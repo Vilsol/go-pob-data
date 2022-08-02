@@ -43,6 +43,7 @@ var filesToExport = []string{
 	"Data/SkillGems.dat64",
 	"Data/ItemExperiencePerLevel.dat64",
 	"Data/Tags.dat64",
+	"Data/ActiveSkillType.dat64",
 }
 
 func main() {
