@@ -45,6 +45,7 @@ var filesToExport = []string{
 	"Data/Tags.dat64",
 	"Data/ActiveSkillType.dat64",
 	"Data/ItemClasses.dat64",
+	"Data/GrantedEffectStatSets.dat64",
 }
 
 func main() {
