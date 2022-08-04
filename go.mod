@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/MarvinJWendt/testza v0.4.2
+	github.com/andybalholm/brotli v1.0.4
 	github.com/oriath-net/pogo v0.0.0-20220205020622-67c41a643bc3
 	github.com/pkg/errors v0.9.1
 	gopkg.in/djherbis/fscache.v0 v0.10.1

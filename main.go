@@ -7,6 +7,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/andybalholm/brotli"
+	_ "github.com/andybalholm/brotli"
+
 	"github.com/Vilsol/go-pob-data/extractor"
 )
 
@@ -102,10 +105,10 @@ func main() {
 			return
 		}
 
-		outName := strings.Split(filepath.Base(file), ".")[0] + ".json.gz"
-		outPath := filepath.Join("data", gameVersion, outName)
+		outNameGzip := strings.Split(filepath.Base(file), ".")[0] + ".json.gz"
+		outPathGzip := filepath.Join("data", gameVersion, outNameGzip)
 
-		if err := os.MkdirAll(filepath.Dir(outPath), 0755); err != nil {
+		if err := os.MkdirAll(filepath.Dir(outPathGzip), 0755); err != nil {
 			if !os.IsExist(err) {
 				println(err.Error())
 				os.Exit(1)
@@ -113,21 +116,41 @@ func main() {
 			}
 		}
 
-		f, err := os.OpenFile(outPath, os.O_WRONLY|os.O_CREATE, 0755)
+		fGzip, err := os.OpenFile(outPathGzip, os.O_WRONLY|os.O_CREATE, 0755)
 		if err != nil {
 			println(err.Error())
 			os.Exit(1)
 			return
 		}
 
-		writer := gzip.NewWriter(f)
-		if _, err := writer.Write(b); err != nil {
+		writerGzip := gzip.NewWriter(fGzip)
+		if _, err := writerGzip.Write(b); err != nil {
 			println(err.Error())
 			os.Exit(1)
 			return
 		}
 
-		_ = writer.Close()
-		_ = f.Close()
+		_ = writerGzip.Close()
+		_ = fGzip.Close()
+
+		outNameBrotli := strings.Split(filepath.Base(file), ".")[0] + ".json.br"
+		outPathBrotli := filepath.Join("data", gameVersion, outNameBrotli)
+
+		fBrotli, err := os.OpenFile(outPathBrotli, os.O_WRONLY|os.O_CREATE, 0755)
+		if err != nil {
+			println(err.Error())
+			os.Exit(1)
+			return
+		}
+
+		writerBrotli := brotli.NewWriter(fBrotli)
+		if _, err := writerBrotli.Write(b); err != nil {
+			println(err.Error())
+			os.Exit(1)
+			return
+		}
+
+		_ = writerBrotli.Close()
+		_ = fBrotli.Close()
 	}
 }
