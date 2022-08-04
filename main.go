@@ -55,7 +55,15 @@ func main() {
 		return
 	}
 
+	if len(os.Args) < 3 {
+		println("please provide game version")
+		os.Exit(1)
+		return
+	}
+
 	gamePath := os.Args[1]
+	gameVersion := os.Args[2]
+
 	if _, err := os.Stat(filepath.Join(gamePath, "Bundles2", "_.index.bin")); err != nil {
 		println(err.Error())
 		os.Exit(1)
@@ -95,7 +103,15 @@ func main() {
 		}
 
 		outName := strings.Split(filepath.Base(file), ".")[0] + ".json.gz"
-		outPath := filepath.Join("data", outName)
+		outPath := filepath.Join("data", gameVersion, outName)
+
+		if err := os.MkdirAll(filepath.Dir(outPath), 0755); err != nil {
+			if !os.IsExist(err) {
+				println(err.Error())
+				os.Exit(1)
+				return
+			}
+		}
 
 		f, err := os.OpenFile(outPath, os.O_WRONLY|os.O_CREATE, 0755)
 		if err != nil {
