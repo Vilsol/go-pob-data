@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"reflect"
+	"sort"
 	"strings"
 
 	"github.com/andybalholm/brotli"
@@ -97,6 +99,11 @@ func main() {
 			os.Exit(1)
 			return
 		}
+
+		// Ensure that all slices are always sorted by key
+		sort.Slice(dat, func(i, j int) bool {
+			return reflect.ValueOf(dat[i]).Field(0).Int() < reflect.ValueOf(dat[j]).Field(0).Int()
+		})
 
 		b, err := json.Marshal(dat)
 		if err != nil {
