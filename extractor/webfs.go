@@ -6,36 +6,27 @@ import (
 	"io/fs"
 )
 
-const gameVersion = "3.18.1.4"
+const gameVersion = "3.18.1.5"
 
 const cdnTemplate = "https://patchcdn.pathofexile.com/%s/"
-
-// TODO Use a proxy when pulled from a browser
-// const cdnTemplate = "https://poe-bundles.snos.workers.dev/%s/"
 
 var _ fs.FS = (*WebFS)(nil)
 
 type WebFS struct {
-	BasePath    string
-	CachedFiles map[string]*WebFile
+	BasePath string
 }
 
 func NewWebFS() *WebFS {
 	return &WebFS{
-		CachedFiles: make(map[string]*WebFile),
-		BasePath:    fmt.Sprintf(cdnTemplate, gameVersion),
+		BasePath: fmt.Sprintf(cdnTemplate, gameVersion),
 	}
 }
 
 func (w *WebFS) Open(name string) (fs.File, error) {
-	if _, ok := w.CachedFiles[name]; !ok {
-		w.CachedFiles[name] = &WebFile{
-			BasePath: w.BasePath,
-			Name:     name,
-		}
-	}
-
-	return w.CachedFiles[name], nil
+	return &WebFile{
+		BasePath: w.BasePath,
+		Name:     name,
+	}, nil
 }
 
 var _ io.ReaderAt = (*WebFile)(nil)
