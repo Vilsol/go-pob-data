@@ -59,7 +59,7 @@ var filesToExport = []string{
 	"Data/GrantedEffectStatSets.dat64",
 }
 
-const GGG_REPO_BASE = "https://raw.githubusercontent.com/grindinggear/skilltree-export/%s/"
+const GGGRepoBase = "https://raw.githubusercontent.com/grindinggear/skilltree-export/%s/"
 
 var skillTreeSpriteGroups = []string{
 	"background",
@@ -206,7 +206,7 @@ func extractRawData(gamePath string, gameVersion string) {
 }
 
 func downloadTreeData(treeVersion string, gameVersion string) {
-	repoVersionBase := fmt.Sprintf(GGG_REPO_BASE, treeVersion)
+	repoVersionBase := fmt.Sprintf(GGGRepoBase, treeVersion)
 	response, err := http.DefaultClient.Get(repoVersionBase + "/data.json")
 	if err != nil {
 		println(err.Error())
@@ -215,16 +215,16 @@ func downloadTreeData(treeVersion string, gameVersion string) {
 	}
 
 	defer response.Body.Close()
-	dataJson, err := io.ReadAll(response.Body)
+	dataJSON, err := io.ReadAll(response.Body)
 	if err != nil {
 		println(err.Error())
 		os.Exit(1)
 		return
 	}
 
-	dataJsonOutPathGzip := filepath.Join("data", gameVersion, "tree", "data.json.gz")
+	dataJSONOutPathGzip := filepath.Join("data", gameVersion, "tree", "data.json.gz")
 
-	if err := os.MkdirAll(filepath.Dir(dataJsonOutPathGzip), 0755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(dataJSONOutPathGzip), 0755); err != nil {
 		if !os.IsExist(err) {
 			println(err.Error())
 			os.Exit(1)
@@ -232,7 +232,7 @@ func downloadTreeData(treeVersion string, gameVersion string) {
 		}
 	}
 
-	fGzip, err := os.OpenFile(dataJsonOutPathGzip, os.O_WRONLY|os.O_CREATE, 0755)
+	fGzip, err := os.OpenFile(dataJSONOutPathGzip, os.O_WRONLY|os.O_CREATE, 0755)
 	if err != nil {
 		println(err.Error())
 		os.Exit(1)
@@ -240,7 +240,7 @@ func downloadTreeData(treeVersion string, gameVersion string) {
 	}
 
 	writerGzip := gzip.NewWriter(fGzip)
-	if _, err := writerGzip.Write(dataJson); err != nil {
+	if _, err := writerGzip.Write(dataJSON); err != nil {
 		println(err.Error())
 		os.Exit(1)
 		return
@@ -249,9 +249,9 @@ func downloadTreeData(treeVersion string, gameVersion string) {
 	_ = writerGzip.Close()
 	_ = fGzip.Close()
 
-	dataJsonOutPathBrotli := filepath.Join("data", gameVersion, "tree", "data.json.br")
+	dataJSONOutPathBrotli := filepath.Join("data", gameVersion, "tree", "data.json.br")
 
-	fBrotli, err := os.OpenFile(dataJsonOutPathBrotli, os.O_WRONLY|os.O_CREATE, 0755)
+	fBrotli, err := os.OpenFile(dataJSONOutPathBrotli, os.O_WRONLY|os.O_CREATE, 0755)
 	if err != nil {
 		println(err.Error())
 		os.Exit(1)
@@ -259,7 +259,7 @@ func downloadTreeData(treeVersion string, gameVersion string) {
 	}
 
 	writerBrotli := brotli.NewWriter(fBrotli)
-	if _, err := writerBrotli.Write(dataJson); err != nil {
+	if _, err := writerBrotli.Write(dataJSON); err != nil {
 		println(err.Error())
 		os.Exit(1)
 		return
@@ -269,7 +269,7 @@ func downloadTreeData(treeVersion string, gameVersion string) {
 	_ = fBrotli.Close()
 
 	var skillTreeData SkillTreeData
-	if err := json.Unmarshal(dataJson, &skillTreeData); err != nil {
+	if err := json.Unmarshal(dataJSON, &skillTreeData); err != nil {
 		println(err.Error())
 		os.Exit(1)
 		return
@@ -288,14 +288,14 @@ func downloadTreeData(treeVersion string, gameVersion string) {
 			}
 		}
 
-		parsedUrl, err := url.Parse(assetPath.Filename)
+		parsedURL, err := url.Parse(assetPath.Filename)
 		if err != nil {
 			println(err.Error())
 			os.Exit(1)
 			return
 		}
 
-		fileName := path.Base(parsedUrl.Path)
+		fileName := path.Base(parsedURL.Path)
 		if _, ok := downloaded[fileName]; ok {
 			continue
 		}
