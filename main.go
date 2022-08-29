@@ -103,11 +103,11 @@ func main() {
 		return
 	}
 
-	//gamePath := os.Args[1]
+	gamePath := os.Args[1]
 	treeVersion := os.Args[2]
 	gameVersion := os.Args[3]
 
-	//extractRawData(gamePath, gameVersion)
+	extractRawData(gamePath, gameVersion)
 	downloadTreeData(treeVersion, gameVersion)
 }
 
