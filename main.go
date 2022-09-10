@@ -17,8 +17,11 @@ import (
 
 	"github.com/andybalholm/brotli"
 	_ "github.com/andybalholm/brotli"
+	"github.com/yusukebe/go-pngquant"
+	"gopkg.in/gographics/imagick.v3/imagick"
 
 	"github.com/Vilsol/go-pob-data/extractor"
+	"github.com/Vilsol/go-pob-data/stat_translations"
 )
 
 var filesToExport = []string{
@@ -57,6 +60,8 @@ var filesToExport = []string{
 	"Data/ActiveSkillType.dat64",
 	"Data/ItemClasses.dat64",
 	"Data/GrantedEffectStatSets.dat64",
+	"Data/PassiveSkills.dat64",
+	"Data/AlternateTreeVersions.dat64",
 }
 
 const GGGRepoBase = "https://raw.githubusercontent.com/grindinggear/skilltree-export/%s/"
@@ -84,6 +89,21 @@ var skillTreeSpriteGroups = []string{
 	"jewelRadius",
 }
 
+var translations = []string{
+	"Metadata/StatDescriptions/stat_descriptions.txt",
+	"Metadata/StatDescriptions/passive_skill_aura_stat_descriptions.txt",
+	"Metadata/StatDescriptions/passive_skill_stat_descriptions.txt",
+}
+
+var imagesToExport = []string{
+	"Art/2DArt/BaseClassIllustrations/Str.dds",
+	"Art/2DArt/BaseClassIllustrations/Dex.dds",
+	"Art/2DArt/BaseClassIllustrations/Int.dds",
+	"Art/2DArt/BaseClassIllustrations/StrDex.dds",
+	"Art/2DArt/BaseClassIllustrations/StrInt.dds",
+	"Art/2DArt/BaseClassIllustrations/DexInt.dds",
+}
+
 func main() {
 	if len(os.Args) < 2 {
 		println("please provide path to the game directory")
@@ -109,6 +129,7 @@ func main() {
 
 	extractRawData(gamePath, gameVersion)
 	downloadTreeData(treeVersion, gameVersion)
+	extractTranslations(gamePath, gameVersion)
 }
 
 func extractRawData(gamePath string, gameVersion string) {
@@ -202,6 +223,67 @@ func extractRawData(gamePath string, gameVersion string) {
 
 		_ = writerBrotli.Close()
 		_ = fBrotli.Close()
+	}
+
+	imagick.Initialize()
+	defer imagick.Terminate()
+
+	mw := imagick.NewMagickWand()
+
+	for _, img := range imagesToExport {
+		println("Extracting", img)
+
+		data, err := loader.Open(img)
+		if err != nil {
+			println(err.Error())
+			os.Exit(1)
+			return
+		}
+
+		fullImage, err := io.ReadAll(data)
+		if err != nil {
+			println(err.Error())
+			os.Exit(1)
+			return
+		}
+
+		if err := mw.ReadImageBlob(fullImage); err != nil {
+			println(err.Error())
+			os.Exit(1)
+			return
+		}
+
+		outName := strings.Split(filepath.Base(img), ".")[0] + ".png"
+		outPath := filepath.Join("data", gameVersion, "raw", filepath.Dir(img), outName)
+
+		if err := os.MkdirAll(filepath.Dir(outPath), 0755); err != nil {
+			if !os.IsExist(err) {
+				println(err.Error())
+				os.Exit(1)
+				return
+			}
+		}
+
+		if err := mw.SetImageFormat("png"); err != nil {
+			println(err.Error())
+			os.Exit(1)
+			return
+		}
+
+		uncompressed := mw.GetImageBlob()
+
+		finalImage, err := pngquant.CompressBytes(uncompressed, "one")
+		if err != nil {
+			println(err.Error())
+			os.Exit(1)
+			return
+		}
+
+		if err := os.WriteFile(outPath, finalImage, 0755); err != nil {
+			println(err.Error())
+			os.Exit(1)
+			return
+		}
 	}
 }
 
@@ -333,4 +415,32 @@ func downloadTreeData(treeVersion string, gameVersion string) {
 			return
 		}
 	}
+}
+
+func extractTranslations(gamePath string, gameVersion string) {
+	if _, err := os.Stat(filepath.Join(gamePath, "Bundles2", "_.index.bin")); err != nil {
+		println(err.Error())
+		os.Exit(1)
+		return
+	}
+
+	extractor.LoadParser()
+	loader, err := extractor.GetBundleLoader(os.DirFS(gamePath))
+	if err != nil {
+		println(err.Error())
+		os.Exit(1)
+		return
+	}
+
+	parser := stat_translations.NewTranslationParser(loader)
+
+	for _, translation := range translations {
+		if err := parser.ParseFile(translation); err != nil {
+			println(err.Error())
+			os.Exit(1)
+			return
+		}
+	}
+
+	println("X")
 }
