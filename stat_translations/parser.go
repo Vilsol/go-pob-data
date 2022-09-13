@@ -64,6 +64,9 @@ func (t *TranslationParser) ParseFile(name string) error {
 	println("parsing", name)
 
 	data, err := t.loader.Open(name)
+	if err != nil {
+		return errors.Wrap(err, "failed to open input file")
+	}
 
 	parsed := unicode.UTF16(unicode.LittleEndian, unicode.UseBOM).NewDecoder().Reader(data)
 	all, err := io.ReadAll(parsed)
@@ -153,7 +156,6 @@ func (t *TranslationParser) ParseFile(name string) error {
 								})
 							}
 						}
-
 					}
 
 					specialMatch := specialRegex.FindAllSubmatch(special, -1)

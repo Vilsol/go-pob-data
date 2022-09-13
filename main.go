@@ -17,51 +17,190 @@ import (
 
 	"github.com/andybalholm/brotli"
 	_ "github.com/andybalholm/brotli"
+	"github.com/tinylib/msgp/msgp"
 	"github.com/yusukebe/go-pngquant"
 	"gopkg.in/gographics/imagick.v3/imagick"
 
 	"github.com/Vilsol/go-pob-data/extractor"
+	"github.com/Vilsol/go-pob-data/raw"
 	"github.com/Vilsol/go-pob-data/stat_translations"
 )
 
-var filesToExport = []string{
-	"Data/PassiveTreeExpansionJewels.dat64",
-	"Data/PassiveTreeExpansionSkills.dat64",
-	"Data/PassiveTreeExpansionSpecialSkills.dat64",
-	"Data/CostTypes.dat64",
-	"Data/Mods.dat64",
-	"Data/ActiveSkills.dat64",
-	"Data/Essences.dat64",
-	"Data/CraftingBenchOptions.dat64",
-	"Data/PantheonPanelLayout.dat64",
-	"Data/WeaponTypes.dat64",
-	"Data/ArmourTypes.dat64",
-	"Data/ShieldTypes.dat64",
-	"Data/Flasks.dat64",
-	"Data/ComponentCharges.dat64",
-	"Data/ComponentAttributeRequirements.dat64",
-	"Data/BaseItemTypes.dat64",
-	"Data/Stats.dat64",
-	"Data/AlternatePassiveSkills.dat64",
-	"Data/AlternatePassiveAdditions.dat64",
-	"Data/DefaultMonsterStats.dat64",
-	"Data/SkillTotemVariations.dat64",
-	"Data/MonsterVarieties.dat64",
-	"Data/MonsterMapDifficulty.dat64",
-	"Data/MonsterMapBossDifficulty.dat64",
-	"Data/GrantedEffects.dat64",
-	"Data/SkillTotems.dat64",
-	"Data/GrantedEffectStatSetsPerLevel.dat64",
-	"Data/GrantedEffectsPerLevel.dat64",
-	"Data/GrantedEffectQualityStats.dat64",
-	"Data/SkillGems.dat64",
-	"Data/ItemExperiencePerLevel.dat64",
-	"Data/Tags.dat64",
-	"Data/ActiveSkillType.dat64",
-	"Data/ItemClasses.dat64",
-	"Data/GrantedEffectStatSets.dat64",
-	"Data/PassiveSkills.dat64",
-	"Data/AlternateTreeVersions.dat64",
+//go:generate msgp -file ./raw
+
+type PackedFile struct {
+	Path string
+	Fn   func(jsonData []byte, w *msgp.Writer)
+}
+
+func ReEncode[T msgp.Encodable]() func(jsonData []byte, w *msgp.Writer) {
+	return func(jsonData []byte, w *msgp.Writer) {
+		out := make([]T, 0)
+		if err := json.Unmarshal(jsonData, &out); err != nil {
+			println(err.Error())
+			os.Exit(1)
+			return
+		}
+
+		for _, obj := range out {
+			if err := obj.EncodeMsg(w); err != nil {
+				println(err.Error())
+				os.Exit(1)
+				return
+			}
+		}
+	}
+}
+
+var filesToExport = []PackedFile{
+	{
+		Path: "Data/PassiveTreeExpansionJewels.dat64",
+		Fn:   ReEncode[*raw.PassiveTreeExpansionJewel](),
+	},
+	{
+		Path: "Data/PassiveTreeExpansionSkills.dat64",
+		Fn:   ReEncode[*raw.PassiveTreeExpansionSkill](),
+	},
+	{
+		Path: "Data/PassiveTreeExpansionSpecialSkills.dat64",
+		Fn:   ReEncode[*raw.PassiveTreeExpansionSpecialSkill](),
+	},
+	{
+		Path: "Data/CostTypes.dat64",
+		Fn:   ReEncode[*raw.CostType](),
+	},
+	{
+		Path: "Data/Mods.dat64",
+		Fn:   ReEncode[*raw.Mod](),
+	},
+	{
+		Path: "Data/ActiveSkills.dat64",
+		Fn:   ReEncode[*raw.ActiveSkill](),
+	},
+	{
+		Path: "Data/Essences.dat64",
+		Fn:   ReEncode[*raw.Essence](),
+	},
+	{
+		Path: "Data/CraftingBenchOptions.dat64",
+		Fn:   ReEncode[*raw.CraftingBenchOption](),
+	},
+	{
+		Path: "Data/PantheonPanelLayout.dat64",
+		Fn:   ReEncode[*raw.PantheonPanelLayout](),
+	},
+	{
+		Path: "Data/WeaponTypes.dat64",
+		Fn:   ReEncode[*raw.WeaponType](),
+	},
+	{
+		Path: "Data/ArmourTypes.dat64",
+		Fn:   ReEncode[*raw.ArmourType](),
+	},
+	{
+		Path: "Data/ShieldTypes.dat64",
+		Fn:   ReEncode[*raw.ShieldType](),
+	},
+	{
+		Path: "Data/Flasks.dat64",
+		Fn:   ReEncode[*raw.Flask](),
+	},
+	{
+		Path: "Data/ComponentCharges.dat64",
+		Fn:   ReEncode[*raw.ComponentCharge](),
+	},
+	{
+		Path: "Data/ComponentAttributeRequirements.dat64",
+		Fn:   ReEncode[*raw.ComponentAttributeRequirement](),
+	},
+	{
+		Path: "Data/BaseItemTypes.dat64",
+		Fn:   ReEncode[*raw.BaseItemType](),
+	},
+	{
+		Path: "Data/Stats.dat64",
+		Fn:   ReEncode[*raw.Stat](),
+	},
+	{
+		Path: "Data/AlternatePassiveSkills.dat64",
+		Fn:   ReEncode[*raw.AlternatePassiveSkill](),
+	},
+	{
+		Path: "Data/AlternatePassiveAdditions.dat64",
+		Fn:   ReEncode[*raw.AlternatePassiveAddition](),
+	},
+	{
+		Path: "Data/DefaultMonsterStats.dat64",
+		Fn:   ReEncode[*raw.DefaultMonsterStat](),
+	},
+	{
+		Path: "Data/SkillTotemVariations.dat64",
+		Fn:   ReEncode[*raw.SkillTotemVariation](),
+	},
+	{
+		Path: "Data/MonsterVarieties.dat64",
+		Fn:   ReEncode[*raw.MonsterVariety](),
+	},
+	{
+		Path: "Data/MonsterMapDifficulty.dat64",
+		Fn:   ReEncode[*raw.MonsterMapDifficulty](),
+	},
+	{
+		Path: "Data/MonsterMapBossDifficulty.dat64",
+		Fn:   ReEncode[*raw.MonsterMapBossDifficulty](),
+	},
+	{
+		Path: "Data/GrantedEffects.dat64",
+		Fn:   ReEncode[*raw.GrantedEffect](),
+	},
+	{
+		Path: "Data/SkillTotems.dat64",
+		Fn:   ReEncode[*raw.SkillTotem](),
+	},
+	{
+		Path: "Data/GrantedEffectStatSetsPerLevel.dat64",
+		Fn:   ReEncode[*raw.GrantedEffectStatSetsPerLevel](),
+	},
+	{
+		Path: "Data/GrantedEffectsPerLevel.dat64",
+		Fn:   ReEncode[*raw.GrantedEffectsPerLevel](),
+	},
+	{
+		Path: "Data/GrantedEffectQualityStats.dat64",
+		Fn:   ReEncode[*raw.GrantedEffectQualityStat](),
+	},
+	{
+		Path: "Data/SkillGems.dat64",
+		Fn:   ReEncode[*raw.SkillGem](),
+	},
+	{
+		Path: "Data/ItemExperiencePerLevel.dat64",
+		Fn:   ReEncode[*raw.ItemExperiencePerLevel](),
+	},
+	{
+		Path: "Data/Tags.dat64",
+		Fn:   ReEncode[*raw.Tag](),
+	},
+	{
+		Path: "Data/ActiveSkillType.dat64",
+		Fn:   ReEncode[*raw.ActiveSkillType](),
+	},
+	{
+		Path: "Data/ItemClasses.dat64",
+		Fn:   ReEncode[*raw.ItemClass](),
+	},
+	{
+		Path: "Data/GrantedEffectStatSets.dat64",
+		Fn:   ReEncode[*raw.GrantedEffectStatSet](),
+	},
+	{
+		Path: "Data/PassiveSkills.dat64",
+		Fn:   ReEncode[*raw.PassiveSkill](),
+	},
+	{
+		Path: "Data/AlternateTreeVersions.dat64",
+		Fn:   ReEncode[*raw.AlternateTreeVersion](),
+	},
 }
 
 const GGGRepoBase = "https://raw.githubusercontent.com/grindinggear/skilltree-export/%s/"
@@ -148,16 +287,16 @@ func extractRawData(gamePath string, gameVersion string) {
 	}
 
 	for _, file := range filesToExport {
-		println("Extracting", file)
+		println("Extracting", file.Path)
 
-		data, err := loader.Open(file)
+		data, err := loader.Open(file.Path)
 		if err != nil {
 			println(err.Error())
 			os.Exit(1)
 			return
 		}
 
-		dat, err := extractor.ParseDat(data, filepath.Base(file))
+		dat, err := extractor.ParseDat(data, filepath.Base(file.Path))
 		if err != nil {
 			println(err.Error())
 			os.Exit(1)
@@ -176,7 +315,7 @@ func extractRawData(gamePath string, gameVersion string) {
 			return
 		}
 
-		outNameGzip := strings.Split(filepath.Base(file), ".")[0] + ".json.gz"
+		outNameGzip := strings.Split(filepath.Base(file.Path), ".")[0] + ".json.gz"
 		outPathGzip := filepath.Join("data", gameVersion, "raw", outNameGzip)
 
 		if err := os.MkdirAll(filepath.Dir(outPathGzip), 0755); err != nil {
@@ -204,7 +343,7 @@ func extractRawData(gamePath string, gameVersion string) {
 		_ = writerGzip.Close()
 		_ = fGzip.Close()
 
-		outNameBrotli := strings.Split(filepath.Base(file), ".")[0] + ".json.br"
+		outNameBrotli := strings.Split(filepath.Base(file.Path), ".")[0] + ".json.br"
 		outPathBrotli := filepath.Join("data", gameVersion, "raw", outNameBrotli)
 
 		fBrotli, err := os.OpenFile(outPathBrotli, os.O_WRONLY|os.O_CREATE, 0755)
@@ -223,6 +362,31 @@ func extractRawData(gamePath string, gameVersion string) {
 
 		_ = writerBrotli.Close()
 		_ = fBrotli.Close()
+
+		outNameMsgpBrotli := strings.Split(filepath.Base(file.Path), ".")[0] + ".msgpack.br"
+		outPathMsgpBrotli := filepath.Join("data", gameVersion, "raw", outNameMsgpBrotli)
+
+		fMsgpBrotli, err := os.OpenFile(outPathMsgpBrotli, os.O_WRONLY|os.O_CREATE, 0755)
+		if err != nil {
+			println(err.Error())
+			os.Exit(1)
+			return
+		}
+
+		writerMsgpBrotli := brotli.NewWriter(fMsgpBrotli)
+
+		msgpWriter := msgp.NewWriter(writerMsgpBrotli)
+		file.Fn(b, msgpWriter)
+
+		if err := msgpWriter.Flush(); err != nil {
+			println(err.Error())
+			os.Exit(1)
+			return
+		}
+
+		_ = writerMsgpBrotli.Close()
+		_ = fMsgpBrotli.Close()
+
 	}
 
 	imagick.Initialize()
@@ -441,6 +605,4 @@ func extractTranslations(gamePath string, gameVersion string) {
 			return
 		}
 	}
-
-	println("X")
 }

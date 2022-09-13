@@ -7,8 +7,9 @@ require (
 	github.com/andybalholm/brotli v1.0.4
 	github.com/oriath-net/pogo v0.0.0-20220205020622-67c41a643bc3
 	github.com/pkg/errors v0.9.1
+	github.com/tinylib/msgp v1.1.6
 	github.com/yusukebe/go-pngquant v0.0.0-20200223090257-49b91f11b627
-	golang.org/x/text v0.3.6
+	golang.org/x/text v0.3.7
 	gopkg.in/gographics/imagick.v3 v3.4.1
 )
 
@@ -20,11 +21,12 @@ require (
 	github.com/mattn/go-runewidth v0.0.13 // indirect
 	github.com/mcuadros/go-version v0.0.0-20190830083331-035f6764e8d2 // indirect
 	github.com/oriath-net/gooz v1.0.0 // indirect
+	github.com/philhofer/fwd v1.1.1 // indirect
 	github.com/pterm/pterm v0.12.40 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/xo/terminfo v0.0.0-20210125001918-ca9a967f8778 // indirect
-	golang.org/x/sys v0.0.0-20220319134239-a9b59b0215f8 // indirect
+	golang.org/x/sys v0.0.0-20220909162455-aba9fc2a8ff2 // indirect
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect
 )
 
