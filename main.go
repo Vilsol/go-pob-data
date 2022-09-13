@@ -376,6 +376,7 @@ func extractRawData(gamePath string, gameVersion string) {
 		writerMsgpBrotli := brotli.NewWriter(fMsgpBrotli)
 
 		msgpWriter := msgp.NewWriter(writerMsgpBrotli)
+		_ = msgpWriter.WriteInt64(int64(len(dat)))
 		file.Fn(b, msgpWriter)
 
 		if err := msgpWriter.Flush(); err != nil {
@@ -386,7 +387,6 @@ func extractRawData(gamePath string, gameVersion string) {
 
 		_ = writerMsgpBrotli.Close()
 		_ = fMsgpBrotli.Close()
-
 	}
 
 	imagick.Initialize()
