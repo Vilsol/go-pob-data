@@ -6,14 +6,9 @@ import (
 	"net/http"
 )
 
-var downloadClient *http.Client
-
-func init() {
-	tr := &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-	}
-	downloadClient = &http.Client{Transport: tr}
-}
+var downloadClient = &http.Client{Transport: &http.Transport{
+	TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+}}
 
 func Fetch(url string) []byte {
 	resp, err := downloadClient.Get(url)

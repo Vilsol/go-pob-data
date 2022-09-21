@@ -1,15 +1,20 @@
-package stat_translations
+package st
 
 import (
 	"bytes"
 	"io"
 	"io/fs"
 	"os"
-	"path"
+	"path/filepath"
 	"regexp"
+	"strconv"
 
+	"github.com/andybalholm/brotli"
 	"github.com/pkg/errors"
+	"github.com/tinylib/msgp/msgp"
 	"golang.org/x/text/encoding/unicode"
+
+	"github.com/Vilsol/go-pob-data/raw"
 )
 
 var (
@@ -28,10 +33,10 @@ var (
 )
 
 type TranslationParser struct {
-	order       int
-	descriptors map[string]*Description
 	loader      fs.FS
+	descriptors map[string]*Description
 	loaded      map[string]bool
+	order       int
 }
 
 func NewTranslationParser(loader fs.FS) *TranslationParser {
@@ -44,15 +49,15 @@ func NewTranslationParser(loader fs.FS) *TranslationParser {
 }
 
 type Translation struct {
+	Special map[string]string `json:"special,omitempty"`
 	Text    string            `json:"text"`
 	Limit   [][2]string       `json:"limit,omitempty"`
-	Special map[string]string `json:"special,omitempty"`
 }
 
 type Description struct {
 	Lang  map[string][]Translation
-	Order int
 	Stats []string
+	Order int
 }
 
 func (t *TranslationParser) ParseFile(name string) error {
@@ -73,8 +78,6 @@ func (t *TranslationParser) ParseFile(name string) error {
 	if err != nil {
 		return errors.Wrap(err, "failed to parse input file")
 	}
-
-	os.WriteFile(path.Base(name), all, 0755)
 
 	var curDescriptor *Description
 	curLang := "English"
@@ -160,13 +163,98 @@ func (t *TranslationParser) ParseFile(name string) error {
 
 					specialMatch := specialRegex.FindAllSubmatch(special, -1)
 					for _, match := range specialMatch {
-						desc.Special[string(match[0][1])] = string(match[0][2])
+						desc.Special[string(match[1])] = string(match[2])
 					}
 
 					curDescriptor.Lang[curLang] = append(curDescriptor.Lang[curLang], desc)
 				}
 			}
 		}
+	}
+
+	return nil
+}
+
+var languageMap = map[string]string{
+	"English":             "en",
+	"German":              "de",
+	"Korean":              "kr",
+	"Russian":             "ru",
+	"Portuguese":          "po",
+	"Spanish":             "es",
+	"French":              "fr",
+	"Traditional Chinese": "tw",
+	"Simplified Chinese":  "cn",
+	"Thai":                "th",
+	"Japanese":            "jp",
+}
+
+func (t *TranslationParser) SaveTo(outDir string, translationName string) error {
+	fullOut := make(map[string][]*raw.StatTranslation)
+	for _, description := range t.descriptors {
+		for lang, translations := range description.Lang {
+			if _, ok := fullOut[lang]; !ok {
+				fullOut[lang] = make([]*raw.StatTranslation, 0)
+			}
+
+			outTranslations := make([]raw.LangTranslation, len(translations))
+			for i, trans := range translations {
+				conditions := make([]raw.Condition, 0)
+				for _, limits := range trans.Limit {
+					if limits[0] != "" || limits[1] != "" {
+						cond := raw.Condition{}
+						if limits[0] != "" {
+							temp, _ := strconv.Atoi(limits[0])
+							cond.Min = &temp
+						}
+						if limits[1] != "" {
+							temp, _ := strconv.Atoi(limits[1])
+							cond.Max = &temp
+						}
+						conditions = append(conditions, cond)
+					}
+				}
+
+				outTranslations[i] = raw.LangTranslation{
+					Conditions:    conditions,
+					IndexHandlers: trans.Special,
+					String:        trans.Text,
+				}
+			}
+
+			fullOut[lang] = append(fullOut[lang], &raw.StatTranslation{
+				IDs:  description.Stats,
+				List: outTranslations,
+			})
+		}
+	}
+
+	for lang, translations := range fullOut {
+		fullPath := filepath.Join(outDir, languageMap[lang], translationName+".msgpack.br")
+		println("writing to", fullPath)
+
+		if err := os.MkdirAll(filepath.Dir(fullPath), 0o755); err != nil {
+			return errors.Wrap(err, "failed to make translation directories")
+		}
+
+		f, err := os.OpenFile(fullPath, os.O_CREATE|os.O_WRONLY, 0o755)
+		if err != nil {
+			return errors.Wrap(err, "failed to open translation file")
+		}
+
+		writerMsgpBrotli := brotli.NewWriter(f)
+
+		msg := msgp.NewWriter(writerMsgpBrotli)
+		if err := msg.WriteIntf(translations); err != nil {
+			return errors.Wrap(err, "failed to encode msgpack")
+		}
+
+		if err := msg.Flush(); err != nil {
+			return errors.Wrap(err, "failed to flush msgpack")
+		}
+
+		_ = writerMsgpBrotli.Close()
+		_ = f.Close()
 	}
 
 	return nil

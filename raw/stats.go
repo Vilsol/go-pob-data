@@ -1,18 +1,18 @@
 package raw
 
 type Stat struct {
-	BelongsStatsKey       []string `json:"BelongsStatsKey"`
-	Category              *int     `json:"Category"`
-	ContextFlags          []int    `json:"ContextFlags"`
-	Hash32                int      `json:"HASH32"`
-	ID                    string   `json:"Id"`
-	IsLocal               bool     `json:"IsLocal"`
-	IsScalable            bool     `json:"IsScalable"`
-	IsVirtual             bool     `json:"IsVirtual"`
-	IsWeaponLocal         bool     `json:"IsWeaponLocal"`
 	MainHandAliasStatsKey *int     `json:"MainHandAlias_StatsKey"`
+	Category              *int     `json:"Category"`
 	OffHandAliasStatsKey  *int     `json:"OffHandAlias_StatsKey"`
-	Semantics             int      `json:"Semantics"`
+	ID                    string   `json:"Id"`
 	Text                  string   `json:"Text"`
+	ContextFlags          []int    `json:"ContextFlags"`
+	BelongsStatsKey       []string `json:"BelongsStatsKey"`
+	Hash32                int      `json:"HASH32"`
+	Semantics             int      `json:"Semantics"`
 	Key                   int      `json:"_key"`
+	IsWeaponLocal         bool     `json:"IsWeaponLocal"`
+	IsVirtual             bool     `json:"IsVirtual"`
+	IsScalable            bool     `json:"IsScalable"`
+	IsLocal               bool     `json:"IsLocal"`
 }

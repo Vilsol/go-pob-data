@@ -29,7 +29,7 @@ func TestReadSkillGems(t *testing.T) {
 }
 
 func TestLoadSchema(t *testing.T) {
-	LoadSchema()
+	LoadSchema("3.18")
 
 	testza.AssertNotNil(t, schemaFile)
 	testza.AssertEqual(t, int64(3), schemaFile.Version)
@@ -40,7 +40,7 @@ func TestLoadSchema(t *testing.T) {
 }
 
 func TestParseDat(t *testing.T) {
-	LoadParser()
+	LoadParser("3.18")
 
 	loader, err := GetBundleLoader(NewWebFS())
 	testza.AssertNoError(t, err)

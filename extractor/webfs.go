@@ -37,7 +37,7 @@ type WebFile struct {
 	CachedFile []byte
 }
 
-func (w *WebFile) ReadAt(p []byte, off int64) (n int, err error) {
+func (w *WebFile) ReadAt(p []byte, off int64) (int, error) {
 	if _, err := w.Read([]byte{}); err != nil {
 		return 0, err
 	}

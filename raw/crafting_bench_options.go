@@ -3,27 +3,27 @@ package raw
 type CraftingBenchOption struct {
 	AddEnchantment              *int   `json:"AddEnchantment"`
 	AddMod                      *int   `json:"AddMod"`
+	UnlockCategory              *int   `json:"UnlockCategory"`
+	Description                 string `json:"Description"`
+	SocketColours               string `json:"SocketColours"`
+	Name                        string `json:"Name"`
 	CostBaseItemTypes           []int  `json:"Cost_BaseItemTypes"`
 	CostValues                  []int  `json:"Cost_Values"`
-	CraftingBenchCustomAction   int    `json:"CraftingBenchCustomAction"`
 	CraftingItemClassCategories []int  `json:"CraftingItemClassCategories"`
-	Description                 string `json:"Description"`
-	HideoutNPCSKey              int    `json:"HideoutNPCsKey"`
-	IsAreaOption                bool   `json:"IsAreaOption"`
-	IsDisabled                  bool   `json:"IsDisabled"`
-	ItemClasses                 []int  `json:"ItemClasses"`
-	ItemQuantity                int    `json:"ItemQuantity"`
-	Links                       int    `json:"Links"`
-	Name                        string `json:"Name"`
-	Order                       int    `json:"Order"`
 	RecipeIDS                   []int  `json:"RecipeIds"`
+	ItemClasses                 []int  `json:"ItemClasses"`
+	Links                       int    `json:"Links"`
+	CraftingBenchCustomAction   int    `json:"CraftingBenchCustomAction"`
+	Key                         int    `json:"_key"`
+	Order                       int    `json:"Order"`
+	UnveilsRequired2            int    `json:"UnveilsRequired2"`
 	RequiredLevel               int    `json:"RequiredLevel"`
-	SocketColours               string `json:"SocketColours"`
+	HideoutNPCSKey              int    `json:"HideoutNPCsKey"`
 	Sockets                     int    `json:"Sockets"`
 	SortCategory                int    `json:"SortCategory"`
 	Tier                        int    `json:"Tier"`
-	UnlockCategory              *int   `json:"UnlockCategory"`
+	ItemQuantity                int    `json:"ItemQuantity"`
 	UnveilsRequired             int    `json:"UnveilsRequired"`
-	UnveilsRequired2            int    `json:"UnveilsRequired2"`
-	Key                         int    `json:"_key"`
+	IsAreaOption                bool   `json:"IsAreaOption"`
+	IsDisabled                  bool   `json:"IsDisabled"`
 }

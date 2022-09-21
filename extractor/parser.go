@@ -12,25 +12,26 @@ import (
 
 var parser *dat.DataParser
 
-func LoadParser() {
-	LoadSchema()
-	semverGameVersion := strings.Join(strings.Split(gameVersion, ".")[:3], ".")
-	parser = dat.InitParser(semverGameVersion, &schemaFS{})
+func LoadParser(gameVersion string) {
+	LoadSchema(gameVersion)
+	parser = dat.InitParser(gameVersion, &schemaFS{})
 }
 
-type schemaFS struct {
-}
+type schemaFS struct{}
 
 func (s *schemaFS) Open(name string) (fs.File, error) {
 	cleanName := strings.Split(name, ".")[0]
+
 	format := tableMap[cleanName].ToJSONFormat()
 	if format.File == "" {
 		format.File = cleanName
 	}
+
 	data, err := json.Marshal(format)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to marshal data")
 	}
+
 	return &schemaFSFile{Data: data}, nil
 }
 

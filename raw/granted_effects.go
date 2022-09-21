@@ -1,22 +1,22 @@
 package raw
 
 type GrantedEffect struct {
-	ID                    string `json:"Id"`
-	IsSupport             bool   `json:"IsSupport"`
-	SupportTypes          []int  `json:"AllowedActiveSkillTypes"`
+	ActiveSkill           *int   `json:"ActiveSkill"`
+	PlusVersionOf         *int   `json:"RegularVariant"`
+	Animation             *int   `json:"Animation"`
 	SupportGemLetter      string `json:"SupportGemLetter"`
-	Attribute             int    `json:"Attribute"`
+	ID                    string `json:"Id"`
+	SupportTypes          []int  `json:"AllowedActiveSkillTypes"`
 	AddTypes              []int  `json:"AddedActiveSkillTypes"`
 	ExcludeTypes          []int  `json:"ExcludedActiveSkillTypes"`
-	SupportsGemsOnly      bool   `json:"SupportsGemsOnly"`
-	CannotBeSupported     bool   `json:"CannotBeSupported"`
-	CastTime              int    `json:"CastTime"`
-	ActiveSkill           *int   `json:"ActiveSkill"`
-	IgnoreMinionTypes     bool   `json:"IgnoreMinionTypes"`
-	AddMinionTypes        []int  `json:"AddedMinionActiveSkillTypes"`
-	Animation             *int   `json:"Animation"`
 	WeaponRestrictions    []int  `json:"SupportWeaponRestrictions"`
-	PlusVersionOf         *int   `json:"RegularVariant"`
+	AddMinionTypes        []int  `json:"AddedMinionActiveSkillTypes"`
+	Attribute             int    `json:"Attribute"`
+	CastTime              int    `json:"CastTime"`
 	GrantedEffectStatSets int    `json:"StatSet"`
 	Key                   int    `json:"_key"`
+	IgnoreMinionTypes     bool   `json:"IgnoreMinionTypes"`
+	CannotBeSupported     bool   `json:"CannotBeSupported"`
+	SupportsGemsOnly      bool   `json:"SupportsGemsOnly"`
+	IsSupport             bool   `json:"IsSupport"`
 }

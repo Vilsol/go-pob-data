@@ -1,20 +1,20 @@
 package raw
 
 type SkillGem struct {
-	BaseItemType           int    `json:"BaseItemTypesKey"`
-	GrantedEffect          int    `json:"GrantedEffectsKey"`
-	Str                    int    `json:"Str"`
-	Dex                    int    `json:"Dex"`
-	Int                    int    `json:"Int"`
-	Tags                   []int  `json:"GemTagsKeys"`
 	VaalGem                *int   `json:"VaalVariant_BaseItemTypesKey"`
-	IsVaalGem              bool   `json:"IsVaalVariant"`
-	Description            string `json:"Description"`
-	HungryLoopMod          *int   `json:"Consumed_ModsKey"`
-	SecondaryGrantedEffect *int   `json:"GrantedEffectsKey2"`
-	GlobalGemLevelStat     *int   `json:"MinionGlobalSkillLevelStat"`
-	SecondarySupportName   string `json:"SupportSkillName"`
-	AwakenedVariant        *int   `json:"AwakenedVariant"`
 	RegularVariant         *int   `json:"RegularVariant"`
+	AwakenedVariant        *int   `json:"AwakenedVariant"`
+	GlobalGemLevelStat     *int   `json:"MinionGlobalSkillLevelStat"`
+	SecondaryGrantedEffect *int   `json:"GrantedEffectsKey2"`
+	HungryLoopMod          *int   `json:"Consumed_ModsKey"`
+	SecondarySupportName   string `json:"SupportSkillName"`
+	Description            string `json:"Description"`
+	Tags                   []int  `json:"GemTagsKeys"`
+	Int                    int    `json:"Int"`
+	Dex                    int    `json:"Dex"`
+	BaseItemType           int    `json:"BaseItemTypesKey"`
+	Str                    int    `json:"Str"`
+	GrantedEffect          int    `json:"GrantedEffectsKey"`
 	Key                    int    `json:"_key"`
+	IsVaalGem              bool   `json:"IsVaalVariant"`
 }

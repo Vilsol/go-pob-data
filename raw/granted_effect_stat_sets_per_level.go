@@ -1,21 +1,21 @@
 package raw
 
 type GrantedEffectStatSetsPerLevel struct {
-	AdditionalBooleanStats []int     `json:"AdditionalFlags"`
+	GrantedEffects         []int     `json:"GrantedEffects"`
 	AdditionalStats        []int     `json:"AdditionalStats"`
 	AdditionalStatsValues  []int     `json:"AdditionalStatsValues"`
-	AttackCritChance       int       `json:"SpellCritChance"`
-	BaseMultiplier         int       `json:"BaseMultiplier"`
+	StatInterpolations     []int     `json:"StatInterpolations"`
+	AdditionalBooleanStats []int     `json:"AdditionalFlags"`
 	BaseResolvedValues     []int     `json:"BaseResolvedValues"`
-	DamageEffectiveness    int       `json:"DamageEffectiveness"`
+	InterpolationBases     []int     `json:"InterpolationBases"`
 	FloatStats             []int     `json:"FloatStats"`
 	FloatStatsValues       []float64 `json:"FloatStatsValues"`
+	BaseMultiplier         int       `json:"BaseMultiplier"`
 	GemLevel               int       `json:"GemLevel"`
-	GrantedEffects         []int     `json:"GrantedEffects"`
-	InterpolationBases     []int     `json:"InterpolationBases"`
+	DamageEffectiveness    int       `json:"DamageEffectiveness"`
 	PlayerLevelReq         int       `json:"PlayerLevelReq"`
 	OffhandCritChance      int       `json:"AttackCritChance"`
-	StatInterpolations     []int     `json:"StatInterpolations"`
+	AttackCritChance       int       `json:"SpellCritChance"`
 	StatSet                int       `json:"StatSet"`
 	Key                    int       `json:"_key"`
 }

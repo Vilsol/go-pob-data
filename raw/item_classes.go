@@ -1,22 +1,22 @@
 package raw
 
 type ItemClass struct {
-	AllocateToMapOwner   bool   `json:"AllocateToMapOwner"`
-	AlwaysAllocate       bool   `json:"AlwaysAllocate"`
-	AlwaysShow           bool   `json:"AlwaysShow"`
-	CanBeCorrupted       bool   `json:"CanBeCorrupted"`
+	ItemStance           *int   `json:"ItemStance"`
+	ItemClassCategory    *int   `json:"ItemClassCategory"`
+	Name                 string `json:"Name"`
+	ID                   string `json:"Id"`
+	Flags                []int  `json:"Flags"`
+	Key                  int    `json:"_key"`
 	CanBeDoubleCorrupted bool   `json:"CanBeDoubleCorrupted"`
-	CanHaveAspects       bool   `json:"CanHaveAspects"`
-	CanHaveIncubators    bool   `json:"CanHaveIncubators"`
 	CanHaveInfluence     bool   `json:"CanHaveInfluence"`
 	CanHaveVeiledMods    bool   `json:"CanHaveVeiledMods"`
 	CanScourge           bool   `json:"CanScourge"`
 	CanTransferSkin      bool   `json:"CanTransferSkin"`
-	Flags                []int  `json:"Flags"`
-	ID                   string `json:"Id"`
-	ItemClassCategory    *int   `json:"ItemClassCategory"`
-	ItemStance           *int   `json:"ItemStance"`
-	Name                 string `json:"Name"`
+	CanHaveIncubators    bool   `json:"CanHaveIncubators"`
+	CanHaveAspects       bool   `json:"CanHaveAspects"`
+	AllocateToMapOwner   bool   `json:"AllocateToMapOwner"`
+	CanBeCorrupted       bool   `json:"CanBeCorrupted"`
+	AlwaysShow           bool   `json:"AlwaysShow"`
 	RemovedIfLeavesArea  bool   `json:"RemovedIfLeavesArea"`
-	Key                  int    `json:"_key"`
+	AlwaysAllocate       bool   `json:"AlwaysAllocate"`
 }

@@ -1,28 +1,28 @@
 package raw
 
 type BaseItemType struct {
-	DropLevel                     int           `json:"DropLevel"`
+	SoundEffect                   *int          `json:"SoundEffect"`
 	EquipAchievementItemsKey      *int          `json:"Equip_AchievementItemsKey"`
 	FlavourTextKey                *int          `json:"FlavourTextKey"`
 	FragmentBaseItemTypesKey      *int          `json:"FragmentBaseItemTypesKey"`
-	Hash                          int           `json:"HASH"`
-	Height                        int           `json:"Height"`
 	ID                            string        `json:"Id"`
+	Name                          string        `json:"Name"`
+	Inflection                    string        `json:"Inflection"`
+	InheritsFrom                  string        `json:"InheritsFrom"`
+	TagsKeys                      []int         `json:"TagsKeys"`
 	IdentifyMagicAchievementItems []interface{} `json:"IdentifyMagic_AchievementItems"`
 	IdentifyAchievementItems      []interface{} `json:"Identify_AchievementItems"`
 	ImplicitModsKeys              []int         `json:"Implicit_ModsKeys"`
-	Inflection                    string        `json:"Inflection"`
-	InheritsFrom                  string        `json:"InheritsFrom"`
-	IsCorrupted                   bool          `json:"IsCorrupted"`
-	ItemClassesKey                int           `json:"ItemClassesKey"`
+	VendorRecipeAchievementItems  []int         `json:"VendorRecipe_AchievementItems"`
+	SizeOnGround                  int           `json:"SizeOnGround"`
 	ItemVisualIdentity            int           `json:"ItemVisualIdentity"`
 	ModDomain                     int           `json:"ModDomain"`
-	Name                          string        `json:"Name"`
+	ItemClassesKey                int           `json:"ItemClassesKey"`
 	SiteVisibility                int           `json:"SiteVisibility"`
-	SizeOnGround                  int           `json:"SizeOnGround"`
-	SoundEffect                   *int          `json:"SoundEffect"`
-	TagsKeys                      []int         `json:"TagsKeys"`
-	VendorRecipeAchievementItems  []int         `json:"VendorRecipe_AchievementItems"`
+	DropLevel                     int           `json:"DropLevel"`
+	Height                        int           `json:"Height"`
+	Hash                          int           `json:"HASH"`
 	Width                         int           `json:"Width"`
 	Key                           int           `json:"_key"`
+	IsCorrupted                   bool          `json:"IsCorrupted"`
 }

@@ -3,17 +3,22 @@ package extractor
 import (
 	"encoding/json"
 	"fmt"
+	"os"
+	"path/filepath"
 
 	"github.com/oriath-net/pogo/dat"
 )
 
-const schemaURL = "https://github.com/poe-tool-dev/dat-schema/releases/download/latest/schema.min.json"
+var (
+	schemaFile *SchemaFile
+	tableMap   map[string]Table
+)
 
-var schemaFile *SchemaFile
-var tableMap map[string]Table
-
-func LoadSchema() {
-	schemaRaw := Fetch(schemaURL)
+func LoadSchema(gameVersion string) {
+	schemaRaw, err := os.ReadFile(filepath.Join("data", gameVersion, "schema.min.json"))
+	if err != nil {
+		panic(err)
+	}
 
 	if err := json.Unmarshal(schemaRaw, &schemaFile); err != nil {
 		panic(err)
@@ -26,16 +31,16 @@ func LoadSchema() {
 }
 
 type SchemaFile struct {
-	Version      int64         `json:"version"`
-	CreatedAt    int64         `json:"createdAt"`
 	Tables       []Table       `json:"tables"`
 	Enumerations []Enumeration `json:"enumerations"`
+	Version      int64         `json:"version"`
+	CreatedAt    int64         `json:"createdAt"`
 }
 
 type Enumeration struct {
 	Name        string    `json:"name"`
-	Indexing    int64     `json:"indexing"`
 	Enumerators []*string `json:"enumerators"`
+	Indexing    int64     `json:"indexing"`
 }
 
 type Table struct {
@@ -101,21 +106,21 @@ var typeToType = map[Type]string{
 }
 
 type Column struct {
+	Until       interface{} `json:"until"`
 	Name        *string     `json:"name"`
 	Description *string     `json:"description"`
-	Array       bool        `json:"array"`
+	References  *References `json:"references"`
+	File        *string     `json:"file"`
 	Type        Type        `json:"type"`
+	Files       []File      `json:"files"`
+	Array       bool        `json:"array"`
 	Unique      bool        `json:"unique"`
 	Localized   bool        `json:"localized"`
-	References  *References `json:"references"`
-	Until       interface{} `json:"until"`
-	File        *string     `json:"file"`
-	Files       []File      `json:"files"`
 }
 
 type References struct {
-	Table  string  `json:"table"`
 	Column *string `json:"column,omitempty"`
+	Table  string  `json:"table"`
 }
 
 type File string

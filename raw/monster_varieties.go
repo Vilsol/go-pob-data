@@ -1,46 +1,46 @@
 package raw
 
 type MonsterVariety struct {
-	ACTFiles                                      []string             `json:"ACTFiles"`
-	AISFile                                       string               `json:"AISFile"`
-	AOFiles                                       []string             `json:"AOFiles"`
-	AttackSpeed                                   int                  `json:"AttackSpeed"`
-	BackItemVisualIdentityKey                     *int                 `json:"Back_ItemVisualIdentityKey"`
-	BaseMonsterTypeIndex                          string               `json:"BaseMonsterTypeIndex"`
-	CriticalStrikeChance                          int                  `json:"CriticalStrikeChance"`
-	DamageMultiplier                              int                  `json:"DamageMultiplier"`
-	EPKFile                                       string               `json:"EPKFile"`
-	EndgameModsKeys                               []int                `json:"Endgame_ModsKeys"`
-	ExperienceMultiplier                          int                  `json:"ExperienceMultiplier"`
-	GrantedEffectsKeys                            []int                `json:"GrantedEffectsKeys"`
 	HelmetItemVisualIdentityKey                   *int                 `json:"Helmet_ItemVisualIdentityKey"`
-	ID                                            string               `json:"Id"`
-	KillRareAchievementItemsKeys                  []int                `json:"KillRare_AchievementItemsKeys"`
-	KillSpecificMonsterCountAchievementItemsKeys  []int                `json:"KillSpecificMonsterCount_AchievementItemsKeys"`
-	KillWhileOnslaughtIsActiveAchievementItemsKey *int                 `json:"KillWhileOnslaughtIsActive_AchievementItemsKey"`
+	MonsterArmoursKey                             *int                 `json:"MonsterArmoursKey"`
 	KillWhileTalismanIsActiveAchievementItemsKey  *int                 `json:"KillWhileTalismanIsActive_AchievementItemsKey"`
-	LifeMultiplier                                int                  `json:"LifeMultiplier"`
+	MonsterSegmentsKey                            *int                 `json:"MonsterSegmentsKey"`
+	OffHandItemClassesKey                         *int                 `json:"OffHand_ItemClassesKey"`
 	MainHandItemClassesKey                        *int                 `json:"MainHand_ItemClassesKey"`
-	MaximumAttackDistance                         int                  `json:"MaximumAttackDistance"`
-	MinimumAttackDistance                         int                  `json:"MinimumAttackDistance"`
-	ModelSizeMultiplier                           int                  `json:"ModelSizeMultiplier"`
+	KillWhileOnslaughtIsActiveAchievementItemsKey *int                 `json:"KillWhileOnslaughtIsActive_AchievementItemsKey"`
+	MonsterConditionalEffectPacksKey              *int                 `json:"MonsterConditionalEffectPacksKey"`
+	BackItemVisualIdentityKey                     *int                 `json:"Back_ItemVisualIdentityKey"`
+	EPKFile                                       string               `json:"EPKFile"`
+	Stance                                        MonsterVarietyStance `json:"Stance"`
+	SinkAnimationAOFile                           string               `json:"SinkAnimation_AOFile"`
+	AISFile                                       string               `json:"AISFile"`
+	ID                                            string               `json:"Id"`
+	BaseMonsterTypeIndex                          string               `json:"BaseMonsterTypeIndex"`
+	Name                                          string               `json:"Name"`
+	TagsKeys                                      []int                `json:"TagsKeys"`
+	KillSpecificMonsterCountAchievementItemsKeys  []int                `json:"KillSpecificMonsterCount_AchievementItemsKeys"`
+	SpecialModsKeys                               []int                `json:"Special_ModsKeys"`
+	KillRareAchievementItemsKeys                  []int                `json:"KillRare_AchievementItemsKeys"`
+	ACTFiles                                      []string             `json:"ACTFiles"`
+	GrantedEffectsKeys                            []int                `json:"GrantedEffectsKeys"`
+	Part2ModsKeys                                 []int                `json:"Part2_ModsKeys"`
 	ModsKeys                                      []int                `json:"ModsKeys"`
 	ModsKeys2                                     []int                `json:"ModsKeys2"`
-	MonsterArmoursKey                             *int                 `json:"MonsterArmoursKey"`
-	MonsterConditionalEffectPacksKey              *int                 `json:"MonsterConditionalEffectPacksKey"`
-	MonsterSegmentsKey                            *int                 `json:"MonsterSegmentsKey"`
-	MonsterTypesKey                               int                  `json:"MonsterTypesKey"`
-	Name                                          string               `json:"Name"`
-	ObjectSize                                    int                  `json:"ObjectSize"`
-	OffHandItemClassesKey                         *int                 `json:"OffHand_ItemClassesKey"`
-	Part1ModsKeys                                 []int                `json:"Part1_ModsKeys"`
-	Part2ModsKeys                                 []int                `json:"Part2_ModsKeys"`
-	SinkAnimationAOFile                           string               `json:"SinkAnimation_AOFile"`
-	SpecialModsKeys                               []int                `json:"Special_ModsKeys"`
-	Stance                                        MonsterVarietyStance `json:"Stance"`
-	TagsKeys                                      []int                `json:"TagsKeys"`
+	EndgameModsKeys                               []int                `json:"Endgame_ModsKeys"`
 	Weapon1ItemVisualIdentityKeys                 []int                `json:"Weapon1_ItemVisualIdentityKeys"`
 	Weapon2ItemVisualIdentityKeys                 []int                `json:"Weapon2_ItemVisualIdentityKeys"`
+	Part1ModsKeys                                 []int                `json:"Part1_ModsKeys"`
+	AOFiles                                       []string             `json:"AOFiles"`
+	MaximumAttackDistance                         int                  `json:"MaximumAttackDistance"`
+	ObjectSize                                    int                  `json:"ObjectSize"`
+	MonsterTypesKey                               int                  `json:"MonsterTypesKey"`
+	ModelSizeMultiplier                           int                  `json:"ModelSizeMultiplier"`
+	MinimumAttackDistance                         int                  `json:"MinimumAttackDistance"`
+	LifeMultiplier                                int                  `json:"LifeMultiplier"`
+	ExperienceMultiplier                          int                  `json:"ExperienceMultiplier"`
+	DamageMultiplier                              int                  `json:"DamageMultiplier"`
+	CriticalStrikeChance                          int                  `json:"CriticalStrikeChance"`
+	AttackSpeed                                   int                  `json:"AttackSpeed"`
 	Key                                           int                  `json:"_key"`
 }
 

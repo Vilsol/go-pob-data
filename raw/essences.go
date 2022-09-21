@@ -1,13 +1,13 @@
 package raw
 
 type Essence struct {
-	AmuletModsKey                    *int  `json:"Amulet_ModsKey"`
-	BaseItemTypesKey                 int   `json:"BaseItemTypesKey"`
+	DisplayShieldModsKey             *int  `json:"Display_Shield_ModsKey"`
+	ClawModsKey                      *int  `json:"Claw_ModsKey"`
 	BeltModsKey                      *int  `json:"Belt_ModsKey"`
 	BodyArmourModsKey                *int  `json:"BodyArmour_ModsKey"`
 	BootsModsKey                     *int  `json:"Boots_ModsKey"`
 	BowModsKey                       *int  `json:"Bow_ModsKey"`
-	ClawModsKey                      *int  `json:"Claw_ModsKey"`
+	DisplayTwoHandMeleeWeaponModsKey *int  `json:"Display_TwoHandMeleeWeapon_ModsKey"`
 	DaggerModsKey                    *int  `json:"Dagger_ModsKey"`
 	DisplayAmuletModsKey             *int  `json:"Display_Amulet_ModsKey"`
 	DisplayArmourModsKey             *int  `json:"Display_Armour_ModsKey"`
@@ -19,37 +19,37 @@ type Essence struct {
 	DisplayHelmetModsKey             *int  `json:"Display_Helmet_ModsKey"`
 	DisplayItemsModsKey              *int  `json:"Display_Items_ModsKey"`
 	DisplayJewelleryModsKey          *int  `json:"Display_Jewellery_ModsKey"`
-	DisplayMeleeWeaponModsKey        *int  `json:"Display_MeleeWeapon_ModsKey"`
-	DisplayMonsterModsKey            int   `json:"Display_Monster_ModsKey"`
+	AmuletModsKey                    *int  `json:"Amulet_ModsKey"`
+	DisplayTwoHandWeaponModsKey      *int  `json:"Display_TwoHandWeapon_ModsKey"`
 	DisplayOneHandWeaponModsKey      *int  `json:"Display_OneHandWeapon_ModsKey"`
 	DisplayQuiverModsKey             *int  `json:"Display_Quiver_ModsKey"`
 	DisplayRangedWeaponModsKey       *int  `json:"Display_RangedWeapon_ModsKey"`
 	DisplayRingModsKey               *int  `json:"Display_Ring_ModsKey"`
-	DisplayShieldModsKey             *int  `json:"Display_Shield_ModsKey"`
-	DisplayTwoHandMeleeWeaponModsKey *int  `json:"Display_TwoHandMeleeWeapon_ModsKey"`
-	DisplayTwoHandWeaponModsKey      *int  `json:"Display_TwoHandWeapon_ModsKey"`
+	DisplayMeleeWeaponModsKey        *int  `json:"Display_MeleeWeapon_ModsKey"`
+	TwoHandSwordModsKey              *int  `json:"TwoHandSword_ModsKey"`
+	WandModsKey                      *int  `json:"Wand_ModsKey"`
 	DisplayWandModsKey               *int  `json:"Display_Wand_ModsKey"`
 	DisplayWeaponModsKey             *int  `json:"Display_Weapon_ModsKey"`
-	DropLevelMaximum                 int   `json:"DropLevelMaximum"`
-	DropLevelMinimum                 int   `json:"DropLevelMinimum"`
-	EssenceTypeKey                   int   `json:"EssenceTypeKey"`
+	TwoHandMaceModsKey               *int  `json:"TwoHandMace_ModsKey"`
+	TwoHandAxeModsKey                *int  `json:"TwoHandAxe_ModsKey"`
+	StaffModsKey                     *int  `json:"Staff_ModsKey"`
 	GlovesModsKey                    *int  `json:"Gloves_ModsKey"`
 	HelmetModsKey                    *int  `json:"Helmet_ModsKey"`
-	IsScreamingEssence               bool  `json:"IsScreamingEssence"`
-	ItemLevelRestriction             int   `json:"ItemLevelRestriction"`
-	Level                            int   `json:"Level"`
-	MonsterModsKeys                  []int `json:"Monster_ModsKeys"`
+	ShieldModsKey                    *int  `json:"Shield_ModsKey"`
+	SceptreModsKey                   *int  `json:"Sceptre_ModsKey"`
+	RingModsKey                      *int  `json:"Ring_ModsKey"`
+	OneHandThrustingSwordModsKey     *int  `json:"OneHandThrustingSword_ModsKey"`
 	OneHandAxeModsKey                *int  `json:"OneHandAxe_ModsKey"`
 	OneHandMaceModsKey               *int  `json:"OneHandMace_ModsKey"`
 	OneHandSwordModsKey              *int  `json:"OneHandSword_ModsKey"`
-	OneHandThrustingSwordModsKey     *int  `json:"OneHandThrustingSword_ModsKey"`
-	RingModsKey                      *int  `json:"Ring_ModsKey"`
-	SceptreModsKey                   *int  `json:"Sceptre_ModsKey"`
-	ShieldModsKey                    *int  `json:"Shield_ModsKey"`
-	StaffModsKey                     *int  `json:"Staff_ModsKey"`
-	TwoHandAxeModsKey                *int  `json:"TwoHandAxe_ModsKey"`
-	TwoHandMaceModsKey               *int  `json:"TwoHandMace_ModsKey"`
-	TwoHandSwordModsKey              *int  `json:"TwoHandSword_ModsKey"`
-	WandModsKey                      *int  `json:"Wand_ModsKey"`
+	MonsterModsKeys                  []int `json:"Monster_ModsKeys"`
+	Level                            int   `json:"Level"`
+	ItemLevelRestriction             int   `json:"ItemLevelRestriction"`
+	EssenceTypeKey                   int   `json:"EssenceTypeKey"`
+	DropLevelMinimum                 int   `json:"DropLevelMinimum"`
+	DropLevelMaximum                 int   `json:"DropLevelMaximum"`
+	BaseItemTypesKey                 int   `json:"BaseItemTypesKey"`
+	DisplayMonsterModsKey            int   `json:"Display_Monster_ModsKey"`
 	Key                              int   `json:"_key"`
+	IsScreamingEssence               bool  `json:"IsScreamingEssence"`
 }
