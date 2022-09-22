@@ -1,8 +1,9 @@
 package raw
 
 type Condition struct {
-	Min *int `json:"min,omitempty"`
-	Max *int `json:"max,omitempty"`
+	Min     *int `json:"min,omitempty"`
+	Max     *int `json:"max,omitempty"`
+	Negated bool `json:"negated"`
 }
 
 type LangTranslation struct {

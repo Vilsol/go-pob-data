@@ -48,14 +48,8 @@ func NewTranslationParser(loader fs.FS) *TranslationParser {
 	}
 }
 
-type Translation struct {
-	Special map[string]string `json:"special,omitempty"`
-	Text    string            `json:"text"`
-	Limit   [][2]string       `json:"limit,omitempty"`
-}
-
 type Description struct {
-	Lang  map[string][]Translation
+	Lang  map[string][]raw.LangTranslation
 	Stats []string
 	Order int
 }
@@ -99,8 +93,8 @@ func (t *TranslationParser) ParseFile(name string) error {
 		} else if bytes.Contains(line, []byte("handed_description")) || (bytes.Contains(line, []byte("description")) && !bytes.Contains(line, []byte("_description"))) {
 			curLang = "English"
 			curDescriptor = &Description{
-				Lang: map[string][]Translation{
-					curLang: make([]Translation, 0),
+				Lang: map[string][]raw.LangTranslation{
+					curLang: make([]raw.LangTranslation, 0),
 				},
 				Order: t.order,
 			}
@@ -120,17 +114,17 @@ func (t *TranslationParser) ParseFile(name string) error {
 			langName := langRegex.FindAllSubmatch(line, -1)
 			if len(langName) > 0 {
 				curLang = string(langName[0][1])
-				curDescriptor.Lang[curLang] = make([]Translation, 0)
+				curDescriptor.Lang[curLang] = make([]raw.LangTranslation, 0)
 			} else {
 				statMatches := statLineRegex.FindAllSubmatch(line, -1)
 				if len(statMatches) > 0 {
 					statLimits := statMatches[0][1]
 					special := statMatches[0][3]
 
-					desc := Translation{
-						Text:    string(statMatches[0][2]),
-						Limit:   make([][2]string, 0),
-						Special: make(map[string]string),
+					desc := raw.LangTranslation{
+						String:        string(statMatches[0][2]),
+						Conditions:    make([]raw.Condition, 0),
+						IndexHandlers: make(map[string]string),
 					}
 
 					statLimitMatch := statLimitRegex.FindAllSubmatch(statLimits, -1)
@@ -140,22 +134,27 @@ func (t *TranslationParser) ParseFile(name string) error {
 						if statLimit == "#" {
 							// Do nothing
 						} else if statLimitNumberRegex.MatchString(statLimit) {
-							desc.Limit = append(desc.Limit, [2]string{
-								statLimit,
-								statLimit,
+							n, _ := strconv.Atoi(statLimit)
+							desc.Conditions = append(desc.Conditions, raw.Condition{
+								Min: &n,
+								Max: &n,
 							})
 						} else {
 							negate := statLimitNegateRegex.FindAllStringSubmatch(statLimit, -1)
 							if len(negate) > 0 {
-								desc.Limit = append(desc.Limit, [2]string{
-									"!",
-									negate[0][1],
+								n, _ := strconv.Atoi(negate[0][1])
+								desc.Conditions = append(desc.Conditions, raw.Condition{
+									Negated: true,
+									Min:     &n,
+									Max:     &n,
 								})
 							} else {
 								pipeMatch := statLimitPipeRegex.FindAllStringSubmatch(statLimit, -1)
-								desc.Limit = append(desc.Limit, [2]string{
-									pipeMatch[0][1],
-									pipeMatch[0][2],
+								n1, _ := strconv.Atoi(pipeMatch[0][1])
+								n2, _ := strconv.Atoi(pipeMatch[0][2])
+								desc.Conditions = append(desc.Conditions, raw.Condition{
+									Min: &n1,
+									Max: &n2,
 								})
 							}
 						}
@@ -163,7 +162,7 @@ func (t *TranslationParser) ParseFile(name string) error {
 
 					specialMatch := specialRegex.FindAllSubmatch(special, -1)
 					for _, match := range specialMatch {
-						desc.Special[string(match[1])] = string(match[2])
+						desc.IndexHandlers[string(match[1])] = string(match[2])
 					}
 
 					curDescriptor.Lang[curLang] = append(curDescriptor.Lang[curLang], desc)
@@ -197,34 +196,9 @@ func (t *TranslationParser) SaveTo(outDir string, translationName string) error 
 				fullOut[lang] = make([]*raw.StatTranslation, 0)
 			}
 
-			outTranslations := make([]raw.LangTranslation, len(translations))
-			for i, trans := range translations {
-				conditions := make([]raw.Condition, 0)
-				for _, limits := range trans.Limit {
-					if limits[0] != "" || limits[1] != "" {
-						cond := raw.Condition{}
-						if limits[0] != "" {
-							temp, _ := strconv.Atoi(limits[0])
-							cond.Min = &temp
-						}
-						if limits[1] != "" {
-							temp, _ := strconv.Atoi(limits[1])
-							cond.Max = &temp
-						}
-						conditions = append(conditions, cond)
-					}
-				}
-
-				outTranslations[i] = raw.LangTranslation{
-					Conditions:    conditions,
-					IndexHandlers: trans.Special,
-					String:        trans.Text,
-				}
-			}
-
 			fullOut[lang] = append(fullOut[lang], &raw.StatTranslation{
 				IDs:  description.Stats,
-				List: outTranslations,
+				List: translations,
 			})
 		}
 	}
