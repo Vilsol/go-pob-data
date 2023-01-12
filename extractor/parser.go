@@ -62,6 +62,5 @@ func (s *schemaFSFile) Close() error {
 }
 
 func ParseDat(data io.Reader, filename string) ([]interface{}, error) {
-	parse, err := parser.Parse(data, filename)
-	return parse, errors.Wrap(err, "failed to parse dat file")
+	return parser.Parse(data, filename)
 }

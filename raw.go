@@ -3,6 +3,7 @@ package main
 import (
 	"compress/gzip"
 	"encoding/json"
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -223,7 +224,8 @@ func extractRawData(gamePath string, gameVersion string) error {
 
 		dat, err := extractor.ParseDat(data, filepath.Base(file.Path))
 		if err != nil {
-			return errors.Wrap(err, "failed to parse dat file")
+			fmt.Println(errors.Wrap(err, "failed to parse dat file"))
+			continue
 		}
 
 		// Ensure that all slices are always sorted by key

@@ -48,6 +48,10 @@ func downloadTreeData(treeVersion string, gameVersion string) error {
 		return errors.Wrap(err, "failed to fetch skill tree data.json")
 	}
 
+	if response.StatusCode != 200 {
+		return fmt.Errorf("failed to fetch tree, status code: %d", response.StatusCode)
+	}
+
 	defer response.Body.Close()
 	dataJSON, err := io.ReadAll(response.Body)
 	if err != nil {
@@ -92,7 +96,7 @@ func downloadTreeData(treeVersion string, gameVersion string) error {
 
 	var skillTreeData SkillTreeData
 	if err := json.Unmarshal(dataJSON, &skillTreeData); err != nil {
-		return errors.Wrap(err, "failed to marshal skill tree to json")
+		return errors.Wrap(err, "failed to unmarshal skill tree from json")
 	}
 
 	downloaded := make(map[string]bool)
