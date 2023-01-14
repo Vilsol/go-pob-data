@@ -7,11 +7,10 @@ import (
 	"net/http"
 	"reflect"
 
+	"github.com/andybalholm/brotli"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"
 	"github.com/tinylib/msgp/msgp"
-
-	"github.com/andybalholm/brotli"
 )
 
 const cdnBase = "https://go-pob-data.pages.dev/data/%s/raw/%s.msgpack.br"
