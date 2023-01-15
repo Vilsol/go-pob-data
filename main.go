@@ -6,7 +6,7 @@ import (
 	_ "github.com/andybalholm/brotli"
 )
 
-//go:generate msgp -file ./raw
+//go:generate msgp -v -file ./raw
 
 func main() {
 	if len(os.Args) < 2 {

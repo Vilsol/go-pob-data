@@ -24,50 +24,6 @@ func (z *ActiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AIFile":
-			z.AIFile, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "AIFile")
-				return
-			}
-		case "ActiveSkillTargetTypes":
-			var zb0002 uint32
-			zb0002, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "ActiveSkillTargetTypes")
-				return
-			}
-			if cap(z.ActiveSkillTargetTypes) >= int(zb0002) {
-				z.ActiveSkillTargetTypes = (z.ActiveSkillTargetTypes)[:zb0002]
-			} else {
-				z.ActiveSkillTargetTypes = make([]int, zb0002)
-			}
-			for za0001 := range z.ActiveSkillTargetTypes {
-				z.ActiveSkillTargetTypes[za0001], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "ActiveSkillTargetTypes", za0001)
-					return
-				}
-			}
-		case "ActiveSkillTypes":
-			var zb0003 uint32
-			zb0003, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "ActiveSkillTypes")
-				return
-			}
-			if cap(z.ActiveSkillTypes) >= int(zb0003) {
-				z.ActiveSkillTypes = (z.ActiveSkillTypes)[:zb0003]
-			} else {
-				z.ActiveSkillTypes = make([]int, zb0003)
-			}
-			for za0002 := range z.ActiveSkillTypes {
-				z.ActiveSkillTypes[za0002], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "ActiveSkillTypes", za0002)
-					return
-				}
-			}
 		case "AlternateSkillTargetingBehavioursKey":
 			if dc.IsNil() {
 				err = dc.ReadNil()
@@ -85,6 +41,18 @@ func (z *ActiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 					err = msgp.WrapError(err, "AlternateSkillTargetingBehavioursKey")
 					return
 				}
+			}
+		case "AIFile":
+			z.AIFile, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "AIFile")
+				return
+			}
+		case "WebsiteImage":
+			z.WebsiteImage, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "WebsiteImage")
+				return
 			}
 		case "Description":
 			z.Description, err = dc.ReadString()
@@ -110,66 +78,123 @@ func (z *ActiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "ID")
 				return
 			}
-		case "InputStatKeys":
-			var zb0004 uint32
-			zb0004, err = dc.ReadArrayHeader()
+		case "WebsiteDescription":
+			z.WebsiteDescription, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "InputStatKeys")
+				err = msgp.WrapError(err, "WebsiteDescription")
 				return
 			}
-			if cap(z.InputStatKeys) >= int(zb0004) {
-				z.InputStatKeys = (z.InputStatKeys)[:zb0004]
-			} else {
-				z.InputStatKeys = make([]int, zb0004)
+		case "WeaponRestrictionItemClassesKeys":
+			var zb0002 uint32
+			zb0002, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "WeaponRestrictionItemClassesKeys")
+				return
 			}
-			for za0003 := range z.InputStatKeys {
-				z.InputStatKeys[za0003], err = dc.ReadInt()
+			if cap(z.WeaponRestrictionItemClassesKeys) >= int(zb0002) {
+				z.WeaponRestrictionItemClassesKeys = (z.WeaponRestrictionItemClassesKeys)[:zb0002]
+			} else {
+				z.WeaponRestrictionItemClassesKeys = make([]int, zb0002)
+			}
+			for za0001 := range z.WeaponRestrictionItemClassesKeys {
+				z.WeaponRestrictionItemClassesKeys[za0001], err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "InputStatKeys", za0003)
+					err = msgp.WrapError(err, "WeaponRestrictionItemClassesKeys", za0001)
 					return
 				}
 			}
-		case "IsManuallyCasted":
-			z.IsManuallyCasted, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "IsManuallyCasted")
-				return
-			}
 		case "MinionActiveSkillTypes":
-			var zb0005 uint32
-			zb0005, err = dc.ReadArrayHeader()
+			var zb0003 uint32
+			zb0003, err = dc.ReadArrayHeader()
 			if err != nil {
 				err = msgp.WrapError(err, "MinionActiveSkillTypes")
 				return
 			}
-			if cap(z.MinionActiveSkillTypes) >= int(zb0005) {
-				z.MinionActiveSkillTypes = (z.MinionActiveSkillTypes)[:zb0005]
+			if cap(z.MinionActiveSkillTypes) >= int(zb0003) {
+				z.MinionActiveSkillTypes = (z.MinionActiveSkillTypes)[:zb0003]
 			} else {
-				z.MinionActiveSkillTypes = make([]int, zb0005)
+				z.MinionActiveSkillTypes = make([]int, zb0003)
 			}
-			for za0004 := range z.MinionActiveSkillTypes {
-				z.MinionActiveSkillTypes[za0004], err = dc.ReadInt()
+			for za0002 := range z.MinionActiveSkillTypes {
+				z.MinionActiveSkillTypes[za0002], err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "MinionActiveSkillTypes", za0004)
+					err = msgp.WrapError(err, "MinionActiveSkillTypes", za0002)
 					return
 				}
 			}
 		case "OutputStatKeys":
-			var zb0006 uint32
-			zb0006, err = dc.ReadArrayHeader()
+			var zb0004 uint32
+			zb0004, err = dc.ReadArrayHeader()
 			if err != nil {
 				err = msgp.WrapError(err, "OutputStatKeys")
 				return
 			}
-			if cap(z.OutputStatKeys) >= int(zb0006) {
-				z.OutputStatKeys = (z.OutputStatKeys)[:zb0006]
+			if cap(z.OutputStatKeys) >= int(zb0004) {
+				z.OutputStatKeys = (z.OutputStatKeys)[:zb0004]
 			} else {
-				z.OutputStatKeys = make([]int, zb0006)
+				z.OutputStatKeys = make([]int, zb0004)
 			}
-			for za0005 := range z.OutputStatKeys {
-				z.OutputStatKeys[za0005], err = dc.ReadInt()
+			for za0003 := range z.OutputStatKeys {
+				z.OutputStatKeys[za0003], err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "OutputStatKeys", za0005)
+					err = msgp.WrapError(err, "OutputStatKeys", za0003)
+					return
+				}
+			}
+		case "InputStatKeys":
+			var zb0005 uint32
+			zb0005, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "InputStatKeys")
+				return
+			}
+			if cap(z.InputStatKeys) >= int(zb0005) {
+				z.InputStatKeys = (z.InputStatKeys)[:zb0005]
+			} else {
+				z.InputStatKeys = make([]int, zb0005)
+			}
+			for za0004 := range z.InputStatKeys {
+				z.InputStatKeys[za0004], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "InputStatKeys", za0004)
+					return
+				}
+			}
+		case "ActiveSkillTypes":
+			var zb0006 uint32
+			zb0006, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "ActiveSkillTypes")
+				return
+			}
+			if cap(z.ActiveSkillTypes) >= int(zb0006) {
+				z.ActiveSkillTypes = (z.ActiveSkillTypes)[:zb0006]
+			} else {
+				z.ActiveSkillTypes = make([]int, zb0006)
+			}
+			for za0005 := range z.ActiveSkillTypes {
+				z.ActiveSkillTypes[za0005], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ActiveSkillTypes", za0005)
+					return
+				}
+			}
+		case "ActiveSkillTargetTypes":
+			var zb0007 uint32
+			zb0007, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "ActiveSkillTargetTypes")
+				return
+			}
+			if cap(z.ActiveSkillTargetTypes) >= int(zb0007) {
+				z.ActiveSkillTargetTypes = (z.ActiveSkillTargetTypes)[:zb0007]
+			} else {
+				z.ActiveSkillTargetTypes = make([]int, zb0007)
+			}
+			for za0006 := range z.ActiveSkillTargetTypes {
+				z.ActiveSkillTargetTypes[za0006], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ActiveSkillTargetTypes", za0006)
 					return
 				}
 			}
@@ -179,41 +204,16 @@ func (z *ActiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "SkillTotemID")
 				return
 			}
-		case "WeaponRestrictionItemClassesKeys":
-			var zb0007 uint32
-			zb0007, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "WeaponRestrictionItemClassesKeys")
-				return
-			}
-			if cap(z.WeaponRestrictionItemClassesKeys) >= int(zb0007) {
-				z.WeaponRestrictionItemClassesKeys = (z.WeaponRestrictionItemClassesKeys)[:zb0007]
-			} else {
-				z.WeaponRestrictionItemClassesKeys = make([]int, zb0007)
-			}
-			for za0006 := range z.WeaponRestrictionItemClassesKeys {
-				z.WeaponRestrictionItemClassesKeys[za0006], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "WeaponRestrictionItemClassesKeys", za0006)
-					return
-				}
-			}
-		case "WebsiteDescription":
-			z.WebsiteDescription, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "WebsiteDescription")
-				return
-			}
-		case "WebsiteImage":
-			z.WebsiteImage, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "WebsiteImage")
-				return
-			}
 		case "Key":
 			z.Key, err = dc.ReadInt()
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "IsManuallyCasted":
+			z.IsManuallyCasted, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IsManuallyCasted")
 				return
 			}
 		default:
@@ -230,52 +230,8 @@ func (z *ActiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *ActiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 17
-	// write "AIFile"
-	err = en.Append(0xde, 0x0, 0x11, 0xa6, 0x41, 0x49, 0x46, 0x69, 0x6c, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.AIFile)
-	if err != nil {
-		err = msgp.WrapError(err, "AIFile")
-		return
-	}
-	// write "ActiveSkillTargetTypes"
-	err = en.Append(0xb6, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x54, 0x79, 0x70, 0x65, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.ActiveSkillTargetTypes)))
-	if err != nil {
-		err = msgp.WrapError(err, "ActiveSkillTargetTypes")
-		return
-	}
-	for za0001 := range z.ActiveSkillTargetTypes {
-		err = en.WriteInt(z.ActiveSkillTargetTypes[za0001])
-		if err != nil {
-			err = msgp.WrapError(err, "ActiveSkillTargetTypes", za0001)
-			return
-		}
-	}
-	// write "ActiveSkillTypes"
-	err = en.Append(0xb0, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.ActiveSkillTypes)))
-	if err != nil {
-		err = msgp.WrapError(err, "ActiveSkillTypes")
-		return
-	}
-	for za0002 := range z.ActiveSkillTypes {
-		err = en.WriteInt(z.ActiveSkillTypes[za0002])
-		if err != nil {
-			err = msgp.WrapError(err, "ActiveSkillTypes", za0002)
-			return
-		}
-	}
 	// write "AlternateSkillTargetingBehavioursKey"
-	err = en.Append(0xd9, 0x24, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6f, 0x75, 0x72, 0x73, 0x4b, 0x65, 0x79)
+	err = en.Append(0xde, 0x0, 0x11, 0xd9, 0x24, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6f, 0x75, 0x72, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
@@ -290,6 +246,26 @@ func (z *ActiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 			err = msgp.WrapError(err, "AlternateSkillTargetingBehavioursKey")
 			return
 		}
+	}
+	// write "AIFile"
+	err = en.Append(0xa6, 0x41, 0x49, 0x46, 0x69, 0x6c, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.AIFile)
+	if err != nil {
+		err = msgp.WrapError(err, "AIFile")
+		return
+	}
+	// write "WebsiteImage"
+	err = en.Append(0xac, 0x57, 0x65, 0x62, 0x73, 0x69, 0x74, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.WebsiteImage)
+	if err != nil {
+		err = msgp.WrapError(err, "WebsiteImage")
+		return
 	}
 	// write "Description"
 	err = en.Append(0xab, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
@@ -331,32 +307,32 @@ func (z *ActiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "ID")
 		return
 	}
-	// write "InputStatKeys"
-	err = en.Append(0xad, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x53, 0x74, 0x61, 0x74, 0x4b, 0x65, 0x79, 0x73)
+	// write "WebsiteDescription"
+	err = en.Append(0xb2, 0x57, 0x65, 0x62, 0x73, 0x69, 0x74, 0x65, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.InputStatKeys)))
+	err = en.WriteString(z.WebsiteDescription)
 	if err != nil {
-		err = msgp.WrapError(err, "InputStatKeys")
+		err = msgp.WrapError(err, "WebsiteDescription")
 		return
 	}
-	for za0003 := range z.InputStatKeys {
-		err = en.WriteInt(z.InputStatKeys[za0003])
+	// write "WeaponRestrictionItemClassesKeys"
+	err = en.Append(0xd9, 0x20, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.WeaponRestrictionItemClassesKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "WeaponRestrictionItemClassesKeys")
+		return
+	}
+	for za0001 := range z.WeaponRestrictionItemClassesKeys {
+		err = en.WriteInt(z.WeaponRestrictionItemClassesKeys[za0001])
 		if err != nil {
-			err = msgp.WrapError(err, "InputStatKeys", za0003)
+			err = msgp.WrapError(err, "WeaponRestrictionItemClassesKeys", za0001)
 			return
 		}
-	}
-	// write "IsManuallyCasted"
-	err = en.Append(0xb0, 0x49, 0x73, 0x4d, 0x61, 0x6e, 0x75, 0x61, 0x6c, 0x6c, 0x79, 0x43, 0x61, 0x73, 0x74, 0x65, 0x64)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.IsManuallyCasted)
-	if err != nil {
-		err = msgp.WrapError(err, "IsManuallyCasted")
-		return
 	}
 	// write "MinionActiveSkillTypes"
 	err = en.Append(0xb6, 0x4d, 0x69, 0x6e, 0x69, 0x6f, 0x6e, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x73)
@@ -368,10 +344,10 @@ func (z *ActiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "MinionActiveSkillTypes")
 		return
 	}
-	for za0004 := range z.MinionActiveSkillTypes {
-		err = en.WriteInt(z.MinionActiveSkillTypes[za0004])
+	for za0002 := range z.MinionActiveSkillTypes {
+		err = en.WriteInt(z.MinionActiveSkillTypes[za0002])
 		if err != nil {
-			err = msgp.WrapError(err, "MinionActiveSkillTypes", za0004)
+			err = msgp.WrapError(err, "MinionActiveSkillTypes", za0002)
 			return
 		}
 	}
@@ -385,10 +361,61 @@ func (z *ActiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "OutputStatKeys")
 		return
 	}
-	for za0005 := range z.OutputStatKeys {
-		err = en.WriteInt(z.OutputStatKeys[za0005])
+	for za0003 := range z.OutputStatKeys {
+		err = en.WriteInt(z.OutputStatKeys[za0003])
 		if err != nil {
-			err = msgp.WrapError(err, "OutputStatKeys", za0005)
+			err = msgp.WrapError(err, "OutputStatKeys", za0003)
+			return
+		}
+	}
+	// write "InputStatKeys"
+	err = en.Append(0xad, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x53, 0x74, 0x61, 0x74, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.InputStatKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "InputStatKeys")
+		return
+	}
+	for za0004 := range z.InputStatKeys {
+		err = en.WriteInt(z.InputStatKeys[za0004])
+		if err != nil {
+			err = msgp.WrapError(err, "InputStatKeys", za0004)
+			return
+		}
+	}
+	// write "ActiveSkillTypes"
+	err = en.Append(0xb0, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.ActiveSkillTypes)))
+	if err != nil {
+		err = msgp.WrapError(err, "ActiveSkillTypes")
+		return
+	}
+	for za0005 := range z.ActiveSkillTypes {
+		err = en.WriteInt(z.ActiveSkillTypes[za0005])
+		if err != nil {
+			err = msgp.WrapError(err, "ActiveSkillTypes", za0005)
+			return
+		}
+	}
+	// write "ActiveSkillTargetTypes"
+	err = en.Append(0xb6, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x54, 0x79, 0x70, 0x65, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.ActiveSkillTargetTypes)))
+	if err != nil {
+		err = msgp.WrapError(err, "ActiveSkillTargetTypes")
+		return
+	}
+	for za0006 := range z.ActiveSkillTargetTypes {
+		err = en.WriteInt(z.ActiveSkillTargetTypes[za0006])
+		if err != nil {
+			err = msgp.WrapError(err, "ActiveSkillTargetTypes", za0006)
 			return
 		}
 	}
@@ -402,43 +429,6 @@ func (z *ActiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "SkillTotemID")
 		return
 	}
-	// write "WeaponRestrictionItemClassesKeys"
-	err = en.Append(0xd9, 0x20, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.WeaponRestrictionItemClassesKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "WeaponRestrictionItemClassesKeys")
-		return
-	}
-	for za0006 := range z.WeaponRestrictionItemClassesKeys {
-		err = en.WriteInt(z.WeaponRestrictionItemClassesKeys[za0006])
-		if err != nil {
-			err = msgp.WrapError(err, "WeaponRestrictionItemClassesKeys", za0006)
-			return
-		}
-	}
-	// write "WebsiteDescription"
-	err = en.Append(0xb2, 0x57, 0x65, 0x62, 0x73, 0x69, 0x74, 0x65, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.WebsiteDescription)
-	if err != nil {
-		err = msgp.WrapError(err, "WebsiteDescription")
-		return
-	}
-	// write "WebsiteImage"
-	err = en.Append(0xac, 0x57, 0x65, 0x62, 0x73, 0x69, 0x74, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.WebsiteImage)
-	if err != nil {
-		err = msgp.WrapError(err, "WebsiteImage")
-		return
-	}
 	// write "Key"
 	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
 	if err != nil {
@@ -449,6 +439,16 @@ func (z *ActiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Key")
 		return
 	}
+	// write "IsManuallyCasted"
+	err = en.Append(0xb0, 0x49, 0x73, 0x4d, 0x61, 0x6e, 0x75, 0x61, 0x6c, 0x6c, 0x79, 0x43, 0x61, 0x73, 0x74, 0x65, 0x64)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IsManuallyCasted)
+	if err != nil {
+		err = msgp.WrapError(err, "IsManuallyCasted")
+		return
+	}
 	return
 }
 
@@ -456,28 +456,19 @@ func (z *ActiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *ActiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 17
-	// string "AIFile"
-	o = append(o, 0xde, 0x0, 0x11, 0xa6, 0x41, 0x49, 0x46, 0x69, 0x6c, 0x65)
-	o = msgp.AppendString(o, z.AIFile)
-	// string "ActiveSkillTargetTypes"
-	o = append(o, 0xb6, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x54, 0x79, 0x70, 0x65, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.ActiveSkillTargetTypes)))
-	for za0001 := range z.ActiveSkillTargetTypes {
-		o = msgp.AppendInt(o, z.ActiveSkillTargetTypes[za0001])
-	}
-	// string "ActiveSkillTypes"
-	o = append(o, 0xb0, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.ActiveSkillTypes)))
-	for za0002 := range z.ActiveSkillTypes {
-		o = msgp.AppendInt(o, z.ActiveSkillTypes[za0002])
-	}
 	// string "AlternateSkillTargetingBehavioursKey"
-	o = append(o, 0xd9, 0x24, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6f, 0x75, 0x72, 0x73, 0x4b, 0x65, 0x79)
+	o = append(o, 0xde, 0x0, 0x11, 0xd9, 0x24, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6f, 0x75, 0x72, 0x73, 0x4b, 0x65, 0x79)
 	if z.AlternateSkillTargetingBehavioursKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
 		o = msgp.AppendInt(o, *z.AlternateSkillTargetingBehavioursKey)
 	}
+	// string "AIFile"
+	o = append(o, 0xa6, 0x41, 0x49, 0x46, 0x69, 0x6c, 0x65)
+	o = msgp.AppendString(o, z.AIFile)
+	// string "WebsiteImage"
+	o = append(o, 0xac, 0x57, 0x65, 0x62, 0x73, 0x69, 0x74, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65)
+	o = msgp.AppendString(o, z.WebsiteImage)
 	// string "Description"
 	o = append(o, 0xab, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
 	o = msgp.AppendString(o, z.Description)
@@ -490,45 +481,54 @@ func (z *ActiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "ID"
 	o = append(o, 0xa2, 0x49, 0x44)
 	o = msgp.AppendString(o, z.ID)
-	// string "InputStatKeys"
-	o = append(o, 0xad, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x53, 0x74, 0x61, 0x74, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.InputStatKeys)))
-	for za0003 := range z.InputStatKeys {
-		o = msgp.AppendInt(o, z.InputStatKeys[za0003])
+	// string "WebsiteDescription"
+	o = append(o, 0xb2, 0x57, 0x65, 0x62, 0x73, 0x69, 0x74, 0x65, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
+	o = msgp.AppendString(o, z.WebsiteDescription)
+	// string "WeaponRestrictionItemClassesKeys"
+	o = append(o, 0xd9, 0x20, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.WeaponRestrictionItemClassesKeys)))
+	for za0001 := range z.WeaponRestrictionItemClassesKeys {
+		o = msgp.AppendInt(o, z.WeaponRestrictionItemClassesKeys[za0001])
 	}
-	// string "IsManuallyCasted"
-	o = append(o, 0xb0, 0x49, 0x73, 0x4d, 0x61, 0x6e, 0x75, 0x61, 0x6c, 0x6c, 0x79, 0x43, 0x61, 0x73, 0x74, 0x65, 0x64)
-	o = msgp.AppendBool(o, z.IsManuallyCasted)
 	// string "MinionActiveSkillTypes"
 	o = append(o, 0xb6, 0x4d, 0x69, 0x6e, 0x69, 0x6f, 0x6e, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.MinionActiveSkillTypes)))
-	for za0004 := range z.MinionActiveSkillTypes {
-		o = msgp.AppendInt(o, z.MinionActiveSkillTypes[za0004])
+	for za0002 := range z.MinionActiveSkillTypes {
+		o = msgp.AppendInt(o, z.MinionActiveSkillTypes[za0002])
 	}
 	// string "OutputStatKeys"
 	o = append(o, 0xae, 0x4f, 0x75, 0x74, 0x70, 0x75, 0x74, 0x53, 0x74, 0x61, 0x74, 0x4b, 0x65, 0x79, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.OutputStatKeys)))
-	for za0005 := range z.OutputStatKeys {
-		o = msgp.AppendInt(o, z.OutputStatKeys[za0005])
+	for za0003 := range z.OutputStatKeys {
+		o = msgp.AppendInt(o, z.OutputStatKeys[za0003])
+	}
+	// string "InputStatKeys"
+	o = append(o, 0xad, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x53, 0x74, 0x61, 0x74, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.InputStatKeys)))
+	for za0004 := range z.InputStatKeys {
+		o = msgp.AppendInt(o, z.InputStatKeys[za0004])
+	}
+	// string "ActiveSkillTypes"
+	o = append(o, 0xb0, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ActiveSkillTypes)))
+	for za0005 := range z.ActiveSkillTypes {
+		o = msgp.AppendInt(o, z.ActiveSkillTypes[za0005])
+	}
+	// string "ActiveSkillTargetTypes"
+	o = append(o, 0xb6, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x54, 0x79, 0x70, 0x65, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ActiveSkillTargetTypes)))
+	for za0006 := range z.ActiveSkillTargetTypes {
+		o = msgp.AppendInt(o, z.ActiveSkillTargetTypes[za0006])
 	}
 	// string "SkillTotemID"
 	o = append(o, 0xac, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x6f, 0x74, 0x65, 0x6d, 0x49, 0x44)
 	o = msgp.AppendInt(o, z.SkillTotemID)
-	// string "WeaponRestrictionItemClassesKeys"
-	o = append(o, 0xd9, 0x20, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.WeaponRestrictionItemClassesKeys)))
-	for za0006 := range z.WeaponRestrictionItemClassesKeys {
-		o = msgp.AppendInt(o, z.WeaponRestrictionItemClassesKeys[za0006])
-	}
-	// string "WebsiteDescription"
-	o = append(o, 0xb2, 0x57, 0x65, 0x62, 0x73, 0x69, 0x74, 0x65, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
-	o = msgp.AppendString(o, z.WebsiteDescription)
-	// string "WebsiteImage"
-	o = append(o, 0xac, 0x57, 0x65, 0x62, 0x73, 0x69, 0x74, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65)
-	o = msgp.AppendString(o, z.WebsiteImage)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
+	// string "IsManuallyCasted"
+	o = append(o, 0xb0, 0x49, 0x73, 0x4d, 0x61, 0x6e, 0x75, 0x61, 0x6c, 0x6c, 0x79, 0x43, 0x61, 0x73, 0x74, 0x65, 0x64)
+	o = msgp.AppendBool(o, z.IsManuallyCasted)
 	return
 }
 
@@ -550,50 +550,6 @@ func (z *ActiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AIFile":
-			z.AIFile, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "AIFile")
-				return
-			}
-		case "ActiveSkillTargetTypes":
-			var zb0002 uint32
-			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ActiveSkillTargetTypes")
-				return
-			}
-			if cap(z.ActiveSkillTargetTypes) >= int(zb0002) {
-				z.ActiveSkillTargetTypes = (z.ActiveSkillTargetTypes)[:zb0002]
-			} else {
-				z.ActiveSkillTargetTypes = make([]int, zb0002)
-			}
-			for za0001 := range z.ActiveSkillTargetTypes {
-				z.ActiveSkillTargetTypes[za0001], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ActiveSkillTargetTypes", za0001)
-					return
-				}
-			}
-		case "ActiveSkillTypes":
-			var zb0003 uint32
-			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ActiveSkillTypes")
-				return
-			}
-			if cap(z.ActiveSkillTypes) >= int(zb0003) {
-				z.ActiveSkillTypes = (z.ActiveSkillTypes)[:zb0003]
-			} else {
-				z.ActiveSkillTypes = make([]int, zb0003)
-			}
-			for za0002 := range z.ActiveSkillTypes {
-				z.ActiveSkillTypes[za0002], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ActiveSkillTypes", za0002)
-					return
-				}
-			}
 		case "AlternateSkillTargetingBehavioursKey":
 			if msgp.IsNil(bts) {
 				bts, err = msgp.ReadNilBytes(bts)
@@ -610,6 +566,18 @@ func (z *ActiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					err = msgp.WrapError(err, "AlternateSkillTargetingBehavioursKey")
 					return
 				}
+			}
+		case "AIFile":
+			z.AIFile, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AIFile")
+				return
+			}
+		case "WebsiteImage":
+			z.WebsiteImage, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "WebsiteImage")
+				return
 			}
 		case "Description":
 			z.Description, bts, err = msgp.ReadStringBytes(bts)
@@ -635,66 +603,123 @@ func (z *ActiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "ID")
 				return
 			}
-		case "InputStatKeys":
-			var zb0004 uint32
-			zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
+		case "WebsiteDescription":
+			z.WebsiteDescription, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "InputStatKeys")
+				err = msgp.WrapError(err, "WebsiteDescription")
 				return
 			}
-			if cap(z.InputStatKeys) >= int(zb0004) {
-				z.InputStatKeys = (z.InputStatKeys)[:zb0004]
-			} else {
-				z.InputStatKeys = make([]int, zb0004)
+		case "WeaponRestrictionItemClassesKeys":
+			var zb0002 uint32
+			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "WeaponRestrictionItemClassesKeys")
+				return
 			}
-			for za0003 := range z.InputStatKeys {
-				z.InputStatKeys[za0003], bts, err = msgp.ReadIntBytes(bts)
+			if cap(z.WeaponRestrictionItemClassesKeys) >= int(zb0002) {
+				z.WeaponRestrictionItemClassesKeys = (z.WeaponRestrictionItemClassesKeys)[:zb0002]
+			} else {
+				z.WeaponRestrictionItemClassesKeys = make([]int, zb0002)
+			}
+			for za0001 := range z.WeaponRestrictionItemClassesKeys {
+				z.WeaponRestrictionItemClassesKeys[za0001], bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "InputStatKeys", za0003)
+					err = msgp.WrapError(err, "WeaponRestrictionItemClassesKeys", za0001)
 					return
 				}
 			}
-		case "IsManuallyCasted":
-			z.IsManuallyCasted, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "IsManuallyCasted")
-				return
-			}
 		case "MinionActiveSkillTypes":
-			var zb0005 uint32
-			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			var zb0003 uint32
+			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "MinionActiveSkillTypes")
 				return
 			}
-			if cap(z.MinionActiveSkillTypes) >= int(zb0005) {
-				z.MinionActiveSkillTypes = (z.MinionActiveSkillTypes)[:zb0005]
+			if cap(z.MinionActiveSkillTypes) >= int(zb0003) {
+				z.MinionActiveSkillTypes = (z.MinionActiveSkillTypes)[:zb0003]
 			} else {
-				z.MinionActiveSkillTypes = make([]int, zb0005)
+				z.MinionActiveSkillTypes = make([]int, zb0003)
 			}
-			for za0004 := range z.MinionActiveSkillTypes {
-				z.MinionActiveSkillTypes[za0004], bts, err = msgp.ReadIntBytes(bts)
+			for za0002 := range z.MinionActiveSkillTypes {
+				z.MinionActiveSkillTypes[za0002], bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "MinionActiveSkillTypes", za0004)
+					err = msgp.WrapError(err, "MinionActiveSkillTypes", za0002)
 					return
 				}
 			}
 		case "OutputStatKeys":
-			var zb0006 uint32
-			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			var zb0004 uint32
+			zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "OutputStatKeys")
 				return
 			}
-			if cap(z.OutputStatKeys) >= int(zb0006) {
-				z.OutputStatKeys = (z.OutputStatKeys)[:zb0006]
+			if cap(z.OutputStatKeys) >= int(zb0004) {
+				z.OutputStatKeys = (z.OutputStatKeys)[:zb0004]
 			} else {
-				z.OutputStatKeys = make([]int, zb0006)
+				z.OutputStatKeys = make([]int, zb0004)
 			}
-			for za0005 := range z.OutputStatKeys {
-				z.OutputStatKeys[za0005], bts, err = msgp.ReadIntBytes(bts)
+			for za0003 := range z.OutputStatKeys {
+				z.OutputStatKeys[za0003], bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "OutputStatKeys", za0005)
+					err = msgp.WrapError(err, "OutputStatKeys", za0003)
+					return
+				}
+			}
+		case "InputStatKeys":
+			var zb0005 uint32
+			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "InputStatKeys")
+				return
+			}
+			if cap(z.InputStatKeys) >= int(zb0005) {
+				z.InputStatKeys = (z.InputStatKeys)[:zb0005]
+			} else {
+				z.InputStatKeys = make([]int, zb0005)
+			}
+			for za0004 := range z.InputStatKeys {
+				z.InputStatKeys[za0004], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "InputStatKeys", za0004)
+					return
+				}
+			}
+		case "ActiveSkillTypes":
+			var zb0006 uint32
+			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ActiveSkillTypes")
+				return
+			}
+			if cap(z.ActiveSkillTypes) >= int(zb0006) {
+				z.ActiveSkillTypes = (z.ActiveSkillTypes)[:zb0006]
+			} else {
+				z.ActiveSkillTypes = make([]int, zb0006)
+			}
+			for za0005 := range z.ActiveSkillTypes {
+				z.ActiveSkillTypes[za0005], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ActiveSkillTypes", za0005)
+					return
+				}
+			}
+		case "ActiveSkillTargetTypes":
+			var zb0007 uint32
+			zb0007, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ActiveSkillTargetTypes")
+				return
+			}
+			if cap(z.ActiveSkillTargetTypes) >= int(zb0007) {
+				z.ActiveSkillTargetTypes = (z.ActiveSkillTargetTypes)[:zb0007]
+			} else {
+				z.ActiveSkillTargetTypes = make([]int, zb0007)
+			}
+			for za0006 := range z.ActiveSkillTargetTypes {
+				z.ActiveSkillTargetTypes[za0006], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ActiveSkillTargetTypes", za0006)
 					return
 				}
 			}
@@ -704,41 +729,16 @@ func (z *ActiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "SkillTotemID")
 				return
 			}
-		case "WeaponRestrictionItemClassesKeys":
-			var zb0007 uint32
-			zb0007, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "WeaponRestrictionItemClassesKeys")
-				return
-			}
-			if cap(z.WeaponRestrictionItemClassesKeys) >= int(zb0007) {
-				z.WeaponRestrictionItemClassesKeys = (z.WeaponRestrictionItemClassesKeys)[:zb0007]
-			} else {
-				z.WeaponRestrictionItemClassesKeys = make([]int, zb0007)
-			}
-			for za0006 := range z.WeaponRestrictionItemClassesKeys {
-				z.WeaponRestrictionItemClassesKeys[za0006], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "WeaponRestrictionItemClassesKeys", za0006)
-					return
-				}
-			}
-		case "WebsiteDescription":
-			z.WebsiteDescription, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "WebsiteDescription")
-				return
-			}
-		case "WebsiteImage":
-			z.WebsiteImage, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "WebsiteImage")
-				return
-			}
 		case "Key":
 			z.Key, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "IsManuallyCasted":
+			z.IsManuallyCasted, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IsManuallyCasted")
 				return
 			}
 		default:
@@ -755,13 +755,13 @@ func (z *ActiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *ActiveSkill) Msgsize() (s int) {
-	s = 3 + 7 + msgp.StringPrefixSize + len(z.AIFile) + 23 + msgp.ArrayHeaderSize + (len(z.ActiveSkillTargetTypes) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.ActiveSkillTypes) * (msgp.IntSize)) + 38
+	s = 3 + 38
 	if z.AlternateSkillTargetingBehavioursKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 12 + msgp.StringPrefixSize + len(z.Description) + 14 + msgp.StringPrefixSize + len(z.DisplayedName) + 12 + msgp.StringPrefixSize + len(z.IconDDSFile) + 3 + msgp.StringPrefixSize + len(z.ID) + 14 + msgp.ArrayHeaderSize + (len(z.InputStatKeys) * (msgp.IntSize)) + 17 + msgp.BoolSize + 23 + msgp.ArrayHeaderSize + (len(z.MinionActiveSkillTypes) * (msgp.IntSize)) + 15 + msgp.ArrayHeaderSize + (len(z.OutputStatKeys) * (msgp.IntSize)) + 13 + msgp.IntSize + 34 + msgp.ArrayHeaderSize + (len(z.WeaponRestrictionItemClassesKeys) * (msgp.IntSize)) + 19 + msgp.StringPrefixSize + len(z.WebsiteDescription) + 13 + msgp.StringPrefixSize + len(z.WebsiteImage) + 4 + msgp.IntSize
+	s += 7 + msgp.StringPrefixSize + len(z.AIFile) + 13 + msgp.StringPrefixSize + len(z.WebsiteImage) + 12 + msgp.StringPrefixSize + len(z.Description) + 14 + msgp.StringPrefixSize + len(z.DisplayedName) + 12 + msgp.StringPrefixSize + len(z.IconDDSFile) + 3 + msgp.StringPrefixSize + len(z.ID) + 19 + msgp.StringPrefixSize + len(z.WebsiteDescription) + 34 + msgp.ArrayHeaderSize + (len(z.WeaponRestrictionItemClassesKeys) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.MinionActiveSkillTypes) * (msgp.IntSize)) + 15 + msgp.ArrayHeaderSize + (len(z.OutputStatKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.InputStatKeys) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.ActiveSkillTypes) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.ActiveSkillTargetTypes) * (msgp.IntSize)) + 13 + msgp.IntSize + 4 + msgp.IntSize + 17 + msgp.BoolSize
 	return
 }
 
@@ -976,12 +976,6 @@ func (z *AlternatePassiveAddition) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AlternateTreeVersionsKey":
-			z.AlternateTreeVersionsKey, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "AlternateTreeVersionsKey")
-				return
-			}
 		case "ID":
 			z.ID, err = dc.ReadString()
 			if err != nil {
@@ -1007,24 +1001,6 @@ func (z *AlternatePassiveAddition) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "SpawnWeight":
-			z.SpawnWeight, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "SpawnWeight")
-				return
-			}
-		case "Stat1Max":
-			z.Stat1Max, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat1Max")
-				return
-			}
-		case "Stat1Min":
-			z.Stat1Min, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat1Min")
-				return
-			}
 		case "StatsKeys":
 			var zb0003 uint32
 			zb0003, err = dc.ReadArrayHeader()
@@ -1043,6 +1019,42 @@ func (z *AlternatePassiveAddition) DecodeMsg(dc *msgp.Reader) (err error) {
 					err = msgp.WrapError(err, "StatsKeys", za0002)
 					return
 				}
+			}
+		case "AlternateTreeVersionsKey":
+			z.AlternateTreeVersionsKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "AlternateTreeVersionsKey")
+				return
+			}
+		case "SpawnWeight":
+			z.SpawnWeight, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "SpawnWeight")
+				return
+			}
+		case "Stat1Max":
+			z.Stat1Max, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat1Max")
+				return
+			}
+		case "Stat1Min":
+			z.Stat1Min, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat1Min")
+				return
+			}
+		case "Stat2Min":
+			z.Stat2Min, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat2Min")
+				return
+			}
+		case "Stat2Max":
+			z.Stat2Max, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat2Max")
+				return
 			}
 		case "Key":
 			z.Key, err = dc.ReadInt()
@@ -1063,19 +1075,9 @@ func (z *AlternatePassiveAddition) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *AlternatePassiveAddition) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 8
-	// write "AlternateTreeVersionsKey"
-	err = en.Append(0x88, 0xb8, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x54, 0x72, 0x65, 0x65, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.AlternateTreeVersionsKey)
-	if err != nil {
-		err = msgp.WrapError(err, "AlternateTreeVersionsKey")
-		return
-	}
+	// map header, size 10
 	// write "ID"
-	err = en.Append(0xa2, 0x49, 0x44)
+	err = en.Append(0x8a, 0xa2, 0x49, 0x44)
 	if err != nil {
 		return
 	}
@@ -1100,6 +1102,33 @@ func (z *AlternatePassiveAddition) EncodeMsg(en *msgp.Writer) (err error) {
 			err = msgp.WrapError(err, "PassiveType", za0001)
 			return
 		}
+	}
+	// write "StatsKeys"
+	err = en.Append(0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.StatsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "StatsKeys")
+		return
+	}
+	for za0002 := range z.StatsKeys {
+		err = en.WriteInt(z.StatsKeys[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "StatsKeys", za0002)
+			return
+		}
+	}
+	// write "AlternateTreeVersionsKey"
+	err = en.Append(0xb8, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x54, 0x72, 0x65, 0x65, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.AlternateTreeVersionsKey)
+	if err != nil {
+		err = msgp.WrapError(err, "AlternateTreeVersionsKey")
+		return
 	}
 	// write "SpawnWeight"
 	err = en.Append(0xab, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74)
@@ -1131,22 +1160,25 @@ func (z *AlternatePassiveAddition) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Stat1Min")
 		return
 	}
-	// write "StatsKeys"
-	err = en.Append(0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	// write "Stat2Min"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x32, 0x4d, 0x69, 0x6e)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.StatsKeys)))
+	err = en.WriteInt(z.Stat2Min)
 	if err != nil {
-		err = msgp.WrapError(err, "StatsKeys")
+		err = msgp.WrapError(err, "Stat2Min")
 		return
 	}
-	for za0002 := range z.StatsKeys {
-		err = en.WriteInt(z.StatsKeys[za0002])
-		if err != nil {
-			err = msgp.WrapError(err, "StatsKeys", za0002)
-			return
-		}
+	// write "Stat2Max"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x32, 0x4d, 0x61, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat2Max)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat2Max")
+		return
 	}
 	// write "Key"
 	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
@@ -1164,12 +1196,9 @@ func (z *AlternatePassiveAddition) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *AlternatePassiveAddition) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 8
-	// string "AlternateTreeVersionsKey"
-	o = append(o, 0x88, 0xb8, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x54, 0x72, 0x65, 0x65, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.AlternateTreeVersionsKey)
+	// map header, size 10
 	// string "ID"
-	o = append(o, 0xa2, 0x49, 0x44)
+	o = append(o, 0x8a, 0xa2, 0x49, 0x44)
 	o = msgp.AppendString(o, z.ID)
 	// string "PassiveType"
 	o = append(o, 0xab, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x54, 0x79, 0x70, 0x65)
@@ -1177,6 +1206,15 @@ func (z *AlternatePassiveAddition) MarshalMsg(b []byte) (o []byte, err error) {
 	for za0001 := range z.PassiveType {
 		o = msgp.AppendInt(o, z.PassiveType[za0001])
 	}
+	// string "StatsKeys"
+	o = append(o, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.StatsKeys)))
+	for za0002 := range z.StatsKeys {
+		o = msgp.AppendInt(o, z.StatsKeys[za0002])
+	}
+	// string "AlternateTreeVersionsKey"
+	o = append(o, 0xb8, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x54, 0x72, 0x65, 0x65, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.AlternateTreeVersionsKey)
 	// string "SpawnWeight"
 	o = append(o, 0xab, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74)
 	o = msgp.AppendInt(o, z.SpawnWeight)
@@ -1186,12 +1224,12 @@ func (z *AlternatePassiveAddition) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "Stat1Min"
 	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x31, 0x4d, 0x69, 0x6e)
 	o = msgp.AppendInt(o, z.Stat1Min)
-	// string "StatsKeys"
-	o = append(o, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.StatsKeys)))
-	for za0002 := range z.StatsKeys {
-		o = msgp.AppendInt(o, z.StatsKeys[za0002])
-	}
+	// string "Stat2Min"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x32, 0x4d, 0x69, 0x6e)
+	o = msgp.AppendInt(o, z.Stat2Min)
+	// string "Stat2Max"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x32, 0x4d, 0x61, 0x78)
+	o = msgp.AppendInt(o, z.Stat2Max)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
@@ -1216,12 +1254,6 @@ func (z *AlternatePassiveAddition) UnmarshalMsg(bts []byte) (o []byte, err error
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AlternateTreeVersionsKey":
-			z.AlternateTreeVersionsKey, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "AlternateTreeVersionsKey")
-				return
-			}
 		case "ID":
 			z.ID, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
@@ -1247,24 +1279,6 @@ func (z *AlternatePassiveAddition) UnmarshalMsg(bts []byte) (o []byte, err error
 					return
 				}
 			}
-		case "SpawnWeight":
-			z.SpawnWeight, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "SpawnWeight")
-				return
-			}
-		case "Stat1Max":
-			z.Stat1Max, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat1Max")
-				return
-			}
-		case "Stat1Min":
-			z.Stat1Min, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat1Min")
-				return
-			}
 		case "StatsKeys":
 			var zb0003 uint32
 			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
@@ -1283,6 +1297,42 @@ func (z *AlternatePassiveAddition) UnmarshalMsg(bts []byte) (o []byte, err error
 					err = msgp.WrapError(err, "StatsKeys", za0002)
 					return
 				}
+			}
+		case "AlternateTreeVersionsKey":
+			z.AlternateTreeVersionsKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AlternateTreeVersionsKey")
+				return
+			}
+		case "SpawnWeight":
+			z.SpawnWeight, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "SpawnWeight")
+				return
+			}
+		case "Stat1Max":
+			z.Stat1Max, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat1Max")
+				return
+			}
+		case "Stat1Min":
+			z.Stat1Min, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat1Min")
+				return
+			}
+		case "Stat2Min":
+			z.Stat2Min, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat2Min")
+				return
+			}
+		case "Stat2Max":
+			z.Stat2Max, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat2Max")
+				return
 			}
 		case "Key":
 			z.Key, bts, err = msgp.ReadIntBytes(bts)
@@ -1304,7 +1354,7 @@ func (z *AlternatePassiveAddition) UnmarshalMsg(bts []byte) (o []byte, err error
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *AlternatePassiveAddition) Msgsize() (s int) {
-	s = 1 + 25 + msgp.IntSize + 3 + msgp.StringPrefixSize + len(z.ID) + 12 + msgp.ArrayHeaderSize + (len(z.PassiveType) * (msgp.IntSize)) + 12 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 10 + msgp.ArrayHeaderSize + (len(z.StatsKeys) * (msgp.IntSize)) + 4 + msgp.IntSize
+	s = 1 + 3 + msgp.StringPrefixSize + len(z.ID) + 12 + msgp.ArrayHeaderSize + (len(z.PassiveType) * (msgp.IntSize)) + 10 + msgp.ArrayHeaderSize + (len(z.StatsKeys) * (msgp.IntSize)) + 25 + msgp.IntSize + 12 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 4 + msgp.IntSize
 	return
 }
 
@@ -1326,31 +1376,6 @@ func (z *AlternatePassiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AchievementItemsKeys":
-			var zb0002 uint32
-			zb0002, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "AchievementItemsKeys")
-				return
-			}
-			if cap(z.AchievementItemsKeys) >= int(zb0002) {
-				z.AchievementItemsKeys = (z.AchievementItemsKeys)[:zb0002]
-			} else {
-				z.AchievementItemsKeys = make([]interface{}, zb0002)
-			}
-			for za0001 := range z.AchievementItemsKeys {
-				z.AchievementItemsKeys[za0001], err = dc.ReadIntf()
-				if err != nil {
-					err = msgp.WrapError(err, "AchievementItemsKeys", za0001)
-					return
-				}
-			}
-		case "AlternateTreeVersionsKey":
-			z.AlternateTreeVersionsKey, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "AlternateTreeVersionsKey")
-				return
-			}
 		case "DDSIcon":
 			z.DDSIcon, err = dc.ReadString()
 			if err != nil {
@@ -1375,35 +1400,73 @@ func (z *AlternatePassiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Name")
 				return
 			}
-		case "PassiveType":
+		case "AchievementItemsKeys":
+			var zb0002 uint32
+			zb0002, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "AchievementItemsKeys")
+				return
+			}
+			if cap(z.AchievementItemsKeys) >= int(zb0002) {
+				z.AchievementItemsKeys = (z.AchievementItemsKeys)[:zb0002]
+			} else {
+				z.AchievementItemsKeys = make([]interface{}, zb0002)
+			}
+			for za0001 := range z.AchievementItemsKeys {
+				z.AchievementItemsKeys[za0001], err = dc.ReadIntf()
+				if err != nil {
+					err = msgp.WrapError(err, "AchievementItemsKeys", za0001)
+					return
+				}
+			}
+		case "StatsKeys":
 			var zb0003 uint32
 			zb0003, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "StatsKeys")
+				return
+			}
+			if cap(z.StatsKeys) >= int(zb0003) {
+				z.StatsKeys = (z.StatsKeys)[:zb0003]
+			} else {
+				z.StatsKeys = make([]int, zb0003)
+			}
+			for za0002 := range z.StatsKeys {
+				z.StatsKeys[za0002], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "StatsKeys", za0002)
+					return
+				}
+			}
+		case "PassiveType":
+			var zb0004 uint32
+			zb0004, err = dc.ReadArrayHeader()
 			if err != nil {
 				err = msgp.WrapError(err, "PassiveType")
 				return
 			}
-			if cap(z.PassiveType) >= int(zb0003) {
-				z.PassiveType = (z.PassiveType)[:zb0003]
+			if cap(z.PassiveType) >= int(zb0004) {
+				z.PassiveType = (z.PassiveType)[:zb0004]
 			} else {
-				z.PassiveType = make([]int, zb0003)
+				z.PassiveType = make([]int, zb0004)
 			}
-			for za0002 := range z.PassiveType {
-				z.PassiveType[za0002], err = dc.ReadInt()
+			for za0003 := range z.PassiveType {
+				z.PassiveType[za0003], err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "PassiveType", za0002)
+					err = msgp.WrapError(err, "PassiveType", za0003)
 					return
 				}
-			}
-		case "RandomMax":
-			z.RandomMax, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "RandomMax")
-				return
 			}
 		case "RandomMin":
 			z.RandomMin, err = dc.ReadInt()
 			if err != nil {
 				err = msgp.WrapError(err, "RandomMin")
+				return
+			}
+		case "RandomMax":
+			z.RandomMax, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "RandomMax")
 				return
 			}
 		case "SpawnWeight":
@@ -1436,24 +1499,47 @@ func (z *AlternatePassiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Stat2Min")
 				return
 			}
-		case "StatsKeys":
-			var zb0004 uint32
-			zb0004, err = dc.ReadArrayHeader()
+		case "Stat3Min":
+			z.Stat3Min, err = dc.ReadInt()
 			if err != nil {
-				err = msgp.WrapError(err, "StatsKeys")
+				err = msgp.WrapError(err, "Stat3Min")
 				return
 			}
-			if cap(z.StatsKeys) >= int(zb0004) {
-				z.StatsKeys = (z.StatsKeys)[:zb0004]
-			} else {
-				z.StatsKeys = make([]int, zb0004)
+		case "Stat3Max":
+			z.Stat3Max, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat3Max")
+				return
 			}
-			for za0003 := range z.StatsKeys {
-				z.StatsKeys[za0003], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "StatsKeys", za0003)
-					return
-				}
+		case "Stat4Min":
+			z.Stat4Min, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat4Min")
+				return
+			}
+		case "Stat4Max":
+			z.Stat4Max, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat4Max")
+				return
+			}
+		case "ConquerorIndex":
+			z.ConquerorIndex, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "ConquerorIndex")
+				return
+			}
+		case "ConquerorVersion":
+			z.ConquerorVersion, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "ConquerorVersion")
+				return
+			}
+		case "AlternateTreeVersionsKey":
+			z.AlternateTreeVersionsKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "AlternateTreeVersionsKey")
+				return
 			}
 		case "Key":
 			z.Key, err = dc.ReadInt()
@@ -1474,36 +1560,9 @@ func (z *AlternatePassiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *AlternatePassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 16
-	// write "AchievementItemsKeys"
-	err = en.Append(0xde, 0x0, 0x10, 0xb4, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.AchievementItemsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "AchievementItemsKeys")
-		return
-	}
-	for za0001 := range z.AchievementItemsKeys {
-		err = en.WriteIntf(z.AchievementItemsKeys[za0001])
-		if err != nil {
-			err = msgp.WrapError(err, "AchievementItemsKeys", za0001)
-			return
-		}
-	}
-	// write "AlternateTreeVersionsKey"
-	err = en.Append(0xb8, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x54, 0x72, 0x65, 0x65, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.AlternateTreeVersionsKey)
-	if err != nil {
-		err = msgp.WrapError(err, "AlternateTreeVersionsKey")
-		return
-	}
+	// map header, size 22
 	// write "DDSIcon"
-	err = en.Append(0xa7, 0x44, 0x44, 0x53, 0x49, 0x63, 0x6f, 0x6e)
+	err = en.Append(0xde, 0x0, 0x16, 0xa7, 0x44, 0x44, 0x53, 0x49, 0x63, 0x6f, 0x6e)
 	if err != nil {
 		return
 	}
@@ -1542,6 +1601,40 @@ func (z *AlternatePassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Name")
 		return
 	}
+	// write "AchievementItemsKeys"
+	err = en.Append(0xb4, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.AchievementItemsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "AchievementItemsKeys")
+		return
+	}
+	for za0001 := range z.AchievementItemsKeys {
+		err = en.WriteIntf(z.AchievementItemsKeys[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "AchievementItemsKeys", za0001)
+			return
+		}
+	}
+	// write "StatsKeys"
+	err = en.Append(0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.StatsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "StatsKeys")
+		return
+	}
+	for za0002 := range z.StatsKeys {
+		err = en.WriteInt(z.StatsKeys[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "StatsKeys", za0002)
+			return
+		}
+	}
 	// write "PassiveType"
 	err = en.Append(0xab, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x54, 0x79, 0x70, 0x65)
 	if err != nil {
@@ -1552,22 +1645,12 @@ func (z *AlternatePassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "PassiveType")
 		return
 	}
-	for za0002 := range z.PassiveType {
-		err = en.WriteInt(z.PassiveType[za0002])
+	for za0003 := range z.PassiveType {
+		err = en.WriteInt(z.PassiveType[za0003])
 		if err != nil {
-			err = msgp.WrapError(err, "PassiveType", za0002)
+			err = msgp.WrapError(err, "PassiveType", za0003)
 			return
 		}
-	}
-	// write "RandomMax"
-	err = en.Append(0xa9, 0x52, 0x61, 0x6e, 0x64, 0x6f, 0x6d, 0x4d, 0x61, 0x78)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.RandomMax)
-	if err != nil {
-		err = msgp.WrapError(err, "RandomMax")
-		return
 	}
 	// write "RandomMin"
 	err = en.Append(0xa9, 0x52, 0x61, 0x6e, 0x64, 0x6f, 0x6d, 0x4d, 0x69, 0x6e)
@@ -1577,6 +1660,16 @@ func (z *AlternatePassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 	err = en.WriteInt(z.RandomMin)
 	if err != nil {
 		err = msgp.WrapError(err, "RandomMin")
+		return
+	}
+	// write "RandomMax"
+	err = en.Append(0xa9, 0x52, 0x61, 0x6e, 0x64, 0x6f, 0x6d, 0x4d, 0x61, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.RandomMax)
+	if err != nil {
+		err = msgp.WrapError(err, "RandomMax")
 		return
 	}
 	// write "SpawnWeight"
@@ -1629,22 +1722,75 @@ func (z *AlternatePassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Stat2Min")
 		return
 	}
-	// write "StatsKeys"
-	err = en.Append(0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	// write "Stat3Min"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x33, 0x4d, 0x69, 0x6e)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.StatsKeys)))
+	err = en.WriteInt(z.Stat3Min)
 	if err != nil {
-		err = msgp.WrapError(err, "StatsKeys")
+		err = msgp.WrapError(err, "Stat3Min")
 		return
 	}
-	for za0003 := range z.StatsKeys {
-		err = en.WriteInt(z.StatsKeys[za0003])
-		if err != nil {
-			err = msgp.WrapError(err, "StatsKeys", za0003)
-			return
-		}
+	// write "Stat3Max"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x33, 0x4d, 0x61, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat3Max)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat3Max")
+		return
+	}
+	// write "Stat4Min"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x34, 0x4d, 0x69, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat4Min)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat4Min")
+		return
+	}
+	// write "Stat4Max"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x34, 0x4d, 0x61, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat4Max)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat4Max")
+		return
+	}
+	// write "ConquerorIndex"
+	err = en.Append(0xae, 0x43, 0x6f, 0x6e, 0x71, 0x75, 0x65, 0x72, 0x6f, 0x72, 0x49, 0x6e, 0x64, 0x65, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.ConquerorIndex)
+	if err != nil {
+		err = msgp.WrapError(err, "ConquerorIndex")
+		return
+	}
+	// write "ConquerorVersion"
+	err = en.Append(0xb0, 0x43, 0x6f, 0x6e, 0x71, 0x75, 0x65, 0x72, 0x6f, 0x72, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.ConquerorVersion)
+	if err != nil {
+		err = msgp.WrapError(err, "ConquerorVersion")
+		return
+	}
+	// write "AlternateTreeVersionsKey"
+	err = en.Append(0xb8, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x54, 0x72, 0x65, 0x65, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.AlternateTreeVersionsKey)
+	if err != nil {
+		err = msgp.WrapError(err, "AlternateTreeVersionsKey")
+		return
 	}
 	// write "Key"
 	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
@@ -1662,22 +1808,9 @@ func (z *AlternatePassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *AlternatePassiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 16
-	// string "AchievementItemsKeys"
-	o = append(o, 0xde, 0x0, 0x10, 0xb4, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.AchievementItemsKeys)))
-	for za0001 := range z.AchievementItemsKeys {
-		o, err = msgp.AppendIntf(o, z.AchievementItemsKeys[za0001])
-		if err != nil {
-			err = msgp.WrapError(err, "AchievementItemsKeys", za0001)
-			return
-		}
-	}
-	// string "AlternateTreeVersionsKey"
-	o = append(o, 0xb8, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x54, 0x72, 0x65, 0x65, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.AlternateTreeVersionsKey)
+	// map header, size 22
 	// string "DDSIcon"
-	o = append(o, 0xa7, 0x44, 0x44, 0x53, 0x49, 0x63, 0x6f, 0x6e)
+	o = append(o, 0xde, 0x0, 0x16, 0xa7, 0x44, 0x44, 0x53, 0x49, 0x63, 0x6f, 0x6e)
 	o = msgp.AppendString(o, z.DDSIcon)
 	// string "FlavourText"
 	o = append(o, 0xab, 0x46, 0x6c, 0x61, 0x76, 0x6f, 0x75, 0x72, 0x54, 0x65, 0x78, 0x74)
@@ -1688,18 +1821,34 @@ func (z *AlternatePassiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "Name"
 	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
 	o = msgp.AppendString(o, z.Name)
+	// string "AchievementItemsKeys"
+	o = append(o, 0xb4, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.AchievementItemsKeys)))
+	for za0001 := range z.AchievementItemsKeys {
+		o, err = msgp.AppendIntf(o, z.AchievementItemsKeys[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "AchievementItemsKeys", za0001)
+			return
+		}
+	}
+	// string "StatsKeys"
+	o = append(o, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.StatsKeys)))
+	for za0002 := range z.StatsKeys {
+		o = msgp.AppendInt(o, z.StatsKeys[za0002])
+	}
 	// string "PassiveType"
 	o = append(o, 0xab, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x54, 0x79, 0x70, 0x65)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.PassiveType)))
-	for za0002 := range z.PassiveType {
-		o = msgp.AppendInt(o, z.PassiveType[za0002])
+	for za0003 := range z.PassiveType {
+		o = msgp.AppendInt(o, z.PassiveType[za0003])
 	}
-	// string "RandomMax"
-	o = append(o, 0xa9, 0x52, 0x61, 0x6e, 0x64, 0x6f, 0x6d, 0x4d, 0x61, 0x78)
-	o = msgp.AppendInt(o, z.RandomMax)
 	// string "RandomMin"
 	o = append(o, 0xa9, 0x52, 0x61, 0x6e, 0x64, 0x6f, 0x6d, 0x4d, 0x69, 0x6e)
 	o = msgp.AppendInt(o, z.RandomMin)
+	// string "RandomMax"
+	o = append(o, 0xa9, 0x52, 0x61, 0x6e, 0x64, 0x6f, 0x6d, 0x4d, 0x61, 0x78)
+	o = msgp.AppendInt(o, z.RandomMax)
 	// string "SpawnWeight"
 	o = append(o, 0xab, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74)
 	o = msgp.AppendInt(o, z.SpawnWeight)
@@ -1715,12 +1864,27 @@ func (z *AlternatePassiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "Stat2Min"
 	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x32, 0x4d, 0x69, 0x6e)
 	o = msgp.AppendInt(o, z.Stat2Min)
-	// string "StatsKeys"
-	o = append(o, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.StatsKeys)))
-	for za0003 := range z.StatsKeys {
-		o = msgp.AppendInt(o, z.StatsKeys[za0003])
-	}
+	// string "Stat3Min"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x33, 0x4d, 0x69, 0x6e)
+	o = msgp.AppendInt(o, z.Stat3Min)
+	// string "Stat3Max"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x33, 0x4d, 0x61, 0x78)
+	o = msgp.AppendInt(o, z.Stat3Max)
+	// string "Stat4Min"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x34, 0x4d, 0x69, 0x6e)
+	o = msgp.AppendInt(o, z.Stat4Min)
+	// string "Stat4Max"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x34, 0x4d, 0x61, 0x78)
+	o = msgp.AppendInt(o, z.Stat4Max)
+	// string "ConquerorIndex"
+	o = append(o, 0xae, 0x43, 0x6f, 0x6e, 0x71, 0x75, 0x65, 0x72, 0x6f, 0x72, 0x49, 0x6e, 0x64, 0x65, 0x78)
+	o = msgp.AppendInt(o, z.ConquerorIndex)
+	// string "ConquerorVersion"
+	o = append(o, 0xb0, 0x43, 0x6f, 0x6e, 0x71, 0x75, 0x65, 0x72, 0x6f, 0x72, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e)
+	o = msgp.AppendInt(o, z.ConquerorVersion)
+	// string "AlternateTreeVersionsKey"
+	o = append(o, 0xb8, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x54, 0x72, 0x65, 0x65, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.AlternateTreeVersionsKey)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
@@ -1745,31 +1909,6 @@ func (z *AlternatePassiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AchievementItemsKeys":
-			var zb0002 uint32
-			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "AchievementItemsKeys")
-				return
-			}
-			if cap(z.AchievementItemsKeys) >= int(zb0002) {
-				z.AchievementItemsKeys = (z.AchievementItemsKeys)[:zb0002]
-			} else {
-				z.AchievementItemsKeys = make([]interface{}, zb0002)
-			}
-			for za0001 := range z.AchievementItemsKeys {
-				z.AchievementItemsKeys[za0001], bts, err = msgp.ReadIntfBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "AchievementItemsKeys", za0001)
-					return
-				}
-			}
-		case "AlternateTreeVersionsKey":
-			z.AlternateTreeVersionsKey, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "AlternateTreeVersionsKey")
-				return
-			}
 		case "DDSIcon":
 			z.DDSIcon, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
@@ -1794,35 +1933,73 @@ func (z *AlternatePassiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Name")
 				return
 			}
-		case "PassiveType":
+		case "AchievementItemsKeys":
+			var zb0002 uint32
+			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AchievementItemsKeys")
+				return
+			}
+			if cap(z.AchievementItemsKeys) >= int(zb0002) {
+				z.AchievementItemsKeys = (z.AchievementItemsKeys)[:zb0002]
+			} else {
+				z.AchievementItemsKeys = make([]interface{}, zb0002)
+			}
+			for za0001 := range z.AchievementItemsKeys {
+				z.AchievementItemsKeys[za0001], bts, err = msgp.ReadIntfBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "AchievementItemsKeys", za0001)
+					return
+				}
+			}
+		case "StatsKeys":
 			var zb0003 uint32
 			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "StatsKeys")
+				return
+			}
+			if cap(z.StatsKeys) >= int(zb0003) {
+				z.StatsKeys = (z.StatsKeys)[:zb0003]
+			} else {
+				z.StatsKeys = make([]int, zb0003)
+			}
+			for za0002 := range z.StatsKeys {
+				z.StatsKeys[za0002], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "StatsKeys", za0002)
+					return
+				}
+			}
+		case "PassiveType":
+			var zb0004 uint32
+			zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "PassiveType")
 				return
 			}
-			if cap(z.PassiveType) >= int(zb0003) {
-				z.PassiveType = (z.PassiveType)[:zb0003]
+			if cap(z.PassiveType) >= int(zb0004) {
+				z.PassiveType = (z.PassiveType)[:zb0004]
 			} else {
-				z.PassiveType = make([]int, zb0003)
+				z.PassiveType = make([]int, zb0004)
 			}
-			for za0002 := range z.PassiveType {
-				z.PassiveType[za0002], bts, err = msgp.ReadIntBytes(bts)
+			for za0003 := range z.PassiveType {
+				z.PassiveType[za0003], bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "PassiveType", za0002)
+					err = msgp.WrapError(err, "PassiveType", za0003)
 					return
 				}
-			}
-		case "RandomMax":
-			z.RandomMax, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "RandomMax")
-				return
 			}
 		case "RandomMin":
 			z.RandomMin, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "RandomMin")
+				return
+			}
+		case "RandomMax":
+			z.RandomMax, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "RandomMax")
 				return
 			}
 		case "SpawnWeight":
@@ -1855,24 +2032,47 @@ func (z *AlternatePassiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Stat2Min")
 				return
 			}
-		case "StatsKeys":
-			var zb0004 uint32
-			zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
+		case "Stat3Min":
+			z.Stat3Min, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "StatsKeys")
+				err = msgp.WrapError(err, "Stat3Min")
 				return
 			}
-			if cap(z.StatsKeys) >= int(zb0004) {
-				z.StatsKeys = (z.StatsKeys)[:zb0004]
-			} else {
-				z.StatsKeys = make([]int, zb0004)
+		case "Stat3Max":
+			z.Stat3Max, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat3Max")
+				return
 			}
-			for za0003 := range z.StatsKeys {
-				z.StatsKeys[za0003], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "StatsKeys", za0003)
-					return
-				}
+		case "Stat4Min":
+			z.Stat4Min, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat4Min")
+				return
+			}
+		case "Stat4Max":
+			z.Stat4Max, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat4Max")
+				return
+			}
+		case "ConquerorIndex":
+			z.ConquerorIndex, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ConquerorIndex")
+				return
+			}
+		case "ConquerorVersion":
+			z.ConquerorVersion, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ConquerorVersion")
+				return
+			}
+		case "AlternateTreeVersionsKey":
+			z.AlternateTreeVersionsKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AlternateTreeVersionsKey")
+				return
 			}
 		case "Key":
 			z.Key, bts, err = msgp.ReadIntBytes(bts)
@@ -1894,11 +2094,11 @@ func (z *AlternatePassiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *AlternatePassiveSkill) Msgsize() (s int) {
-	s = 3 + 21 + msgp.ArrayHeaderSize
+	s = 3 + 8 + msgp.StringPrefixSize + len(z.DDSIcon) + 12 + msgp.StringPrefixSize + len(z.FlavourText) + 3 + msgp.StringPrefixSize + len(z.ID) + 5 + msgp.StringPrefixSize + len(z.Name) + 21 + msgp.ArrayHeaderSize
 	for za0001 := range z.AchievementItemsKeys {
 		s += msgp.GuessSize(z.AchievementItemsKeys[za0001])
 	}
-	s += 25 + msgp.IntSize + 8 + msgp.StringPrefixSize + len(z.DDSIcon) + 12 + msgp.StringPrefixSize + len(z.FlavourText) + 3 + msgp.StringPrefixSize + len(z.ID) + 5 + msgp.StringPrefixSize + len(z.Name) + 12 + msgp.ArrayHeaderSize + (len(z.PassiveType) * (msgp.IntSize)) + 10 + msgp.IntSize + 10 + msgp.IntSize + 12 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 10 + msgp.ArrayHeaderSize + (len(z.StatsKeys) * (msgp.IntSize)) + 4 + msgp.IntSize
+	s += 10 + msgp.ArrayHeaderSize + (len(z.StatsKeys) * (msgp.IntSize)) + 12 + msgp.ArrayHeaderSize + (len(z.PassiveType) * (msgp.IntSize)) + 10 + msgp.IntSize + 10 + msgp.IntSize + 12 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 15 + msgp.IntSize + 17 + msgp.IntSize + 25 + msgp.IntSize + 4 + msgp.IntSize
 	return
 }
 
@@ -1932,6 +2132,36 @@ func (z *AlternateTreeVersion) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Key")
 				return
 			}
+		case "AreSmallAttributePassiveSkillsReplaced":
+			z.AreSmallAttributePassiveSkillsReplaced, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "AreSmallAttributePassiveSkillsReplaced")
+				return
+			}
+		case "AreSmallNormalPassiveSkillsReplaced":
+			z.AreSmallNormalPassiveSkillsReplaced, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "AreSmallNormalPassiveSkillsReplaced")
+				return
+			}
+		case "MinimumAdditions":
+			z.MinimumAdditions, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "MinimumAdditions")
+				return
+			}
+		case "MaximumAdditions":
+			z.MaximumAdditions, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "MaximumAdditions")
+				return
+			}
+		case "NotableReplacementSpawnWeight":
+			z.NotableReplacementSpawnWeight, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "NotableReplacementSpawnWeight")
+				return
+			}
 		default:
 			err = dc.Skip()
 			if err != nil {
@@ -1944,10 +2174,10 @@ func (z *AlternateTreeVersion) DecodeMsg(dc *msgp.Reader) (err error) {
 }
 
 // EncodeMsg implements msgp.Encodable
-func (z AlternateTreeVersion) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 2
+func (z *AlternateTreeVersion) EncodeMsg(en *msgp.Writer) (err error) {
+	// map header, size 7
 	// write "ConquerorType"
-	err = en.Append(0x82, 0xad, 0x43, 0x6f, 0x6e, 0x71, 0x75, 0x65, 0x72, 0x6f, 0x72, 0x54, 0x79, 0x70, 0x65)
+	err = en.Append(0x87, 0xad, 0x43, 0x6f, 0x6e, 0x71, 0x75, 0x65, 0x72, 0x6f, 0x72, 0x54, 0x79, 0x70, 0x65)
 	if err != nil {
 		return
 	}
@@ -1966,19 +2196,84 @@ func (z AlternateTreeVersion) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Key")
 		return
 	}
+	// write "AreSmallAttributePassiveSkillsReplaced"
+	err = en.Append(0xd9, 0x26, 0x41, 0x72, 0x65, 0x53, 0x6d, 0x61, 0x6c, 0x6c, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x64)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.AreSmallAttributePassiveSkillsReplaced)
+	if err != nil {
+		err = msgp.WrapError(err, "AreSmallAttributePassiveSkillsReplaced")
+		return
+	}
+	// write "AreSmallNormalPassiveSkillsReplaced"
+	err = en.Append(0xd9, 0x23, 0x41, 0x72, 0x65, 0x53, 0x6d, 0x61, 0x6c, 0x6c, 0x4e, 0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x64)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.AreSmallNormalPassiveSkillsReplaced)
+	if err != nil {
+		err = msgp.WrapError(err, "AreSmallNormalPassiveSkillsReplaced")
+		return
+	}
+	// write "MinimumAdditions"
+	err = en.Append(0xb0, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MinimumAdditions)
+	if err != nil {
+		err = msgp.WrapError(err, "MinimumAdditions")
+		return
+	}
+	// write "MaximumAdditions"
+	err = en.Append(0xb0, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MaximumAdditions)
+	if err != nil {
+		err = msgp.WrapError(err, "MaximumAdditions")
+		return
+	}
+	// write "NotableReplacementSpawnWeight"
+	err = en.Append(0xbd, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.NotableReplacementSpawnWeight)
+	if err != nil {
+		err = msgp.WrapError(err, "NotableReplacementSpawnWeight")
+		return
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
-func (z AlternateTreeVersion) MarshalMsg(b []byte) (o []byte, err error) {
+func (z *AlternateTreeVersion) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 2
+	// map header, size 7
 	// string "ConquerorType"
-	o = append(o, 0x82, 0xad, 0x43, 0x6f, 0x6e, 0x71, 0x75, 0x65, 0x72, 0x6f, 0x72, 0x54, 0x79, 0x70, 0x65)
+	o = append(o, 0x87, 0xad, 0x43, 0x6f, 0x6e, 0x71, 0x75, 0x65, 0x72, 0x6f, 0x72, 0x54, 0x79, 0x70, 0x65)
 	o = msgp.AppendString(o, z.ConquerorType)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
+	// string "AreSmallAttributePassiveSkillsReplaced"
+	o = append(o, 0xd9, 0x26, 0x41, 0x72, 0x65, 0x53, 0x6d, 0x61, 0x6c, 0x6c, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x64)
+	o = msgp.AppendBool(o, z.AreSmallAttributePassiveSkillsReplaced)
+	// string "AreSmallNormalPassiveSkillsReplaced"
+	o = append(o, 0xd9, 0x23, 0x41, 0x72, 0x65, 0x53, 0x6d, 0x61, 0x6c, 0x6c, 0x4e, 0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x64)
+	o = msgp.AppendBool(o, z.AreSmallNormalPassiveSkillsReplaced)
+	// string "MinimumAdditions"
+	o = append(o, 0xb0, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73)
+	o = msgp.AppendInt(o, z.MinimumAdditions)
+	// string "MaximumAdditions"
+	o = append(o, 0xb0, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73)
+	o = msgp.AppendInt(o, z.MaximumAdditions)
+	// string "NotableReplacementSpawnWeight"
+	o = append(o, 0xbd, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74)
+	o = msgp.AppendInt(o, z.NotableReplacementSpawnWeight)
 	return
 }
 
@@ -2012,6 +2307,36 @@ func (z *AlternateTreeVersion) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Key")
 				return
 			}
+		case "AreSmallAttributePassiveSkillsReplaced":
+			z.AreSmallAttributePassiveSkillsReplaced, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AreSmallAttributePassiveSkillsReplaced")
+				return
+			}
+		case "AreSmallNormalPassiveSkillsReplaced":
+			z.AreSmallNormalPassiveSkillsReplaced, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AreSmallNormalPassiveSkillsReplaced")
+				return
+			}
+		case "MinimumAdditions":
+			z.MinimumAdditions, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MinimumAdditions")
+				return
+			}
+		case "MaximumAdditions":
+			z.MaximumAdditions, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MaximumAdditions")
+				return
+			}
+		case "NotableReplacementSpawnWeight":
+			z.NotableReplacementSpawnWeight, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "NotableReplacementSpawnWeight")
+				return
+			}
 		default:
 			bts, err = msgp.Skip(bts)
 			if err != nil {
@@ -2025,8 +2350,8 @@ func (z *AlternateTreeVersion) UnmarshalMsg(bts []byte) (o []byte, err error) {
 }
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
-func (z AlternateTreeVersion) Msgsize() (s int) {
-	s = 1 + 14 + msgp.StringPrefixSize + len(z.ConquerorType) + 4 + msgp.IntSize
+func (z *AlternateTreeVersion) Msgsize() (s int) {
+	s = 1 + 14 + msgp.StringPrefixSize + len(z.ConquerorType) + 4 + msgp.IntSize + 40 + msgp.BoolSize + 37 + msgp.BoolSize + 17 + msgp.IntSize + 17 + msgp.IntSize + 30 + msgp.IntSize
 	return
 }
 
@@ -2401,11 +2726,23 @@ func (z *BaseItemType) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "DropLevel":
-			z.DropLevel, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "DropLevel")
-				return
+		case "SoundEffect":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "SoundEffect")
+					return
+				}
+				z.SoundEffect = nil
+			} else {
+				if z.SoundEffect == nil {
+					z.SoundEffect = new(int)
+				}
+				*z.SoundEffect, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "SoundEffect")
+					return
+				}
 			}
 		case "EquipAchievementItemsKey":
 			if dc.IsNil() {
@@ -2461,80 +2798,17 @@ func (z *BaseItemType) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "Hash":
-			z.Hash, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Hash")
-				return
-			}
-		case "Height":
-			z.Height, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Height")
-				return
-			}
 		case "ID":
 			z.ID, err = dc.ReadString()
 			if err != nil {
 				err = msgp.WrapError(err, "ID")
 				return
 			}
-		case "IdentifyMagicAchievementItems":
-			var zb0002 uint32
-			zb0002, err = dc.ReadArrayHeader()
+		case "Name":
+			z.Name, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "IdentifyMagicAchievementItems")
+				err = msgp.WrapError(err, "Name")
 				return
-			}
-			if cap(z.IdentifyMagicAchievementItems) >= int(zb0002) {
-				z.IdentifyMagicAchievementItems = (z.IdentifyMagicAchievementItems)[:zb0002]
-			} else {
-				z.IdentifyMagicAchievementItems = make([]interface{}, zb0002)
-			}
-			for za0001 := range z.IdentifyMagicAchievementItems {
-				z.IdentifyMagicAchievementItems[za0001], err = dc.ReadIntf()
-				if err != nil {
-					err = msgp.WrapError(err, "IdentifyMagicAchievementItems", za0001)
-					return
-				}
-			}
-		case "IdentifyAchievementItems":
-			var zb0003 uint32
-			zb0003, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "IdentifyAchievementItems")
-				return
-			}
-			if cap(z.IdentifyAchievementItems) >= int(zb0003) {
-				z.IdentifyAchievementItems = (z.IdentifyAchievementItems)[:zb0003]
-			} else {
-				z.IdentifyAchievementItems = make([]interface{}, zb0003)
-			}
-			for za0002 := range z.IdentifyAchievementItems {
-				z.IdentifyAchievementItems[za0002], err = dc.ReadIntf()
-				if err != nil {
-					err = msgp.WrapError(err, "IdentifyAchievementItems", za0002)
-					return
-				}
-			}
-		case "ImplicitModsKeys":
-			var zb0004 uint32
-			zb0004, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "ImplicitModsKeys")
-				return
-			}
-			if cap(z.ImplicitModsKeys) >= int(zb0004) {
-				z.ImplicitModsKeys = (z.ImplicitModsKeys)[:zb0004]
-			} else {
-				z.ImplicitModsKeys = make([]int, zb0004)
-			}
-			for za0003 := range z.ImplicitModsKeys {
-				z.ImplicitModsKeys[za0003], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "ImplicitModsKeys", za0003)
-					return
-				}
 			}
 		case "Inflection":
 			z.Inflection, err = dc.ReadString()
@@ -2548,82 +2822,79 @@ func (z *BaseItemType) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "InheritsFrom")
 				return
 			}
-		case "IsCorrupted":
-			z.IsCorrupted, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "IsCorrupted")
-				return
-			}
-		case "ItemClassesKey":
-			z.ItemClassesKey, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "ItemClassesKey")
-				return
-			}
-		case "ItemVisualIdentity":
-			z.ItemVisualIdentity, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "ItemVisualIdentity")
-				return
-			}
-		case "ModDomain":
-			z.ModDomain, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "ModDomain")
-				return
-			}
-		case "Name":
-			z.Name, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "Name")
-				return
-			}
-		case "SiteVisibility":
-			z.SiteVisibility, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "SiteVisibility")
-				return
-			}
-		case "SizeOnGround":
-			z.SizeOnGround, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "SizeOnGround")
-				return
-			}
-		case "SoundEffect":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "SoundEffect")
-					return
-				}
-				z.SoundEffect = nil
-			} else {
-				if z.SoundEffect == nil {
-					z.SoundEffect = new(int)
-				}
-				*z.SoundEffect, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "SoundEffect")
-					return
-				}
-			}
 		case "TagsKeys":
-			var zb0005 uint32
-			zb0005, err = dc.ReadArrayHeader()
+			var zb0002 uint32
+			zb0002, err = dc.ReadArrayHeader()
 			if err != nil {
 				err = msgp.WrapError(err, "TagsKeys")
 				return
 			}
-			if cap(z.TagsKeys) >= int(zb0005) {
-				z.TagsKeys = (z.TagsKeys)[:zb0005]
+			if cap(z.TagsKeys) >= int(zb0002) {
+				z.TagsKeys = (z.TagsKeys)[:zb0002]
 			} else {
-				z.TagsKeys = make([]int, zb0005)
+				z.TagsKeys = make([]int, zb0002)
 			}
-			for za0004 := range z.TagsKeys {
-				z.TagsKeys[za0004], err = dc.ReadInt()
+			for za0001 := range z.TagsKeys {
+				z.TagsKeys[za0001], err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "TagsKeys", za0004)
+					err = msgp.WrapError(err, "TagsKeys", za0001)
+					return
+				}
+			}
+		case "IdentifyMagicAchievementItems":
+			var zb0003 uint32
+			zb0003, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "IdentifyMagicAchievementItems")
+				return
+			}
+			if cap(z.IdentifyMagicAchievementItems) >= int(zb0003) {
+				z.IdentifyMagicAchievementItems = (z.IdentifyMagicAchievementItems)[:zb0003]
+			} else {
+				z.IdentifyMagicAchievementItems = make([]interface{}, zb0003)
+			}
+			for za0002 := range z.IdentifyMagicAchievementItems {
+				z.IdentifyMagicAchievementItems[za0002], err = dc.ReadIntf()
+				if err != nil {
+					err = msgp.WrapError(err, "IdentifyMagicAchievementItems", za0002)
+					return
+				}
+			}
+		case "IdentifyAchievementItems":
+			var zb0004 uint32
+			zb0004, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "IdentifyAchievementItems")
+				return
+			}
+			if cap(z.IdentifyAchievementItems) >= int(zb0004) {
+				z.IdentifyAchievementItems = (z.IdentifyAchievementItems)[:zb0004]
+			} else {
+				z.IdentifyAchievementItems = make([]interface{}, zb0004)
+			}
+			for za0003 := range z.IdentifyAchievementItems {
+				z.IdentifyAchievementItems[za0003], err = dc.ReadIntf()
+				if err != nil {
+					err = msgp.WrapError(err, "IdentifyAchievementItems", za0003)
+					return
+				}
+			}
+		case "ImplicitModsKeys":
+			var zb0005 uint32
+			zb0005, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "ImplicitModsKeys")
+				return
+			}
+			if cap(z.ImplicitModsKeys) >= int(zb0005) {
+				z.ImplicitModsKeys = (z.ImplicitModsKeys)[:zb0005]
+			} else {
+				z.ImplicitModsKeys = make([]int, zb0005)
+			}
+			for za0004 := range z.ImplicitModsKeys {
+				z.ImplicitModsKeys[za0004], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ImplicitModsKeys", za0004)
 					return
 				}
 			}
@@ -2646,6 +2917,54 @@ func (z *BaseItemType) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
+		case "SizeOnGround":
+			z.SizeOnGround, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "SizeOnGround")
+				return
+			}
+		case "ItemVisualIdentity":
+			z.ItemVisualIdentity, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "ItemVisualIdentity")
+				return
+			}
+		case "ModDomain":
+			z.ModDomain, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "ModDomain")
+				return
+			}
+		case "ItemClassesKey":
+			z.ItemClassesKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "ItemClassesKey")
+				return
+			}
+		case "SiteVisibility":
+			z.SiteVisibility, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "SiteVisibility")
+				return
+			}
+		case "DropLevel":
+			z.DropLevel, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "DropLevel")
+				return
+			}
+		case "Height":
+			z.Height, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Height")
+				return
+			}
+		case "Hash":
+			z.Hash, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Hash")
+				return
+			}
 		case "Width":
 			z.Width, err = dc.ReadInt()
 			if err != nil {
@@ -2656,6 +2975,12 @@ func (z *BaseItemType) DecodeMsg(dc *msgp.Reader) (err error) {
 			z.Key, err = dc.ReadInt()
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "IsCorrupted":
+			z.IsCorrupted, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IsCorrupted")
 				return
 			}
 		default:
@@ -2672,15 +2997,22 @@ func (z *BaseItemType) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *BaseItemType) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 24
-	// write "DropLevel"
-	err = en.Append(0xde, 0x0, 0x18, 0xa9, 0x44, 0x72, 0x6f, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	// write "SoundEffect"
+	err = en.Append(0xde, 0x0, 0x18, 0xab, 0x53, 0x6f, 0x75, 0x6e, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.DropLevel)
-	if err != nil {
-		err = msgp.WrapError(err, "DropLevel")
-		return
+	if z.SoundEffect == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.SoundEffect)
+		if err != nil {
+			err = msgp.WrapError(err, "SoundEffect")
+			return
+		}
 	}
 	// write "EquipAchievementItemsKey"
 	err = en.Append(0xb8, 0x45, 0x71, 0x75, 0x69, 0x70, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
@@ -2733,26 +3065,6 @@ func (z *BaseItemType) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "Hash"
-	err = en.Append(0xa4, 0x48, 0x61, 0x73, 0x68)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Hash)
-	if err != nil {
-		err = msgp.WrapError(err, "Hash")
-		return
-	}
-	// write "Height"
-	err = en.Append(0xa6, 0x48, 0x65, 0x69, 0x67, 0x68, 0x74)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Height)
-	if err != nil {
-		err = msgp.WrapError(err, "Height")
-		return
-	}
 	// write "ID"
 	err = en.Append(0xa2, 0x49, 0x44)
 	if err != nil {
@@ -2763,56 +3075,15 @@ func (z *BaseItemType) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "ID")
 		return
 	}
-	// write "IdentifyMagicAchievementItems"
-	err = en.Append(0xbd, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x66, 0x79, 0x4d, 0x61, 0x67, 0x69, 0x63, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
+	// write "Name"
+	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.IdentifyMagicAchievementItems)))
+	err = en.WriteString(z.Name)
 	if err != nil {
-		err = msgp.WrapError(err, "IdentifyMagicAchievementItems")
+		err = msgp.WrapError(err, "Name")
 		return
-	}
-	for za0001 := range z.IdentifyMagicAchievementItems {
-		err = en.WriteIntf(z.IdentifyMagicAchievementItems[za0001])
-		if err != nil {
-			err = msgp.WrapError(err, "IdentifyMagicAchievementItems", za0001)
-			return
-		}
-	}
-	// write "IdentifyAchievementItems"
-	err = en.Append(0xb8, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x66, 0x79, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.IdentifyAchievementItems)))
-	if err != nil {
-		err = msgp.WrapError(err, "IdentifyAchievementItems")
-		return
-	}
-	for za0002 := range z.IdentifyAchievementItems {
-		err = en.WriteIntf(z.IdentifyAchievementItems[za0002])
-		if err != nil {
-			err = msgp.WrapError(err, "IdentifyAchievementItems", za0002)
-			return
-		}
-	}
-	// write "ImplicitModsKeys"
-	err = en.Append(0xb0, 0x49, 0x6d, 0x70, 0x6c, 0x69, 0x63, 0x69, 0x74, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.ImplicitModsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "ImplicitModsKeys")
-		return
-	}
-	for za0003 := range z.ImplicitModsKeys {
-		err = en.WriteInt(z.ImplicitModsKeys[za0003])
-		if err != nil {
-			err = msgp.WrapError(err, "ImplicitModsKeys", za0003)
-			return
-		}
 	}
 	// write "Inflection"
 	err = en.Append(0xaa, 0x49, 0x6e, 0x66, 0x6c, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e)
@@ -2834,24 +3105,99 @@ func (z *BaseItemType) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "InheritsFrom")
 		return
 	}
-	// write "IsCorrupted"
-	err = en.Append(0xab, 0x49, 0x73, 0x43, 0x6f, 0x72, 0x72, 0x75, 0x70, 0x74, 0x65, 0x64)
+	// write "TagsKeys"
+	err = en.Append(0xa8, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
 	if err != nil {
 		return
 	}
-	err = en.WriteBool(z.IsCorrupted)
+	err = en.WriteArrayHeader(uint32(len(z.TagsKeys)))
 	if err != nil {
-		err = msgp.WrapError(err, "IsCorrupted")
+		err = msgp.WrapError(err, "TagsKeys")
 		return
 	}
-	// write "ItemClassesKey"
-	err = en.Append(0xae, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79)
+	for za0001 := range z.TagsKeys {
+		err = en.WriteInt(z.TagsKeys[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "TagsKeys", za0001)
+			return
+		}
+	}
+	// write "IdentifyMagicAchievementItems"
+	err = en.Append(0xbd, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x66, 0x79, 0x4d, 0x61, 0x67, 0x69, 0x63, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.ItemClassesKey)
+	err = en.WriteArrayHeader(uint32(len(z.IdentifyMagicAchievementItems)))
 	if err != nil {
-		err = msgp.WrapError(err, "ItemClassesKey")
+		err = msgp.WrapError(err, "IdentifyMagicAchievementItems")
+		return
+	}
+	for za0002 := range z.IdentifyMagicAchievementItems {
+		err = en.WriteIntf(z.IdentifyMagicAchievementItems[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "IdentifyMagicAchievementItems", za0002)
+			return
+		}
+	}
+	// write "IdentifyAchievementItems"
+	err = en.Append(0xb8, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x66, 0x79, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.IdentifyAchievementItems)))
+	if err != nil {
+		err = msgp.WrapError(err, "IdentifyAchievementItems")
+		return
+	}
+	for za0003 := range z.IdentifyAchievementItems {
+		err = en.WriteIntf(z.IdentifyAchievementItems[za0003])
+		if err != nil {
+			err = msgp.WrapError(err, "IdentifyAchievementItems", za0003)
+			return
+		}
+	}
+	// write "ImplicitModsKeys"
+	err = en.Append(0xb0, 0x49, 0x6d, 0x70, 0x6c, 0x69, 0x63, 0x69, 0x74, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.ImplicitModsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "ImplicitModsKeys")
+		return
+	}
+	for za0004 := range z.ImplicitModsKeys {
+		err = en.WriteInt(z.ImplicitModsKeys[za0004])
+		if err != nil {
+			err = msgp.WrapError(err, "ImplicitModsKeys", za0004)
+			return
+		}
+	}
+	// write "VendorRecipeAchievementItems"
+	err = en.Append(0xbc, 0x56, 0x65, 0x6e, 0x64, 0x6f, 0x72, 0x52, 0x65, 0x63, 0x69, 0x70, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.VendorRecipeAchievementItems)))
+	if err != nil {
+		err = msgp.WrapError(err, "VendorRecipeAchievementItems")
+		return
+	}
+	for za0005 := range z.VendorRecipeAchievementItems {
+		err = en.WriteInt(z.VendorRecipeAchievementItems[za0005])
+		if err != nil {
+			err = msgp.WrapError(err, "VendorRecipeAchievementItems", za0005)
+			return
+		}
+	}
+	// write "SizeOnGround"
+	err = en.Append(0xac, 0x53, 0x69, 0x7a, 0x65, 0x4f, 0x6e, 0x47, 0x72, 0x6f, 0x75, 0x6e, 0x64)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.SizeOnGround)
+	if err != nil {
+		err = msgp.WrapError(err, "SizeOnGround")
 		return
 	}
 	// write "ItemVisualIdentity"
@@ -2874,14 +3220,14 @@ func (z *BaseItemType) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "ModDomain")
 		return
 	}
-	// write "Name"
-	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	// write "ItemClassesKey"
+	err = en.Append(0xae, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.Name)
+	err = en.WriteInt(z.ItemClassesKey)
 	if err != nil {
-		err = msgp.WrapError(err, "Name")
+		err = msgp.WrapError(err, "ItemClassesKey")
 		return
 	}
 	// write "SiteVisibility"
@@ -2894,66 +3240,35 @@ func (z *BaseItemType) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "SiteVisibility")
 		return
 	}
-	// write "SizeOnGround"
-	err = en.Append(0xac, 0x53, 0x69, 0x7a, 0x65, 0x4f, 0x6e, 0x47, 0x72, 0x6f, 0x75, 0x6e, 0x64)
+	// write "DropLevel"
+	err = en.Append(0xa9, 0x44, 0x72, 0x6f, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.SizeOnGround)
+	err = en.WriteInt(z.DropLevel)
 	if err != nil {
-		err = msgp.WrapError(err, "SizeOnGround")
+		err = msgp.WrapError(err, "DropLevel")
 		return
 	}
-	// write "SoundEffect"
-	err = en.Append(0xab, 0x53, 0x6f, 0x75, 0x6e, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
-	if err != nil {
-		return
-	}
-	if z.SoundEffect == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.SoundEffect)
-		if err != nil {
-			err = msgp.WrapError(err, "SoundEffect")
-			return
-		}
-	}
-	// write "TagsKeys"
-	err = en.Append(0xa8, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	// write "Height"
+	err = en.Append(0xa6, 0x48, 0x65, 0x69, 0x67, 0x68, 0x74)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.TagsKeys)))
+	err = en.WriteInt(z.Height)
 	if err != nil {
-		err = msgp.WrapError(err, "TagsKeys")
+		err = msgp.WrapError(err, "Height")
 		return
 	}
-	for za0004 := range z.TagsKeys {
-		err = en.WriteInt(z.TagsKeys[za0004])
-		if err != nil {
-			err = msgp.WrapError(err, "TagsKeys", za0004)
-			return
-		}
-	}
-	// write "VendorRecipeAchievementItems"
-	err = en.Append(0xbc, 0x56, 0x65, 0x6e, 0x64, 0x6f, 0x72, 0x52, 0x65, 0x63, 0x69, 0x70, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
+	// write "Hash"
+	err = en.Append(0xa4, 0x48, 0x61, 0x73, 0x68)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.VendorRecipeAchievementItems)))
+	err = en.WriteInt(z.Hash)
 	if err != nil {
-		err = msgp.WrapError(err, "VendorRecipeAchievementItems")
+		err = msgp.WrapError(err, "Hash")
 		return
-	}
-	for za0005 := range z.VendorRecipeAchievementItems {
-		err = en.WriteInt(z.VendorRecipeAchievementItems[za0005])
-		if err != nil {
-			err = msgp.WrapError(err, "VendorRecipeAchievementItems", za0005)
-			return
-		}
 	}
 	// write "Width"
 	err = en.Append(0xa5, 0x57, 0x69, 0x64, 0x74, 0x68)
@@ -2975,6 +3290,16 @@ func (z *BaseItemType) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Key")
 		return
 	}
+	// write "IsCorrupted"
+	err = en.Append(0xab, 0x49, 0x73, 0x43, 0x6f, 0x72, 0x72, 0x75, 0x70, 0x74, 0x65, 0x64)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IsCorrupted)
+	if err != nil {
+		err = msgp.WrapError(err, "IsCorrupted")
+		return
+	}
 	return
 }
 
@@ -2982,9 +3307,13 @@ func (z *BaseItemType) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *BaseItemType) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 24
-	// string "DropLevel"
-	o = append(o, 0xde, 0x0, 0x18, 0xa9, 0x44, 0x72, 0x6f, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c)
-	o = msgp.AppendInt(o, z.DropLevel)
+	// string "SoundEffect"
+	o = append(o, 0xde, 0x0, 0x18, 0xab, 0x53, 0x6f, 0x75, 0x6e, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
+	if z.SoundEffect == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.SoundEffect)
+	}
 	// string "EquipAchievementItemsKey"
 	o = append(o, 0xb8, 0x45, 0x71, 0x75, 0x69, 0x70, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
 	if z.EquipAchievementItemsKey == nil {
@@ -3006,80 +3335,49 @@ func (z *BaseItemType) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.FragmentBaseItemTypesKey)
 	}
-	// string "Hash"
-	o = append(o, 0xa4, 0x48, 0x61, 0x73, 0x68)
-	o = msgp.AppendInt(o, z.Hash)
-	// string "Height"
-	o = append(o, 0xa6, 0x48, 0x65, 0x69, 0x67, 0x68, 0x74)
-	o = msgp.AppendInt(o, z.Height)
 	// string "ID"
 	o = append(o, 0xa2, 0x49, 0x44)
 	o = msgp.AppendString(o, z.ID)
-	// string "IdentifyMagicAchievementItems"
-	o = append(o, 0xbd, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x66, 0x79, 0x4d, 0x61, 0x67, 0x69, 0x63, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.IdentifyMagicAchievementItems)))
-	for za0001 := range z.IdentifyMagicAchievementItems {
-		o, err = msgp.AppendIntf(o, z.IdentifyMagicAchievementItems[za0001])
-		if err != nil {
-			err = msgp.WrapError(err, "IdentifyMagicAchievementItems", za0001)
-			return
-		}
-	}
-	// string "IdentifyAchievementItems"
-	o = append(o, 0xb8, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x66, 0x79, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.IdentifyAchievementItems)))
-	for za0002 := range z.IdentifyAchievementItems {
-		o, err = msgp.AppendIntf(o, z.IdentifyAchievementItems[za0002])
-		if err != nil {
-			err = msgp.WrapError(err, "IdentifyAchievementItems", za0002)
-			return
-		}
-	}
-	// string "ImplicitModsKeys"
-	o = append(o, 0xb0, 0x49, 0x6d, 0x70, 0x6c, 0x69, 0x63, 0x69, 0x74, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.ImplicitModsKeys)))
-	for za0003 := range z.ImplicitModsKeys {
-		o = msgp.AppendInt(o, z.ImplicitModsKeys[za0003])
-	}
+	// string "Name"
+	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	o = msgp.AppendString(o, z.Name)
 	// string "Inflection"
 	o = append(o, 0xaa, 0x49, 0x6e, 0x66, 0x6c, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e)
 	o = msgp.AppendString(o, z.Inflection)
 	// string "InheritsFrom"
 	o = append(o, 0xac, 0x49, 0x6e, 0x68, 0x65, 0x72, 0x69, 0x74, 0x73, 0x46, 0x72, 0x6f, 0x6d)
 	o = msgp.AppendString(o, z.InheritsFrom)
-	// string "IsCorrupted"
-	o = append(o, 0xab, 0x49, 0x73, 0x43, 0x6f, 0x72, 0x72, 0x75, 0x70, 0x74, 0x65, 0x64)
-	o = msgp.AppendBool(o, z.IsCorrupted)
-	// string "ItemClassesKey"
-	o = append(o, 0xae, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.ItemClassesKey)
-	// string "ItemVisualIdentity"
-	o = append(o, 0xb2, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79)
-	o = msgp.AppendInt(o, z.ItemVisualIdentity)
-	// string "ModDomain"
-	o = append(o, 0xa9, 0x4d, 0x6f, 0x64, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e)
-	o = msgp.AppendInt(o, z.ModDomain)
-	// string "Name"
-	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
-	o = msgp.AppendString(o, z.Name)
-	// string "SiteVisibility"
-	o = append(o, 0xae, 0x53, 0x69, 0x74, 0x65, 0x56, 0x69, 0x73, 0x69, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79)
-	o = msgp.AppendInt(o, z.SiteVisibility)
-	// string "SizeOnGround"
-	o = append(o, 0xac, 0x53, 0x69, 0x7a, 0x65, 0x4f, 0x6e, 0x47, 0x72, 0x6f, 0x75, 0x6e, 0x64)
-	o = msgp.AppendInt(o, z.SizeOnGround)
-	// string "SoundEffect"
-	o = append(o, 0xab, 0x53, 0x6f, 0x75, 0x6e, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
-	if z.SoundEffect == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.SoundEffect)
-	}
 	// string "TagsKeys"
 	o = append(o, 0xa8, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.TagsKeys)))
-	for za0004 := range z.TagsKeys {
-		o = msgp.AppendInt(o, z.TagsKeys[za0004])
+	for za0001 := range z.TagsKeys {
+		o = msgp.AppendInt(o, z.TagsKeys[za0001])
+	}
+	// string "IdentifyMagicAchievementItems"
+	o = append(o, 0xbd, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x66, 0x79, 0x4d, 0x61, 0x67, 0x69, 0x63, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.IdentifyMagicAchievementItems)))
+	for za0002 := range z.IdentifyMagicAchievementItems {
+		o, err = msgp.AppendIntf(o, z.IdentifyMagicAchievementItems[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "IdentifyMagicAchievementItems", za0002)
+			return
+		}
+	}
+	// string "IdentifyAchievementItems"
+	o = append(o, 0xb8, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x66, 0x79, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.IdentifyAchievementItems)))
+	for za0003 := range z.IdentifyAchievementItems {
+		o, err = msgp.AppendIntf(o, z.IdentifyAchievementItems[za0003])
+		if err != nil {
+			err = msgp.WrapError(err, "IdentifyAchievementItems", za0003)
+			return
+		}
+	}
+	// string "ImplicitModsKeys"
+	o = append(o, 0xb0, 0x49, 0x6d, 0x70, 0x6c, 0x69, 0x63, 0x69, 0x74, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ImplicitModsKeys)))
+	for za0004 := range z.ImplicitModsKeys {
+		o = msgp.AppendInt(o, z.ImplicitModsKeys[za0004])
 	}
 	// string "VendorRecipeAchievementItems"
 	o = append(o, 0xbc, 0x56, 0x65, 0x6e, 0x64, 0x6f, 0x72, 0x52, 0x65, 0x63, 0x69, 0x70, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
@@ -3087,12 +3385,39 @@ func (z *BaseItemType) MarshalMsg(b []byte) (o []byte, err error) {
 	for za0005 := range z.VendorRecipeAchievementItems {
 		o = msgp.AppendInt(o, z.VendorRecipeAchievementItems[za0005])
 	}
+	// string "SizeOnGround"
+	o = append(o, 0xac, 0x53, 0x69, 0x7a, 0x65, 0x4f, 0x6e, 0x47, 0x72, 0x6f, 0x75, 0x6e, 0x64)
+	o = msgp.AppendInt(o, z.SizeOnGround)
+	// string "ItemVisualIdentity"
+	o = append(o, 0xb2, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79)
+	o = msgp.AppendInt(o, z.ItemVisualIdentity)
+	// string "ModDomain"
+	o = append(o, 0xa9, 0x4d, 0x6f, 0x64, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e)
+	o = msgp.AppendInt(o, z.ModDomain)
+	// string "ItemClassesKey"
+	o = append(o, 0xae, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.ItemClassesKey)
+	// string "SiteVisibility"
+	o = append(o, 0xae, 0x53, 0x69, 0x74, 0x65, 0x56, 0x69, 0x73, 0x69, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79)
+	o = msgp.AppendInt(o, z.SiteVisibility)
+	// string "DropLevel"
+	o = append(o, 0xa9, 0x44, 0x72, 0x6f, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	o = msgp.AppendInt(o, z.DropLevel)
+	// string "Height"
+	o = append(o, 0xa6, 0x48, 0x65, 0x69, 0x67, 0x68, 0x74)
+	o = msgp.AppendInt(o, z.Height)
+	// string "Hash"
+	o = append(o, 0xa4, 0x48, 0x61, 0x73, 0x68)
+	o = msgp.AppendInt(o, z.Hash)
 	// string "Width"
 	o = append(o, 0xa5, 0x57, 0x69, 0x64, 0x74, 0x68)
 	o = msgp.AppendInt(o, z.Width)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
+	// string "IsCorrupted"
+	o = append(o, 0xab, 0x49, 0x73, 0x43, 0x6f, 0x72, 0x72, 0x75, 0x70, 0x74, 0x65, 0x64)
+	o = msgp.AppendBool(o, z.IsCorrupted)
 	return
 }
 
@@ -3114,11 +3439,22 @@ func (z *BaseItemType) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "DropLevel":
-			z.DropLevel, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "DropLevel")
-				return
+		case "SoundEffect":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.SoundEffect = nil
+			} else {
+				if z.SoundEffect == nil {
+					z.SoundEffect = new(int)
+				}
+				*z.SoundEffect, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "SoundEffect")
+					return
+				}
 			}
 		case "EquipAchievementItemsKey":
 			if msgp.IsNil(bts) {
@@ -3171,80 +3507,17 @@ func (z *BaseItemType) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "Hash":
-			z.Hash, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Hash")
-				return
-			}
-		case "Height":
-			z.Height, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Height")
-				return
-			}
 		case "ID":
 			z.ID, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "ID")
 				return
 			}
-		case "IdentifyMagicAchievementItems":
-			var zb0002 uint32
-			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+		case "Name":
+			z.Name, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "IdentifyMagicAchievementItems")
+				err = msgp.WrapError(err, "Name")
 				return
-			}
-			if cap(z.IdentifyMagicAchievementItems) >= int(zb0002) {
-				z.IdentifyMagicAchievementItems = (z.IdentifyMagicAchievementItems)[:zb0002]
-			} else {
-				z.IdentifyMagicAchievementItems = make([]interface{}, zb0002)
-			}
-			for za0001 := range z.IdentifyMagicAchievementItems {
-				z.IdentifyMagicAchievementItems[za0001], bts, err = msgp.ReadIntfBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "IdentifyMagicAchievementItems", za0001)
-					return
-				}
-			}
-		case "IdentifyAchievementItems":
-			var zb0003 uint32
-			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "IdentifyAchievementItems")
-				return
-			}
-			if cap(z.IdentifyAchievementItems) >= int(zb0003) {
-				z.IdentifyAchievementItems = (z.IdentifyAchievementItems)[:zb0003]
-			} else {
-				z.IdentifyAchievementItems = make([]interface{}, zb0003)
-			}
-			for za0002 := range z.IdentifyAchievementItems {
-				z.IdentifyAchievementItems[za0002], bts, err = msgp.ReadIntfBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "IdentifyAchievementItems", za0002)
-					return
-				}
-			}
-		case "ImplicitModsKeys":
-			var zb0004 uint32
-			zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ImplicitModsKeys")
-				return
-			}
-			if cap(z.ImplicitModsKeys) >= int(zb0004) {
-				z.ImplicitModsKeys = (z.ImplicitModsKeys)[:zb0004]
-			} else {
-				z.ImplicitModsKeys = make([]int, zb0004)
-			}
-			for za0003 := range z.ImplicitModsKeys {
-				z.ImplicitModsKeys[za0003], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ImplicitModsKeys", za0003)
-					return
-				}
 			}
 		case "Inflection":
 			z.Inflection, bts, err = msgp.ReadStringBytes(bts)
@@ -3258,81 +3531,79 @@ func (z *BaseItemType) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "InheritsFrom")
 				return
 			}
-		case "IsCorrupted":
-			z.IsCorrupted, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "IsCorrupted")
-				return
-			}
-		case "ItemClassesKey":
-			z.ItemClassesKey, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ItemClassesKey")
-				return
-			}
-		case "ItemVisualIdentity":
-			z.ItemVisualIdentity, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ItemVisualIdentity")
-				return
-			}
-		case "ModDomain":
-			z.ModDomain, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ModDomain")
-				return
-			}
-		case "Name":
-			z.Name, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Name")
-				return
-			}
-		case "SiteVisibility":
-			z.SiteVisibility, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "SiteVisibility")
-				return
-			}
-		case "SizeOnGround":
-			z.SizeOnGround, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "SizeOnGround")
-				return
-			}
-		case "SoundEffect":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.SoundEffect = nil
-			} else {
-				if z.SoundEffect == nil {
-					z.SoundEffect = new(int)
-				}
-				*z.SoundEffect, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "SoundEffect")
-					return
-				}
-			}
 		case "TagsKeys":
-			var zb0005 uint32
-			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			var zb0002 uint32
+			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "TagsKeys")
 				return
 			}
-			if cap(z.TagsKeys) >= int(zb0005) {
-				z.TagsKeys = (z.TagsKeys)[:zb0005]
+			if cap(z.TagsKeys) >= int(zb0002) {
+				z.TagsKeys = (z.TagsKeys)[:zb0002]
 			} else {
-				z.TagsKeys = make([]int, zb0005)
+				z.TagsKeys = make([]int, zb0002)
 			}
-			for za0004 := range z.TagsKeys {
-				z.TagsKeys[za0004], bts, err = msgp.ReadIntBytes(bts)
+			for za0001 := range z.TagsKeys {
+				z.TagsKeys[za0001], bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "TagsKeys", za0004)
+					err = msgp.WrapError(err, "TagsKeys", za0001)
+					return
+				}
+			}
+		case "IdentifyMagicAchievementItems":
+			var zb0003 uint32
+			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IdentifyMagicAchievementItems")
+				return
+			}
+			if cap(z.IdentifyMagicAchievementItems) >= int(zb0003) {
+				z.IdentifyMagicAchievementItems = (z.IdentifyMagicAchievementItems)[:zb0003]
+			} else {
+				z.IdentifyMagicAchievementItems = make([]interface{}, zb0003)
+			}
+			for za0002 := range z.IdentifyMagicAchievementItems {
+				z.IdentifyMagicAchievementItems[za0002], bts, err = msgp.ReadIntfBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "IdentifyMagicAchievementItems", za0002)
+					return
+				}
+			}
+		case "IdentifyAchievementItems":
+			var zb0004 uint32
+			zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IdentifyAchievementItems")
+				return
+			}
+			if cap(z.IdentifyAchievementItems) >= int(zb0004) {
+				z.IdentifyAchievementItems = (z.IdentifyAchievementItems)[:zb0004]
+			} else {
+				z.IdentifyAchievementItems = make([]interface{}, zb0004)
+			}
+			for za0003 := range z.IdentifyAchievementItems {
+				z.IdentifyAchievementItems[za0003], bts, err = msgp.ReadIntfBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "IdentifyAchievementItems", za0003)
+					return
+				}
+			}
+		case "ImplicitModsKeys":
+			var zb0005 uint32
+			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ImplicitModsKeys")
+				return
+			}
+			if cap(z.ImplicitModsKeys) >= int(zb0005) {
+				z.ImplicitModsKeys = (z.ImplicitModsKeys)[:zb0005]
+			} else {
+				z.ImplicitModsKeys = make([]int, zb0005)
+			}
+			for za0004 := range z.ImplicitModsKeys {
+				z.ImplicitModsKeys[za0004], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ImplicitModsKeys", za0004)
 					return
 				}
 			}
@@ -3355,6 +3626,54 @@ func (z *BaseItemType) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
+		case "SizeOnGround":
+			z.SizeOnGround, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "SizeOnGround")
+				return
+			}
+		case "ItemVisualIdentity":
+			z.ItemVisualIdentity, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ItemVisualIdentity")
+				return
+			}
+		case "ModDomain":
+			z.ModDomain, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ModDomain")
+				return
+			}
+		case "ItemClassesKey":
+			z.ItemClassesKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ItemClassesKey")
+				return
+			}
+		case "SiteVisibility":
+			z.SiteVisibility, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "SiteVisibility")
+				return
+			}
+		case "DropLevel":
+			z.DropLevel, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "DropLevel")
+				return
+			}
+		case "Height":
+			z.Height, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Height")
+				return
+			}
+		case "Hash":
+			z.Hash, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Hash")
+				return
+			}
 		case "Width":
 			z.Width, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
@@ -3365,6 +3684,12 @@ func (z *BaseItemType) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			z.Key, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "IsCorrupted":
+			z.IsCorrupted, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IsCorrupted")
 				return
 			}
 		default:
@@ -3381,7 +3706,13 @@ func (z *BaseItemType) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *BaseItemType) Msgsize() (s int) {
-	s = 3 + 10 + msgp.IntSize + 25
+	s = 3 + 12
+	if z.SoundEffect == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 25
 	if z.EquipAchievementItemsKey == nil {
 		s += msgp.NilSize
 	} else {
@@ -3399,21 +3730,15 @@ func (z *BaseItemType) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 5 + msgp.IntSize + 7 + msgp.IntSize + 3 + msgp.StringPrefixSize + len(z.ID) + 30 + msgp.ArrayHeaderSize
-	for za0001 := range z.IdentifyMagicAchievementItems {
-		s += msgp.GuessSize(z.IdentifyMagicAchievementItems[za0001])
+	s += 3 + msgp.StringPrefixSize + len(z.ID) + 5 + msgp.StringPrefixSize + len(z.Name) + 11 + msgp.StringPrefixSize + len(z.Inflection) + 13 + msgp.StringPrefixSize + len(z.InheritsFrom) + 9 + msgp.ArrayHeaderSize + (len(z.TagsKeys) * (msgp.IntSize)) + 30 + msgp.ArrayHeaderSize
+	for za0002 := range z.IdentifyMagicAchievementItems {
+		s += msgp.GuessSize(z.IdentifyMagicAchievementItems[za0002])
 	}
 	s += 25 + msgp.ArrayHeaderSize
-	for za0002 := range z.IdentifyAchievementItems {
-		s += msgp.GuessSize(z.IdentifyAchievementItems[za0002])
+	for za0003 := range z.IdentifyAchievementItems {
+		s += msgp.GuessSize(z.IdentifyAchievementItems[za0003])
 	}
-	s += 17 + msgp.ArrayHeaderSize + (len(z.ImplicitModsKeys) * (msgp.IntSize)) + 11 + msgp.StringPrefixSize + len(z.Inflection) + 13 + msgp.StringPrefixSize + len(z.InheritsFrom) + 12 + msgp.BoolSize + 15 + msgp.IntSize + 19 + msgp.IntSize + 10 + msgp.IntSize + 5 + msgp.StringPrefixSize + len(z.Name) + 15 + msgp.IntSize + 13 + msgp.IntSize + 12
-	if z.SoundEffect == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 9 + msgp.ArrayHeaderSize + (len(z.TagsKeys) * (msgp.IntSize)) + 29 + msgp.ArrayHeaderSize + (len(z.VendorRecipeAchievementItems) * (msgp.IntSize)) + 6 + msgp.IntSize + 4 + msgp.IntSize
+	s += 17 + msgp.ArrayHeaderSize + (len(z.ImplicitModsKeys) * (msgp.IntSize)) + 29 + msgp.ArrayHeaderSize + (len(z.VendorRecipeAchievementItems) * (msgp.IntSize)) + 13 + msgp.IntSize + 19 + msgp.IntSize + 10 + msgp.IntSize + 15 + msgp.IntSize + 15 + msgp.IntSize + 10 + msgp.IntSize + 7 + msgp.IntSize + 5 + msgp.IntSize + 6 + msgp.IntSize + 4 + msgp.IntSize + 12 + msgp.BoolSize
 	return
 }
 
@@ -3902,6 +4227,12 @@ func (z *Condition) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
+		case "Negated":
+			z.Negated, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "Negated")
+				return
+			}
 		default:
 			err = dc.Skip()
 			if err != nil {
@@ -3915,9 +4246,9 @@ func (z *Condition) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *Condition) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 2
+	// map header, size 3
 	// write "Min"
-	err = en.Append(0x82, 0xa3, 0x4d, 0x69, 0x6e)
+	err = en.Append(0x83, 0xa3, 0x4d, 0x69, 0x6e)
 	if err != nil {
 		return
 	}
@@ -3950,15 +4281,25 @@ func (z *Condition) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
+	// write "Negated"
+	err = en.Append(0xa7, 0x4e, 0x65, 0x67, 0x61, 0x74, 0x65, 0x64)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.Negated)
+	if err != nil {
+		err = msgp.WrapError(err, "Negated")
+		return
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
 func (z *Condition) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 2
+	// map header, size 3
 	// string "Min"
-	o = append(o, 0x82, 0xa3, 0x4d, 0x69, 0x6e)
+	o = append(o, 0x83, 0xa3, 0x4d, 0x69, 0x6e)
 	if z.Min == nil {
 		o = msgp.AppendNil(o)
 	} else {
@@ -3971,6 +4312,9 @@ func (z *Condition) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.Max)
 	}
+	// string "Negated"
+	o = append(o, 0xa7, 0x4e, 0x65, 0x67, 0x61, 0x74, 0x65, 0x64)
+	o = msgp.AppendBool(o, z.Negated)
 	return
 }
 
@@ -4026,6 +4370,12 @@ func (z *Condition) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
+		case "Negated":
+			z.Negated, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Negated")
+				return
+			}
 		default:
 			bts, err = msgp.Skip(bts)
 			if err != nil {
@@ -4052,6 +4402,7 @@ func (z *Condition) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
+	s += 8 + msgp.BoolSize
 	return
 }
 
@@ -4287,6 +4638,42 @@ func (z *CraftingBenchOption) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
+		case "UnlockCategory":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "UnlockCategory")
+					return
+				}
+				z.UnlockCategory = nil
+			} else {
+				if z.UnlockCategory == nil {
+					z.UnlockCategory = new(int)
+				}
+				*z.UnlockCategory, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "UnlockCategory")
+					return
+				}
+			}
+		case "Description":
+			z.Description, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "Description")
+				return
+			}
+		case "SocketColours":
+			z.SocketColours, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "SocketColours")
+				return
+			}
+		case "Name":
+			z.Name, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "Name")
+				return
+			}
 		case "CostBaseItemTypes":
 			var zb0002 uint32
 			zb0002, err = dc.ReadArrayHeader()
@@ -4325,12 +4712,6 @@ func (z *CraftingBenchOption) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "CraftingBenchCustomAction":
-			z.CraftingBenchCustomAction, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "CraftingBenchCustomAction")
-				return
-			}
 		case "CraftingItemClassCategories":
 			var zb0004 uint32
 			zb0004, err = dc.ReadArrayHeader()
@@ -4350,54 +4731,43 @@ func (z *CraftingBenchOption) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "Description":
-			z.Description, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "Description")
-				return
-			}
-		case "HideoutNPCSKey":
-			z.HideoutNPCSKey, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "HideoutNPCSKey")
-				return
-			}
-		case "IsAreaOption":
-			z.IsAreaOption, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "IsAreaOption")
-				return
-			}
-		case "IsDisabled":
-			z.IsDisabled, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "IsDisabled")
-				return
-			}
-		case "ItemClasses":
+		case "RecipeIDS":
 			var zb0005 uint32
 			zb0005, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "RecipeIDS")
+				return
+			}
+			if cap(z.RecipeIDS) >= int(zb0005) {
+				z.RecipeIDS = (z.RecipeIDS)[:zb0005]
+			} else {
+				z.RecipeIDS = make([]int, zb0005)
+			}
+			for za0004 := range z.RecipeIDS {
+				z.RecipeIDS[za0004], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "RecipeIDS", za0004)
+					return
+				}
+			}
+		case "ItemClasses":
+			var zb0006 uint32
+			zb0006, err = dc.ReadArrayHeader()
 			if err != nil {
 				err = msgp.WrapError(err, "ItemClasses")
 				return
 			}
-			if cap(z.ItemClasses) >= int(zb0005) {
-				z.ItemClasses = (z.ItemClasses)[:zb0005]
+			if cap(z.ItemClasses) >= int(zb0006) {
+				z.ItemClasses = (z.ItemClasses)[:zb0006]
 			} else {
-				z.ItemClasses = make([]int, zb0005)
+				z.ItemClasses = make([]int, zb0006)
 			}
-			for za0004 := range z.ItemClasses {
-				z.ItemClasses[za0004], err = dc.ReadInt()
+			for za0005 := range z.ItemClasses {
+				z.ItemClasses[za0005], err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "ItemClasses", za0004)
+					err = msgp.WrapError(err, "ItemClasses", za0005)
 					return
 				}
-			}
-		case "ItemQuantity":
-			z.ItemQuantity, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "ItemQuantity")
-				return
 			}
 		case "Links":
 			z.Links, err = dc.ReadInt()
@@ -4405,10 +4775,16 @@ func (z *CraftingBenchOption) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Links")
 				return
 			}
-		case "Name":
-			z.Name, err = dc.ReadString()
+		case "CraftingBenchCustomAction":
+			z.CraftingBenchCustomAction, err = dc.ReadInt()
 			if err != nil {
-				err = msgp.WrapError(err, "Name")
+				err = msgp.WrapError(err, "CraftingBenchCustomAction")
+				return
+			}
+		case "Key":
+			z.Key, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Key")
 				return
 			}
 		case "Order":
@@ -4417,24 +4793,11 @@ func (z *CraftingBenchOption) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Order")
 				return
 			}
-		case "RecipeIDS":
-			var zb0006 uint32
-			zb0006, err = dc.ReadArrayHeader()
+		case "UnveilsRequired2":
+			z.UnveilsRequired2, err = dc.ReadInt()
 			if err != nil {
-				err = msgp.WrapError(err, "RecipeIDS")
+				err = msgp.WrapError(err, "UnveilsRequired2")
 				return
-			}
-			if cap(z.RecipeIDS) >= int(zb0006) {
-				z.RecipeIDS = (z.RecipeIDS)[:zb0006]
-			} else {
-				z.RecipeIDS = make([]int, zb0006)
-			}
-			for za0005 := range z.RecipeIDS {
-				z.RecipeIDS[za0005], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "RecipeIDS", za0005)
-					return
-				}
 			}
 		case "RequiredLevel":
 			z.RequiredLevel, err = dc.ReadInt()
@@ -4442,10 +4805,10 @@ func (z *CraftingBenchOption) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "RequiredLevel")
 				return
 			}
-		case "SocketColours":
-			z.SocketColours, err = dc.ReadString()
+		case "HideoutNPCSKey":
+			z.HideoutNPCSKey, err = dc.ReadInt()
 			if err != nil {
-				err = msgp.WrapError(err, "SocketColours")
+				err = msgp.WrapError(err, "HideoutNPCSKey")
 				return
 			}
 		case "Sockets":
@@ -4466,23 +4829,11 @@ func (z *CraftingBenchOption) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Tier")
 				return
 			}
-		case "UnlockCategory":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "UnlockCategory")
-					return
-				}
-				z.UnlockCategory = nil
-			} else {
-				if z.UnlockCategory == nil {
-					z.UnlockCategory = new(int)
-				}
-				*z.UnlockCategory, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "UnlockCategory")
-					return
-				}
+		case "ItemQuantity":
+			z.ItemQuantity, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "ItemQuantity")
+				return
 			}
 		case "UnveilsRequired":
 			z.UnveilsRequired, err = dc.ReadInt()
@@ -4490,16 +4841,16 @@ func (z *CraftingBenchOption) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "UnveilsRequired")
 				return
 			}
-		case "UnveilsRequired2":
-			z.UnveilsRequired2, err = dc.ReadInt()
+		case "IsAreaOption":
+			z.IsAreaOption, err = dc.ReadBool()
 			if err != nil {
-				err = msgp.WrapError(err, "UnveilsRequired2")
+				err = msgp.WrapError(err, "IsAreaOption")
 				return
 			}
-		case "Key":
-			z.Key, err = dc.ReadInt()
+		case "IsDisabled":
+			z.IsDisabled, err = dc.ReadBool()
 			if err != nil {
-				err = msgp.WrapError(err, "Key")
+				err = msgp.WrapError(err, "IsDisabled")
 				return
 			}
 		default:
@@ -4550,6 +4901,53 @@ func (z *CraftingBenchOption) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
+	// write "UnlockCategory"
+	err = en.Append(0xae, 0x55, 0x6e, 0x6c, 0x6f, 0x63, 0x6b, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79)
+	if err != nil {
+		return
+	}
+	if z.UnlockCategory == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.UnlockCategory)
+		if err != nil {
+			err = msgp.WrapError(err, "UnlockCategory")
+			return
+		}
+	}
+	// write "Description"
+	err = en.Append(0xab, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Description)
+	if err != nil {
+		err = msgp.WrapError(err, "Description")
+		return
+	}
+	// write "SocketColours"
+	err = en.Append(0xad, 0x53, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x43, 0x6f, 0x6c, 0x6f, 0x75, 0x72, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.SocketColours)
+	if err != nil {
+		err = msgp.WrapError(err, "SocketColours")
+		return
+	}
+	// write "Name"
+	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
 	// write "CostBaseItemTypes"
 	err = en.Append(0xb1, 0x43, 0x6f, 0x73, 0x74, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73)
 	if err != nil {
@@ -4584,16 +4982,6 @@ func (z *CraftingBenchOption) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "CraftingBenchCustomAction"
-	err = en.Append(0xb9, 0x43, 0x72, 0x61, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x65, 0x6e, 0x63, 0x68, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.CraftingBenchCustomAction)
-	if err != nil {
-		err = msgp.WrapError(err, "CraftingBenchCustomAction")
-		return
-	}
 	// write "CraftingItemClassCategories"
 	err = en.Append(0xbb, 0x43, 0x72, 0x61, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73)
 	if err != nil {
@@ -4611,45 +4999,22 @@ func (z *CraftingBenchOption) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "Description"
-	err = en.Append(0xab, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
+	// write "RecipeIDS"
+	err = en.Append(0xa9, 0x52, 0x65, 0x63, 0x69, 0x70, 0x65, 0x49, 0x44, 0x53)
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.Description)
+	err = en.WriteArrayHeader(uint32(len(z.RecipeIDS)))
 	if err != nil {
-		err = msgp.WrapError(err, "Description")
+		err = msgp.WrapError(err, "RecipeIDS")
 		return
 	}
-	// write "HideoutNPCSKey"
-	err = en.Append(0xae, 0x48, 0x69, 0x64, 0x65, 0x6f, 0x75, 0x74, 0x4e, 0x50, 0x43, 0x53, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.HideoutNPCSKey)
-	if err != nil {
-		err = msgp.WrapError(err, "HideoutNPCSKey")
-		return
-	}
-	// write "IsAreaOption"
-	err = en.Append(0xac, 0x49, 0x73, 0x41, 0x72, 0x65, 0x61, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.IsAreaOption)
-	if err != nil {
-		err = msgp.WrapError(err, "IsAreaOption")
-		return
-	}
-	// write "IsDisabled"
-	err = en.Append(0xaa, 0x49, 0x73, 0x44, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.IsDisabled)
-	if err != nil {
-		err = msgp.WrapError(err, "IsDisabled")
-		return
+	for za0004 := range z.RecipeIDS {
+		err = en.WriteInt(z.RecipeIDS[za0004])
+		if err != nil {
+			err = msgp.WrapError(err, "RecipeIDS", za0004)
+			return
+		}
 	}
 	// write "ItemClasses"
 	err = en.Append(0xab, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73)
@@ -4661,22 +5026,12 @@ func (z *CraftingBenchOption) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "ItemClasses")
 		return
 	}
-	for za0004 := range z.ItemClasses {
-		err = en.WriteInt(z.ItemClasses[za0004])
+	for za0005 := range z.ItemClasses {
+		err = en.WriteInt(z.ItemClasses[za0005])
 		if err != nil {
-			err = msgp.WrapError(err, "ItemClasses", za0004)
+			err = msgp.WrapError(err, "ItemClasses", za0005)
 			return
 		}
-	}
-	// write "ItemQuantity"
-	err = en.Append(0xac, 0x49, 0x74, 0x65, 0x6d, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.ItemQuantity)
-	if err != nil {
-		err = msgp.WrapError(err, "ItemQuantity")
-		return
 	}
 	// write "Links"
 	err = en.Append(0xa5, 0x4c, 0x69, 0x6e, 0x6b, 0x73)
@@ -4688,14 +5043,24 @@ func (z *CraftingBenchOption) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Links")
 		return
 	}
-	// write "Name"
-	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	// write "CraftingBenchCustomAction"
+	err = en.Append(0xb9, 0x43, 0x72, 0x61, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x65, 0x6e, 0x63, 0x68, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e)
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.Name)
+	err = en.WriteInt(z.CraftingBenchCustomAction)
 	if err != nil {
-		err = msgp.WrapError(err, "Name")
+		err = msgp.WrapError(err, "CraftingBenchCustomAction")
+		return
+	}
+	// write "Key"
+	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
 		return
 	}
 	// write "Order"
@@ -4708,22 +5073,15 @@ func (z *CraftingBenchOption) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Order")
 		return
 	}
-	// write "RecipeIDS"
-	err = en.Append(0xa9, 0x52, 0x65, 0x63, 0x69, 0x70, 0x65, 0x49, 0x44, 0x53)
+	// write "UnveilsRequired2"
+	err = en.Append(0xb0, 0x55, 0x6e, 0x76, 0x65, 0x69, 0x6c, 0x73, 0x52, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64, 0x32)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.RecipeIDS)))
+	err = en.WriteInt(z.UnveilsRequired2)
 	if err != nil {
-		err = msgp.WrapError(err, "RecipeIDS")
+		err = msgp.WrapError(err, "UnveilsRequired2")
 		return
-	}
-	for za0005 := range z.RecipeIDS {
-		err = en.WriteInt(z.RecipeIDS[za0005])
-		if err != nil {
-			err = msgp.WrapError(err, "RecipeIDS", za0005)
-			return
-		}
 	}
 	// write "RequiredLevel"
 	err = en.Append(0xad, 0x52, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64, 0x4c, 0x65, 0x76, 0x65, 0x6c)
@@ -4735,14 +5093,14 @@ func (z *CraftingBenchOption) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "RequiredLevel")
 		return
 	}
-	// write "SocketColours"
-	err = en.Append(0xad, 0x53, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x43, 0x6f, 0x6c, 0x6f, 0x75, 0x72, 0x73)
+	// write "HideoutNPCSKey"
+	err = en.Append(0xae, 0x48, 0x69, 0x64, 0x65, 0x6f, 0x75, 0x74, 0x4e, 0x50, 0x43, 0x53, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.SocketColours)
+	err = en.WriteInt(z.HideoutNPCSKey)
 	if err != nil {
-		err = msgp.WrapError(err, "SocketColours")
+		err = msgp.WrapError(err, "HideoutNPCSKey")
 		return
 	}
 	// write "Sockets"
@@ -4775,22 +5133,15 @@ func (z *CraftingBenchOption) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Tier")
 		return
 	}
-	// write "UnlockCategory"
-	err = en.Append(0xae, 0x55, 0x6e, 0x6c, 0x6f, 0x63, 0x6b, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79)
+	// write "ItemQuantity"
+	err = en.Append(0xac, 0x49, 0x74, 0x65, 0x6d, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79)
 	if err != nil {
 		return
 	}
-	if z.UnlockCategory == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.UnlockCategory)
-		if err != nil {
-			err = msgp.WrapError(err, "UnlockCategory")
-			return
-		}
+	err = en.WriteInt(z.ItemQuantity)
+	if err != nil {
+		err = msgp.WrapError(err, "ItemQuantity")
+		return
 	}
 	// write "UnveilsRequired"
 	err = en.Append(0xaf, 0x55, 0x6e, 0x76, 0x65, 0x69, 0x6c, 0x73, 0x52, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64)
@@ -4802,24 +5153,24 @@ func (z *CraftingBenchOption) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "UnveilsRequired")
 		return
 	}
-	// write "UnveilsRequired2"
-	err = en.Append(0xb0, 0x55, 0x6e, 0x76, 0x65, 0x69, 0x6c, 0x73, 0x52, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64, 0x32)
+	// write "IsAreaOption"
+	err = en.Append(0xac, 0x49, 0x73, 0x41, 0x72, 0x65, 0x61, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.UnveilsRequired2)
+	err = en.WriteBool(z.IsAreaOption)
 	if err != nil {
-		err = msgp.WrapError(err, "UnveilsRequired2")
+		err = msgp.WrapError(err, "IsAreaOption")
 		return
 	}
-	// write "Key"
-	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
+	// write "IsDisabled"
+	err = en.Append(0xaa, 0x49, 0x73, 0x44, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.Key)
+	err = en.WriteBool(z.IsDisabled)
 	if err != nil {
-		err = msgp.WrapError(err, "Key")
+		err = msgp.WrapError(err, "IsDisabled")
 		return
 	}
 	return
@@ -4843,6 +5194,22 @@ func (z *CraftingBenchOption) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.AddMod)
 	}
+	// string "UnlockCategory"
+	o = append(o, 0xae, 0x55, 0x6e, 0x6c, 0x6f, 0x63, 0x6b, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79)
+	if z.UnlockCategory == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.UnlockCategory)
+	}
+	// string "Description"
+	o = append(o, 0xab, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
+	o = msgp.AppendString(o, z.Description)
+	// string "SocketColours"
+	o = append(o, 0xad, 0x53, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x43, 0x6f, 0x6c, 0x6f, 0x75, 0x72, 0x73)
+	o = msgp.AppendString(o, z.SocketColours)
+	// string "Name"
+	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	o = msgp.AppendString(o, z.Name)
 	// string "CostBaseItemTypes"
 	o = append(o, 0xb1, 0x43, 0x6f, 0x73, 0x74, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.CostBaseItemTypes)))
@@ -4855,57 +5222,45 @@ func (z *CraftingBenchOption) MarshalMsg(b []byte) (o []byte, err error) {
 	for za0002 := range z.CostValues {
 		o = msgp.AppendInt(o, z.CostValues[za0002])
 	}
-	// string "CraftingBenchCustomAction"
-	o = append(o, 0xb9, 0x43, 0x72, 0x61, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x65, 0x6e, 0x63, 0x68, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e)
-	o = msgp.AppendInt(o, z.CraftingBenchCustomAction)
 	// string "CraftingItemClassCategories"
 	o = append(o, 0xbb, 0x43, 0x72, 0x61, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.CraftingItemClassCategories)))
 	for za0003 := range z.CraftingItemClassCategories {
 		o = msgp.AppendInt(o, z.CraftingItemClassCategories[za0003])
 	}
-	// string "Description"
-	o = append(o, 0xab, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
-	o = msgp.AppendString(o, z.Description)
-	// string "HideoutNPCSKey"
-	o = append(o, 0xae, 0x48, 0x69, 0x64, 0x65, 0x6f, 0x75, 0x74, 0x4e, 0x50, 0x43, 0x53, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.HideoutNPCSKey)
-	// string "IsAreaOption"
-	o = append(o, 0xac, 0x49, 0x73, 0x41, 0x72, 0x65, 0x61, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e)
-	o = msgp.AppendBool(o, z.IsAreaOption)
-	// string "IsDisabled"
-	o = append(o, 0xaa, 0x49, 0x73, 0x44, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64)
-	o = msgp.AppendBool(o, z.IsDisabled)
-	// string "ItemClasses"
-	o = append(o, 0xab, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.ItemClasses)))
-	for za0004 := range z.ItemClasses {
-		o = msgp.AppendInt(o, z.ItemClasses[za0004])
-	}
-	// string "ItemQuantity"
-	o = append(o, 0xac, 0x49, 0x74, 0x65, 0x6d, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79)
-	o = msgp.AppendInt(o, z.ItemQuantity)
-	// string "Links"
-	o = append(o, 0xa5, 0x4c, 0x69, 0x6e, 0x6b, 0x73)
-	o = msgp.AppendInt(o, z.Links)
-	// string "Name"
-	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
-	o = msgp.AppendString(o, z.Name)
-	// string "Order"
-	o = append(o, 0xa5, 0x4f, 0x72, 0x64, 0x65, 0x72)
-	o = msgp.AppendInt(o, z.Order)
 	// string "RecipeIDS"
 	o = append(o, 0xa9, 0x52, 0x65, 0x63, 0x69, 0x70, 0x65, 0x49, 0x44, 0x53)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.RecipeIDS)))
-	for za0005 := range z.RecipeIDS {
-		o = msgp.AppendInt(o, z.RecipeIDS[za0005])
+	for za0004 := range z.RecipeIDS {
+		o = msgp.AppendInt(o, z.RecipeIDS[za0004])
 	}
+	// string "ItemClasses"
+	o = append(o, 0xab, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ItemClasses)))
+	for za0005 := range z.ItemClasses {
+		o = msgp.AppendInt(o, z.ItemClasses[za0005])
+	}
+	// string "Links"
+	o = append(o, 0xa5, 0x4c, 0x69, 0x6e, 0x6b, 0x73)
+	o = msgp.AppendInt(o, z.Links)
+	// string "CraftingBenchCustomAction"
+	o = append(o, 0xb9, 0x43, 0x72, 0x61, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x65, 0x6e, 0x63, 0x68, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e)
+	o = msgp.AppendInt(o, z.CraftingBenchCustomAction)
+	// string "Key"
+	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.Key)
+	// string "Order"
+	o = append(o, 0xa5, 0x4f, 0x72, 0x64, 0x65, 0x72)
+	o = msgp.AppendInt(o, z.Order)
+	// string "UnveilsRequired2"
+	o = append(o, 0xb0, 0x55, 0x6e, 0x76, 0x65, 0x69, 0x6c, 0x73, 0x52, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64, 0x32)
+	o = msgp.AppendInt(o, z.UnveilsRequired2)
 	// string "RequiredLevel"
 	o = append(o, 0xad, 0x52, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64, 0x4c, 0x65, 0x76, 0x65, 0x6c)
 	o = msgp.AppendInt(o, z.RequiredLevel)
-	// string "SocketColours"
-	o = append(o, 0xad, 0x53, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x43, 0x6f, 0x6c, 0x6f, 0x75, 0x72, 0x73)
-	o = msgp.AppendString(o, z.SocketColours)
+	// string "HideoutNPCSKey"
+	o = append(o, 0xae, 0x48, 0x69, 0x64, 0x65, 0x6f, 0x75, 0x74, 0x4e, 0x50, 0x43, 0x53, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.HideoutNPCSKey)
 	// string "Sockets"
 	o = append(o, 0xa7, 0x53, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x73)
 	o = msgp.AppendInt(o, z.Sockets)
@@ -4915,22 +5270,18 @@ func (z *CraftingBenchOption) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "Tier"
 	o = append(o, 0xa4, 0x54, 0x69, 0x65, 0x72)
 	o = msgp.AppendInt(o, z.Tier)
-	// string "UnlockCategory"
-	o = append(o, 0xae, 0x55, 0x6e, 0x6c, 0x6f, 0x63, 0x6b, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79)
-	if z.UnlockCategory == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.UnlockCategory)
-	}
+	// string "ItemQuantity"
+	o = append(o, 0xac, 0x49, 0x74, 0x65, 0x6d, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79)
+	o = msgp.AppendInt(o, z.ItemQuantity)
 	// string "UnveilsRequired"
 	o = append(o, 0xaf, 0x55, 0x6e, 0x76, 0x65, 0x69, 0x6c, 0x73, 0x52, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64)
 	o = msgp.AppendInt(o, z.UnveilsRequired)
-	// string "UnveilsRequired2"
-	o = append(o, 0xb0, 0x55, 0x6e, 0x76, 0x65, 0x69, 0x6c, 0x73, 0x52, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64, 0x32)
-	o = msgp.AppendInt(o, z.UnveilsRequired2)
-	// string "Key"
-	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.Key)
+	// string "IsAreaOption"
+	o = append(o, 0xac, 0x49, 0x73, 0x41, 0x72, 0x65, 0x61, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e)
+	o = msgp.AppendBool(o, z.IsAreaOption)
+	// string "IsDisabled"
+	o = append(o, 0xaa, 0x49, 0x73, 0x44, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64)
+	o = msgp.AppendBool(o, z.IsDisabled)
 	return
 }
 
@@ -4986,6 +5337,41 @@ func (z *CraftingBenchOption) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
+		case "UnlockCategory":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.UnlockCategory = nil
+			} else {
+				if z.UnlockCategory == nil {
+					z.UnlockCategory = new(int)
+				}
+				*z.UnlockCategory, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "UnlockCategory")
+					return
+				}
+			}
+		case "Description":
+			z.Description, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Description")
+				return
+			}
+		case "SocketColours":
+			z.SocketColours, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "SocketColours")
+				return
+			}
+		case "Name":
+			z.Name, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Name")
+				return
+			}
 		case "CostBaseItemTypes":
 			var zb0002 uint32
 			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
@@ -5024,12 +5410,6 @@ func (z *CraftingBenchOption) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "CraftingBenchCustomAction":
-			z.CraftingBenchCustomAction, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "CraftingBenchCustomAction")
-				return
-			}
 		case "CraftingItemClassCategories":
 			var zb0004 uint32
 			zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
@@ -5049,54 +5429,43 @@ func (z *CraftingBenchOption) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "Description":
-			z.Description, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Description")
-				return
-			}
-		case "HideoutNPCSKey":
-			z.HideoutNPCSKey, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "HideoutNPCSKey")
-				return
-			}
-		case "IsAreaOption":
-			z.IsAreaOption, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "IsAreaOption")
-				return
-			}
-		case "IsDisabled":
-			z.IsDisabled, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "IsDisabled")
-				return
-			}
-		case "ItemClasses":
+		case "RecipeIDS":
 			var zb0005 uint32
 			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "RecipeIDS")
+				return
+			}
+			if cap(z.RecipeIDS) >= int(zb0005) {
+				z.RecipeIDS = (z.RecipeIDS)[:zb0005]
+			} else {
+				z.RecipeIDS = make([]int, zb0005)
+			}
+			for za0004 := range z.RecipeIDS {
+				z.RecipeIDS[za0004], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "RecipeIDS", za0004)
+					return
+				}
+			}
+		case "ItemClasses":
+			var zb0006 uint32
+			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "ItemClasses")
 				return
 			}
-			if cap(z.ItemClasses) >= int(zb0005) {
-				z.ItemClasses = (z.ItemClasses)[:zb0005]
+			if cap(z.ItemClasses) >= int(zb0006) {
+				z.ItemClasses = (z.ItemClasses)[:zb0006]
 			} else {
-				z.ItemClasses = make([]int, zb0005)
+				z.ItemClasses = make([]int, zb0006)
 			}
-			for za0004 := range z.ItemClasses {
-				z.ItemClasses[za0004], bts, err = msgp.ReadIntBytes(bts)
+			for za0005 := range z.ItemClasses {
+				z.ItemClasses[za0005], bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "ItemClasses", za0004)
+					err = msgp.WrapError(err, "ItemClasses", za0005)
 					return
 				}
-			}
-		case "ItemQuantity":
-			z.ItemQuantity, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ItemQuantity")
-				return
 			}
 		case "Links":
 			z.Links, bts, err = msgp.ReadIntBytes(bts)
@@ -5104,10 +5473,16 @@ func (z *CraftingBenchOption) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Links")
 				return
 			}
-		case "Name":
-			z.Name, bts, err = msgp.ReadStringBytes(bts)
+		case "CraftingBenchCustomAction":
+			z.CraftingBenchCustomAction, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Name")
+				err = msgp.WrapError(err, "CraftingBenchCustomAction")
+				return
+			}
+		case "Key":
+			z.Key, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Key")
 				return
 			}
 		case "Order":
@@ -5116,24 +5491,11 @@ func (z *CraftingBenchOption) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Order")
 				return
 			}
-		case "RecipeIDS":
-			var zb0006 uint32
-			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
+		case "UnveilsRequired2":
+			z.UnveilsRequired2, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "RecipeIDS")
+				err = msgp.WrapError(err, "UnveilsRequired2")
 				return
-			}
-			if cap(z.RecipeIDS) >= int(zb0006) {
-				z.RecipeIDS = (z.RecipeIDS)[:zb0006]
-			} else {
-				z.RecipeIDS = make([]int, zb0006)
-			}
-			for za0005 := range z.RecipeIDS {
-				z.RecipeIDS[za0005], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "RecipeIDS", za0005)
-					return
-				}
 			}
 		case "RequiredLevel":
 			z.RequiredLevel, bts, err = msgp.ReadIntBytes(bts)
@@ -5141,10 +5503,10 @@ func (z *CraftingBenchOption) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "RequiredLevel")
 				return
 			}
-		case "SocketColours":
-			z.SocketColours, bts, err = msgp.ReadStringBytes(bts)
+		case "HideoutNPCSKey":
+			z.HideoutNPCSKey, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "SocketColours")
+				err = msgp.WrapError(err, "HideoutNPCSKey")
 				return
 			}
 		case "Sockets":
@@ -5165,22 +5527,11 @@ func (z *CraftingBenchOption) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Tier")
 				return
 			}
-		case "UnlockCategory":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.UnlockCategory = nil
-			} else {
-				if z.UnlockCategory == nil {
-					z.UnlockCategory = new(int)
-				}
-				*z.UnlockCategory, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "UnlockCategory")
-					return
-				}
+		case "ItemQuantity":
+			z.ItemQuantity, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ItemQuantity")
+				return
 			}
 		case "UnveilsRequired":
 			z.UnveilsRequired, bts, err = msgp.ReadIntBytes(bts)
@@ -5188,16 +5539,16 @@ func (z *CraftingBenchOption) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "UnveilsRequired")
 				return
 			}
-		case "UnveilsRequired2":
-			z.UnveilsRequired2, bts, err = msgp.ReadIntBytes(bts)
+		case "IsAreaOption":
+			z.IsAreaOption, bts, err = msgp.ReadBoolBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "UnveilsRequired2")
+				err = msgp.WrapError(err, "IsAreaOption")
 				return
 			}
-		case "Key":
-			z.Key, bts, err = msgp.ReadIntBytes(bts)
+		case "IsDisabled":
+			z.IsDisabled, bts, err = msgp.ReadBoolBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Key")
+				err = msgp.WrapError(err, "IsDisabled")
 				return
 			}
 		default:
@@ -5226,13 +5577,13 @@ func (z *CraftingBenchOption) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 18 + msgp.ArrayHeaderSize + (len(z.CostBaseItemTypes) * (msgp.IntSize)) + 11 + msgp.ArrayHeaderSize + (len(z.CostValues) * (msgp.IntSize)) + 26 + msgp.IntSize + 28 + msgp.ArrayHeaderSize + (len(z.CraftingItemClassCategories) * (msgp.IntSize)) + 12 + msgp.StringPrefixSize + len(z.Description) + 15 + msgp.IntSize + 13 + msgp.BoolSize + 11 + msgp.BoolSize + 12 + msgp.ArrayHeaderSize + (len(z.ItemClasses) * (msgp.IntSize)) + 13 + msgp.IntSize + 6 + msgp.IntSize + 5 + msgp.StringPrefixSize + len(z.Name) + 6 + msgp.IntSize + 10 + msgp.ArrayHeaderSize + (len(z.RecipeIDS) * (msgp.IntSize)) + 14 + msgp.IntSize + 14 + msgp.StringPrefixSize + len(z.SocketColours) + 8 + msgp.IntSize + 13 + msgp.IntSize + 5 + msgp.IntSize + 15
+	s += 15
 	if z.UnlockCategory == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 16 + msgp.IntSize + 17 + msgp.IntSize + 4 + msgp.IntSize
+	s += 12 + msgp.StringPrefixSize + len(z.Description) + 14 + msgp.StringPrefixSize + len(z.SocketColours) + 5 + msgp.StringPrefixSize + len(z.Name) + 18 + msgp.ArrayHeaderSize + (len(z.CostBaseItemTypes) * (msgp.IntSize)) + 11 + msgp.ArrayHeaderSize + (len(z.CostValues) * (msgp.IntSize)) + 28 + msgp.ArrayHeaderSize + (len(z.CraftingItemClassCategories) * (msgp.IntSize)) + 10 + msgp.ArrayHeaderSize + (len(z.RecipeIDS) * (msgp.IntSize)) + 12 + msgp.ArrayHeaderSize + (len(z.ItemClasses) * (msgp.IntSize)) + 6 + msgp.IntSize + 26 + msgp.IntSize + 4 + msgp.IntSize + 6 + msgp.IntSize + 17 + msgp.IntSize + 14 + msgp.IntSize + 15 + msgp.IntSize + 8 + msgp.IntSize + 13 + msgp.IntSize + 5 + msgp.IntSize + 13 + msgp.IntSize + 16 + msgp.IntSize + 13 + msgp.BoolSize + 11 + msgp.BoolSize
 	return
 }
 
@@ -5254,6 +5605,12 @@ func (z *DefaultMonsterStat) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
+		case "DisplayLevel":
+			z.DisplayLevel, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "DisplayLevel")
+				return
+			}
 		case "Accuracy":
 			z.Accuracy, err = dc.ReadInt()
 			if err != nil {
@@ -5288,12 +5645,6 @@ func (z *DefaultMonsterStat) DecodeMsg(dc *msgp.Reader) (err error) {
 			z.Difficulty, err = dc.ReadInt()
 			if err != nil {
 				err = msgp.WrapError(err, "Difficulty")
-				return
-			}
-		case "DisplayLevel":
-			z.DisplayLevel, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "DisplayLevel")
 				return
 			}
 		case "Evasion":
@@ -5334,8 +5685,18 @@ func (z *DefaultMonsterStat) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *DefaultMonsterStat) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 11
+	// write "DisplayLevel"
+	err = en.Append(0x8b, 0xac, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.DisplayLevel)
+	if err != nil {
+		err = msgp.WrapError(err, "DisplayLevel")
+		return
+	}
 	// write "Accuracy"
-	err = en.Append(0x8b, 0xa8, 0x41, 0x63, 0x63, 0x75, 0x72, 0x61, 0x63, 0x79)
+	err = en.Append(0xa8, 0x41, 0x63, 0x63, 0x75, 0x72, 0x61, 0x63, 0x79)
 	if err != nil {
 		return
 	}
@@ -5394,16 +5755,6 @@ func (z *DefaultMonsterStat) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Difficulty")
 		return
 	}
-	// write "DisplayLevel"
-	err = en.Append(0xac, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4c, 0x65, 0x76, 0x65, 0x6c)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.DisplayLevel)
-	if err != nil {
-		err = msgp.WrapError(err, "DisplayLevel")
-		return
-	}
 	// write "Evasion"
 	err = en.Append(0xa7, 0x45, 0x76, 0x61, 0x73, 0x69, 0x6f, 0x6e)
 	if err != nil {
@@ -5451,8 +5802,11 @@ func (z *DefaultMonsterStat) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *DefaultMonsterStat) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 11
+	// string "DisplayLevel"
+	o = append(o, 0x8b, 0xac, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	o = msgp.AppendString(o, z.DisplayLevel)
 	// string "Accuracy"
-	o = append(o, 0x8b, 0xa8, 0x41, 0x63, 0x63, 0x75, 0x72, 0x61, 0x63, 0x79)
+	o = append(o, 0xa8, 0x41, 0x63, 0x63, 0x75, 0x72, 0x61, 0x63, 0x79)
 	o = msgp.AppendInt(o, z.Accuracy)
 	// string "AllyLife"
 	o = append(o, 0xa8, 0x41, 0x6c, 0x6c, 0x79, 0x4c, 0x69, 0x66, 0x65)
@@ -5469,9 +5823,6 @@ func (z *DefaultMonsterStat) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "Difficulty"
 	o = append(o, 0xaa, 0x44, 0x69, 0x66, 0x66, 0x69, 0x63, 0x75, 0x6c, 0x74, 0x79)
 	o = msgp.AppendInt(o, z.Difficulty)
-	// string "DisplayLevel"
-	o = append(o, 0xac, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4c, 0x65, 0x76, 0x65, 0x6c)
-	o = msgp.AppendString(o, z.DisplayLevel)
 	// string "Evasion"
 	o = append(o, 0xa7, 0x45, 0x76, 0x61, 0x73, 0x69, 0x6f, 0x6e)
 	o = msgp.AppendInt(o, z.Evasion)
@@ -5505,6 +5856,12 @@ func (z *DefaultMonsterStat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
+		case "DisplayLevel":
+			z.DisplayLevel, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "DisplayLevel")
+				return
+			}
 		case "Accuracy":
 			z.Accuracy, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
@@ -5539,12 +5896,6 @@ func (z *DefaultMonsterStat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			z.Difficulty, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "Difficulty")
-				return
-			}
-		case "DisplayLevel":
-			z.DisplayLevel, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "DisplayLevel")
 				return
 			}
 		case "Evasion":
@@ -5585,7 +5936,7 @@ func (z *DefaultMonsterStat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *DefaultMonsterStat) Msgsize() (s int) {
-	s = 1 + 9 + msgp.IntSize + 9 + msgp.IntSize + 7 + msgp.IntSize + 7 + msgp.Float64Size + 8 + msgp.Float64Size + 11 + msgp.IntSize + 13 + msgp.StringPrefixSize + len(z.DisplayLevel) + 8 + msgp.IntSize + 11 + msgp.IntSize + 5 + msgp.IntSize + 4 + msgp.IntSize
+	s = 1 + 13 + msgp.StringPrefixSize + len(z.DisplayLevel) + 9 + msgp.IntSize + 9 + msgp.IntSize + 7 + msgp.IntSize + 7 + msgp.Float64Size + 8 + msgp.Float64Size + 11 + msgp.IntSize + 8 + msgp.IntSize + 11 + msgp.IntSize + 5 + msgp.IntSize + 4 + msgp.IntSize
 	return
 }
 
@@ -5607,29 +5958,41 @@ func (z *Essence) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AmuletModsKey":
+		case "DisplayShieldModsKey":
 			if dc.IsNil() {
 				err = dc.ReadNil()
 				if err != nil {
-					err = msgp.WrapError(err, "AmuletModsKey")
+					err = msgp.WrapError(err, "DisplayShieldModsKey")
 					return
 				}
-				z.AmuletModsKey = nil
+				z.DisplayShieldModsKey = nil
 			} else {
-				if z.AmuletModsKey == nil {
-					z.AmuletModsKey = new(int)
+				if z.DisplayShieldModsKey == nil {
+					z.DisplayShieldModsKey = new(int)
 				}
-				*z.AmuletModsKey, err = dc.ReadInt()
+				*z.DisplayShieldModsKey, err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "AmuletModsKey")
+					err = msgp.WrapError(err, "DisplayShieldModsKey")
 					return
 				}
 			}
-		case "BaseItemTypesKey":
-			z.BaseItemTypesKey, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "BaseItemTypesKey")
-				return
+		case "ClawModsKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "ClawModsKey")
+					return
+				}
+				z.ClawModsKey = nil
+			} else {
+				if z.ClawModsKey == nil {
+					z.ClawModsKey = new(int)
+				}
+				*z.ClawModsKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ClawModsKey")
+					return
+				}
 			}
 		case "BeltModsKey":
 			if dc.IsNil() {
@@ -5703,21 +6066,21 @@ func (z *Essence) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "ClawModsKey":
+		case "DisplayTwoHandMeleeWeaponModsKey":
 			if dc.IsNil() {
 				err = dc.ReadNil()
 				if err != nil {
-					err = msgp.WrapError(err, "ClawModsKey")
+					err = msgp.WrapError(err, "DisplayTwoHandMeleeWeaponModsKey")
 					return
 				}
-				z.ClawModsKey = nil
+				z.DisplayTwoHandMeleeWeaponModsKey = nil
 			} else {
-				if z.ClawModsKey == nil {
-					z.ClawModsKey = new(int)
+				if z.DisplayTwoHandMeleeWeaponModsKey == nil {
+					z.DisplayTwoHandMeleeWeaponModsKey = new(int)
 				}
-				*z.ClawModsKey, err = dc.ReadInt()
+				*z.DisplayTwoHandMeleeWeaponModsKey, err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "ClawModsKey")
+					err = msgp.WrapError(err, "DisplayTwoHandMeleeWeaponModsKey")
 					return
 				}
 			}
@@ -5919,29 +6282,41 @@ func (z *Essence) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "DisplayMeleeWeaponModsKey":
+		case "AmuletModsKey":
 			if dc.IsNil() {
 				err = dc.ReadNil()
 				if err != nil {
-					err = msgp.WrapError(err, "DisplayMeleeWeaponModsKey")
+					err = msgp.WrapError(err, "AmuletModsKey")
 					return
 				}
-				z.DisplayMeleeWeaponModsKey = nil
+				z.AmuletModsKey = nil
 			} else {
-				if z.DisplayMeleeWeaponModsKey == nil {
-					z.DisplayMeleeWeaponModsKey = new(int)
+				if z.AmuletModsKey == nil {
+					z.AmuletModsKey = new(int)
 				}
-				*z.DisplayMeleeWeaponModsKey, err = dc.ReadInt()
+				*z.AmuletModsKey, err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "DisplayMeleeWeaponModsKey")
+					err = msgp.WrapError(err, "AmuletModsKey")
 					return
 				}
 			}
-		case "DisplayMonsterModsKey":
-			z.DisplayMonsterModsKey, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "DisplayMonsterModsKey")
-				return
+		case "DisplayTwoHandWeaponModsKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "DisplayTwoHandWeaponModsKey")
+					return
+				}
+				z.DisplayTwoHandWeaponModsKey = nil
+			} else {
+				if z.DisplayTwoHandWeaponModsKey == nil {
+					z.DisplayTwoHandWeaponModsKey = new(int)
+				}
+				*z.DisplayTwoHandWeaponModsKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "DisplayTwoHandWeaponModsKey")
+					return
+				}
 			}
 		case "DisplayOneHandWeaponModsKey":
 			if dc.IsNil() {
@@ -6015,57 +6390,57 @@ func (z *Essence) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "DisplayShieldModsKey":
+		case "DisplayMeleeWeaponModsKey":
 			if dc.IsNil() {
 				err = dc.ReadNil()
 				if err != nil {
-					err = msgp.WrapError(err, "DisplayShieldModsKey")
+					err = msgp.WrapError(err, "DisplayMeleeWeaponModsKey")
 					return
 				}
-				z.DisplayShieldModsKey = nil
+				z.DisplayMeleeWeaponModsKey = nil
 			} else {
-				if z.DisplayShieldModsKey == nil {
-					z.DisplayShieldModsKey = new(int)
+				if z.DisplayMeleeWeaponModsKey == nil {
+					z.DisplayMeleeWeaponModsKey = new(int)
 				}
-				*z.DisplayShieldModsKey, err = dc.ReadInt()
+				*z.DisplayMeleeWeaponModsKey, err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "DisplayShieldModsKey")
+					err = msgp.WrapError(err, "DisplayMeleeWeaponModsKey")
 					return
 				}
 			}
-		case "DisplayTwoHandMeleeWeaponModsKey":
+		case "TwoHandSwordModsKey":
 			if dc.IsNil() {
 				err = dc.ReadNil()
 				if err != nil {
-					err = msgp.WrapError(err, "DisplayTwoHandMeleeWeaponModsKey")
+					err = msgp.WrapError(err, "TwoHandSwordModsKey")
 					return
 				}
-				z.DisplayTwoHandMeleeWeaponModsKey = nil
+				z.TwoHandSwordModsKey = nil
 			} else {
-				if z.DisplayTwoHandMeleeWeaponModsKey == nil {
-					z.DisplayTwoHandMeleeWeaponModsKey = new(int)
+				if z.TwoHandSwordModsKey == nil {
+					z.TwoHandSwordModsKey = new(int)
 				}
-				*z.DisplayTwoHandMeleeWeaponModsKey, err = dc.ReadInt()
+				*z.TwoHandSwordModsKey, err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "DisplayTwoHandMeleeWeaponModsKey")
+					err = msgp.WrapError(err, "TwoHandSwordModsKey")
 					return
 				}
 			}
-		case "DisplayTwoHandWeaponModsKey":
+		case "WandModsKey":
 			if dc.IsNil() {
 				err = dc.ReadNil()
 				if err != nil {
-					err = msgp.WrapError(err, "DisplayTwoHandWeaponModsKey")
+					err = msgp.WrapError(err, "WandModsKey")
 					return
 				}
-				z.DisplayTwoHandWeaponModsKey = nil
+				z.WandModsKey = nil
 			} else {
-				if z.DisplayTwoHandWeaponModsKey == nil {
-					z.DisplayTwoHandWeaponModsKey = new(int)
+				if z.WandModsKey == nil {
+					z.WandModsKey = new(int)
 				}
-				*z.DisplayTwoHandWeaponModsKey, err = dc.ReadInt()
+				*z.WandModsKey, err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "DisplayTwoHandWeaponModsKey")
+					err = msgp.WrapError(err, "WandModsKey")
 					return
 				}
 			}
@@ -6105,23 +6480,59 @@ func (z *Essence) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "DropLevelMaximum":
-			z.DropLevelMaximum, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "DropLevelMaximum")
-				return
+		case "TwoHandMaceModsKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "TwoHandMaceModsKey")
+					return
+				}
+				z.TwoHandMaceModsKey = nil
+			} else {
+				if z.TwoHandMaceModsKey == nil {
+					z.TwoHandMaceModsKey = new(int)
+				}
+				*z.TwoHandMaceModsKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "TwoHandMaceModsKey")
+					return
+				}
 			}
-		case "DropLevelMinimum":
-			z.DropLevelMinimum, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "DropLevelMinimum")
-				return
+		case "TwoHandAxeModsKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "TwoHandAxeModsKey")
+					return
+				}
+				z.TwoHandAxeModsKey = nil
+			} else {
+				if z.TwoHandAxeModsKey == nil {
+					z.TwoHandAxeModsKey = new(int)
+				}
+				*z.TwoHandAxeModsKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "TwoHandAxeModsKey")
+					return
+				}
 			}
-		case "EssenceTypeKey":
-			z.EssenceTypeKey, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "EssenceTypeKey")
-				return
+		case "StaffModsKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "StaffModsKey")
+					return
+				}
+				z.StaffModsKey = nil
+			} else {
+				if z.StaffModsKey == nil {
+					z.StaffModsKey = new(int)
+				}
+				*z.StaffModsKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "StaffModsKey")
+					return
+				}
 			}
 		case "GlovesModsKey":
 			if dc.IsNil() {
@@ -6159,40 +6570,75 @@ func (z *Essence) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "IsScreamingEssence":
-			z.IsScreamingEssence, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "IsScreamingEssence")
-				return
-			}
-		case "ItemLevelRestriction":
-			z.ItemLevelRestriction, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "ItemLevelRestriction")
-				return
-			}
-		case "Level":
-			z.Level, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Level")
-				return
-			}
-		case "MonsterModsKeys":
-			var zb0002 uint32
-			zb0002, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "MonsterModsKeys")
-				return
-			}
-			if cap(z.MonsterModsKeys) >= int(zb0002) {
-				z.MonsterModsKeys = (z.MonsterModsKeys)[:zb0002]
-			} else {
-				z.MonsterModsKeys = make([]int, zb0002)
-			}
-			for za0001 := range z.MonsterModsKeys {
-				z.MonsterModsKeys[za0001], err = dc.ReadInt()
+		case "ShieldModsKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
 				if err != nil {
-					err = msgp.WrapError(err, "MonsterModsKeys", za0001)
+					err = msgp.WrapError(err, "ShieldModsKey")
+					return
+				}
+				z.ShieldModsKey = nil
+			} else {
+				if z.ShieldModsKey == nil {
+					z.ShieldModsKey = new(int)
+				}
+				*z.ShieldModsKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ShieldModsKey")
+					return
+				}
+			}
+		case "SceptreModsKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "SceptreModsKey")
+					return
+				}
+				z.SceptreModsKey = nil
+			} else {
+				if z.SceptreModsKey == nil {
+					z.SceptreModsKey = new(int)
+				}
+				*z.SceptreModsKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "SceptreModsKey")
+					return
+				}
+			}
+		case "RingModsKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "RingModsKey")
+					return
+				}
+				z.RingModsKey = nil
+			} else {
+				if z.RingModsKey == nil {
+					z.RingModsKey = new(int)
+				}
+				*z.RingModsKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "RingModsKey")
+					return
+				}
+			}
+		case "OneHandThrustingSwordModsKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "OneHandThrustingSwordModsKey")
+					return
+				}
+				z.OneHandThrustingSwordModsKey = nil
+			} else {
+				if z.OneHandThrustingSwordModsKey == nil {
+					z.OneHandThrustingSwordModsKey = new(int)
+				}
+				*z.OneHandThrustingSwordModsKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "OneHandThrustingSwordModsKey")
 					return
 				}
 			}
@@ -6250,172 +6696,77 @@ func (z *Essence) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "OneHandThrustingSwordModsKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "OneHandThrustingSwordModsKey")
-					return
-				}
-				z.OneHandThrustingSwordModsKey = nil
+		case "MonsterModsKeys":
+			var zb0002 uint32
+			zb0002, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "MonsterModsKeys")
+				return
+			}
+			if cap(z.MonsterModsKeys) >= int(zb0002) {
+				z.MonsterModsKeys = (z.MonsterModsKeys)[:zb0002]
 			} else {
-				if z.OneHandThrustingSwordModsKey == nil {
-					z.OneHandThrustingSwordModsKey = new(int)
-				}
-				*z.OneHandThrustingSwordModsKey, err = dc.ReadInt()
+				z.MonsterModsKeys = make([]int, zb0002)
+			}
+			for za0001 := range z.MonsterModsKeys {
+				z.MonsterModsKeys[za0001], err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "OneHandThrustingSwordModsKey")
+					err = msgp.WrapError(err, "MonsterModsKeys", za0001)
 					return
 				}
 			}
-		case "RingModsKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "RingModsKey")
-					return
-				}
-				z.RingModsKey = nil
-			} else {
-				if z.RingModsKey == nil {
-					z.RingModsKey = new(int)
-				}
-				*z.RingModsKey, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "RingModsKey")
-					return
-				}
+		case "Level":
+			z.Level, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Level")
+				return
 			}
-		case "SceptreModsKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "SceptreModsKey")
-					return
-				}
-				z.SceptreModsKey = nil
-			} else {
-				if z.SceptreModsKey == nil {
-					z.SceptreModsKey = new(int)
-				}
-				*z.SceptreModsKey, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "SceptreModsKey")
-					return
-				}
+		case "ItemLevelRestriction":
+			z.ItemLevelRestriction, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "ItemLevelRestriction")
+				return
 			}
-		case "ShieldModsKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "ShieldModsKey")
-					return
-				}
-				z.ShieldModsKey = nil
-			} else {
-				if z.ShieldModsKey == nil {
-					z.ShieldModsKey = new(int)
-				}
-				*z.ShieldModsKey, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "ShieldModsKey")
-					return
-				}
+		case "EssenceTypeKey":
+			z.EssenceTypeKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "EssenceTypeKey")
+				return
 			}
-		case "StaffModsKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "StaffModsKey")
-					return
-				}
-				z.StaffModsKey = nil
-			} else {
-				if z.StaffModsKey == nil {
-					z.StaffModsKey = new(int)
-				}
-				*z.StaffModsKey, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "StaffModsKey")
-					return
-				}
+		case "DropLevelMinimum":
+			z.DropLevelMinimum, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "DropLevelMinimum")
+				return
 			}
-		case "TwoHandAxeModsKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "TwoHandAxeModsKey")
-					return
-				}
-				z.TwoHandAxeModsKey = nil
-			} else {
-				if z.TwoHandAxeModsKey == nil {
-					z.TwoHandAxeModsKey = new(int)
-				}
-				*z.TwoHandAxeModsKey, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "TwoHandAxeModsKey")
-					return
-				}
+		case "DropLevelMaximum":
+			z.DropLevelMaximum, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "DropLevelMaximum")
+				return
 			}
-		case "TwoHandMaceModsKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "TwoHandMaceModsKey")
-					return
-				}
-				z.TwoHandMaceModsKey = nil
-			} else {
-				if z.TwoHandMaceModsKey == nil {
-					z.TwoHandMaceModsKey = new(int)
-				}
-				*z.TwoHandMaceModsKey, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "TwoHandMaceModsKey")
-					return
-				}
+		case "BaseItemTypesKey":
+			z.BaseItemTypesKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "BaseItemTypesKey")
+				return
 			}
-		case "TwoHandSwordModsKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "TwoHandSwordModsKey")
-					return
-				}
-				z.TwoHandSwordModsKey = nil
-			} else {
-				if z.TwoHandSwordModsKey == nil {
-					z.TwoHandSwordModsKey = new(int)
-				}
-				*z.TwoHandSwordModsKey, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "TwoHandSwordModsKey")
-					return
-				}
-			}
-		case "WandModsKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "WandModsKey")
-					return
-				}
-				z.WandModsKey = nil
-			} else {
-				if z.WandModsKey == nil {
-					z.WandModsKey = new(int)
-				}
-				*z.WandModsKey, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "WandModsKey")
-					return
-				}
+		case "DisplayMonsterModsKey":
+			z.DisplayMonsterModsKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "DisplayMonsterModsKey")
+				return
 			}
 		case "Key":
 			z.Key, err = dc.ReadInt()
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "IsScreamingEssence":
+			z.IsScreamingEssence, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IsScreamingEssence")
 				return
 			}
 		default:
@@ -6432,32 +6783,39 @@ func (z *Essence) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *Essence) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 51
-	// write "AmuletModsKey"
-	err = en.Append(0xde, 0x0, 0x33, 0xad, 0x41, 0x6d, 0x75, 0x6c, 0x65, 0x74, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "DisplayShieldModsKey"
+	err = en.Append(0xde, 0x0, 0x33, 0xb4, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x53, 0x68, 0x69, 0x65, 0x6c, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	if z.AmuletModsKey == nil {
+	if z.DisplayShieldModsKey == nil {
 		err = en.WriteNil()
 		if err != nil {
 			return
 		}
 	} else {
-		err = en.WriteInt(*z.AmuletModsKey)
+		err = en.WriteInt(*z.DisplayShieldModsKey)
 		if err != nil {
-			err = msgp.WrapError(err, "AmuletModsKey")
+			err = msgp.WrapError(err, "DisplayShieldModsKey")
 			return
 		}
 	}
-	// write "BaseItemTypesKey"
-	err = en.Append(0xb0, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
+	// write "ClawModsKey"
+	err = en.Append(0xab, 0x43, 0x6c, 0x61, 0x77, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.BaseItemTypesKey)
-	if err != nil {
-		err = msgp.WrapError(err, "BaseItemTypesKey")
-		return
+	if z.ClawModsKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.ClawModsKey)
+		if err != nil {
+			err = msgp.WrapError(err, "ClawModsKey")
+			return
+		}
 	}
 	// write "BeltModsKey"
 	err = en.Append(0xab, 0x42, 0x65, 0x6c, 0x74, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
@@ -6527,20 +6885,20 @@ func (z *Essence) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "ClawModsKey"
-	err = en.Append(0xab, 0x43, 0x6c, 0x61, 0x77, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "DisplayTwoHandMeleeWeaponModsKey"
+	err = en.Append(0xd9, 0x20, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x4d, 0x65, 0x6c, 0x65, 0x65, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	if z.ClawModsKey == nil {
+	if z.DisplayTwoHandMeleeWeaponModsKey == nil {
 		err = en.WriteNil()
 		if err != nil {
 			return
 		}
 	} else {
-		err = en.WriteInt(*z.ClawModsKey)
+		err = en.WriteInt(*z.DisplayTwoHandMeleeWeaponModsKey)
 		if err != nil {
-			err = msgp.WrapError(err, "ClawModsKey")
+			err = msgp.WrapError(err, "DisplayTwoHandMeleeWeaponModsKey")
 			return
 		}
 	}
@@ -6731,32 +7089,39 @@ func (z *Essence) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "DisplayMeleeWeaponModsKey"
-	err = en.Append(0xb9, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4d, 0x65, 0x6c, 0x65, 0x65, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "AmuletModsKey"
+	err = en.Append(0xad, 0x41, 0x6d, 0x75, 0x6c, 0x65, 0x74, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	if z.DisplayMeleeWeaponModsKey == nil {
+	if z.AmuletModsKey == nil {
 		err = en.WriteNil()
 		if err != nil {
 			return
 		}
 	} else {
-		err = en.WriteInt(*z.DisplayMeleeWeaponModsKey)
+		err = en.WriteInt(*z.AmuletModsKey)
 		if err != nil {
-			err = msgp.WrapError(err, "DisplayMeleeWeaponModsKey")
+			err = msgp.WrapError(err, "AmuletModsKey")
 			return
 		}
 	}
-	// write "DisplayMonsterModsKey"
-	err = en.Append(0xb5, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "DisplayTwoHandWeaponModsKey"
+	err = en.Append(0xbb, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.DisplayMonsterModsKey)
-	if err != nil {
-		err = msgp.WrapError(err, "DisplayMonsterModsKey")
-		return
+	if z.DisplayTwoHandWeaponModsKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.DisplayTwoHandWeaponModsKey)
+		if err != nil {
+			err = msgp.WrapError(err, "DisplayTwoHandWeaponModsKey")
+			return
+		}
 	}
 	// write "DisplayOneHandWeaponModsKey"
 	err = en.Append(0xbb, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4f, 0x6e, 0x65, 0x48, 0x61, 0x6e, 0x64, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
@@ -6826,54 +7191,54 @@ func (z *Essence) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "DisplayShieldModsKey"
-	err = en.Append(0xb4, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x53, 0x68, 0x69, 0x65, 0x6c, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "DisplayMeleeWeaponModsKey"
+	err = en.Append(0xb9, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4d, 0x65, 0x6c, 0x65, 0x65, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	if z.DisplayShieldModsKey == nil {
+	if z.DisplayMeleeWeaponModsKey == nil {
 		err = en.WriteNil()
 		if err != nil {
 			return
 		}
 	} else {
-		err = en.WriteInt(*z.DisplayShieldModsKey)
+		err = en.WriteInt(*z.DisplayMeleeWeaponModsKey)
 		if err != nil {
-			err = msgp.WrapError(err, "DisplayShieldModsKey")
+			err = msgp.WrapError(err, "DisplayMeleeWeaponModsKey")
 			return
 		}
 	}
-	// write "DisplayTwoHandMeleeWeaponModsKey"
-	err = en.Append(0xd9, 0x20, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x4d, 0x65, 0x6c, 0x65, 0x65, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "TwoHandSwordModsKey"
+	err = en.Append(0xb3, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x53, 0x77, 0x6f, 0x72, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	if z.DisplayTwoHandMeleeWeaponModsKey == nil {
+	if z.TwoHandSwordModsKey == nil {
 		err = en.WriteNil()
 		if err != nil {
 			return
 		}
 	} else {
-		err = en.WriteInt(*z.DisplayTwoHandMeleeWeaponModsKey)
+		err = en.WriteInt(*z.TwoHandSwordModsKey)
 		if err != nil {
-			err = msgp.WrapError(err, "DisplayTwoHandMeleeWeaponModsKey")
+			err = msgp.WrapError(err, "TwoHandSwordModsKey")
 			return
 		}
 	}
-	// write "DisplayTwoHandWeaponModsKey"
-	err = en.Append(0xbb, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "WandModsKey"
+	err = en.Append(0xab, 0x57, 0x61, 0x6e, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	if z.DisplayTwoHandWeaponModsKey == nil {
+	if z.WandModsKey == nil {
 		err = en.WriteNil()
 		if err != nil {
 			return
 		}
 	} else {
-		err = en.WriteInt(*z.DisplayTwoHandWeaponModsKey)
+		err = en.WriteInt(*z.WandModsKey)
 		if err != nil {
-			err = msgp.WrapError(err, "DisplayTwoHandWeaponModsKey")
+			err = msgp.WrapError(err, "WandModsKey")
 			return
 		}
 	}
@@ -6911,35 +7276,56 @@ func (z *Essence) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "DropLevelMaximum"
-	err = en.Append(0xb0, 0x44, 0x72, 0x6f, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d)
+	// write "TwoHandMaceModsKey"
+	err = en.Append(0xb2, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x4d, 0x61, 0x63, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.DropLevelMaximum)
-	if err != nil {
-		err = msgp.WrapError(err, "DropLevelMaximum")
-		return
+	if z.TwoHandMaceModsKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.TwoHandMaceModsKey)
+		if err != nil {
+			err = msgp.WrapError(err, "TwoHandMaceModsKey")
+			return
+		}
 	}
-	// write "DropLevelMinimum"
-	err = en.Append(0xb0, 0x44, 0x72, 0x6f, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.DropLevelMinimum)
-	if err != nil {
-		err = msgp.WrapError(err, "DropLevelMinimum")
-		return
-	}
-	// write "EssenceTypeKey"
-	err = en.Append(0xae, 0x45, 0x73, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x4b, 0x65, 0x79)
+	// write "TwoHandAxeModsKey"
+	err = en.Append(0xb1, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x41, 0x78, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.EssenceTypeKey)
+	if z.TwoHandAxeModsKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.TwoHandAxeModsKey)
+		if err != nil {
+			err = msgp.WrapError(err, "TwoHandAxeModsKey")
+			return
+		}
+	}
+	// write "StaffModsKey"
+	err = en.Append(0xac, 0x53, 0x74, 0x61, 0x66, 0x66, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
-		err = msgp.WrapError(err, "EssenceTypeKey")
 		return
+	}
+	if z.StaffModsKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.StaffModsKey)
+		if err != nil {
+			err = msgp.WrapError(err, "StaffModsKey")
+			return
+		}
 	}
 	// write "GlovesModsKey"
 	err = en.Append(0xad, 0x47, 0x6c, 0x6f, 0x76, 0x65, 0x73, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
@@ -6975,50 +7361,71 @@ func (z *Essence) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "IsScreamingEssence"
-	err = en.Append(0xb2, 0x49, 0x73, 0x53, 0x63, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x45, 0x73, 0x73, 0x65, 0x6e, 0x63, 0x65)
+	// write "ShieldModsKey"
+	err = en.Append(0xad, 0x53, 0x68, 0x69, 0x65, 0x6c, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	err = en.WriteBool(z.IsScreamingEssence)
-	if err != nil {
-		err = msgp.WrapError(err, "IsScreamingEssence")
-		return
-	}
-	// write "ItemLevelRestriction"
-	err = en.Append(0xb4, 0x49, 0x74, 0x65, 0x6d, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.ItemLevelRestriction)
-	if err != nil {
-		err = msgp.WrapError(err, "ItemLevelRestriction")
-		return
-	}
-	// write "Level"
-	err = en.Append(0xa5, 0x4c, 0x65, 0x76, 0x65, 0x6c)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Level)
-	if err != nil {
-		err = msgp.WrapError(err, "Level")
-		return
-	}
-	// write "MonsterModsKeys"
-	err = en.Append(0xaf, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.MonsterModsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "MonsterModsKeys")
-		return
-	}
-	for za0001 := range z.MonsterModsKeys {
-		err = en.WriteInt(z.MonsterModsKeys[za0001])
+	if z.ShieldModsKey == nil {
+		err = en.WriteNil()
 		if err != nil {
-			err = msgp.WrapError(err, "MonsterModsKeys", za0001)
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.ShieldModsKey)
+		if err != nil {
+			err = msgp.WrapError(err, "ShieldModsKey")
+			return
+		}
+	}
+	// write "SceptreModsKey"
+	err = en.Append(0xae, 0x53, 0x63, 0x65, 0x70, 0x74, 0x72, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	if z.SceptreModsKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.SceptreModsKey)
+		if err != nil {
+			err = msgp.WrapError(err, "SceptreModsKey")
+			return
+		}
+	}
+	// write "RingModsKey"
+	err = en.Append(0xab, 0x52, 0x69, 0x6e, 0x67, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	if z.RingModsKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.RingModsKey)
+		if err != nil {
+			err = msgp.WrapError(err, "RingModsKey")
+			return
+		}
+	}
+	// write "OneHandThrustingSwordModsKey"
+	err = en.Append(0xbc, 0x4f, 0x6e, 0x65, 0x48, 0x61, 0x6e, 0x64, 0x54, 0x68, 0x72, 0x75, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x53, 0x77, 0x6f, 0x72, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	if z.OneHandThrustingSwordModsKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.OneHandThrustingSwordModsKey)
+		if err != nil {
+			err = msgp.WrapError(err, "OneHandThrustingSwordModsKey")
 			return
 		}
 	}
@@ -7073,158 +7480,92 @@ func (z *Essence) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "OneHandThrustingSwordModsKey"
-	err = en.Append(0xbc, 0x4f, 0x6e, 0x65, 0x48, 0x61, 0x6e, 0x64, 0x54, 0x68, 0x72, 0x75, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x53, 0x77, 0x6f, 0x72, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "MonsterModsKeys"
+	err = en.Append(0xaf, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
 	if err != nil {
 		return
 	}
-	if z.OneHandThrustingSwordModsKey == nil {
-		err = en.WriteNil()
+	err = en.WriteArrayHeader(uint32(len(z.MonsterModsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterModsKeys")
+		return
+	}
+	for za0001 := range z.MonsterModsKeys {
+		err = en.WriteInt(z.MonsterModsKeys[za0001])
 		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.OneHandThrustingSwordModsKey)
-		if err != nil {
-			err = msgp.WrapError(err, "OneHandThrustingSwordModsKey")
+			err = msgp.WrapError(err, "MonsterModsKeys", za0001)
 			return
 		}
 	}
-	// write "RingModsKey"
-	err = en.Append(0xab, 0x52, 0x69, 0x6e, 0x67, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "Level"
+	err = en.Append(0xa5, 0x4c, 0x65, 0x76, 0x65, 0x6c)
 	if err != nil {
 		return
 	}
-	if z.RingModsKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.RingModsKey)
-		if err != nil {
-			err = msgp.WrapError(err, "RingModsKey")
-			return
-		}
+	err = en.WriteInt(z.Level)
+	if err != nil {
+		err = msgp.WrapError(err, "Level")
+		return
 	}
-	// write "SceptreModsKey"
-	err = en.Append(0xae, 0x53, 0x63, 0x65, 0x70, 0x74, 0x72, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "ItemLevelRestriction"
+	err = en.Append(0xb4, 0x49, 0x74, 0x65, 0x6d, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e)
 	if err != nil {
 		return
 	}
-	if z.SceptreModsKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.SceptreModsKey)
-		if err != nil {
-			err = msgp.WrapError(err, "SceptreModsKey")
-			return
-		}
+	err = en.WriteInt(z.ItemLevelRestriction)
+	if err != nil {
+		err = msgp.WrapError(err, "ItemLevelRestriction")
+		return
 	}
-	// write "ShieldModsKey"
-	err = en.Append(0xad, 0x53, 0x68, 0x69, 0x65, 0x6c, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "EssenceTypeKey"
+	err = en.Append(0xae, 0x45, 0x73, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	if z.ShieldModsKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.ShieldModsKey)
-		if err != nil {
-			err = msgp.WrapError(err, "ShieldModsKey")
-			return
-		}
+	err = en.WriteInt(z.EssenceTypeKey)
+	if err != nil {
+		err = msgp.WrapError(err, "EssenceTypeKey")
+		return
 	}
-	// write "StaffModsKey"
-	err = en.Append(0xac, 0x53, 0x74, 0x61, 0x66, 0x66, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "DropLevelMinimum"
+	err = en.Append(0xb0, 0x44, 0x72, 0x6f, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d)
 	if err != nil {
 		return
 	}
-	if z.StaffModsKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.StaffModsKey)
-		if err != nil {
-			err = msgp.WrapError(err, "StaffModsKey")
-			return
-		}
+	err = en.WriteInt(z.DropLevelMinimum)
+	if err != nil {
+		err = msgp.WrapError(err, "DropLevelMinimum")
+		return
 	}
-	// write "TwoHandAxeModsKey"
-	err = en.Append(0xb1, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x41, 0x78, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "DropLevelMaximum"
+	err = en.Append(0xb0, 0x44, 0x72, 0x6f, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d)
 	if err != nil {
 		return
 	}
-	if z.TwoHandAxeModsKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.TwoHandAxeModsKey)
-		if err != nil {
-			err = msgp.WrapError(err, "TwoHandAxeModsKey")
-			return
-		}
+	err = en.WriteInt(z.DropLevelMaximum)
+	if err != nil {
+		err = msgp.WrapError(err, "DropLevelMaximum")
+		return
 	}
-	// write "TwoHandMaceModsKey"
-	err = en.Append(0xb2, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x4d, 0x61, 0x63, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "BaseItemTypesKey"
+	err = en.Append(0xb0, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	if z.TwoHandMaceModsKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.TwoHandMaceModsKey)
-		if err != nil {
-			err = msgp.WrapError(err, "TwoHandMaceModsKey")
-			return
-		}
+	err = en.WriteInt(z.BaseItemTypesKey)
+	if err != nil {
+		err = msgp.WrapError(err, "BaseItemTypesKey")
+		return
 	}
-	// write "TwoHandSwordModsKey"
-	err = en.Append(0xb3, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x53, 0x77, 0x6f, 0x72, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	// write "DisplayMonsterModsKey"
+	err = en.Append(0xb5, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	if z.TwoHandSwordModsKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.TwoHandSwordModsKey)
-		if err != nil {
-			err = msgp.WrapError(err, "TwoHandSwordModsKey")
-			return
-		}
-	}
-	// write "WandModsKey"
-	err = en.Append(0xab, 0x57, 0x61, 0x6e, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	err = en.WriteInt(z.DisplayMonsterModsKey)
 	if err != nil {
+		err = msgp.WrapError(err, "DisplayMonsterModsKey")
 		return
-	}
-	if z.WandModsKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.WandModsKey)
-		if err != nil {
-			err = msgp.WrapError(err, "WandModsKey")
-			return
-		}
 	}
 	// write "Key"
 	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
@@ -7236,6 +7577,16 @@ func (z *Essence) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Key")
 		return
 	}
+	// write "IsScreamingEssence"
+	err = en.Append(0xb2, 0x49, 0x73, 0x53, 0x63, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x45, 0x73, 0x73, 0x65, 0x6e, 0x63, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IsScreamingEssence)
+	if err != nil {
+		err = msgp.WrapError(err, "IsScreamingEssence")
+		return
+	}
 	return
 }
 
@@ -7243,16 +7594,20 @@ func (z *Essence) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *Essence) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 51
-	// string "AmuletModsKey"
-	o = append(o, 0xde, 0x0, 0x33, 0xad, 0x41, 0x6d, 0x75, 0x6c, 0x65, 0x74, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.AmuletModsKey == nil {
+	// string "DisplayShieldModsKey"
+	o = append(o, 0xde, 0x0, 0x33, 0xb4, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x53, 0x68, 0x69, 0x65, 0x6c, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.DisplayShieldModsKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
-		o = msgp.AppendInt(o, *z.AmuletModsKey)
+		o = msgp.AppendInt(o, *z.DisplayShieldModsKey)
 	}
-	// string "BaseItemTypesKey"
-	o = append(o, 0xb0, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.BaseItemTypesKey)
+	// string "ClawModsKey"
+	o = append(o, 0xab, 0x43, 0x6c, 0x61, 0x77, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.ClawModsKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.ClawModsKey)
+	}
 	// string "BeltModsKey"
 	o = append(o, 0xab, 0x42, 0x65, 0x6c, 0x74, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if z.BeltModsKey == nil {
@@ -7281,12 +7636,12 @@ func (z *Essence) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.BowModsKey)
 	}
-	// string "ClawModsKey"
-	o = append(o, 0xab, 0x43, 0x6c, 0x61, 0x77, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.ClawModsKey == nil {
+	// string "DisplayTwoHandMeleeWeaponModsKey"
+	o = append(o, 0xd9, 0x20, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x4d, 0x65, 0x6c, 0x65, 0x65, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.DisplayTwoHandMeleeWeaponModsKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
-		o = msgp.AppendInt(o, *z.ClawModsKey)
+		o = msgp.AppendInt(o, *z.DisplayTwoHandMeleeWeaponModsKey)
 	}
 	// string "DaggerModsKey"
 	o = append(o, 0xad, 0x44, 0x61, 0x67, 0x67, 0x65, 0x72, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
@@ -7365,16 +7720,20 @@ func (z *Essence) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.DisplayJewelleryModsKey)
 	}
-	// string "DisplayMeleeWeaponModsKey"
-	o = append(o, 0xb9, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4d, 0x65, 0x6c, 0x65, 0x65, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.DisplayMeleeWeaponModsKey == nil {
+	// string "AmuletModsKey"
+	o = append(o, 0xad, 0x41, 0x6d, 0x75, 0x6c, 0x65, 0x74, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.AmuletModsKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
-		o = msgp.AppendInt(o, *z.DisplayMeleeWeaponModsKey)
+		o = msgp.AppendInt(o, *z.AmuletModsKey)
 	}
-	// string "DisplayMonsterModsKey"
-	o = append(o, 0xb5, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.DisplayMonsterModsKey)
+	// string "DisplayTwoHandWeaponModsKey"
+	o = append(o, 0xbb, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.DisplayTwoHandWeaponModsKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.DisplayTwoHandWeaponModsKey)
+	}
 	// string "DisplayOneHandWeaponModsKey"
 	o = append(o, 0xbb, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4f, 0x6e, 0x65, 0x48, 0x61, 0x6e, 0x64, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if z.DisplayOneHandWeaponModsKey == nil {
@@ -7403,26 +7762,26 @@ func (z *Essence) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.DisplayRingModsKey)
 	}
-	// string "DisplayShieldModsKey"
-	o = append(o, 0xb4, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x53, 0x68, 0x69, 0x65, 0x6c, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.DisplayShieldModsKey == nil {
+	// string "DisplayMeleeWeaponModsKey"
+	o = append(o, 0xb9, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4d, 0x65, 0x6c, 0x65, 0x65, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.DisplayMeleeWeaponModsKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
-		o = msgp.AppendInt(o, *z.DisplayShieldModsKey)
+		o = msgp.AppendInt(o, *z.DisplayMeleeWeaponModsKey)
 	}
-	// string "DisplayTwoHandMeleeWeaponModsKey"
-	o = append(o, 0xd9, 0x20, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x4d, 0x65, 0x6c, 0x65, 0x65, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.DisplayTwoHandMeleeWeaponModsKey == nil {
+	// string "TwoHandSwordModsKey"
+	o = append(o, 0xb3, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x53, 0x77, 0x6f, 0x72, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.TwoHandSwordModsKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
-		o = msgp.AppendInt(o, *z.DisplayTwoHandMeleeWeaponModsKey)
+		o = msgp.AppendInt(o, *z.TwoHandSwordModsKey)
 	}
-	// string "DisplayTwoHandWeaponModsKey"
-	o = append(o, 0xbb, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.DisplayTwoHandWeaponModsKey == nil {
+	// string "WandModsKey"
+	o = append(o, 0xab, 0x57, 0x61, 0x6e, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.WandModsKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
-		o = msgp.AppendInt(o, *z.DisplayTwoHandWeaponModsKey)
+		o = msgp.AppendInt(o, *z.WandModsKey)
 	}
 	// string "DisplayWandModsKey"
 	o = append(o, 0xb2, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x57, 0x61, 0x6e, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
@@ -7438,15 +7797,27 @@ func (z *Essence) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.DisplayWeaponModsKey)
 	}
-	// string "DropLevelMaximum"
-	o = append(o, 0xb0, 0x44, 0x72, 0x6f, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d)
-	o = msgp.AppendInt(o, z.DropLevelMaximum)
-	// string "DropLevelMinimum"
-	o = append(o, 0xb0, 0x44, 0x72, 0x6f, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d)
-	o = msgp.AppendInt(o, z.DropLevelMinimum)
-	// string "EssenceTypeKey"
-	o = append(o, 0xae, 0x45, 0x73, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.EssenceTypeKey)
+	// string "TwoHandMaceModsKey"
+	o = append(o, 0xb2, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x4d, 0x61, 0x63, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.TwoHandMaceModsKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.TwoHandMaceModsKey)
+	}
+	// string "TwoHandAxeModsKey"
+	o = append(o, 0xb1, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x41, 0x78, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.TwoHandAxeModsKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.TwoHandAxeModsKey)
+	}
+	// string "StaffModsKey"
+	o = append(o, 0xac, 0x53, 0x74, 0x61, 0x66, 0x66, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.StaffModsKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.StaffModsKey)
+	}
 	// string "GlovesModsKey"
 	o = append(o, 0xad, 0x47, 0x6c, 0x6f, 0x76, 0x65, 0x73, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
 	if z.GlovesModsKey == nil {
@@ -7461,20 +7832,33 @@ func (z *Essence) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.HelmetModsKey)
 	}
-	// string "IsScreamingEssence"
-	o = append(o, 0xb2, 0x49, 0x73, 0x53, 0x63, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x45, 0x73, 0x73, 0x65, 0x6e, 0x63, 0x65)
-	o = msgp.AppendBool(o, z.IsScreamingEssence)
-	// string "ItemLevelRestriction"
-	o = append(o, 0xb4, 0x49, 0x74, 0x65, 0x6d, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e)
-	o = msgp.AppendInt(o, z.ItemLevelRestriction)
-	// string "Level"
-	o = append(o, 0xa5, 0x4c, 0x65, 0x76, 0x65, 0x6c)
-	o = msgp.AppendInt(o, z.Level)
-	// string "MonsterModsKeys"
-	o = append(o, 0xaf, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.MonsterModsKeys)))
-	for za0001 := range z.MonsterModsKeys {
-		o = msgp.AppendInt(o, z.MonsterModsKeys[za0001])
+	// string "ShieldModsKey"
+	o = append(o, 0xad, 0x53, 0x68, 0x69, 0x65, 0x6c, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.ShieldModsKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.ShieldModsKey)
+	}
+	// string "SceptreModsKey"
+	o = append(o, 0xae, 0x53, 0x63, 0x65, 0x70, 0x74, 0x72, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.SceptreModsKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.SceptreModsKey)
+	}
+	// string "RingModsKey"
+	o = append(o, 0xab, 0x52, 0x69, 0x6e, 0x67, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.RingModsKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.RingModsKey)
+	}
+	// string "OneHandThrustingSwordModsKey"
+	o = append(o, 0xbc, 0x4f, 0x6e, 0x65, 0x48, 0x61, 0x6e, 0x64, 0x54, 0x68, 0x72, 0x75, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x53, 0x77, 0x6f, 0x72, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	if z.OneHandThrustingSwordModsKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.OneHandThrustingSwordModsKey)
 	}
 	// string "OneHandAxeModsKey"
 	o = append(o, 0xb1, 0x4f, 0x6e, 0x65, 0x48, 0x61, 0x6e, 0x64, 0x41, 0x78, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
@@ -7497,72 +7881,39 @@ func (z *Essence) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.OneHandSwordModsKey)
 	}
-	// string "OneHandThrustingSwordModsKey"
-	o = append(o, 0xbc, 0x4f, 0x6e, 0x65, 0x48, 0x61, 0x6e, 0x64, 0x54, 0x68, 0x72, 0x75, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x53, 0x77, 0x6f, 0x72, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.OneHandThrustingSwordModsKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.OneHandThrustingSwordModsKey)
+	// string "MonsterModsKeys"
+	o = append(o, 0xaf, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.MonsterModsKeys)))
+	for za0001 := range z.MonsterModsKeys {
+		o = msgp.AppendInt(o, z.MonsterModsKeys[za0001])
 	}
-	// string "RingModsKey"
-	o = append(o, 0xab, 0x52, 0x69, 0x6e, 0x67, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.RingModsKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.RingModsKey)
-	}
-	// string "SceptreModsKey"
-	o = append(o, 0xae, 0x53, 0x63, 0x65, 0x70, 0x74, 0x72, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.SceptreModsKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.SceptreModsKey)
-	}
-	// string "ShieldModsKey"
-	o = append(o, 0xad, 0x53, 0x68, 0x69, 0x65, 0x6c, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.ShieldModsKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.ShieldModsKey)
-	}
-	// string "StaffModsKey"
-	o = append(o, 0xac, 0x53, 0x74, 0x61, 0x66, 0x66, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.StaffModsKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.StaffModsKey)
-	}
-	// string "TwoHandAxeModsKey"
-	o = append(o, 0xb1, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x41, 0x78, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.TwoHandAxeModsKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.TwoHandAxeModsKey)
-	}
-	// string "TwoHandMaceModsKey"
-	o = append(o, 0xb2, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x4d, 0x61, 0x63, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.TwoHandMaceModsKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.TwoHandMaceModsKey)
-	}
-	// string "TwoHandSwordModsKey"
-	o = append(o, 0xb3, 0x54, 0x77, 0x6f, 0x48, 0x61, 0x6e, 0x64, 0x53, 0x77, 0x6f, 0x72, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.TwoHandSwordModsKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.TwoHandSwordModsKey)
-	}
-	// string "WandModsKey"
-	o = append(o, 0xab, 0x57, 0x61, 0x6e, 0x64, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
-	if z.WandModsKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.WandModsKey)
-	}
+	// string "Level"
+	o = append(o, 0xa5, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	o = msgp.AppendInt(o, z.Level)
+	// string "ItemLevelRestriction"
+	o = append(o, 0xb4, 0x49, 0x74, 0x65, 0x6d, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e)
+	o = msgp.AppendInt(o, z.ItemLevelRestriction)
+	// string "EssenceTypeKey"
+	o = append(o, 0xae, 0x45, 0x73, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.EssenceTypeKey)
+	// string "DropLevelMinimum"
+	o = append(o, 0xb0, 0x44, 0x72, 0x6f, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d)
+	o = msgp.AppendInt(o, z.DropLevelMinimum)
+	// string "DropLevelMaximum"
+	o = append(o, 0xb0, 0x44, 0x72, 0x6f, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d)
+	o = msgp.AppendInt(o, z.DropLevelMaximum)
+	// string "BaseItemTypesKey"
+	o = append(o, 0xb0, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.BaseItemTypesKey)
+	// string "DisplayMonsterModsKey"
+	o = append(o, 0xb5, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.DisplayMonsterModsKey)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
+	// string "IsScreamingEssence"
+	o = append(o, 0xb2, 0x49, 0x73, 0x53, 0x63, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x45, 0x73, 0x73, 0x65, 0x6e, 0x63, 0x65)
+	o = msgp.AppendBool(o, z.IsScreamingEssence)
 	return
 }
 
@@ -7584,28 +7935,39 @@ func (z *Essence) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AmuletModsKey":
+		case "DisplayShieldModsKey":
 			if msgp.IsNil(bts) {
 				bts, err = msgp.ReadNilBytes(bts)
 				if err != nil {
 					return
 				}
-				z.AmuletModsKey = nil
+				z.DisplayShieldModsKey = nil
 			} else {
-				if z.AmuletModsKey == nil {
-					z.AmuletModsKey = new(int)
+				if z.DisplayShieldModsKey == nil {
+					z.DisplayShieldModsKey = new(int)
 				}
-				*z.AmuletModsKey, bts, err = msgp.ReadIntBytes(bts)
+				*z.DisplayShieldModsKey, bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "AmuletModsKey")
+					err = msgp.WrapError(err, "DisplayShieldModsKey")
 					return
 				}
 			}
-		case "BaseItemTypesKey":
-			z.BaseItemTypesKey, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "BaseItemTypesKey")
-				return
+		case "ClawModsKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.ClawModsKey = nil
+			} else {
+				if z.ClawModsKey == nil {
+					z.ClawModsKey = new(int)
+				}
+				*z.ClawModsKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ClawModsKey")
+					return
+				}
 			}
 		case "BeltModsKey":
 			if msgp.IsNil(bts) {
@@ -7675,20 +8037,20 @@ func (z *Essence) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "ClawModsKey":
+		case "DisplayTwoHandMeleeWeaponModsKey":
 			if msgp.IsNil(bts) {
 				bts, err = msgp.ReadNilBytes(bts)
 				if err != nil {
 					return
 				}
-				z.ClawModsKey = nil
+				z.DisplayTwoHandMeleeWeaponModsKey = nil
 			} else {
-				if z.ClawModsKey == nil {
-					z.ClawModsKey = new(int)
+				if z.DisplayTwoHandMeleeWeaponModsKey == nil {
+					z.DisplayTwoHandMeleeWeaponModsKey = new(int)
 				}
-				*z.ClawModsKey, bts, err = msgp.ReadIntBytes(bts)
+				*z.DisplayTwoHandMeleeWeaponModsKey, bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "ClawModsKey")
+					err = msgp.WrapError(err, "DisplayTwoHandMeleeWeaponModsKey")
 					return
 				}
 			}
@@ -7879,28 +8241,39 @@ func (z *Essence) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "DisplayMeleeWeaponModsKey":
+		case "AmuletModsKey":
 			if msgp.IsNil(bts) {
 				bts, err = msgp.ReadNilBytes(bts)
 				if err != nil {
 					return
 				}
-				z.DisplayMeleeWeaponModsKey = nil
+				z.AmuletModsKey = nil
 			} else {
-				if z.DisplayMeleeWeaponModsKey == nil {
-					z.DisplayMeleeWeaponModsKey = new(int)
+				if z.AmuletModsKey == nil {
+					z.AmuletModsKey = new(int)
 				}
-				*z.DisplayMeleeWeaponModsKey, bts, err = msgp.ReadIntBytes(bts)
+				*z.AmuletModsKey, bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "DisplayMeleeWeaponModsKey")
+					err = msgp.WrapError(err, "AmuletModsKey")
 					return
 				}
 			}
-		case "DisplayMonsterModsKey":
-			z.DisplayMonsterModsKey, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "DisplayMonsterModsKey")
-				return
+		case "DisplayTwoHandWeaponModsKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.DisplayTwoHandWeaponModsKey = nil
+			} else {
+				if z.DisplayTwoHandWeaponModsKey == nil {
+					z.DisplayTwoHandWeaponModsKey = new(int)
+				}
+				*z.DisplayTwoHandWeaponModsKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "DisplayTwoHandWeaponModsKey")
+					return
+				}
 			}
 		case "DisplayOneHandWeaponModsKey":
 			if msgp.IsNil(bts) {
@@ -7970,54 +8343,54 @@ func (z *Essence) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "DisplayShieldModsKey":
+		case "DisplayMeleeWeaponModsKey":
 			if msgp.IsNil(bts) {
 				bts, err = msgp.ReadNilBytes(bts)
 				if err != nil {
 					return
 				}
-				z.DisplayShieldModsKey = nil
+				z.DisplayMeleeWeaponModsKey = nil
 			} else {
-				if z.DisplayShieldModsKey == nil {
-					z.DisplayShieldModsKey = new(int)
+				if z.DisplayMeleeWeaponModsKey == nil {
+					z.DisplayMeleeWeaponModsKey = new(int)
 				}
-				*z.DisplayShieldModsKey, bts, err = msgp.ReadIntBytes(bts)
+				*z.DisplayMeleeWeaponModsKey, bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "DisplayShieldModsKey")
+					err = msgp.WrapError(err, "DisplayMeleeWeaponModsKey")
 					return
 				}
 			}
-		case "DisplayTwoHandMeleeWeaponModsKey":
+		case "TwoHandSwordModsKey":
 			if msgp.IsNil(bts) {
 				bts, err = msgp.ReadNilBytes(bts)
 				if err != nil {
 					return
 				}
-				z.DisplayTwoHandMeleeWeaponModsKey = nil
+				z.TwoHandSwordModsKey = nil
 			} else {
-				if z.DisplayTwoHandMeleeWeaponModsKey == nil {
-					z.DisplayTwoHandMeleeWeaponModsKey = new(int)
+				if z.TwoHandSwordModsKey == nil {
+					z.TwoHandSwordModsKey = new(int)
 				}
-				*z.DisplayTwoHandMeleeWeaponModsKey, bts, err = msgp.ReadIntBytes(bts)
+				*z.TwoHandSwordModsKey, bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "DisplayTwoHandMeleeWeaponModsKey")
+					err = msgp.WrapError(err, "TwoHandSwordModsKey")
 					return
 				}
 			}
-		case "DisplayTwoHandWeaponModsKey":
+		case "WandModsKey":
 			if msgp.IsNil(bts) {
 				bts, err = msgp.ReadNilBytes(bts)
 				if err != nil {
 					return
 				}
-				z.DisplayTwoHandWeaponModsKey = nil
+				z.WandModsKey = nil
 			} else {
-				if z.DisplayTwoHandWeaponModsKey == nil {
-					z.DisplayTwoHandWeaponModsKey = new(int)
+				if z.WandModsKey == nil {
+					z.WandModsKey = new(int)
 				}
-				*z.DisplayTwoHandWeaponModsKey, bts, err = msgp.ReadIntBytes(bts)
+				*z.WandModsKey, bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "DisplayTwoHandWeaponModsKey")
+					err = msgp.WrapError(err, "WandModsKey")
 					return
 				}
 			}
@@ -8055,23 +8428,56 @@ func (z *Essence) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "DropLevelMaximum":
-			z.DropLevelMaximum, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "DropLevelMaximum")
-				return
+		case "TwoHandMaceModsKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.TwoHandMaceModsKey = nil
+			} else {
+				if z.TwoHandMaceModsKey == nil {
+					z.TwoHandMaceModsKey = new(int)
+				}
+				*z.TwoHandMaceModsKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "TwoHandMaceModsKey")
+					return
+				}
 			}
-		case "DropLevelMinimum":
-			z.DropLevelMinimum, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "DropLevelMinimum")
-				return
+		case "TwoHandAxeModsKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.TwoHandAxeModsKey = nil
+			} else {
+				if z.TwoHandAxeModsKey == nil {
+					z.TwoHandAxeModsKey = new(int)
+				}
+				*z.TwoHandAxeModsKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "TwoHandAxeModsKey")
+					return
+				}
 			}
-		case "EssenceTypeKey":
-			z.EssenceTypeKey, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "EssenceTypeKey")
-				return
+		case "StaffModsKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.StaffModsKey = nil
+			} else {
+				if z.StaffModsKey == nil {
+					z.StaffModsKey = new(int)
+				}
+				*z.StaffModsKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "StaffModsKey")
+					return
+				}
 			}
 		case "GlovesModsKey":
 			if msgp.IsNil(bts) {
@@ -8107,40 +8513,71 @@ func (z *Essence) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "IsScreamingEssence":
-			z.IsScreamingEssence, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "IsScreamingEssence")
-				return
-			}
-		case "ItemLevelRestriction":
-			z.ItemLevelRestriction, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ItemLevelRestriction")
-				return
-			}
-		case "Level":
-			z.Level, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Level")
-				return
-			}
-		case "MonsterModsKeys":
-			var zb0002 uint32
-			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "MonsterModsKeys")
-				return
-			}
-			if cap(z.MonsterModsKeys) >= int(zb0002) {
-				z.MonsterModsKeys = (z.MonsterModsKeys)[:zb0002]
-			} else {
-				z.MonsterModsKeys = make([]int, zb0002)
-			}
-			for za0001 := range z.MonsterModsKeys {
-				z.MonsterModsKeys[za0001], bts, err = msgp.ReadIntBytes(bts)
+		case "ShieldModsKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "MonsterModsKeys", za0001)
+					return
+				}
+				z.ShieldModsKey = nil
+			} else {
+				if z.ShieldModsKey == nil {
+					z.ShieldModsKey = new(int)
+				}
+				*z.ShieldModsKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ShieldModsKey")
+					return
+				}
+			}
+		case "SceptreModsKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.SceptreModsKey = nil
+			} else {
+				if z.SceptreModsKey == nil {
+					z.SceptreModsKey = new(int)
+				}
+				*z.SceptreModsKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "SceptreModsKey")
+					return
+				}
+			}
+		case "RingModsKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.RingModsKey = nil
+			} else {
+				if z.RingModsKey == nil {
+					z.RingModsKey = new(int)
+				}
+				*z.RingModsKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "RingModsKey")
+					return
+				}
+			}
+		case "OneHandThrustingSwordModsKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.OneHandThrustingSwordModsKey = nil
+			} else {
+				if z.OneHandThrustingSwordModsKey == nil {
+					z.OneHandThrustingSwordModsKey = new(int)
+				}
+				*z.OneHandThrustingSwordModsKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "OneHandThrustingSwordModsKey")
 					return
 				}
 			}
@@ -8195,163 +8632,77 @@ func (z *Essence) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "OneHandThrustingSwordModsKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.OneHandThrustingSwordModsKey = nil
+		case "MonsterModsKeys":
+			var zb0002 uint32
+			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MonsterModsKeys")
+				return
+			}
+			if cap(z.MonsterModsKeys) >= int(zb0002) {
+				z.MonsterModsKeys = (z.MonsterModsKeys)[:zb0002]
 			} else {
-				if z.OneHandThrustingSwordModsKey == nil {
-					z.OneHandThrustingSwordModsKey = new(int)
-				}
-				*z.OneHandThrustingSwordModsKey, bts, err = msgp.ReadIntBytes(bts)
+				z.MonsterModsKeys = make([]int, zb0002)
+			}
+			for za0001 := range z.MonsterModsKeys {
+				z.MonsterModsKeys[za0001], bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "OneHandThrustingSwordModsKey")
+					err = msgp.WrapError(err, "MonsterModsKeys", za0001)
 					return
 				}
 			}
-		case "RingModsKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.RingModsKey = nil
-			} else {
-				if z.RingModsKey == nil {
-					z.RingModsKey = new(int)
-				}
-				*z.RingModsKey, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "RingModsKey")
-					return
-				}
+		case "Level":
+			z.Level, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Level")
+				return
 			}
-		case "SceptreModsKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.SceptreModsKey = nil
-			} else {
-				if z.SceptreModsKey == nil {
-					z.SceptreModsKey = new(int)
-				}
-				*z.SceptreModsKey, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "SceptreModsKey")
-					return
-				}
+		case "ItemLevelRestriction":
+			z.ItemLevelRestriction, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ItemLevelRestriction")
+				return
 			}
-		case "ShieldModsKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.ShieldModsKey = nil
-			} else {
-				if z.ShieldModsKey == nil {
-					z.ShieldModsKey = new(int)
-				}
-				*z.ShieldModsKey, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ShieldModsKey")
-					return
-				}
+		case "EssenceTypeKey":
+			z.EssenceTypeKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "EssenceTypeKey")
+				return
 			}
-		case "StaffModsKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.StaffModsKey = nil
-			} else {
-				if z.StaffModsKey == nil {
-					z.StaffModsKey = new(int)
-				}
-				*z.StaffModsKey, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "StaffModsKey")
-					return
-				}
+		case "DropLevelMinimum":
+			z.DropLevelMinimum, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "DropLevelMinimum")
+				return
 			}
-		case "TwoHandAxeModsKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.TwoHandAxeModsKey = nil
-			} else {
-				if z.TwoHandAxeModsKey == nil {
-					z.TwoHandAxeModsKey = new(int)
-				}
-				*z.TwoHandAxeModsKey, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "TwoHandAxeModsKey")
-					return
-				}
+		case "DropLevelMaximum":
+			z.DropLevelMaximum, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "DropLevelMaximum")
+				return
 			}
-		case "TwoHandMaceModsKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.TwoHandMaceModsKey = nil
-			} else {
-				if z.TwoHandMaceModsKey == nil {
-					z.TwoHandMaceModsKey = new(int)
-				}
-				*z.TwoHandMaceModsKey, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "TwoHandMaceModsKey")
-					return
-				}
+		case "BaseItemTypesKey":
+			z.BaseItemTypesKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "BaseItemTypesKey")
+				return
 			}
-		case "TwoHandSwordModsKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.TwoHandSwordModsKey = nil
-			} else {
-				if z.TwoHandSwordModsKey == nil {
-					z.TwoHandSwordModsKey = new(int)
-				}
-				*z.TwoHandSwordModsKey, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "TwoHandSwordModsKey")
-					return
-				}
-			}
-		case "WandModsKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.WandModsKey = nil
-			} else {
-				if z.WandModsKey == nil {
-					z.WandModsKey = new(int)
-				}
-				*z.WandModsKey, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "WandModsKey")
-					return
-				}
+		case "DisplayMonsterModsKey":
+			z.DisplayMonsterModsKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "DisplayMonsterModsKey")
+				return
 			}
 		case "Key":
 			z.Key, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "IsScreamingEssence":
+			z.IsScreamingEssence, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IsScreamingEssence")
 				return
 			}
 		default:
@@ -8368,13 +8719,19 @@ func (z *Essence) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *Essence) Msgsize() (s int) {
-	s = 3 + 14
-	if z.AmuletModsKey == nil {
+	s = 3 + 21
+	if z.DisplayShieldModsKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 17 + msgp.IntSize + 12
+	s += 12
+	if z.ClawModsKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 12
 	if z.BeltModsKey == nil {
 		s += msgp.NilSize
 	} else {
@@ -8398,8 +8755,8 @@ func (z *Essence) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 12
-	if z.ClawModsKey == nil {
+	s += 34
+	if z.DisplayTwoHandMeleeWeaponModsKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
@@ -8470,13 +8827,19 @@ func (z *Essence) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 26
-	if z.DisplayMeleeWeaponModsKey == nil {
+	s += 14
+	if z.AmuletModsKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 22 + msgp.IntSize + 28
+	s += 28
+	if z.DisplayTwoHandWeaponModsKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 28
 	if z.DisplayOneHandWeaponModsKey == nil {
 		s += msgp.NilSize
 	} else {
@@ -8500,20 +8863,20 @@ func (z *Essence) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 21
-	if z.DisplayShieldModsKey == nil {
+	s += 26
+	if z.DisplayMeleeWeaponModsKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 34
-	if z.DisplayTwoHandMeleeWeaponModsKey == nil {
+	s += 20
+	if z.TwoHandSwordModsKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 28
-	if z.DisplayTwoHandWeaponModsKey == nil {
+	s += 12
+	if z.WandModsKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
@@ -8530,7 +8893,25 @@ func (z *Essence) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 17 + msgp.IntSize + 17 + msgp.IntSize + 15 + msgp.IntSize + 14
+	s += 19
+	if z.TwoHandMaceModsKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 18
+	if z.TwoHandAxeModsKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 13
+	if z.StaffModsKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 14
 	if z.GlovesModsKey == nil {
 		s += msgp.NilSize
 	} else {
@@ -8542,7 +8923,31 @@ func (z *Essence) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 19 + msgp.BoolSize + 21 + msgp.IntSize + 6 + msgp.IntSize + 16 + msgp.ArrayHeaderSize + (len(z.MonsterModsKeys) * (msgp.IntSize)) + 18
+	s += 14
+	if z.ShieldModsKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 15
+	if z.SceptreModsKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 12
+	if z.RingModsKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 29
+	if z.OneHandThrustingSwordModsKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 18
 	if z.OneHandAxeModsKey == nil {
 		s += msgp.NilSize
 	} else {
@@ -8560,61 +8965,7 @@ func (z *Essence) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 29
-	if z.OneHandThrustingSwordModsKey == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 12
-	if z.RingModsKey == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 15
-	if z.SceptreModsKey == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 14
-	if z.ShieldModsKey == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 13
-	if z.StaffModsKey == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 18
-	if z.TwoHandAxeModsKey == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 19
-	if z.TwoHandMaceModsKey == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 20
-	if z.TwoHandSwordModsKey == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 12
-	if z.WandModsKey == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 4 + msgp.IntSize
+	s += 16 + msgp.ArrayHeaderSize + (len(z.MonsterModsKeys) * (msgp.IntSize)) + 6 + msgp.IntSize + 21 + msgp.IntSize + 15 + msgp.IntSize + 17 + msgp.IntSize + 17 + msgp.IntSize + 17 + msgp.IntSize + 22 + msgp.IntSize + 4 + msgp.IntSize + 19 + msgp.BoolSize
 	return
 }
 
@@ -8636,12 +8987,6 @@ func (z *Flask) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "BaseItemTypesKey":
-			z.BaseItemTypesKey, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "BaseItemTypesKey")
-				return
-			}
 		case "BuffDefinitionsKey":
 			if dc.IsNil() {
 				err = dc.ReadNil()
@@ -8659,6 +9004,12 @@ func (z *Flask) DecodeMsg(dc *msgp.Reader) (err error) {
 					err = msgp.WrapError(err, "BuffDefinitionsKey")
 					return
 				}
+			}
+		case "Name":
+			z.Name, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "Name")
+				return
 			}
 		case "BuffStatValues":
 			var zb0002 uint32
@@ -8698,6 +9049,12 @@ func (z *Flask) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
+		case "BaseItemTypesKey":
+			z.BaseItemTypesKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "BaseItemTypesKey")
+				return
+			}
 		case "Group":
 			z.Group, err = dc.ReadInt()
 			if err != nil {
@@ -8714,12 +9071,6 @@ func (z *Flask) DecodeMsg(dc *msgp.Reader) (err error) {
 			z.ManaPerUse, err = dc.ReadInt()
 			if err != nil {
 				err = msgp.WrapError(err, "ManaPerUse")
-				return
-			}
-		case "Name":
-			z.Name, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "Name")
 				return
 			}
 		case "RecoveryTime":
@@ -8754,18 +9105,8 @@ func (z *Flask) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *Flask) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 11
-	// write "BaseItemTypesKey"
-	err = en.Append(0x8b, 0xb0, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.BaseItemTypesKey)
-	if err != nil {
-		err = msgp.WrapError(err, "BaseItemTypesKey")
-		return
-	}
 	// write "BuffDefinitionsKey"
-	err = en.Append(0xb2, 0x42, 0x75, 0x66, 0x66, 0x44, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x4b, 0x65, 0x79)
+	err = en.Append(0x8b, 0xb2, 0x42, 0x75, 0x66, 0x66, 0x44, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
@@ -8780,6 +9121,16 @@ func (z *Flask) EncodeMsg(en *msgp.Writer) (err error) {
 			err = msgp.WrapError(err, "BuffDefinitionsKey")
 			return
 		}
+	}
+	// write "Name"
+	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
 	}
 	// write "BuffStatValues"
 	err = en.Append(0xae, 0x42, 0x75, 0x66, 0x66, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
@@ -8815,6 +9166,16 @@ func (z *Flask) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
+	// write "BaseItemTypesKey"
+	err = en.Append(0xb0, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.BaseItemTypesKey)
+	if err != nil {
+		err = msgp.WrapError(err, "BaseItemTypesKey")
+		return
+	}
 	// write "Group"
 	err = en.Append(0xa5, 0x47, 0x72, 0x6f, 0x75, 0x70)
 	if err != nil {
@@ -8843,16 +9204,6 @@ func (z *Flask) EncodeMsg(en *msgp.Writer) (err error) {
 	err = en.WriteInt(z.ManaPerUse)
 	if err != nil {
 		err = msgp.WrapError(err, "ManaPerUse")
-		return
-	}
-	// write "Name"
-	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.Name)
-	if err != nil {
-		err = msgp.WrapError(err, "Name")
 		return
 	}
 	// write "RecoveryTime"
@@ -8892,16 +9243,16 @@ func (z *Flask) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *Flask) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 11
-	// string "BaseItemTypesKey"
-	o = append(o, 0x8b, 0xb0, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.BaseItemTypesKey)
 	// string "BuffDefinitionsKey"
-	o = append(o, 0xb2, 0x42, 0x75, 0x66, 0x66, 0x44, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x4b, 0x65, 0x79)
+	o = append(o, 0x8b, 0xb2, 0x42, 0x75, 0x66, 0x66, 0x44, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x4b, 0x65, 0x79)
 	if z.BuffDefinitionsKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
 		o = msgp.AppendInt(o, *z.BuffDefinitionsKey)
 	}
+	// string "Name"
+	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	o = msgp.AppendString(o, z.Name)
 	// string "BuffStatValues"
 	o = append(o, 0xae, 0x42, 0x75, 0x66, 0x66, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.BuffStatValues)))
@@ -8914,6 +9265,9 @@ func (z *Flask) MarshalMsg(b []byte) (o []byte, err error) {
 	for za0002 := range z.BuffStatValues2 {
 		o = msgp.AppendInt(o, z.BuffStatValues2[za0002])
 	}
+	// string "BaseItemTypesKey"
+	o = append(o, 0xb0, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.BaseItemTypesKey)
 	// string "Group"
 	o = append(o, 0xa5, 0x47, 0x72, 0x6f, 0x75, 0x70)
 	o = msgp.AppendInt(o, z.Group)
@@ -8923,9 +9277,6 @@ func (z *Flask) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "ManaPerUse"
 	o = append(o, 0xaa, 0x4d, 0x61, 0x6e, 0x61, 0x50, 0x65, 0x72, 0x55, 0x73, 0x65)
 	o = msgp.AppendInt(o, z.ManaPerUse)
-	// string "Name"
-	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
-	o = msgp.AppendString(o, z.Name)
 	// string "RecoveryTime"
 	o = append(o, 0xac, 0x52, 0x65, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x79, 0x54, 0x69, 0x6d, 0x65)
 	o = msgp.AppendInt(o, z.RecoveryTime)
@@ -8956,12 +9307,6 @@ func (z *Flask) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "BaseItemTypesKey":
-			z.BaseItemTypesKey, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "BaseItemTypesKey")
-				return
-			}
 		case "BuffDefinitionsKey":
 			if msgp.IsNil(bts) {
 				bts, err = msgp.ReadNilBytes(bts)
@@ -8978,6 +9323,12 @@ func (z *Flask) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					err = msgp.WrapError(err, "BuffDefinitionsKey")
 					return
 				}
+			}
+		case "Name":
+			z.Name, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Name")
+				return
 			}
 		case "BuffStatValues":
 			var zb0002 uint32
@@ -9017,6 +9368,12 @@ func (z *Flask) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
+		case "BaseItemTypesKey":
+			z.BaseItemTypesKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "BaseItemTypesKey")
+				return
+			}
 		case "Group":
 			z.Group, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
@@ -9033,12 +9390,6 @@ func (z *Flask) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			z.ManaPerUse, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "ManaPerUse")
-				return
-			}
-		case "Name":
-			z.Name, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Name")
 				return
 			}
 		case "RecoveryTime":
@@ -9073,13 +9424,13 @@ func (z *Flask) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *Flask) Msgsize() (s int) {
-	s = 1 + 17 + msgp.IntSize + 19
+	s = 1 + 19
 	if z.BuffDefinitionsKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 15 + msgp.ArrayHeaderSize + (len(z.BuffStatValues) * (msgp.IntSize)) + 16 + msgp.ArrayHeaderSize + (len(z.BuffStatValues2) * (msgp.IntSize)) + 6 + msgp.IntSize + 11 + msgp.IntSize + 11 + msgp.IntSize + 5 + msgp.StringPrefixSize + len(z.Name) + 13 + msgp.IntSize + 14 + msgp.IntSize + 4 + msgp.IntSize
+	s += 5 + msgp.StringPrefixSize + len(z.Name) + 15 + msgp.ArrayHeaderSize + (len(z.BuffStatValues) * (msgp.IntSize)) + 16 + msgp.ArrayHeaderSize + (len(z.BuffStatValues2) * (msgp.IntSize)) + 17 + msgp.IntSize + 6 + msgp.IntSize + 11 + msgp.IntSize + 11 + msgp.IntSize + 13 + msgp.IntSize + 14 + msgp.IntSize + 4 + msgp.IntSize
 	return
 }
 
@@ -9101,16 +9452,70 @@ func (z *GrantedEffect) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
+		case "ActiveSkill":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "ActiveSkill")
+					return
+				}
+				z.ActiveSkill = nil
+			} else {
+				if z.ActiveSkill == nil {
+					z.ActiveSkill = new(int)
+				}
+				*z.ActiveSkill, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ActiveSkill")
+					return
+				}
+			}
+		case "PlusVersionOf":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "PlusVersionOf")
+					return
+				}
+				z.PlusVersionOf = nil
+			} else {
+				if z.PlusVersionOf == nil {
+					z.PlusVersionOf = new(int)
+				}
+				*z.PlusVersionOf, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "PlusVersionOf")
+					return
+				}
+			}
+		case "Animation":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "Animation")
+					return
+				}
+				z.Animation = nil
+			} else {
+				if z.Animation == nil {
+					z.Animation = new(int)
+				}
+				*z.Animation, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "Animation")
+					return
+				}
+			}
+		case "SupportGemLetter":
+			z.SupportGemLetter, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "SupportGemLetter")
+				return
+			}
 		case "ID":
 			z.ID, err = dc.ReadString()
 			if err != nil {
 				err = msgp.WrapError(err, "ID")
-				return
-			}
-		case "IsSupport":
-			z.IsSupport, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "IsSupport")
 				return
 			}
 		case "SupportTypes":
@@ -9131,18 +9536,6 @@ func (z *GrantedEffect) DecodeMsg(dc *msgp.Reader) (err error) {
 					err = msgp.WrapError(err, "SupportTypes", za0001)
 					return
 				}
-			}
-		case "SupportGemLetter":
-			z.SupportGemLetter, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "SupportGemLetter")
-				return
-			}
-		case "Attribute":
-			z.Attribute, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Attribute")
-				return
 			}
 		case "AddTypes":
 			var zb0003 uint32
@@ -9182,16 +9575,48 @@ func (z *GrantedEffect) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "SupportsGemsOnly":
-			z.SupportsGemsOnly, err = dc.ReadBool()
+		case "WeaponRestrictions":
+			var zb0005 uint32
+			zb0005, err = dc.ReadArrayHeader()
 			if err != nil {
-				err = msgp.WrapError(err, "SupportsGemsOnly")
+				err = msgp.WrapError(err, "WeaponRestrictions")
 				return
 			}
-		case "CannotBeSupported":
-			z.CannotBeSupported, err = dc.ReadBool()
+			if cap(z.WeaponRestrictions) >= int(zb0005) {
+				z.WeaponRestrictions = (z.WeaponRestrictions)[:zb0005]
+			} else {
+				z.WeaponRestrictions = make([]int, zb0005)
+			}
+			for za0004 := range z.WeaponRestrictions {
+				z.WeaponRestrictions[za0004], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "WeaponRestrictions", za0004)
+					return
+				}
+			}
+		case "AddMinionTypes":
+			var zb0006 uint32
+			zb0006, err = dc.ReadArrayHeader()
 			if err != nil {
-				err = msgp.WrapError(err, "CannotBeSupported")
+				err = msgp.WrapError(err, "AddMinionTypes")
+				return
+			}
+			if cap(z.AddMinionTypes) >= int(zb0006) {
+				z.AddMinionTypes = (z.AddMinionTypes)[:zb0006]
+			} else {
+				z.AddMinionTypes = make([]int, zb0006)
+			}
+			for za0005 := range z.AddMinionTypes {
+				z.AddMinionTypes[za0005], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "AddMinionTypes", za0005)
+					return
+				}
+			}
+		case "Attribute":
+			z.Attribute, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Attribute")
 				return
 			}
 		case "CastTime":
@@ -9199,104 +9624,6 @@ func (z *GrantedEffect) DecodeMsg(dc *msgp.Reader) (err error) {
 			if err != nil {
 				err = msgp.WrapError(err, "CastTime")
 				return
-			}
-		case "ActiveSkill":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "ActiveSkill")
-					return
-				}
-				z.ActiveSkill = nil
-			} else {
-				if z.ActiveSkill == nil {
-					z.ActiveSkill = new(int)
-				}
-				*z.ActiveSkill, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "ActiveSkill")
-					return
-				}
-			}
-		case "IgnoreMinionTypes":
-			z.IgnoreMinionTypes, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "IgnoreMinionTypes")
-				return
-			}
-		case "AddMinionTypes":
-			var zb0005 uint32
-			zb0005, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "AddMinionTypes")
-				return
-			}
-			if cap(z.AddMinionTypes) >= int(zb0005) {
-				z.AddMinionTypes = (z.AddMinionTypes)[:zb0005]
-			} else {
-				z.AddMinionTypes = make([]int, zb0005)
-			}
-			for za0004 := range z.AddMinionTypes {
-				z.AddMinionTypes[za0004], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "AddMinionTypes", za0004)
-					return
-				}
-			}
-		case "Animation":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "Animation")
-					return
-				}
-				z.Animation = nil
-			} else {
-				if z.Animation == nil {
-					z.Animation = new(int)
-				}
-				*z.Animation, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "Animation")
-					return
-				}
-			}
-		case "WeaponRestrictions":
-			var zb0006 uint32
-			zb0006, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "WeaponRestrictions")
-				return
-			}
-			if cap(z.WeaponRestrictions) >= int(zb0006) {
-				z.WeaponRestrictions = (z.WeaponRestrictions)[:zb0006]
-			} else {
-				z.WeaponRestrictions = make([]int, zb0006)
-			}
-			for za0005 := range z.WeaponRestrictions {
-				z.WeaponRestrictions[za0005], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "WeaponRestrictions", za0005)
-					return
-				}
-			}
-		case "PlusVersionOf":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "PlusVersionOf")
-					return
-				}
-				z.PlusVersionOf = nil
-			} else {
-				if z.PlusVersionOf == nil {
-					z.PlusVersionOf = new(int)
-				}
-				*z.PlusVersionOf, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "PlusVersionOf")
-					return
-				}
 			}
 		case "GrantedEffectStatSets":
 			z.GrantedEffectStatSets, err = dc.ReadInt()
@@ -9308,6 +9635,30 @@ func (z *GrantedEffect) DecodeMsg(dc *msgp.Reader) (err error) {
 			z.Key, err = dc.ReadInt()
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "IgnoreMinionTypes":
+			z.IgnoreMinionTypes, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IgnoreMinionTypes")
+				return
+			}
+		case "CannotBeSupported":
+			z.CannotBeSupported, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "CannotBeSupported")
+				return
+			}
+		case "SupportsGemsOnly":
+			z.SupportsGemsOnly, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "SupportsGemsOnly")
+				return
+			}
+		case "IsSupport":
+			z.IsSupport, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IsSupport")
 				return
 			}
 		default:
@@ -9324,24 +9675,75 @@ func (z *GrantedEffect) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *GrantedEffect) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 18
+	// write "ActiveSkill"
+	err = en.Append(0xde, 0x0, 0x12, 0xab, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c)
+	if err != nil {
+		return
+	}
+	if z.ActiveSkill == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.ActiveSkill)
+		if err != nil {
+			err = msgp.WrapError(err, "ActiveSkill")
+			return
+		}
+	}
+	// write "PlusVersionOf"
+	err = en.Append(0xad, 0x50, 0x6c, 0x75, 0x73, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x4f, 0x66)
+	if err != nil {
+		return
+	}
+	if z.PlusVersionOf == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.PlusVersionOf)
+		if err != nil {
+			err = msgp.WrapError(err, "PlusVersionOf")
+			return
+		}
+	}
+	// write "Animation"
+	err = en.Append(0xa9, 0x41, 0x6e, 0x69, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e)
+	if err != nil {
+		return
+	}
+	if z.Animation == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Animation)
+		if err != nil {
+			err = msgp.WrapError(err, "Animation")
+			return
+		}
+	}
+	// write "SupportGemLetter"
+	err = en.Append(0xb0, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x47, 0x65, 0x6d, 0x4c, 0x65, 0x74, 0x74, 0x65, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.SupportGemLetter)
+	if err != nil {
+		err = msgp.WrapError(err, "SupportGemLetter")
+		return
+	}
 	// write "ID"
-	err = en.Append(0xde, 0x0, 0x12, 0xa2, 0x49, 0x44)
+	err = en.Append(0xa2, 0x49, 0x44)
 	if err != nil {
 		return
 	}
 	err = en.WriteString(z.ID)
 	if err != nil {
 		err = msgp.WrapError(err, "ID")
-		return
-	}
-	// write "IsSupport"
-	err = en.Append(0xa9, 0x49, 0x73, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.IsSupport)
-	if err != nil {
-		err = msgp.WrapError(err, "IsSupport")
 		return
 	}
 	// write "SupportTypes"
@@ -9360,26 +9762,6 @@ func (z *GrantedEffect) EncodeMsg(en *msgp.Writer) (err error) {
 			err = msgp.WrapError(err, "SupportTypes", za0001)
 			return
 		}
-	}
-	// write "SupportGemLetter"
-	err = en.Append(0xb0, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x47, 0x65, 0x6d, 0x4c, 0x65, 0x74, 0x74, 0x65, 0x72)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.SupportGemLetter)
-	if err != nil {
-		err = msgp.WrapError(err, "SupportGemLetter")
-		return
-	}
-	// write "Attribute"
-	err = en.Append(0xa9, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Attribute)
-	if err != nil {
-		err = msgp.WrapError(err, "Attribute")
-		return
 	}
 	// write "AddTypes"
 	err = en.Append(0xa8, 0x41, 0x64, 0x64, 0x54, 0x79, 0x70, 0x65, 0x73)
@@ -9415,62 +9797,22 @@ func (z *GrantedEffect) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "SupportsGemsOnly"
-	err = en.Append(0xb0, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x73, 0x47, 0x65, 0x6d, 0x73, 0x4f, 0x6e, 0x6c, 0x79)
+	// write "WeaponRestrictions"
+	err = en.Append(0xb2, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73)
 	if err != nil {
 		return
 	}
-	err = en.WriteBool(z.SupportsGemsOnly)
+	err = en.WriteArrayHeader(uint32(len(z.WeaponRestrictions)))
 	if err != nil {
-		err = msgp.WrapError(err, "SupportsGemsOnly")
+		err = msgp.WrapError(err, "WeaponRestrictions")
 		return
 	}
-	// write "CannotBeSupported"
-	err = en.Append(0xb1, 0x43, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x42, 0x65, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.CannotBeSupported)
-	if err != nil {
-		err = msgp.WrapError(err, "CannotBeSupported")
-		return
-	}
-	// write "CastTime"
-	err = en.Append(0xa8, 0x43, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.CastTime)
-	if err != nil {
-		err = msgp.WrapError(err, "CastTime")
-		return
-	}
-	// write "ActiveSkill"
-	err = en.Append(0xab, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c)
-	if err != nil {
-		return
-	}
-	if z.ActiveSkill == nil {
-		err = en.WriteNil()
+	for za0004 := range z.WeaponRestrictions {
+		err = en.WriteInt(z.WeaponRestrictions[za0004])
 		if err != nil {
+			err = msgp.WrapError(err, "WeaponRestrictions", za0004)
 			return
 		}
-	} else {
-		err = en.WriteInt(*z.ActiveSkill)
-		if err != nil {
-			err = msgp.WrapError(err, "ActiveSkill")
-			return
-		}
-	}
-	// write "IgnoreMinionTypes"
-	err = en.Append(0xb1, 0x49, 0x67, 0x6e, 0x6f, 0x72, 0x65, 0x4d, 0x69, 0x6e, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.IgnoreMinionTypes)
-	if err != nil {
-		err = msgp.WrapError(err, "IgnoreMinionTypes")
-		return
 	}
 	// write "AddMinionTypes"
 	err = en.Append(0xae, 0x41, 0x64, 0x64, 0x4d, 0x69, 0x6e, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x73)
@@ -9482,63 +9824,32 @@ func (z *GrantedEffect) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "AddMinionTypes")
 		return
 	}
-	for za0004 := range z.AddMinionTypes {
-		err = en.WriteInt(z.AddMinionTypes[za0004])
+	for za0005 := range z.AddMinionTypes {
+		err = en.WriteInt(z.AddMinionTypes[za0005])
 		if err != nil {
-			err = msgp.WrapError(err, "AddMinionTypes", za0004)
+			err = msgp.WrapError(err, "AddMinionTypes", za0005)
 			return
 		}
 	}
-	// write "Animation"
-	err = en.Append(0xa9, 0x41, 0x6e, 0x69, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e)
+	// write "Attribute"
+	err = en.Append(0xa9, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65)
 	if err != nil {
 		return
 	}
-	if z.Animation == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.Animation)
-		if err != nil {
-			err = msgp.WrapError(err, "Animation")
-			return
-		}
+	err = en.WriteInt(z.Attribute)
+	if err != nil {
+		err = msgp.WrapError(err, "Attribute")
+		return
 	}
-	// write "WeaponRestrictions"
-	err = en.Append(0xb2, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73)
+	// write "CastTime"
+	err = en.Append(0xa8, 0x43, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.WeaponRestrictions)))
+	err = en.WriteInt(z.CastTime)
 	if err != nil {
-		err = msgp.WrapError(err, "WeaponRestrictions")
+		err = msgp.WrapError(err, "CastTime")
 		return
-	}
-	for za0005 := range z.WeaponRestrictions {
-		err = en.WriteInt(z.WeaponRestrictions[za0005])
-		if err != nil {
-			err = msgp.WrapError(err, "WeaponRestrictions", za0005)
-			return
-		}
-	}
-	// write "PlusVersionOf"
-	err = en.Append(0xad, 0x50, 0x6c, 0x75, 0x73, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x4f, 0x66)
-	if err != nil {
-		return
-	}
-	if z.PlusVersionOf == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.PlusVersionOf)
-		if err != nil {
-			err = msgp.WrapError(err, "PlusVersionOf")
-			return
-		}
 	}
 	// write "GrantedEffectStatSets"
 	err = en.Append(0xb5, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x53, 0x74, 0x61, 0x74, 0x53, 0x65, 0x74, 0x73)
@@ -9560,6 +9871,46 @@ func (z *GrantedEffect) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Key")
 		return
 	}
+	// write "IgnoreMinionTypes"
+	err = en.Append(0xb1, 0x49, 0x67, 0x6e, 0x6f, 0x72, 0x65, 0x4d, 0x69, 0x6e, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IgnoreMinionTypes)
+	if err != nil {
+		err = msgp.WrapError(err, "IgnoreMinionTypes")
+		return
+	}
+	// write "CannotBeSupported"
+	err = en.Append(0xb1, 0x43, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x42, 0x65, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.CannotBeSupported)
+	if err != nil {
+		err = msgp.WrapError(err, "CannotBeSupported")
+		return
+	}
+	// write "SupportsGemsOnly"
+	err = en.Append(0xb0, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x73, 0x47, 0x65, 0x6d, 0x73, 0x4f, 0x6e, 0x6c, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.SupportsGemsOnly)
+	if err != nil {
+		err = msgp.WrapError(err, "SupportsGemsOnly")
+		return
+	}
+	// write "IsSupport"
+	err = en.Append(0xa9, 0x49, 0x73, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IsSupport)
+	if err != nil {
+		err = msgp.WrapError(err, "IsSupport")
+		return
+	}
 	return
 }
 
@@ -9567,24 +9918,39 @@ func (z *GrantedEffect) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *GrantedEffect) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 18
+	// string "ActiveSkill"
+	o = append(o, 0xde, 0x0, 0x12, 0xab, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c)
+	if z.ActiveSkill == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.ActiveSkill)
+	}
+	// string "PlusVersionOf"
+	o = append(o, 0xad, 0x50, 0x6c, 0x75, 0x73, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x4f, 0x66)
+	if z.PlusVersionOf == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.PlusVersionOf)
+	}
+	// string "Animation"
+	o = append(o, 0xa9, 0x41, 0x6e, 0x69, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e)
+	if z.Animation == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Animation)
+	}
+	// string "SupportGemLetter"
+	o = append(o, 0xb0, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x47, 0x65, 0x6d, 0x4c, 0x65, 0x74, 0x74, 0x65, 0x72)
+	o = msgp.AppendString(o, z.SupportGemLetter)
 	// string "ID"
-	o = append(o, 0xde, 0x0, 0x12, 0xa2, 0x49, 0x44)
+	o = append(o, 0xa2, 0x49, 0x44)
 	o = msgp.AppendString(o, z.ID)
-	// string "IsSupport"
-	o = append(o, 0xa9, 0x49, 0x73, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74)
-	o = msgp.AppendBool(o, z.IsSupport)
 	// string "SupportTypes"
 	o = append(o, 0xac, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x54, 0x79, 0x70, 0x65, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.SupportTypes)))
 	for za0001 := range z.SupportTypes {
 		o = msgp.AppendInt(o, z.SupportTypes[za0001])
 	}
-	// string "SupportGemLetter"
-	o = append(o, 0xb0, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x47, 0x65, 0x6d, 0x4c, 0x65, 0x74, 0x74, 0x65, 0x72)
-	o = msgp.AppendString(o, z.SupportGemLetter)
-	// string "Attribute"
-	o = append(o, 0xa9, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65)
-	o = msgp.AppendInt(o, z.Attribute)
 	// string "AddTypes"
 	o = append(o, 0xa8, 0x41, 0x64, 0x64, 0x54, 0x79, 0x70, 0x65, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.AddTypes)))
@@ -9597,57 +9963,42 @@ func (z *GrantedEffect) MarshalMsg(b []byte) (o []byte, err error) {
 	for za0003 := range z.ExcludeTypes {
 		o = msgp.AppendInt(o, z.ExcludeTypes[za0003])
 	}
-	// string "SupportsGemsOnly"
-	o = append(o, 0xb0, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x73, 0x47, 0x65, 0x6d, 0x73, 0x4f, 0x6e, 0x6c, 0x79)
-	o = msgp.AppendBool(o, z.SupportsGemsOnly)
-	// string "CannotBeSupported"
-	o = append(o, 0xb1, 0x43, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x42, 0x65, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64)
-	o = msgp.AppendBool(o, z.CannotBeSupported)
-	// string "CastTime"
-	o = append(o, 0xa8, 0x43, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65)
-	o = msgp.AppendInt(o, z.CastTime)
-	// string "ActiveSkill"
-	o = append(o, 0xab, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c)
-	if z.ActiveSkill == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.ActiveSkill)
-	}
-	// string "IgnoreMinionTypes"
-	o = append(o, 0xb1, 0x49, 0x67, 0x6e, 0x6f, 0x72, 0x65, 0x4d, 0x69, 0x6e, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x73)
-	o = msgp.AppendBool(o, z.IgnoreMinionTypes)
-	// string "AddMinionTypes"
-	o = append(o, 0xae, 0x41, 0x64, 0x64, 0x4d, 0x69, 0x6e, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.AddMinionTypes)))
-	for za0004 := range z.AddMinionTypes {
-		o = msgp.AppendInt(o, z.AddMinionTypes[za0004])
-	}
-	// string "Animation"
-	o = append(o, 0xa9, 0x41, 0x6e, 0x69, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e)
-	if z.Animation == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.Animation)
-	}
 	// string "WeaponRestrictions"
 	o = append(o, 0xb2, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.WeaponRestrictions)))
-	for za0005 := range z.WeaponRestrictions {
-		o = msgp.AppendInt(o, z.WeaponRestrictions[za0005])
+	for za0004 := range z.WeaponRestrictions {
+		o = msgp.AppendInt(o, z.WeaponRestrictions[za0004])
 	}
-	// string "PlusVersionOf"
-	o = append(o, 0xad, 0x50, 0x6c, 0x75, 0x73, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x4f, 0x66)
-	if z.PlusVersionOf == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.PlusVersionOf)
+	// string "AddMinionTypes"
+	o = append(o, 0xae, 0x41, 0x64, 0x64, 0x4d, 0x69, 0x6e, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.AddMinionTypes)))
+	for za0005 := range z.AddMinionTypes {
+		o = msgp.AppendInt(o, z.AddMinionTypes[za0005])
 	}
+	// string "Attribute"
+	o = append(o, 0xa9, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65)
+	o = msgp.AppendInt(o, z.Attribute)
+	// string "CastTime"
+	o = append(o, 0xa8, 0x43, 0x61, 0x73, 0x74, 0x54, 0x69, 0x6d, 0x65)
+	o = msgp.AppendInt(o, z.CastTime)
 	// string "GrantedEffectStatSets"
 	o = append(o, 0xb5, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x53, 0x74, 0x61, 0x74, 0x53, 0x65, 0x74, 0x73)
 	o = msgp.AppendInt(o, z.GrantedEffectStatSets)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
+	// string "IgnoreMinionTypes"
+	o = append(o, 0xb1, 0x49, 0x67, 0x6e, 0x6f, 0x72, 0x65, 0x4d, 0x69, 0x6e, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x73)
+	o = msgp.AppendBool(o, z.IgnoreMinionTypes)
+	// string "CannotBeSupported"
+	o = append(o, 0xb1, 0x43, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x42, 0x65, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64)
+	o = msgp.AppendBool(o, z.CannotBeSupported)
+	// string "SupportsGemsOnly"
+	o = append(o, 0xb0, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x73, 0x47, 0x65, 0x6d, 0x73, 0x4f, 0x6e, 0x6c, 0x79)
+	o = msgp.AppendBool(o, z.SupportsGemsOnly)
+	// string "IsSupport"
+	o = append(o, 0xa9, 0x49, 0x73, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74)
+	o = msgp.AppendBool(o, z.IsSupport)
 	return
 }
 
@@ -9669,16 +10020,67 @@ func (z *GrantedEffect) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
+		case "ActiveSkill":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.ActiveSkill = nil
+			} else {
+				if z.ActiveSkill == nil {
+					z.ActiveSkill = new(int)
+				}
+				*z.ActiveSkill, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ActiveSkill")
+					return
+				}
+			}
+		case "PlusVersionOf":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.PlusVersionOf = nil
+			} else {
+				if z.PlusVersionOf == nil {
+					z.PlusVersionOf = new(int)
+				}
+				*z.PlusVersionOf, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "PlusVersionOf")
+					return
+				}
+			}
+		case "Animation":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.Animation = nil
+			} else {
+				if z.Animation == nil {
+					z.Animation = new(int)
+				}
+				*z.Animation, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Animation")
+					return
+				}
+			}
+		case "SupportGemLetter":
+			z.SupportGemLetter, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "SupportGemLetter")
+				return
+			}
 		case "ID":
 			z.ID, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "ID")
-				return
-			}
-		case "IsSupport":
-			z.IsSupport, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "IsSupport")
 				return
 			}
 		case "SupportTypes":
@@ -9699,18 +10101,6 @@ func (z *GrantedEffect) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					err = msgp.WrapError(err, "SupportTypes", za0001)
 					return
 				}
-			}
-		case "SupportGemLetter":
-			z.SupportGemLetter, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "SupportGemLetter")
-				return
-			}
-		case "Attribute":
-			z.Attribute, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Attribute")
-				return
 			}
 		case "AddTypes":
 			var zb0003 uint32
@@ -9750,16 +10140,48 @@ func (z *GrantedEffect) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "SupportsGemsOnly":
-			z.SupportsGemsOnly, bts, err = msgp.ReadBoolBytes(bts)
+		case "WeaponRestrictions":
+			var zb0005 uint32
+			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "SupportsGemsOnly")
+				err = msgp.WrapError(err, "WeaponRestrictions")
 				return
 			}
-		case "CannotBeSupported":
-			z.CannotBeSupported, bts, err = msgp.ReadBoolBytes(bts)
+			if cap(z.WeaponRestrictions) >= int(zb0005) {
+				z.WeaponRestrictions = (z.WeaponRestrictions)[:zb0005]
+			} else {
+				z.WeaponRestrictions = make([]int, zb0005)
+			}
+			for za0004 := range z.WeaponRestrictions {
+				z.WeaponRestrictions[za0004], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "WeaponRestrictions", za0004)
+					return
+				}
+			}
+		case "AddMinionTypes":
+			var zb0006 uint32
+			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "CannotBeSupported")
+				err = msgp.WrapError(err, "AddMinionTypes")
+				return
+			}
+			if cap(z.AddMinionTypes) >= int(zb0006) {
+				z.AddMinionTypes = (z.AddMinionTypes)[:zb0006]
+			} else {
+				z.AddMinionTypes = make([]int, zb0006)
+			}
+			for za0005 := range z.AddMinionTypes {
+				z.AddMinionTypes[za0005], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "AddMinionTypes", za0005)
+					return
+				}
+			}
+		case "Attribute":
+			z.Attribute, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Attribute")
 				return
 			}
 		case "CastTime":
@@ -9767,101 +10189,6 @@ func (z *GrantedEffect) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			if err != nil {
 				err = msgp.WrapError(err, "CastTime")
 				return
-			}
-		case "ActiveSkill":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.ActiveSkill = nil
-			} else {
-				if z.ActiveSkill == nil {
-					z.ActiveSkill = new(int)
-				}
-				*z.ActiveSkill, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ActiveSkill")
-					return
-				}
-			}
-		case "IgnoreMinionTypes":
-			z.IgnoreMinionTypes, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "IgnoreMinionTypes")
-				return
-			}
-		case "AddMinionTypes":
-			var zb0005 uint32
-			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "AddMinionTypes")
-				return
-			}
-			if cap(z.AddMinionTypes) >= int(zb0005) {
-				z.AddMinionTypes = (z.AddMinionTypes)[:zb0005]
-			} else {
-				z.AddMinionTypes = make([]int, zb0005)
-			}
-			for za0004 := range z.AddMinionTypes {
-				z.AddMinionTypes[za0004], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "AddMinionTypes", za0004)
-					return
-				}
-			}
-		case "Animation":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.Animation = nil
-			} else {
-				if z.Animation == nil {
-					z.Animation = new(int)
-				}
-				*z.Animation, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Animation")
-					return
-				}
-			}
-		case "WeaponRestrictions":
-			var zb0006 uint32
-			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "WeaponRestrictions")
-				return
-			}
-			if cap(z.WeaponRestrictions) >= int(zb0006) {
-				z.WeaponRestrictions = (z.WeaponRestrictions)[:zb0006]
-			} else {
-				z.WeaponRestrictions = make([]int, zb0006)
-			}
-			for za0005 := range z.WeaponRestrictions {
-				z.WeaponRestrictions[za0005], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "WeaponRestrictions", za0005)
-					return
-				}
-			}
-		case "PlusVersionOf":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.PlusVersionOf = nil
-			} else {
-				if z.PlusVersionOf == nil {
-					z.PlusVersionOf = new(int)
-				}
-				*z.PlusVersionOf, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "PlusVersionOf")
-					return
-				}
 			}
 		case "GrantedEffectStatSets":
 			z.GrantedEffectStatSets, bts, err = msgp.ReadIntBytes(bts)
@@ -9873,6 +10200,30 @@ func (z *GrantedEffect) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			z.Key, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "IgnoreMinionTypes":
+			z.IgnoreMinionTypes, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IgnoreMinionTypes")
+				return
+			}
+		case "CannotBeSupported":
+			z.CannotBeSupported, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "CannotBeSupported")
+				return
+			}
+		case "SupportsGemsOnly":
+			z.SupportsGemsOnly, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "SupportsGemsOnly")
+				return
+			}
+		case "IsSupport":
+			z.IsSupport, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IsSupport")
 				return
 			}
 		default:
@@ -9889,25 +10240,25 @@ func (z *GrantedEffect) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *GrantedEffect) Msgsize() (s int) {
-	s = 3 + 3 + msgp.StringPrefixSize + len(z.ID) + 10 + msgp.BoolSize + 13 + msgp.ArrayHeaderSize + (len(z.SupportTypes) * (msgp.IntSize)) + 17 + msgp.StringPrefixSize + len(z.SupportGemLetter) + 10 + msgp.IntSize + 9 + msgp.ArrayHeaderSize + (len(z.AddTypes) * (msgp.IntSize)) + 13 + msgp.ArrayHeaderSize + (len(z.ExcludeTypes) * (msgp.IntSize)) + 17 + msgp.BoolSize + 18 + msgp.BoolSize + 9 + msgp.IntSize + 12
+	s = 3 + 12
 	if z.ActiveSkill == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 18 + msgp.BoolSize + 15 + msgp.ArrayHeaderSize + (len(z.AddMinionTypes) * (msgp.IntSize)) + 10
-	if z.Animation == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 19 + msgp.ArrayHeaderSize + (len(z.WeaponRestrictions) * (msgp.IntSize)) + 14
+	s += 14
 	if z.PlusVersionOf == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 22 + msgp.IntSize + 4 + msgp.IntSize
+	s += 10
+	if z.Animation == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 17 + msgp.StringPrefixSize + len(z.SupportGemLetter) + 3 + msgp.StringPrefixSize + len(z.ID) + 13 + msgp.ArrayHeaderSize + (len(z.SupportTypes) * (msgp.IntSize)) + 9 + msgp.ArrayHeaderSize + (len(z.AddTypes) * (msgp.IntSize)) + 13 + msgp.ArrayHeaderSize + (len(z.ExcludeTypes) * (msgp.IntSize)) + 19 + msgp.ArrayHeaderSize + (len(z.WeaponRestrictions) * (msgp.IntSize)) + 15 + msgp.ArrayHeaderSize + (len(z.AddMinionTypes) * (msgp.IntSize)) + 10 + msgp.IntSize + 9 + msgp.IntSize + 22 + msgp.IntSize + 4 + msgp.IntSize + 18 + msgp.BoolSize + 18 + msgp.BoolSize + 17 + msgp.BoolSize + 10 + msgp.BoolSize
 	return
 }
 
@@ -9929,18 +10280,6 @@ func (z *GrantedEffectQualityStat) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "GrantedEffectsKey":
-			z.GrantedEffectsKey, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "GrantedEffectsKey")
-				return
-			}
-		case "SetID":
-			z.SetID, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "SetID")
-				return
-			}
 		case "StatsKeys":
 			var zb0002 uint32
 			zb0002, err = dc.ReadArrayHeader()
@@ -9979,6 +10318,18 @@ func (z *GrantedEffectQualityStat) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
+		case "GrantedEffectsKey":
+			z.GrantedEffectsKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "GrantedEffectsKey")
+				return
+			}
+		case "SetID":
+			z.SetID, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "SetID")
+				return
+			}
 		case "Weight":
 			z.Weight, err = dc.ReadInt()
 			if err != nil {
@@ -10005,28 +10356,8 @@ func (z *GrantedEffectQualityStat) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *GrantedEffectQualityStat) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 6
-	// write "GrantedEffectsKey"
-	err = en.Append(0x86, 0xb1, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.GrantedEffectsKey)
-	if err != nil {
-		err = msgp.WrapError(err, "GrantedEffectsKey")
-		return
-	}
-	// write "SetID"
-	err = en.Append(0xa5, 0x53, 0x65, 0x74, 0x49, 0x44)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.SetID)
-	if err != nil {
-		err = msgp.WrapError(err, "SetID")
-		return
-	}
 	// write "StatsKeys"
-	err = en.Append(0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	err = en.Append(0x86, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
 	if err != nil {
 		return
 	}
@@ -10059,6 +10390,26 @@ func (z *GrantedEffectQualityStat) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
+	// write "GrantedEffectsKey"
+	err = en.Append(0xb1, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.GrantedEffectsKey)
+	if err != nil {
+		err = msgp.WrapError(err, "GrantedEffectsKey")
+		return
+	}
+	// write "SetID"
+	err = en.Append(0xa5, 0x53, 0x65, 0x74, 0x49, 0x44)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.SetID)
+	if err != nil {
+		err = msgp.WrapError(err, "SetID")
+		return
+	}
 	// write "Weight"
 	err = en.Append(0xa6, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74)
 	if err != nil {
@@ -10086,14 +10437,8 @@ func (z *GrantedEffectQualityStat) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *GrantedEffectQualityStat) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 6
-	// string "GrantedEffectsKey"
-	o = append(o, 0x86, 0xb1, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.GrantedEffectsKey)
-	// string "SetID"
-	o = append(o, 0xa5, 0x53, 0x65, 0x74, 0x49, 0x44)
-	o = msgp.AppendInt(o, z.SetID)
 	// string "StatsKeys"
-	o = append(o, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = append(o, 0x86, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.StatsKeys)))
 	for za0001 := range z.StatsKeys {
 		o = msgp.AppendInt(o, z.StatsKeys[za0001])
@@ -10104,6 +10449,12 @@ func (z *GrantedEffectQualityStat) MarshalMsg(b []byte) (o []byte, err error) {
 	for za0002 := range z.StatsValuesPermille {
 		o = msgp.AppendInt(o, z.StatsValuesPermille[za0002])
 	}
+	// string "GrantedEffectsKey"
+	o = append(o, 0xb1, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.GrantedEffectsKey)
+	// string "SetID"
+	o = append(o, 0xa5, 0x53, 0x65, 0x74, 0x49, 0x44)
+	o = msgp.AppendInt(o, z.SetID)
 	// string "Weight"
 	o = append(o, 0xa6, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74)
 	o = msgp.AppendInt(o, z.Weight)
@@ -10131,18 +10482,6 @@ func (z *GrantedEffectQualityStat) UnmarshalMsg(bts []byte) (o []byte, err error
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "GrantedEffectsKey":
-			z.GrantedEffectsKey, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "GrantedEffectsKey")
-				return
-			}
-		case "SetID":
-			z.SetID, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "SetID")
-				return
-			}
 		case "StatsKeys":
 			var zb0002 uint32
 			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
@@ -10181,6 +10520,18 @@ func (z *GrantedEffectQualityStat) UnmarshalMsg(bts []byte) (o []byte, err error
 					return
 				}
 			}
+		case "GrantedEffectsKey":
+			z.GrantedEffectsKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "GrantedEffectsKey")
+				return
+			}
+		case "SetID":
+			z.SetID, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "SetID")
+				return
+			}
 		case "Weight":
 			z.Weight, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
@@ -10207,7 +10558,7 @@ func (z *GrantedEffectQualityStat) UnmarshalMsg(bts []byte) (o []byte, err error
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *GrantedEffectQualityStat) Msgsize() (s int) {
-	s = 1 + 18 + msgp.IntSize + 6 + msgp.IntSize + 10 + msgp.ArrayHeaderSize + (len(z.StatsKeys) * (msgp.IntSize)) + 20 + msgp.ArrayHeaderSize + (len(z.StatsValuesPermille) * (msgp.IntSize)) + 7 + msgp.IntSize + 4 + msgp.IntSize
+	s = 1 + 10 + msgp.ArrayHeaderSize + (len(z.StatsKeys) * (msgp.IntSize)) + 20 + msgp.ArrayHeaderSize + (len(z.StatsValuesPermille) * (msgp.IntSize)) + 18 + msgp.IntSize + 6 + msgp.IntSize + 7 + msgp.IntSize + 4 + msgp.IntSize
 	return
 }
 
@@ -10229,12 +10580,6 @@ func (z *GrantedEffectStatSet) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "Key":
-			z.Key, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Key")
-				return
-			}
 		case "ID":
 			z.ID, err = dc.ReadString()
 			if err != nil {
@@ -10298,6 +10643,12 @@ func (z *GrantedEffectStatSet) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
+		case "Key":
+			z.Key, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Key")
+				return
+			}
 		case "BaseEffectiveness":
 			z.BaseEffectiveness, err = dc.ReadFloat64()
 			if err != nil {
@@ -10324,18 +10675,8 @@ func (z *GrantedEffectStatSet) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *GrantedEffectStatSet) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 7
-	// write "Key"
-	err = en.Append(0x87, 0xa3, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Key)
-	if err != nil {
-		err = msgp.WrapError(err, "Key")
-		return
-	}
 	// write "ID"
-	err = en.Append(0xa2, 0x49, 0x44)
+	err = en.Append(0x87, 0xa2, 0x49, 0x44)
 	if err != nil {
 		return
 	}
@@ -10395,6 +10736,16 @@ func (z *GrantedEffectStatSet) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
+	// write "Key"
+	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
 	// write "BaseEffectiveness"
 	err = en.Append(0xb1, 0x42, 0x61, 0x73, 0x65, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x69, 0x76, 0x65, 0x6e, 0x65, 0x73, 0x73)
 	if err != nil {
@@ -10422,11 +10773,8 @@ func (z *GrantedEffectStatSet) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *GrantedEffectStatSet) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 7
-	// string "Key"
-	o = append(o, 0x87, 0xa3, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.Key)
 	// string "ID"
-	o = append(o, 0xa2, 0x49, 0x44)
+	o = append(o, 0x87, 0xa2, 0x49, 0x44)
 	o = msgp.AppendString(o, z.ID)
 	// string "ImplicitStats"
 	o = append(o, 0xad, 0x49, 0x6d, 0x70, 0x6c, 0x69, 0x63, 0x69, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73)
@@ -10446,6 +10794,9 @@ func (z *GrantedEffectStatSet) MarshalMsg(b []byte) (o []byte, err error) {
 	for za0003 := range z.ConstantStatsValues {
 		o = msgp.AppendInt(o, z.ConstantStatsValues[za0003])
 	}
+	// string "Key"
+	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.Key)
 	// string "BaseEffectiveness"
 	o = append(o, 0xb1, 0x42, 0x61, 0x73, 0x65, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x69, 0x76, 0x65, 0x6e, 0x65, 0x73, 0x73)
 	o = msgp.AppendFloat64(o, z.BaseEffectiveness)
@@ -10473,12 +10824,6 @@ func (z *GrantedEffectStatSet) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "Key":
-			z.Key, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Key")
-				return
-			}
 		case "ID":
 			z.ID, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
@@ -10542,6 +10887,12 @@ func (z *GrantedEffectStatSet) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
+		case "Key":
+			z.Key, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Key")
+				return
+			}
 		case "BaseEffectiveness":
 			z.BaseEffectiveness, bts, err = msgp.ReadFloat64Bytes(bts)
 			if err != nil {
@@ -10568,7 +10919,7 @@ func (z *GrantedEffectStatSet) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *GrantedEffectStatSet) Msgsize() (s int) {
-	s = 1 + 4 + msgp.IntSize + 3 + msgp.StringPrefixSize + len(z.ID) + 14 + msgp.ArrayHeaderSize + (len(z.ImplicitStats) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.ConstantStats) * (msgp.IntSize)) + 20 + msgp.ArrayHeaderSize + (len(z.ConstantStatsValues) * (msgp.IntSize)) + 18 + msgp.Float64Size + 25 + msgp.Float64Size
+	s = 1 + 3 + msgp.StringPrefixSize + len(z.ID) + 14 + msgp.ArrayHeaderSize + (len(z.ImplicitStats) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.ConstantStats) * (msgp.IntSize)) + 20 + msgp.ArrayHeaderSize + (len(z.ConstantStatsValues) * (msgp.IntSize)) + 4 + msgp.IntSize + 18 + msgp.Float64Size + 25 + msgp.Float64Size
 	return
 }
 
@@ -10590,22 +10941,22 @@ func (z *GrantedEffectStatSetsPerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AdditionalBooleanStats":
+		case "GrantedEffects":
 			var zb0002 uint32
 			zb0002, err = dc.ReadArrayHeader()
 			if err != nil {
-				err = msgp.WrapError(err, "AdditionalBooleanStats")
+				err = msgp.WrapError(err, "GrantedEffects")
 				return
 			}
-			if cap(z.AdditionalBooleanStats) >= int(zb0002) {
-				z.AdditionalBooleanStats = (z.AdditionalBooleanStats)[:zb0002]
+			if cap(z.GrantedEffects) >= int(zb0002) {
+				z.GrantedEffects = (z.GrantedEffects)[:zb0002]
 			} else {
-				z.AdditionalBooleanStats = make([]int, zb0002)
+				z.GrantedEffects = make([]int, zb0002)
 			}
-			for za0001 := range z.AdditionalBooleanStats {
-				z.AdditionalBooleanStats[za0001], err = dc.ReadInt()
+			for za0001 := range z.GrantedEffects {
+				z.GrantedEffects[za0001], err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "AdditionalBooleanStats", za0001)
+					err = msgp.WrapError(err, "GrantedEffects", za0001)
 					return
 				}
 			}
@@ -10647,11 +10998,119 @@ func (z *GrantedEffectStatSetsPerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "AttackCritChance":
-			z.AttackCritChance, err = dc.ReadInt()
+		case "StatInterpolations":
+			var zb0005 uint32
+			zb0005, err = dc.ReadArrayHeader()
 			if err != nil {
-				err = msgp.WrapError(err, "AttackCritChance")
+				err = msgp.WrapError(err, "StatInterpolations")
 				return
+			}
+			if cap(z.StatInterpolations) >= int(zb0005) {
+				z.StatInterpolations = (z.StatInterpolations)[:zb0005]
+			} else {
+				z.StatInterpolations = make([]int, zb0005)
+			}
+			for za0004 := range z.StatInterpolations {
+				z.StatInterpolations[za0004], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "StatInterpolations", za0004)
+					return
+				}
+			}
+		case "AdditionalBooleanStats":
+			var zb0006 uint32
+			zb0006, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "AdditionalBooleanStats")
+				return
+			}
+			if cap(z.AdditionalBooleanStats) >= int(zb0006) {
+				z.AdditionalBooleanStats = (z.AdditionalBooleanStats)[:zb0006]
+			} else {
+				z.AdditionalBooleanStats = make([]int, zb0006)
+			}
+			for za0005 := range z.AdditionalBooleanStats {
+				z.AdditionalBooleanStats[za0005], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "AdditionalBooleanStats", za0005)
+					return
+				}
+			}
+		case "BaseResolvedValues":
+			var zb0007 uint32
+			zb0007, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "BaseResolvedValues")
+				return
+			}
+			if cap(z.BaseResolvedValues) >= int(zb0007) {
+				z.BaseResolvedValues = (z.BaseResolvedValues)[:zb0007]
+			} else {
+				z.BaseResolvedValues = make([]int, zb0007)
+			}
+			for za0006 := range z.BaseResolvedValues {
+				z.BaseResolvedValues[za0006], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "BaseResolvedValues", za0006)
+					return
+				}
+			}
+		case "InterpolationBases":
+			var zb0008 uint32
+			zb0008, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "InterpolationBases")
+				return
+			}
+			if cap(z.InterpolationBases) >= int(zb0008) {
+				z.InterpolationBases = (z.InterpolationBases)[:zb0008]
+			} else {
+				z.InterpolationBases = make([]int, zb0008)
+			}
+			for za0007 := range z.InterpolationBases {
+				z.InterpolationBases[za0007], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "InterpolationBases", za0007)
+					return
+				}
+			}
+		case "FloatStats":
+			var zb0009 uint32
+			zb0009, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "FloatStats")
+				return
+			}
+			if cap(z.FloatStats) >= int(zb0009) {
+				z.FloatStats = (z.FloatStats)[:zb0009]
+			} else {
+				z.FloatStats = make([]int, zb0009)
+			}
+			for za0008 := range z.FloatStats {
+				z.FloatStats[za0008], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "FloatStats", za0008)
+					return
+				}
+			}
+		case "FloatStatsValues":
+			var zb0010 uint32
+			zb0010, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "FloatStatsValues")
+				return
+			}
+			if cap(z.FloatStatsValues) >= int(zb0010) {
+				z.FloatStatsValues = (z.FloatStatsValues)[:zb0010]
+			} else {
+				z.FloatStatsValues = make([]float64, zb0010)
+			}
+			for za0009 := range z.FloatStatsValues {
+				z.FloatStatsValues[za0009], err = dc.ReadFloat64()
+				if err != nil {
+					err = msgp.WrapError(err, "FloatStatsValues", za0009)
+					return
+				}
 			}
 		case "BaseMultiplier":
 			z.BaseMultiplier, err = dc.ReadInt()
@@ -10659,112 +11118,17 @@ func (z *GrantedEffectStatSetsPerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "BaseMultiplier")
 				return
 			}
-		case "BaseResolvedValues":
-			var zb0005 uint32
-			zb0005, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "BaseResolvedValues")
-				return
-			}
-			if cap(z.BaseResolvedValues) >= int(zb0005) {
-				z.BaseResolvedValues = (z.BaseResolvedValues)[:zb0005]
-			} else {
-				z.BaseResolvedValues = make([]int, zb0005)
-			}
-			for za0004 := range z.BaseResolvedValues {
-				z.BaseResolvedValues[za0004], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "BaseResolvedValues", za0004)
-					return
-				}
-			}
-		case "DamageEffectiveness":
-			z.DamageEffectiveness, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "DamageEffectiveness")
-				return
-			}
-		case "FloatStats":
-			var zb0006 uint32
-			zb0006, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "FloatStats")
-				return
-			}
-			if cap(z.FloatStats) >= int(zb0006) {
-				z.FloatStats = (z.FloatStats)[:zb0006]
-			} else {
-				z.FloatStats = make([]int, zb0006)
-			}
-			for za0005 := range z.FloatStats {
-				z.FloatStats[za0005], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "FloatStats", za0005)
-					return
-				}
-			}
-		case "FloatStatsValues":
-			var zb0007 uint32
-			zb0007, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "FloatStatsValues")
-				return
-			}
-			if cap(z.FloatStatsValues) >= int(zb0007) {
-				z.FloatStatsValues = (z.FloatStatsValues)[:zb0007]
-			} else {
-				z.FloatStatsValues = make([]float64, zb0007)
-			}
-			for za0006 := range z.FloatStatsValues {
-				z.FloatStatsValues[za0006], err = dc.ReadFloat64()
-				if err != nil {
-					err = msgp.WrapError(err, "FloatStatsValues", za0006)
-					return
-				}
-			}
 		case "GemLevel":
 			z.GemLevel, err = dc.ReadInt()
 			if err != nil {
 				err = msgp.WrapError(err, "GemLevel")
 				return
 			}
-		case "GrantedEffects":
-			var zb0008 uint32
-			zb0008, err = dc.ReadArrayHeader()
+		case "DamageEffectiveness":
+			z.DamageEffectiveness, err = dc.ReadInt()
 			if err != nil {
-				err = msgp.WrapError(err, "GrantedEffects")
+				err = msgp.WrapError(err, "DamageEffectiveness")
 				return
-			}
-			if cap(z.GrantedEffects) >= int(zb0008) {
-				z.GrantedEffects = (z.GrantedEffects)[:zb0008]
-			} else {
-				z.GrantedEffects = make([]int, zb0008)
-			}
-			for za0007 := range z.GrantedEffects {
-				z.GrantedEffects[za0007], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "GrantedEffects", za0007)
-					return
-				}
-			}
-		case "InterpolationBases":
-			var zb0009 uint32
-			zb0009, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "InterpolationBases")
-				return
-			}
-			if cap(z.InterpolationBases) >= int(zb0009) {
-				z.InterpolationBases = (z.InterpolationBases)[:zb0009]
-			} else {
-				z.InterpolationBases = make([]int, zb0009)
-			}
-			for za0008 := range z.InterpolationBases {
-				z.InterpolationBases[za0008], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "InterpolationBases", za0008)
-					return
-				}
 			}
 		case "PlayerLevelReq":
 			z.PlayerLevelReq, err = dc.ReadInt()
@@ -10778,24 +11142,11 @@ func (z *GrantedEffectStatSetsPerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "OffhandCritChance")
 				return
 			}
-		case "StatInterpolations":
-			var zb0010 uint32
-			zb0010, err = dc.ReadArrayHeader()
+		case "AttackCritChance":
+			z.AttackCritChance, err = dc.ReadInt()
 			if err != nil {
-				err = msgp.WrapError(err, "StatInterpolations")
+				err = msgp.WrapError(err, "AttackCritChance")
 				return
-			}
-			if cap(z.StatInterpolations) >= int(zb0010) {
-				z.StatInterpolations = (z.StatInterpolations)[:zb0010]
-			} else {
-				z.StatInterpolations = make([]int, zb0010)
-			}
-			for za0009 := range z.StatInterpolations {
-				z.StatInterpolations[za0009], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "StatInterpolations", za0009)
-					return
-				}
 			}
 		case "StatSet":
 			z.StatSet, err = dc.ReadInt()
@@ -10823,20 +11174,20 @@ func (z *GrantedEffectStatSetsPerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *GrantedEffectStatSetsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 17
-	// write "AdditionalBooleanStats"
-	err = en.Append(0xde, 0x0, 0x11, 0xb6, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x42, 0x6f, 0x6f, 0x6c, 0x65, 0x61, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x73)
+	// write "GrantedEffects"
+	err = en.Append(0xde, 0x0, 0x11, 0xae, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.AdditionalBooleanStats)))
+	err = en.WriteArrayHeader(uint32(len(z.GrantedEffects)))
 	if err != nil {
-		err = msgp.WrapError(err, "AdditionalBooleanStats")
+		err = msgp.WrapError(err, "GrantedEffects")
 		return
 	}
-	for za0001 := range z.AdditionalBooleanStats {
-		err = en.WriteInt(z.AdditionalBooleanStats[za0001])
+	for za0001 := range z.GrantedEffects {
+		err = en.WriteInt(z.GrantedEffects[za0001])
 		if err != nil {
-			err = msgp.WrapError(err, "AdditionalBooleanStats", za0001)
+			err = msgp.WrapError(err, "GrantedEffects", za0001)
 			return
 		}
 	}
@@ -10874,25 +11225,39 @@ func (z *GrantedEffectStatSetsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "AttackCritChance"
-	err = en.Append(0xb0, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x43, 0x72, 0x69, 0x74, 0x43, 0x68, 0x61, 0x6e, 0x63, 0x65)
+	// write "StatInterpolations"
+	err = en.Append(0xb2, 0x53, 0x74, 0x61, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x70, 0x6f, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.AttackCritChance)
+	err = en.WriteArrayHeader(uint32(len(z.StatInterpolations)))
 	if err != nil {
-		err = msgp.WrapError(err, "AttackCritChance")
+		err = msgp.WrapError(err, "StatInterpolations")
 		return
 	}
-	// write "BaseMultiplier"
-	err = en.Append(0xae, 0x42, 0x61, 0x73, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	for za0004 := range z.StatInterpolations {
+		err = en.WriteInt(z.StatInterpolations[za0004])
+		if err != nil {
+			err = msgp.WrapError(err, "StatInterpolations", za0004)
+			return
+		}
+	}
+	// write "AdditionalBooleanStats"
+	err = en.Append(0xb6, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x42, 0x6f, 0x6f, 0x6c, 0x65, 0x61, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x73)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.BaseMultiplier)
+	err = en.WriteArrayHeader(uint32(len(z.AdditionalBooleanStats)))
 	if err != nil {
-		err = msgp.WrapError(err, "BaseMultiplier")
+		err = msgp.WrapError(err, "AdditionalBooleanStats")
 		return
+	}
+	for za0005 := range z.AdditionalBooleanStats {
+		err = en.WriteInt(z.AdditionalBooleanStats[za0005])
+		if err != nil {
+			err = msgp.WrapError(err, "AdditionalBooleanStats", za0005)
+			return
+		}
 	}
 	// write "BaseResolvedValues"
 	err = en.Append(0xb2, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x6f, 0x6c, 0x76, 0x65, 0x64, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
@@ -10904,81 +11269,10 @@ func (z *GrantedEffectStatSetsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "BaseResolvedValues")
 		return
 	}
-	for za0004 := range z.BaseResolvedValues {
-		err = en.WriteInt(z.BaseResolvedValues[za0004])
+	for za0006 := range z.BaseResolvedValues {
+		err = en.WriteInt(z.BaseResolvedValues[za0006])
 		if err != nil {
-			err = msgp.WrapError(err, "BaseResolvedValues", za0004)
-			return
-		}
-	}
-	// write "DamageEffectiveness"
-	err = en.Append(0xb3, 0x44, 0x61, 0x6d, 0x61, 0x67, 0x65, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x69, 0x76, 0x65, 0x6e, 0x65, 0x73, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.DamageEffectiveness)
-	if err != nil {
-		err = msgp.WrapError(err, "DamageEffectiveness")
-		return
-	}
-	// write "FloatStats"
-	err = en.Append(0xaa, 0x46, 0x6c, 0x6f, 0x61, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.FloatStats)))
-	if err != nil {
-		err = msgp.WrapError(err, "FloatStats")
-		return
-	}
-	for za0005 := range z.FloatStats {
-		err = en.WriteInt(z.FloatStats[za0005])
-		if err != nil {
-			err = msgp.WrapError(err, "FloatStats", za0005)
-			return
-		}
-	}
-	// write "FloatStatsValues"
-	err = en.Append(0xb0, 0x46, 0x6c, 0x6f, 0x61, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.FloatStatsValues)))
-	if err != nil {
-		err = msgp.WrapError(err, "FloatStatsValues")
-		return
-	}
-	for za0006 := range z.FloatStatsValues {
-		err = en.WriteFloat64(z.FloatStatsValues[za0006])
-		if err != nil {
-			err = msgp.WrapError(err, "FloatStatsValues", za0006)
-			return
-		}
-	}
-	// write "GemLevel"
-	err = en.Append(0xa8, 0x47, 0x65, 0x6d, 0x4c, 0x65, 0x76, 0x65, 0x6c)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.GemLevel)
-	if err != nil {
-		err = msgp.WrapError(err, "GemLevel")
-		return
-	}
-	// write "GrantedEffects"
-	err = en.Append(0xae, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.GrantedEffects)))
-	if err != nil {
-		err = msgp.WrapError(err, "GrantedEffects")
-		return
-	}
-	for za0007 := range z.GrantedEffects {
-		err = en.WriteInt(z.GrantedEffects[za0007])
-		if err != nil {
-			err = msgp.WrapError(err, "GrantedEffects", za0007)
+			err = msgp.WrapError(err, "BaseResolvedValues", za0006)
 			return
 		}
 	}
@@ -10992,12 +11286,76 @@ func (z *GrantedEffectStatSetsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "InterpolationBases")
 		return
 	}
-	for za0008 := range z.InterpolationBases {
-		err = en.WriteInt(z.InterpolationBases[za0008])
+	for za0007 := range z.InterpolationBases {
+		err = en.WriteInt(z.InterpolationBases[za0007])
 		if err != nil {
-			err = msgp.WrapError(err, "InterpolationBases", za0008)
+			err = msgp.WrapError(err, "InterpolationBases", za0007)
 			return
 		}
+	}
+	// write "FloatStats"
+	err = en.Append(0xaa, 0x46, 0x6c, 0x6f, 0x61, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.FloatStats)))
+	if err != nil {
+		err = msgp.WrapError(err, "FloatStats")
+		return
+	}
+	for za0008 := range z.FloatStats {
+		err = en.WriteInt(z.FloatStats[za0008])
+		if err != nil {
+			err = msgp.WrapError(err, "FloatStats", za0008)
+			return
+		}
+	}
+	// write "FloatStatsValues"
+	err = en.Append(0xb0, 0x46, 0x6c, 0x6f, 0x61, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.FloatStatsValues)))
+	if err != nil {
+		err = msgp.WrapError(err, "FloatStatsValues")
+		return
+	}
+	for za0009 := range z.FloatStatsValues {
+		err = en.WriteFloat64(z.FloatStatsValues[za0009])
+		if err != nil {
+			err = msgp.WrapError(err, "FloatStatsValues", za0009)
+			return
+		}
+	}
+	// write "BaseMultiplier"
+	err = en.Append(0xae, 0x42, 0x61, 0x73, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.BaseMultiplier)
+	if err != nil {
+		err = msgp.WrapError(err, "BaseMultiplier")
+		return
+	}
+	// write "GemLevel"
+	err = en.Append(0xa8, 0x47, 0x65, 0x6d, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.GemLevel)
+	if err != nil {
+		err = msgp.WrapError(err, "GemLevel")
+		return
+	}
+	// write "DamageEffectiveness"
+	err = en.Append(0xb3, 0x44, 0x61, 0x6d, 0x61, 0x67, 0x65, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x69, 0x76, 0x65, 0x6e, 0x65, 0x73, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.DamageEffectiveness)
+	if err != nil {
+		err = msgp.WrapError(err, "DamageEffectiveness")
+		return
 	}
 	// write "PlayerLevelReq"
 	err = en.Append(0xae, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x52, 0x65, 0x71)
@@ -11019,22 +11377,15 @@ func (z *GrantedEffectStatSetsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "OffhandCritChance")
 		return
 	}
-	// write "StatInterpolations"
-	err = en.Append(0xb2, 0x53, 0x74, 0x61, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x70, 0x6f, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73)
+	// write "AttackCritChance"
+	err = en.Append(0xb0, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x43, 0x72, 0x69, 0x74, 0x43, 0x68, 0x61, 0x6e, 0x63, 0x65)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.StatInterpolations)))
+	err = en.WriteInt(z.AttackCritChance)
 	if err != nil {
-		err = msgp.WrapError(err, "StatInterpolations")
+		err = msgp.WrapError(err, "AttackCritChance")
 		return
-	}
-	for za0009 := range z.StatInterpolations {
-		err = en.WriteInt(z.StatInterpolations[za0009])
-		if err != nil {
-			err = msgp.WrapError(err, "StatInterpolations", za0009)
-			return
-		}
 	}
 	// write "StatSet"
 	err = en.Append(0xa7, 0x53, 0x74, 0x61, 0x74, 0x53, 0x65, 0x74)
@@ -11063,11 +11414,11 @@ func (z *GrantedEffectStatSetsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *GrantedEffectStatSetsPerLevel) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 17
-	// string "AdditionalBooleanStats"
-	o = append(o, 0xde, 0x0, 0x11, 0xb6, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x42, 0x6f, 0x6f, 0x6c, 0x65, 0x61, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.AdditionalBooleanStats)))
-	for za0001 := range z.AdditionalBooleanStats {
-		o = msgp.AppendInt(o, z.AdditionalBooleanStats[za0001])
+	// string "GrantedEffects"
+	o = append(o, 0xde, 0x0, 0x11, 0xae, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.GrantedEffects)))
+	for za0001 := range z.GrantedEffects {
+		o = msgp.AppendInt(o, z.GrantedEffects[za0001])
 	}
 	// string "AdditionalStats"
 	o = append(o, 0xaf, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x53, 0x74, 0x61, 0x74, 0x73)
@@ -11081,60 +11432,60 @@ func (z *GrantedEffectStatSetsPerLevel) MarshalMsg(b []byte) (o []byte, err erro
 	for za0003 := range z.AdditionalStatsValues {
 		o = msgp.AppendInt(o, z.AdditionalStatsValues[za0003])
 	}
-	// string "AttackCritChance"
-	o = append(o, 0xb0, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x43, 0x72, 0x69, 0x74, 0x43, 0x68, 0x61, 0x6e, 0x63, 0x65)
-	o = msgp.AppendInt(o, z.AttackCritChance)
-	// string "BaseMultiplier"
-	o = append(o, 0xae, 0x42, 0x61, 0x73, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
-	o = msgp.AppendInt(o, z.BaseMultiplier)
+	// string "StatInterpolations"
+	o = append(o, 0xb2, 0x53, 0x74, 0x61, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x70, 0x6f, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.StatInterpolations)))
+	for za0004 := range z.StatInterpolations {
+		o = msgp.AppendInt(o, z.StatInterpolations[za0004])
+	}
+	// string "AdditionalBooleanStats"
+	o = append(o, 0xb6, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x42, 0x6f, 0x6f, 0x6c, 0x65, 0x61, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.AdditionalBooleanStats)))
+	for za0005 := range z.AdditionalBooleanStats {
+		o = msgp.AppendInt(o, z.AdditionalBooleanStats[za0005])
+	}
 	// string "BaseResolvedValues"
 	o = append(o, 0xb2, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x6f, 0x6c, 0x76, 0x65, 0x64, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.BaseResolvedValues)))
-	for za0004 := range z.BaseResolvedValues {
-		o = msgp.AppendInt(o, z.BaseResolvedValues[za0004])
-	}
-	// string "DamageEffectiveness"
-	o = append(o, 0xb3, 0x44, 0x61, 0x6d, 0x61, 0x67, 0x65, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x69, 0x76, 0x65, 0x6e, 0x65, 0x73, 0x73)
-	o = msgp.AppendInt(o, z.DamageEffectiveness)
-	// string "FloatStats"
-	o = append(o, 0xaa, 0x46, 0x6c, 0x6f, 0x61, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.FloatStats)))
-	for za0005 := range z.FloatStats {
-		o = msgp.AppendInt(o, z.FloatStats[za0005])
-	}
-	// string "FloatStatsValues"
-	o = append(o, 0xb0, 0x46, 0x6c, 0x6f, 0x61, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.FloatStatsValues)))
-	for za0006 := range z.FloatStatsValues {
-		o = msgp.AppendFloat64(o, z.FloatStatsValues[za0006])
-	}
-	// string "GemLevel"
-	o = append(o, 0xa8, 0x47, 0x65, 0x6d, 0x4c, 0x65, 0x76, 0x65, 0x6c)
-	o = msgp.AppendInt(o, z.GemLevel)
-	// string "GrantedEffects"
-	o = append(o, 0xae, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.GrantedEffects)))
-	for za0007 := range z.GrantedEffects {
-		o = msgp.AppendInt(o, z.GrantedEffects[za0007])
+	for za0006 := range z.BaseResolvedValues {
+		o = msgp.AppendInt(o, z.BaseResolvedValues[za0006])
 	}
 	// string "InterpolationBases"
 	o = append(o, 0xb2, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x70, 0x6f, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x61, 0x73, 0x65, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.InterpolationBases)))
-	for za0008 := range z.InterpolationBases {
-		o = msgp.AppendInt(o, z.InterpolationBases[za0008])
+	for za0007 := range z.InterpolationBases {
+		o = msgp.AppendInt(o, z.InterpolationBases[za0007])
 	}
+	// string "FloatStats"
+	o = append(o, 0xaa, 0x46, 0x6c, 0x6f, 0x61, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.FloatStats)))
+	for za0008 := range z.FloatStats {
+		o = msgp.AppendInt(o, z.FloatStats[za0008])
+	}
+	// string "FloatStatsValues"
+	o = append(o, 0xb0, 0x46, 0x6c, 0x6f, 0x61, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.FloatStatsValues)))
+	for za0009 := range z.FloatStatsValues {
+		o = msgp.AppendFloat64(o, z.FloatStatsValues[za0009])
+	}
+	// string "BaseMultiplier"
+	o = append(o, 0xae, 0x42, 0x61, 0x73, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	o = msgp.AppendInt(o, z.BaseMultiplier)
+	// string "GemLevel"
+	o = append(o, 0xa8, 0x47, 0x65, 0x6d, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	o = msgp.AppendInt(o, z.GemLevel)
+	// string "DamageEffectiveness"
+	o = append(o, 0xb3, 0x44, 0x61, 0x6d, 0x61, 0x67, 0x65, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x69, 0x76, 0x65, 0x6e, 0x65, 0x73, 0x73)
+	o = msgp.AppendInt(o, z.DamageEffectiveness)
 	// string "PlayerLevelReq"
 	o = append(o, 0xae, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x52, 0x65, 0x71)
 	o = msgp.AppendInt(o, z.PlayerLevelReq)
 	// string "OffhandCritChance"
 	o = append(o, 0xb1, 0x4f, 0x66, 0x66, 0x68, 0x61, 0x6e, 0x64, 0x43, 0x72, 0x69, 0x74, 0x43, 0x68, 0x61, 0x6e, 0x63, 0x65)
 	o = msgp.AppendInt(o, z.OffhandCritChance)
-	// string "StatInterpolations"
-	o = append(o, 0xb2, 0x53, 0x74, 0x61, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x70, 0x6f, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.StatInterpolations)))
-	for za0009 := range z.StatInterpolations {
-		o = msgp.AppendInt(o, z.StatInterpolations[za0009])
-	}
+	// string "AttackCritChance"
+	o = append(o, 0xb0, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x43, 0x72, 0x69, 0x74, 0x43, 0x68, 0x61, 0x6e, 0x63, 0x65)
+	o = msgp.AppendInt(o, z.AttackCritChance)
 	// string "StatSet"
 	o = append(o, 0xa7, 0x53, 0x74, 0x61, 0x74, 0x53, 0x65, 0x74)
 	o = msgp.AppendInt(o, z.StatSet)
@@ -11162,22 +11513,22 @@ func (z *GrantedEffectStatSetsPerLevel) UnmarshalMsg(bts []byte) (o []byte, err 
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AdditionalBooleanStats":
+		case "GrantedEffects":
 			var zb0002 uint32
 			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "AdditionalBooleanStats")
+				err = msgp.WrapError(err, "GrantedEffects")
 				return
 			}
-			if cap(z.AdditionalBooleanStats) >= int(zb0002) {
-				z.AdditionalBooleanStats = (z.AdditionalBooleanStats)[:zb0002]
+			if cap(z.GrantedEffects) >= int(zb0002) {
+				z.GrantedEffects = (z.GrantedEffects)[:zb0002]
 			} else {
-				z.AdditionalBooleanStats = make([]int, zb0002)
+				z.GrantedEffects = make([]int, zb0002)
 			}
-			for za0001 := range z.AdditionalBooleanStats {
-				z.AdditionalBooleanStats[za0001], bts, err = msgp.ReadIntBytes(bts)
+			for za0001 := range z.GrantedEffects {
+				z.GrantedEffects[za0001], bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "AdditionalBooleanStats", za0001)
+					err = msgp.WrapError(err, "GrantedEffects", za0001)
 					return
 				}
 			}
@@ -11219,11 +11570,119 @@ func (z *GrantedEffectStatSetsPerLevel) UnmarshalMsg(bts []byte) (o []byte, err 
 					return
 				}
 			}
-		case "AttackCritChance":
-			z.AttackCritChance, bts, err = msgp.ReadIntBytes(bts)
+		case "StatInterpolations":
+			var zb0005 uint32
+			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "AttackCritChance")
+				err = msgp.WrapError(err, "StatInterpolations")
 				return
+			}
+			if cap(z.StatInterpolations) >= int(zb0005) {
+				z.StatInterpolations = (z.StatInterpolations)[:zb0005]
+			} else {
+				z.StatInterpolations = make([]int, zb0005)
+			}
+			for za0004 := range z.StatInterpolations {
+				z.StatInterpolations[za0004], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "StatInterpolations", za0004)
+					return
+				}
+			}
+		case "AdditionalBooleanStats":
+			var zb0006 uint32
+			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AdditionalBooleanStats")
+				return
+			}
+			if cap(z.AdditionalBooleanStats) >= int(zb0006) {
+				z.AdditionalBooleanStats = (z.AdditionalBooleanStats)[:zb0006]
+			} else {
+				z.AdditionalBooleanStats = make([]int, zb0006)
+			}
+			for za0005 := range z.AdditionalBooleanStats {
+				z.AdditionalBooleanStats[za0005], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "AdditionalBooleanStats", za0005)
+					return
+				}
+			}
+		case "BaseResolvedValues":
+			var zb0007 uint32
+			zb0007, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "BaseResolvedValues")
+				return
+			}
+			if cap(z.BaseResolvedValues) >= int(zb0007) {
+				z.BaseResolvedValues = (z.BaseResolvedValues)[:zb0007]
+			} else {
+				z.BaseResolvedValues = make([]int, zb0007)
+			}
+			for za0006 := range z.BaseResolvedValues {
+				z.BaseResolvedValues[za0006], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "BaseResolvedValues", za0006)
+					return
+				}
+			}
+		case "InterpolationBases":
+			var zb0008 uint32
+			zb0008, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "InterpolationBases")
+				return
+			}
+			if cap(z.InterpolationBases) >= int(zb0008) {
+				z.InterpolationBases = (z.InterpolationBases)[:zb0008]
+			} else {
+				z.InterpolationBases = make([]int, zb0008)
+			}
+			for za0007 := range z.InterpolationBases {
+				z.InterpolationBases[za0007], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "InterpolationBases", za0007)
+					return
+				}
+			}
+		case "FloatStats":
+			var zb0009 uint32
+			zb0009, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "FloatStats")
+				return
+			}
+			if cap(z.FloatStats) >= int(zb0009) {
+				z.FloatStats = (z.FloatStats)[:zb0009]
+			} else {
+				z.FloatStats = make([]int, zb0009)
+			}
+			for za0008 := range z.FloatStats {
+				z.FloatStats[za0008], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "FloatStats", za0008)
+					return
+				}
+			}
+		case "FloatStatsValues":
+			var zb0010 uint32
+			zb0010, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "FloatStatsValues")
+				return
+			}
+			if cap(z.FloatStatsValues) >= int(zb0010) {
+				z.FloatStatsValues = (z.FloatStatsValues)[:zb0010]
+			} else {
+				z.FloatStatsValues = make([]float64, zb0010)
+			}
+			for za0009 := range z.FloatStatsValues {
+				z.FloatStatsValues[za0009], bts, err = msgp.ReadFloat64Bytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "FloatStatsValues", za0009)
+					return
+				}
 			}
 		case "BaseMultiplier":
 			z.BaseMultiplier, bts, err = msgp.ReadIntBytes(bts)
@@ -11231,112 +11690,17 @@ func (z *GrantedEffectStatSetsPerLevel) UnmarshalMsg(bts []byte) (o []byte, err 
 				err = msgp.WrapError(err, "BaseMultiplier")
 				return
 			}
-		case "BaseResolvedValues":
-			var zb0005 uint32
-			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "BaseResolvedValues")
-				return
-			}
-			if cap(z.BaseResolvedValues) >= int(zb0005) {
-				z.BaseResolvedValues = (z.BaseResolvedValues)[:zb0005]
-			} else {
-				z.BaseResolvedValues = make([]int, zb0005)
-			}
-			for za0004 := range z.BaseResolvedValues {
-				z.BaseResolvedValues[za0004], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "BaseResolvedValues", za0004)
-					return
-				}
-			}
-		case "DamageEffectiveness":
-			z.DamageEffectiveness, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "DamageEffectiveness")
-				return
-			}
-		case "FloatStats":
-			var zb0006 uint32
-			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "FloatStats")
-				return
-			}
-			if cap(z.FloatStats) >= int(zb0006) {
-				z.FloatStats = (z.FloatStats)[:zb0006]
-			} else {
-				z.FloatStats = make([]int, zb0006)
-			}
-			for za0005 := range z.FloatStats {
-				z.FloatStats[za0005], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "FloatStats", za0005)
-					return
-				}
-			}
-		case "FloatStatsValues":
-			var zb0007 uint32
-			zb0007, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "FloatStatsValues")
-				return
-			}
-			if cap(z.FloatStatsValues) >= int(zb0007) {
-				z.FloatStatsValues = (z.FloatStatsValues)[:zb0007]
-			} else {
-				z.FloatStatsValues = make([]float64, zb0007)
-			}
-			for za0006 := range z.FloatStatsValues {
-				z.FloatStatsValues[za0006], bts, err = msgp.ReadFloat64Bytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "FloatStatsValues", za0006)
-					return
-				}
-			}
 		case "GemLevel":
 			z.GemLevel, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "GemLevel")
 				return
 			}
-		case "GrantedEffects":
-			var zb0008 uint32
-			zb0008, bts, err = msgp.ReadArrayHeaderBytes(bts)
+		case "DamageEffectiveness":
+			z.DamageEffectiveness, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "GrantedEffects")
+				err = msgp.WrapError(err, "DamageEffectiveness")
 				return
-			}
-			if cap(z.GrantedEffects) >= int(zb0008) {
-				z.GrantedEffects = (z.GrantedEffects)[:zb0008]
-			} else {
-				z.GrantedEffects = make([]int, zb0008)
-			}
-			for za0007 := range z.GrantedEffects {
-				z.GrantedEffects[za0007], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "GrantedEffects", za0007)
-					return
-				}
-			}
-		case "InterpolationBases":
-			var zb0009 uint32
-			zb0009, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "InterpolationBases")
-				return
-			}
-			if cap(z.InterpolationBases) >= int(zb0009) {
-				z.InterpolationBases = (z.InterpolationBases)[:zb0009]
-			} else {
-				z.InterpolationBases = make([]int, zb0009)
-			}
-			for za0008 := range z.InterpolationBases {
-				z.InterpolationBases[za0008], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "InterpolationBases", za0008)
-					return
-				}
 			}
 		case "PlayerLevelReq":
 			z.PlayerLevelReq, bts, err = msgp.ReadIntBytes(bts)
@@ -11350,24 +11714,11 @@ func (z *GrantedEffectStatSetsPerLevel) UnmarshalMsg(bts []byte) (o []byte, err 
 				err = msgp.WrapError(err, "OffhandCritChance")
 				return
 			}
-		case "StatInterpolations":
-			var zb0010 uint32
-			zb0010, bts, err = msgp.ReadArrayHeaderBytes(bts)
+		case "AttackCritChance":
+			z.AttackCritChance, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "StatInterpolations")
+				err = msgp.WrapError(err, "AttackCritChance")
 				return
-			}
-			if cap(z.StatInterpolations) >= int(zb0010) {
-				z.StatInterpolations = (z.StatInterpolations)[:zb0010]
-			} else {
-				z.StatInterpolations = make([]int, zb0010)
-			}
-			for za0009 := range z.StatInterpolations {
-				z.StatInterpolations[za0009], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "StatInterpolations", za0009)
-					return
-				}
 			}
 		case "StatSet":
 			z.StatSet, bts, err = msgp.ReadIntBytes(bts)
@@ -11395,7 +11746,7 @@ func (z *GrantedEffectStatSetsPerLevel) UnmarshalMsg(bts []byte) (o []byte, err 
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *GrantedEffectStatSetsPerLevel) Msgsize() (s int) {
-	s = 3 + 23 + msgp.ArrayHeaderSize + (len(z.AdditionalBooleanStats) * (msgp.IntSize)) + 16 + msgp.ArrayHeaderSize + (len(z.AdditionalStats) * (msgp.IntSize)) + 22 + msgp.ArrayHeaderSize + (len(z.AdditionalStatsValues) * (msgp.IntSize)) + 17 + msgp.IntSize + 15 + msgp.IntSize + 19 + msgp.ArrayHeaderSize + (len(z.BaseResolvedValues) * (msgp.IntSize)) + 20 + msgp.IntSize + 11 + msgp.ArrayHeaderSize + (len(z.FloatStats) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.FloatStatsValues) * (msgp.Float64Size)) + 9 + msgp.IntSize + 15 + msgp.ArrayHeaderSize + (len(z.GrantedEffects) * (msgp.IntSize)) + 19 + msgp.ArrayHeaderSize + (len(z.InterpolationBases) * (msgp.IntSize)) + 15 + msgp.IntSize + 18 + msgp.IntSize + 19 + msgp.ArrayHeaderSize + (len(z.StatInterpolations) * (msgp.IntSize)) + 8 + msgp.IntSize + 4 + msgp.IntSize
+	s = 3 + 15 + msgp.ArrayHeaderSize + (len(z.GrantedEffects) * (msgp.IntSize)) + 16 + msgp.ArrayHeaderSize + (len(z.AdditionalStats) * (msgp.IntSize)) + 22 + msgp.ArrayHeaderSize + (len(z.AdditionalStatsValues) * (msgp.IntSize)) + 19 + msgp.ArrayHeaderSize + (len(z.StatInterpolations) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.AdditionalBooleanStats) * (msgp.IntSize)) + 19 + msgp.ArrayHeaderSize + (len(z.BaseResolvedValues) * (msgp.IntSize)) + 19 + msgp.ArrayHeaderSize + (len(z.InterpolationBases) * (msgp.IntSize)) + 11 + msgp.ArrayHeaderSize + (len(z.FloatStats) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.FloatStatsValues) * (msgp.Float64Size)) + 15 + msgp.IntSize + 9 + msgp.IntSize + 20 + msgp.IntSize + 15 + msgp.IntSize + 18 + msgp.IntSize + 17 + msgp.IntSize + 8 + msgp.IntSize + 4 + msgp.IntSize
 	return
 }
 
@@ -11417,36 +11768,6 @@ func (z *GrantedEffectsPerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AttackSpeedMultiplier":
-			z.AttackSpeedMultiplier, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "AttackSpeedMultiplier")
-				return
-			}
-		case "AttackTime":
-			z.AttackTime, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "AttackTime")
-				return
-			}
-		case "Cooldown":
-			z.Cooldown, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Cooldown")
-				return
-			}
-		case "CooldownBypassType":
-			z.CooldownBypassType, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "CooldownBypassType")
-				return
-			}
-		case "CooldownGroup":
-			z.CooldownGroup, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "CooldownGroup")
-				return
-			}
 		case "CostAmounts":
 			var zb0002 uint32
 			zb0002, err = dc.ReadArrayHeader()
@@ -11465,12 +11786,6 @@ func (z *GrantedEffectsPerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 					err = msgp.WrapError(err, "CostAmounts", za0001)
 					return
 				}
-			}
-		case "CostMultiplier":
-			z.CostMultiplier, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "CostMultiplier")
-				return
 			}
 		case "CostTypes":
 			var zb0003 uint32
@@ -11491,6 +11806,42 @@ func (z *GrantedEffectsPerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
+		case "LifeReservationFlat":
+			z.LifeReservationFlat, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "LifeReservationFlat")
+				return
+			}
+		case "LifeReservationPercent":
+			z.LifeReservationPercent, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "LifeReservationPercent")
+				return
+			}
+		case "CooldownGroup":
+			z.CooldownGroup, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "CooldownGroup")
+				return
+			}
+		case "Cooldown":
+			z.Cooldown, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Cooldown")
+				return
+			}
+		case "CostMultiplier":
+			z.CostMultiplier, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "CostMultiplier")
+				return
+			}
+		case "AttackTime":
+			z.AttackTime, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "AttackTime")
+				return
+			}
 		case "GrantedEffect":
 			z.GrantedEffect, err = dc.ReadInt()
 			if err != nil {
@@ -11503,16 +11854,16 @@ func (z *GrantedEffectsPerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Level")
 				return
 			}
-		case "LifeReservationFlat":
-			z.LifeReservationFlat, err = dc.ReadInt()
+		case "AttackSpeedMultiplier":
+			z.AttackSpeedMultiplier, err = dc.ReadInt()
 			if err != nil {
-				err = msgp.WrapError(err, "LifeReservationFlat")
+				err = msgp.WrapError(err, "AttackSpeedMultiplier")
 				return
 			}
-		case "LifeReservationPercent":
-			z.LifeReservationPercent, err = dc.ReadInt()
+		case "CooldownBypassType":
+			z.CooldownBypassType, err = dc.ReadInt()
 			if err != nil {
-				err = msgp.WrapError(err, "LifeReservationPercent")
+				err = msgp.WrapError(err, "CooldownBypassType")
 				return
 			}
 		case "ManaReservationFlat":
@@ -11577,58 +11928,8 @@ func (z *GrantedEffectsPerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *GrantedEffectsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 20
-	// write "AttackSpeedMultiplier"
-	err = en.Append(0xde, 0x0, 0x14, 0xb5, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x53, 0x70, 0x65, 0x65, 0x64, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.AttackSpeedMultiplier)
-	if err != nil {
-		err = msgp.WrapError(err, "AttackSpeedMultiplier")
-		return
-	}
-	// write "AttackTime"
-	err = en.Append(0xaa, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x54, 0x69, 0x6d, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.AttackTime)
-	if err != nil {
-		err = msgp.WrapError(err, "AttackTime")
-		return
-	}
-	// write "Cooldown"
-	err = en.Append(0xa8, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Cooldown)
-	if err != nil {
-		err = msgp.WrapError(err, "Cooldown")
-		return
-	}
-	// write "CooldownBypassType"
-	err = en.Append(0xb2, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e, 0x42, 0x79, 0x70, 0x61, 0x73, 0x73, 0x54, 0x79, 0x70, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.CooldownBypassType)
-	if err != nil {
-		err = msgp.WrapError(err, "CooldownBypassType")
-		return
-	}
-	// write "CooldownGroup"
-	err = en.Append(0xad, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e, 0x47, 0x72, 0x6f, 0x75, 0x70)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.CooldownGroup)
-	if err != nil {
-		err = msgp.WrapError(err, "CooldownGroup")
-		return
-	}
 	// write "CostAmounts"
-	err = en.Append(0xab, 0x43, 0x6f, 0x73, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x73)
+	err = en.Append(0xde, 0x0, 0x14, 0xab, 0x43, 0x6f, 0x73, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x73)
 	if err != nil {
 		return
 	}
@@ -11643,16 +11944,6 @@ func (z *GrantedEffectsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 			err = msgp.WrapError(err, "CostAmounts", za0001)
 			return
 		}
-	}
-	// write "CostMultiplier"
-	err = en.Append(0xae, 0x43, 0x6f, 0x73, 0x74, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.CostMultiplier)
-	if err != nil {
-		err = msgp.WrapError(err, "CostMultiplier")
-		return
 	}
 	// write "CostTypes"
 	err = en.Append(0xa9, 0x43, 0x6f, 0x73, 0x74, 0x54, 0x79, 0x70, 0x65, 0x73)
@@ -11670,6 +11961,66 @@ func (z *GrantedEffectsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 			err = msgp.WrapError(err, "CostTypes", za0002)
 			return
 		}
+	}
+	// write "LifeReservationFlat"
+	err = en.Append(0xb3, 0x4c, 0x69, 0x66, 0x65, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x46, 0x6c, 0x61, 0x74)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.LifeReservationFlat)
+	if err != nil {
+		err = msgp.WrapError(err, "LifeReservationFlat")
+		return
+	}
+	// write "LifeReservationPercent"
+	err = en.Append(0xb6, 0x4c, 0x69, 0x66, 0x65, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.LifeReservationPercent)
+	if err != nil {
+		err = msgp.WrapError(err, "LifeReservationPercent")
+		return
+	}
+	// write "CooldownGroup"
+	err = en.Append(0xad, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e, 0x47, 0x72, 0x6f, 0x75, 0x70)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.CooldownGroup)
+	if err != nil {
+		err = msgp.WrapError(err, "CooldownGroup")
+		return
+	}
+	// write "Cooldown"
+	err = en.Append(0xa8, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Cooldown)
+	if err != nil {
+		err = msgp.WrapError(err, "Cooldown")
+		return
+	}
+	// write "CostMultiplier"
+	err = en.Append(0xae, 0x43, 0x6f, 0x73, 0x74, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.CostMultiplier)
+	if err != nil {
+		err = msgp.WrapError(err, "CostMultiplier")
+		return
+	}
+	// write "AttackTime"
+	err = en.Append(0xaa, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x54, 0x69, 0x6d, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.AttackTime)
+	if err != nil {
+		err = msgp.WrapError(err, "AttackTime")
+		return
 	}
 	// write "GrantedEffect"
 	err = en.Append(0xad, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
@@ -11691,24 +12042,24 @@ func (z *GrantedEffectsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Level")
 		return
 	}
-	// write "LifeReservationFlat"
-	err = en.Append(0xb3, 0x4c, 0x69, 0x66, 0x65, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x46, 0x6c, 0x61, 0x74)
+	// write "AttackSpeedMultiplier"
+	err = en.Append(0xb5, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x53, 0x70, 0x65, 0x65, 0x64, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.LifeReservationFlat)
+	err = en.WriteInt(z.AttackSpeedMultiplier)
 	if err != nil {
-		err = msgp.WrapError(err, "LifeReservationFlat")
+		err = msgp.WrapError(err, "AttackSpeedMultiplier")
 		return
 	}
-	// write "LifeReservationPercent"
-	err = en.Append(0xb6, 0x4c, 0x69, 0x66, 0x65, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74)
+	// write "CooldownBypassType"
+	err = en.Append(0xb2, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e, 0x42, 0x79, 0x70, 0x61, 0x73, 0x73, 0x54, 0x79, 0x70, 0x65)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.LifeReservationPercent)
+	err = en.WriteInt(z.CooldownBypassType)
 	if err != nil {
-		err = msgp.WrapError(err, "LifeReservationPercent")
+		err = msgp.WrapError(err, "CooldownBypassType")
 		return
 	}
 	// write "ManaReservationFlat"
@@ -11798,48 +12149,48 @@ func (z *GrantedEffectsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *GrantedEffectsPerLevel) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 20
-	// string "AttackSpeedMultiplier"
-	o = append(o, 0xde, 0x0, 0x14, 0xb5, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x53, 0x70, 0x65, 0x65, 0x64, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
-	o = msgp.AppendInt(o, z.AttackSpeedMultiplier)
-	// string "AttackTime"
-	o = append(o, 0xaa, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x54, 0x69, 0x6d, 0x65)
-	o = msgp.AppendInt(o, z.AttackTime)
-	// string "Cooldown"
-	o = append(o, 0xa8, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e)
-	o = msgp.AppendInt(o, z.Cooldown)
-	// string "CooldownBypassType"
-	o = append(o, 0xb2, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e, 0x42, 0x79, 0x70, 0x61, 0x73, 0x73, 0x54, 0x79, 0x70, 0x65)
-	o = msgp.AppendInt(o, z.CooldownBypassType)
-	// string "CooldownGroup"
-	o = append(o, 0xad, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e, 0x47, 0x72, 0x6f, 0x75, 0x70)
-	o = msgp.AppendInt(o, z.CooldownGroup)
 	// string "CostAmounts"
-	o = append(o, 0xab, 0x43, 0x6f, 0x73, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x73)
+	o = append(o, 0xde, 0x0, 0x14, 0xab, 0x43, 0x6f, 0x73, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.CostAmounts)))
 	for za0001 := range z.CostAmounts {
 		o = msgp.AppendInt(o, z.CostAmounts[za0001])
 	}
-	// string "CostMultiplier"
-	o = append(o, 0xae, 0x43, 0x6f, 0x73, 0x74, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
-	o = msgp.AppendInt(o, z.CostMultiplier)
 	// string "CostTypes"
 	o = append(o, 0xa9, 0x43, 0x6f, 0x73, 0x74, 0x54, 0x79, 0x70, 0x65, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.CostTypes)))
 	for za0002 := range z.CostTypes {
 		o = msgp.AppendInt(o, z.CostTypes[za0002])
 	}
-	// string "GrantedEffect"
-	o = append(o, 0xad, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
-	o = msgp.AppendInt(o, z.GrantedEffect)
-	// string "Level"
-	o = append(o, 0xa5, 0x4c, 0x65, 0x76, 0x65, 0x6c)
-	o = msgp.AppendInt(o, z.Level)
 	// string "LifeReservationFlat"
 	o = append(o, 0xb3, 0x4c, 0x69, 0x66, 0x65, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x46, 0x6c, 0x61, 0x74)
 	o = msgp.AppendInt(o, z.LifeReservationFlat)
 	// string "LifeReservationPercent"
 	o = append(o, 0xb6, 0x4c, 0x69, 0x66, 0x65, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74)
 	o = msgp.AppendInt(o, z.LifeReservationPercent)
+	// string "CooldownGroup"
+	o = append(o, 0xad, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e, 0x47, 0x72, 0x6f, 0x75, 0x70)
+	o = msgp.AppendInt(o, z.CooldownGroup)
+	// string "Cooldown"
+	o = append(o, 0xa8, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e)
+	o = msgp.AppendInt(o, z.Cooldown)
+	// string "CostMultiplier"
+	o = append(o, 0xae, 0x43, 0x6f, 0x73, 0x74, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	o = msgp.AppendInt(o, z.CostMultiplier)
+	// string "AttackTime"
+	o = append(o, 0xaa, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x54, 0x69, 0x6d, 0x65)
+	o = msgp.AppendInt(o, z.AttackTime)
+	// string "GrantedEffect"
+	o = append(o, 0xad, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
+	o = msgp.AppendInt(o, z.GrantedEffect)
+	// string "Level"
+	o = append(o, 0xa5, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	o = msgp.AppendInt(o, z.Level)
+	// string "AttackSpeedMultiplier"
+	o = append(o, 0xb5, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x53, 0x70, 0x65, 0x65, 0x64, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	o = msgp.AppendInt(o, z.AttackSpeedMultiplier)
+	// string "CooldownBypassType"
+	o = append(o, 0xb2, 0x43, 0x6f, 0x6f, 0x6c, 0x64, 0x6f, 0x77, 0x6e, 0x42, 0x79, 0x70, 0x61, 0x73, 0x73, 0x54, 0x79, 0x70, 0x65)
+	o = msgp.AppendInt(o, z.CooldownBypassType)
 	// string "ManaReservationFlat"
 	o = append(o, 0xb3, 0x4d, 0x61, 0x6e, 0x61, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x46, 0x6c, 0x61, 0x74)
 	o = msgp.AppendInt(o, z.ManaReservationFlat)
@@ -11885,36 +12236,6 @@ func (z *GrantedEffectsPerLevel) UnmarshalMsg(bts []byte) (o []byte, err error) 
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AttackSpeedMultiplier":
-			z.AttackSpeedMultiplier, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "AttackSpeedMultiplier")
-				return
-			}
-		case "AttackTime":
-			z.AttackTime, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "AttackTime")
-				return
-			}
-		case "Cooldown":
-			z.Cooldown, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Cooldown")
-				return
-			}
-		case "CooldownBypassType":
-			z.CooldownBypassType, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "CooldownBypassType")
-				return
-			}
-		case "CooldownGroup":
-			z.CooldownGroup, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "CooldownGroup")
-				return
-			}
 		case "CostAmounts":
 			var zb0002 uint32
 			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
@@ -11933,12 +12254,6 @@ func (z *GrantedEffectsPerLevel) UnmarshalMsg(bts []byte) (o []byte, err error) 
 					err = msgp.WrapError(err, "CostAmounts", za0001)
 					return
 				}
-			}
-		case "CostMultiplier":
-			z.CostMultiplier, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "CostMultiplier")
-				return
 			}
 		case "CostTypes":
 			var zb0003 uint32
@@ -11959,6 +12274,42 @@ func (z *GrantedEffectsPerLevel) UnmarshalMsg(bts []byte) (o []byte, err error) 
 					return
 				}
 			}
+		case "LifeReservationFlat":
+			z.LifeReservationFlat, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "LifeReservationFlat")
+				return
+			}
+		case "LifeReservationPercent":
+			z.LifeReservationPercent, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "LifeReservationPercent")
+				return
+			}
+		case "CooldownGroup":
+			z.CooldownGroup, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "CooldownGroup")
+				return
+			}
+		case "Cooldown":
+			z.Cooldown, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Cooldown")
+				return
+			}
+		case "CostMultiplier":
+			z.CostMultiplier, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "CostMultiplier")
+				return
+			}
+		case "AttackTime":
+			z.AttackTime, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AttackTime")
+				return
+			}
 		case "GrantedEffect":
 			z.GrantedEffect, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
@@ -11971,16 +12322,16 @@ func (z *GrantedEffectsPerLevel) UnmarshalMsg(bts []byte) (o []byte, err error) 
 				err = msgp.WrapError(err, "Level")
 				return
 			}
-		case "LifeReservationFlat":
-			z.LifeReservationFlat, bts, err = msgp.ReadIntBytes(bts)
+		case "AttackSpeedMultiplier":
+			z.AttackSpeedMultiplier, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "LifeReservationFlat")
+				err = msgp.WrapError(err, "AttackSpeedMultiplier")
 				return
 			}
-		case "LifeReservationPercent":
-			z.LifeReservationPercent, bts, err = msgp.ReadIntBytes(bts)
+		case "CooldownBypassType":
+			z.CooldownBypassType, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "LifeReservationPercent")
+				err = msgp.WrapError(err, "CooldownBypassType")
 				return
 			}
 		case "ManaReservationFlat":
@@ -12045,7 +12396,7 @@ func (z *GrantedEffectsPerLevel) UnmarshalMsg(bts []byte) (o []byte, err error) 
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *GrantedEffectsPerLevel) Msgsize() (s int) {
-	s = 3 + 22 + msgp.IntSize + 11 + msgp.IntSize + 9 + msgp.IntSize + 19 + msgp.IntSize + 14 + msgp.IntSize + 12 + msgp.ArrayHeaderSize + (len(z.CostAmounts) * (msgp.IntSize)) + 15 + msgp.IntSize + 10 + msgp.ArrayHeaderSize + (len(z.CostTypes) * (msgp.IntSize)) + 14 + msgp.IntSize + 6 + msgp.IntSize + 20 + msgp.IntSize + 23 + msgp.IntSize + 20 + msgp.IntSize + 23 + msgp.IntSize + 15 + msgp.IntSize + 27 + msgp.IntSize + 11 + msgp.IntSize + 10 + msgp.IntSize + 15 + msgp.IntSize + 4 + msgp.IntSize
+	s = 3 + 12 + msgp.ArrayHeaderSize + (len(z.CostAmounts) * (msgp.IntSize)) + 10 + msgp.ArrayHeaderSize + (len(z.CostTypes) * (msgp.IntSize)) + 20 + msgp.IntSize + 23 + msgp.IntSize + 14 + msgp.IntSize + 9 + msgp.IntSize + 15 + msgp.IntSize + 11 + msgp.IntSize + 14 + msgp.IntSize + 6 + msgp.IntSize + 22 + msgp.IntSize + 19 + msgp.IntSize + 20 + msgp.IntSize + 23 + msgp.IntSize + 15 + msgp.IntSize + 27 + msgp.IntSize + 11 + msgp.IntSize + 10 + msgp.IntSize + 15 + msgp.IntSize + 4 + msgp.IntSize
 	return
 }
 
@@ -12067,46 +12418,83 @@ func (z *ItemClass) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AllocateToMapOwner":
-			z.AllocateToMapOwner, err = dc.ReadBool()
+		case "ItemStance":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "ItemStance")
+					return
+				}
+				z.ItemStance = nil
+			} else {
+				if z.ItemStance == nil {
+					z.ItemStance = new(int)
+				}
+				*z.ItemStance, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ItemStance")
+					return
+				}
+			}
+		case "ItemClassCategory":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "ItemClassCategory")
+					return
+				}
+				z.ItemClassCategory = nil
+			} else {
+				if z.ItemClassCategory == nil {
+					z.ItemClassCategory = new(int)
+				}
+				*z.ItemClassCategory, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ItemClassCategory")
+					return
+				}
+			}
+		case "Name":
+			z.Name, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "AllocateToMapOwner")
+				err = msgp.WrapError(err, "Name")
 				return
 			}
-		case "AlwaysAllocate":
-			z.AlwaysAllocate, err = dc.ReadBool()
+		case "ID":
+			z.ID, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "AlwaysAllocate")
+				err = msgp.WrapError(err, "ID")
 				return
 			}
-		case "AlwaysShow":
-			z.AlwaysShow, err = dc.ReadBool()
+		case "Flags":
+			var zb0002 uint32
+			zb0002, err = dc.ReadArrayHeader()
 			if err != nil {
-				err = msgp.WrapError(err, "AlwaysShow")
+				err = msgp.WrapError(err, "Flags")
 				return
 			}
-		case "CanBeCorrupted":
-			z.CanBeCorrupted, err = dc.ReadBool()
+			if cap(z.Flags) >= int(zb0002) {
+				z.Flags = (z.Flags)[:zb0002]
+			} else {
+				z.Flags = make([]int, zb0002)
+			}
+			for za0001 := range z.Flags {
+				z.Flags[za0001], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "Flags", za0001)
+					return
+				}
+			}
+		case "Key":
+			z.Key, err = dc.ReadInt()
 			if err != nil {
-				err = msgp.WrapError(err, "CanBeCorrupted")
+				err = msgp.WrapError(err, "Key")
 				return
 			}
 		case "CanBeDoubleCorrupted":
 			z.CanBeDoubleCorrupted, err = dc.ReadBool()
 			if err != nil {
 				err = msgp.WrapError(err, "CanBeDoubleCorrupted")
-				return
-			}
-		case "CanHaveAspects":
-			z.CanHaveAspects, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "CanHaveAspects")
-				return
-			}
-		case "CanHaveIncubators":
-			z.CanHaveIncubators, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "CanHaveIncubators")
 				return
 			}
 		case "CanHaveInfluence":
@@ -12133,71 +12521,34 @@ func (z *ItemClass) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "CanTransferSkin")
 				return
 			}
-		case "Flags":
-			var zb0002 uint32
-			zb0002, err = dc.ReadArrayHeader()
+		case "CanHaveIncubators":
+			z.CanHaveIncubators, err = dc.ReadBool()
 			if err != nil {
-				err = msgp.WrapError(err, "Flags")
+				err = msgp.WrapError(err, "CanHaveIncubators")
 				return
 			}
-			if cap(z.Flags) >= int(zb0002) {
-				z.Flags = (z.Flags)[:zb0002]
-			} else {
-				z.Flags = make([]int, zb0002)
-			}
-			for za0001 := range z.Flags {
-				z.Flags[za0001], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "Flags", za0001)
-					return
-				}
-			}
-		case "ID":
-			z.ID, err = dc.ReadString()
+		case "CanHaveAspects":
+			z.CanHaveAspects, err = dc.ReadBool()
 			if err != nil {
-				err = msgp.WrapError(err, "ID")
+				err = msgp.WrapError(err, "CanHaveAspects")
 				return
 			}
-		case "ItemClassCategory":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "ItemClassCategory")
-					return
-				}
-				z.ItemClassCategory = nil
-			} else {
-				if z.ItemClassCategory == nil {
-					z.ItemClassCategory = new(int)
-				}
-				*z.ItemClassCategory, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "ItemClassCategory")
-					return
-				}
-			}
-		case "ItemStance":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "ItemStance")
-					return
-				}
-				z.ItemStance = nil
-			} else {
-				if z.ItemStance == nil {
-					z.ItemStance = new(int)
-				}
-				*z.ItemStance, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "ItemStance")
-					return
-				}
-			}
-		case "Name":
-			z.Name, err = dc.ReadString()
+		case "AllocateToMapOwner":
+			z.AllocateToMapOwner, err = dc.ReadBool()
 			if err != nil {
-				err = msgp.WrapError(err, "Name")
+				err = msgp.WrapError(err, "AllocateToMapOwner")
+				return
+			}
+		case "CanBeCorrupted":
+			z.CanBeCorrupted, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "CanBeCorrupted")
+				return
+			}
+		case "AlwaysShow":
+			z.AlwaysShow, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "AlwaysShow")
 				return
 			}
 		case "RemovedIfLeavesArea":
@@ -12206,10 +12557,10 @@ func (z *ItemClass) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "RemovedIfLeavesArea")
 				return
 			}
-		case "Key":
-			z.Key, err = dc.ReadInt()
+		case "AlwaysAllocate":
+			z.AlwaysAllocate, err = dc.ReadBool()
 			if err != nil {
-				err = msgp.WrapError(err, "Key")
+				err = msgp.WrapError(err, "AlwaysAllocate")
 				return
 			}
 		default:
@@ -12226,44 +12577,85 @@ func (z *ItemClass) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *ItemClass) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 18
-	// write "AllocateToMapOwner"
-	err = en.Append(0xde, 0x0, 0x12, 0xb2, 0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65, 0x54, 0x6f, 0x4d, 0x61, 0x70, 0x4f, 0x77, 0x6e, 0x65, 0x72)
+	// write "ItemStance"
+	err = en.Append(0xde, 0x0, 0x12, 0xaa, 0x49, 0x74, 0x65, 0x6d, 0x53, 0x74, 0x61, 0x6e, 0x63, 0x65)
 	if err != nil {
 		return
 	}
-	err = en.WriteBool(z.AllocateToMapOwner)
-	if err != nil {
-		err = msgp.WrapError(err, "AllocateToMapOwner")
-		return
+	if z.ItemStance == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.ItemStance)
+		if err != nil {
+			err = msgp.WrapError(err, "ItemStance")
+			return
+		}
 	}
-	// write "AlwaysAllocate"
-	err = en.Append(0xae, 0x41, 0x6c, 0x77, 0x61, 0x79, 0x73, 0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.AlwaysAllocate)
-	if err != nil {
-		err = msgp.WrapError(err, "AlwaysAllocate")
-		return
-	}
-	// write "AlwaysShow"
-	err = en.Append(0xaa, 0x41, 0x6c, 0x77, 0x61, 0x79, 0x73, 0x53, 0x68, 0x6f, 0x77)
+	// write "ItemClassCategory"
+	err = en.Append(0xb1, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79)
 	if err != nil {
 		return
 	}
-	err = en.WriteBool(z.AlwaysShow)
+	if z.ItemClassCategory == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.ItemClassCategory)
+		if err != nil {
+			err = msgp.WrapError(err, "ItemClassCategory")
+			return
+		}
+	}
+	// write "Name"
+	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
 	if err != nil {
-		err = msgp.WrapError(err, "AlwaysShow")
 		return
 	}
-	// write "CanBeCorrupted"
-	err = en.Append(0xae, 0x43, 0x61, 0x6e, 0x42, 0x65, 0x43, 0x6f, 0x72, 0x72, 0x75, 0x70, 0x74, 0x65, 0x64)
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	// write "ID"
+	err = en.Append(0xa2, 0x49, 0x44)
 	if err != nil {
 		return
 	}
-	err = en.WriteBool(z.CanBeCorrupted)
+	err = en.WriteString(z.ID)
 	if err != nil {
-		err = msgp.WrapError(err, "CanBeCorrupted")
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	// write "Flags"
+	err = en.Append(0xa5, 0x46, 0x6c, 0x61, 0x67, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Flags)))
+	if err != nil {
+		err = msgp.WrapError(err, "Flags")
+		return
+	}
+	for za0001 := range z.Flags {
+		err = en.WriteInt(z.Flags[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "Flags", za0001)
+			return
+		}
+	}
+	// write "Key"
+	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
 		return
 	}
 	// write "CanBeDoubleCorrupted"
@@ -12274,26 +12666,6 @@ func (z *ItemClass) EncodeMsg(en *msgp.Writer) (err error) {
 	err = en.WriteBool(z.CanBeDoubleCorrupted)
 	if err != nil {
 		err = msgp.WrapError(err, "CanBeDoubleCorrupted")
-		return
-	}
-	// write "CanHaveAspects"
-	err = en.Append(0xae, 0x43, 0x61, 0x6e, 0x48, 0x61, 0x76, 0x65, 0x41, 0x73, 0x70, 0x65, 0x63, 0x74, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.CanHaveAspects)
-	if err != nil {
-		err = msgp.WrapError(err, "CanHaveAspects")
-		return
-	}
-	// write "CanHaveIncubators"
-	err = en.Append(0xb1, 0x43, 0x61, 0x6e, 0x48, 0x61, 0x76, 0x65, 0x49, 0x6e, 0x63, 0x75, 0x62, 0x61, 0x74, 0x6f, 0x72, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.CanHaveIncubators)
-	if err != nil {
-		err = msgp.WrapError(err, "CanHaveIncubators")
 		return
 	}
 	// write "CanHaveInfluence"
@@ -12336,75 +12708,54 @@ func (z *ItemClass) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "CanTransferSkin")
 		return
 	}
-	// write "Flags"
-	err = en.Append(0xa5, 0x46, 0x6c, 0x61, 0x67, 0x73)
+	// write "CanHaveIncubators"
+	err = en.Append(0xb1, 0x43, 0x61, 0x6e, 0x48, 0x61, 0x76, 0x65, 0x49, 0x6e, 0x63, 0x75, 0x62, 0x61, 0x74, 0x6f, 0x72, 0x73)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.Flags)))
+	err = en.WriteBool(z.CanHaveIncubators)
 	if err != nil {
-		err = msgp.WrapError(err, "Flags")
+		err = msgp.WrapError(err, "CanHaveIncubators")
 		return
 	}
-	for za0001 := range z.Flags {
-		err = en.WriteInt(z.Flags[za0001])
-		if err != nil {
-			err = msgp.WrapError(err, "Flags", za0001)
-			return
-		}
-	}
-	// write "ID"
-	err = en.Append(0xa2, 0x49, 0x44)
+	// write "CanHaveAspects"
+	err = en.Append(0xae, 0x43, 0x61, 0x6e, 0x48, 0x61, 0x76, 0x65, 0x41, 0x73, 0x70, 0x65, 0x63, 0x74, 0x73)
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.ID)
+	err = en.WriteBool(z.CanHaveAspects)
 	if err != nil {
-		err = msgp.WrapError(err, "ID")
+		err = msgp.WrapError(err, "CanHaveAspects")
 		return
 	}
-	// write "ItemClassCategory"
-	err = en.Append(0xb1, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79)
-	if err != nil {
-		return
-	}
-	if z.ItemClassCategory == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.ItemClassCategory)
-		if err != nil {
-			err = msgp.WrapError(err, "ItemClassCategory")
-			return
-		}
-	}
-	// write "ItemStance"
-	err = en.Append(0xaa, 0x49, 0x74, 0x65, 0x6d, 0x53, 0x74, 0x61, 0x6e, 0x63, 0x65)
+	// write "AllocateToMapOwner"
+	err = en.Append(0xb2, 0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65, 0x54, 0x6f, 0x4d, 0x61, 0x70, 0x4f, 0x77, 0x6e, 0x65, 0x72)
 	if err != nil {
 		return
 	}
-	if z.ItemStance == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.ItemStance)
-		if err != nil {
-			err = msgp.WrapError(err, "ItemStance")
-			return
-		}
+	err = en.WriteBool(z.AllocateToMapOwner)
+	if err != nil {
+		err = msgp.WrapError(err, "AllocateToMapOwner")
+		return
 	}
-	// write "Name"
-	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	// write "CanBeCorrupted"
+	err = en.Append(0xae, 0x43, 0x61, 0x6e, 0x42, 0x65, 0x43, 0x6f, 0x72, 0x72, 0x75, 0x70, 0x74, 0x65, 0x64)
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.Name)
+	err = en.WriteBool(z.CanBeCorrupted)
 	if err != nil {
-		err = msgp.WrapError(err, "Name")
+		err = msgp.WrapError(err, "CanBeCorrupted")
+		return
+	}
+	// write "AlwaysShow"
+	err = en.Append(0xaa, 0x41, 0x6c, 0x77, 0x61, 0x79, 0x73, 0x53, 0x68, 0x6f, 0x77)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.AlwaysShow)
+	if err != nil {
+		err = msgp.WrapError(err, "AlwaysShow")
 		return
 	}
 	// write "RemovedIfLeavesArea"
@@ -12417,14 +12768,14 @@ func (z *ItemClass) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "RemovedIfLeavesArea")
 		return
 	}
-	// write "Key"
-	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
+	// write "AlwaysAllocate"
+	err = en.Append(0xae, 0x41, 0x6c, 0x77, 0x61, 0x79, 0x73, 0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.Key)
+	err = en.WriteBool(z.AlwaysAllocate)
 	if err != nil {
-		err = msgp.WrapError(err, "Key")
+		err = msgp.WrapError(err, "AlwaysAllocate")
 		return
 	}
 	return
@@ -12434,27 +12785,38 @@ func (z *ItemClass) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *ItemClass) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 18
-	// string "AllocateToMapOwner"
-	o = append(o, 0xde, 0x0, 0x12, 0xb2, 0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65, 0x54, 0x6f, 0x4d, 0x61, 0x70, 0x4f, 0x77, 0x6e, 0x65, 0x72)
-	o = msgp.AppendBool(o, z.AllocateToMapOwner)
-	// string "AlwaysAllocate"
-	o = append(o, 0xae, 0x41, 0x6c, 0x77, 0x61, 0x79, 0x73, 0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65)
-	o = msgp.AppendBool(o, z.AlwaysAllocate)
-	// string "AlwaysShow"
-	o = append(o, 0xaa, 0x41, 0x6c, 0x77, 0x61, 0x79, 0x73, 0x53, 0x68, 0x6f, 0x77)
-	o = msgp.AppendBool(o, z.AlwaysShow)
-	// string "CanBeCorrupted"
-	o = append(o, 0xae, 0x43, 0x61, 0x6e, 0x42, 0x65, 0x43, 0x6f, 0x72, 0x72, 0x75, 0x70, 0x74, 0x65, 0x64)
-	o = msgp.AppendBool(o, z.CanBeCorrupted)
+	// string "ItemStance"
+	o = append(o, 0xde, 0x0, 0x12, 0xaa, 0x49, 0x74, 0x65, 0x6d, 0x53, 0x74, 0x61, 0x6e, 0x63, 0x65)
+	if z.ItemStance == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.ItemStance)
+	}
+	// string "ItemClassCategory"
+	o = append(o, 0xb1, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79)
+	if z.ItemClassCategory == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.ItemClassCategory)
+	}
+	// string "Name"
+	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	o = msgp.AppendString(o, z.Name)
+	// string "ID"
+	o = append(o, 0xa2, 0x49, 0x44)
+	o = msgp.AppendString(o, z.ID)
+	// string "Flags"
+	o = append(o, 0xa5, 0x46, 0x6c, 0x61, 0x67, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Flags)))
+	for za0001 := range z.Flags {
+		o = msgp.AppendInt(o, z.Flags[za0001])
+	}
+	// string "Key"
+	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.Key)
 	// string "CanBeDoubleCorrupted"
 	o = append(o, 0xb4, 0x43, 0x61, 0x6e, 0x42, 0x65, 0x44, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x43, 0x6f, 0x72, 0x72, 0x75, 0x70, 0x74, 0x65, 0x64)
 	o = msgp.AppendBool(o, z.CanBeDoubleCorrupted)
-	// string "CanHaveAspects"
-	o = append(o, 0xae, 0x43, 0x61, 0x6e, 0x48, 0x61, 0x76, 0x65, 0x41, 0x73, 0x70, 0x65, 0x63, 0x74, 0x73)
-	o = msgp.AppendBool(o, z.CanHaveAspects)
-	// string "CanHaveIncubators"
-	o = append(o, 0xb1, 0x43, 0x61, 0x6e, 0x48, 0x61, 0x76, 0x65, 0x49, 0x6e, 0x63, 0x75, 0x62, 0x61, 0x74, 0x6f, 0x72, 0x73)
-	o = msgp.AppendBool(o, z.CanHaveIncubators)
 	// string "CanHaveInfluence"
 	o = append(o, 0xb0, 0x43, 0x61, 0x6e, 0x48, 0x61, 0x76, 0x65, 0x49, 0x6e, 0x66, 0x6c, 0x75, 0x65, 0x6e, 0x63, 0x65)
 	o = msgp.AppendBool(o, z.CanHaveInfluence)
@@ -12467,38 +12829,27 @@ func (z *ItemClass) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "CanTransferSkin"
 	o = append(o, 0xaf, 0x43, 0x61, 0x6e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x53, 0x6b, 0x69, 0x6e)
 	o = msgp.AppendBool(o, z.CanTransferSkin)
-	// string "Flags"
-	o = append(o, 0xa5, 0x46, 0x6c, 0x61, 0x67, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.Flags)))
-	for za0001 := range z.Flags {
-		o = msgp.AppendInt(o, z.Flags[za0001])
-	}
-	// string "ID"
-	o = append(o, 0xa2, 0x49, 0x44)
-	o = msgp.AppendString(o, z.ID)
-	// string "ItemClassCategory"
-	o = append(o, 0xb1, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79)
-	if z.ItemClassCategory == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.ItemClassCategory)
-	}
-	// string "ItemStance"
-	o = append(o, 0xaa, 0x49, 0x74, 0x65, 0x6d, 0x53, 0x74, 0x61, 0x6e, 0x63, 0x65)
-	if z.ItemStance == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.ItemStance)
-	}
-	// string "Name"
-	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
-	o = msgp.AppendString(o, z.Name)
+	// string "CanHaveIncubators"
+	o = append(o, 0xb1, 0x43, 0x61, 0x6e, 0x48, 0x61, 0x76, 0x65, 0x49, 0x6e, 0x63, 0x75, 0x62, 0x61, 0x74, 0x6f, 0x72, 0x73)
+	o = msgp.AppendBool(o, z.CanHaveIncubators)
+	// string "CanHaveAspects"
+	o = append(o, 0xae, 0x43, 0x61, 0x6e, 0x48, 0x61, 0x76, 0x65, 0x41, 0x73, 0x70, 0x65, 0x63, 0x74, 0x73)
+	o = msgp.AppendBool(o, z.CanHaveAspects)
+	// string "AllocateToMapOwner"
+	o = append(o, 0xb2, 0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65, 0x54, 0x6f, 0x4d, 0x61, 0x70, 0x4f, 0x77, 0x6e, 0x65, 0x72)
+	o = msgp.AppendBool(o, z.AllocateToMapOwner)
+	// string "CanBeCorrupted"
+	o = append(o, 0xae, 0x43, 0x61, 0x6e, 0x42, 0x65, 0x43, 0x6f, 0x72, 0x72, 0x75, 0x70, 0x74, 0x65, 0x64)
+	o = msgp.AppendBool(o, z.CanBeCorrupted)
+	// string "AlwaysShow"
+	o = append(o, 0xaa, 0x41, 0x6c, 0x77, 0x61, 0x79, 0x73, 0x53, 0x68, 0x6f, 0x77)
+	o = msgp.AppendBool(o, z.AlwaysShow)
 	// string "RemovedIfLeavesArea"
 	o = append(o, 0xb3, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x64, 0x49, 0x66, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x73, 0x41, 0x72, 0x65, 0x61)
 	o = msgp.AppendBool(o, z.RemovedIfLeavesArea)
-	// string "Key"
-	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.Key)
+	// string "AlwaysAllocate"
+	o = append(o, 0xae, 0x41, 0x6c, 0x77, 0x61, 0x79, 0x73, 0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65)
+	o = msgp.AppendBool(o, z.AlwaysAllocate)
 	return
 }
 
@@ -12520,46 +12871,81 @@ func (z *ItemClass) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AllocateToMapOwner":
-			z.AllocateToMapOwner, bts, err = msgp.ReadBoolBytes(bts)
+		case "ItemStance":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.ItemStance = nil
+			} else {
+				if z.ItemStance == nil {
+					z.ItemStance = new(int)
+				}
+				*z.ItemStance, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ItemStance")
+					return
+				}
+			}
+		case "ItemClassCategory":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.ItemClassCategory = nil
+			} else {
+				if z.ItemClassCategory == nil {
+					z.ItemClassCategory = new(int)
+				}
+				*z.ItemClassCategory, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ItemClassCategory")
+					return
+				}
+			}
+		case "Name":
+			z.Name, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "AllocateToMapOwner")
+				err = msgp.WrapError(err, "Name")
 				return
 			}
-		case "AlwaysAllocate":
-			z.AlwaysAllocate, bts, err = msgp.ReadBoolBytes(bts)
+		case "ID":
+			z.ID, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "AlwaysAllocate")
+				err = msgp.WrapError(err, "ID")
 				return
 			}
-		case "AlwaysShow":
-			z.AlwaysShow, bts, err = msgp.ReadBoolBytes(bts)
+		case "Flags":
+			var zb0002 uint32
+			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "AlwaysShow")
+				err = msgp.WrapError(err, "Flags")
 				return
 			}
-		case "CanBeCorrupted":
-			z.CanBeCorrupted, bts, err = msgp.ReadBoolBytes(bts)
+			if cap(z.Flags) >= int(zb0002) {
+				z.Flags = (z.Flags)[:zb0002]
+			} else {
+				z.Flags = make([]int, zb0002)
+			}
+			for za0001 := range z.Flags {
+				z.Flags[za0001], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Flags", za0001)
+					return
+				}
+			}
+		case "Key":
+			z.Key, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "CanBeCorrupted")
+				err = msgp.WrapError(err, "Key")
 				return
 			}
 		case "CanBeDoubleCorrupted":
 			z.CanBeDoubleCorrupted, bts, err = msgp.ReadBoolBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "CanBeDoubleCorrupted")
-				return
-			}
-		case "CanHaveAspects":
-			z.CanHaveAspects, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "CanHaveAspects")
-				return
-			}
-		case "CanHaveIncubators":
-			z.CanHaveIncubators, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "CanHaveIncubators")
 				return
 			}
 		case "CanHaveInfluence":
@@ -12586,69 +12972,34 @@ func (z *ItemClass) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "CanTransferSkin")
 				return
 			}
-		case "Flags":
-			var zb0002 uint32
-			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+		case "CanHaveIncubators":
+			z.CanHaveIncubators, bts, err = msgp.ReadBoolBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Flags")
+				err = msgp.WrapError(err, "CanHaveIncubators")
 				return
 			}
-			if cap(z.Flags) >= int(zb0002) {
-				z.Flags = (z.Flags)[:zb0002]
-			} else {
-				z.Flags = make([]int, zb0002)
-			}
-			for za0001 := range z.Flags {
-				z.Flags[za0001], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Flags", za0001)
-					return
-				}
-			}
-		case "ID":
-			z.ID, bts, err = msgp.ReadStringBytes(bts)
+		case "CanHaveAspects":
+			z.CanHaveAspects, bts, err = msgp.ReadBoolBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "ID")
+				err = msgp.WrapError(err, "CanHaveAspects")
 				return
 			}
-		case "ItemClassCategory":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.ItemClassCategory = nil
-			} else {
-				if z.ItemClassCategory == nil {
-					z.ItemClassCategory = new(int)
-				}
-				*z.ItemClassCategory, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ItemClassCategory")
-					return
-				}
-			}
-		case "ItemStance":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.ItemStance = nil
-			} else {
-				if z.ItemStance == nil {
-					z.ItemStance = new(int)
-				}
-				*z.ItemStance, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ItemStance")
-					return
-				}
-			}
-		case "Name":
-			z.Name, bts, err = msgp.ReadStringBytes(bts)
+		case "AllocateToMapOwner":
+			z.AllocateToMapOwner, bts, err = msgp.ReadBoolBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Name")
+				err = msgp.WrapError(err, "AllocateToMapOwner")
+				return
+			}
+		case "CanBeCorrupted":
+			z.CanBeCorrupted, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "CanBeCorrupted")
+				return
+			}
+		case "AlwaysShow":
+			z.AlwaysShow, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AlwaysShow")
 				return
 			}
 		case "RemovedIfLeavesArea":
@@ -12657,10 +13008,10 @@ func (z *ItemClass) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "RemovedIfLeavesArea")
 				return
 			}
-		case "Key":
-			z.Key, bts, err = msgp.ReadIntBytes(bts)
+		case "AlwaysAllocate":
+			z.AlwaysAllocate, bts, err = msgp.ReadBoolBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Key")
+				err = msgp.WrapError(err, "AlwaysAllocate")
 				return
 			}
 		default:
@@ -12677,19 +13028,19 @@ func (z *ItemClass) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *ItemClass) Msgsize() (s int) {
-	s = 3 + 19 + msgp.BoolSize + 15 + msgp.BoolSize + 11 + msgp.BoolSize + 15 + msgp.BoolSize + 21 + msgp.BoolSize + 15 + msgp.BoolSize + 18 + msgp.BoolSize + 17 + msgp.BoolSize + 18 + msgp.BoolSize + 11 + msgp.BoolSize + 16 + msgp.BoolSize + 6 + msgp.ArrayHeaderSize + (len(z.Flags) * (msgp.IntSize)) + 3 + msgp.StringPrefixSize + len(z.ID) + 18
-	if z.ItemClassCategory == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 11
+	s = 3 + 11
 	if z.ItemStance == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 5 + msgp.StringPrefixSize + len(z.Name) + 20 + msgp.BoolSize + 4 + msgp.IntSize
+	s += 18
+	if z.ItemClassCategory == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 5 + msgp.StringPrefixSize + len(z.Name) + 3 + msgp.StringPrefixSize + len(z.ID) + 6 + msgp.ArrayHeaderSize + (len(z.Flags) * (msgp.IntSize)) + 4 + msgp.IntSize + 21 + msgp.BoolSize + 17 + msgp.BoolSize + 18 + msgp.BoolSize + 11 + msgp.BoolSize + 16 + msgp.BoolSize + 18 + msgp.BoolSize + 15 + msgp.BoolSize + 19 + msgp.BoolSize + 15 + msgp.BoolSize + 11 + msgp.BoolSize + 20 + msgp.BoolSize + 15 + msgp.BoolSize
 	return
 }
 
@@ -12889,60 +13240,60 @@ func (z *LangTranslation) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "Conditions":
-			var zb0002 uint32
-			zb0002, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "Conditions")
-				return
-			}
-			if cap(z.Conditions) >= int(zb0002) {
-				z.Conditions = (z.Conditions)[:zb0002]
-			} else {
-				z.Conditions = make([]Condition, zb0002)
-			}
-			for za0001 := range z.Conditions {
-				err = z.Conditions[za0001].DecodeMsg(dc)
-				if err != nil {
-					err = msgp.WrapError(err, "Conditions", za0001)
-					return
-				}
-			}
 		case "IndexHandlers":
-			var zb0003 uint32
-			zb0003, err = dc.ReadMapHeader()
+			var zb0002 uint32
+			zb0002, err = dc.ReadMapHeader()
 			if err != nil {
 				err = msgp.WrapError(err, "IndexHandlers")
 				return
 			}
 			if z.IndexHandlers == nil {
-				z.IndexHandlers = make(map[string]string, zb0003)
+				z.IndexHandlers = make(map[string]string, zb0002)
 			} else if len(z.IndexHandlers) > 0 {
 				for key := range z.IndexHandlers {
 					delete(z.IndexHandlers, key)
 				}
 			}
-			for zb0003 > 0 {
-				zb0003--
+			for zb0002 > 0 {
+				zb0002--
+				var za0001 string
 				var za0002 string
-				var za0003 string
-				za0002, err = dc.ReadString()
+				za0001, err = dc.ReadString()
 				if err != nil {
 					err = msgp.WrapError(err, "IndexHandlers")
 					return
 				}
-				za0003, err = dc.ReadString()
+				za0002, err = dc.ReadString()
 				if err != nil {
-					err = msgp.WrapError(err, "IndexHandlers", za0002)
+					err = msgp.WrapError(err, "IndexHandlers", za0001)
 					return
 				}
-				z.IndexHandlers[za0002] = za0003
+				z.IndexHandlers[za0001] = za0002
 			}
 		case "String":
 			z.String, err = dc.ReadString()
 			if err != nil {
 				err = msgp.WrapError(err, "String")
 				return
+			}
+		case "Conditions":
+			var zb0003 uint32
+			zb0003, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Conditions")
+				return
+			}
+			if cap(z.Conditions) >= int(zb0003) {
+				z.Conditions = (z.Conditions)[:zb0003]
+			} else {
+				z.Conditions = make([]Condition, zb0003)
+			}
+			for za0003 := range z.Conditions {
+				err = z.Conditions[za0003].DecodeMsg(dc)
+				if err != nil {
+					err = msgp.WrapError(err, "Conditions", za0003)
+					return
+				}
 			}
 		default:
 			err = dc.Skip()
@@ -12958,25 +13309,8 @@ func (z *LangTranslation) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *LangTranslation) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 3
-	// write "Conditions"
-	err = en.Append(0x83, 0xaa, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.Conditions)))
-	if err != nil {
-		err = msgp.WrapError(err, "Conditions")
-		return
-	}
-	for za0001 := range z.Conditions {
-		err = z.Conditions[za0001].EncodeMsg(en)
-		if err != nil {
-			err = msgp.WrapError(err, "Conditions", za0001)
-			return
-		}
-	}
 	// write "IndexHandlers"
-	err = en.Append(0xad, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x48, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x72, 0x73)
+	err = en.Append(0x83, 0xad, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x48, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x72, 0x73)
 	if err != nil {
 		return
 	}
@@ -12985,15 +13319,15 @@ func (z *LangTranslation) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "IndexHandlers")
 		return
 	}
-	for za0002, za0003 := range z.IndexHandlers {
-		err = en.WriteString(za0002)
+	for za0001, za0002 := range z.IndexHandlers {
+		err = en.WriteString(za0001)
 		if err != nil {
 			err = msgp.WrapError(err, "IndexHandlers")
 			return
 		}
-		err = en.WriteString(za0003)
+		err = en.WriteString(za0002)
 		if err != nil {
-			err = msgp.WrapError(err, "IndexHandlers", za0002)
+			err = msgp.WrapError(err, "IndexHandlers", za0001)
 			return
 		}
 	}
@@ -13007,6 +13341,23 @@ func (z *LangTranslation) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "String")
 		return
 	}
+	// write "Conditions"
+	err = en.Append(0xaa, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Conditions)))
+	if err != nil {
+		err = msgp.WrapError(err, "Conditions")
+		return
+	}
+	for za0003 := range z.Conditions {
+		err = z.Conditions[za0003].EncodeMsg(en)
+		if err != nil {
+			err = msgp.WrapError(err, "Conditions", za0003)
+			return
+		}
+	}
 	return
 }
 
@@ -13014,26 +13365,26 @@ func (z *LangTranslation) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *LangTranslation) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 3
-	// string "Conditions"
-	o = append(o, 0x83, 0xaa, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.Conditions)))
-	for za0001 := range z.Conditions {
-		o, err = z.Conditions[za0001].MarshalMsg(o)
-		if err != nil {
-			err = msgp.WrapError(err, "Conditions", za0001)
-			return
-		}
-	}
 	// string "IndexHandlers"
-	o = append(o, 0xad, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x48, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x72, 0x73)
+	o = append(o, 0x83, 0xad, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x48, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x72, 0x73)
 	o = msgp.AppendMapHeader(o, uint32(len(z.IndexHandlers)))
-	for za0002, za0003 := range z.IndexHandlers {
+	for za0001, za0002 := range z.IndexHandlers {
+		o = msgp.AppendString(o, za0001)
 		o = msgp.AppendString(o, za0002)
-		o = msgp.AppendString(o, za0003)
 	}
 	// string "String"
 	o = append(o, 0xa6, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67)
 	o = msgp.AppendString(o, z.String)
+	// string "Conditions"
+	o = append(o, 0xaa, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Conditions)))
+	for za0003 := range z.Conditions {
+		o, err = z.Conditions[za0003].MarshalMsg(o)
+		if err != nil {
+			err = msgp.WrapError(err, "Conditions", za0003)
+			return
+		}
+	}
 	return
 }
 
@@ -13055,60 +13406,60 @@ func (z *LangTranslation) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "Conditions":
-			var zb0002 uint32
-			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Conditions")
-				return
-			}
-			if cap(z.Conditions) >= int(zb0002) {
-				z.Conditions = (z.Conditions)[:zb0002]
-			} else {
-				z.Conditions = make([]Condition, zb0002)
-			}
-			for za0001 := range z.Conditions {
-				bts, err = z.Conditions[za0001].UnmarshalMsg(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Conditions", za0001)
-					return
-				}
-			}
 		case "IndexHandlers":
-			var zb0003 uint32
-			zb0003, bts, err = msgp.ReadMapHeaderBytes(bts)
+			var zb0002 uint32
+			zb0002, bts, err = msgp.ReadMapHeaderBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "IndexHandlers")
 				return
 			}
 			if z.IndexHandlers == nil {
-				z.IndexHandlers = make(map[string]string, zb0003)
+				z.IndexHandlers = make(map[string]string, zb0002)
 			} else if len(z.IndexHandlers) > 0 {
 				for key := range z.IndexHandlers {
 					delete(z.IndexHandlers, key)
 				}
 			}
-			for zb0003 > 0 {
+			for zb0002 > 0 {
+				var za0001 string
 				var za0002 string
-				var za0003 string
-				zb0003--
-				za0002, bts, err = msgp.ReadStringBytes(bts)
+				zb0002--
+				za0001, bts, err = msgp.ReadStringBytes(bts)
 				if err != nil {
 					err = msgp.WrapError(err, "IndexHandlers")
 					return
 				}
-				za0003, bts, err = msgp.ReadStringBytes(bts)
+				za0002, bts, err = msgp.ReadStringBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "IndexHandlers", za0002)
+					err = msgp.WrapError(err, "IndexHandlers", za0001)
 					return
 				}
-				z.IndexHandlers[za0002] = za0003
+				z.IndexHandlers[za0001] = za0002
 			}
 		case "String":
 			z.String, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "String")
 				return
+			}
+		case "Conditions":
+			var zb0003 uint32
+			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Conditions")
+				return
+			}
+			if cap(z.Conditions) >= int(zb0003) {
+				z.Conditions = (z.Conditions)[:zb0003]
+			} else {
+				z.Conditions = make([]Condition, zb0003)
+			}
+			for za0003 := range z.Conditions {
+				bts, err = z.Conditions[za0003].UnmarshalMsg(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Conditions", za0003)
+					return
+				}
 			}
 		default:
 			bts, err = msgp.Skip(bts)
@@ -13124,18 +13475,17 @@ func (z *LangTranslation) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *LangTranslation) Msgsize() (s int) {
-	s = 1 + 11 + msgp.ArrayHeaderSize
-	for za0001 := range z.Conditions {
-		s += z.Conditions[za0001].Msgsize()
-	}
-	s += 14 + msgp.MapHeaderSize
+	s = 1 + 14 + msgp.MapHeaderSize
 	if z.IndexHandlers != nil {
-		for za0002, za0003 := range z.IndexHandlers {
-			_ = za0003
-			s += msgp.StringPrefixSize + len(za0002) + msgp.StringPrefixSize + len(za0003)
+		for za0001, za0002 := range z.IndexHandlers {
+			_ = za0002
+			s += msgp.StringPrefixSize + len(za0001) + msgp.StringPrefixSize + len(za0002)
 		}
 	}
-	s += 7 + msgp.StringPrefixSize + len(z.String)
+	s += 7 + msgp.StringPrefixSize + len(z.String) + 11 + msgp.ArrayHeaderSize
+	for za0003 := range z.Conditions {
+		s += z.Conditions[za0003].Msgsize()
+	}
 	return
 }
 
@@ -13157,22 +13507,21 @@ func (z *Mod) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AchievementItemsKey":
-			var zb0002 uint32
-			zb0002, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "AchievementItemsKey")
-				return
-			}
-			if cap(z.AchievementItemsKey) >= int(zb0002) {
-				z.AchievementItemsKey = (z.AchievementItemsKey)[:zb0002]
-			} else {
-				z.AchievementItemsKey = make([]interface{}, zb0002)
-			}
-			for za0001 := range z.AchievementItemsKey {
-				z.AchievementItemsKey[za0001], err = dc.ReadIntf()
+		case "HeistStatsKey1":
+			if dc.IsNil() {
+				err = dc.ReadNil()
 				if err != nil {
-					err = msgp.WrapError(err, "AchievementItemsKey", za0001)
+					err = msgp.WrapError(err, "HeistStatsKey1")
+					return
+				}
+				z.HeistStatsKey1 = nil
+			} else {
+				if z.HeistStatsKey1 == nil {
+					z.HeistStatsKey1 = new(int)
+				}
+				*z.HeistStatsKey1, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "HeistStatsKey1")
 					return
 				}
 			}
@@ -13209,449 +13558,6 @@ func (z *Mod) DecodeMsg(dc *msgp.Reader) (err error) {
 				*z.BuffTemplate, err = dc.ReadInt()
 				if err != nil {
 					err = msgp.WrapError(err, "BuffTemplate")
-					return
-				}
-			}
-		case "ChestModType":
-			var zb0003 uint32
-			zb0003, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "ChestModType")
-				return
-			}
-			if cap(z.ChestModType) >= int(zb0003) {
-				z.ChestModType = (z.ChestModType)[:zb0003]
-			} else {
-				z.ChestModType = make([]int, zb0003)
-			}
-			for za0002 := range z.ChestModType {
-				z.ChestModType[za0002], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "ChestModType", za0002)
-					return
-				}
-			}
-		case "CorrectGroup":
-			z.CorrectGroup, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "CorrectGroup")
-				return
-			}
-		case "CraftingItemClassRestrictions":
-			var zb0004 uint32
-			zb0004, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "CraftingItemClassRestrictions")
-				return
-			}
-			if cap(z.CraftingItemClassRestrictions) >= int(zb0004) {
-				z.CraftingItemClassRestrictions = (z.CraftingItemClassRestrictions)[:zb0004]
-			} else {
-				z.CraftingItemClassRestrictions = make([]int, zb0004)
-			}
-			for za0003 := range z.CraftingItemClassRestrictions {
-				z.CraftingItemClassRestrictions[za0003], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "CraftingItemClassRestrictions", za0003)
-					return
-				}
-			}
-		case "Domain":
-			z.Domain, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Domain")
-				return
-			}
-		case "FullAreaClearAchievementItemsKey":
-			var zb0005 uint32
-			zb0005, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey")
-				return
-			}
-			if cap(z.FullAreaClearAchievementItemsKey) >= int(zb0005) {
-				z.FullAreaClearAchievementItemsKey = (z.FullAreaClearAchievementItemsKey)[:zb0005]
-			} else {
-				z.FullAreaClearAchievementItemsKey = make([]interface{}, zb0005)
-			}
-			for za0004 := range z.FullAreaClearAchievementItemsKey {
-				z.FullAreaClearAchievementItemsKey[za0004], err = dc.ReadIntf()
-				if err != nil {
-					err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey", za0004)
-					return
-				}
-			}
-		case "GenerationType":
-			z.GenerationType, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "GenerationType")
-				return
-			}
-		case "GenerationWeightTagsKeys":
-			var zb0006 uint32
-			zb0006, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "GenerationWeightTagsKeys")
-				return
-			}
-			if cap(z.GenerationWeightTagsKeys) >= int(zb0006) {
-				z.GenerationWeightTagsKeys = (z.GenerationWeightTagsKeys)[:zb0006]
-			} else {
-				z.GenerationWeightTagsKeys = make([]int, zb0006)
-			}
-			for za0005 := range z.GenerationWeightTagsKeys {
-				z.GenerationWeightTagsKeys[za0005], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "GenerationWeightTagsKeys", za0005)
-					return
-				}
-			}
-		case "GenerationWeightValues":
-			var zb0007 uint32
-			zb0007, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "GenerationWeightValues")
-				return
-			}
-			if cap(z.GenerationWeightValues) >= int(zb0007) {
-				z.GenerationWeightValues = (z.GenerationWeightValues)[:zb0007]
-			} else {
-				z.GenerationWeightValues = make([]int, zb0007)
-			}
-			for za0006 := range z.GenerationWeightValues {
-				z.GenerationWeightValues[za0006], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "GenerationWeightValues", za0006)
-					return
-				}
-			}
-		case "GrantedEffectsPerLevelKeys":
-			var zb0008 uint32
-			zb0008, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "GrantedEffectsPerLevelKeys")
-				return
-			}
-			if cap(z.GrantedEffectsPerLevelKeys) >= int(zb0008) {
-				z.GrantedEffectsPerLevelKeys = (z.GrantedEffectsPerLevelKeys)[:zb0008]
-			} else {
-				z.GrantedEffectsPerLevelKeys = make([]int, zb0008)
-			}
-			for za0007 := range z.GrantedEffectsPerLevelKeys {
-				z.GrantedEffectsPerLevelKeys[za0007], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "GrantedEffectsPerLevelKeys", za0007)
-					return
-				}
-			}
-		case "Hash16":
-			z.Hash16, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Hash16")
-				return
-			}
-		case "Hash32":
-			z.Hash32, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Hash32")
-				return
-			}
-		case "HeistAddStatValue1":
-			z.HeistAddStatValue1, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "HeistAddStatValue1")
-				return
-			}
-		case "HeistAddStatValue2":
-			z.HeistAddStatValue2, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "HeistAddStatValue2")
-				return
-			}
-		case "HeistStatsKey0":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "HeistStatsKey0")
-					return
-				}
-				z.HeistStatsKey0 = nil
-			} else {
-				if z.HeistStatsKey0 == nil {
-					z.HeistStatsKey0 = new(int)
-				}
-				*z.HeistStatsKey0, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "HeistStatsKey0")
-					return
-				}
-			}
-		case "HeistStatsKey1":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "HeistStatsKey1")
-					return
-				}
-				z.HeistStatsKey1 = nil
-			} else {
-				if z.HeistStatsKey1 == nil {
-					z.HeistStatsKey1 = new(int)
-				}
-				*z.HeistStatsKey1, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "HeistStatsKey1")
-					return
-				}
-			}
-		case "HeistSubStatValue1":
-			z.HeistSubStatValue1, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "HeistSubStatValue1")
-				return
-			}
-		case "HeistSubStatValue2":
-			z.HeistSubStatValue2, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "HeistSubStatValue2")
-				return
-			}
-		case "ID":
-			z.ID, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "ID")
-				return
-			}
-		case "ImplicitTagsKeys":
-			var zb0009 uint32
-			zb0009, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "ImplicitTagsKeys")
-				return
-			}
-			if cap(z.ImplicitTagsKeys) >= int(zb0009) {
-				z.ImplicitTagsKeys = (z.ImplicitTagsKeys)[:zb0009]
-			} else {
-				z.ImplicitTagsKeys = make([]int, zb0009)
-			}
-			for za0008 := range z.ImplicitTagsKeys {
-				z.ImplicitTagsKeys[za0008], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "ImplicitTagsKeys", za0008)
-					return
-				}
-			}
-		case "InfluenceTypes":
-			z.InfluenceTypes, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "InfluenceTypes")
-				return
-			}
-		case "IsEssenceOnlyModifier":
-			z.IsEssenceOnlyModifier, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "IsEssenceOnlyModifier")
-				return
-			}
-		case "Level":
-			z.Level, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Level")
-				return
-			}
-		case "MaxLevel":
-			z.MaxLevel, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "MaxLevel")
-				return
-			}
-		case "ModTypeKey":
-			z.ModTypeKey, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "ModTypeKey")
-				return
-			}
-		case "ModifyMapsAchievements":
-			var zb0010 uint32
-			zb0010, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "ModifyMapsAchievements")
-				return
-			}
-			if cap(z.ModifyMapsAchievements) >= int(zb0010) {
-				z.ModifyMapsAchievements = (z.ModifyMapsAchievements)[:zb0010]
-			} else {
-				z.ModifyMapsAchievements = make([]int, zb0010)
-			}
-			for za0009 := range z.ModifyMapsAchievements {
-				z.ModifyMapsAchievements[za0009], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "ModifyMapsAchievements", za0009)
-					return
-				}
-			}
-		case "MonsterKillAchievements":
-			var zb0011 uint32
-			zb0011, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "MonsterKillAchievements")
-				return
-			}
-			if cap(z.MonsterKillAchievements) >= int(zb0011) {
-				z.MonsterKillAchievements = (z.MonsterKillAchievements)[:zb0011]
-			} else {
-				z.MonsterKillAchievements = make([]int, zb0011)
-			}
-			for za0010 := range z.MonsterKillAchievements {
-				z.MonsterKillAchievements[za0010], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "MonsterKillAchievements", za0010)
-					return
-				}
-			}
-		case "MonsterMetadata":
-			z.MonsterMetadata, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "MonsterMetadata")
-				return
-			}
-		case "MonsterOnDeath":
-			z.MonsterOnDeath, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "MonsterOnDeath")
-				return
-			}
-		case "Name":
-			z.Name, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "Name")
-				return
-			}
-		case "SpawnWeightTagsKeys":
-			var zb0012 uint32
-			zb0012, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "SpawnWeightTagsKeys")
-				return
-			}
-			if cap(z.SpawnWeightTagsKeys) >= int(zb0012) {
-				z.SpawnWeightTagsKeys = (z.SpawnWeightTagsKeys)[:zb0012]
-			} else {
-				z.SpawnWeightTagsKeys = make([]int, zb0012)
-			}
-			for za0011 := range z.SpawnWeightTagsKeys {
-				z.SpawnWeightTagsKeys[za0011], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "SpawnWeightTagsKeys", za0011)
-					return
-				}
-			}
-		case "SpawnWeightValues":
-			var zb0013 uint32
-			zb0013, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "SpawnWeightValues")
-				return
-			}
-			if cap(z.SpawnWeightValues) >= int(zb0013) {
-				z.SpawnWeightValues = (z.SpawnWeightValues)[:zb0013]
-			} else {
-				z.SpawnWeightValues = make([]int, zb0013)
-			}
-			for za0012 := range z.SpawnWeightValues {
-				z.SpawnWeightValues[za0012], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "SpawnWeightValues", za0012)
-					return
-				}
-			}
-		case "Stat1Max":
-			z.Stat1Max, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat1Max")
-				return
-			}
-		case "Stat1Min":
-			z.Stat1Min, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat1Min")
-				return
-			}
-		case "Stat2Max":
-			z.Stat2Max, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat2Max")
-				return
-			}
-		case "Stat2Min":
-			z.Stat2Min, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat2Min")
-				return
-			}
-		case "Stat3Max":
-			z.Stat3Max, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat3Max")
-				return
-			}
-		case "Stat3Min":
-			z.Stat3Min, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat3Min")
-				return
-			}
-		case "Stat4Max":
-			z.Stat4Max, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat4Max")
-				return
-			}
-		case "Stat4Min":
-			z.Stat4Min, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat4Min")
-				return
-			}
-		case "Stat5Max":
-			z.Stat5Max, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat5Max")
-				return
-			}
-		case "Stat5Min":
-			z.Stat5Min, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat5Min")
-				return
-			}
-		case "Stat6Max":
-			z.Stat6Max, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat6Max")
-				return
-			}
-		case "Stat6Min":
-			z.Stat6Min, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat6Min")
-				return
-			}
-		case "StatsKey1":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "StatsKey1")
-					return
-				}
-				z.StatsKey1 = nil
-			} else {
-				if z.StatsKey1 == nil {
-					z.StatsKey1 = new(int)
-				}
-				*z.StatsKey1, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "StatsKey1")
 					return
 				}
 			}
@@ -13727,6 +13633,24 @@ func (z *Mod) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
+		case "HeistStatsKey0":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "HeistStatsKey0")
+					return
+				}
+				z.HeistStatsKey0 = nil
+			} else {
+				if z.HeistStatsKey0 == nil {
+					z.HeistStatsKey0 = new(int)
+				}
+				*z.HeistStatsKey0, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "HeistStatsKey0")
+					return
+				}
+			}
 		case "StatsKey6":
 			if dc.IsNil() {
 				err = dc.ReadNil()
@@ -13745,29 +13669,455 @@ func (z *Mod) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
+		case "StatsKey1":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "StatsKey1")
+					return
+				}
+				z.StatsKey1 = nil
+			} else {
+				if z.StatsKey1 == nil {
+					z.StatsKey1 = new(int)
+				}
+				*z.StatsKey1, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "StatsKey1")
+					return
+				}
+			}
+		case "MonsterMetadata":
+			z.MonsterMetadata, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "MonsterMetadata")
+				return
+			}
+		case "ID":
+			z.ID, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "ID")
+				return
+			}
+		case "Name":
+			z.Name, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "Name")
+				return
+			}
+		case "MonsterOnDeath":
+			z.MonsterOnDeath, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "MonsterOnDeath")
+				return
+			}
+		case "CorrectGroup":
+			z.CorrectGroup, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "CorrectGroup")
+				return
+			}
+		case "FullAreaClearAchievementItemsKey":
+			var zb0002 uint32
+			zb0002, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey")
+				return
+			}
+			if cap(z.FullAreaClearAchievementItemsKey) >= int(zb0002) {
+				z.FullAreaClearAchievementItemsKey = (z.FullAreaClearAchievementItemsKey)[:zb0002]
+			} else {
+				z.FullAreaClearAchievementItemsKey = make([]interface{}, zb0002)
+			}
+			for za0001 := range z.FullAreaClearAchievementItemsKey {
+				z.FullAreaClearAchievementItemsKey[za0001], err = dc.ReadIntf()
+				if err != nil {
+					err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey", za0001)
+					return
+				}
+			}
+		case "GrantedEffectsPerLevelKeys":
+			var zb0003 uint32
+			zb0003, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "GrantedEffectsPerLevelKeys")
+				return
+			}
+			if cap(z.GrantedEffectsPerLevelKeys) >= int(zb0003) {
+				z.GrantedEffectsPerLevelKeys = (z.GrantedEffectsPerLevelKeys)[:zb0003]
+			} else {
+				z.GrantedEffectsPerLevelKeys = make([]int, zb0003)
+			}
+			for za0002 := range z.GrantedEffectsPerLevelKeys {
+				z.GrantedEffectsPerLevelKeys[za0002], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "GrantedEffectsPerLevelKeys", za0002)
+					return
+				}
+			}
+		case "GenerationWeightValues":
+			var zb0004 uint32
+			zb0004, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "GenerationWeightValues")
+				return
+			}
+			if cap(z.GenerationWeightValues) >= int(zb0004) {
+				z.GenerationWeightValues = (z.GenerationWeightValues)[:zb0004]
+			} else {
+				z.GenerationWeightValues = make([]int, zb0004)
+			}
+			for za0003 := range z.GenerationWeightValues {
+				z.GenerationWeightValues[za0003], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "GenerationWeightValues", za0003)
+					return
+				}
+			}
+		case "GenerationWeightTagsKeys":
+			var zb0005 uint32
+			zb0005, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "GenerationWeightTagsKeys")
+				return
+			}
+			if cap(z.GenerationWeightTagsKeys) >= int(zb0005) {
+				z.GenerationWeightTagsKeys = (z.GenerationWeightTagsKeys)[:zb0005]
+			} else {
+				z.GenerationWeightTagsKeys = make([]int, zb0005)
+			}
+			for za0004 := range z.GenerationWeightTagsKeys {
+				z.GenerationWeightTagsKeys[za0004], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "GenerationWeightTagsKeys", za0004)
+					return
+				}
+			}
+		case "SpawnWeightValues":
+			var zb0006 uint32
+			zb0006, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "SpawnWeightValues")
+				return
+			}
+			if cap(z.SpawnWeightValues) >= int(zb0006) {
+				z.SpawnWeightValues = (z.SpawnWeightValues)[:zb0006]
+			} else {
+				z.SpawnWeightValues = make([]int, zb0006)
+			}
+			for za0005 := range z.SpawnWeightValues {
+				z.SpawnWeightValues[za0005], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "SpawnWeightValues", za0005)
+					return
+				}
+			}
+		case "MonsterKillAchievements":
+			var zb0007 uint32
+			zb0007, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "MonsterKillAchievements")
+				return
+			}
+			if cap(z.MonsterKillAchievements) >= int(zb0007) {
+				z.MonsterKillAchievements = (z.MonsterKillAchievements)[:zb0007]
+			} else {
+				z.MonsterKillAchievements = make([]int, zb0007)
+			}
+			for za0006 := range z.MonsterKillAchievements {
+				z.MonsterKillAchievements[za0006], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "MonsterKillAchievements", za0006)
+					return
+				}
+			}
+		case "ImplicitTagsKeys":
+			var zb0008 uint32
+			zb0008, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "ImplicitTagsKeys")
+				return
+			}
+			if cap(z.ImplicitTagsKeys) >= int(zb0008) {
+				z.ImplicitTagsKeys = (z.ImplicitTagsKeys)[:zb0008]
+			} else {
+				z.ImplicitTagsKeys = make([]int, zb0008)
+			}
+			for za0007 := range z.ImplicitTagsKeys {
+				z.ImplicitTagsKeys[za0007], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ImplicitTagsKeys", za0007)
+					return
+				}
+			}
+		case "SpawnWeightTagsKeys":
+			var zb0009 uint32
+			zb0009, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "SpawnWeightTagsKeys")
+				return
+			}
+			if cap(z.SpawnWeightTagsKeys) >= int(zb0009) {
+				z.SpawnWeightTagsKeys = (z.SpawnWeightTagsKeys)[:zb0009]
+			} else {
+				z.SpawnWeightTagsKeys = make([]int, zb0009)
+			}
+			for za0008 := range z.SpawnWeightTagsKeys {
+				z.SpawnWeightTagsKeys[za0008], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "SpawnWeightTagsKeys", za0008)
+					return
+				}
+			}
 		case "TagsKeys":
-			var zb0014 uint32
-			zb0014, err = dc.ReadArrayHeader()
+			var zb0010 uint32
+			zb0010, err = dc.ReadArrayHeader()
 			if err != nil {
 				err = msgp.WrapError(err, "TagsKeys")
 				return
 			}
-			if cap(z.TagsKeys) >= int(zb0014) {
-				z.TagsKeys = (z.TagsKeys)[:zb0014]
+			if cap(z.TagsKeys) >= int(zb0010) {
+				z.TagsKeys = (z.TagsKeys)[:zb0010]
 			} else {
-				z.TagsKeys = make([]int, zb0014)
+				z.TagsKeys = make([]int, zb0010)
 			}
-			for za0013 := range z.TagsKeys {
-				z.TagsKeys[za0013], err = dc.ReadInt()
+			for za0009 := range z.TagsKeys {
+				z.TagsKeys[za0009], err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "TagsKeys", za0013)
+					err = msgp.WrapError(err, "TagsKeys", za0009)
 					return
 				}
+			}
+		case "CraftingItemClassRestrictions":
+			var zb0011 uint32
+			zb0011, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "CraftingItemClassRestrictions")
+				return
+			}
+			if cap(z.CraftingItemClassRestrictions) >= int(zb0011) {
+				z.CraftingItemClassRestrictions = (z.CraftingItemClassRestrictions)[:zb0011]
+			} else {
+				z.CraftingItemClassRestrictions = make([]int, zb0011)
+			}
+			for za0010 := range z.CraftingItemClassRestrictions {
+				z.CraftingItemClassRestrictions[za0010], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "CraftingItemClassRestrictions", za0010)
+					return
+				}
+			}
+		case "AchievementItemsKey":
+			var zb0012 uint32
+			zb0012, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "AchievementItemsKey")
+				return
+			}
+			if cap(z.AchievementItemsKey) >= int(zb0012) {
+				z.AchievementItemsKey = (z.AchievementItemsKey)[:zb0012]
+			} else {
+				z.AchievementItemsKey = make([]interface{}, zb0012)
+			}
+			for za0011 := range z.AchievementItemsKey {
+				z.AchievementItemsKey[za0011], err = dc.ReadIntf()
+				if err != nil {
+					err = msgp.WrapError(err, "AchievementItemsKey", za0011)
+					return
+				}
+			}
+		case "ChestModType":
+			var zb0013 uint32
+			zb0013, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "ChestModType")
+				return
+			}
+			if cap(z.ChestModType) >= int(zb0013) {
+				z.ChestModType = (z.ChestModType)[:zb0013]
+			} else {
+				z.ChestModType = make([]int, zb0013)
+			}
+			for za0012 := range z.ChestModType {
+				z.ChestModType[za0012], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ChestModType", za0012)
+					return
+				}
+			}
+		case "ModifyMapsAchievements":
+			var zb0014 uint32
+			zb0014, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "ModifyMapsAchievements")
+				return
+			}
+			if cap(z.ModifyMapsAchievements) >= int(zb0014) {
+				z.ModifyMapsAchievements = (z.ModifyMapsAchievements)[:zb0014]
+			} else {
+				z.ModifyMapsAchievements = make([]int, zb0014)
+			}
+			for za0013 := range z.ModifyMapsAchievements {
+				z.ModifyMapsAchievements[za0013], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ModifyMapsAchievements", za0013)
+					return
+				}
+			}
+		case "MaxLevel":
+			z.MaxLevel, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "MaxLevel")
+				return
+			}
+		case "Stat4Min":
+			z.Stat4Min, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat4Min")
+				return
+			}
+		case "Level":
+			z.Level, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Level")
+				return
 			}
 		case "Key":
 			z.Key, err = dc.ReadInt()
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "InfluenceTypes":
+			z.InfluenceTypes, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "InfluenceTypes")
+				return
+			}
+		case "HeistSubStatValue2":
+			z.HeistSubStatValue2, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "HeistSubStatValue2")
+				return
+			}
+		case "Stat1Max":
+			z.Stat1Max, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat1Max")
+				return
+			}
+		case "Stat1Min":
+			z.Stat1Min, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat1Min")
+				return
+			}
+		case "Stat2Max":
+			z.Stat2Max, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat2Max")
+				return
+			}
+		case "Stat2Min":
+			z.Stat2Min, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat2Min")
+				return
+			}
+		case "Stat3Max":
+			z.Stat3Max, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat3Max")
+				return
+			}
+		case "Stat3Min":
+			z.Stat3Min, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat3Min")
+				return
+			}
+		case "Stat4Max":
+			z.Stat4Max, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat4Max")
+				return
+			}
+		case "ModTypeKey":
+			z.ModTypeKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "ModTypeKey")
+				return
+			}
+		case "Stat5Max":
+			z.Stat5Max, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat5Max")
+				return
+			}
+		case "Stat5Min":
+			z.Stat5Min, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat5Min")
+				return
+			}
+		case "Stat6Max":
+			z.Stat6Max, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat6Max")
+				return
+			}
+		case "Stat6Min":
+			z.Stat6Min, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat6Min")
+				return
+			}
+		case "HeistSubStatValue1":
+			z.HeistSubStatValue1, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "HeistSubStatValue1")
+				return
+			}
+		case "HeistAddStatValue2":
+			z.HeistAddStatValue2, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "HeistAddStatValue2")
+				return
+			}
+		case "HeistAddStatValue1":
+			z.HeistAddStatValue1, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "HeistAddStatValue1")
+				return
+			}
+		case "Hash32":
+			z.Hash32, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Hash32")
+				return
+			}
+		case "Hash16":
+			z.Hash16, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Hash16")
+				return
+			}
+		case "GenerationType":
+			z.GenerationType, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "GenerationType")
+				return
+			}
+		case "Domain":
+			z.Domain, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Domain")
+				return
+			}
+		case "IsEssenceOnlyModifier":
+			z.IsEssenceOnlyModifier, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IsEssenceOnlyModifier")
 				return
 			}
 		default:
@@ -13784,20 +14134,20 @@ func (z *Mod) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *Mod) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 54
-	// write "AchievementItemsKey"
-	err = en.Append(0xde, 0x0, 0x36, 0xb3, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
+	// write "HeistStatsKey1"
+	err = en.Append(0xde, 0x0, 0x36, 0xae, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x31)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.AchievementItemsKey)))
-	if err != nil {
-		err = msgp.WrapError(err, "AchievementItemsKey")
-		return
-	}
-	for za0001 := range z.AchievementItemsKey {
-		err = en.WriteIntf(z.AchievementItemsKey[za0001])
+	if z.HeistStatsKey1 == nil {
+		err = en.WriteNil()
 		if err != nil {
-			err = msgp.WrapError(err, "AchievementItemsKey", za0001)
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.HeistStatsKey1)
+		if err != nil {
+			err = msgp.WrapError(err, "HeistStatsKey1")
 			return
 		}
 	}
@@ -13832,544 +14182,6 @@ func (z *Mod) EncodeMsg(en *msgp.Writer) (err error) {
 		err = en.WriteInt(*z.BuffTemplate)
 		if err != nil {
 			err = msgp.WrapError(err, "BuffTemplate")
-			return
-		}
-	}
-	// write "ChestModType"
-	err = en.Append(0xac, 0x43, 0x68, 0x65, 0x73, 0x74, 0x4d, 0x6f, 0x64, 0x54, 0x79, 0x70, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.ChestModType)))
-	if err != nil {
-		err = msgp.WrapError(err, "ChestModType")
-		return
-	}
-	for za0002 := range z.ChestModType {
-		err = en.WriteInt(z.ChestModType[za0002])
-		if err != nil {
-			err = msgp.WrapError(err, "ChestModType", za0002)
-			return
-		}
-	}
-	// write "CorrectGroup"
-	err = en.Append(0xac, 0x43, 0x6f, 0x72, 0x72, 0x65, 0x63, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.CorrectGroup)
-	if err != nil {
-		err = msgp.WrapError(err, "CorrectGroup")
-		return
-	}
-	// write "CraftingItemClassRestrictions"
-	err = en.Append(0xbd, 0x43, 0x72, 0x61, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.CraftingItemClassRestrictions)))
-	if err != nil {
-		err = msgp.WrapError(err, "CraftingItemClassRestrictions")
-		return
-	}
-	for za0003 := range z.CraftingItemClassRestrictions {
-		err = en.WriteInt(z.CraftingItemClassRestrictions[za0003])
-		if err != nil {
-			err = msgp.WrapError(err, "CraftingItemClassRestrictions", za0003)
-			return
-		}
-	}
-	// write "Domain"
-	err = en.Append(0xa6, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Domain)
-	if err != nil {
-		err = msgp.WrapError(err, "Domain")
-		return
-	}
-	// write "FullAreaClearAchievementItemsKey"
-	err = en.Append(0xd9, 0x20, 0x46, 0x75, 0x6c, 0x6c, 0x41, 0x72, 0x65, 0x61, 0x43, 0x6c, 0x65, 0x61, 0x72, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.FullAreaClearAchievementItemsKey)))
-	if err != nil {
-		err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey")
-		return
-	}
-	for za0004 := range z.FullAreaClearAchievementItemsKey {
-		err = en.WriteIntf(z.FullAreaClearAchievementItemsKey[za0004])
-		if err != nil {
-			err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey", za0004)
-			return
-		}
-	}
-	// write "GenerationType"
-	err = en.Append(0xae, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.GenerationType)
-	if err != nil {
-		err = msgp.WrapError(err, "GenerationType")
-		return
-	}
-	// write "GenerationWeightTagsKeys"
-	err = en.Append(0xb8, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.GenerationWeightTagsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "GenerationWeightTagsKeys")
-		return
-	}
-	for za0005 := range z.GenerationWeightTagsKeys {
-		err = en.WriteInt(z.GenerationWeightTagsKeys[za0005])
-		if err != nil {
-			err = msgp.WrapError(err, "GenerationWeightTagsKeys", za0005)
-			return
-		}
-	}
-	// write "GenerationWeightValues"
-	err = en.Append(0xb6, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.GenerationWeightValues)))
-	if err != nil {
-		err = msgp.WrapError(err, "GenerationWeightValues")
-		return
-	}
-	for za0006 := range z.GenerationWeightValues {
-		err = en.WriteInt(z.GenerationWeightValues[za0006])
-		if err != nil {
-			err = msgp.WrapError(err, "GenerationWeightValues", za0006)
-			return
-		}
-	}
-	// write "GrantedEffectsPerLevelKeys"
-	err = en.Append(0xba, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x50, 0x65, 0x72, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.GrantedEffectsPerLevelKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "GrantedEffectsPerLevelKeys")
-		return
-	}
-	for za0007 := range z.GrantedEffectsPerLevelKeys {
-		err = en.WriteInt(z.GrantedEffectsPerLevelKeys[za0007])
-		if err != nil {
-			err = msgp.WrapError(err, "GrantedEffectsPerLevelKeys", za0007)
-			return
-		}
-	}
-	// write "Hash16"
-	err = en.Append(0xa6, 0x48, 0x61, 0x73, 0x68, 0x31, 0x36)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Hash16)
-	if err != nil {
-		err = msgp.WrapError(err, "Hash16")
-		return
-	}
-	// write "Hash32"
-	err = en.Append(0xa6, 0x48, 0x61, 0x73, 0x68, 0x33, 0x32)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Hash32)
-	if err != nil {
-		err = msgp.WrapError(err, "Hash32")
-		return
-	}
-	// write "HeistAddStatValue1"
-	err = en.Append(0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x41, 0x64, 0x64, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x31)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.HeistAddStatValue1)
-	if err != nil {
-		err = msgp.WrapError(err, "HeistAddStatValue1")
-		return
-	}
-	// write "HeistAddStatValue2"
-	err = en.Append(0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x41, 0x64, 0x64, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x32)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.HeistAddStatValue2)
-	if err != nil {
-		err = msgp.WrapError(err, "HeistAddStatValue2")
-		return
-	}
-	// write "HeistStatsKey0"
-	err = en.Append(0xae, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x30)
-	if err != nil {
-		return
-	}
-	if z.HeistStatsKey0 == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.HeistStatsKey0)
-		if err != nil {
-			err = msgp.WrapError(err, "HeistStatsKey0")
-			return
-		}
-	}
-	// write "HeistStatsKey1"
-	err = en.Append(0xae, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x31)
-	if err != nil {
-		return
-	}
-	if z.HeistStatsKey1 == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.HeistStatsKey1)
-		if err != nil {
-			err = msgp.WrapError(err, "HeistStatsKey1")
-			return
-		}
-	}
-	// write "HeistSubStatValue1"
-	err = en.Append(0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x75, 0x62, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x31)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.HeistSubStatValue1)
-	if err != nil {
-		err = msgp.WrapError(err, "HeistSubStatValue1")
-		return
-	}
-	// write "HeistSubStatValue2"
-	err = en.Append(0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x75, 0x62, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x32)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.HeistSubStatValue2)
-	if err != nil {
-		err = msgp.WrapError(err, "HeistSubStatValue2")
-		return
-	}
-	// write "ID"
-	err = en.Append(0xa2, 0x49, 0x44)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.ID)
-	if err != nil {
-		err = msgp.WrapError(err, "ID")
-		return
-	}
-	// write "ImplicitTagsKeys"
-	err = en.Append(0xb0, 0x49, 0x6d, 0x70, 0x6c, 0x69, 0x63, 0x69, 0x74, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.ImplicitTagsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "ImplicitTagsKeys")
-		return
-	}
-	for za0008 := range z.ImplicitTagsKeys {
-		err = en.WriteInt(z.ImplicitTagsKeys[za0008])
-		if err != nil {
-			err = msgp.WrapError(err, "ImplicitTagsKeys", za0008)
-			return
-		}
-	}
-	// write "InfluenceTypes"
-	err = en.Append(0xae, 0x49, 0x6e, 0x66, 0x6c, 0x75, 0x65, 0x6e, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.InfluenceTypes)
-	if err != nil {
-		err = msgp.WrapError(err, "InfluenceTypes")
-		return
-	}
-	// write "IsEssenceOnlyModifier"
-	err = en.Append(0xb5, 0x49, 0x73, 0x45, 0x73, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x4f, 0x6e, 0x6c, 0x79, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x69, 0x65, 0x72)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.IsEssenceOnlyModifier)
-	if err != nil {
-		err = msgp.WrapError(err, "IsEssenceOnlyModifier")
-		return
-	}
-	// write "Level"
-	err = en.Append(0xa5, 0x4c, 0x65, 0x76, 0x65, 0x6c)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Level)
-	if err != nil {
-		err = msgp.WrapError(err, "Level")
-		return
-	}
-	// write "MaxLevel"
-	err = en.Append(0xa8, 0x4d, 0x61, 0x78, 0x4c, 0x65, 0x76, 0x65, 0x6c)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.MaxLevel)
-	if err != nil {
-		err = msgp.WrapError(err, "MaxLevel")
-		return
-	}
-	// write "ModTypeKey"
-	err = en.Append(0xaa, 0x4d, 0x6f, 0x64, 0x54, 0x79, 0x70, 0x65, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.ModTypeKey)
-	if err != nil {
-		err = msgp.WrapError(err, "ModTypeKey")
-		return
-	}
-	// write "ModifyMapsAchievements"
-	err = en.Append(0xb6, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x79, 0x4d, 0x61, 0x70, 0x73, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.ModifyMapsAchievements)))
-	if err != nil {
-		err = msgp.WrapError(err, "ModifyMapsAchievements")
-		return
-	}
-	for za0009 := range z.ModifyMapsAchievements {
-		err = en.WriteInt(z.ModifyMapsAchievements[za0009])
-		if err != nil {
-			err = msgp.WrapError(err, "ModifyMapsAchievements", za0009)
-			return
-		}
-	}
-	// write "MonsterKillAchievements"
-	err = en.Append(0xb7, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4b, 0x69, 0x6c, 0x6c, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.MonsterKillAchievements)))
-	if err != nil {
-		err = msgp.WrapError(err, "MonsterKillAchievements")
-		return
-	}
-	for za0010 := range z.MonsterKillAchievements {
-		err = en.WriteInt(z.MonsterKillAchievements[za0010])
-		if err != nil {
-			err = msgp.WrapError(err, "MonsterKillAchievements", za0010)
-			return
-		}
-	}
-	// write "MonsterMetadata"
-	err = en.Append(0xaf, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.MonsterMetadata)
-	if err != nil {
-		err = msgp.WrapError(err, "MonsterMetadata")
-		return
-	}
-	// write "MonsterOnDeath"
-	err = en.Append(0xae, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4f, 0x6e, 0x44, 0x65, 0x61, 0x74, 0x68)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.MonsterOnDeath)
-	if err != nil {
-		err = msgp.WrapError(err, "MonsterOnDeath")
-		return
-	}
-	// write "Name"
-	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.Name)
-	if err != nil {
-		err = msgp.WrapError(err, "Name")
-		return
-	}
-	// write "SpawnWeightTagsKeys"
-	err = en.Append(0xb3, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.SpawnWeightTagsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "SpawnWeightTagsKeys")
-		return
-	}
-	for za0011 := range z.SpawnWeightTagsKeys {
-		err = en.WriteInt(z.SpawnWeightTagsKeys[za0011])
-		if err != nil {
-			err = msgp.WrapError(err, "SpawnWeightTagsKeys", za0011)
-			return
-		}
-	}
-	// write "SpawnWeightValues"
-	err = en.Append(0xb1, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.SpawnWeightValues)))
-	if err != nil {
-		err = msgp.WrapError(err, "SpawnWeightValues")
-		return
-	}
-	for za0012 := range z.SpawnWeightValues {
-		err = en.WriteInt(z.SpawnWeightValues[za0012])
-		if err != nil {
-			err = msgp.WrapError(err, "SpawnWeightValues", za0012)
-			return
-		}
-	}
-	// write "Stat1Max"
-	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x31, 0x4d, 0x61, 0x78)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Stat1Max)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat1Max")
-		return
-	}
-	// write "Stat1Min"
-	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x31, 0x4d, 0x69, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Stat1Min)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat1Min")
-		return
-	}
-	// write "Stat2Max"
-	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x32, 0x4d, 0x61, 0x78)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Stat2Max)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat2Max")
-		return
-	}
-	// write "Stat2Min"
-	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x32, 0x4d, 0x69, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Stat2Min)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat2Min")
-		return
-	}
-	// write "Stat3Max"
-	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x33, 0x4d, 0x61, 0x78)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Stat3Max)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat3Max")
-		return
-	}
-	// write "Stat3Min"
-	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x33, 0x4d, 0x69, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Stat3Min)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat3Min")
-		return
-	}
-	// write "Stat4Max"
-	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x34, 0x4d, 0x61, 0x78)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Stat4Max)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat4Max")
-		return
-	}
-	// write "Stat4Min"
-	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x34, 0x4d, 0x69, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Stat4Min)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat4Min")
-		return
-	}
-	// write "Stat5Max"
-	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x35, 0x4d, 0x61, 0x78)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Stat5Max)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat5Max")
-		return
-	}
-	// write "Stat5Min"
-	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x35, 0x4d, 0x69, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Stat5Min)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat5Min")
-		return
-	}
-	// write "Stat6Max"
-	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x36, 0x4d, 0x61, 0x78)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Stat6Max)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat6Max")
-		return
-	}
-	// write "Stat6Min"
-	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x36, 0x4d, 0x69, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Stat6Min)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat6Min")
-		return
-	}
-	// write "StatsKey1"
-	err = en.Append(0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x31)
-	if err != nil {
-		return
-	}
-	if z.StatsKey1 == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.StatsKey1)
-		if err != nil {
-			err = msgp.WrapError(err, "StatsKey1")
 			return
 		}
 	}
@@ -14441,6 +14253,23 @@ func (z *Mod) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
+	// write "HeistStatsKey0"
+	err = en.Append(0xae, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x30)
+	if err != nil {
+		return
+	}
+	if z.HeistStatsKey0 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.HeistStatsKey0)
+		if err != nil {
+			err = msgp.WrapError(err, "HeistStatsKey0")
+			return
+		}
+	}
 	// write "StatsKey6"
 	err = en.Append(0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x36)
 	if err != nil {
@@ -14458,6 +14287,209 @@ func (z *Mod) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
+	// write "StatsKey1"
+	err = en.Append(0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x31)
+	if err != nil {
+		return
+	}
+	if z.StatsKey1 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.StatsKey1)
+		if err != nil {
+			err = msgp.WrapError(err, "StatsKey1")
+			return
+		}
+	}
+	// write "MonsterMetadata"
+	err = en.Append(0xaf, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.MonsterMetadata)
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterMetadata")
+		return
+	}
+	// write "ID"
+	err = en.Append(0xa2, 0x49, 0x44)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	// write "Name"
+	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	// write "MonsterOnDeath"
+	err = en.Append(0xae, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4f, 0x6e, 0x44, 0x65, 0x61, 0x74, 0x68)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.MonsterOnDeath)
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterOnDeath")
+		return
+	}
+	// write "CorrectGroup"
+	err = en.Append(0xac, 0x43, 0x6f, 0x72, 0x72, 0x65, 0x63, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.CorrectGroup)
+	if err != nil {
+		err = msgp.WrapError(err, "CorrectGroup")
+		return
+	}
+	// write "FullAreaClearAchievementItemsKey"
+	err = en.Append(0xd9, 0x20, 0x46, 0x75, 0x6c, 0x6c, 0x41, 0x72, 0x65, 0x61, 0x43, 0x6c, 0x65, 0x61, 0x72, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.FullAreaClearAchievementItemsKey)))
+	if err != nil {
+		err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey")
+		return
+	}
+	for za0001 := range z.FullAreaClearAchievementItemsKey {
+		err = en.WriteIntf(z.FullAreaClearAchievementItemsKey[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey", za0001)
+			return
+		}
+	}
+	// write "GrantedEffectsPerLevelKeys"
+	err = en.Append(0xba, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x50, 0x65, 0x72, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.GrantedEffectsPerLevelKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "GrantedEffectsPerLevelKeys")
+		return
+	}
+	for za0002 := range z.GrantedEffectsPerLevelKeys {
+		err = en.WriteInt(z.GrantedEffectsPerLevelKeys[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffectsPerLevelKeys", za0002)
+			return
+		}
+	}
+	// write "GenerationWeightValues"
+	err = en.Append(0xb6, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.GenerationWeightValues)))
+	if err != nil {
+		err = msgp.WrapError(err, "GenerationWeightValues")
+		return
+	}
+	for za0003 := range z.GenerationWeightValues {
+		err = en.WriteInt(z.GenerationWeightValues[za0003])
+		if err != nil {
+			err = msgp.WrapError(err, "GenerationWeightValues", za0003)
+			return
+		}
+	}
+	// write "GenerationWeightTagsKeys"
+	err = en.Append(0xb8, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.GenerationWeightTagsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "GenerationWeightTagsKeys")
+		return
+	}
+	for za0004 := range z.GenerationWeightTagsKeys {
+		err = en.WriteInt(z.GenerationWeightTagsKeys[za0004])
+		if err != nil {
+			err = msgp.WrapError(err, "GenerationWeightTagsKeys", za0004)
+			return
+		}
+	}
+	// write "SpawnWeightValues"
+	err = en.Append(0xb1, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.SpawnWeightValues)))
+	if err != nil {
+		err = msgp.WrapError(err, "SpawnWeightValues")
+		return
+	}
+	for za0005 := range z.SpawnWeightValues {
+		err = en.WriteInt(z.SpawnWeightValues[za0005])
+		if err != nil {
+			err = msgp.WrapError(err, "SpawnWeightValues", za0005)
+			return
+		}
+	}
+	// write "MonsterKillAchievements"
+	err = en.Append(0xb7, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4b, 0x69, 0x6c, 0x6c, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.MonsterKillAchievements)))
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterKillAchievements")
+		return
+	}
+	for za0006 := range z.MonsterKillAchievements {
+		err = en.WriteInt(z.MonsterKillAchievements[za0006])
+		if err != nil {
+			err = msgp.WrapError(err, "MonsterKillAchievements", za0006)
+			return
+		}
+	}
+	// write "ImplicitTagsKeys"
+	err = en.Append(0xb0, 0x49, 0x6d, 0x70, 0x6c, 0x69, 0x63, 0x69, 0x74, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.ImplicitTagsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "ImplicitTagsKeys")
+		return
+	}
+	for za0007 := range z.ImplicitTagsKeys {
+		err = en.WriteInt(z.ImplicitTagsKeys[za0007])
+		if err != nil {
+			err = msgp.WrapError(err, "ImplicitTagsKeys", za0007)
+			return
+		}
+	}
+	// write "SpawnWeightTagsKeys"
+	err = en.Append(0xb3, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.SpawnWeightTagsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "SpawnWeightTagsKeys")
+		return
+	}
+	for za0008 := range z.SpawnWeightTagsKeys {
+		err = en.WriteInt(z.SpawnWeightTagsKeys[za0008])
+		if err != nil {
+			err = msgp.WrapError(err, "SpawnWeightTagsKeys", za0008)
+			return
+		}
+	}
 	// write "TagsKeys"
 	err = en.Append(0xa8, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
 	if err != nil {
@@ -14468,12 +14500,110 @@ func (z *Mod) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "TagsKeys")
 		return
 	}
-	for za0013 := range z.TagsKeys {
-		err = en.WriteInt(z.TagsKeys[za0013])
+	for za0009 := range z.TagsKeys {
+		err = en.WriteInt(z.TagsKeys[za0009])
 		if err != nil {
-			err = msgp.WrapError(err, "TagsKeys", za0013)
+			err = msgp.WrapError(err, "TagsKeys", za0009)
 			return
 		}
+	}
+	// write "CraftingItemClassRestrictions"
+	err = en.Append(0xbd, 0x43, 0x72, 0x61, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.CraftingItemClassRestrictions)))
+	if err != nil {
+		err = msgp.WrapError(err, "CraftingItemClassRestrictions")
+		return
+	}
+	for za0010 := range z.CraftingItemClassRestrictions {
+		err = en.WriteInt(z.CraftingItemClassRestrictions[za0010])
+		if err != nil {
+			err = msgp.WrapError(err, "CraftingItemClassRestrictions", za0010)
+			return
+		}
+	}
+	// write "AchievementItemsKey"
+	err = en.Append(0xb3, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.AchievementItemsKey)))
+	if err != nil {
+		err = msgp.WrapError(err, "AchievementItemsKey")
+		return
+	}
+	for za0011 := range z.AchievementItemsKey {
+		err = en.WriteIntf(z.AchievementItemsKey[za0011])
+		if err != nil {
+			err = msgp.WrapError(err, "AchievementItemsKey", za0011)
+			return
+		}
+	}
+	// write "ChestModType"
+	err = en.Append(0xac, 0x43, 0x68, 0x65, 0x73, 0x74, 0x4d, 0x6f, 0x64, 0x54, 0x79, 0x70, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.ChestModType)))
+	if err != nil {
+		err = msgp.WrapError(err, "ChestModType")
+		return
+	}
+	for za0012 := range z.ChestModType {
+		err = en.WriteInt(z.ChestModType[za0012])
+		if err != nil {
+			err = msgp.WrapError(err, "ChestModType", za0012)
+			return
+		}
+	}
+	// write "ModifyMapsAchievements"
+	err = en.Append(0xb6, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x79, 0x4d, 0x61, 0x70, 0x73, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.ModifyMapsAchievements)))
+	if err != nil {
+		err = msgp.WrapError(err, "ModifyMapsAchievements")
+		return
+	}
+	for za0013 := range z.ModifyMapsAchievements {
+		err = en.WriteInt(z.ModifyMapsAchievements[za0013])
+		if err != nil {
+			err = msgp.WrapError(err, "ModifyMapsAchievements", za0013)
+			return
+		}
+	}
+	// write "MaxLevel"
+	err = en.Append(0xa8, 0x4d, 0x61, 0x78, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MaxLevel)
+	if err != nil {
+		err = msgp.WrapError(err, "MaxLevel")
+		return
+	}
+	// write "Stat4Min"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x34, 0x4d, 0x69, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat4Min)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat4Min")
+		return
+	}
+	// write "Level"
+	err = en.Append(0xa5, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Level)
+	if err != nil {
+		err = msgp.WrapError(err, "Level")
+		return
 	}
 	// write "Key"
 	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
@@ -14485,6 +14615,226 @@ func (z *Mod) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Key")
 		return
 	}
+	// write "InfluenceTypes"
+	err = en.Append(0xae, 0x49, 0x6e, 0x66, 0x6c, 0x75, 0x65, 0x6e, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.InfluenceTypes)
+	if err != nil {
+		err = msgp.WrapError(err, "InfluenceTypes")
+		return
+	}
+	// write "HeistSubStatValue2"
+	err = en.Append(0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x75, 0x62, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x32)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.HeistSubStatValue2)
+	if err != nil {
+		err = msgp.WrapError(err, "HeistSubStatValue2")
+		return
+	}
+	// write "Stat1Max"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x31, 0x4d, 0x61, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat1Max)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat1Max")
+		return
+	}
+	// write "Stat1Min"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x31, 0x4d, 0x69, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat1Min)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat1Min")
+		return
+	}
+	// write "Stat2Max"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x32, 0x4d, 0x61, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat2Max)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat2Max")
+		return
+	}
+	// write "Stat2Min"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x32, 0x4d, 0x69, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat2Min)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat2Min")
+		return
+	}
+	// write "Stat3Max"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x33, 0x4d, 0x61, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat3Max)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat3Max")
+		return
+	}
+	// write "Stat3Min"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x33, 0x4d, 0x69, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat3Min)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat3Min")
+		return
+	}
+	// write "Stat4Max"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x34, 0x4d, 0x61, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat4Max)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat4Max")
+		return
+	}
+	// write "ModTypeKey"
+	err = en.Append(0xaa, 0x4d, 0x6f, 0x64, 0x54, 0x79, 0x70, 0x65, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.ModTypeKey)
+	if err != nil {
+		err = msgp.WrapError(err, "ModTypeKey")
+		return
+	}
+	// write "Stat5Max"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x35, 0x4d, 0x61, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat5Max)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat5Max")
+		return
+	}
+	// write "Stat5Min"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x35, 0x4d, 0x69, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat5Min)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat5Min")
+		return
+	}
+	// write "Stat6Max"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x36, 0x4d, 0x61, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat6Max)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat6Max")
+		return
+	}
+	// write "Stat6Min"
+	err = en.Append(0xa8, 0x53, 0x74, 0x61, 0x74, 0x36, 0x4d, 0x69, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Stat6Min)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat6Min")
+		return
+	}
+	// write "HeistSubStatValue1"
+	err = en.Append(0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x75, 0x62, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x31)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.HeistSubStatValue1)
+	if err != nil {
+		err = msgp.WrapError(err, "HeistSubStatValue1")
+		return
+	}
+	// write "HeistAddStatValue2"
+	err = en.Append(0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x41, 0x64, 0x64, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x32)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.HeistAddStatValue2)
+	if err != nil {
+		err = msgp.WrapError(err, "HeistAddStatValue2")
+		return
+	}
+	// write "HeistAddStatValue1"
+	err = en.Append(0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x41, 0x64, 0x64, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x31)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.HeistAddStatValue1)
+	if err != nil {
+		err = msgp.WrapError(err, "HeistAddStatValue1")
+		return
+	}
+	// write "Hash32"
+	err = en.Append(0xa6, 0x48, 0x61, 0x73, 0x68, 0x33, 0x32)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Hash32)
+	if err != nil {
+		err = msgp.WrapError(err, "Hash32")
+		return
+	}
+	// write "Hash16"
+	err = en.Append(0xa6, 0x48, 0x61, 0x73, 0x68, 0x31, 0x36)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Hash16)
+	if err != nil {
+		err = msgp.WrapError(err, "Hash16")
+		return
+	}
+	// write "GenerationType"
+	err = en.Append(0xae, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.GenerationType)
+	if err != nil {
+		err = msgp.WrapError(err, "GenerationType")
+		return
+	}
+	// write "Domain"
+	err = en.Append(0xa6, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Domain)
+	if err != nil {
+		err = msgp.WrapError(err, "Domain")
+		return
+	}
+	// write "IsEssenceOnlyModifier"
+	err = en.Append(0xb5, 0x49, 0x73, 0x45, 0x73, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x4f, 0x6e, 0x6c, 0x79, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x69, 0x65, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IsEssenceOnlyModifier)
+	if err != nil {
+		err = msgp.WrapError(err, "IsEssenceOnlyModifier")
+		return
+	}
 	return
 }
 
@@ -14492,15 +14842,12 @@ func (z *Mod) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *Mod) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 54
-	// string "AchievementItemsKey"
-	o = append(o, 0xde, 0x0, 0x36, 0xb3, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.AchievementItemsKey)))
-	for za0001 := range z.AchievementItemsKey {
-		o, err = msgp.AppendIntf(o, z.AchievementItemsKey[za0001])
-		if err != nil {
-			err = msgp.WrapError(err, "AchievementItemsKey", za0001)
-			return
-		}
+	// string "HeistStatsKey1"
+	o = append(o, 0xde, 0x0, 0x36, 0xae, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x31)
+	if z.HeistStatsKey1 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.HeistStatsKey1)
 	}
 	// string "ArchnemesisMinionMod"
 	o = append(o, 0xb4, 0x41, 0x72, 0x63, 0x68, 0x6e, 0x65, 0x6d, 0x65, 0x73, 0x69, 0x73, 0x4d, 0x69, 0x6e, 0x69, 0x6f, 0x6e, 0x4d, 0x6f, 0x64)
@@ -14515,187 +14862,6 @@ func (z *Mod) MarshalMsg(b []byte) (o []byte, err error) {
 		o = msgp.AppendNil(o)
 	} else {
 		o = msgp.AppendInt(o, *z.BuffTemplate)
-	}
-	// string "ChestModType"
-	o = append(o, 0xac, 0x43, 0x68, 0x65, 0x73, 0x74, 0x4d, 0x6f, 0x64, 0x54, 0x79, 0x70, 0x65)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.ChestModType)))
-	for za0002 := range z.ChestModType {
-		o = msgp.AppendInt(o, z.ChestModType[za0002])
-	}
-	// string "CorrectGroup"
-	o = append(o, 0xac, 0x43, 0x6f, 0x72, 0x72, 0x65, 0x63, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70)
-	o = msgp.AppendString(o, z.CorrectGroup)
-	// string "CraftingItemClassRestrictions"
-	o = append(o, 0xbd, 0x43, 0x72, 0x61, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.CraftingItemClassRestrictions)))
-	for za0003 := range z.CraftingItemClassRestrictions {
-		o = msgp.AppendInt(o, z.CraftingItemClassRestrictions[za0003])
-	}
-	// string "Domain"
-	o = append(o, 0xa6, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e)
-	o = msgp.AppendInt(o, z.Domain)
-	// string "FullAreaClearAchievementItemsKey"
-	o = append(o, 0xd9, 0x20, 0x46, 0x75, 0x6c, 0x6c, 0x41, 0x72, 0x65, 0x61, 0x43, 0x6c, 0x65, 0x61, 0x72, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.FullAreaClearAchievementItemsKey)))
-	for za0004 := range z.FullAreaClearAchievementItemsKey {
-		o, err = msgp.AppendIntf(o, z.FullAreaClearAchievementItemsKey[za0004])
-		if err != nil {
-			err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey", za0004)
-			return
-		}
-	}
-	// string "GenerationType"
-	o = append(o, 0xae, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65)
-	o = msgp.AppendInt(o, z.GenerationType)
-	// string "GenerationWeightTagsKeys"
-	o = append(o, 0xb8, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.GenerationWeightTagsKeys)))
-	for za0005 := range z.GenerationWeightTagsKeys {
-		o = msgp.AppendInt(o, z.GenerationWeightTagsKeys[za0005])
-	}
-	// string "GenerationWeightValues"
-	o = append(o, 0xb6, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.GenerationWeightValues)))
-	for za0006 := range z.GenerationWeightValues {
-		o = msgp.AppendInt(o, z.GenerationWeightValues[za0006])
-	}
-	// string "GrantedEffectsPerLevelKeys"
-	o = append(o, 0xba, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x50, 0x65, 0x72, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.GrantedEffectsPerLevelKeys)))
-	for za0007 := range z.GrantedEffectsPerLevelKeys {
-		o = msgp.AppendInt(o, z.GrantedEffectsPerLevelKeys[za0007])
-	}
-	// string "Hash16"
-	o = append(o, 0xa6, 0x48, 0x61, 0x73, 0x68, 0x31, 0x36)
-	o = msgp.AppendInt(o, z.Hash16)
-	// string "Hash32"
-	o = append(o, 0xa6, 0x48, 0x61, 0x73, 0x68, 0x33, 0x32)
-	o = msgp.AppendInt(o, z.Hash32)
-	// string "HeistAddStatValue1"
-	o = append(o, 0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x41, 0x64, 0x64, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x31)
-	o = msgp.AppendInt(o, z.HeistAddStatValue1)
-	// string "HeistAddStatValue2"
-	o = append(o, 0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x41, 0x64, 0x64, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x32)
-	o = msgp.AppendInt(o, z.HeistAddStatValue2)
-	// string "HeistStatsKey0"
-	o = append(o, 0xae, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x30)
-	if z.HeistStatsKey0 == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.HeistStatsKey0)
-	}
-	// string "HeistStatsKey1"
-	o = append(o, 0xae, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x31)
-	if z.HeistStatsKey1 == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.HeistStatsKey1)
-	}
-	// string "HeistSubStatValue1"
-	o = append(o, 0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x75, 0x62, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x31)
-	o = msgp.AppendInt(o, z.HeistSubStatValue1)
-	// string "HeistSubStatValue2"
-	o = append(o, 0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x75, 0x62, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x32)
-	o = msgp.AppendInt(o, z.HeistSubStatValue2)
-	// string "ID"
-	o = append(o, 0xa2, 0x49, 0x44)
-	o = msgp.AppendString(o, z.ID)
-	// string "ImplicitTagsKeys"
-	o = append(o, 0xb0, 0x49, 0x6d, 0x70, 0x6c, 0x69, 0x63, 0x69, 0x74, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.ImplicitTagsKeys)))
-	for za0008 := range z.ImplicitTagsKeys {
-		o = msgp.AppendInt(o, z.ImplicitTagsKeys[za0008])
-	}
-	// string "InfluenceTypes"
-	o = append(o, 0xae, 0x49, 0x6e, 0x66, 0x6c, 0x75, 0x65, 0x6e, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x73)
-	o = msgp.AppendInt(o, z.InfluenceTypes)
-	// string "IsEssenceOnlyModifier"
-	o = append(o, 0xb5, 0x49, 0x73, 0x45, 0x73, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x4f, 0x6e, 0x6c, 0x79, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x69, 0x65, 0x72)
-	o = msgp.AppendBool(o, z.IsEssenceOnlyModifier)
-	// string "Level"
-	o = append(o, 0xa5, 0x4c, 0x65, 0x76, 0x65, 0x6c)
-	o = msgp.AppendInt(o, z.Level)
-	// string "MaxLevel"
-	o = append(o, 0xa8, 0x4d, 0x61, 0x78, 0x4c, 0x65, 0x76, 0x65, 0x6c)
-	o = msgp.AppendInt(o, z.MaxLevel)
-	// string "ModTypeKey"
-	o = append(o, 0xaa, 0x4d, 0x6f, 0x64, 0x54, 0x79, 0x70, 0x65, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.ModTypeKey)
-	// string "ModifyMapsAchievements"
-	o = append(o, 0xb6, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x79, 0x4d, 0x61, 0x70, 0x73, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.ModifyMapsAchievements)))
-	for za0009 := range z.ModifyMapsAchievements {
-		o = msgp.AppendInt(o, z.ModifyMapsAchievements[za0009])
-	}
-	// string "MonsterKillAchievements"
-	o = append(o, 0xb7, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4b, 0x69, 0x6c, 0x6c, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.MonsterKillAchievements)))
-	for za0010 := range z.MonsterKillAchievements {
-		o = msgp.AppendInt(o, z.MonsterKillAchievements[za0010])
-	}
-	// string "MonsterMetadata"
-	o = append(o, 0xaf, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61)
-	o = msgp.AppendString(o, z.MonsterMetadata)
-	// string "MonsterOnDeath"
-	o = append(o, 0xae, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4f, 0x6e, 0x44, 0x65, 0x61, 0x74, 0x68)
-	o = msgp.AppendString(o, z.MonsterOnDeath)
-	// string "Name"
-	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
-	o = msgp.AppendString(o, z.Name)
-	// string "SpawnWeightTagsKeys"
-	o = append(o, 0xb3, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.SpawnWeightTagsKeys)))
-	for za0011 := range z.SpawnWeightTagsKeys {
-		o = msgp.AppendInt(o, z.SpawnWeightTagsKeys[za0011])
-	}
-	// string "SpawnWeightValues"
-	o = append(o, 0xb1, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.SpawnWeightValues)))
-	for za0012 := range z.SpawnWeightValues {
-		o = msgp.AppendInt(o, z.SpawnWeightValues[za0012])
-	}
-	// string "Stat1Max"
-	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x31, 0x4d, 0x61, 0x78)
-	o = msgp.AppendInt(o, z.Stat1Max)
-	// string "Stat1Min"
-	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x31, 0x4d, 0x69, 0x6e)
-	o = msgp.AppendInt(o, z.Stat1Min)
-	// string "Stat2Max"
-	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x32, 0x4d, 0x61, 0x78)
-	o = msgp.AppendInt(o, z.Stat2Max)
-	// string "Stat2Min"
-	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x32, 0x4d, 0x69, 0x6e)
-	o = msgp.AppendInt(o, z.Stat2Min)
-	// string "Stat3Max"
-	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x33, 0x4d, 0x61, 0x78)
-	o = msgp.AppendInt(o, z.Stat3Max)
-	// string "Stat3Min"
-	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x33, 0x4d, 0x69, 0x6e)
-	o = msgp.AppendInt(o, z.Stat3Min)
-	// string "Stat4Max"
-	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x34, 0x4d, 0x61, 0x78)
-	o = msgp.AppendInt(o, z.Stat4Max)
-	// string "Stat4Min"
-	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x34, 0x4d, 0x69, 0x6e)
-	o = msgp.AppendInt(o, z.Stat4Min)
-	// string "Stat5Max"
-	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x35, 0x4d, 0x61, 0x78)
-	o = msgp.AppendInt(o, z.Stat5Max)
-	// string "Stat5Min"
-	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x35, 0x4d, 0x69, 0x6e)
-	o = msgp.AppendInt(o, z.Stat5Min)
-	// string "Stat6Max"
-	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x36, 0x4d, 0x61, 0x78)
-	o = msgp.AppendInt(o, z.Stat6Max)
-	// string "Stat6Min"
-	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x36, 0x4d, 0x69, 0x6e)
-	o = msgp.AppendInt(o, z.Stat6Min)
-	// string "StatsKey1"
-	o = append(o, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x31)
-	if z.StatsKey1 == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.StatsKey1)
 	}
 	// string "StatsKey2"
 	o = append(o, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x32)
@@ -14725,6 +14891,13 @@ func (z *Mod) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.StatsKey5)
 	}
+	// string "HeistStatsKey0"
+	o = append(o, 0xae, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x30)
+	if z.HeistStatsKey0 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.HeistStatsKey0)
+	}
 	// string "StatsKey6"
 	o = append(o, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x36)
 	if z.StatsKey6 == nil {
@@ -14732,15 +14905,192 @@ func (z *Mod) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.StatsKey6)
 	}
+	// string "StatsKey1"
+	o = append(o, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x31)
+	if z.StatsKey1 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.StatsKey1)
+	}
+	// string "MonsterMetadata"
+	o = append(o, 0xaf, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61)
+	o = msgp.AppendString(o, z.MonsterMetadata)
+	// string "ID"
+	o = append(o, 0xa2, 0x49, 0x44)
+	o = msgp.AppendString(o, z.ID)
+	// string "Name"
+	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	o = msgp.AppendString(o, z.Name)
+	// string "MonsterOnDeath"
+	o = append(o, 0xae, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4f, 0x6e, 0x44, 0x65, 0x61, 0x74, 0x68)
+	o = msgp.AppendString(o, z.MonsterOnDeath)
+	// string "CorrectGroup"
+	o = append(o, 0xac, 0x43, 0x6f, 0x72, 0x72, 0x65, 0x63, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70)
+	o = msgp.AppendString(o, z.CorrectGroup)
+	// string "FullAreaClearAchievementItemsKey"
+	o = append(o, 0xd9, 0x20, 0x46, 0x75, 0x6c, 0x6c, 0x41, 0x72, 0x65, 0x61, 0x43, 0x6c, 0x65, 0x61, 0x72, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.FullAreaClearAchievementItemsKey)))
+	for za0001 := range z.FullAreaClearAchievementItemsKey {
+		o, err = msgp.AppendIntf(o, z.FullAreaClearAchievementItemsKey[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey", za0001)
+			return
+		}
+	}
+	// string "GrantedEffectsPerLevelKeys"
+	o = append(o, 0xba, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x50, 0x65, 0x72, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.GrantedEffectsPerLevelKeys)))
+	for za0002 := range z.GrantedEffectsPerLevelKeys {
+		o = msgp.AppendInt(o, z.GrantedEffectsPerLevelKeys[za0002])
+	}
+	// string "GenerationWeightValues"
+	o = append(o, 0xb6, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.GenerationWeightValues)))
+	for za0003 := range z.GenerationWeightValues {
+		o = msgp.AppendInt(o, z.GenerationWeightValues[za0003])
+	}
+	// string "GenerationWeightTagsKeys"
+	o = append(o, 0xb8, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.GenerationWeightTagsKeys)))
+	for za0004 := range z.GenerationWeightTagsKeys {
+		o = msgp.AppendInt(o, z.GenerationWeightTagsKeys[za0004])
+	}
+	// string "SpawnWeightValues"
+	o = append(o, 0xb1, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.SpawnWeightValues)))
+	for za0005 := range z.SpawnWeightValues {
+		o = msgp.AppendInt(o, z.SpawnWeightValues[za0005])
+	}
+	// string "MonsterKillAchievements"
+	o = append(o, 0xb7, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x4b, 0x69, 0x6c, 0x6c, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.MonsterKillAchievements)))
+	for za0006 := range z.MonsterKillAchievements {
+		o = msgp.AppendInt(o, z.MonsterKillAchievements[za0006])
+	}
+	// string "ImplicitTagsKeys"
+	o = append(o, 0xb0, 0x49, 0x6d, 0x70, 0x6c, 0x69, 0x63, 0x69, 0x74, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ImplicitTagsKeys)))
+	for za0007 := range z.ImplicitTagsKeys {
+		o = msgp.AppendInt(o, z.ImplicitTagsKeys[za0007])
+	}
+	// string "SpawnWeightTagsKeys"
+	o = append(o, 0xb3, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.SpawnWeightTagsKeys)))
+	for za0008 := range z.SpawnWeightTagsKeys {
+		o = msgp.AppendInt(o, z.SpawnWeightTagsKeys[za0008])
+	}
 	// string "TagsKeys"
 	o = append(o, 0xa8, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.TagsKeys)))
-	for za0013 := range z.TagsKeys {
-		o = msgp.AppendInt(o, z.TagsKeys[za0013])
+	for za0009 := range z.TagsKeys {
+		o = msgp.AppendInt(o, z.TagsKeys[za0009])
 	}
+	// string "CraftingItemClassRestrictions"
+	o = append(o, 0xbd, 0x43, 0x72, 0x61, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.CraftingItemClassRestrictions)))
+	for za0010 := range z.CraftingItemClassRestrictions {
+		o = msgp.AppendInt(o, z.CraftingItemClassRestrictions[za0010])
+	}
+	// string "AchievementItemsKey"
+	o = append(o, 0xb3, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.AchievementItemsKey)))
+	for za0011 := range z.AchievementItemsKey {
+		o, err = msgp.AppendIntf(o, z.AchievementItemsKey[za0011])
+		if err != nil {
+			err = msgp.WrapError(err, "AchievementItemsKey", za0011)
+			return
+		}
+	}
+	// string "ChestModType"
+	o = append(o, 0xac, 0x43, 0x68, 0x65, 0x73, 0x74, 0x4d, 0x6f, 0x64, 0x54, 0x79, 0x70, 0x65)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ChestModType)))
+	for za0012 := range z.ChestModType {
+		o = msgp.AppendInt(o, z.ChestModType[za0012])
+	}
+	// string "ModifyMapsAchievements"
+	o = append(o, 0xb6, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x79, 0x4d, 0x61, 0x70, 0x73, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ModifyMapsAchievements)))
+	for za0013 := range z.ModifyMapsAchievements {
+		o = msgp.AppendInt(o, z.ModifyMapsAchievements[za0013])
+	}
+	// string "MaxLevel"
+	o = append(o, 0xa8, 0x4d, 0x61, 0x78, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	o = msgp.AppendInt(o, z.MaxLevel)
+	// string "Stat4Min"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x34, 0x4d, 0x69, 0x6e)
+	o = msgp.AppendInt(o, z.Stat4Min)
+	// string "Level"
+	o = append(o, 0xa5, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	o = msgp.AppendInt(o, z.Level)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
+	// string "InfluenceTypes"
+	o = append(o, 0xae, 0x49, 0x6e, 0x66, 0x6c, 0x75, 0x65, 0x6e, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x73)
+	o = msgp.AppendInt(o, z.InfluenceTypes)
+	// string "HeistSubStatValue2"
+	o = append(o, 0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x75, 0x62, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x32)
+	o = msgp.AppendInt(o, z.HeistSubStatValue2)
+	// string "Stat1Max"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x31, 0x4d, 0x61, 0x78)
+	o = msgp.AppendInt(o, z.Stat1Max)
+	// string "Stat1Min"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x31, 0x4d, 0x69, 0x6e)
+	o = msgp.AppendInt(o, z.Stat1Min)
+	// string "Stat2Max"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x32, 0x4d, 0x61, 0x78)
+	o = msgp.AppendInt(o, z.Stat2Max)
+	// string "Stat2Min"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x32, 0x4d, 0x69, 0x6e)
+	o = msgp.AppendInt(o, z.Stat2Min)
+	// string "Stat3Max"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x33, 0x4d, 0x61, 0x78)
+	o = msgp.AppendInt(o, z.Stat3Max)
+	// string "Stat3Min"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x33, 0x4d, 0x69, 0x6e)
+	o = msgp.AppendInt(o, z.Stat3Min)
+	// string "Stat4Max"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x34, 0x4d, 0x61, 0x78)
+	o = msgp.AppendInt(o, z.Stat4Max)
+	// string "ModTypeKey"
+	o = append(o, 0xaa, 0x4d, 0x6f, 0x64, 0x54, 0x79, 0x70, 0x65, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.ModTypeKey)
+	// string "Stat5Max"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x35, 0x4d, 0x61, 0x78)
+	o = msgp.AppendInt(o, z.Stat5Max)
+	// string "Stat5Min"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x35, 0x4d, 0x69, 0x6e)
+	o = msgp.AppendInt(o, z.Stat5Min)
+	// string "Stat6Max"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x36, 0x4d, 0x61, 0x78)
+	o = msgp.AppendInt(o, z.Stat6Max)
+	// string "Stat6Min"
+	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x36, 0x4d, 0x69, 0x6e)
+	o = msgp.AppendInt(o, z.Stat6Min)
+	// string "HeistSubStatValue1"
+	o = append(o, 0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x53, 0x75, 0x62, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x31)
+	o = msgp.AppendInt(o, z.HeistSubStatValue1)
+	// string "HeistAddStatValue2"
+	o = append(o, 0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x41, 0x64, 0x64, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x32)
+	o = msgp.AppendInt(o, z.HeistAddStatValue2)
+	// string "HeistAddStatValue1"
+	o = append(o, 0xb2, 0x48, 0x65, 0x69, 0x73, 0x74, 0x41, 0x64, 0x64, 0x53, 0x74, 0x61, 0x74, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x31)
+	o = msgp.AppendInt(o, z.HeistAddStatValue1)
+	// string "Hash32"
+	o = append(o, 0xa6, 0x48, 0x61, 0x73, 0x68, 0x33, 0x32)
+	o = msgp.AppendInt(o, z.Hash32)
+	// string "Hash16"
+	o = append(o, 0xa6, 0x48, 0x61, 0x73, 0x68, 0x31, 0x36)
+	o = msgp.AppendInt(o, z.Hash16)
+	// string "GenerationType"
+	o = append(o, 0xae, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65)
+	o = msgp.AppendInt(o, z.GenerationType)
+	// string "Domain"
+	o = append(o, 0xa6, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e)
+	o = msgp.AppendInt(o, z.Domain)
+	// string "IsEssenceOnlyModifier"
+	o = append(o, 0xb5, 0x49, 0x73, 0x45, 0x73, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x4f, 0x6e, 0x6c, 0x79, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x69, 0x65, 0x72)
+	o = msgp.AppendBool(o, z.IsEssenceOnlyModifier)
 	return
 }
 
@@ -14762,22 +15112,20 @@ func (z *Mod) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AchievementItemsKey":
-			var zb0002 uint32
-			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "AchievementItemsKey")
-				return
-			}
-			if cap(z.AchievementItemsKey) >= int(zb0002) {
-				z.AchievementItemsKey = (z.AchievementItemsKey)[:zb0002]
-			} else {
-				z.AchievementItemsKey = make([]interface{}, zb0002)
-			}
-			for za0001 := range z.AchievementItemsKey {
-				z.AchievementItemsKey[za0001], bts, err = msgp.ReadIntfBytes(bts)
+		case "HeistStatsKey1":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "AchievementItemsKey", za0001)
+					return
+				}
+				z.HeistStatsKey1 = nil
+			} else {
+				if z.HeistStatsKey1 == nil {
+					z.HeistStatsKey1 = new(int)
+				}
+				*z.HeistStatsKey1, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "HeistStatsKey1")
 					return
 				}
 			}
@@ -14812,446 +15160,6 @@ func (z *Mod) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				*z.BuffTemplate, bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
 					err = msgp.WrapError(err, "BuffTemplate")
-					return
-				}
-			}
-		case "ChestModType":
-			var zb0003 uint32
-			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ChestModType")
-				return
-			}
-			if cap(z.ChestModType) >= int(zb0003) {
-				z.ChestModType = (z.ChestModType)[:zb0003]
-			} else {
-				z.ChestModType = make([]int, zb0003)
-			}
-			for za0002 := range z.ChestModType {
-				z.ChestModType[za0002], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ChestModType", za0002)
-					return
-				}
-			}
-		case "CorrectGroup":
-			z.CorrectGroup, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "CorrectGroup")
-				return
-			}
-		case "CraftingItemClassRestrictions":
-			var zb0004 uint32
-			zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "CraftingItemClassRestrictions")
-				return
-			}
-			if cap(z.CraftingItemClassRestrictions) >= int(zb0004) {
-				z.CraftingItemClassRestrictions = (z.CraftingItemClassRestrictions)[:zb0004]
-			} else {
-				z.CraftingItemClassRestrictions = make([]int, zb0004)
-			}
-			for za0003 := range z.CraftingItemClassRestrictions {
-				z.CraftingItemClassRestrictions[za0003], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "CraftingItemClassRestrictions", za0003)
-					return
-				}
-			}
-		case "Domain":
-			z.Domain, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Domain")
-				return
-			}
-		case "FullAreaClearAchievementItemsKey":
-			var zb0005 uint32
-			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey")
-				return
-			}
-			if cap(z.FullAreaClearAchievementItemsKey) >= int(zb0005) {
-				z.FullAreaClearAchievementItemsKey = (z.FullAreaClearAchievementItemsKey)[:zb0005]
-			} else {
-				z.FullAreaClearAchievementItemsKey = make([]interface{}, zb0005)
-			}
-			for za0004 := range z.FullAreaClearAchievementItemsKey {
-				z.FullAreaClearAchievementItemsKey[za0004], bts, err = msgp.ReadIntfBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey", za0004)
-					return
-				}
-			}
-		case "GenerationType":
-			z.GenerationType, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "GenerationType")
-				return
-			}
-		case "GenerationWeightTagsKeys":
-			var zb0006 uint32
-			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "GenerationWeightTagsKeys")
-				return
-			}
-			if cap(z.GenerationWeightTagsKeys) >= int(zb0006) {
-				z.GenerationWeightTagsKeys = (z.GenerationWeightTagsKeys)[:zb0006]
-			} else {
-				z.GenerationWeightTagsKeys = make([]int, zb0006)
-			}
-			for za0005 := range z.GenerationWeightTagsKeys {
-				z.GenerationWeightTagsKeys[za0005], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "GenerationWeightTagsKeys", za0005)
-					return
-				}
-			}
-		case "GenerationWeightValues":
-			var zb0007 uint32
-			zb0007, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "GenerationWeightValues")
-				return
-			}
-			if cap(z.GenerationWeightValues) >= int(zb0007) {
-				z.GenerationWeightValues = (z.GenerationWeightValues)[:zb0007]
-			} else {
-				z.GenerationWeightValues = make([]int, zb0007)
-			}
-			for za0006 := range z.GenerationWeightValues {
-				z.GenerationWeightValues[za0006], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "GenerationWeightValues", za0006)
-					return
-				}
-			}
-		case "GrantedEffectsPerLevelKeys":
-			var zb0008 uint32
-			zb0008, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "GrantedEffectsPerLevelKeys")
-				return
-			}
-			if cap(z.GrantedEffectsPerLevelKeys) >= int(zb0008) {
-				z.GrantedEffectsPerLevelKeys = (z.GrantedEffectsPerLevelKeys)[:zb0008]
-			} else {
-				z.GrantedEffectsPerLevelKeys = make([]int, zb0008)
-			}
-			for za0007 := range z.GrantedEffectsPerLevelKeys {
-				z.GrantedEffectsPerLevelKeys[za0007], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "GrantedEffectsPerLevelKeys", za0007)
-					return
-				}
-			}
-		case "Hash16":
-			z.Hash16, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Hash16")
-				return
-			}
-		case "Hash32":
-			z.Hash32, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Hash32")
-				return
-			}
-		case "HeistAddStatValue1":
-			z.HeistAddStatValue1, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "HeistAddStatValue1")
-				return
-			}
-		case "HeistAddStatValue2":
-			z.HeistAddStatValue2, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "HeistAddStatValue2")
-				return
-			}
-		case "HeistStatsKey0":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.HeistStatsKey0 = nil
-			} else {
-				if z.HeistStatsKey0 == nil {
-					z.HeistStatsKey0 = new(int)
-				}
-				*z.HeistStatsKey0, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "HeistStatsKey0")
-					return
-				}
-			}
-		case "HeistStatsKey1":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.HeistStatsKey1 = nil
-			} else {
-				if z.HeistStatsKey1 == nil {
-					z.HeistStatsKey1 = new(int)
-				}
-				*z.HeistStatsKey1, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "HeistStatsKey1")
-					return
-				}
-			}
-		case "HeistSubStatValue1":
-			z.HeistSubStatValue1, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "HeistSubStatValue1")
-				return
-			}
-		case "HeistSubStatValue2":
-			z.HeistSubStatValue2, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "HeistSubStatValue2")
-				return
-			}
-		case "ID":
-			z.ID, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ID")
-				return
-			}
-		case "ImplicitTagsKeys":
-			var zb0009 uint32
-			zb0009, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ImplicitTagsKeys")
-				return
-			}
-			if cap(z.ImplicitTagsKeys) >= int(zb0009) {
-				z.ImplicitTagsKeys = (z.ImplicitTagsKeys)[:zb0009]
-			} else {
-				z.ImplicitTagsKeys = make([]int, zb0009)
-			}
-			for za0008 := range z.ImplicitTagsKeys {
-				z.ImplicitTagsKeys[za0008], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ImplicitTagsKeys", za0008)
-					return
-				}
-			}
-		case "InfluenceTypes":
-			z.InfluenceTypes, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "InfluenceTypes")
-				return
-			}
-		case "IsEssenceOnlyModifier":
-			z.IsEssenceOnlyModifier, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "IsEssenceOnlyModifier")
-				return
-			}
-		case "Level":
-			z.Level, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Level")
-				return
-			}
-		case "MaxLevel":
-			z.MaxLevel, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "MaxLevel")
-				return
-			}
-		case "ModTypeKey":
-			z.ModTypeKey, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ModTypeKey")
-				return
-			}
-		case "ModifyMapsAchievements":
-			var zb0010 uint32
-			zb0010, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ModifyMapsAchievements")
-				return
-			}
-			if cap(z.ModifyMapsAchievements) >= int(zb0010) {
-				z.ModifyMapsAchievements = (z.ModifyMapsAchievements)[:zb0010]
-			} else {
-				z.ModifyMapsAchievements = make([]int, zb0010)
-			}
-			for za0009 := range z.ModifyMapsAchievements {
-				z.ModifyMapsAchievements[za0009], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ModifyMapsAchievements", za0009)
-					return
-				}
-			}
-		case "MonsterKillAchievements":
-			var zb0011 uint32
-			zb0011, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "MonsterKillAchievements")
-				return
-			}
-			if cap(z.MonsterKillAchievements) >= int(zb0011) {
-				z.MonsterKillAchievements = (z.MonsterKillAchievements)[:zb0011]
-			} else {
-				z.MonsterKillAchievements = make([]int, zb0011)
-			}
-			for za0010 := range z.MonsterKillAchievements {
-				z.MonsterKillAchievements[za0010], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "MonsterKillAchievements", za0010)
-					return
-				}
-			}
-		case "MonsterMetadata":
-			z.MonsterMetadata, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "MonsterMetadata")
-				return
-			}
-		case "MonsterOnDeath":
-			z.MonsterOnDeath, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "MonsterOnDeath")
-				return
-			}
-		case "Name":
-			z.Name, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Name")
-				return
-			}
-		case "SpawnWeightTagsKeys":
-			var zb0012 uint32
-			zb0012, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "SpawnWeightTagsKeys")
-				return
-			}
-			if cap(z.SpawnWeightTagsKeys) >= int(zb0012) {
-				z.SpawnWeightTagsKeys = (z.SpawnWeightTagsKeys)[:zb0012]
-			} else {
-				z.SpawnWeightTagsKeys = make([]int, zb0012)
-			}
-			for za0011 := range z.SpawnWeightTagsKeys {
-				z.SpawnWeightTagsKeys[za0011], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "SpawnWeightTagsKeys", za0011)
-					return
-				}
-			}
-		case "SpawnWeightValues":
-			var zb0013 uint32
-			zb0013, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "SpawnWeightValues")
-				return
-			}
-			if cap(z.SpawnWeightValues) >= int(zb0013) {
-				z.SpawnWeightValues = (z.SpawnWeightValues)[:zb0013]
-			} else {
-				z.SpawnWeightValues = make([]int, zb0013)
-			}
-			for za0012 := range z.SpawnWeightValues {
-				z.SpawnWeightValues[za0012], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "SpawnWeightValues", za0012)
-					return
-				}
-			}
-		case "Stat1Max":
-			z.Stat1Max, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat1Max")
-				return
-			}
-		case "Stat1Min":
-			z.Stat1Min, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat1Min")
-				return
-			}
-		case "Stat2Max":
-			z.Stat2Max, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat2Max")
-				return
-			}
-		case "Stat2Min":
-			z.Stat2Min, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat2Min")
-				return
-			}
-		case "Stat3Max":
-			z.Stat3Max, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat3Max")
-				return
-			}
-		case "Stat3Min":
-			z.Stat3Min, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat3Min")
-				return
-			}
-		case "Stat4Max":
-			z.Stat4Max, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat4Max")
-				return
-			}
-		case "Stat4Min":
-			z.Stat4Min, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat4Min")
-				return
-			}
-		case "Stat5Max":
-			z.Stat5Max, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat5Max")
-				return
-			}
-		case "Stat5Min":
-			z.Stat5Min, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat5Min")
-				return
-			}
-		case "Stat6Max":
-			z.Stat6Max, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat6Max")
-				return
-			}
-		case "Stat6Min":
-			z.Stat6Min, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat6Min")
-				return
-			}
-		case "StatsKey1":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.StatsKey1 = nil
-			} else {
-				if z.StatsKey1 == nil {
-					z.StatsKey1 = new(int)
-				}
-				*z.StatsKey1, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "StatsKey1")
 					return
 				}
 			}
@@ -15323,6 +15231,23 @@ func (z *Mod) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
+		case "HeistStatsKey0":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.HeistStatsKey0 = nil
+			} else {
+				if z.HeistStatsKey0 == nil {
+					z.HeistStatsKey0 = new(int)
+				}
+				*z.HeistStatsKey0, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "HeistStatsKey0")
+					return
+				}
+			}
 		case "StatsKey6":
 			if msgp.IsNil(bts) {
 				bts, err = msgp.ReadNilBytes(bts)
@@ -15340,29 +15265,454 @@ func (z *Mod) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
+		case "StatsKey1":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.StatsKey1 = nil
+			} else {
+				if z.StatsKey1 == nil {
+					z.StatsKey1 = new(int)
+				}
+				*z.StatsKey1, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "StatsKey1")
+					return
+				}
+			}
+		case "MonsterMetadata":
+			z.MonsterMetadata, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MonsterMetadata")
+				return
+			}
+		case "ID":
+			z.ID, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ID")
+				return
+			}
+		case "Name":
+			z.Name, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Name")
+				return
+			}
+		case "MonsterOnDeath":
+			z.MonsterOnDeath, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MonsterOnDeath")
+				return
+			}
+		case "CorrectGroup":
+			z.CorrectGroup, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "CorrectGroup")
+				return
+			}
+		case "FullAreaClearAchievementItemsKey":
+			var zb0002 uint32
+			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey")
+				return
+			}
+			if cap(z.FullAreaClearAchievementItemsKey) >= int(zb0002) {
+				z.FullAreaClearAchievementItemsKey = (z.FullAreaClearAchievementItemsKey)[:zb0002]
+			} else {
+				z.FullAreaClearAchievementItemsKey = make([]interface{}, zb0002)
+			}
+			for za0001 := range z.FullAreaClearAchievementItemsKey {
+				z.FullAreaClearAchievementItemsKey[za0001], bts, err = msgp.ReadIntfBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "FullAreaClearAchievementItemsKey", za0001)
+					return
+				}
+			}
+		case "GrantedEffectsPerLevelKeys":
+			var zb0003 uint32
+			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "GrantedEffectsPerLevelKeys")
+				return
+			}
+			if cap(z.GrantedEffectsPerLevelKeys) >= int(zb0003) {
+				z.GrantedEffectsPerLevelKeys = (z.GrantedEffectsPerLevelKeys)[:zb0003]
+			} else {
+				z.GrantedEffectsPerLevelKeys = make([]int, zb0003)
+			}
+			for za0002 := range z.GrantedEffectsPerLevelKeys {
+				z.GrantedEffectsPerLevelKeys[za0002], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "GrantedEffectsPerLevelKeys", za0002)
+					return
+				}
+			}
+		case "GenerationWeightValues":
+			var zb0004 uint32
+			zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "GenerationWeightValues")
+				return
+			}
+			if cap(z.GenerationWeightValues) >= int(zb0004) {
+				z.GenerationWeightValues = (z.GenerationWeightValues)[:zb0004]
+			} else {
+				z.GenerationWeightValues = make([]int, zb0004)
+			}
+			for za0003 := range z.GenerationWeightValues {
+				z.GenerationWeightValues[za0003], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "GenerationWeightValues", za0003)
+					return
+				}
+			}
+		case "GenerationWeightTagsKeys":
+			var zb0005 uint32
+			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "GenerationWeightTagsKeys")
+				return
+			}
+			if cap(z.GenerationWeightTagsKeys) >= int(zb0005) {
+				z.GenerationWeightTagsKeys = (z.GenerationWeightTagsKeys)[:zb0005]
+			} else {
+				z.GenerationWeightTagsKeys = make([]int, zb0005)
+			}
+			for za0004 := range z.GenerationWeightTagsKeys {
+				z.GenerationWeightTagsKeys[za0004], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "GenerationWeightTagsKeys", za0004)
+					return
+				}
+			}
+		case "SpawnWeightValues":
+			var zb0006 uint32
+			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "SpawnWeightValues")
+				return
+			}
+			if cap(z.SpawnWeightValues) >= int(zb0006) {
+				z.SpawnWeightValues = (z.SpawnWeightValues)[:zb0006]
+			} else {
+				z.SpawnWeightValues = make([]int, zb0006)
+			}
+			for za0005 := range z.SpawnWeightValues {
+				z.SpawnWeightValues[za0005], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "SpawnWeightValues", za0005)
+					return
+				}
+			}
+		case "MonsterKillAchievements":
+			var zb0007 uint32
+			zb0007, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MonsterKillAchievements")
+				return
+			}
+			if cap(z.MonsterKillAchievements) >= int(zb0007) {
+				z.MonsterKillAchievements = (z.MonsterKillAchievements)[:zb0007]
+			} else {
+				z.MonsterKillAchievements = make([]int, zb0007)
+			}
+			for za0006 := range z.MonsterKillAchievements {
+				z.MonsterKillAchievements[za0006], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "MonsterKillAchievements", za0006)
+					return
+				}
+			}
+		case "ImplicitTagsKeys":
+			var zb0008 uint32
+			zb0008, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ImplicitTagsKeys")
+				return
+			}
+			if cap(z.ImplicitTagsKeys) >= int(zb0008) {
+				z.ImplicitTagsKeys = (z.ImplicitTagsKeys)[:zb0008]
+			} else {
+				z.ImplicitTagsKeys = make([]int, zb0008)
+			}
+			for za0007 := range z.ImplicitTagsKeys {
+				z.ImplicitTagsKeys[za0007], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ImplicitTagsKeys", za0007)
+					return
+				}
+			}
+		case "SpawnWeightTagsKeys":
+			var zb0009 uint32
+			zb0009, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "SpawnWeightTagsKeys")
+				return
+			}
+			if cap(z.SpawnWeightTagsKeys) >= int(zb0009) {
+				z.SpawnWeightTagsKeys = (z.SpawnWeightTagsKeys)[:zb0009]
+			} else {
+				z.SpawnWeightTagsKeys = make([]int, zb0009)
+			}
+			for za0008 := range z.SpawnWeightTagsKeys {
+				z.SpawnWeightTagsKeys[za0008], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "SpawnWeightTagsKeys", za0008)
+					return
+				}
+			}
 		case "TagsKeys":
-			var zb0014 uint32
-			zb0014, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			var zb0010 uint32
+			zb0010, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "TagsKeys")
 				return
 			}
-			if cap(z.TagsKeys) >= int(zb0014) {
-				z.TagsKeys = (z.TagsKeys)[:zb0014]
+			if cap(z.TagsKeys) >= int(zb0010) {
+				z.TagsKeys = (z.TagsKeys)[:zb0010]
 			} else {
-				z.TagsKeys = make([]int, zb0014)
+				z.TagsKeys = make([]int, zb0010)
 			}
-			for za0013 := range z.TagsKeys {
-				z.TagsKeys[za0013], bts, err = msgp.ReadIntBytes(bts)
+			for za0009 := range z.TagsKeys {
+				z.TagsKeys[za0009], bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "TagsKeys", za0013)
+					err = msgp.WrapError(err, "TagsKeys", za0009)
 					return
 				}
+			}
+		case "CraftingItemClassRestrictions":
+			var zb0011 uint32
+			zb0011, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "CraftingItemClassRestrictions")
+				return
+			}
+			if cap(z.CraftingItemClassRestrictions) >= int(zb0011) {
+				z.CraftingItemClassRestrictions = (z.CraftingItemClassRestrictions)[:zb0011]
+			} else {
+				z.CraftingItemClassRestrictions = make([]int, zb0011)
+			}
+			for za0010 := range z.CraftingItemClassRestrictions {
+				z.CraftingItemClassRestrictions[za0010], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "CraftingItemClassRestrictions", za0010)
+					return
+				}
+			}
+		case "AchievementItemsKey":
+			var zb0012 uint32
+			zb0012, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AchievementItemsKey")
+				return
+			}
+			if cap(z.AchievementItemsKey) >= int(zb0012) {
+				z.AchievementItemsKey = (z.AchievementItemsKey)[:zb0012]
+			} else {
+				z.AchievementItemsKey = make([]interface{}, zb0012)
+			}
+			for za0011 := range z.AchievementItemsKey {
+				z.AchievementItemsKey[za0011], bts, err = msgp.ReadIntfBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "AchievementItemsKey", za0011)
+					return
+				}
+			}
+		case "ChestModType":
+			var zb0013 uint32
+			zb0013, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ChestModType")
+				return
+			}
+			if cap(z.ChestModType) >= int(zb0013) {
+				z.ChestModType = (z.ChestModType)[:zb0013]
+			} else {
+				z.ChestModType = make([]int, zb0013)
+			}
+			for za0012 := range z.ChestModType {
+				z.ChestModType[za0012], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ChestModType", za0012)
+					return
+				}
+			}
+		case "ModifyMapsAchievements":
+			var zb0014 uint32
+			zb0014, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ModifyMapsAchievements")
+				return
+			}
+			if cap(z.ModifyMapsAchievements) >= int(zb0014) {
+				z.ModifyMapsAchievements = (z.ModifyMapsAchievements)[:zb0014]
+			} else {
+				z.ModifyMapsAchievements = make([]int, zb0014)
+			}
+			for za0013 := range z.ModifyMapsAchievements {
+				z.ModifyMapsAchievements[za0013], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ModifyMapsAchievements", za0013)
+					return
+				}
+			}
+		case "MaxLevel":
+			z.MaxLevel, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MaxLevel")
+				return
+			}
+		case "Stat4Min":
+			z.Stat4Min, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat4Min")
+				return
+			}
+		case "Level":
+			z.Level, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Level")
+				return
 			}
 		case "Key":
 			z.Key, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "InfluenceTypes":
+			z.InfluenceTypes, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "InfluenceTypes")
+				return
+			}
+		case "HeistSubStatValue2":
+			z.HeistSubStatValue2, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "HeistSubStatValue2")
+				return
+			}
+		case "Stat1Max":
+			z.Stat1Max, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat1Max")
+				return
+			}
+		case "Stat1Min":
+			z.Stat1Min, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat1Min")
+				return
+			}
+		case "Stat2Max":
+			z.Stat2Max, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat2Max")
+				return
+			}
+		case "Stat2Min":
+			z.Stat2Min, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat2Min")
+				return
+			}
+		case "Stat3Max":
+			z.Stat3Max, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat3Max")
+				return
+			}
+		case "Stat3Min":
+			z.Stat3Min, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat3Min")
+				return
+			}
+		case "Stat4Max":
+			z.Stat4Max, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat4Max")
+				return
+			}
+		case "ModTypeKey":
+			z.ModTypeKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ModTypeKey")
+				return
+			}
+		case "Stat5Max":
+			z.Stat5Max, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat5Max")
+				return
+			}
+		case "Stat5Min":
+			z.Stat5Min, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat5Min")
+				return
+			}
+		case "Stat6Max":
+			z.Stat6Max, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat6Max")
+				return
+			}
+		case "Stat6Min":
+			z.Stat6Min, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat6Min")
+				return
+			}
+		case "HeistSubStatValue1":
+			z.HeistSubStatValue1, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "HeistSubStatValue1")
+				return
+			}
+		case "HeistAddStatValue2":
+			z.HeistAddStatValue2, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "HeistAddStatValue2")
+				return
+			}
+		case "HeistAddStatValue1":
+			z.HeistAddStatValue1, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "HeistAddStatValue1")
+				return
+			}
+		case "Hash32":
+			z.Hash32, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Hash32")
+				return
+			}
+		case "Hash16":
+			z.Hash16, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Hash16")
+				return
+			}
+		case "GenerationType":
+			z.GenerationType, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "GenerationType")
+				return
+			}
+		case "Domain":
+			z.Domain, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Domain")
+				return
+			}
+		case "IsEssenceOnlyModifier":
+			z.IsEssenceOnlyModifier, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IsEssenceOnlyModifier")
 				return
 			}
 		default:
@@ -15379,9 +15729,11 @@ func (z *Mod) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *Mod) Msgsize() (s int) {
-	s = 3 + 20 + msgp.ArrayHeaderSize
-	for za0001 := range z.AchievementItemsKey {
-		s += msgp.GuessSize(z.AchievementItemsKey[za0001])
+	s = 3 + 15
+	if z.HeistStatsKey1 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
 	}
 	s += 21
 	if z.ArchnemesisMinionMod == nil {
@@ -15391,28 +15743,6 @@ func (z *Mod) Msgsize() (s int) {
 	}
 	s += 13
 	if z.BuffTemplate == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 13 + msgp.ArrayHeaderSize + (len(z.ChestModType) * (msgp.IntSize)) + 13 + msgp.StringPrefixSize + len(z.CorrectGroup) + 30 + msgp.ArrayHeaderSize + (len(z.CraftingItemClassRestrictions) * (msgp.IntSize)) + 7 + msgp.IntSize + 34 + msgp.ArrayHeaderSize
-	for za0004 := range z.FullAreaClearAchievementItemsKey {
-		s += msgp.GuessSize(z.FullAreaClearAchievementItemsKey[za0004])
-	}
-	s += 15 + msgp.IntSize + 25 + msgp.ArrayHeaderSize + (len(z.GenerationWeightTagsKeys) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.GenerationWeightValues) * (msgp.IntSize)) + 27 + msgp.ArrayHeaderSize + (len(z.GrantedEffectsPerLevelKeys) * (msgp.IntSize)) + 7 + msgp.IntSize + 7 + msgp.IntSize + 19 + msgp.IntSize + 19 + msgp.IntSize + 15
-	if z.HeistStatsKey0 == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 15
-	if z.HeistStatsKey1 == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 19 + msgp.IntSize + 19 + msgp.IntSize + 3 + msgp.StringPrefixSize + len(z.ID) + 17 + msgp.ArrayHeaderSize + (len(z.ImplicitTagsKeys) * (msgp.IntSize)) + 15 + msgp.IntSize + 22 + msgp.BoolSize + 6 + msgp.IntSize + 9 + msgp.IntSize + 11 + msgp.IntSize + 23 + msgp.ArrayHeaderSize + (len(z.ModifyMapsAchievements) * (msgp.IntSize)) + 24 + msgp.ArrayHeaderSize + (len(z.MonsterKillAchievements) * (msgp.IntSize)) + 16 + msgp.StringPrefixSize + len(z.MonsterMetadata) + 15 + msgp.StringPrefixSize + len(z.MonsterOnDeath) + 5 + msgp.StringPrefixSize + len(z.Name) + 20 + msgp.ArrayHeaderSize + (len(z.SpawnWeightTagsKeys) * (msgp.IntSize)) + 18 + msgp.ArrayHeaderSize + (len(z.SpawnWeightValues) * (msgp.IntSize)) + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 10
-	if z.StatsKey1 == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
@@ -15441,13 +15771,33 @@ func (z *Mod) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
+	s += 15
+	if z.HeistStatsKey0 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
 	s += 10
 	if z.StatsKey6 == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 9 + msgp.ArrayHeaderSize + (len(z.TagsKeys) * (msgp.IntSize)) + 4 + msgp.IntSize
+	s += 10
+	if z.StatsKey1 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 16 + msgp.StringPrefixSize + len(z.MonsterMetadata) + 3 + msgp.StringPrefixSize + len(z.ID) + 5 + msgp.StringPrefixSize + len(z.Name) + 15 + msgp.StringPrefixSize + len(z.MonsterOnDeath) + 13 + msgp.StringPrefixSize + len(z.CorrectGroup) + 34 + msgp.ArrayHeaderSize
+	for za0001 := range z.FullAreaClearAchievementItemsKey {
+		s += msgp.GuessSize(z.FullAreaClearAchievementItemsKey[za0001])
+	}
+	s += 27 + msgp.ArrayHeaderSize + (len(z.GrantedEffectsPerLevelKeys) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.GenerationWeightValues) * (msgp.IntSize)) + 25 + msgp.ArrayHeaderSize + (len(z.GenerationWeightTagsKeys) * (msgp.IntSize)) + 18 + msgp.ArrayHeaderSize + (len(z.SpawnWeightValues) * (msgp.IntSize)) + 24 + msgp.ArrayHeaderSize + (len(z.MonsterKillAchievements) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.ImplicitTagsKeys) * (msgp.IntSize)) + 20 + msgp.ArrayHeaderSize + (len(z.SpawnWeightTagsKeys) * (msgp.IntSize)) + 9 + msgp.ArrayHeaderSize + (len(z.TagsKeys) * (msgp.IntSize)) + 30 + msgp.ArrayHeaderSize + (len(z.CraftingItemClassRestrictions) * (msgp.IntSize)) + 20 + msgp.ArrayHeaderSize
+	for za0011 := range z.AchievementItemsKey {
+		s += msgp.GuessSize(z.AchievementItemsKey[za0011])
+	}
+	s += 13 + msgp.ArrayHeaderSize + (len(z.ChestModType) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.ModifyMapsAchievements) * (msgp.IntSize)) + 9 + msgp.IntSize + 9 + msgp.IntSize + 6 + msgp.IntSize + 4 + msgp.IntSize + 15 + msgp.IntSize + 19 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 11 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 19 + msgp.IntSize + 19 + msgp.IntSize + 19 + msgp.IntSize + 7 + msgp.IntSize + 7 + msgp.IntSize + 15 + msgp.IntSize + 7 + msgp.IntSize + 22 + msgp.BoolSize
 	return
 }
 
@@ -15847,6 +16197,18 @@ func (z *MonsterMapDifficulty) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
+		case "StatsKey3":
+			z.StatsKey3, err = dc.ReadIntf()
+			if err != nil {
+				err = msgp.WrapError(err, "StatsKey3")
+				return
+			}
+		case "StatsKey4":
+			z.StatsKey4, err = dc.ReadIntf()
+			if err != nil {
+				err = msgp.WrapError(err, "StatsKey4")
+				return
+			}
 		case "MapLevel":
 			z.MapLevel, err = dc.ReadInt()
 			if err != nil {
@@ -15889,18 +16251,6 @@ func (z *MonsterMapDifficulty) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "StatsKey2")
 				return
 			}
-		case "StatsKey3":
-			z.StatsKey3, err = dc.ReadIntf()
-			if err != nil {
-				err = msgp.WrapError(err, "StatsKey3")
-				return
-			}
-		case "StatsKey4":
-			z.StatsKey4, err = dc.ReadIntf()
-			if err != nil {
-				err = msgp.WrapError(err, "StatsKey4")
-				return
-			}
 		case "Key":
 			z.Key, err = dc.ReadInt()
 			if err != nil {
@@ -15921,8 +16271,28 @@ func (z *MonsterMapDifficulty) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *MonsterMapDifficulty) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 10
+	// write "StatsKey3"
+	err = en.Append(0x8a, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x33)
+	if err != nil {
+		return
+	}
+	err = en.WriteIntf(z.StatsKey3)
+	if err != nil {
+		err = msgp.WrapError(err, "StatsKey3")
+		return
+	}
+	// write "StatsKey4"
+	err = en.Append(0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x34)
+	if err != nil {
+		return
+	}
+	err = en.WriteIntf(z.StatsKey4)
+	if err != nil {
+		err = msgp.WrapError(err, "StatsKey4")
+		return
+	}
 	// write "MapLevel"
-	err = en.Append(0x8a, 0xa8, 0x4d, 0x61, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	err = en.Append(0xa8, 0x4d, 0x61, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c)
 	if err != nil {
 		return
 	}
@@ -15991,26 +16361,6 @@ func (z *MonsterMapDifficulty) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "StatsKey2")
 		return
 	}
-	// write "StatsKey3"
-	err = en.Append(0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x33)
-	if err != nil {
-		return
-	}
-	err = en.WriteIntf(z.StatsKey3)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey3")
-		return
-	}
-	// write "StatsKey4"
-	err = en.Append(0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x34)
-	if err != nil {
-		return
-	}
-	err = en.WriteIntf(z.StatsKey4)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey4")
-		return
-	}
 	// write "Key"
 	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
 	if err != nil {
@@ -16028,8 +16378,22 @@ func (z *MonsterMapDifficulty) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *MonsterMapDifficulty) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 10
+	// string "StatsKey3"
+	o = append(o, 0x8a, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x33)
+	o, err = msgp.AppendIntf(o, z.StatsKey3)
+	if err != nil {
+		err = msgp.WrapError(err, "StatsKey3")
+		return
+	}
+	// string "StatsKey4"
+	o = append(o, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x34)
+	o, err = msgp.AppendIntf(o, z.StatsKey4)
+	if err != nil {
+		err = msgp.WrapError(err, "StatsKey4")
+		return
+	}
 	// string "MapLevel"
-	o = append(o, 0x8a, 0xa8, 0x4d, 0x61, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c)
+	o = append(o, 0xa8, 0x4d, 0x61, 0x70, 0x4c, 0x65, 0x76, 0x65, 0x6c)
 	o = msgp.AppendInt(o, z.MapLevel)
 	// string "Stat1Value"
 	o = append(o, 0xaa, 0x53, 0x74, 0x61, 0x74, 0x31, 0x56, 0x61, 0x6c, 0x75, 0x65)
@@ -16049,20 +16413,6 @@ func (z *MonsterMapDifficulty) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "StatsKey2"
 	o = append(o, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x32)
 	o = msgp.AppendInt(o, z.StatsKey2)
-	// string "StatsKey3"
-	o = append(o, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x33)
-	o, err = msgp.AppendIntf(o, z.StatsKey3)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey3")
-		return
-	}
-	// string "StatsKey4"
-	o = append(o, 0xa9, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x34)
-	o, err = msgp.AppendIntf(o, z.StatsKey4)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey4")
-		return
-	}
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
@@ -16087,6 +16437,18 @@ func (z *MonsterMapDifficulty) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
+		case "StatsKey3":
+			z.StatsKey3, bts, err = msgp.ReadIntfBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "StatsKey3")
+				return
+			}
+		case "StatsKey4":
+			z.StatsKey4, bts, err = msgp.ReadIntfBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "StatsKey4")
+				return
+			}
 		case "MapLevel":
 			z.MapLevel, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
@@ -16129,18 +16491,6 @@ func (z *MonsterMapDifficulty) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "StatsKey2")
 				return
 			}
-		case "StatsKey3":
-			z.StatsKey3, bts, err = msgp.ReadIntfBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "StatsKey3")
-				return
-			}
-		case "StatsKey4":
-			z.StatsKey4, bts, err = msgp.ReadIntfBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "StatsKey4")
-				return
-			}
 		case "Key":
 			z.Key, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
@@ -16161,7 +16511,7 @@ func (z *MonsterMapDifficulty) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *MonsterMapDifficulty) Msgsize() (s int) {
-	s = 1 + 9 + msgp.IntSize + 11 + msgp.IntSize + 11 + msgp.IntSize + 11 + msgp.IntSize + 11 + msgp.IntSize + 10 + msgp.IntSize + 10 + msgp.IntSize + 10 + msgp.GuessSize(z.StatsKey3) + 10 + msgp.GuessSize(z.StatsKey4) + 4 + msgp.IntSize
+	s = 1 + 10 + msgp.GuessSize(z.StatsKey3) + 10 + msgp.GuessSize(z.StatsKey4) + 9 + msgp.IntSize + 11 + msgp.IntSize + 11 + msgp.IntSize + 11 + msgp.IntSize + 11 + msgp.IntSize + 10 + msgp.IntSize + 10 + msgp.IntSize + 4 + msgp.IntSize
 	return
 }
 
@@ -16183,142 +16533,6 @@ func (z *MonsterVariety) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "ACTFiles":
-			var zb0002 uint32
-			zb0002, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "ACTFiles")
-				return
-			}
-			if cap(z.ACTFiles) >= int(zb0002) {
-				z.ACTFiles = (z.ACTFiles)[:zb0002]
-			} else {
-				z.ACTFiles = make([]string, zb0002)
-			}
-			for za0001 := range z.ACTFiles {
-				z.ACTFiles[za0001], err = dc.ReadString()
-				if err != nil {
-					err = msgp.WrapError(err, "ACTFiles", za0001)
-					return
-				}
-			}
-		case "AISFile":
-			z.AISFile, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "AISFile")
-				return
-			}
-		case "AOFiles":
-			var zb0003 uint32
-			zb0003, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "AOFiles")
-				return
-			}
-			if cap(z.AOFiles) >= int(zb0003) {
-				z.AOFiles = (z.AOFiles)[:zb0003]
-			} else {
-				z.AOFiles = make([]string, zb0003)
-			}
-			for za0002 := range z.AOFiles {
-				z.AOFiles[za0002], err = dc.ReadString()
-				if err != nil {
-					err = msgp.WrapError(err, "AOFiles", za0002)
-					return
-				}
-			}
-		case "AttackSpeed":
-			z.AttackSpeed, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "AttackSpeed")
-				return
-			}
-		case "BackItemVisualIdentityKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "BackItemVisualIdentityKey")
-					return
-				}
-				z.BackItemVisualIdentityKey = nil
-			} else {
-				if z.BackItemVisualIdentityKey == nil {
-					z.BackItemVisualIdentityKey = new(int)
-				}
-				*z.BackItemVisualIdentityKey, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "BackItemVisualIdentityKey")
-					return
-				}
-			}
-		case "BaseMonsterTypeIndex":
-			z.BaseMonsterTypeIndex, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "BaseMonsterTypeIndex")
-				return
-			}
-		case "CriticalStrikeChance":
-			z.CriticalStrikeChance, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "CriticalStrikeChance")
-				return
-			}
-		case "DamageMultiplier":
-			z.DamageMultiplier, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "DamageMultiplier")
-				return
-			}
-		case "EPKFile":
-			z.EPKFile, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "EPKFile")
-				return
-			}
-		case "EndgameModsKeys":
-			var zb0004 uint32
-			zb0004, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "EndgameModsKeys")
-				return
-			}
-			if cap(z.EndgameModsKeys) >= int(zb0004) {
-				z.EndgameModsKeys = (z.EndgameModsKeys)[:zb0004]
-			} else {
-				z.EndgameModsKeys = make([]int, zb0004)
-			}
-			for za0003 := range z.EndgameModsKeys {
-				z.EndgameModsKeys[za0003], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "EndgameModsKeys", za0003)
-					return
-				}
-			}
-		case "ExperienceMultiplier":
-			z.ExperienceMultiplier, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "ExperienceMultiplier")
-				return
-			}
-		case "GrantedEffectsKeys":
-			var zb0005 uint32
-			zb0005, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "GrantedEffectsKeys")
-				return
-			}
-			if cap(z.GrantedEffectsKeys) >= int(zb0005) {
-				z.GrantedEffectsKeys = (z.GrantedEffectsKeys)[:zb0005]
-			} else {
-				z.GrantedEffectsKeys = make([]int, zb0005)
-			}
-			for za0004 := range z.GrantedEffectsKeys {
-				z.GrantedEffectsKeys[za0004], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "GrantedEffectsKeys", za0004)
-					return
-				}
-			}
 		case "HelmetItemVisualIdentityKey":
 			if dc.IsNil() {
 				err = dc.ReadNil()
@@ -16334,166 +16548,6 @@ func (z *MonsterVariety) DecodeMsg(dc *msgp.Reader) (err error) {
 				*z.HelmetItemVisualIdentityKey, err = dc.ReadInt()
 				if err != nil {
 					err = msgp.WrapError(err, "HelmetItemVisualIdentityKey")
-					return
-				}
-			}
-		case "ID":
-			z.ID, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "ID")
-				return
-			}
-		case "KillRareAchievementItemsKeys":
-			var zb0006 uint32
-			zb0006, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "KillRareAchievementItemsKeys")
-				return
-			}
-			if cap(z.KillRareAchievementItemsKeys) >= int(zb0006) {
-				z.KillRareAchievementItemsKeys = (z.KillRareAchievementItemsKeys)[:zb0006]
-			} else {
-				z.KillRareAchievementItemsKeys = make([]int, zb0006)
-			}
-			for za0005 := range z.KillRareAchievementItemsKeys {
-				z.KillRareAchievementItemsKeys[za0005], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "KillRareAchievementItemsKeys", za0005)
-					return
-				}
-			}
-		case "KillSpecificMonsterCountAchievementItemsKeys":
-			var zb0007 uint32
-			zb0007, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "KillSpecificMonsterCountAchievementItemsKeys")
-				return
-			}
-			if cap(z.KillSpecificMonsterCountAchievementItemsKeys) >= int(zb0007) {
-				z.KillSpecificMonsterCountAchievementItemsKeys = (z.KillSpecificMonsterCountAchievementItemsKeys)[:zb0007]
-			} else {
-				z.KillSpecificMonsterCountAchievementItemsKeys = make([]int, zb0007)
-			}
-			for za0006 := range z.KillSpecificMonsterCountAchievementItemsKeys {
-				z.KillSpecificMonsterCountAchievementItemsKeys[za0006], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "KillSpecificMonsterCountAchievementItemsKeys", za0006)
-					return
-				}
-			}
-		case "KillWhileOnslaughtIsActiveAchievementItemsKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "KillWhileOnslaughtIsActiveAchievementItemsKey")
-					return
-				}
-				z.KillWhileOnslaughtIsActiveAchievementItemsKey = nil
-			} else {
-				if z.KillWhileOnslaughtIsActiveAchievementItemsKey == nil {
-					z.KillWhileOnslaughtIsActiveAchievementItemsKey = new(int)
-				}
-				*z.KillWhileOnslaughtIsActiveAchievementItemsKey, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "KillWhileOnslaughtIsActiveAchievementItemsKey")
-					return
-				}
-			}
-		case "KillWhileTalismanIsActiveAchievementItemsKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "KillWhileTalismanIsActiveAchievementItemsKey")
-					return
-				}
-				z.KillWhileTalismanIsActiveAchievementItemsKey = nil
-			} else {
-				if z.KillWhileTalismanIsActiveAchievementItemsKey == nil {
-					z.KillWhileTalismanIsActiveAchievementItemsKey = new(int)
-				}
-				*z.KillWhileTalismanIsActiveAchievementItemsKey, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "KillWhileTalismanIsActiveAchievementItemsKey")
-					return
-				}
-			}
-		case "LifeMultiplier":
-			z.LifeMultiplier, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "LifeMultiplier")
-				return
-			}
-		case "MainHandItemClassesKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "MainHandItemClassesKey")
-					return
-				}
-				z.MainHandItemClassesKey = nil
-			} else {
-				if z.MainHandItemClassesKey == nil {
-					z.MainHandItemClassesKey = new(int)
-				}
-				*z.MainHandItemClassesKey, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "MainHandItemClassesKey")
-					return
-				}
-			}
-		case "MaximumAttackDistance":
-			z.MaximumAttackDistance, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "MaximumAttackDistance")
-				return
-			}
-		case "MinimumAttackDistance":
-			z.MinimumAttackDistance, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "MinimumAttackDistance")
-				return
-			}
-		case "ModelSizeMultiplier":
-			z.ModelSizeMultiplier, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "ModelSizeMultiplier")
-				return
-			}
-		case "ModsKeys":
-			var zb0008 uint32
-			zb0008, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "ModsKeys")
-				return
-			}
-			if cap(z.ModsKeys) >= int(zb0008) {
-				z.ModsKeys = (z.ModsKeys)[:zb0008]
-			} else {
-				z.ModsKeys = make([]int, zb0008)
-			}
-			for za0007 := range z.ModsKeys {
-				z.ModsKeys[za0007], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "ModsKeys", za0007)
-					return
-				}
-			}
-		case "ModsKeys2":
-			var zb0009 uint32
-			zb0009, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "ModsKeys2")
-				return
-			}
-			if cap(z.ModsKeys2) >= int(zb0009) {
-				z.ModsKeys2 = (z.ModsKeys2)[:zb0009]
-			} else {
-				z.ModsKeys2 = make([]int, zb0009)
-			}
-			for za0008 := range z.ModsKeys2 {
-				z.ModsKeys2[za0008], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "ModsKeys2", za0008)
 					return
 				}
 			}
@@ -16515,21 +16569,21 @@ func (z *MonsterVariety) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "MonsterConditionalEffectPacksKey":
+		case "KillWhileTalismanIsActiveAchievementItemsKey":
 			if dc.IsNil() {
 				err = dc.ReadNil()
 				if err != nil {
-					err = msgp.WrapError(err, "MonsterConditionalEffectPacksKey")
+					err = msgp.WrapError(err, "KillWhileTalismanIsActiveAchievementItemsKey")
 					return
 				}
-				z.MonsterConditionalEffectPacksKey = nil
+				z.KillWhileTalismanIsActiveAchievementItemsKey = nil
 			} else {
-				if z.MonsterConditionalEffectPacksKey == nil {
-					z.MonsterConditionalEffectPacksKey = new(int)
+				if z.KillWhileTalismanIsActiveAchievementItemsKey == nil {
+					z.KillWhileTalismanIsActiveAchievementItemsKey = new(int)
 				}
-				*z.MonsterConditionalEffectPacksKey, err = dc.ReadInt()
+				*z.KillWhileTalismanIsActiveAchievementItemsKey, err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "MonsterConditionalEffectPacksKey")
+					err = msgp.WrapError(err, "KillWhileTalismanIsActiveAchievementItemsKey")
 					return
 				}
 			}
@@ -16551,24 +16605,6 @@ func (z *MonsterVariety) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "MonsterTypesKey":
-			z.MonsterTypesKey, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "MonsterTypesKey")
-				return
-			}
-		case "Name":
-			z.Name, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "Name")
-				return
-			}
-		case "ObjectSize":
-			z.ObjectSize, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "ObjectSize")
-				return
-			}
 		case "OffHandItemClassesKey":
 			if dc.IsNil() {
 				err = dc.ReadNil()
@@ -16587,43 +16623,93 @@ func (z *MonsterVariety) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "Part1ModsKeys":
-			var zb0010 uint32
-			zb0010, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "Part1ModsKeys")
-				return
-			}
-			if cap(z.Part1ModsKeys) >= int(zb0010) {
-				z.Part1ModsKeys = (z.Part1ModsKeys)[:zb0010]
-			} else {
-				z.Part1ModsKeys = make([]int, zb0010)
-			}
-			for za0009 := range z.Part1ModsKeys {
-				z.Part1ModsKeys[za0009], err = dc.ReadInt()
+		case "MainHandItemClassesKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
 				if err != nil {
-					err = msgp.WrapError(err, "Part1ModsKeys", za0009)
+					err = msgp.WrapError(err, "MainHandItemClassesKey")
+					return
+				}
+				z.MainHandItemClassesKey = nil
+			} else {
+				if z.MainHandItemClassesKey == nil {
+					z.MainHandItemClassesKey = new(int)
+				}
+				*z.MainHandItemClassesKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "MainHandItemClassesKey")
 					return
 				}
 			}
-		case "Part2ModsKeys":
-			var zb0011 uint32
-			zb0011, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "Part2ModsKeys")
-				return
-			}
-			if cap(z.Part2ModsKeys) >= int(zb0011) {
-				z.Part2ModsKeys = (z.Part2ModsKeys)[:zb0011]
-			} else {
-				z.Part2ModsKeys = make([]int, zb0011)
-			}
-			for za0010 := range z.Part2ModsKeys {
-				z.Part2ModsKeys[za0010], err = dc.ReadInt()
+		case "KillWhileOnslaughtIsActiveAchievementItemsKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
 				if err != nil {
-					err = msgp.WrapError(err, "Part2ModsKeys", za0010)
+					err = msgp.WrapError(err, "KillWhileOnslaughtIsActiveAchievementItemsKey")
 					return
 				}
+				z.KillWhileOnslaughtIsActiveAchievementItemsKey = nil
+			} else {
+				if z.KillWhileOnslaughtIsActiveAchievementItemsKey == nil {
+					z.KillWhileOnslaughtIsActiveAchievementItemsKey = new(int)
+				}
+				*z.KillWhileOnslaughtIsActiveAchievementItemsKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "KillWhileOnslaughtIsActiveAchievementItemsKey")
+					return
+				}
+			}
+		case "MonsterConditionalEffectPacksKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "MonsterConditionalEffectPacksKey")
+					return
+				}
+				z.MonsterConditionalEffectPacksKey = nil
+			} else {
+				if z.MonsterConditionalEffectPacksKey == nil {
+					z.MonsterConditionalEffectPacksKey = new(int)
+				}
+				*z.MonsterConditionalEffectPacksKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "MonsterConditionalEffectPacksKey")
+					return
+				}
+			}
+		case "BackItemVisualIdentityKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "BackItemVisualIdentityKey")
+					return
+				}
+				z.BackItemVisualIdentityKey = nil
+			} else {
+				if z.BackItemVisualIdentityKey == nil {
+					z.BackItemVisualIdentityKey = new(int)
+				}
+				*z.BackItemVisualIdentityKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "BackItemVisualIdentityKey")
+					return
+				}
+			}
+		case "EPKFile":
+			z.EPKFile, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "EPKFile")
+				return
+			}
+		case "Stance":
+			{
+				var zb0002 string
+				zb0002, err = dc.ReadString()
+				if err != nil {
+					err = msgp.WrapError(err, "Stance")
+					return
+				}
+				z.Stance = MonsterVarietyStance(zb0002)
 			}
 		case "SinkAnimationAOFile":
 			z.SinkAnimationAOFile, err = dc.ReadString()
@@ -16631,91 +16717,355 @@ func (z *MonsterVariety) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "SinkAnimationAOFile")
 				return
 			}
-		case "SpecialModsKeys":
-			var zb0012 uint32
-			zb0012, err = dc.ReadArrayHeader()
+		case "AISFile":
+			z.AISFile, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "SpecialModsKeys")
+				err = msgp.WrapError(err, "AISFile")
 				return
 			}
-			if cap(z.SpecialModsKeys) >= int(zb0012) {
-				z.SpecialModsKeys = (z.SpecialModsKeys)[:zb0012]
-			} else {
-				z.SpecialModsKeys = make([]int, zb0012)
+		case "ID":
+			z.ID, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "ID")
+				return
 			}
-			for za0011 := range z.SpecialModsKeys {
-				z.SpecialModsKeys[za0011], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "SpecialModsKeys", za0011)
-					return
-				}
+		case "BaseMonsterTypeIndex":
+			z.BaseMonsterTypeIndex, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "BaseMonsterTypeIndex")
+				return
 			}
-		case "Stance":
-			{
-				var zb0013 string
-				zb0013, err = dc.ReadString()
-				if err != nil {
-					err = msgp.WrapError(err, "Stance")
-					return
-				}
-				z.Stance = MonsterVarietyStance(zb0013)
+		case "Name":
+			z.Name, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "Name")
+				return
 			}
 		case "TagsKeys":
-			var zb0014 uint32
-			zb0014, err = dc.ReadArrayHeader()
+			var zb0003 uint32
+			zb0003, err = dc.ReadArrayHeader()
 			if err != nil {
 				err = msgp.WrapError(err, "TagsKeys")
 				return
 			}
-			if cap(z.TagsKeys) >= int(zb0014) {
-				z.TagsKeys = (z.TagsKeys)[:zb0014]
+			if cap(z.TagsKeys) >= int(zb0003) {
+				z.TagsKeys = (z.TagsKeys)[:zb0003]
 			} else {
-				z.TagsKeys = make([]int, zb0014)
+				z.TagsKeys = make([]int, zb0003)
 			}
-			for za0012 := range z.TagsKeys {
-				z.TagsKeys[za0012], err = dc.ReadInt()
+			for za0001 := range z.TagsKeys {
+				z.TagsKeys[za0001], err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "TagsKeys", za0012)
+					err = msgp.WrapError(err, "TagsKeys", za0001)
+					return
+				}
+			}
+		case "KillSpecificMonsterCountAchievementItemsKeys":
+			var zb0004 uint32
+			zb0004, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "KillSpecificMonsterCountAchievementItemsKeys")
+				return
+			}
+			if cap(z.KillSpecificMonsterCountAchievementItemsKeys) >= int(zb0004) {
+				z.KillSpecificMonsterCountAchievementItemsKeys = (z.KillSpecificMonsterCountAchievementItemsKeys)[:zb0004]
+			} else {
+				z.KillSpecificMonsterCountAchievementItemsKeys = make([]int, zb0004)
+			}
+			for za0002 := range z.KillSpecificMonsterCountAchievementItemsKeys {
+				z.KillSpecificMonsterCountAchievementItemsKeys[za0002], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "KillSpecificMonsterCountAchievementItemsKeys", za0002)
+					return
+				}
+			}
+		case "SpecialModsKeys":
+			var zb0005 uint32
+			zb0005, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "SpecialModsKeys")
+				return
+			}
+			if cap(z.SpecialModsKeys) >= int(zb0005) {
+				z.SpecialModsKeys = (z.SpecialModsKeys)[:zb0005]
+			} else {
+				z.SpecialModsKeys = make([]int, zb0005)
+			}
+			for za0003 := range z.SpecialModsKeys {
+				z.SpecialModsKeys[za0003], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "SpecialModsKeys", za0003)
+					return
+				}
+			}
+		case "KillRareAchievementItemsKeys":
+			var zb0006 uint32
+			zb0006, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "KillRareAchievementItemsKeys")
+				return
+			}
+			if cap(z.KillRareAchievementItemsKeys) >= int(zb0006) {
+				z.KillRareAchievementItemsKeys = (z.KillRareAchievementItemsKeys)[:zb0006]
+			} else {
+				z.KillRareAchievementItemsKeys = make([]int, zb0006)
+			}
+			for za0004 := range z.KillRareAchievementItemsKeys {
+				z.KillRareAchievementItemsKeys[za0004], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "KillRareAchievementItemsKeys", za0004)
+					return
+				}
+			}
+		case "ACTFiles":
+			var zb0007 uint32
+			zb0007, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "ACTFiles")
+				return
+			}
+			if cap(z.ACTFiles) >= int(zb0007) {
+				z.ACTFiles = (z.ACTFiles)[:zb0007]
+			} else {
+				z.ACTFiles = make([]string, zb0007)
+			}
+			for za0005 := range z.ACTFiles {
+				z.ACTFiles[za0005], err = dc.ReadString()
+				if err != nil {
+					err = msgp.WrapError(err, "ACTFiles", za0005)
+					return
+				}
+			}
+		case "GrantedEffectsKeys":
+			var zb0008 uint32
+			zb0008, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "GrantedEffectsKeys")
+				return
+			}
+			if cap(z.GrantedEffectsKeys) >= int(zb0008) {
+				z.GrantedEffectsKeys = (z.GrantedEffectsKeys)[:zb0008]
+			} else {
+				z.GrantedEffectsKeys = make([]int, zb0008)
+			}
+			for za0006 := range z.GrantedEffectsKeys {
+				z.GrantedEffectsKeys[za0006], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "GrantedEffectsKeys", za0006)
+					return
+				}
+			}
+		case "Part2ModsKeys":
+			var zb0009 uint32
+			zb0009, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Part2ModsKeys")
+				return
+			}
+			if cap(z.Part2ModsKeys) >= int(zb0009) {
+				z.Part2ModsKeys = (z.Part2ModsKeys)[:zb0009]
+			} else {
+				z.Part2ModsKeys = make([]int, zb0009)
+			}
+			for za0007 := range z.Part2ModsKeys {
+				z.Part2ModsKeys[za0007], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "Part2ModsKeys", za0007)
+					return
+				}
+			}
+		case "ModsKeys":
+			var zb0010 uint32
+			zb0010, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "ModsKeys")
+				return
+			}
+			if cap(z.ModsKeys) >= int(zb0010) {
+				z.ModsKeys = (z.ModsKeys)[:zb0010]
+			} else {
+				z.ModsKeys = make([]int, zb0010)
+			}
+			for za0008 := range z.ModsKeys {
+				z.ModsKeys[za0008], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ModsKeys", za0008)
+					return
+				}
+			}
+		case "ModsKeys2":
+			var zb0011 uint32
+			zb0011, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "ModsKeys2")
+				return
+			}
+			if cap(z.ModsKeys2) >= int(zb0011) {
+				z.ModsKeys2 = (z.ModsKeys2)[:zb0011]
+			} else {
+				z.ModsKeys2 = make([]int, zb0011)
+			}
+			for za0009 := range z.ModsKeys2 {
+				z.ModsKeys2[za0009], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ModsKeys2", za0009)
+					return
+				}
+			}
+		case "EndgameModsKeys":
+			var zb0012 uint32
+			zb0012, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "EndgameModsKeys")
+				return
+			}
+			if cap(z.EndgameModsKeys) >= int(zb0012) {
+				z.EndgameModsKeys = (z.EndgameModsKeys)[:zb0012]
+			} else {
+				z.EndgameModsKeys = make([]int, zb0012)
+			}
+			for za0010 := range z.EndgameModsKeys {
+				z.EndgameModsKeys[za0010], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "EndgameModsKeys", za0010)
 					return
 				}
 			}
 		case "Weapon1ItemVisualIdentityKeys":
-			var zb0015 uint32
-			zb0015, err = dc.ReadArrayHeader()
+			var zb0013 uint32
+			zb0013, err = dc.ReadArrayHeader()
 			if err != nil {
 				err = msgp.WrapError(err, "Weapon1ItemVisualIdentityKeys")
 				return
 			}
-			if cap(z.Weapon1ItemVisualIdentityKeys) >= int(zb0015) {
-				z.Weapon1ItemVisualIdentityKeys = (z.Weapon1ItemVisualIdentityKeys)[:zb0015]
+			if cap(z.Weapon1ItemVisualIdentityKeys) >= int(zb0013) {
+				z.Weapon1ItemVisualIdentityKeys = (z.Weapon1ItemVisualIdentityKeys)[:zb0013]
 			} else {
-				z.Weapon1ItemVisualIdentityKeys = make([]int, zb0015)
+				z.Weapon1ItemVisualIdentityKeys = make([]int, zb0013)
 			}
-			for za0013 := range z.Weapon1ItemVisualIdentityKeys {
-				z.Weapon1ItemVisualIdentityKeys[za0013], err = dc.ReadInt()
+			for za0011 := range z.Weapon1ItemVisualIdentityKeys {
+				z.Weapon1ItemVisualIdentityKeys[za0011], err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "Weapon1ItemVisualIdentityKeys", za0013)
+					err = msgp.WrapError(err, "Weapon1ItemVisualIdentityKeys", za0011)
 					return
 				}
 			}
 		case "Weapon2ItemVisualIdentityKeys":
-			var zb0016 uint32
-			zb0016, err = dc.ReadArrayHeader()
+			var zb0014 uint32
+			zb0014, err = dc.ReadArrayHeader()
 			if err != nil {
 				err = msgp.WrapError(err, "Weapon2ItemVisualIdentityKeys")
 				return
 			}
-			if cap(z.Weapon2ItemVisualIdentityKeys) >= int(zb0016) {
-				z.Weapon2ItemVisualIdentityKeys = (z.Weapon2ItemVisualIdentityKeys)[:zb0016]
+			if cap(z.Weapon2ItemVisualIdentityKeys) >= int(zb0014) {
+				z.Weapon2ItemVisualIdentityKeys = (z.Weapon2ItemVisualIdentityKeys)[:zb0014]
 			} else {
-				z.Weapon2ItemVisualIdentityKeys = make([]int, zb0016)
+				z.Weapon2ItemVisualIdentityKeys = make([]int, zb0014)
 			}
-			for za0014 := range z.Weapon2ItemVisualIdentityKeys {
-				z.Weapon2ItemVisualIdentityKeys[za0014], err = dc.ReadInt()
+			for za0012 := range z.Weapon2ItemVisualIdentityKeys {
+				z.Weapon2ItemVisualIdentityKeys[za0012], err = dc.ReadInt()
 				if err != nil {
-					err = msgp.WrapError(err, "Weapon2ItemVisualIdentityKeys", za0014)
+					err = msgp.WrapError(err, "Weapon2ItemVisualIdentityKeys", za0012)
 					return
 				}
+			}
+		case "Part1ModsKeys":
+			var zb0015 uint32
+			zb0015, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Part1ModsKeys")
+				return
+			}
+			if cap(z.Part1ModsKeys) >= int(zb0015) {
+				z.Part1ModsKeys = (z.Part1ModsKeys)[:zb0015]
+			} else {
+				z.Part1ModsKeys = make([]int, zb0015)
+			}
+			for za0013 := range z.Part1ModsKeys {
+				z.Part1ModsKeys[za0013], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "Part1ModsKeys", za0013)
+					return
+				}
+			}
+		case "AOFiles":
+			var zb0016 uint32
+			zb0016, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "AOFiles")
+				return
+			}
+			if cap(z.AOFiles) >= int(zb0016) {
+				z.AOFiles = (z.AOFiles)[:zb0016]
+			} else {
+				z.AOFiles = make([]string, zb0016)
+			}
+			for za0014 := range z.AOFiles {
+				z.AOFiles[za0014], err = dc.ReadString()
+				if err != nil {
+					err = msgp.WrapError(err, "AOFiles", za0014)
+					return
+				}
+			}
+		case "MaximumAttackDistance":
+			z.MaximumAttackDistance, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "MaximumAttackDistance")
+				return
+			}
+		case "ObjectSize":
+			z.ObjectSize, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "ObjectSize")
+				return
+			}
+		case "MonsterTypesKey":
+			z.MonsterTypesKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "MonsterTypesKey")
+				return
+			}
+		case "ModelSizeMultiplier":
+			z.ModelSizeMultiplier, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "ModelSizeMultiplier")
+				return
+			}
+		case "MinimumAttackDistance":
+			z.MinimumAttackDistance, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "MinimumAttackDistance")
+				return
+			}
+		case "LifeMultiplier":
+			z.LifeMultiplier, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "LifeMultiplier")
+				return
+			}
+		case "ExperienceMultiplier":
+			z.ExperienceMultiplier, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "ExperienceMultiplier")
+				return
+			}
+		case "DamageMultiplier":
+			z.DamageMultiplier, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "DamageMultiplier")
+				return
+			}
+		case "CriticalStrikeChance":
+			z.CriticalStrikeChance, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "CriticalStrikeChance")
+				return
+			}
+		case "AttackSpeed":
+			z.AttackSpeed, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "AttackSpeed")
+				return
 			}
 		case "Key":
 			z.Key, err = dc.ReadInt()
@@ -16737,163 +17087,8 @@ func (z *MonsterVariety) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *MonsterVariety) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 41
-	// write "ACTFiles"
-	err = en.Append(0xde, 0x0, 0x29, 0xa8, 0x41, 0x43, 0x54, 0x46, 0x69, 0x6c, 0x65, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.ACTFiles)))
-	if err != nil {
-		err = msgp.WrapError(err, "ACTFiles")
-		return
-	}
-	for za0001 := range z.ACTFiles {
-		err = en.WriteString(z.ACTFiles[za0001])
-		if err != nil {
-			err = msgp.WrapError(err, "ACTFiles", za0001)
-			return
-		}
-	}
-	// write "AISFile"
-	err = en.Append(0xa7, 0x41, 0x49, 0x53, 0x46, 0x69, 0x6c, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.AISFile)
-	if err != nil {
-		err = msgp.WrapError(err, "AISFile")
-		return
-	}
-	// write "AOFiles"
-	err = en.Append(0xa7, 0x41, 0x4f, 0x46, 0x69, 0x6c, 0x65, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.AOFiles)))
-	if err != nil {
-		err = msgp.WrapError(err, "AOFiles")
-		return
-	}
-	for za0002 := range z.AOFiles {
-		err = en.WriteString(z.AOFiles[za0002])
-		if err != nil {
-			err = msgp.WrapError(err, "AOFiles", za0002)
-			return
-		}
-	}
-	// write "AttackSpeed"
-	err = en.Append(0xab, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x53, 0x70, 0x65, 0x65, 0x64)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.AttackSpeed)
-	if err != nil {
-		err = msgp.WrapError(err, "AttackSpeed")
-		return
-	}
-	// write "BackItemVisualIdentityKey"
-	err = en.Append(0xb9, 0x42, 0x61, 0x63, 0x6b, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	if z.BackItemVisualIdentityKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.BackItemVisualIdentityKey)
-		if err != nil {
-			err = msgp.WrapError(err, "BackItemVisualIdentityKey")
-			return
-		}
-	}
-	// write "BaseMonsterTypeIndex"
-	err = en.Append(0xb4, 0x42, 0x61, 0x73, 0x65, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x49, 0x6e, 0x64, 0x65, 0x78)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.BaseMonsterTypeIndex)
-	if err != nil {
-		err = msgp.WrapError(err, "BaseMonsterTypeIndex")
-		return
-	}
-	// write "CriticalStrikeChance"
-	err = en.Append(0xb4, 0x43, 0x72, 0x69, 0x74, 0x69, 0x63, 0x61, 0x6c, 0x53, 0x74, 0x72, 0x69, 0x6b, 0x65, 0x43, 0x68, 0x61, 0x6e, 0x63, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.CriticalStrikeChance)
-	if err != nil {
-		err = msgp.WrapError(err, "CriticalStrikeChance")
-		return
-	}
-	// write "DamageMultiplier"
-	err = en.Append(0xb0, 0x44, 0x61, 0x6d, 0x61, 0x67, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.DamageMultiplier)
-	if err != nil {
-		err = msgp.WrapError(err, "DamageMultiplier")
-		return
-	}
-	// write "EPKFile"
-	err = en.Append(0xa7, 0x45, 0x50, 0x4b, 0x46, 0x69, 0x6c, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.EPKFile)
-	if err != nil {
-		err = msgp.WrapError(err, "EPKFile")
-		return
-	}
-	// write "EndgameModsKeys"
-	err = en.Append(0xaf, 0x45, 0x6e, 0x64, 0x67, 0x61, 0x6d, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.EndgameModsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "EndgameModsKeys")
-		return
-	}
-	for za0003 := range z.EndgameModsKeys {
-		err = en.WriteInt(z.EndgameModsKeys[za0003])
-		if err != nil {
-			err = msgp.WrapError(err, "EndgameModsKeys", za0003)
-			return
-		}
-	}
-	// write "ExperienceMultiplier"
-	err = en.Append(0xb4, 0x45, 0x78, 0x70, 0x65, 0x72, 0x69, 0x65, 0x6e, 0x63, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.ExperienceMultiplier)
-	if err != nil {
-		err = msgp.WrapError(err, "ExperienceMultiplier")
-		return
-	}
-	// write "GrantedEffectsKeys"
-	err = en.Append(0xb2, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.GrantedEffectsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "GrantedEffectsKeys")
-		return
-	}
-	for za0004 := range z.GrantedEffectsKeys {
-		err = en.WriteInt(z.GrantedEffectsKeys[za0004])
-		if err != nil {
-			err = msgp.WrapError(err, "GrantedEffectsKeys", za0004)
-			return
-		}
-	}
 	// write "HelmetItemVisualIdentityKey"
-	err = en.Append(0xbb, 0x48, 0x65, 0x6c, 0x6d, 0x65, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79)
+	err = en.Append(0xde, 0x0, 0x29, 0xbb, 0x48, 0x65, 0x6c, 0x6d, 0x65, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
@@ -16906,175 +17101,6 @@ func (z *MonsterVariety) EncodeMsg(en *msgp.Writer) (err error) {
 		err = en.WriteInt(*z.HelmetItemVisualIdentityKey)
 		if err != nil {
 			err = msgp.WrapError(err, "HelmetItemVisualIdentityKey")
-			return
-		}
-	}
-	// write "ID"
-	err = en.Append(0xa2, 0x49, 0x44)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.ID)
-	if err != nil {
-		err = msgp.WrapError(err, "ID")
-		return
-	}
-	// write "KillRareAchievementItemsKeys"
-	err = en.Append(0xbc, 0x4b, 0x69, 0x6c, 0x6c, 0x52, 0x61, 0x72, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.KillRareAchievementItemsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "KillRareAchievementItemsKeys")
-		return
-	}
-	for za0005 := range z.KillRareAchievementItemsKeys {
-		err = en.WriteInt(z.KillRareAchievementItemsKeys[za0005])
-		if err != nil {
-			err = msgp.WrapError(err, "KillRareAchievementItemsKeys", za0005)
-			return
-		}
-	}
-	// write "KillSpecificMonsterCountAchievementItemsKeys"
-	err = en.Append(0xd9, 0x2c, 0x4b, 0x69, 0x6c, 0x6c, 0x53, 0x70, 0x65, 0x63, 0x69, 0x66, 0x69, 0x63, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.KillSpecificMonsterCountAchievementItemsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "KillSpecificMonsterCountAchievementItemsKeys")
-		return
-	}
-	for za0006 := range z.KillSpecificMonsterCountAchievementItemsKeys {
-		err = en.WriteInt(z.KillSpecificMonsterCountAchievementItemsKeys[za0006])
-		if err != nil {
-			err = msgp.WrapError(err, "KillSpecificMonsterCountAchievementItemsKeys", za0006)
-			return
-		}
-	}
-	// write "KillWhileOnslaughtIsActiveAchievementItemsKey"
-	err = en.Append(0xd9, 0x2d, 0x4b, 0x69, 0x6c, 0x6c, 0x57, 0x68, 0x69, 0x6c, 0x65, 0x4f, 0x6e, 0x73, 0x6c, 0x61, 0x75, 0x67, 0x68, 0x74, 0x49, 0x73, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	if z.KillWhileOnslaughtIsActiveAchievementItemsKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.KillWhileOnslaughtIsActiveAchievementItemsKey)
-		if err != nil {
-			err = msgp.WrapError(err, "KillWhileOnslaughtIsActiveAchievementItemsKey")
-			return
-		}
-	}
-	// write "KillWhileTalismanIsActiveAchievementItemsKey"
-	err = en.Append(0xd9, 0x2c, 0x4b, 0x69, 0x6c, 0x6c, 0x57, 0x68, 0x69, 0x6c, 0x65, 0x54, 0x61, 0x6c, 0x69, 0x73, 0x6d, 0x61, 0x6e, 0x49, 0x73, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	if z.KillWhileTalismanIsActiveAchievementItemsKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.KillWhileTalismanIsActiveAchievementItemsKey)
-		if err != nil {
-			err = msgp.WrapError(err, "KillWhileTalismanIsActiveAchievementItemsKey")
-			return
-		}
-	}
-	// write "LifeMultiplier"
-	err = en.Append(0xae, 0x4c, 0x69, 0x66, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.LifeMultiplier)
-	if err != nil {
-		err = msgp.WrapError(err, "LifeMultiplier")
-		return
-	}
-	// write "MainHandItemClassesKey"
-	err = en.Append(0xb6, 0x4d, 0x61, 0x69, 0x6e, 0x48, 0x61, 0x6e, 0x64, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	if z.MainHandItemClassesKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.MainHandItemClassesKey)
-		if err != nil {
-			err = msgp.WrapError(err, "MainHandItemClassesKey")
-			return
-		}
-	}
-	// write "MaximumAttackDistance"
-	err = en.Append(0xb5, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x44, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.MaximumAttackDistance)
-	if err != nil {
-		err = msgp.WrapError(err, "MaximumAttackDistance")
-		return
-	}
-	// write "MinimumAttackDistance"
-	err = en.Append(0xb5, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x44, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.MinimumAttackDistance)
-	if err != nil {
-		err = msgp.WrapError(err, "MinimumAttackDistance")
-		return
-	}
-	// write "ModelSizeMultiplier"
-	err = en.Append(0xb3, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x53, 0x69, 0x7a, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.ModelSizeMultiplier)
-	if err != nil {
-		err = msgp.WrapError(err, "ModelSizeMultiplier")
-		return
-	}
-	// write "ModsKeys"
-	err = en.Append(0xa8, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.ModsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "ModsKeys")
-		return
-	}
-	for za0007 := range z.ModsKeys {
-		err = en.WriteInt(z.ModsKeys[za0007])
-		if err != nil {
-			err = msgp.WrapError(err, "ModsKeys", za0007)
-			return
-		}
-	}
-	// write "ModsKeys2"
-	err = en.Append(0xa9, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73, 0x32)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.ModsKeys2)))
-	if err != nil {
-		err = msgp.WrapError(err, "ModsKeys2")
-		return
-	}
-	for za0008 := range z.ModsKeys2 {
-		err = en.WriteInt(z.ModsKeys2[za0008])
-		if err != nil {
-			err = msgp.WrapError(err, "ModsKeys2", za0008)
 			return
 		}
 	}
@@ -17095,20 +17121,20 @@ func (z *MonsterVariety) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "MonsterConditionalEffectPacksKey"
-	err = en.Append(0xd9, 0x20, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x50, 0x61, 0x63, 0x6b, 0x73, 0x4b, 0x65, 0x79)
+	// write "KillWhileTalismanIsActiveAchievementItemsKey"
+	err = en.Append(0xd9, 0x2c, 0x4b, 0x69, 0x6c, 0x6c, 0x57, 0x68, 0x69, 0x6c, 0x65, 0x54, 0x61, 0x6c, 0x69, 0x73, 0x6d, 0x61, 0x6e, 0x49, 0x73, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	if z.MonsterConditionalEffectPacksKey == nil {
+	if z.KillWhileTalismanIsActiveAchievementItemsKey == nil {
 		err = en.WriteNil()
 		if err != nil {
 			return
 		}
 	} else {
-		err = en.WriteInt(*z.MonsterConditionalEffectPacksKey)
+		err = en.WriteInt(*z.KillWhileTalismanIsActiveAchievementItemsKey)
 		if err != nil {
-			err = msgp.WrapError(err, "MonsterConditionalEffectPacksKey")
+			err = msgp.WrapError(err, "KillWhileTalismanIsActiveAchievementItemsKey")
 			return
 		}
 	}
@@ -17129,36 +17155,6 @@ func (z *MonsterVariety) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "MonsterTypesKey"
-	err = en.Append(0xaf, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.MonsterTypesKey)
-	if err != nil {
-		err = msgp.WrapError(err, "MonsterTypesKey")
-		return
-	}
-	// write "Name"
-	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.Name)
-	if err != nil {
-		err = msgp.WrapError(err, "Name")
-		return
-	}
-	// write "ObjectSize"
-	err = en.Append(0xaa, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x53, 0x69, 0x7a, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.ObjectSize)
-	if err != nil {
-		err = msgp.WrapError(err, "ObjectSize")
-		return
-	}
 	// write "OffHandItemClassesKey"
 	err = en.Append(0xb5, 0x4f, 0x66, 0x66, 0x48, 0x61, 0x6e, 0x64, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
@@ -17176,20 +17172,243 @@ func (z *MonsterVariety) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "Part1ModsKeys"
-	err = en.Append(0xad, 0x50, 0x61, 0x72, 0x74, 0x31, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	// write "MainHandItemClassesKey"
+	err = en.Append(0xb6, 0x4d, 0x61, 0x69, 0x6e, 0x48, 0x61, 0x6e, 0x64, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.Part1ModsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "Part1ModsKeys")
-		return
-	}
-	for za0009 := range z.Part1ModsKeys {
-		err = en.WriteInt(z.Part1ModsKeys[za0009])
+	if z.MainHandItemClassesKey == nil {
+		err = en.WriteNil()
 		if err != nil {
-			err = msgp.WrapError(err, "Part1ModsKeys", za0009)
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.MainHandItemClassesKey)
+		if err != nil {
+			err = msgp.WrapError(err, "MainHandItemClassesKey")
+			return
+		}
+	}
+	// write "KillWhileOnslaughtIsActiveAchievementItemsKey"
+	err = en.Append(0xd9, 0x2d, 0x4b, 0x69, 0x6c, 0x6c, 0x57, 0x68, 0x69, 0x6c, 0x65, 0x4f, 0x6e, 0x73, 0x6c, 0x61, 0x75, 0x67, 0x68, 0x74, 0x49, 0x73, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	if z.KillWhileOnslaughtIsActiveAchievementItemsKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.KillWhileOnslaughtIsActiveAchievementItemsKey)
+		if err != nil {
+			err = msgp.WrapError(err, "KillWhileOnslaughtIsActiveAchievementItemsKey")
+			return
+		}
+	}
+	// write "MonsterConditionalEffectPacksKey"
+	err = en.Append(0xd9, 0x20, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x50, 0x61, 0x63, 0x6b, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	if z.MonsterConditionalEffectPacksKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.MonsterConditionalEffectPacksKey)
+		if err != nil {
+			err = msgp.WrapError(err, "MonsterConditionalEffectPacksKey")
+			return
+		}
+	}
+	// write "BackItemVisualIdentityKey"
+	err = en.Append(0xb9, 0x42, 0x61, 0x63, 0x6b, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	if z.BackItemVisualIdentityKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.BackItemVisualIdentityKey)
+		if err != nil {
+			err = msgp.WrapError(err, "BackItemVisualIdentityKey")
+			return
+		}
+	}
+	// write "EPKFile"
+	err = en.Append(0xa7, 0x45, 0x50, 0x4b, 0x46, 0x69, 0x6c, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.EPKFile)
+	if err != nil {
+		err = msgp.WrapError(err, "EPKFile")
+		return
+	}
+	// write "Stance"
+	err = en.Append(0xa6, 0x53, 0x74, 0x61, 0x6e, 0x63, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(string(z.Stance))
+	if err != nil {
+		err = msgp.WrapError(err, "Stance")
+		return
+	}
+	// write "SinkAnimationAOFile"
+	err = en.Append(0xb3, 0x53, 0x69, 0x6e, 0x6b, 0x41, 0x6e, 0x69, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x4f, 0x46, 0x69, 0x6c, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.SinkAnimationAOFile)
+	if err != nil {
+		err = msgp.WrapError(err, "SinkAnimationAOFile")
+		return
+	}
+	// write "AISFile"
+	err = en.Append(0xa7, 0x41, 0x49, 0x53, 0x46, 0x69, 0x6c, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.AISFile)
+	if err != nil {
+		err = msgp.WrapError(err, "AISFile")
+		return
+	}
+	// write "ID"
+	err = en.Append(0xa2, 0x49, 0x44)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	// write "BaseMonsterTypeIndex"
+	err = en.Append(0xb4, 0x42, 0x61, 0x73, 0x65, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x49, 0x6e, 0x64, 0x65, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.BaseMonsterTypeIndex)
+	if err != nil {
+		err = msgp.WrapError(err, "BaseMonsterTypeIndex")
+		return
+	}
+	// write "Name"
+	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	// write "TagsKeys"
+	err = en.Append(0xa8, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.TagsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "TagsKeys")
+		return
+	}
+	for za0001 := range z.TagsKeys {
+		err = en.WriteInt(z.TagsKeys[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "TagsKeys", za0001)
+			return
+		}
+	}
+	// write "KillSpecificMonsterCountAchievementItemsKeys"
+	err = en.Append(0xd9, 0x2c, 0x4b, 0x69, 0x6c, 0x6c, 0x53, 0x70, 0x65, 0x63, 0x69, 0x66, 0x69, 0x63, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.KillSpecificMonsterCountAchievementItemsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "KillSpecificMonsterCountAchievementItemsKeys")
+		return
+	}
+	for za0002 := range z.KillSpecificMonsterCountAchievementItemsKeys {
+		err = en.WriteInt(z.KillSpecificMonsterCountAchievementItemsKeys[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "KillSpecificMonsterCountAchievementItemsKeys", za0002)
+			return
+		}
+	}
+	// write "SpecialModsKeys"
+	err = en.Append(0xaf, 0x53, 0x70, 0x65, 0x63, 0x69, 0x61, 0x6c, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.SpecialModsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "SpecialModsKeys")
+		return
+	}
+	for za0003 := range z.SpecialModsKeys {
+		err = en.WriteInt(z.SpecialModsKeys[za0003])
+		if err != nil {
+			err = msgp.WrapError(err, "SpecialModsKeys", za0003)
+			return
+		}
+	}
+	// write "KillRareAchievementItemsKeys"
+	err = en.Append(0xbc, 0x4b, 0x69, 0x6c, 0x6c, 0x52, 0x61, 0x72, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.KillRareAchievementItemsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "KillRareAchievementItemsKeys")
+		return
+	}
+	for za0004 := range z.KillRareAchievementItemsKeys {
+		err = en.WriteInt(z.KillRareAchievementItemsKeys[za0004])
+		if err != nil {
+			err = msgp.WrapError(err, "KillRareAchievementItemsKeys", za0004)
+			return
+		}
+	}
+	// write "ACTFiles"
+	err = en.Append(0xa8, 0x41, 0x43, 0x54, 0x46, 0x69, 0x6c, 0x65, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.ACTFiles)))
+	if err != nil {
+		err = msgp.WrapError(err, "ACTFiles")
+		return
+	}
+	for za0005 := range z.ACTFiles {
+		err = en.WriteString(z.ACTFiles[za0005])
+		if err != nil {
+			err = msgp.WrapError(err, "ACTFiles", za0005)
+			return
+		}
+	}
+	// write "GrantedEffectsKeys"
+	err = en.Append(0xb2, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.GrantedEffectsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "GrantedEffectsKeys")
+		return
+	}
+	for za0006 := range z.GrantedEffectsKeys {
+		err = en.WriteInt(z.GrantedEffectsKeys[za0006])
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffectsKeys", za0006)
 			return
 		}
 	}
@@ -17203,64 +17422,61 @@ func (z *MonsterVariety) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Part2ModsKeys")
 		return
 	}
-	for za0010 := range z.Part2ModsKeys {
-		err = en.WriteInt(z.Part2ModsKeys[za0010])
+	for za0007 := range z.Part2ModsKeys {
+		err = en.WriteInt(z.Part2ModsKeys[za0007])
 		if err != nil {
-			err = msgp.WrapError(err, "Part2ModsKeys", za0010)
+			err = msgp.WrapError(err, "Part2ModsKeys", za0007)
 			return
 		}
 	}
-	// write "SinkAnimationAOFile"
-	err = en.Append(0xb3, 0x53, 0x69, 0x6e, 0x6b, 0x41, 0x6e, 0x69, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x4f, 0x46, 0x69, 0x6c, 0x65)
+	// write "ModsKeys"
+	err = en.Append(0xa8, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.SinkAnimationAOFile)
+	err = en.WriteArrayHeader(uint32(len(z.ModsKeys)))
 	if err != nil {
-		err = msgp.WrapError(err, "SinkAnimationAOFile")
+		err = msgp.WrapError(err, "ModsKeys")
 		return
 	}
-	// write "SpecialModsKeys"
-	err = en.Append(0xaf, 0x53, 0x70, 0x65, 0x63, 0x69, 0x61, 0x6c, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.SpecialModsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "SpecialModsKeys")
-		return
-	}
-	for za0011 := range z.SpecialModsKeys {
-		err = en.WriteInt(z.SpecialModsKeys[za0011])
+	for za0008 := range z.ModsKeys {
+		err = en.WriteInt(z.ModsKeys[za0008])
 		if err != nil {
-			err = msgp.WrapError(err, "SpecialModsKeys", za0011)
+			err = msgp.WrapError(err, "ModsKeys", za0008)
 			return
 		}
 	}
-	// write "Stance"
-	err = en.Append(0xa6, 0x53, 0x74, 0x61, 0x6e, 0x63, 0x65)
+	// write "ModsKeys2"
+	err = en.Append(0xa9, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73, 0x32)
 	if err != nil {
 		return
 	}
-	err = en.WriteString(string(z.Stance))
+	err = en.WriteArrayHeader(uint32(len(z.ModsKeys2)))
 	if err != nil {
-		err = msgp.WrapError(err, "Stance")
+		err = msgp.WrapError(err, "ModsKeys2")
 		return
 	}
-	// write "TagsKeys"
-	err = en.Append(0xa8, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.TagsKeys)))
-	if err != nil {
-		err = msgp.WrapError(err, "TagsKeys")
-		return
-	}
-	for za0012 := range z.TagsKeys {
-		err = en.WriteInt(z.TagsKeys[za0012])
+	for za0009 := range z.ModsKeys2 {
+		err = en.WriteInt(z.ModsKeys2[za0009])
 		if err != nil {
-			err = msgp.WrapError(err, "TagsKeys", za0012)
+			err = msgp.WrapError(err, "ModsKeys2", za0009)
+			return
+		}
+	}
+	// write "EndgameModsKeys"
+	err = en.Append(0xaf, 0x45, 0x6e, 0x64, 0x67, 0x61, 0x6d, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.EndgameModsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "EndgameModsKeys")
+		return
+	}
+	for za0010 := range z.EndgameModsKeys {
+		err = en.WriteInt(z.EndgameModsKeys[za0010])
+		if err != nil {
+			err = msgp.WrapError(err, "EndgameModsKeys", za0010)
 			return
 		}
 	}
@@ -17274,10 +17490,10 @@ func (z *MonsterVariety) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Weapon1ItemVisualIdentityKeys")
 		return
 	}
-	for za0013 := range z.Weapon1ItemVisualIdentityKeys {
-		err = en.WriteInt(z.Weapon1ItemVisualIdentityKeys[za0013])
+	for za0011 := range z.Weapon1ItemVisualIdentityKeys {
+		err = en.WriteInt(z.Weapon1ItemVisualIdentityKeys[za0011])
 		if err != nil {
-			err = msgp.WrapError(err, "Weapon1ItemVisualIdentityKeys", za0013)
+			err = msgp.WrapError(err, "Weapon1ItemVisualIdentityKeys", za0011)
 			return
 		}
 	}
@@ -17291,12 +17507,146 @@ func (z *MonsterVariety) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Weapon2ItemVisualIdentityKeys")
 		return
 	}
-	for za0014 := range z.Weapon2ItemVisualIdentityKeys {
-		err = en.WriteInt(z.Weapon2ItemVisualIdentityKeys[za0014])
+	for za0012 := range z.Weapon2ItemVisualIdentityKeys {
+		err = en.WriteInt(z.Weapon2ItemVisualIdentityKeys[za0012])
 		if err != nil {
-			err = msgp.WrapError(err, "Weapon2ItemVisualIdentityKeys", za0014)
+			err = msgp.WrapError(err, "Weapon2ItemVisualIdentityKeys", za0012)
 			return
 		}
+	}
+	// write "Part1ModsKeys"
+	err = en.Append(0xad, 0x50, 0x61, 0x72, 0x74, 0x31, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Part1ModsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "Part1ModsKeys")
+		return
+	}
+	for za0013 := range z.Part1ModsKeys {
+		err = en.WriteInt(z.Part1ModsKeys[za0013])
+		if err != nil {
+			err = msgp.WrapError(err, "Part1ModsKeys", za0013)
+			return
+		}
+	}
+	// write "AOFiles"
+	err = en.Append(0xa7, 0x41, 0x4f, 0x46, 0x69, 0x6c, 0x65, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.AOFiles)))
+	if err != nil {
+		err = msgp.WrapError(err, "AOFiles")
+		return
+	}
+	for za0014 := range z.AOFiles {
+		err = en.WriteString(z.AOFiles[za0014])
+		if err != nil {
+			err = msgp.WrapError(err, "AOFiles", za0014)
+			return
+		}
+	}
+	// write "MaximumAttackDistance"
+	err = en.Append(0xb5, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x44, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MaximumAttackDistance)
+	if err != nil {
+		err = msgp.WrapError(err, "MaximumAttackDistance")
+		return
+	}
+	// write "ObjectSize"
+	err = en.Append(0xaa, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x53, 0x69, 0x7a, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.ObjectSize)
+	if err != nil {
+		err = msgp.WrapError(err, "ObjectSize")
+		return
+	}
+	// write "MonsterTypesKey"
+	err = en.Append(0xaf, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MonsterTypesKey)
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterTypesKey")
+		return
+	}
+	// write "ModelSizeMultiplier"
+	err = en.Append(0xb3, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x53, 0x69, 0x7a, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.ModelSizeMultiplier)
+	if err != nil {
+		err = msgp.WrapError(err, "ModelSizeMultiplier")
+		return
+	}
+	// write "MinimumAttackDistance"
+	err = en.Append(0xb5, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x44, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MinimumAttackDistance)
+	if err != nil {
+		err = msgp.WrapError(err, "MinimumAttackDistance")
+		return
+	}
+	// write "LifeMultiplier"
+	err = en.Append(0xae, 0x4c, 0x69, 0x66, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.LifeMultiplier)
+	if err != nil {
+		err = msgp.WrapError(err, "LifeMultiplier")
+		return
+	}
+	// write "ExperienceMultiplier"
+	err = en.Append(0xb4, 0x45, 0x78, 0x70, 0x65, 0x72, 0x69, 0x65, 0x6e, 0x63, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.ExperienceMultiplier)
+	if err != nil {
+		err = msgp.WrapError(err, "ExperienceMultiplier")
+		return
+	}
+	// write "DamageMultiplier"
+	err = en.Append(0xb0, 0x44, 0x61, 0x6d, 0x61, 0x67, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.DamageMultiplier)
+	if err != nil {
+		err = msgp.WrapError(err, "DamageMultiplier")
+		return
+	}
+	// write "CriticalStrikeChance"
+	err = en.Append(0xb4, 0x43, 0x72, 0x69, 0x74, 0x69, 0x63, 0x61, 0x6c, 0x53, 0x74, 0x72, 0x69, 0x6b, 0x65, 0x43, 0x68, 0x61, 0x6e, 0x63, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.CriticalStrikeChance)
+	if err != nil {
+		err = msgp.WrapError(err, "CriticalStrikeChance")
+		return
+	}
+	// write "AttackSpeed"
+	err = en.Append(0xab, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x53, 0x70, 0x65, 0x65, 0x64)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.AttackSpeed)
+	if err != nil {
+		err = msgp.WrapError(err, "AttackSpeed")
+		return
 	}
 	// write "Key"
 	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
@@ -17315,124 +17665,12 @@ func (z *MonsterVariety) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *MonsterVariety) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 41
-	// string "ACTFiles"
-	o = append(o, 0xde, 0x0, 0x29, 0xa8, 0x41, 0x43, 0x54, 0x46, 0x69, 0x6c, 0x65, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.ACTFiles)))
-	for za0001 := range z.ACTFiles {
-		o = msgp.AppendString(o, z.ACTFiles[za0001])
-	}
-	// string "AISFile"
-	o = append(o, 0xa7, 0x41, 0x49, 0x53, 0x46, 0x69, 0x6c, 0x65)
-	o = msgp.AppendString(o, z.AISFile)
-	// string "AOFiles"
-	o = append(o, 0xa7, 0x41, 0x4f, 0x46, 0x69, 0x6c, 0x65, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.AOFiles)))
-	for za0002 := range z.AOFiles {
-		o = msgp.AppendString(o, z.AOFiles[za0002])
-	}
-	// string "AttackSpeed"
-	o = append(o, 0xab, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x53, 0x70, 0x65, 0x65, 0x64)
-	o = msgp.AppendInt(o, z.AttackSpeed)
-	// string "BackItemVisualIdentityKey"
-	o = append(o, 0xb9, 0x42, 0x61, 0x63, 0x6b, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79)
-	if z.BackItemVisualIdentityKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.BackItemVisualIdentityKey)
-	}
-	// string "BaseMonsterTypeIndex"
-	o = append(o, 0xb4, 0x42, 0x61, 0x73, 0x65, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x49, 0x6e, 0x64, 0x65, 0x78)
-	o = msgp.AppendString(o, z.BaseMonsterTypeIndex)
-	// string "CriticalStrikeChance"
-	o = append(o, 0xb4, 0x43, 0x72, 0x69, 0x74, 0x69, 0x63, 0x61, 0x6c, 0x53, 0x74, 0x72, 0x69, 0x6b, 0x65, 0x43, 0x68, 0x61, 0x6e, 0x63, 0x65)
-	o = msgp.AppendInt(o, z.CriticalStrikeChance)
-	// string "DamageMultiplier"
-	o = append(o, 0xb0, 0x44, 0x61, 0x6d, 0x61, 0x67, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
-	o = msgp.AppendInt(o, z.DamageMultiplier)
-	// string "EPKFile"
-	o = append(o, 0xa7, 0x45, 0x50, 0x4b, 0x46, 0x69, 0x6c, 0x65)
-	o = msgp.AppendString(o, z.EPKFile)
-	// string "EndgameModsKeys"
-	o = append(o, 0xaf, 0x45, 0x6e, 0x64, 0x67, 0x61, 0x6d, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.EndgameModsKeys)))
-	for za0003 := range z.EndgameModsKeys {
-		o = msgp.AppendInt(o, z.EndgameModsKeys[za0003])
-	}
-	// string "ExperienceMultiplier"
-	o = append(o, 0xb4, 0x45, 0x78, 0x70, 0x65, 0x72, 0x69, 0x65, 0x6e, 0x63, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
-	o = msgp.AppendInt(o, z.ExperienceMultiplier)
-	// string "GrantedEffectsKeys"
-	o = append(o, 0xb2, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.GrantedEffectsKeys)))
-	for za0004 := range z.GrantedEffectsKeys {
-		o = msgp.AppendInt(o, z.GrantedEffectsKeys[za0004])
-	}
 	// string "HelmetItemVisualIdentityKey"
-	o = append(o, 0xbb, 0x48, 0x65, 0x6c, 0x6d, 0x65, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79)
+	o = append(o, 0xde, 0x0, 0x29, 0xbb, 0x48, 0x65, 0x6c, 0x6d, 0x65, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79)
 	if z.HelmetItemVisualIdentityKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
 		o = msgp.AppendInt(o, *z.HelmetItemVisualIdentityKey)
-	}
-	// string "ID"
-	o = append(o, 0xa2, 0x49, 0x44)
-	o = msgp.AppendString(o, z.ID)
-	// string "KillRareAchievementItemsKeys"
-	o = append(o, 0xbc, 0x4b, 0x69, 0x6c, 0x6c, 0x52, 0x61, 0x72, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.KillRareAchievementItemsKeys)))
-	for za0005 := range z.KillRareAchievementItemsKeys {
-		o = msgp.AppendInt(o, z.KillRareAchievementItemsKeys[za0005])
-	}
-	// string "KillSpecificMonsterCountAchievementItemsKeys"
-	o = append(o, 0xd9, 0x2c, 0x4b, 0x69, 0x6c, 0x6c, 0x53, 0x70, 0x65, 0x63, 0x69, 0x66, 0x69, 0x63, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.KillSpecificMonsterCountAchievementItemsKeys)))
-	for za0006 := range z.KillSpecificMonsterCountAchievementItemsKeys {
-		o = msgp.AppendInt(o, z.KillSpecificMonsterCountAchievementItemsKeys[za0006])
-	}
-	// string "KillWhileOnslaughtIsActiveAchievementItemsKey"
-	o = append(o, 0xd9, 0x2d, 0x4b, 0x69, 0x6c, 0x6c, 0x57, 0x68, 0x69, 0x6c, 0x65, 0x4f, 0x6e, 0x73, 0x6c, 0x61, 0x75, 0x67, 0x68, 0x74, 0x49, 0x73, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
-	if z.KillWhileOnslaughtIsActiveAchievementItemsKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.KillWhileOnslaughtIsActiveAchievementItemsKey)
-	}
-	// string "KillWhileTalismanIsActiveAchievementItemsKey"
-	o = append(o, 0xd9, 0x2c, 0x4b, 0x69, 0x6c, 0x6c, 0x57, 0x68, 0x69, 0x6c, 0x65, 0x54, 0x61, 0x6c, 0x69, 0x73, 0x6d, 0x61, 0x6e, 0x49, 0x73, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
-	if z.KillWhileTalismanIsActiveAchievementItemsKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.KillWhileTalismanIsActiveAchievementItemsKey)
-	}
-	// string "LifeMultiplier"
-	o = append(o, 0xae, 0x4c, 0x69, 0x66, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
-	o = msgp.AppendInt(o, z.LifeMultiplier)
-	// string "MainHandItemClassesKey"
-	o = append(o, 0xb6, 0x4d, 0x61, 0x69, 0x6e, 0x48, 0x61, 0x6e, 0x64, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79)
-	if z.MainHandItemClassesKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.MainHandItemClassesKey)
-	}
-	// string "MaximumAttackDistance"
-	o = append(o, 0xb5, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x44, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65)
-	o = msgp.AppendInt(o, z.MaximumAttackDistance)
-	// string "MinimumAttackDistance"
-	o = append(o, 0xb5, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x44, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65)
-	o = msgp.AppendInt(o, z.MinimumAttackDistance)
-	// string "ModelSizeMultiplier"
-	o = append(o, 0xb3, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x53, 0x69, 0x7a, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
-	o = msgp.AppendInt(o, z.ModelSizeMultiplier)
-	// string "ModsKeys"
-	o = append(o, 0xa8, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.ModsKeys)))
-	for za0007 := range z.ModsKeys {
-		o = msgp.AppendInt(o, z.ModsKeys[za0007])
-	}
-	// string "ModsKeys2"
-	o = append(o, 0xa9, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73, 0x32)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.ModsKeys2)))
-	for za0008 := range z.ModsKeys2 {
-		o = msgp.AppendInt(o, z.ModsKeys2[za0008])
 	}
 	// string "MonsterArmoursKey"
 	o = append(o, 0xb1, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x41, 0x72, 0x6d, 0x6f, 0x75, 0x72, 0x73, 0x4b, 0x65, 0x79)
@@ -17441,12 +17679,12 @@ func (z *MonsterVariety) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.MonsterArmoursKey)
 	}
-	// string "MonsterConditionalEffectPacksKey"
-	o = append(o, 0xd9, 0x20, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x50, 0x61, 0x63, 0x6b, 0x73, 0x4b, 0x65, 0x79)
-	if z.MonsterConditionalEffectPacksKey == nil {
+	// string "KillWhileTalismanIsActiveAchievementItemsKey"
+	o = append(o, 0xd9, 0x2c, 0x4b, 0x69, 0x6c, 0x6c, 0x57, 0x68, 0x69, 0x6c, 0x65, 0x54, 0x61, 0x6c, 0x69, 0x73, 0x6d, 0x61, 0x6e, 0x49, 0x73, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
+	if z.KillWhileTalismanIsActiveAchievementItemsKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
-		o = msgp.AppendInt(o, *z.MonsterConditionalEffectPacksKey)
+		o = msgp.AppendInt(o, *z.KillWhileTalismanIsActiveAchievementItemsKey)
 	}
 	// string "MonsterSegmentsKey"
 	o = append(o, 0xb2, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x4b, 0x65, 0x79)
@@ -17455,15 +17693,6 @@ func (z *MonsterVariety) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.MonsterSegmentsKey)
 	}
-	// string "MonsterTypesKey"
-	o = append(o, 0xaf, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.MonsterTypesKey)
-	// string "Name"
-	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
-	o = msgp.AppendString(o, z.Name)
-	// string "ObjectSize"
-	o = append(o, 0xaa, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x53, 0x69, 0x7a, 0x65)
-	o = msgp.AppendInt(o, z.ObjectSize)
 	// string "OffHandItemClassesKey"
 	o = append(o, 0xb5, 0x4f, 0x66, 0x66, 0x48, 0x61, 0x6e, 0x64, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79)
 	if z.OffHandItemClassesKey == nil {
@@ -17471,48 +17700,169 @@ func (z *MonsterVariety) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.OffHandItemClassesKey)
 	}
-	// string "Part1ModsKeys"
-	o = append(o, 0xad, 0x50, 0x61, 0x72, 0x74, 0x31, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.Part1ModsKeys)))
-	for za0009 := range z.Part1ModsKeys {
-		o = msgp.AppendInt(o, z.Part1ModsKeys[za0009])
+	// string "MainHandItemClassesKey"
+	o = append(o, 0xb6, 0x4d, 0x61, 0x69, 0x6e, 0x48, 0x61, 0x6e, 0x64, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79)
+	if z.MainHandItemClassesKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.MainHandItemClassesKey)
+	}
+	// string "KillWhileOnslaughtIsActiveAchievementItemsKey"
+	o = append(o, 0xd9, 0x2d, 0x4b, 0x69, 0x6c, 0x6c, 0x57, 0x68, 0x69, 0x6c, 0x65, 0x4f, 0x6e, 0x73, 0x6c, 0x61, 0x75, 0x67, 0x68, 0x74, 0x49, 0x73, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79)
+	if z.KillWhileOnslaughtIsActiveAchievementItemsKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.KillWhileOnslaughtIsActiveAchievementItemsKey)
+	}
+	// string "MonsterConditionalEffectPacksKey"
+	o = append(o, 0xd9, 0x20, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x50, 0x61, 0x63, 0x6b, 0x73, 0x4b, 0x65, 0x79)
+	if z.MonsterConditionalEffectPacksKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.MonsterConditionalEffectPacksKey)
+	}
+	// string "BackItemVisualIdentityKey"
+	o = append(o, 0xb9, 0x42, 0x61, 0x63, 0x6b, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79)
+	if z.BackItemVisualIdentityKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.BackItemVisualIdentityKey)
+	}
+	// string "EPKFile"
+	o = append(o, 0xa7, 0x45, 0x50, 0x4b, 0x46, 0x69, 0x6c, 0x65)
+	o = msgp.AppendString(o, z.EPKFile)
+	// string "Stance"
+	o = append(o, 0xa6, 0x53, 0x74, 0x61, 0x6e, 0x63, 0x65)
+	o = msgp.AppendString(o, string(z.Stance))
+	// string "SinkAnimationAOFile"
+	o = append(o, 0xb3, 0x53, 0x69, 0x6e, 0x6b, 0x41, 0x6e, 0x69, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x4f, 0x46, 0x69, 0x6c, 0x65)
+	o = msgp.AppendString(o, z.SinkAnimationAOFile)
+	// string "AISFile"
+	o = append(o, 0xa7, 0x41, 0x49, 0x53, 0x46, 0x69, 0x6c, 0x65)
+	o = msgp.AppendString(o, z.AISFile)
+	// string "ID"
+	o = append(o, 0xa2, 0x49, 0x44)
+	o = msgp.AppendString(o, z.ID)
+	// string "BaseMonsterTypeIndex"
+	o = append(o, 0xb4, 0x42, 0x61, 0x73, 0x65, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x49, 0x6e, 0x64, 0x65, 0x78)
+	o = msgp.AppendString(o, z.BaseMonsterTypeIndex)
+	// string "Name"
+	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	o = msgp.AppendString(o, z.Name)
+	// string "TagsKeys"
+	o = append(o, 0xa8, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.TagsKeys)))
+	for za0001 := range z.TagsKeys {
+		o = msgp.AppendInt(o, z.TagsKeys[za0001])
+	}
+	// string "KillSpecificMonsterCountAchievementItemsKeys"
+	o = append(o, 0xd9, 0x2c, 0x4b, 0x69, 0x6c, 0x6c, 0x53, 0x70, 0x65, 0x63, 0x69, 0x66, 0x69, 0x63, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.KillSpecificMonsterCountAchievementItemsKeys)))
+	for za0002 := range z.KillSpecificMonsterCountAchievementItemsKeys {
+		o = msgp.AppendInt(o, z.KillSpecificMonsterCountAchievementItemsKeys[za0002])
+	}
+	// string "SpecialModsKeys"
+	o = append(o, 0xaf, 0x53, 0x70, 0x65, 0x63, 0x69, 0x61, 0x6c, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.SpecialModsKeys)))
+	for za0003 := range z.SpecialModsKeys {
+		o = msgp.AppendInt(o, z.SpecialModsKeys[za0003])
+	}
+	// string "KillRareAchievementItemsKeys"
+	o = append(o, 0xbc, 0x4b, 0x69, 0x6c, 0x6c, 0x52, 0x61, 0x72, 0x65, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.KillRareAchievementItemsKeys)))
+	for za0004 := range z.KillRareAchievementItemsKeys {
+		o = msgp.AppendInt(o, z.KillRareAchievementItemsKeys[za0004])
+	}
+	// string "ACTFiles"
+	o = append(o, 0xa8, 0x41, 0x43, 0x54, 0x46, 0x69, 0x6c, 0x65, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ACTFiles)))
+	for za0005 := range z.ACTFiles {
+		o = msgp.AppendString(o, z.ACTFiles[za0005])
+	}
+	// string "GrantedEffectsKeys"
+	o = append(o, 0xb2, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.GrantedEffectsKeys)))
+	for za0006 := range z.GrantedEffectsKeys {
+		o = msgp.AppendInt(o, z.GrantedEffectsKeys[za0006])
 	}
 	// string "Part2ModsKeys"
 	o = append(o, 0xad, 0x50, 0x61, 0x72, 0x74, 0x32, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.Part2ModsKeys)))
-	for za0010 := range z.Part2ModsKeys {
-		o = msgp.AppendInt(o, z.Part2ModsKeys[za0010])
+	for za0007 := range z.Part2ModsKeys {
+		o = msgp.AppendInt(o, z.Part2ModsKeys[za0007])
 	}
-	// string "SinkAnimationAOFile"
-	o = append(o, 0xb3, 0x53, 0x69, 0x6e, 0x6b, 0x41, 0x6e, 0x69, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x4f, 0x46, 0x69, 0x6c, 0x65)
-	o = msgp.AppendString(o, z.SinkAnimationAOFile)
-	// string "SpecialModsKeys"
-	o = append(o, 0xaf, 0x53, 0x70, 0x65, 0x63, 0x69, 0x61, 0x6c, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.SpecialModsKeys)))
-	for za0011 := range z.SpecialModsKeys {
-		o = msgp.AppendInt(o, z.SpecialModsKeys[za0011])
+	// string "ModsKeys"
+	o = append(o, 0xa8, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ModsKeys)))
+	for za0008 := range z.ModsKeys {
+		o = msgp.AppendInt(o, z.ModsKeys[za0008])
 	}
-	// string "Stance"
-	o = append(o, 0xa6, 0x53, 0x74, 0x61, 0x6e, 0x63, 0x65)
-	o = msgp.AppendString(o, string(z.Stance))
-	// string "TagsKeys"
-	o = append(o, 0xa8, 0x54, 0x61, 0x67, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.TagsKeys)))
-	for za0012 := range z.TagsKeys {
-		o = msgp.AppendInt(o, z.TagsKeys[za0012])
+	// string "ModsKeys2"
+	o = append(o, 0xa9, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73, 0x32)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ModsKeys2)))
+	for za0009 := range z.ModsKeys2 {
+		o = msgp.AppendInt(o, z.ModsKeys2[za0009])
+	}
+	// string "EndgameModsKeys"
+	o = append(o, 0xaf, 0x45, 0x6e, 0x64, 0x67, 0x61, 0x6d, 0x65, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.EndgameModsKeys)))
+	for za0010 := range z.EndgameModsKeys {
+		o = msgp.AppendInt(o, z.EndgameModsKeys[za0010])
 	}
 	// string "Weapon1ItemVisualIdentityKeys"
 	o = append(o, 0xbd, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x31, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.Weapon1ItemVisualIdentityKeys)))
-	for za0013 := range z.Weapon1ItemVisualIdentityKeys {
-		o = msgp.AppendInt(o, z.Weapon1ItemVisualIdentityKeys[za0013])
+	for za0011 := range z.Weapon1ItemVisualIdentityKeys {
+		o = msgp.AppendInt(o, z.Weapon1ItemVisualIdentityKeys[za0011])
 	}
 	// string "Weapon2ItemVisualIdentityKeys"
 	o = append(o, 0xbd, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x32, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.Weapon2ItemVisualIdentityKeys)))
-	for za0014 := range z.Weapon2ItemVisualIdentityKeys {
-		o = msgp.AppendInt(o, z.Weapon2ItemVisualIdentityKeys[za0014])
+	for za0012 := range z.Weapon2ItemVisualIdentityKeys {
+		o = msgp.AppendInt(o, z.Weapon2ItemVisualIdentityKeys[za0012])
 	}
+	// string "Part1ModsKeys"
+	o = append(o, 0xad, 0x50, 0x61, 0x72, 0x74, 0x31, 0x4d, 0x6f, 0x64, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Part1ModsKeys)))
+	for za0013 := range z.Part1ModsKeys {
+		o = msgp.AppendInt(o, z.Part1ModsKeys[za0013])
+	}
+	// string "AOFiles"
+	o = append(o, 0xa7, 0x41, 0x4f, 0x46, 0x69, 0x6c, 0x65, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.AOFiles)))
+	for za0014 := range z.AOFiles {
+		o = msgp.AppendString(o, z.AOFiles[za0014])
+	}
+	// string "MaximumAttackDistance"
+	o = append(o, 0xb5, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x44, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65)
+	o = msgp.AppendInt(o, z.MaximumAttackDistance)
+	// string "ObjectSize"
+	o = append(o, 0xaa, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x53, 0x69, 0x7a, 0x65)
+	o = msgp.AppendInt(o, z.ObjectSize)
+	// string "MonsterTypesKey"
+	o = append(o, 0xaf, 0x4d, 0x6f, 0x6e, 0x73, 0x74, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.MonsterTypesKey)
+	// string "ModelSizeMultiplier"
+	o = append(o, 0xb3, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x53, 0x69, 0x7a, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	o = msgp.AppendInt(o, z.ModelSizeMultiplier)
+	// string "MinimumAttackDistance"
+	o = append(o, 0xb5, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x44, 0x69, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65)
+	o = msgp.AppendInt(o, z.MinimumAttackDistance)
+	// string "LifeMultiplier"
+	o = append(o, 0xae, 0x4c, 0x69, 0x66, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	o = msgp.AppendInt(o, z.LifeMultiplier)
+	// string "ExperienceMultiplier"
+	o = append(o, 0xb4, 0x45, 0x78, 0x70, 0x65, 0x72, 0x69, 0x65, 0x6e, 0x63, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	o = msgp.AppendInt(o, z.ExperienceMultiplier)
+	// string "DamageMultiplier"
+	o = append(o, 0xb0, 0x44, 0x61, 0x6d, 0x61, 0x67, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72)
+	o = msgp.AppendInt(o, z.DamageMultiplier)
+	// string "CriticalStrikeChance"
+	o = append(o, 0xb4, 0x43, 0x72, 0x69, 0x74, 0x69, 0x63, 0x61, 0x6c, 0x53, 0x74, 0x72, 0x69, 0x6b, 0x65, 0x43, 0x68, 0x61, 0x6e, 0x63, 0x65)
+	o = msgp.AppendInt(o, z.CriticalStrikeChance)
+	// string "AttackSpeed"
+	o = append(o, 0xab, 0x41, 0x74, 0x74, 0x61, 0x63, 0x6b, 0x53, 0x70, 0x65, 0x65, 0x64)
+	o = msgp.AppendInt(o, z.AttackSpeed)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
@@ -17537,141 +17887,6 @@ func (z *MonsterVariety) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "ACTFiles":
-			var zb0002 uint32
-			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ACTFiles")
-				return
-			}
-			if cap(z.ACTFiles) >= int(zb0002) {
-				z.ACTFiles = (z.ACTFiles)[:zb0002]
-			} else {
-				z.ACTFiles = make([]string, zb0002)
-			}
-			for za0001 := range z.ACTFiles {
-				z.ACTFiles[za0001], bts, err = msgp.ReadStringBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ACTFiles", za0001)
-					return
-				}
-			}
-		case "AISFile":
-			z.AISFile, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "AISFile")
-				return
-			}
-		case "AOFiles":
-			var zb0003 uint32
-			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "AOFiles")
-				return
-			}
-			if cap(z.AOFiles) >= int(zb0003) {
-				z.AOFiles = (z.AOFiles)[:zb0003]
-			} else {
-				z.AOFiles = make([]string, zb0003)
-			}
-			for za0002 := range z.AOFiles {
-				z.AOFiles[za0002], bts, err = msgp.ReadStringBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "AOFiles", za0002)
-					return
-				}
-			}
-		case "AttackSpeed":
-			z.AttackSpeed, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "AttackSpeed")
-				return
-			}
-		case "BackItemVisualIdentityKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.BackItemVisualIdentityKey = nil
-			} else {
-				if z.BackItemVisualIdentityKey == nil {
-					z.BackItemVisualIdentityKey = new(int)
-				}
-				*z.BackItemVisualIdentityKey, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "BackItemVisualIdentityKey")
-					return
-				}
-			}
-		case "BaseMonsterTypeIndex":
-			z.BaseMonsterTypeIndex, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "BaseMonsterTypeIndex")
-				return
-			}
-		case "CriticalStrikeChance":
-			z.CriticalStrikeChance, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "CriticalStrikeChance")
-				return
-			}
-		case "DamageMultiplier":
-			z.DamageMultiplier, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "DamageMultiplier")
-				return
-			}
-		case "EPKFile":
-			z.EPKFile, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "EPKFile")
-				return
-			}
-		case "EndgameModsKeys":
-			var zb0004 uint32
-			zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "EndgameModsKeys")
-				return
-			}
-			if cap(z.EndgameModsKeys) >= int(zb0004) {
-				z.EndgameModsKeys = (z.EndgameModsKeys)[:zb0004]
-			} else {
-				z.EndgameModsKeys = make([]int, zb0004)
-			}
-			for za0003 := range z.EndgameModsKeys {
-				z.EndgameModsKeys[za0003], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "EndgameModsKeys", za0003)
-					return
-				}
-			}
-		case "ExperienceMultiplier":
-			z.ExperienceMultiplier, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ExperienceMultiplier")
-				return
-			}
-		case "GrantedEffectsKeys":
-			var zb0005 uint32
-			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "GrantedEffectsKeys")
-				return
-			}
-			if cap(z.GrantedEffectsKeys) >= int(zb0005) {
-				z.GrantedEffectsKeys = (z.GrantedEffectsKeys)[:zb0005]
-			} else {
-				z.GrantedEffectsKeys = make([]int, zb0005)
-			}
-			for za0004 := range z.GrantedEffectsKeys {
-				z.GrantedEffectsKeys[za0004], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "GrantedEffectsKeys", za0004)
-					return
-				}
-			}
 		case "HelmetItemVisualIdentityKey":
 			if msgp.IsNil(bts) {
 				bts, err = msgp.ReadNilBytes(bts)
@@ -17686,163 +17901,6 @@ func (z *MonsterVariety) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				*z.HelmetItemVisualIdentityKey, bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
 					err = msgp.WrapError(err, "HelmetItemVisualIdentityKey")
-					return
-				}
-			}
-		case "ID":
-			z.ID, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ID")
-				return
-			}
-		case "KillRareAchievementItemsKeys":
-			var zb0006 uint32
-			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "KillRareAchievementItemsKeys")
-				return
-			}
-			if cap(z.KillRareAchievementItemsKeys) >= int(zb0006) {
-				z.KillRareAchievementItemsKeys = (z.KillRareAchievementItemsKeys)[:zb0006]
-			} else {
-				z.KillRareAchievementItemsKeys = make([]int, zb0006)
-			}
-			for za0005 := range z.KillRareAchievementItemsKeys {
-				z.KillRareAchievementItemsKeys[za0005], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "KillRareAchievementItemsKeys", za0005)
-					return
-				}
-			}
-		case "KillSpecificMonsterCountAchievementItemsKeys":
-			var zb0007 uint32
-			zb0007, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "KillSpecificMonsterCountAchievementItemsKeys")
-				return
-			}
-			if cap(z.KillSpecificMonsterCountAchievementItemsKeys) >= int(zb0007) {
-				z.KillSpecificMonsterCountAchievementItemsKeys = (z.KillSpecificMonsterCountAchievementItemsKeys)[:zb0007]
-			} else {
-				z.KillSpecificMonsterCountAchievementItemsKeys = make([]int, zb0007)
-			}
-			for za0006 := range z.KillSpecificMonsterCountAchievementItemsKeys {
-				z.KillSpecificMonsterCountAchievementItemsKeys[za0006], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "KillSpecificMonsterCountAchievementItemsKeys", za0006)
-					return
-				}
-			}
-		case "KillWhileOnslaughtIsActiveAchievementItemsKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.KillWhileOnslaughtIsActiveAchievementItemsKey = nil
-			} else {
-				if z.KillWhileOnslaughtIsActiveAchievementItemsKey == nil {
-					z.KillWhileOnslaughtIsActiveAchievementItemsKey = new(int)
-				}
-				*z.KillWhileOnslaughtIsActiveAchievementItemsKey, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "KillWhileOnslaughtIsActiveAchievementItemsKey")
-					return
-				}
-			}
-		case "KillWhileTalismanIsActiveAchievementItemsKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.KillWhileTalismanIsActiveAchievementItemsKey = nil
-			} else {
-				if z.KillWhileTalismanIsActiveAchievementItemsKey == nil {
-					z.KillWhileTalismanIsActiveAchievementItemsKey = new(int)
-				}
-				*z.KillWhileTalismanIsActiveAchievementItemsKey, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "KillWhileTalismanIsActiveAchievementItemsKey")
-					return
-				}
-			}
-		case "LifeMultiplier":
-			z.LifeMultiplier, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "LifeMultiplier")
-				return
-			}
-		case "MainHandItemClassesKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.MainHandItemClassesKey = nil
-			} else {
-				if z.MainHandItemClassesKey == nil {
-					z.MainHandItemClassesKey = new(int)
-				}
-				*z.MainHandItemClassesKey, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "MainHandItemClassesKey")
-					return
-				}
-			}
-		case "MaximumAttackDistance":
-			z.MaximumAttackDistance, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "MaximumAttackDistance")
-				return
-			}
-		case "MinimumAttackDistance":
-			z.MinimumAttackDistance, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "MinimumAttackDistance")
-				return
-			}
-		case "ModelSizeMultiplier":
-			z.ModelSizeMultiplier, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ModelSizeMultiplier")
-				return
-			}
-		case "ModsKeys":
-			var zb0008 uint32
-			zb0008, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ModsKeys")
-				return
-			}
-			if cap(z.ModsKeys) >= int(zb0008) {
-				z.ModsKeys = (z.ModsKeys)[:zb0008]
-			} else {
-				z.ModsKeys = make([]int, zb0008)
-			}
-			for za0007 := range z.ModsKeys {
-				z.ModsKeys[za0007], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ModsKeys", za0007)
-					return
-				}
-			}
-		case "ModsKeys2":
-			var zb0009 uint32
-			zb0009, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ModsKeys2")
-				return
-			}
-			if cap(z.ModsKeys2) >= int(zb0009) {
-				z.ModsKeys2 = (z.ModsKeys2)[:zb0009]
-			} else {
-				z.ModsKeys2 = make([]int, zb0009)
-			}
-			for za0008 := range z.ModsKeys2 {
-				z.ModsKeys2[za0008], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ModsKeys2", za0008)
 					return
 				}
 			}
@@ -17863,20 +17921,20 @@ func (z *MonsterVariety) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "MonsterConditionalEffectPacksKey":
+		case "KillWhileTalismanIsActiveAchievementItemsKey":
 			if msgp.IsNil(bts) {
 				bts, err = msgp.ReadNilBytes(bts)
 				if err != nil {
 					return
 				}
-				z.MonsterConditionalEffectPacksKey = nil
+				z.KillWhileTalismanIsActiveAchievementItemsKey = nil
 			} else {
-				if z.MonsterConditionalEffectPacksKey == nil {
-					z.MonsterConditionalEffectPacksKey = new(int)
+				if z.KillWhileTalismanIsActiveAchievementItemsKey == nil {
+					z.KillWhileTalismanIsActiveAchievementItemsKey = new(int)
 				}
-				*z.MonsterConditionalEffectPacksKey, bts, err = msgp.ReadIntBytes(bts)
+				*z.KillWhileTalismanIsActiveAchievementItemsKey, bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "MonsterConditionalEffectPacksKey")
+					err = msgp.WrapError(err, "KillWhileTalismanIsActiveAchievementItemsKey")
 					return
 				}
 			}
@@ -17897,24 +17955,6 @@ func (z *MonsterVariety) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "MonsterTypesKey":
-			z.MonsterTypesKey, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "MonsterTypesKey")
-				return
-			}
-		case "Name":
-			z.Name, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Name")
-				return
-			}
-		case "ObjectSize":
-			z.ObjectSize, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ObjectSize")
-				return
-			}
 		case "OffHandItemClassesKey":
 			if msgp.IsNil(bts) {
 				bts, err = msgp.ReadNilBytes(bts)
@@ -17932,43 +17972,89 @@ func (z *MonsterVariety) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "Part1ModsKeys":
-			var zb0010 uint32
-			zb0010, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Part1ModsKeys")
-				return
-			}
-			if cap(z.Part1ModsKeys) >= int(zb0010) {
-				z.Part1ModsKeys = (z.Part1ModsKeys)[:zb0010]
-			} else {
-				z.Part1ModsKeys = make([]int, zb0010)
-			}
-			for za0009 := range z.Part1ModsKeys {
-				z.Part1ModsKeys[za0009], bts, err = msgp.ReadIntBytes(bts)
+		case "MainHandItemClassesKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "Part1ModsKeys", za0009)
+					return
+				}
+				z.MainHandItemClassesKey = nil
+			} else {
+				if z.MainHandItemClassesKey == nil {
+					z.MainHandItemClassesKey = new(int)
+				}
+				*z.MainHandItemClassesKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "MainHandItemClassesKey")
 					return
 				}
 			}
-		case "Part2ModsKeys":
-			var zb0011 uint32
-			zb0011, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Part2ModsKeys")
-				return
-			}
-			if cap(z.Part2ModsKeys) >= int(zb0011) {
-				z.Part2ModsKeys = (z.Part2ModsKeys)[:zb0011]
-			} else {
-				z.Part2ModsKeys = make([]int, zb0011)
-			}
-			for za0010 := range z.Part2ModsKeys {
-				z.Part2ModsKeys[za0010], bts, err = msgp.ReadIntBytes(bts)
+		case "KillWhileOnslaughtIsActiveAchievementItemsKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "Part2ModsKeys", za0010)
 					return
 				}
+				z.KillWhileOnslaughtIsActiveAchievementItemsKey = nil
+			} else {
+				if z.KillWhileOnslaughtIsActiveAchievementItemsKey == nil {
+					z.KillWhileOnslaughtIsActiveAchievementItemsKey = new(int)
+				}
+				*z.KillWhileOnslaughtIsActiveAchievementItemsKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "KillWhileOnslaughtIsActiveAchievementItemsKey")
+					return
+				}
+			}
+		case "MonsterConditionalEffectPacksKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.MonsterConditionalEffectPacksKey = nil
+			} else {
+				if z.MonsterConditionalEffectPacksKey == nil {
+					z.MonsterConditionalEffectPacksKey = new(int)
+				}
+				*z.MonsterConditionalEffectPacksKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "MonsterConditionalEffectPacksKey")
+					return
+				}
+			}
+		case "BackItemVisualIdentityKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.BackItemVisualIdentityKey = nil
+			} else {
+				if z.BackItemVisualIdentityKey == nil {
+					z.BackItemVisualIdentityKey = new(int)
+				}
+				*z.BackItemVisualIdentityKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "BackItemVisualIdentityKey")
+					return
+				}
+			}
+		case "EPKFile":
+			z.EPKFile, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "EPKFile")
+				return
+			}
+		case "Stance":
+			{
+				var zb0002 string
+				zb0002, bts, err = msgp.ReadStringBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Stance")
+					return
+				}
+				z.Stance = MonsterVarietyStance(zb0002)
 			}
 		case "SinkAnimationAOFile":
 			z.SinkAnimationAOFile, bts, err = msgp.ReadStringBytes(bts)
@@ -17976,91 +18062,355 @@ func (z *MonsterVariety) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "SinkAnimationAOFile")
 				return
 			}
-		case "SpecialModsKeys":
-			var zb0012 uint32
-			zb0012, bts, err = msgp.ReadArrayHeaderBytes(bts)
+		case "AISFile":
+			z.AISFile, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "SpecialModsKeys")
+				err = msgp.WrapError(err, "AISFile")
 				return
 			}
-			if cap(z.SpecialModsKeys) >= int(zb0012) {
-				z.SpecialModsKeys = (z.SpecialModsKeys)[:zb0012]
-			} else {
-				z.SpecialModsKeys = make([]int, zb0012)
+		case "ID":
+			z.ID, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ID")
+				return
 			}
-			for za0011 := range z.SpecialModsKeys {
-				z.SpecialModsKeys[za0011], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "SpecialModsKeys", za0011)
-					return
-				}
+		case "BaseMonsterTypeIndex":
+			z.BaseMonsterTypeIndex, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "BaseMonsterTypeIndex")
+				return
 			}
-		case "Stance":
-			{
-				var zb0013 string
-				zb0013, bts, err = msgp.ReadStringBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Stance")
-					return
-				}
-				z.Stance = MonsterVarietyStance(zb0013)
+		case "Name":
+			z.Name, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Name")
+				return
 			}
 		case "TagsKeys":
-			var zb0014 uint32
-			zb0014, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			var zb0003 uint32
+			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "TagsKeys")
 				return
 			}
-			if cap(z.TagsKeys) >= int(zb0014) {
-				z.TagsKeys = (z.TagsKeys)[:zb0014]
+			if cap(z.TagsKeys) >= int(zb0003) {
+				z.TagsKeys = (z.TagsKeys)[:zb0003]
 			} else {
-				z.TagsKeys = make([]int, zb0014)
+				z.TagsKeys = make([]int, zb0003)
 			}
-			for za0012 := range z.TagsKeys {
-				z.TagsKeys[za0012], bts, err = msgp.ReadIntBytes(bts)
+			for za0001 := range z.TagsKeys {
+				z.TagsKeys[za0001], bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "TagsKeys", za0012)
+					err = msgp.WrapError(err, "TagsKeys", za0001)
+					return
+				}
+			}
+		case "KillSpecificMonsterCountAchievementItemsKeys":
+			var zb0004 uint32
+			zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "KillSpecificMonsterCountAchievementItemsKeys")
+				return
+			}
+			if cap(z.KillSpecificMonsterCountAchievementItemsKeys) >= int(zb0004) {
+				z.KillSpecificMonsterCountAchievementItemsKeys = (z.KillSpecificMonsterCountAchievementItemsKeys)[:zb0004]
+			} else {
+				z.KillSpecificMonsterCountAchievementItemsKeys = make([]int, zb0004)
+			}
+			for za0002 := range z.KillSpecificMonsterCountAchievementItemsKeys {
+				z.KillSpecificMonsterCountAchievementItemsKeys[za0002], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "KillSpecificMonsterCountAchievementItemsKeys", za0002)
+					return
+				}
+			}
+		case "SpecialModsKeys":
+			var zb0005 uint32
+			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "SpecialModsKeys")
+				return
+			}
+			if cap(z.SpecialModsKeys) >= int(zb0005) {
+				z.SpecialModsKeys = (z.SpecialModsKeys)[:zb0005]
+			} else {
+				z.SpecialModsKeys = make([]int, zb0005)
+			}
+			for za0003 := range z.SpecialModsKeys {
+				z.SpecialModsKeys[za0003], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "SpecialModsKeys", za0003)
+					return
+				}
+			}
+		case "KillRareAchievementItemsKeys":
+			var zb0006 uint32
+			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "KillRareAchievementItemsKeys")
+				return
+			}
+			if cap(z.KillRareAchievementItemsKeys) >= int(zb0006) {
+				z.KillRareAchievementItemsKeys = (z.KillRareAchievementItemsKeys)[:zb0006]
+			} else {
+				z.KillRareAchievementItemsKeys = make([]int, zb0006)
+			}
+			for za0004 := range z.KillRareAchievementItemsKeys {
+				z.KillRareAchievementItemsKeys[za0004], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "KillRareAchievementItemsKeys", za0004)
+					return
+				}
+			}
+		case "ACTFiles":
+			var zb0007 uint32
+			zb0007, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ACTFiles")
+				return
+			}
+			if cap(z.ACTFiles) >= int(zb0007) {
+				z.ACTFiles = (z.ACTFiles)[:zb0007]
+			} else {
+				z.ACTFiles = make([]string, zb0007)
+			}
+			for za0005 := range z.ACTFiles {
+				z.ACTFiles[za0005], bts, err = msgp.ReadStringBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ACTFiles", za0005)
+					return
+				}
+			}
+		case "GrantedEffectsKeys":
+			var zb0008 uint32
+			zb0008, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "GrantedEffectsKeys")
+				return
+			}
+			if cap(z.GrantedEffectsKeys) >= int(zb0008) {
+				z.GrantedEffectsKeys = (z.GrantedEffectsKeys)[:zb0008]
+			} else {
+				z.GrantedEffectsKeys = make([]int, zb0008)
+			}
+			for za0006 := range z.GrantedEffectsKeys {
+				z.GrantedEffectsKeys[za0006], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "GrantedEffectsKeys", za0006)
+					return
+				}
+			}
+		case "Part2ModsKeys":
+			var zb0009 uint32
+			zb0009, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Part2ModsKeys")
+				return
+			}
+			if cap(z.Part2ModsKeys) >= int(zb0009) {
+				z.Part2ModsKeys = (z.Part2ModsKeys)[:zb0009]
+			} else {
+				z.Part2ModsKeys = make([]int, zb0009)
+			}
+			for za0007 := range z.Part2ModsKeys {
+				z.Part2ModsKeys[za0007], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Part2ModsKeys", za0007)
+					return
+				}
+			}
+		case "ModsKeys":
+			var zb0010 uint32
+			zb0010, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ModsKeys")
+				return
+			}
+			if cap(z.ModsKeys) >= int(zb0010) {
+				z.ModsKeys = (z.ModsKeys)[:zb0010]
+			} else {
+				z.ModsKeys = make([]int, zb0010)
+			}
+			for za0008 := range z.ModsKeys {
+				z.ModsKeys[za0008], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ModsKeys", za0008)
+					return
+				}
+			}
+		case "ModsKeys2":
+			var zb0011 uint32
+			zb0011, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ModsKeys2")
+				return
+			}
+			if cap(z.ModsKeys2) >= int(zb0011) {
+				z.ModsKeys2 = (z.ModsKeys2)[:zb0011]
+			} else {
+				z.ModsKeys2 = make([]int, zb0011)
+			}
+			for za0009 := range z.ModsKeys2 {
+				z.ModsKeys2[za0009], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ModsKeys2", za0009)
+					return
+				}
+			}
+		case "EndgameModsKeys":
+			var zb0012 uint32
+			zb0012, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "EndgameModsKeys")
+				return
+			}
+			if cap(z.EndgameModsKeys) >= int(zb0012) {
+				z.EndgameModsKeys = (z.EndgameModsKeys)[:zb0012]
+			} else {
+				z.EndgameModsKeys = make([]int, zb0012)
+			}
+			for za0010 := range z.EndgameModsKeys {
+				z.EndgameModsKeys[za0010], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "EndgameModsKeys", za0010)
 					return
 				}
 			}
 		case "Weapon1ItemVisualIdentityKeys":
-			var zb0015 uint32
-			zb0015, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			var zb0013 uint32
+			zb0013, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "Weapon1ItemVisualIdentityKeys")
 				return
 			}
-			if cap(z.Weapon1ItemVisualIdentityKeys) >= int(zb0015) {
-				z.Weapon1ItemVisualIdentityKeys = (z.Weapon1ItemVisualIdentityKeys)[:zb0015]
+			if cap(z.Weapon1ItemVisualIdentityKeys) >= int(zb0013) {
+				z.Weapon1ItemVisualIdentityKeys = (z.Weapon1ItemVisualIdentityKeys)[:zb0013]
 			} else {
-				z.Weapon1ItemVisualIdentityKeys = make([]int, zb0015)
+				z.Weapon1ItemVisualIdentityKeys = make([]int, zb0013)
 			}
-			for za0013 := range z.Weapon1ItemVisualIdentityKeys {
-				z.Weapon1ItemVisualIdentityKeys[za0013], bts, err = msgp.ReadIntBytes(bts)
+			for za0011 := range z.Weapon1ItemVisualIdentityKeys {
+				z.Weapon1ItemVisualIdentityKeys[za0011], bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "Weapon1ItemVisualIdentityKeys", za0013)
+					err = msgp.WrapError(err, "Weapon1ItemVisualIdentityKeys", za0011)
 					return
 				}
 			}
 		case "Weapon2ItemVisualIdentityKeys":
-			var zb0016 uint32
-			zb0016, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			var zb0014 uint32
+			zb0014, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "Weapon2ItemVisualIdentityKeys")
 				return
 			}
-			if cap(z.Weapon2ItemVisualIdentityKeys) >= int(zb0016) {
-				z.Weapon2ItemVisualIdentityKeys = (z.Weapon2ItemVisualIdentityKeys)[:zb0016]
+			if cap(z.Weapon2ItemVisualIdentityKeys) >= int(zb0014) {
+				z.Weapon2ItemVisualIdentityKeys = (z.Weapon2ItemVisualIdentityKeys)[:zb0014]
 			} else {
-				z.Weapon2ItemVisualIdentityKeys = make([]int, zb0016)
+				z.Weapon2ItemVisualIdentityKeys = make([]int, zb0014)
 			}
-			for za0014 := range z.Weapon2ItemVisualIdentityKeys {
-				z.Weapon2ItemVisualIdentityKeys[za0014], bts, err = msgp.ReadIntBytes(bts)
+			for za0012 := range z.Weapon2ItemVisualIdentityKeys {
+				z.Weapon2ItemVisualIdentityKeys[za0012], bts, err = msgp.ReadIntBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "Weapon2ItemVisualIdentityKeys", za0014)
+					err = msgp.WrapError(err, "Weapon2ItemVisualIdentityKeys", za0012)
 					return
 				}
+			}
+		case "Part1ModsKeys":
+			var zb0015 uint32
+			zb0015, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Part1ModsKeys")
+				return
+			}
+			if cap(z.Part1ModsKeys) >= int(zb0015) {
+				z.Part1ModsKeys = (z.Part1ModsKeys)[:zb0015]
+			} else {
+				z.Part1ModsKeys = make([]int, zb0015)
+			}
+			for za0013 := range z.Part1ModsKeys {
+				z.Part1ModsKeys[za0013], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Part1ModsKeys", za0013)
+					return
+				}
+			}
+		case "AOFiles":
+			var zb0016 uint32
+			zb0016, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AOFiles")
+				return
+			}
+			if cap(z.AOFiles) >= int(zb0016) {
+				z.AOFiles = (z.AOFiles)[:zb0016]
+			} else {
+				z.AOFiles = make([]string, zb0016)
+			}
+			for za0014 := range z.AOFiles {
+				z.AOFiles[za0014], bts, err = msgp.ReadStringBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "AOFiles", za0014)
+					return
+				}
+			}
+		case "MaximumAttackDistance":
+			z.MaximumAttackDistance, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MaximumAttackDistance")
+				return
+			}
+		case "ObjectSize":
+			z.ObjectSize, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ObjectSize")
+				return
+			}
+		case "MonsterTypesKey":
+			z.MonsterTypesKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MonsterTypesKey")
+				return
+			}
+		case "ModelSizeMultiplier":
+			z.ModelSizeMultiplier, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ModelSizeMultiplier")
+				return
+			}
+		case "MinimumAttackDistance":
+			z.MinimumAttackDistance, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MinimumAttackDistance")
+				return
+			}
+		case "LifeMultiplier":
+			z.LifeMultiplier, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "LifeMultiplier")
+				return
+			}
+		case "ExperienceMultiplier":
+			z.ExperienceMultiplier, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ExperienceMultiplier")
+				return
+			}
+		case "DamageMultiplier":
+			z.DamageMultiplier, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "DamageMultiplier")
+				return
+			}
+		case "CriticalStrikeChance":
+			z.CriticalStrikeChance, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "CriticalStrikeChance")
+				return
+			}
+		case "AttackSpeed":
+			z.AttackSpeed, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AttackSpeed")
+				return
 			}
 		case "Key":
 			z.Key, bts, err = msgp.ReadIntBytes(bts)
@@ -18082,28 +18432,14 @@ func (z *MonsterVariety) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *MonsterVariety) Msgsize() (s int) {
-	s = 3 + 9 + msgp.ArrayHeaderSize
-	for za0001 := range z.ACTFiles {
-		s += msgp.StringPrefixSize + len(z.ACTFiles[za0001])
-	}
-	s += 8 + msgp.StringPrefixSize + len(z.AISFile) + 8 + msgp.ArrayHeaderSize
-	for za0002 := range z.AOFiles {
-		s += msgp.StringPrefixSize + len(z.AOFiles[za0002])
-	}
-	s += 12 + msgp.IntSize + 26
-	if z.BackItemVisualIdentityKey == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 21 + msgp.StringPrefixSize + len(z.BaseMonsterTypeIndex) + 21 + msgp.IntSize + 17 + msgp.IntSize + 8 + msgp.StringPrefixSize + len(z.EPKFile) + 16 + msgp.ArrayHeaderSize + (len(z.EndgameModsKeys) * (msgp.IntSize)) + 21 + msgp.IntSize + 19 + msgp.ArrayHeaderSize + (len(z.GrantedEffectsKeys) * (msgp.IntSize)) + 28
+	s = 3 + 28
 	if z.HelmetItemVisualIdentityKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 3 + msgp.StringPrefixSize + len(z.ID) + 29 + msgp.ArrayHeaderSize + (len(z.KillRareAchievementItemsKeys) * (msgp.IntSize)) + 46 + msgp.ArrayHeaderSize + (len(z.KillSpecificMonsterCountAchievementItemsKeys) * (msgp.IntSize)) + 47
-	if z.KillWhileOnslaughtIsActiveAchievementItemsKey == nil {
+	s += 18
+	if z.MonsterArmoursKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
@@ -18114,14 +18450,26 @@ func (z *MonsterVariety) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 15 + msgp.IntSize + 23
+	s += 19
+	if z.MonsterSegmentsKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 22
+	if z.OffHandItemClassesKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 23
 	if z.MainHandItemClassesKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 22 + msgp.IntSize + 22 + msgp.IntSize + 20 + msgp.IntSize + 9 + msgp.ArrayHeaderSize + (len(z.ModsKeys) * (msgp.IntSize)) + 10 + msgp.ArrayHeaderSize + (len(z.ModsKeys2) * (msgp.IntSize)) + 18
-	if z.MonsterArmoursKey == nil {
+	s += 47
+	if z.KillWhileOnslaughtIsActiveAchievementItemsKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
@@ -18132,19 +18480,21 @@ func (z *MonsterVariety) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 19
-	if z.MonsterSegmentsKey == nil {
+	s += 26
+	if z.BackItemVisualIdentityKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 16 + msgp.IntSize + 5 + msgp.StringPrefixSize + len(z.Name) + 11 + msgp.IntSize + 22
-	if z.OffHandItemClassesKey == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
+	s += 8 + msgp.StringPrefixSize + len(z.EPKFile) + 7 + msgp.StringPrefixSize + len(string(z.Stance)) + 20 + msgp.StringPrefixSize + len(z.SinkAnimationAOFile) + 8 + msgp.StringPrefixSize + len(z.AISFile) + 3 + msgp.StringPrefixSize + len(z.ID) + 21 + msgp.StringPrefixSize + len(z.BaseMonsterTypeIndex) + 5 + msgp.StringPrefixSize + len(z.Name) + 9 + msgp.ArrayHeaderSize + (len(z.TagsKeys) * (msgp.IntSize)) + 46 + msgp.ArrayHeaderSize + (len(z.KillSpecificMonsterCountAchievementItemsKeys) * (msgp.IntSize)) + 16 + msgp.ArrayHeaderSize + (len(z.SpecialModsKeys) * (msgp.IntSize)) + 29 + msgp.ArrayHeaderSize + (len(z.KillRareAchievementItemsKeys) * (msgp.IntSize)) + 9 + msgp.ArrayHeaderSize
+	for za0005 := range z.ACTFiles {
+		s += msgp.StringPrefixSize + len(z.ACTFiles[za0005])
 	}
-	s += 14 + msgp.ArrayHeaderSize + (len(z.Part1ModsKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.Part2ModsKeys) * (msgp.IntSize)) + 20 + msgp.StringPrefixSize + len(z.SinkAnimationAOFile) + 16 + msgp.ArrayHeaderSize + (len(z.SpecialModsKeys) * (msgp.IntSize)) + 7 + msgp.StringPrefixSize + len(string(z.Stance)) + 9 + msgp.ArrayHeaderSize + (len(z.TagsKeys) * (msgp.IntSize)) + 30 + msgp.ArrayHeaderSize + (len(z.Weapon1ItemVisualIdentityKeys) * (msgp.IntSize)) + 30 + msgp.ArrayHeaderSize + (len(z.Weapon2ItemVisualIdentityKeys) * (msgp.IntSize)) + 4 + msgp.IntSize
+	s += 19 + msgp.ArrayHeaderSize + (len(z.GrantedEffectsKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.Part2ModsKeys) * (msgp.IntSize)) + 9 + msgp.ArrayHeaderSize + (len(z.ModsKeys) * (msgp.IntSize)) + 10 + msgp.ArrayHeaderSize + (len(z.ModsKeys2) * (msgp.IntSize)) + 16 + msgp.ArrayHeaderSize + (len(z.EndgameModsKeys) * (msgp.IntSize)) + 30 + msgp.ArrayHeaderSize + (len(z.Weapon1ItemVisualIdentityKeys) * (msgp.IntSize)) + 30 + msgp.ArrayHeaderSize + (len(z.Weapon2ItemVisualIdentityKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.Part1ModsKeys) * (msgp.IntSize)) + 8 + msgp.ArrayHeaderSize
+	for za0014 := range z.AOFiles {
+		s += msgp.StringPrefixSize + len(z.AOFiles[za0014])
+	}
+	s += 22 + msgp.IntSize + 11 + msgp.IntSize + 16 + msgp.IntSize + 20 + msgp.IntSize + 22 + msgp.IntSize + 15 + msgp.IntSize + 21 + msgp.IntSize + 17 + msgp.IntSize + 21 + msgp.IntSize + 12 + msgp.IntSize + 4 + msgp.IntSize
 	return
 }
 
@@ -18218,24 +18568,11 @@ func (z *PantheonPanelLayout) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AchievementItems":
-			var zb0002 uint32
-			zb0002, err = dc.ReadArrayHeader()
+		case "GodName1":
+			z.GodName1, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "AchievementItems")
+				err = msgp.WrapError(err, "GodName1")
 				return
-			}
-			if cap(z.AchievementItems) >= int(zb0002) {
-				z.AchievementItems = (z.AchievementItems)[:zb0002]
-			} else {
-				z.AchievementItems = make([]int, zb0002)
-			}
-			for za0001 := range z.AchievementItems {
-				z.AchievementItems[za0001], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "AchievementItems", za0001)
-					return
-				}
 			}
 		case "CoverImage":
 			z.CoverImage, err = dc.ReadString()
@@ -18243,180 +18580,10 @@ func (z *PantheonPanelLayout) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "CoverImage")
 				return
 			}
-		case "Effect1StatsKeys":
-			var zb0003 uint32
-			zb0003, err = dc.ReadArrayHeader()
+		case "SelectionImage":
+			z.SelectionImage, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "Effect1StatsKeys")
-				return
-			}
-			if cap(z.Effect1StatsKeys) >= int(zb0003) {
-				z.Effect1StatsKeys = (z.Effect1StatsKeys)[:zb0003]
-			} else {
-				z.Effect1StatsKeys = make([]int, zb0003)
-			}
-			for za0002 := range z.Effect1StatsKeys {
-				z.Effect1StatsKeys[za0002], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "Effect1StatsKeys", za0002)
-					return
-				}
-			}
-		case "Effect1Values":
-			var zb0004 uint32
-			zb0004, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "Effect1Values")
-				return
-			}
-			if cap(z.Effect1Values) >= int(zb0004) {
-				z.Effect1Values = (z.Effect1Values)[:zb0004]
-			} else {
-				z.Effect1Values = make([]int, zb0004)
-			}
-			for za0003 := range z.Effect1Values {
-				z.Effect1Values[za0003], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "Effect1Values", za0003)
-					return
-				}
-			}
-		case "Effect2StatsKeys":
-			var zb0005 uint32
-			zb0005, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "Effect2StatsKeys")
-				return
-			}
-			if cap(z.Effect2StatsKeys) >= int(zb0005) {
-				z.Effect2StatsKeys = (z.Effect2StatsKeys)[:zb0005]
-			} else {
-				z.Effect2StatsKeys = make([]int, zb0005)
-			}
-			for za0004 := range z.Effect2StatsKeys {
-				z.Effect2StatsKeys[za0004], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "Effect2StatsKeys", za0004)
-					return
-				}
-			}
-		case "Effect2Values":
-			var zb0006 uint32
-			zb0006, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "Effect2Values")
-				return
-			}
-			if cap(z.Effect2Values) >= int(zb0006) {
-				z.Effect2Values = (z.Effect2Values)[:zb0006]
-			} else {
-				z.Effect2Values = make([]int, zb0006)
-			}
-			for za0005 := range z.Effect2Values {
-				z.Effect2Values[za0005], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "Effect2Values", za0005)
-					return
-				}
-			}
-		case "Effect3StatsKeys":
-			var zb0007 uint32
-			zb0007, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "Effect3StatsKeys")
-				return
-			}
-			if cap(z.Effect3StatsKeys) >= int(zb0007) {
-				z.Effect3StatsKeys = (z.Effect3StatsKeys)[:zb0007]
-			} else {
-				z.Effect3StatsKeys = make([]int, zb0007)
-			}
-			for za0006 := range z.Effect3StatsKeys {
-				z.Effect3StatsKeys[za0006], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "Effect3StatsKeys", za0006)
-					return
-				}
-			}
-		case "Effect3Values":
-			var zb0008 uint32
-			zb0008, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "Effect3Values")
-				return
-			}
-			if cap(z.Effect3Values) >= int(zb0008) {
-				z.Effect3Values = (z.Effect3Values)[:zb0008]
-			} else {
-				z.Effect3Values = make([]int, zb0008)
-			}
-			for za0007 := range z.Effect3Values {
-				z.Effect3Values[za0007], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "Effect3Values", za0007)
-					return
-				}
-			}
-		case "Effect4StatsKeys":
-			var zb0009 uint32
-			zb0009, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "Effect4StatsKeys")
-				return
-			}
-			if cap(z.Effect4StatsKeys) >= int(zb0009) {
-				z.Effect4StatsKeys = (z.Effect4StatsKeys)[:zb0009]
-			} else {
-				z.Effect4StatsKeys = make([]int, zb0009)
-			}
-			for za0008 := range z.Effect4StatsKeys {
-				z.Effect4StatsKeys[za0008], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "Effect4StatsKeys", za0008)
-					return
-				}
-			}
-		case "Effect4Values":
-			var zb0010 uint32
-			zb0010, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "Effect4Values")
-				return
-			}
-			if cap(z.Effect4Values) >= int(zb0010) {
-				z.Effect4Values = (z.Effect4Values)[:zb0010]
-			} else {
-				z.Effect4Values = make([]int, zb0010)
-			}
-			for za0009 := range z.Effect4Values {
-				z.Effect4Values[za0009], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "Effect4Values", za0009)
-					return
-				}
-			}
-		case "GodName1":
-			z.GodName1, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "GodName1")
-				return
-			}
-		case "GodName2":
-			z.GodName2, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "GodName2")
-				return
-			}
-		case "GodName3":
-			z.GodName3, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "GodName3")
-				return
-			}
-		case "GodName4":
-			z.GodName4, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "GodName4")
+				err = msgp.WrapError(err, "SelectionImage")
 				return
 			}
 		case "ID":
@@ -18425,16 +18592,199 @@ func (z *PantheonPanelLayout) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "ID")
 				return
 			}
-		case "IsDisabled":
-			z.IsDisabled, err = dc.ReadBool()
+		case "GodName4":
+			z.GodName4, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "IsDisabled")
+				err = msgp.WrapError(err, "GodName4")
 				return
 			}
-		case "IsMajorGod":
-			z.IsMajorGod, err = dc.ReadBool()
+		case "GodName3":
+			z.GodName3, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "IsMajorGod")
+				err = msgp.WrapError(err, "GodName3")
+				return
+			}
+		case "GodName2":
+			z.GodName2, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "GodName2")
+				return
+			}
+		case "Effect3StatsKeys":
+			var zb0002 uint32
+			zb0002, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Effect3StatsKeys")
+				return
+			}
+			if cap(z.Effect3StatsKeys) >= int(zb0002) {
+				z.Effect3StatsKeys = (z.Effect3StatsKeys)[:zb0002]
+			} else {
+				z.Effect3StatsKeys = make([]int, zb0002)
+			}
+			for za0001 := range z.Effect3StatsKeys {
+				z.Effect3StatsKeys[za0001], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "Effect3StatsKeys", za0001)
+					return
+				}
+			}
+		case "Effect4StatsKeys":
+			var zb0003 uint32
+			zb0003, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Effect4StatsKeys")
+				return
+			}
+			if cap(z.Effect4StatsKeys) >= int(zb0003) {
+				z.Effect4StatsKeys = (z.Effect4StatsKeys)[:zb0003]
+			} else {
+				z.Effect4StatsKeys = make([]int, zb0003)
+			}
+			for za0002 := range z.Effect4StatsKeys {
+				z.Effect4StatsKeys[za0002], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "Effect4StatsKeys", za0002)
+					return
+				}
+			}
+		case "Effect4Values":
+			var zb0004 uint32
+			zb0004, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Effect4Values")
+				return
+			}
+			if cap(z.Effect4Values) >= int(zb0004) {
+				z.Effect4Values = (z.Effect4Values)[:zb0004]
+			} else {
+				z.Effect4Values = make([]int, zb0004)
+			}
+			for za0003 := range z.Effect4Values {
+				z.Effect4Values[za0003], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "Effect4Values", za0003)
+					return
+				}
+			}
+		case "Effect3Values":
+			var zb0005 uint32
+			zb0005, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Effect3Values")
+				return
+			}
+			if cap(z.Effect3Values) >= int(zb0005) {
+				z.Effect3Values = (z.Effect3Values)[:zb0005]
+			} else {
+				z.Effect3Values = make([]int, zb0005)
+			}
+			for za0004 := range z.Effect3Values {
+				z.Effect3Values[za0004], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "Effect3Values", za0004)
+					return
+				}
+			}
+		case "AchievementItems":
+			var zb0006 uint32
+			zb0006, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "AchievementItems")
+				return
+			}
+			if cap(z.AchievementItems) >= int(zb0006) {
+				z.AchievementItems = (z.AchievementItems)[:zb0006]
+			} else {
+				z.AchievementItems = make([]int, zb0006)
+			}
+			for za0005 := range z.AchievementItems {
+				z.AchievementItems[za0005], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "AchievementItems", za0005)
+					return
+				}
+			}
+		case "Effect2Values":
+			var zb0007 uint32
+			zb0007, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Effect2Values")
+				return
+			}
+			if cap(z.Effect2Values) >= int(zb0007) {
+				z.Effect2Values = (z.Effect2Values)[:zb0007]
+			} else {
+				z.Effect2Values = make([]int, zb0007)
+			}
+			for za0006 := range z.Effect2Values {
+				z.Effect2Values[za0006], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "Effect2Values", za0006)
+					return
+				}
+			}
+		case "Effect2StatsKeys":
+			var zb0008 uint32
+			zb0008, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Effect2StatsKeys")
+				return
+			}
+			if cap(z.Effect2StatsKeys) >= int(zb0008) {
+				z.Effect2StatsKeys = (z.Effect2StatsKeys)[:zb0008]
+			} else {
+				z.Effect2StatsKeys = make([]int, zb0008)
+			}
+			for za0007 := range z.Effect2StatsKeys {
+				z.Effect2StatsKeys[za0007], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "Effect2StatsKeys", za0007)
+					return
+				}
+			}
+		case "Effect1Values":
+			var zb0009 uint32
+			zb0009, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Effect1Values")
+				return
+			}
+			if cap(z.Effect1Values) >= int(zb0009) {
+				z.Effect1Values = (z.Effect1Values)[:zb0009]
+			} else {
+				z.Effect1Values = make([]int, zb0009)
+			}
+			for za0008 := range z.Effect1Values {
+				z.Effect1Values[za0008], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "Effect1Values", za0008)
+					return
+				}
+			}
+		case "Effect1StatsKeys":
+			var zb0010 uint32
+			zb0010, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Effect1StatsKeys")
+				return
+			}
+			if cap(z.Effect1StatsKeys) >= int(zb0010) {
+				z.Effect1StatsKeys = (z.Effect1StatsKeys)[:zb0010]
+			} else {
+				z.Effect1StatsKeys = make([]int, zb0010)
+			}
+			for za0009 := range z.Effect1StatsKeys {
+				z.Effect1StatsKeys[za0009], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "Effect1StatsKeys", za0009)
+					return
+				}
+			}
+		case "QuestState4":
+			z.QuestState4, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "QuestState4")
 				return
 			}
 		case "QuestState1":
@@ -18455,18 +18805,6 @@ func (z *PantheonPanelLayout) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "QuestState3")
 				return
 			}
-		case "QuestState4":
-			z.QuestState4, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "QuestState4")
-				return
-			}
-		case "SelectionImage":
-			z.SelectionImage, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "SelectionImage")
-				return
-			}
 		case "X":
 			z.X, err = dc.ReadInt()
 			if err != nil {
@@ -18485,6 +18823,18 @@ func (z *PantheonPanelLayout) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Key")
 				return
 			}
+		case "IsMajorGod":
+			z.IsMajorGod, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IsMajorGod")
+				return
+			}
+		case "IsDisabled":
+			z.IsDisabled, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IsDisabled")
+				return
+			}
 		default:
 			err = dc.Skip()
 			if err != nil {
@@ -18499,22 +18849,15 @@ func (z *PantheonPanelLayout) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *PantheonPanelLayout) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 25
-	// write "AchievementItems"
-	err = en.Append(0xde, 0x0, 0x19, 0xb0, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
+	// write "GodName1"
+	err = en.Append(0xde, 0x0, 0x19, 0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x31)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.AchievementItems)))
+	err = en.WriteString(z.GodName1)
 	if err != nil {
-		err = msgp.WrapError(err, "AchievementItems")
+		err = msgp.WrapError(err, "GodName1")
 		return
-	}
-	for za0001 := range z.AchievementItems {
-		err = en.WriteInt(z.AchievementItems[za0001])
-		if err != nil {
-			err = msgp.WrapError(err, "AchievementItems", za0001)
-			return
-		}
 	}
 	// write "CoverImage"
 	err = en.Append(0xaa, 0x43, 0x6f, 0x76, 0x65, 0x72, 0x49, 0x6d, 0x61, 0x67, 0x65)
@@ -18526,73 +18869,55 @@ func (z *PantheonPanelLayout) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "CoverImage")
 		return
 	}
-	// write "Effect1StatsKeys"
-	err = en.Append(0xb0, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x31, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	// write "SelectionImage"
+	err = en.Append(0xae, 0x53, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6d, 0x61, 0x67, 0x65)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.Effect1StatsKeys)))
+	err = en.WriteString(z.SelectionImage)
 	if err != nil {
-		err = msgp.WrapError(err, "Effect1StatsKeys")
+		err = msgp.WrapError(err, "SelectionImage")
 		return
 	}
-	for za0002 := range z.Effect1StatsKeys {
-		err = en.WriteInt(z.Effect1StatsKeys[za0002])
-		if err != nil {
-			err = msgp.WrapError(err, "Effect1StatsKeys", za0002)
-			return
-		}
-	}
-	// write "Effect1Values"
-	err = en.Append(0xad, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x31, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
+	// write "ID"
+	err = en.Append(0xa2, 0x49, 0x44)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.Effect1Values)))
+	err = en.WriteString(z.ID)
 	if err != nil {
-		err = msgp.WrapError(err, "Effect1Values")
+		err = msgp.WrapError(err, "ID")
 		return
 	}
-	for za0003 := range z.Effect1Values {
-		err = en.WriteInt(z.Effect1Values[za0003])
-		if err != nil {
-			err = msgp.WrapError(err, "Effect1Values", za0003)
-			return
-		}
-	}
-	// write "Effect2StatsKeys"
-	err = en.Append(0xb0, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x32, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	// write "GodName4"
+	err = en.Append(0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x34)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.Effect2StatsKeys)))
+	err = en.WriteString(z.GodName4)
 	if err != nil {
-		err = msgp.WrapError(err, "Effect2StatsKeys")
+		err = msgp.WrapError(err, "GodName4")
 		return
 	}
-	for za0004 := range z.Effect2StatsKeys {
-		err = en.WriteInt(z.Effect2StatsKeys[za0004])
-		if err != nil {
-			err = msgp.WrapError(err, "Effect2StatsKeys", za0004)
-			return
-		}
-	}
-	// write "Effect2Values"
-	err = en.Append(0xad, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x32, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
+	// write "GodName3"
+	err = en.Append(0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x33)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.Effect2Values)))
+	err = en.WriteString(z.GodName3)
 	if err != nil {
-		err = msgp.WrapError(err, "Effect2Values")
+		err = msgp.WrapError(err, "GodName3")
 		return
 	}
-	for za0005 := range z.Effect2Values {
-		err = en.WriteInt(z.Effect2Values[za0005])
-		if err != nil {
-			err = msgp.WrapError(err, "Effect2Values", za0005)
-			return
-		}
+	// write "GodName2"
+	err = en.Append(0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x32)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.GodName2)
+	if err != nil {
+		err = msgp.WrapError(err, "GodName2")
+		return
 	}
 	// write "Effect3StatsKeys"
 	err = en.Append(0xb0, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x33, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
@@ -18604,27 +18929,10 @@ func (z *PantheonPanelLayout) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Effect3StatsKeys")
 		return
 	}
-	for za0006 := range z.Effect3StatsKeys {
-		err = en.WriteInt(z.Effect3StatsKeys[za0006])
+	for za0001 := range z.Effect3StatsKeys {
+		err = en.WriteInt(z.Effect3StatsKeys[za0001])
 		if err != nil {
-			err = msgp.WrapError(err, "Effect3StatsKeys", za0006)
-			return
-		}
-	}
-	// write "Effect3Values"
-	err = en.Append(0xad, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x33, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.Effect3Values)))
-	if err != nil {
-		err = msgp.WrapError(err, "Effect3Values")
-		return
-	}
-	for za0007 := range z.Effect3Values {
-		err = en.WriteInt(z.Effect3Values[za0007])
-		if err != nil {
-			err = msgp.WrapError(err, "Effect3Values", za0007)
+			err = msgp.WrapError(err, "Effect3StatsKeys", za0001)
 			return
 		}
 	}
@@ -18638,10 +18946,10 @@ func (z *PantheonPanelLayout) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Effect4StatsKeys")
 		return
 	}
-	for za0008 := range z.Effect4StatsKeys {
-		err = en.WriteInt(z.Effect4StatsKeys[za0008])
+	for za0002 := range z.Effect4StatsKeys {
+		err = en.WriteInt(z.Effect4StatsKeys[za0002])
 		if err != nil {
-			err = msgp.WrapError(err, "Effect4StatsKeys", za0008)
+			err = msgp.WrapError(err, "Effect4StatsKeys", za0002)
 			return
 		}
 	}
@@ -18655,81 +18963,123 @@ func (z *PantheonPanelLayout) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Effect4Values")
 		return
 	}
-	for za0009 := range z.Effect4Values {
-		err = en.WriteInt(z.Effect4Values[za0009])
+	for za0003 := range z.Effect4Values {
+		err = en.WriteInt(z.Effect4Values[za0003])
 		if err != nil {
-			err = msgp.WrapError(err, "Effect4Values", za0009)
+			err = msgp.WrapError(err, "Effect4Values", za0003)
 			return
 		}
 	}
-	// write "GodName1"
-	err = en.Append(0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x31)
+	// write "Effect3Values"
+	err = en.Append(0xad, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x33, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.GodName1)
+	err = en.WriteArrayHeader(uint32(len(z.Effect3Values)))
 	if err != nil {
-		err = msgp.WrapError(err, "GodName1")
+		err = msgp.WrapError(err, "Effect3Values")
 		return
 	}
-	// write "GodName2"
-	err = en.Append(0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x32)
-	if err != nil {
-		return
+	for za0004 := range z.Effect3Values {
+		err = en.WriteInt(z.Effect3Values[za0004])
+		if err != nil {
+			err = msgp.WrapError(err, "Effect3Values", za0004)
+			return
+		}
 	}
-	err = en.WriteString(z.GodName2)
-	if err != nil {
-		err = msgp.WrapError(err, "GodName2")
-		return
-	}
-	// write "GodName3"
-	err = en.Append(0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x33)
+	// write "AchievementItems"
+	err = en.Append(0xb0, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.GodName3)
+	err = en.WriteArrayHeader(uint32(len(z.AchievementItems)))
 	if err != nil {
-		err = msgp.WrapError(err, "GodName3")
+		err = msgp.WrapError(err, "AchievementItems")
 		return
 	}
-	// write "GodName4"
-	err = en.Append(0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x34)
-	if err != nil {
-		return
+	for za0005 := range z.AchievementItems {
+		err = en.WriteInt(z.AchievementItems[za0005])
+		if err != nil {
+			err = msgp.WrapError(err, "AchievementItems", za0005)
+			return
+		}
 	}
-	err = en.WriteString(z.GodName4)
-	if err != nil {
-		err = msgp.WrapError(err, "GodName4")
-		return
-	}
-	// write "ID"
-	err = en.Append(0xa2, 0x49, 0x44)
+	// write "Effect2Values"
+	err = en.Append(0xad, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x32, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.ID)
+	err = en.WriteArrayHeader(uint32(len(z.Effect2Values)))
 	if err != nil {
-		err = msgp.WrapError(err, "ID")
+		err = msgp.WrapError(err, "Effect2Values")
 		return
 	}
-	// write "IsDisabled"
-	err = en.Append(0xaa, 0x49, 0x73, 0x44, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64)
-	if err != nil {
-		return
+	for za0006 := range z.Effect2Values {
+		err = en.WriteInt(z.Effect2Values[za0006])
+		if err != nil {
+			err = msgp.WrapError(err, "Effect2Values", za0006)
+			return
+		}
 	}
-	err = en.WriteBool(z.IsDisabled)
-	if err != nil {
-		err = msgp.WrapError(err, "IsDisabled")
-		return
-	}
-	// write "IsMajorGod"
-	err = en.Append(0xaa, 0x49, 0x73, 0x4d, 0x61, 0x6a, 0x6f, 0x72, 0x47, 0x6f, 0x64)
+	// write "Effect2StatsKeys"
+	err = en.Append(0xb0, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x32, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
 	if err != nil {
 		return
 	}
-	err = en.WriteBool(z.IsMajorGod)
+	err = en.WriteArrayHeader(uint32(len(z.Effect2StatsKeys)))
 	if err != nil {
-		err = msgp.WrapError(err, "IsMajorGod")
+		err = msgp.WrapError(err, "Effect2StatsKeys")
+		return
+	}
+	for za0007 := range z.Effect2StatsKeys {
+		err = en.WriteInt(z.Effect2StatsKeys[za0007])
+		if err != nil {
+			err = msgp.WrapError(err, "Effect2StatsKeys", za0007)
+			return
+		}
+	}
+	// write "Effect1Values"
+	err = en.Append(0xad, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x31, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Effect1Values)))
+	if err != nil {
+		err = msgp.WrapError(err, "Effect1Values")
+		return
+	}
+	for za0008 := range z.Effect1Values {
+		err = en.WriteInt(z.Effect1Values[za0008])
+		if err != nil {
+			err = msgp.WrapError(err, "Effect1Values", za0008)
+			return
+		}
+	}
+	// write "Effect1StatsKeys"
+	err = en.Append(0xb0, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x31, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Effect1StatsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "Effect1StatsKeys")
+		return
+	}
+	for za0009 := range z.Effect1StatsKeys {
+		err = en.WriteInt(z.Effect1StatsKeys[za0009])
+		if err != nil {
+			err = msgp.WrapError(err, "Effect1StatsKeys", za0009)
+			return
+		}
+	}
+	// write "QuestState4"
+	err = en.Append(0xab, 0x51, 0x75, 0x65, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x65, 0x34)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.QuestState4)
+	if err != nil {
+		err = msgp.WrapError(err, "QuestState4")
 		return
 	}
 	// write "QuestState1"
@@ -18762,26 +19112,6 @@ func (z *PantheonPanelLayout) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "QuestState3")
 		return
 	}
-	// write "QuestState4"
-	err = en.Append(0xab, 0x51, 0x75, 0x65, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x65, 0x34)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.QuestState4)
-	if err != nil {
-		err = msgp.WrapError(err, "QuestState4")
-		return
-	}
-	// write "SelectionImage"
-	err = en.Append(0xae, 0x53, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6d, 0x61, 0x67, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.SelectionImage)
-	if err != nil {
-		err = msgp.WrapError(err, "SelectionImage")
-		return
-	}
 	// write "X"
 	err = en.Append(0xa1, 0x58)
 	if err != nil {
@@ -18812,6 +19142,26 @@ func (z *PantheonPanelLayout) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Key")
 		return
 	}
+	// write "IsMajorGod"
+	err = en.Append(0xaa, 0x49, 0x73, 0x4d, 0x61, 0x6a, 0x6f, 0x72, 0x47, 0x6f, 0x64)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IsMajorGod)
+	if err != nil {
+		err = msgp.WrapError(err, "IsMajorGod")
+		return
+	}
+	// write "IsDisabled"
+	err = en.Append(0xaa, 0x49, 0x73, 0x44, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IsDisabled)
+	if err != nil {
+		err = msgp.WrapError(err, "IsDisabled")
+		return
+	}
 	return
 }
 
@@ -18819,84 +19169,84 @@ func (z *PantheonPanelLayout) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *PantheonPanelLayout) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 25
-	// string "AchievementItems"
-	o = append(o, 0xde, 0x0, 0x19, 0xb0, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.AchievementItems)))
-	for za0001 := range z.AchievementItems {
-		o = msgp.AppendInt(o, z.AchievementItems[za0001])
-	}
+	// string "GodName1"
+	o = append(o, 0xde, 0x0, 0x19, 0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x31)
+	o = msgp.AppendString(o, z.GodName1)
 	// string "CoverImage"
 	o = append(o, 0xaa, 0x43, 0x6f, 0x76, 0x65, 0x72, 0x49, 0x6d, 0x61, 0x67, 0x65)
 	o = msgp.AppendString(o, z.CoverImage)
-	// string "Effect1StatsKeys"
-	o = append(o, 0xb0, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x31, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.Effect1StatsKeys)))
-	for za0002 := range z.Effect1StatsKeys {
-		o = msgp.AppendInt(o, z.Effect1StatsKeys[za0002])
-	}
-	// string "Effect1Values"
-	o = append(o, 0xad, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x31, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.Effect1Values)))
-	for za0003 := range z.Effect1Values {
-		o = msgp.AppendInt(o, z.Effect1Values[za0003])
-	}
-	// string "Effect2StatsKeys"
-	o = append(o, 0xb0, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x32, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.Effect2StatsKeys)))
-	for za0004 := range z.Effect2StatsKeys {
-		o = msgp.AppendInt(o, z.Effect2StatsKeys[za0004])
-	}
-	// string "Effect2Values"
-	o = append(o, 0xad, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x32, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.Effect2Values)))
-	for za0005 := range z.Effect2Values {
-		o = msgp.AppendInt(o, z.Effect2Values[za0005])
-	}
+	// string "SelectionImage"
+	o = append(o, 0xae, 0x53, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6d, 0x61, 0x67, 0x65)
+	o = msgp.AppendString(o, z.SelectionImage)
+	// string "ID"
+	o = append(o, 0xa2, 0x49, 0x44)
+	o = msgp.AppendString(o, z.ID)
+	// string "GodName4"
+	o = append(o, 0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x34)
+	o = msgp.AppendString(o, z.GodName4)
+	// string "GodName3"
+	o = append(o, 0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x33)
+	o = msgp.AppendString(o, z.GodName3)
+	// string "GodName2"
+	o = append(o, 0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x32)
+	o = msgp.AppendString(o, z.GodName2)
 	// string "Effect3StatsKeys"
 	o = append(o, 0xb0, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x33, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.Effect3StatsKeys)))
-	for za0006 := range z.Effect3StatsKeys {
-		o = msgp.AppendInt(o, z.Effect3StatsKeys[za0006])
-	}
-	// string "Effect3Values"
-	o = append(o, 0xad, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x33, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.Effect3Values)))
-	for za0007 := range z.Effect3Values {
-		o = msgp.AppendInt(o, z.Effect3Values[za0007])
+	for za0001 := range z.Effect3StatsKeys {
+		o = msgp.AppendInt(o, z.Effect3StatsKeys[za0001])
 	}
 	// string "Effect4StatsKeys"
 	o = append(o, 0xb0, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x34, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.Effect4StatsKeys)))
-	for za0008 := range z.Effect4StatsKeys {
-		o = msgp.AppendInt(o, z.Effect4StatsKeys[za0008])
+	for za0002 := range z.Effect4StatsKeys {
+		o = msgp.AppendInt(o, z.Effect4StatsKeys[za0002])
 	}
 	// string "Effect4Values"
 	o = append(o, 0xad, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.Effect4Values)))
-	for za0009 := range z.Effect4Values {
-		o = msgp.AppendInt(o, z.Effect4Values[za0009])
+	for za0003 := range z.Effect4Values {
+		o = msgp.AppendInt(o, z.Effect4Values[za0003])
 	}
-	// string "GodName1"
-	o = append(o, 0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x31)
-	o = msgp.AppendString(o, z.GodName1)
-	// string "GodName2"
-	o = append(o, 0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x32)
-	o = msgp.AppendString(o, z.GodName2)
-	// string "GodName3"
-	o = append(o, 0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x33)
-	o = msgp.AppendString(o, z.GodName3)
-	// string "GodName4"
-	o = append(o, 0xa8, 0x47, 0x6f, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x34)
-	o = msgp.AppendString(o, z.GodName4)
-	// string "ID"
-	o = append(o, 0xa2, 0x49, 0x44)
-	o = msgp.AppendString(o, z.ID)
-	// string "IsDisabled"
-	o = append(o, 0xaa, 0x49, 0x73, 0x44, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64)
-	o = msgp.AppendBool(o, z.IsDisabled)
-	// string "IsMajorGod"
-	o = append(o, 0xaa, 0x49, 0x73, 0x4d, 0x61, 0x6a, 0x6f, 0x72, 0x47, 0x6f, 0x64)
-	o = msgp.AppendBool(o, z.IsMajorGod)
+	// string "Effect3Values"
+	o = append(o, 0xad, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x33, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Effect3Values)))
+	for za0004 := range z.Effect3Values {
+		o = msgp.AppendInt(o, z.Effect3Values[za0004])
+	}
+	// string "AchievementItems"
+	o = append(o, 0xb0, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.AchievementItems)))
+	for za0005 := range z.AchievementItems {
+		o = msgp.AppendInt(o, z.AchievementItems[za0005])
+	}
+	// string "Effect2Values"
+	o = append(o, 0xad, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x32, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Effect2Values)))
+	for za0006 := range z.Effect2Values {
+		o = msgp.AppendInt(o, z.Effect2Values[za0006])
+	}
+	// string "Effect2StatsKeys"
+	o = append(o, 0xb0, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x32, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Effect2StatsKeys)))
+	for za0007 := range z.Effect2StatsKeys {
+		o = msgp.AppendInt(o, z.Effect2StatsKeys[za0007])
+	}
+	// string "Effect1Values"
+	o = append(o, 0xad, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x31, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Effect1Values)))
+	for za0008 := range z.Effect1Values {
+		o = msgp.AppendInt(o, z.Effect1Values[za0008])
+	}
+	// string "Effect1StatsKeys"
+	o = append(o, 0xb0, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x31, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Effect1StatsKeys)))
+	for za0009 := range z.Effect1StatsKeys {
+		o = msgp.AppendInt(o, z.Effect1StatsKeys[za0009])
+	}
+	// string "QuestState4"
+	o = append(o, 0xab, 0x51, 0x75, 0x65, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x65, 0x34)
+	o = msgp.AppendInt(o, z.QuestState4)
 	// string "QuestState1"
 	o = append(o, 0xab, 0x51, 0x75, 0x65, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x65, 0x31)
 	o = msgp.AppendInt(o, z.QuestState1)
@@ -18906,12 +19256,6 @@ func (z *PantheonPanelLayout) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "QuestState3"
 	o = append(o, 0xab, 0x51, 0x75, 0x65, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x65, 0x33)
 	o = msgp.AppendInt(o, z.QuestState3)
-	// string "QuestState4"
-	o = append(o, 0xab, 0x51, 0x75, 0x65, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x65, 0x34)
-	o = msgp.AppendInt(o, z.QuestState4)
-	// string "SelectionImage"
-	o = append(o, 0xae, 0x53, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6d, 0x61, 0x67, 0x65)
-	o = msgp.AppendString(o, z.SelectionImage)
 	// string "X"
 	o = append(o, 0xa1, 0x58)
 	o = msgp.AppendInt(o, z.X)
@@ -18921,6 +19265,12 @@ func (z *PantheonPanelLayout) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
+	// string "IsMajorGod"
+	o = append(o, 0xaa, 0x49, 0x73, 0x4d, 0x61, 0x6a, 0x6f, 0x72, 0x47, 0x6f, 0x64)
+	o = msgp.AppendBool(o, z.IsMajorGod)
+	// string "IsDisabled"
+	o = append(o, 0xaa, 0x49, 0x73, 0x44, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64)
+	o = msgp.AppendBool(o, z.IsDisabled)
 	return
 }
 
@@ -18942,24 +19292,11 @@ func (z *PantheonPanelLayout) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "AchievementItems":
-			var zb0002 uint32
-			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+		case "GodName1":
+			z.GodName1, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "AchievementItems")
+				err = msgp.WrapError(err, "GodName1")
 				return
-			}
-			if cap(z.AchievementItems) >= int(zb0002) {
-				z.AchievementItems = (z.AchievementItems)[:zb0002]
-			} else {
-				z.AchievementItems = make([]int, zb0002)
-			}
-			for za0001 := range z.AchievementItems {
-				z.AchievementItems[za0001], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "AchievementItems", za0001)
-					return
-				}
 			}
 		case "CoverImage":
 			z.CoverImage, bts, err = msgp.ReadStringBytes(bts)
@@ -18967,180 +19304,10 @@ func (z *PantheonPanelLayout) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "CoverImage")
 				return
 			}
-		case "Effect1StatsKeys":
-			var zb0003 uint32
-			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+		case "SelectionImage":
+			z.SelectionImage, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Effect1StatsKeys")
-				return
-			}
-			if cap(z.Effect1StatsKeys) >= int(zb0003) {
-				z.Effect1StatsKeys = (z.Effect1StatsKeys)[:zb0003]
-			} else {
-				z.Effect1StatsKeys = make([]int, zb0003)
-			}
-			for za0002 := range z.Effect1StatsKeys {
-				z.Effect1StatsKeys[za0002], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Effect1StatsKeys", za0002)
-					return
-				}
-			}
-		case "Effect1Values":
-			var zb0004 uint32
-			zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Effect1Values")
-				return
-			}
-			if cap(z.Effect1Values) >= int(zb0004) {
-				z.Effect1Values = (z.Effect1Values)[:zb0004]
-			} else {
-				z.Effect1Values = make([]int, zb0004)
-			}
-			for za0003 := range z.Effect1Values {
-				z.Effect1Values[za0003], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Effect1Values", za0003)
-					return
-				}
-			}
-		case "Effect2StatsKeys":
-			var zb0005 uint32
-			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Effect2StatsKeys")
-				return
-			}
-			if cap(z.Effect2StatsKeys) >= int(zb0005) {
-				z.Effect2StatsKeys = (z.Effect2StatsKeys)[:zb0005]
-			} else {
-				z.Effect2StatsKeys = make([]int, zb0005)
-			}
-			for za0004 := range z.Effect2StatsKeys {
-				z.Effect2StatsKeys[za0004], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Effect2StatsKeys", za0004)
-					return
-				}
-			}
-		case "Effect2Values":
-			var zb0006 uint32
-			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Effect2Values")
-				return
-			}
-			if cap(z.Effect2Values) >= int(zb0006) {
-				z.Effect2Values = (z.Effect2Values)[:zb0006]
-			} else {
-				z.Effect2Values = make([]int, zb0006)
-			}
-			for za0005 := range z.Effect2Values {
-				z.Effect2Values[za0005], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Effect2Values", za0005)
-					return
-				}
-			}
-		case "Effect3StatsKeys":
-			var zb0007 uint32
-			zb0007, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Effect3StatsKeys")
-				return
-			}
-			if cap(z.Effect3StatsKeys) >= int(zb0007) {
-				z.Effect3StatsKeys = (z.Effect3StatsKeys)[:zb0007]
-			} else {
-				z.Effect3StatsKeys = make([]int, zb0007)
-			}
-			for za0006 := range z.Effect3StatsKeys {
-				z.Effect3StatsKeys[za0006], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Effect3StatsKeys", za0006)
-					return
-				}
-			}
-		case "Effect3Values":
-			var zb0008 uint32
-			zb0008, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Effect3Values")
-				return
-			}
-			if cap(z.Effect3Values) >= int(zb0008) {
-				z.Effect3Values = (z.Effect3Values)[:zb0008]
-			} else {
-				z.Effect3Values = make([]int, zb0008)
-			}
-			for za0007 := range z.Effect3Values {
-				z.Effect3Values[za0007], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Effect3Values", za0007)
-					return
-				}
-			}
-		case "Effect4StatsKeys":
-			var zb0009 uint32
-			zb0009, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Effect4StatsKeys")
-				return
-			}
-			if cap(z.Effect4StatsKeys) >= int(zb0009) {
-				z.Effect4StatsKeys = (z.Effect4StatsKeys)[:zb0009]
-			} else {
-				z.Effect4StatsKeys = make([]int, zb0009)
-			}
-			for za0008 := range z.Effect4StatsKeys {
-				z.Effect4StatsKeys[za0008], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Effect4StatsKeys", za0008)
-					return
-				}
-			}
-		case "Effect4Values":
-			var zb0010 uint32
-			zb0010, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Effect4Values")
-				return
-			}
-			if cap(z.Effect4Values) >= int(zb0010) {
-				z.Effect4Values = (z.Effect4Values)[:zb0010]
-			} else {
-				z.Effect4Values = make([]int, zb0010)
-			}
-			for za0009 := range z.Effect4Values {
-				z.Effect4Values[za0009], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Effect4Values", za0009)
-					return
-				}
-			}
-		case "GodName1":
-			z.GodName1, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "GodName1")
-				return
-			}
-		case "GodName2":
-			z.GodName2, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "GodName2")
-				return
-			}
-		case "GodName3":
-			z.GodName3, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "GodName3")
-				return
-			}
-		case "GodName4":
-			z.GodName4, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "GodName4")
+				err = msgp.WrapError(err, "SelectionImage")
 				return
 			}
 		case "ID":
@@ -19149,16 +19316,199 @@ func (z *PantheonPanelLayout) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "ID")
 				return
 			}
-		case "IsDisabled":
-			z.IsDisabled, bts, err = msgp.ReadBoolBytes(bts)
+		case "GodName4":
+			z.GodName4, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "IsDisabled")
+				err = msgp.WrapError(err, "GodName4")
 				return
 			}
-		case "IsMajorGod":
-			z.IsMajorGod, bts, err = msgp.ReadBoolBytes(bts)
+		case "GodName3":
+			z.GodName3, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "IsMajorGod")
+				err = msgp.WrapError(err, "GodName3")
+				return
+			}
+		case "GodName2":
+			z.GodName2, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "GodName2")
+				return
+			}
+		case "Effect3StatsKeys":
+			var zb0002 uint32
+			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Effect3StatsKeys")
+				return
+			}
+			if cap(z.Effect3StatsKeys) >= int(zb0002) {
+				z.Effect3StatsKeys = (z.Effect3StatsKeys)[:zb0002]
+			} else {
+				z.Effect3StatsKeys = make([]int, zb0002)
+			}
+			for za0001 := range z.Effect3StatsKeys {
+				z.Effect3StatsKeys[za0001], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Effect3StatsKeys", za0001)
+					return
+				}
+			}
+		case "Effect4StatsKeys":
+			var zb0003 uint32
+			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Effect4StatsKeys")
+				return
+			}
+			if cap(z.Effect4StatsKeys) >= int(zb0003) {
+				z.Effect4StatsKeys = (z.Effect4StatsKeys)[:zb0003]
+			} else {
+				z.Effect4StatsKeys = make([]int, zb0003)
+			}
+			for za0002 := range z.Effect4StatsKeys {
+				z.Effect4StatsKeys[za0002], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Effect4StatsKeys", za0002)
+					return
+				}
+			}
+		case "Effect4Values":
+			var zb0004 uint32
+			zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Effect4Values")
+				return
+			}
+			if cap(z.Effect4Values) >= int(zb0004) {
+				z.Effect4Values = (z.Effect4Values)[:zb0004]
+			} else {
+				z.Effect4Values = make([]int, zb0004)
+			}
+			for za0003 := range z.Effect4Values {
+				z.Effect4Values[za0003], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Effect4Values", za0003)
+					return
+				}
+			}
+		case "Effect3Values":
+			var zb0005 uint32
+			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Effect3Values")
+				return
+			}
+			if cap(z.Effect3Values) >= int(zb0005) {
+				z.Effect3Values = (z.Effect3Values)[:zb0005]
+			} else {
+				z.Effect3Values = make([]int, zb0005)
+			}
+			for za0004 := range z.Effect3Values {
+				z.Effect3Values[za0004], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Effect3Values", za0004)
+					return
+				}
+			}
+		case "AchievementItems":
+			var zb0006 uint32
+			zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AchievementItems")
+				return
+			}
+			if cap(z.AchievementItems) >= int(zb0006) {
+				z.AchievementItems = (z.AchievementItems)[:zb0006]
+			} else {
+				z.AchievementItems = make([]int, zb0006)
+			}
+			for za0005 := range z.AchievementItems {
+				z.AchievementItems[za0005], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "AchievementItems", za0005)
+					return
+				}
+			}
+		case "Effect2Values":
+			var zb0007 uint32
+			zb0007, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Effect2Values")
+				return
+			}
+			if cap(z.Effect2Values) >= int(zb0007) {
+				z.Effect2Values = (z.Effect2Values)[:zb0007]
+			} else {
+				z.Effect2Values = make([]int, zb0007)
+			}
+			for za0006 := range z.Effect2Values {
+				z.Effect2Values[za0006], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Effect2Values", za0006)
+					return
+				}
+			}
+		case "Effect2StatsKeys":
+			var zb0008 uint32
+			zb0008, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Effect2StatsKeys")
+				return
+			}
+			if cap(z.Effect2StatsKeys) >= int(zb0008) {
+				z.Effect2StatsKeys = (z.Effect2StatsKeys)[:zb0008]
+			} else {
+				z.Effect2StatsKeys = make([]int, zb0008)
+			}
+			for za0007 := range z.Effect2StatsKeys {
+				z.Effect2StatsKeys[za0007], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Effect2StatsKeys", za0007)
+					return
+				}
+			}
+		case "Effect1Values":
+			var zb0009 uint32
+			zb0009, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Effect1Values")
+				return
+			}
+			if cap(z.Effect1Values) >= int(zb0009) {
+				z.Effect1Values = (z.Effect1Values)[:zb0009]
+			} else {
+				z.Effect1Values = make([]int, zb0009)
+			}
+			for za0008 := range z.Effect1Values {
+				z.Effect1Values[za0008], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Effect1Values", za0008)
+					return
+				}
+			}
+		case "Effect1StatsKeys":
+			var zb0010 uint32
+			zb0010, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Effect1StatsKeys")
+				return
+			}
+			if cap(z.Effect1StatsKeys) >= int(zb0010) {
+				z.Effect1StatsKeys = (z.Effect1StatsKeys)[:zb0010]
+			} else {
+				z.Effect1StatsKeys = make([]int, zb0010)
+			}
+			for za0009 := range z.Effect1StatsKeys {
+				z.Effect1StatsKeys[za0009], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Effect1StatsKeys", za0009)
+					return
+				}
+			}
+		case "QuestState4":
+			z.QuestState4, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "QuestState4")
 				return
 			}
 		case "QuestState1":
@@ -19179,18 +19529,6 @@ func (z *PantheonPanelLayout) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "QuestState3")
 				return
 			}
-		case "QuestState4":
-			z.QuestState4, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "QuestState4")
-				return
-			}
-		case "SelectionImage":
-			z.SelectionImage, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "SelectionImage")
-				return
-			}
 		case "X":
 			z.X, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
@@ -19209,6 +19547,18 @@ func (z *PantheonPanelLayout) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Key")
 				return
 			}
+		case "IsMajorGod":
+			z.IsMajorGod, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IsMajorGod")
+				return
+			}
+		case "IsDisabled":
+			z.IsDisabled, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IsDisabled")
+				return
+			}
 		default:
 			bts, err = msgp.Skip(bts)
 			if err != nil {
@@ -19223,7 +19573,7 @@ func (z *PantheonPanelLayout) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *PantheonPanelLayout) Msgsize() (s int) {
-	s = 3 + 17 + msgp.ArrayHeaderSize + (len(z.AchievementItems) * (msgp.IntSize)) + 11 + msgp.StringPrefixSize + len(z.CoverImage) + 17 + msgp.ArrayHeaderSize + (len(z.Effect1StatsKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.Effect1Values) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.Effect2StatsKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.Effect2Values) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.Effect3StatsKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.Effect3Values) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.Effect4StatsKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.Effect4Values) * (msgp.IntSize)) + 9 + msgp.StringPrefixSize + len(z.GodName1) + 9 + msgp.StringPrefixSize + len(z.GodName2) + 9 + msgp.StringPrefixSize + len(z.GodName3) + 9 + msgp.StringPrefixSize + len(z.GodName4) + 3 + msgp.StringPrefixSize + len(z.ID) + 11 + msgp.BoolSize + 11 + msgp.BoolSize + 12 + msgp.IntSize + 12 + msgp.IntSize + 12 + msgp.IntSize + 12 + msgp.IntSize + 15 + msgp.StringPrefixSize + len(z.SelectionImage) + 2 + msgp.IntSize + 2 + msgp.IntSize + 4 + msgp.IntSize
+	s = 3 + 9 + msgp.StringPrefixSize + len(z.GodName1) + 11 + msgp.StringPrefixSize + len(z.CoverImage) + 15 + msgp.StringPrefixSize + len(z.SelectionImage) + 3 + msgp.StringPrefixSize + len(z.ID) + 9 + msgp.StringPrefixSize + len(z.GodName4) + 9 + msgp.StringPrefixSize + len(z.GodName3) + 9 + msgp.StringPrefixSize + len(z.GodName2) + 17 + msgp.ArrayHeaderSize + (len(z.Effect3StatsKeys) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.Effect4StatsKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.Effect4Values) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.Effect3Values) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.AchievementItems) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.Effect2Values) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.Effect2StatsKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.Effect1Values) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.Effect1StatsKeys) * (msgp.IntSize)) + 12 + msgp.IntSize + 12 + msgp.IntSize + 12 + msgp.IntSize + 12 + msgp.IntSize + 2 + msgp.IntSize + 2 + msgp.IntSize + 4 + msgp.IntSize + 11 + msgp.BoolSize + 11 + msgp.BoolSize
 	return
 }
 
@@ -19245,223 +19595,21 @@ func (z *PassiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "ID":
-			z.ID, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "ID")
-				return
-			}
-		case "Icon":
-			z.Icon, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "Icon")
-				return
-			}
-		case "Stats":
-			var zb0002 uint32
-			zb0002, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "Stats")
-				return
-			}
-			if cap(z.Stats) >= int(zb0002) {
-				z.Stats = (z.Stats)[:zb0002]
-			} else {
-				z.Stats = make([]int64, zb0002)
-			}
-			for za0001 := range z.Stats {
-				z.Stats[za0001], err = dc.ReadInt64()
-				if err != nil {
-					err = msgp.WrapError(err, "Stats", za0001)
-					return
-				}
-			}
-		case "Stat1":
-			z.Stat1, err = dc.ReadInt64()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat1")
-				return
-			}
-		case "Stat2":
-			z.Stat2, err = dc.ReadInt64()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat2")
-				return
-			}
-		case "Stat3":
-			z.Stat3, err = dc.ReadInt64()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat3")
-				return
-			}
-		case "Stat4":
-			z.Stat4, err = dc.ReadInt64()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat4")
-				return
-			}
-		case "Hash":
-			z.Hash, err = dc.ReadInt64()
-			if err != nil {
-				err = msgp.WrapError(err, "Hash")
-				return
-			}
-		case "Name":
-			z.Name, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "Name")
-				return
-			}
-		case "ClassStart":
-			var zb0003 uint32
-			zb0003, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "ClassStart")
-				return
-			}
-			if cap(z.ClassStart) >= int(zb0003) {
-				z.ClassStart = (z.ClassStart)[:zb0003]
-			} else {
-				z.ClassStart = make([]int64, zb0003)
-			}
-			for za0002 := range z.ClassStart {
-				z.ClassStart[za0002], err = dc.ReadInt64()
-				if err != nil {
-					err = msgp.WrapError(err, "ClassStart", za0002)
-					return
-				}
-			}
-		case "Keystone":
-			z.Keystone, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "Keystone")
-				return
-			}
-		case "Notable":
-			z.Notable, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "Notable")
-				return
-			}
-		case "Flavour":
-			z.Flavour, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "Flavour")
-				return
-			}
-		case "Mastery":
-			z.Mastery, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "Mastery")
-				return
-			}
-		case "Achievement":
+		case "MasteryGroup":
 			if dc.IsNil() {
 				err = dc.ReadNil()
 				if err != nil {
-					err = msgp.WrapError(err, "Achievement")
+					err = msgp.WrapError(err, "MasteryGroup")
 					return
 				}
-				z.Achievement = nil
+				z.MasteryGroup = nil
 			} else {
-				if z.Achievement == nil {
-					z.Achievement = new(int64)
+				if z.MasteryGroup == nil {
+					z.MasteryGroup = new(int64)
 				}
-				*z.Achievement, err = dc.ReadInt64()
+				*z.MasteryGroup, err = dc.ReadInt64()
 				if err != nil {
-					err = msgp.WrapError(err, "Achievement")
-					return
-				}
-			}
-		case "JewelSocket":
-			z.JewelSocket, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "JewelSocket")
-				return
-			}
-		case "Ascendancy":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "Ascendancy")
-					return
-				}
-				z.Ascendancy = nil
-			} else {
-				if z.Ascendancy == nil {
-					z.Ascendancy = new(int64)
-				}
-				*z.Ascendancy, err = dc.ReadInt64()
-				if err != nil {
-					err = msgp.WrapError(err, "Ascendancy")
-					return
-				}
-			}
-		case "AscendancyStart":
-			z.AscendancyStart, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "AscendancyStart")
-				return
-			}
-		case "ReminderTexts":
-			var zb0004 uint32
-			zb0004, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "ReminderTexts")
-				return
-			}
-			if cap(z.ReminderTexts) >= int(zb0004) {
-				z.ReminderTexts = (z.ReminderTexts)[:zb0004]
-			} else {
-				z.ReminderTexts = make([]int64, zb0004)
-			}
-			for za0003 := range z.ReminderTexts {
-				z.ReminderTexts[za0003], err = dc.ReadInt64()
-				if err != nil {
-					err = msgp.WrapError(err, "ReminderTexts", za0003)
-					return
-				}
-			}
-		case "PassivePointsGranted":
-			z.PassivePointsGranted, err = dc.ReadInt64()
-			if err != nil {
-				err = msgp.WrapError(err, "PassivePointsGranted")
-				return
-			}
-		case "MultipleChoice":
-			z.MultipleChoice, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "MultipleChoice")
-				return
-			}
-		case "MultipleChoiceOption":
-			z.MultipleChoiceOption, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "MultipleChoiceOption")
-				return
-			}
-		case "Stat5":
-			z.Stat5, err = dc.ReadInt64()
-			if err != nil {
-				err = msgp.WrapError(err, "Stat5")
-				return
-			}
-		case "Buffs":
-			var zb0005 uint32
-			zb0005, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "Buffs")
-				return
-			}
-			if cap(z.Buffs) >= int(zb0005) {
-				z.Buffs = (z.Buffs)[:zb0005]
-			} else {
-				z.Buffs = make([]int64, zb0005)
-			}
-			for za0004 := range z.Buffs {
-				z.Buffs[za0004], err = dc.ReadInt64()
-				if err != nil {
-					err = msgp.WrapError(err, "Buffs", za0004)
+					err = msgp.WrapError(err, "MasteryGroup")
 					return
 				}
 			}
@@ -19483,6 +19631,220 @@ func (z *PassiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
+		case "Ascendancy":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "Ascendancy")
+					return
+				}
+				z.Ascendancy = nil
+			} else {
+				if z.Ascendancy == nil {
+					z.Ascendancy = new(int64)
+				}
+				*z.Ascendancy, err = dc.ReadInt64()
+				if err != nil {
+					err = msgp.WrapError(err, "Ascendancy")
+					return
+				}
+			}
+		case "Achievement":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "Achievement")
+					return
+				}
+				z.Achievement = nil
+			} else {
+				if z.Achievement == nil {
+					z.Achievement = new(int64)
+				}
+				*z.Achievement, err = dc.ReadInt64()
+				if err != nil {
+					err = msgp.WrapError(err, "Achievement")
+					return
+				}
+			}
+		case "Flavour":
+			z.Flavour, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "Flavour")
+				return
+			}
+		case "Icon":
+			z.Icon, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "Icon")
+				return
+			}
+		case "ID":
+			z.ID, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "ID")
+				return
+			}
+		case "Name":
+			z.Name, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "Name")
+				return
+			}
+		case "Stats":
+			var zb0002 uint32
+			zb0002, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Stats")
+				return
+			}
+			if cap(z.Stats) >= int(zb0002) {
+				z.Stats = (z.Stats)[:zb0002]
+			} else {
+				z.Stats = make([]int64, zb0002)
+			}
+			for za0001 := range z.Stats {
+				z.Stats[za0001], err = dc.ReadInt64()
+				if err != nil {
+					err = msgp.WrapError(err, "Stats", za0001)
+					return
+				}
+			}
+		case "Buffs":
+			var zb0003 uint32
+			zb0003, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Buffs")
+				return
+			}
+			if cap(z.Buffs) >= int(zb0003) {
+				z.Buffs = (z.Buffs)[:zb0003]
+			} else {
+				z.Buffs = make([]int64, zb0003)
+			}
+			for za0002 := range z.Buffs {
+				z.Buffs[za0002], err = dc.ReadInt64()
+				if err != nil {
+					err = msgp.WrapError(err, "Buffs", za0002)
+					return
+				}
+			}
+		case "ReminderTexts":
+			var zb0004 uint32
+			zb0004, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "ReminderTexts")
+				return
+			}
+			if cap(z.ReminderTexts) >= int(zb0004) {
+				z.ReminderTexts = (z.ReminderTexts)[:zb0004]
+			} else {
+				z.ReminderTexts = make([]int64, zb0004)
+			}
+			for za0003 := range z.ReminderTexts {
+				z.ReminderTexts[za0003], err = dc.ReadInt64()
+				if err != nil {
+					err = msgp.WrapError(err, "ReminderTexts", za0003)
+					return
+				}
+			}
+		case "ClassStart":
+			var zb0005 uint32
+			zb0005, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "ClassStart")
+				return
+			}
+			if cap(z.ClassStart) >= int(zb0005) {
+				z.ClassStart = (z.ClassStart)[:zb0005]
+			} else {
+				z.ClassStart = make([]int64, zb0005)
+			}
+			for za0004 := range z.ClassStart {
+				z.ClassStart[za0004], err = dc.ReadInt64()
+				if err != nil {
+					err = msgp.WrapError(err, "ClassStart", za0004)
+					return
+				}
+			}
+		case "Hash":
+			z.Hash, err = dc.ReadInt64()
+			if err != nil {
+				err = msgp.WrapError(err, "Hash")
+				return
+			}
+		case "Stat5":
+			z.Stat5, err = dc.ReadInt64()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat5")
+				return
+			}
+		case "Key":
+			z.Key, err = dc.ReadInt64()
+			if err != nil {
+				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "Stat1":
+			z.Stat1, err = dc.ReadInt64()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat1")
+				return
+			}
+		case "Type":
+			z.Type, err = dc.ReadInt64()
+			if err != nil {
+				err = msgp.WrapError(err, "Type")
+				return
+			}
+		case "Stat2":
+			z.Stat2, err = dc.ReadInt64()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat2")
+				return
+			}
+		case "Stat4":
+			z.Stat4, err = dc.ReadInt64()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat4")
+				return
+			}
+		case "PassivePointsGranted":
+			z.PassivePointsGranted, err = dc.ReadInt64()
+			if err != nil {
+				err = msgp.WrapError(err, "PassivePointsGranted")
+				return
+			}
+		case "Stat3":
+			z.Stat3, err = dc.ReadInt64()
+			if err != nil {
+				err = msgp.WrapError(err, "Stat3")
+				return
+			}
+		case "MultipleChoiceOption":
+			z.MultipleChoiceOption, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "MultipleChoiceOption")
+				return
+			}
+		case "Mastery":
+			z.Mastery, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "Mastery")
+				return
+			}
+		case "MultipleChoice":
+			z.MultipleChoice, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "MultipleChoice")
+				return
+			}
+		case "AscendancyStart":
+			z.AscendancyStart, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "AscendancyStart")
+				return
+			}
 		case "Blighted":
 			z.Blighted, err = dc.ReadBool()
 			if err != nil {
@@ -19501,34 +19863,22 @@ func (z *PassiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Proxy")
 				return
 			}
-		case "Type":
-			z.Type, err = dc.ReadInt64()
+		case "Keystone":
+			z.Keystone, err = dc.ReadBool()
 			if err != nil {
-				err = msgp.WrapError(err, "Type")
+				err = msgp.WrapError(err, "Keystone")
 				return
 			}
-		case "MasteryGroup":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "MasteryGroup")
-					return
-				}
-				z.MasteryGroup = nil
-			} else {
-				if z.MasteryGroup == nil {
-					z.MasteryGroup = new(int64)
-				}
-				*z.MasteryGroup, err = dc.ReadInt64()
-				if err != nil {
-					err = msgp.WrapError(err, "MasteryGroup")
-					return
-				}
-			}
-		case "Key":
-			z.Key, err = dc.ReadInt64()
+		case "JewelSocket":
+			z.JewelSocket, err = dc.ReadBool()
 			if err != nil {
-				err = msgp.WrapError(err, "Key")
+				err = msgp.WrapError(err, "JewelSocket")
+				return
+			}
+		case "Notable":
+			z.Notable, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "Notable")
 				return
 			}
 		default:
@@ -19545,285 +19895,20 @@ func (z *PassiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *PassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 31
-	// write "ID"
-	err = en.Append(0xde, 0x0, 0x1f, 0xa2, 0x49, 0x44)
+	// write "MasteryGroup"
+	err = en.Append(0xde, 0x0, 0x1f, 0xac, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70)
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.ID)
-	if err != nil {
-		err = msgp.WrapError(err, "ID")
-		return
-	}
-	// write "Icon"
-	err = en.Append(0xa4, 0x49, 0x63, 0x6f, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.Icon)
-	if err != nil {
-		err = msgp.WrapError(err, "Icon")
-		return
-	}
-	// write "Stats"
-	err = en.Append(0xa5, 0x53, 0x74, 0x61, 0x74, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.Stats)))
-	if err != nil {
-		err = msgp.WrapError(err, "Stats")
-		return
-	}
-	for za0001 := range z.Stats {
-		err = en.WriteInt64(z.Stats[za0001])
-		if err != nil {
-			err = msgp.WrapError(err, "Stats", za0001)
-			return
-		}
-	}
-	// write "Stat1"
-	err = en.Append(0xa5, 0x53, 0x74, 0x61, 0x74, 0x31)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt64(z.Stat1)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat1")
-		return
-	}
-	// write "Stat2"
-	err = en.Append(0xa5, 0x53, 0x74, 0x61, 0x74, 0x32)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt64(z.Stat2)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat2")
-		return
-	}
-	// write "Stat3"
-	err = en.Append(0xa5, 0x53, 0x74, 0x61, 0x74, 0x33)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt64(z.Stat3)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat3")
-		return
-	}
-	// write "Stat4"
-	err = en.Append(0xa5, 0x53, 0x74, 0x61, 0x74, 0x34)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt64(z.Stat4)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat4")
-		return
-	}
-	// write "Hash"
-	err = en.Append(0xa4, 0x48, 0x61, 0x73, 0x68)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt64(z.Hash)
-	if err != nil {
-		err = msgp.WrapError(err, "Hash")
-		return
-	}
-	// write "Name"
-	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.Name)
-	if err != nil {
-		err = msgp.WrapError(err, "Name")
-		return
-	}
-	// write "ClassStart"
-	err = en.Append(0xaa, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x53, 0x74, 0x61, 0x72, 0x74)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.ClassStart)))
-	if err != nil {
-		err = msgp.WrapError(err, "ClassStart")
-		return
-	}
-	for za0002 := range z.ClassStart {
-		err = en.WriteInt64(z.ClassStart[za0002])
-		if err != nil {
-			err = msgp.WrapError(err, "ClassStart", za0002)
-			return
-		}
-	}
-	// write "Keystone"
-	err = en.Append(0xa8, 0x4b, 0x65, 0x79, 0x73, 0x74, 0x6f, 0x6e, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.Keystone)
-	if err != nil {
-		err = msgp.WrapError(err, "Keystone")
-		return
-	}
-	// write "Notable"
-	err = en.Append(0xa7, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.Notable)
-	if err != nil {
-		err = msgp.WrapError(err, "Notable")
-		return
-	}
-	// write "Flavour"
-	err = en.Append(0xa7, 0x46, 0x6c, 0x61, 0x76, 0x6f, 0x75, 0x72)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.Flavour)
-	if err != nil {
-		err = msgp.WrapError(err, "Flavour")
-		return
-	}
-	// write "Mastery"
-	err = en.Append(0xa7, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x79)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.Mastery)
-	if err != nil {
-		err = msgp.WrapError(err, "Mastery")
-		return
-	}
-	// write "Achievement"
-	err = en.Append(0xab, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74)
-	if err != nil {
-		return
-	}
-	if z.Achievement == nil {
+	if z.MasteryGroup == nil {
 		err = en.WriteNil()
 		if err != nil {
 			return
 		}
 	} else {
-		err = en.WriteInt64(*z.Achievement)
+		err = en.WriteInt64(*z.MasteryGroup)
 		if err != nil {
-			err = msgp.WrapError(err, "Achievement")
-			return
-		}
-	}
-	// write "JewelSocket"
-	err = en.Append(0xab, 0x4a, 0x65, 0x77, 0x65, 0x6c, 0x53, 0x6f, 0x63, 0x6b, 0x65, 0x74)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.JewelSocket)
-	if err != nil {
-		err = msgp.WrapError(err, "JewelSocket")
-		return
-	}
-	// write "Ascendancy"
-	err = en.Append(0xaa, 0x41, 0x73, 0x63, 0x65, 0x6e, 0x64, 0x61, 0x6e, 0x63, 0x79)
-	if err != nil {
-		return
-	}
-	if z.Ascendancy == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt64(*z.Ascendancy)
-		if err != nil {
-			err = msgp.WrapError(err, "Ascendancy")
-			return
-		}
-	}
-	// write "AscendancyStart"
-	err = en.Append(0xaf, 0x41, 0x73, 0x63, 0x65, 0x6e, 0x64, 0x61, 0x6e, 0x63, 0x79, 0x53, 0x74, 0x61, 0x72, 0x74)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.AscendancyStart)
-	if err != nil {
-		err = msgp.WrapError(err, "AscendancyStart")
-		return
-	}
-	// write "ReminderTexts"
-	err = en.Append(0xad, 0x52, 0x65, 0x6d, 0x69, 0x6e, 0x64, 0x65, 0x72, 0x54, 0x65, 0x78, 0x74, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.ReminderTexts)))
-	if err != nil {
-		err = msgp.WrapError(err, "ReminderTexts")
-		return
-	}
-	for za0003 := range z.ReminderTexts {
-		err = en.WriteInt64(z.ReminderTexts[za0003])
-		if err != nil {
-			err = msgp.WrapError(err, "ReminderTexts", za0003)
-			return
-		}
-	}
-	// write "PassivePointsGranted"
-	err = en.Append(0xb4, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt64(z.PassivePointsGranted)
-	if err != nil {
-		err = msgp.WrapError(err, "PassivePointsGranted")
-		return
-	}
-	// write "MultipleChoice"
-	err = en.Append(0xae, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x65, 0x43, 0x68, 0x6f, 0x69, 0x63, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.MultipleChoice)
-	if err != nil {
-		err = msgp.WrapError(err, "MultipleChoice")
-		return
-	}
-	// write "MultipleChoiceOption"
-	err = en.Append(0xb4, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x65, 0x43, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.MultipleChoiceOption)
-	if err != nil {
-		err = msgp.WrapError(err, "MultipleChoiceOption")
-		return
-	}
-	// write "Stat5"
-	err = en.Append(0xa5, 0x53, 0x74, 0x61, 0x74, 0x35)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt64(z.Stat5)
-	if err != nil {
-		err = msgp.WrapError(err, "Stat5")
-		return
-	}
-	// write "Buffs"
-	err = en.Append(0xa5, 0x42, 0x75, 0x66, 0x66, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.Buffs)))
-	if err != nil {
-		err = msgp.WrapError(err, "Buffs")
-		return
-	}
-	for za0004 := range z.Buffs {
-		err = en.WriteInt64(z.Buffs[za0004])
-		if err != nil {
-			err = msgp.WrapError(err, "Buffs", za0004)
+			err = msgp.WrapError(err, "MasteryGroup")
 			return
 		}
 	}
@@ -19843,6 +19928,278 @@ func (z *PassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 			err = msgp.WrapError(err, "GrantedEffect")
 			return
 		}
+	}
+	// write "Ascendancy"
+	err = en.Append(0xaa, 0x41, 0x73, 0x63, 0x65, 0x6e, 0x64, 0x61, 0x6e, 0x63, 0x79)
+	if err != nil {
+		return
+	}
+	if z.Ascendancy == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt64(*z.Ascendancy)
+		if err != nil {
+			err = msgp.WrapError(err, "Ascendancy")
+			return
+		}
+	}
+	// write "Achievement"
+	err = en.Append(0xab, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74)
+	if err != nil {
+		return
+	}
+	if z.Achievement == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt64(*z.Achievement)
+		if err != nil {
+			err = msgp.WrapError(err, "Achievement")
+			return
+		}
+	}
+	// write "Flavour"
+	err = en.Append(0xa7, 0x46, 0x6c, 0x61, 0x76, 0x6f, 0x75, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Flavour)
+	if err != nil {
+		err = msgp.WrapError(err, "Flavour")
+		return
+	}
+	// write "Icon"
+	err = en.Append(0xa4, 0x49, 0x63, 0x6f, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Icon)
+	if err != nil {
+		err = msgp.WrapError(err, "Icon")
+		return
+	}
+	// write "ID"
+	err = en.Append(0xa2, 0x49, 0x44)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	// write "Name"
+	err = en.Append(0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	// write "Stats"
+	err = en.Append(0xa5, 0x53, 0x74, 0x61, 0x74, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Stats)))
+	if err != nil {
+		err = msgp.WrapError(err, "Stats")
+		return
+	}
+	for za0001 := range z.Stats {
+		err = en.WriteInt64(z.Stats[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "Stats", za0001)
+			return
+		}
+	}
+	// write "Buffs"
+	err = en.Append(0xa5, 0x42, 0x75, 0x66, 0x66, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Buffs)))
+	if err != nil {
+		err = msgp.WrapError(err, "Buffs")
+		return
+	}
+	for za0002 := range z.Buffs {
+		err = en.WriteInt64(z.Buffs[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "Buffs", za0002)
+			return
+		}
+	}
+	// write "ReminderTexts"
+	err = en.Append(0xad, 0x52, 0x65, 0x6d, 0x69, 0x6e, 0x64, 0x65, 0x72, 0x54, 0x65, 0x78, 0x74, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.ReminderTexts)))
+	if err != nil {
+		err = msgp.WrapError(err, "ReminderTexts")
+		return
+	}
+	for za0003 := range z.ReminderTexts {
+		err = en.WriteInt64(z.ReminderTexts[za0003])
+		if err != nil {
+			err = msgp.WrapError(err, "ReminderTexts", za0003)
+			return
+		}
+	}
+	// write "ClassStart"
+	err = en.Append(0xaa, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x53, 0x74, 0x61, 0x72, 0x74)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.ClassStart)))
+	if err != nil {
+		err = msgp.WrapError(err, "ClassStart")
+		return
+	}
+	for za0004 := range z.ClassStart {
+		err = en.WriteInt64(z.ClassStart[za0004])
+		if err != nil {
+			err = msgp.WrapError(err, "ClassStart", za0004)
+			return
+		}
+	}
+	// write "Hash"
+	err = en.Append(0xa4, 0x48, 0x61, 0x73, 0x68)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt64(z.Hash)
+	if err != nil {
+		err = msgp.WrapError(err, "Hash")
+		return
+	}
+	// write "Stat5"
+	err = en.Append(0xa5, 0x53, 0x74, 0x61, 0x74, 0x35)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt64(z.Stat5)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat5")
+		return
+	}
+	// write "Key"
+	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt64(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	// write "Stat1"
+	err = en.Append(0xa5, 0x53, 0x74, 0x61, 0x74, 0x31)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt64(z.Stat1)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat1")
+		return
+	}
+	// write "Type"
+	err = en.Append(0xa4, 0x54, 0x79, 0x70, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt64(z.Type)
+	if err != nil {
+		err = msgp.WrapError(err, "Type")
+		return
+	}
+	// write "Stat2"
+	err = en.Append(0xa5, 0x53, 0x74, 0x61, 0x74, 0x32)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt64(z.Stat2)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat2")
+		return
+	}
+	// write "Stat4"
+	err = en.Append(0xa5, 0x53, 0x74, 0x61, 0x74, 0x34)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt64(z.Stat4)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat4")
+		return
+	}
+	// write "PassivePointsGranted"
+	err = en.Append(0xb4, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt64(z.PassivePointsGranted)
+	if err != nil {
+		err = msgp.WrapError(err, "PassivePointsGranted")
+		return
+	}
+	// write "Stat3"
+	err = en.Append(0xa5, 0x53, 0x74, 0x61, 0x74, 0x33)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt64(z.Stat3)
+	if err != nil {
+		err = msgp.WrapError(err, "Stat3")
+		return
+	}
+	// write "MultipleChoiceOption"
+	err = en.Append(0xb4, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x65, 0x43, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.MultipleChoiceOption)
+	if err != nil {
+		err = msgp.WrapError(err, "MultipleChoiceOption")
+		return
+	}
+	// write "Mastery"
+	err = en.Append(0xa7, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.Mastery)
+	if err != nil {
+		err = msgp.WrapError(err, "Mastery")
+		return
+	}
+	// write "MultipleChoice"
+	err = en.Append(0xae, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x65, 0x43, 0x68, 0x6f, 0x69, 0x63, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.MultipleChoice)
+	if err != nil {
+		err = msgp.WrapError(err, "MultipleChoice")
+		return
+	}
+	// write "AscendancyStart"
+	err = en.Append(0xaf, 0x41, 0x73, 0x63, 0x65, 0x6e, 0x64, 0x61, 0x6e, 0x63, 0x79, 0x53, 0x74, 0x61, 0x72, 0x74)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.AscendancyStart)
+	if err != nil {
+		err = msgp.WrapError(err, "AscendancyStart")
+		return
 	}
 	// write "Blighted"
 	err = en.Append(0xa8, 0x42, 0x6c, 0x69, 0x67, 0x68, 0x74, 0x65, 0x64)
@@ -19874,41 +20231,34 @@ func (z *PassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Proxy")
 		return
 	}
-	// write "Type"
-	err = en.Append(0xa4, 0x54, 0x79, 0x70, 0x65)
+	// write "Keystone"
+	err = en.Append(0xa8, 0x4b, 0x65, 0x79, 0x73, 0x74, 0x6f, 0x6e, 0x65)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt64(z.Type)
+	err = en.WriteBool(z.Keystone)
 	if err != nil {
-		err = msgp.WrapError(err, "Type")
+		err = msgp.WrapError(err, "Keystone")
 		return
 	}
-	// write "MasteryGroup"
-	err = en.Append(0xac, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70)
-	if err != nil {
-		return
-	}
-	if z.MasteryGroup == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt64(*z.MasteryGroup)
-		if err != nil {
-			err = msgp.WrapError(err, "MasteryGroup")
-			return
-		}
-	}
-	// write "Key"
-	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
+	// write "JewelSocket"
+	err = en.Append(0xab, 0x4a, 0x65, 0x77, 0x65, 0x6c, 0x53, 0x6f, 0x63, 0x6b, 0x65, 0x74)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt64(z.Key)
+	err = en.WriteBool(z.JewelSocket)
 	if err != nil {
-		err = msgp.WrapError(err, "Key")
+		err = msgp.WrapError(err, "JewelSocket")
+		return
+	}
+	// write "Notable"
+	err = en.Append(0xa7, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.Notable)
+	if err != nil {
+		err = msgp.WrapError(err, "Notable")
 		return
 	}
 	return
@@ -19918,97 +20268,12 @@ func (z *PassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *PassiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 31
-	// string "ID"
-	o = append(o, 0xde, 0x0, 0x1f, 0xa2, 0x49, 0x44)
-	o = msgp.AppendString(o, z.ID)
-	// string "Icon"
-	o = append(o, 0xa4, 0x49, 0x63, 0x6f, 0x6e)
-	o = msgp.AppendString(o, z.Icon)
-	// string "Stats"
-	o = append(o, 0xa5, 0x53, 0x74, 0x61, 0x74, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.Stats)))
-	for za0001 := range z.Stats {
-		o = msgp.AppendInt64(o, z.Stats[za0001])
-	}
-	// string "Stat1"
-	o = append(o, 0xa5, 0x53, 0x74, 0x61, 0x74, 0x31)
-	o = msgp.AppendInt64(o, z.Stat1)
-	// string "Stat2"
-	o = append(o, 0xa5, 0x53, 0x74, 0x61, 0x74, 0x32)
-	o = msgp.AppendInt64(o, z.Stat2)
-	// string "Stat3"
-	o = append(o, 0xa5, 0x53, 0x74, 0x61, 0x74, 0x33)
-	o = msgp.AppendInt64(o, z.Stat3)
-	// string "Stat4"
-	o = append(o, 0xa5, 0x53, 0x74, 0x61, 0x74, 0x34)
-	o = msgp.AppendInt64(o, z.Stat4)
-	// string "Hash"
-	o = append(o, 0xa4, 0x48, 0x61, 0x73, 0x68)
-	o = msgp.AppendInt64(o, z.Hash)
-	// string "Name"
-	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
-	o = msgp.AppendString(o, z.Name)
-	// string "ClassStart"
-	o = append(o, 0xaa, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x53, 0x74, 0x61, 0x72, 0x74)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.ClassStart)))
-	for za0002 := range z.ClassStart {
-		o = msgp.AppendInt64(o, z.ClassStart[za0002])
-	}
-	// string "Keystone"
-	o = append(o, 0xa8, 0x4b, 0x65, 0x79, 0x73, 0x74, 0x6f, 0x6e, 0x65)
-	o = msgp.AppendBool(o, z.Keystone)
-	// string "Notable"
-	o = append(o, 0xa7, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65)
-	o = msgp.AppendBool(o, z.Notable)
-	// string "Flavour"
-	o = append(o, 0xa7, 0x46, 0x6c, 0x61, 0x76, 0x6f, 0x75, 0x72)
-	o = msgp.AppendString(o, z.Flavour)
-	// string "Mastery"
-	o = append(o, 0xa7, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x79)
-	o = msgp.AppendBool(o, z.Mastery)
-	// string "Achievement"
-	o = append(o, 0xab, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74)
-	if z.Achievement == nil {
+	// string "MasteryGroup"
+	o = append(o, 0xde, 0x0, 0x1f, 0xac, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70)
+	if z.MasteryGroup == nil {
 		o = msgp.AppendNil(o)
 	} else {
-		o = msgp.AppendInt64(o, *z.Achievement)
-	}
-	// string "JewelSocket"
-	o = append(o, 0xab, 0x4a, 0x65, 0x77, 0x65, 0x6c, 0x53, 0x6f, 0x63, 0x6b, 0x65, 0x74)
-	o = msgp.AppendBool(o, z.JewelSocket)
-	// string "Ascendancy"
-	o = append(o, 0xaa, 0x41, 0x73, 0x63, 0x65, 0x6e, 0x64, 0x61, 0x6e, 0x63, 0x79)
-	if z.Ascendancy == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt64(o, *z.Ascendancy)
-	}
-	// string "AscendancyStart"
-	o = append(o, 0xaf, 0x41, 0x73, 0x63, 0x65, 0x6e, 0x64, 0x61, 0x6e, 0x63, 0x79, 0x53, 0x74, 0x61, 0x72, 0x74)
-	o = msgp.AppendBool(o, z.AscendancyStart)
-	// string "ReminderTexts"
-	o = append(o, 0xad, 0x52, 0x65, 0x6d, 0x69, 0x6e, 0x64, 0x65, 0x72, 0x54, 0x65, 0x78, 0x74, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.ReminderTexts)))
-	for za0003 := range z.ReminderTexts {
-		o = msgp.AppendInt64(o, z.ReminderTexts[za0003])
-	}
-	// string "PassivePointsGranted"
-	o = append(o, 0xb4, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64)
-	o = msgp.AppendInt64(o, z.PassivePointsGranted)
-	// string "MultipleChoice"
-	o = append(o, 0xae, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x65, 0x43, 0x68, 0x6f, 0x69, 0x63, 0x65)
-	o = msgp.AppendBool(o, z.MultipleChoice)
-	// string "MultipleChoiceOption"
-	o = append(o, 0xb4, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x65, 0x43, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e)
-	o = msgp.AppendBool(o, z.MultipleChoiceOption)
-	// string "Stat5"
-	o = append(o, 0xa5, 0x53, 0x74, 0x61, 0x74, 0x35)
-	o = msgp.AppendInt64(o, z.Stat5)
-	// string "Buffs"
-	o = append(o, 0xa5, 0x42, 0x75, 0x66, 0x66, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.Buffs)))
-	for za0004 := range z.Buffs {
-		o = msgp.AppendInt64(o, z.Buffs[za0004])
+		o = msgp.AppendInt64(o, *z.MasteryGroup)
 	}
 	// string "GrantedEffect"
 	o = append(o, 0xad, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
@@ -20017,6 +20282,95 @@ func (z *PassiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt64(o, *z.GrantedEffect)
 	}
+	// string "Ascendancy"
+	o = append(o, 0xaa, 0x41, 0x73, 0x63, 0x65, 0x6e, 0x64, 0x61, 0x6e, 0x63, 0x79)
+	if z.Ascendancy == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt64(o, *z.Ascendancy)
+	}
+	// string "Achievement"
+	o = append(o, 0xab, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74)
+	if z.Achievement == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt64(o, *z.Achievement)
+	}
+	// string "Flavour"
+	o = append(o, 0xa7, 0x46, 0x6c, 0x61, 0x76, 0x6f, 0x75, 0x72)
+	o = msgp.AppendString(o, z.Flavour)
+	// string "Icon"
+	o = append(o, 0xa4, 0x49, 0x63, 0x6f, 0x6e)
+	o = msgp.AppendString(o, z.Icon)
+	// string "ID"
+	o = append(o, 0xa2, 0x49, 0x44)
+	o = msgp.AppendString(o, z.ID)
+	// string "Name"
+	o = append(o, 0xa4, 0x4e, 0x61, 0x6d, 0x65)
+	o = msgp.AppendString(o, z.Name)
+	// string "Stats"
+	o = append(o, 0xa5, 0x53, 0x74, 0x61, 0x74, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Stats)))
+	for za0001 := range z.Stats {
+		o = msgp.AppendInt64(o, z.Stats[za0001])
+	}
+	// string "Buffs"
+	o = append(o, 0xa5, 0x42, 0x75, 0x66, 0x66, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Buffs)))
+	for za0002 := range z.Buffs {
+		o = msgp.AppendInt64(o, z.Buffs[za0002])
+	}
+	// string "ReminderTexts"
+	o = append(o, 0xad, 0x52, 0x65, 0x6d, 0x69, 0x6e, 0x64, 0x65, 0x72, 0x54, 0x65, 0x78, 0x74, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ReminderTexts)))
+	for za0003 := range z.ReminderTexts {
+		o = msgp.AppendInt64(o, z.ReminderTexts[za0003])
+	}
+	// string "ClassStart"
+	o = append(o, 0xaa, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x53, 0x74, 0x61, 0x72, 0x74)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ClassStart)))
+	for za0004 := range z.ClassStart {
+		o = msgp.AppendInt64(o, z.ClassStart[za0004])
+	}
+	// string "Hash"
+	o = append(o, 0xa4, 0x48, 0x61, 0x73, 0x68)
+	o = msgp.AppendInt64(o, z.Hash)
+	// string "Stat5"
+	o = append(o, 0xa5, 0x53, 0x74, 0x61, 0x74, 0x35)
+	o = msgp.AppendInt64(o, z.Stat5)
+	// string "Key"
+	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt64(o, z.Key)
+	// string "Stat1"
+	o = append(o, 0xa5, 0x53, 0x74, 0x61, 0x74, 0x31)
+	o = msgp.AppendInt64(o, z.Stat1)
+	// string "Type"
+	o = append(o, 0xa4, 0x54, 0x79, 0x70, 0x65)
+	o = msgp.AppendInt64(o, z.Type)
+	// string "Stat2"
+	o = append(o, 0xa5, 0x53, 0x74, 0x61, 0x74, 0x32)
+	o = msgp.AppendInt64(o, z.Stat2)
+	// string "Stat4"
+	o = append(o, 0xa5, 0x53, 0x74, 0x61, 0x74, 0x34)
+	o = msgp.AppendInt64(o, z.Stat4)
+	// string "PassivePointsGranted"
+	o = append(o, 0xb4, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64)
+	o = msgp.AppendInt64(o, z.PassivePointsGranted)
+	// string "Stat3"
+	o = append(o, 0xa5, 0x53, 0x74, 0x61, 0x74, 0x33)
+	o = msgp.AppendInt64(o, z.Stat3)
+	// string "MultipleChoiceOption"
+	o = append(o, 0xb4, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x65, 0x43, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e)
+	o = msgp.AppendBool(o, z.MultipleChoiceOption)
+	// string "Mastery"
+	o = append(o, 0xa7, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x79)
+	o = msgp.AppendBool(o, z.Mastery)
+	// string "MultipleChoice"
+	o = append(o, 0xae, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x65, 0x43, 0x68, 0x6f, 0x69, 0x63, 0x65)
+	o = msgp.AppendBool(o, z.MultipleChoice)
+	// string "AscendancyStart"
+	o = append(o, 0xaf, 0x41, 0x73, 0x63, 0x65, 0x6e, 0x64, 0x61, 0x6e, 0x63, 0x79, 0x53, 0x74, 0x61, 0x72, 0x74)
+	o = msgp.AppendBool(o, z.AscendancyStart)
 	// string "Blighted"
 	o = append(o, 0xa8, 0x42, 0x6c, 0x69, 0x67, 0x68, 0x74, 0x65, 0x64)
 	o = msgp.AppendBool(o, z.Blighted)
@@ -20026,19 +20380,15 @@ func (z *PassiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "Proxy"
 	o = append(o, 0xa5, 0x50, 0x72, 0x6f, 0x78, 0x79)
 	o = msgp.AppendBool(o, z.Proxy)
-	// string "Type"
-	o = append(o, 0xa4, 0x54, 0x79, 0x70, 0x65)
-	o = msgp.AppendInt64(o, z.Type)
-	// string "MasteryGroup"
-	o = append(o, 0xac, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70)
-	if z.MasteryGroup == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt64(o, *z.MasteryGroup)
-	}
-	// string "Key"
-	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt64(o, z.Key)
+	// string "Keystone"
+	o = append(o, 0xa8, 0x4b, 0x65, 0x79, 0x73, 0x74, 0x6f, 0x6e, 0x65)
+	o = msgp.AppendBool(o, z.Keystone)
+	// string "JewelSocket"
+	o = append(o, 0xab, 0x4a, 0x65, 0x77, 0x65, 0x6c, 0x53, 0x6f, 0x63, 0x6b, 0x65, 0x74)
+	o = msgp.AppendBool(o, z.JewelSocket)
+	// string "Notable"
+	o = append(o, 0xa7, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65)
+	o = msgp.AppendBool(o, z.Notable)
 	return
 }
 
@@ -20060,16 +20410,96 @@ func (z *PassiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "ID":
-			z.ID, bts, err = msgp.ReadStringBytes(bts)
+		case "MasteryGroup":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.MasteryGroup = nil
+			} else {
+				if z.MasteryGroup == nil {
+					z.MasteryGroup = new(int64)
+				}
+				*z.MasteryGroup, bts, err = msgp.ReadInt64Bytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "MasteryGroup")
+					return
+				}
+			}
+		case "GrantedEffect":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.GrantedEffect = nil
+			} else {
+				if z.GrantedEffect == nil {
+					z.GrantedEffect = new(int64)
+				}
+				*z.GrantedEffect, bts, err = msgp.ReadInt64Bytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "GrantedEffect")
+					return
+				}
+			}
+		case "Ascendancy":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.Ascendancy = nil
+			} else {
+				if z.Ascendancy == nil {
+					z.Ascendancy = new(int64)
+				}
+				*z.Ascendancy, bts, err = msgp.ReadInt64Bytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Ascendancy")
+					return
+				}
+			}
+		case "Achievement":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.Achievement = nil
+			} else {
+				if z.Achievement == nil {
+					z.Achievement = new(int64)
+				}
+				*z.Achievement, bts, err = msgp.ReadInt64Bytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Achievement")
+					return
+				}
+			}
+		case "Flavour":
+			z.Flavour, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "ID")
+				err = msgp.WrapError(err, "Flavour")
 				return
 			}
 		case "Icon":
 			z.Icon, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "Icon")
+				return
+			}
+		case "ID":
+			z.ID, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ID")
+				return
+			}
+		case "Name":
+			z.Name, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Name")
 				return
 			}
 		case "Stats":
@@ -20091,130 +20521,24 @@ func (z *PassiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "Stat1":
-			z.Stat1, bts, err = msgp.ReadInt64Bytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat1")
-				return
-			}
-		case "Stat2":
-			z.Stat2, bts, err = msgp.ReadInt64Bytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat2")
-				return
-			}
-		case "Stat3":
-			z.Stat3, bts, err = msgp.ReadInt64Bytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat3")
-				return
-			}
-		case "Stat4":
-			z.Stat4, bts, err = msgp.ReadInt64Bytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Stat4")
-				return
-			}
-		case "Hash":
-			z.Hash, bts, err = msgp.ReadInt64Bytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Hash")
-				return
-			}
-		case "Name":
-			z.Name, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Name")
-				return
-			}
-		case "ClassStart":
+		case "Buffs":
 			var zb0003 uint32
 			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "ClassStart")
+				err = msgp.WrapError(err, "Buffs")
 				return
 			}
-			if cap(z.ClassStart) >= int(zb0003) {
-				z.ClassStart = (z.ClassStart)[:zb0003]
+			if cap(z.Buffs) >= int(zb0003) {
+				z.Buffs = (z.Buffs)[:zb0003]
 			} else {
-				z.ClassStart = make([]int64, zb0003)
+				z.Buffs = make([]int64, zb0003)
 			}
-			for za0002 := range z.ClassStart {
-				z.ClassStart[za0002], bts, err = msgp.ReadInt64Bytes(bts)
+			for za0002 := range z.Buffs {
+				z.Buffs[za0002], bts, err = msgp.ReadInt64Bytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "ClassStart", za0002)
+					err = msgp.WrapError(err, "Buffs", za0002)
 					return
 				}
-			}
-		case "Keystone":
-			z.Keystone, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Keystone")
-				return
-			}
-		case "Notable":
-			z.Notable, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Notable")
-				return
-			}
-		case "Flavour":
-			z.Flavour, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Flavour")
-				return
-			}
-		case "Mastery":
-			z.Mastery, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Mastery")
-				return
-			}
-		case "Achievement":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.Achievement = nil
-			} else {
-				if z.Achievement == nil {
-					z.Achievement = new(int64)
-				}
-				*z.Achievement, bts, err = msgp.ReadInt64Bytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Achievement")
-					return
-				}
-			}
-		case "JewelSocket":
-			z.JewelSocket, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "JewelSocket")
-				return
-			}
-		case "Ascendancy":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.Ascendancy = nil
-			} else {
-				if z.Ascendancy == nil {
-					z.Ascendancy = new(int64)
-				}
-				*z.Ascendancy, bts, err = msgp.ReadInt64Bytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Ascendancy")
-					return
-				}
-			}
-		case "AscendancyStart":
-			z.AscendancyStart, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "AscendancyStart")
-				return
 			}
 		case "ReminderTexts":
 			var zb0004 uint32
@@ -20235,22 +20559,29 @@ func (z *PassiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "PassivePointsGranted":
-			z.PassivePointsGranted, bts, err = msgp.ReadInt64Bytes(bts)
+		case "ClassStart":
+			var zb0005 uint32
+			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "PassivePointsGranted")
+				err = msgp.WrapError(err, "ClassStart")
 				return
 			}
-		case "MultipleChoice":
-			z.MultipleChoice, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "MultipleChoice")
-				return
+			if cap(z.ClassStart) >= int(zb0005) {
+				z.ClassStart = (z.ClassStart)[:zb0005]
+			} else {
+				z.ClassStart = make([]int64, zb0005)
 			}
-		case "MultipleChoiceOption":
-			z.MultipleChoiceOption, bts, err = msgp.ReadBoolBytes(bts)
+			for za0004 := range z.ClassStart {
+				z.ClassStart[za0004], bts, err = msgp.ReadInt64Bytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ClassStart", za0004)
+					return
+				}
+			}
+		case "Hash":
+			z.Hash, bts, err = msgp.ReadInt64Bytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "MultipleChoiceOption")
+				err = msgp.WrapError(err, "Hash")
 				return
 			}
 		case "Stat5":
@@ -20259,41 +20590,71 @@ func (z *PassiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Stat5")
 				return
 			}
-		case "Buffs":
-			var zb0005 uint32
-			zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
+		case "Key":
+			z.Key, bts, err = msgp.ReadInt64Bytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Buffs")
+				err = msgp.WrapError(err, "Key")
 				return
 			}
-			if cap(z.Buffs) >= int(zb0005) {
-				z.Buffs = (z.Buffs)[:zb0005]
-			} else {
-				z.Buffs = make([]int64, zb0005)
+		case "Stat1":
+			z.Stat1, bts, err = msgp.ReadInt64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat1")
+				return
 			}
-			for za0004 := range z.Buffs {
-				z.Buffs[za0004], bts, err = msgp.ReadInt64Bytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "Buffs", za0004)
-					return
-				}
+		case "Type":
+			z.Type, bts, err = msgp.ReadInt64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Type")
+				return
 			}
-		case "GrantedEffect":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.GrantedEffect = nil
-			} else {
-				if z.GrantedEffect == nil {
-					z.GrantedEffect = new(int64)
-				}
-				*z.GrantedEffect, bts, err = msgp.ReadInt64Bytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "GrantedEffect")
-					return
-				}
+		case "Stat2":
+			z.Stat2, bts, err = msgp.ReadInt64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat2")
+				return
+			}
+		case "Stat4":
+			z.Stat4, bts, err = msgp.ReadInt64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat4")
+				return
+			}
+		case "PassivePointsGranted":
+			z.PassivePointsGranted, bts, err = msgp.ReadInt64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "PassivePointsGranted")
+				return
+			}
+		case "Stat3":
+			z.Stat3, bts, err = msgp.ReadInt64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Stat3")
+				return
+			}
+		case "MultipleChoiceOption":
+			z.MultipleChoiceOption, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MultipleChoiceOption")
+				return
+			}
+		case "Mastery":
+			z.Mastery, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Mastery")
+				return
+			}
+		case "MultipleChoice":
+			z.MultipleChoice, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MultipleChoice")
+				return
+			}
+		case "AscendancyStart":
+			z.AscendancyStart, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AscendancyStart")
+				return
 			}
 		case "Blighted":
 			z.Blighted, bts, err = msgp.ReadBoolBytes(bts)
@@ -20313,33 +20674,22 @@ func (z *PassiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Proxy")
 				return
 			}
-		case "Type":
-			z.Type, bts, err = msgp.ReadInt64Bytes(bts)
+		case "Keystone":
+			z.Keystone, bts, err = msgp.ReadBoolBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Type")
+				err = msgp.WrapError(err, "Keystone")
 				return
 			}
-		case "MasteryGroup":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.MasteryGroup = nil
-			} else {
-				if z.MasteryGroup == nil {
-					z.MasteryGroup = new(int64)
-				}
-				*z.MasteryGroup, bts, err = msgp.ReadInt64Bytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "MasteryGroup")
-					return
-				}
-			}
-		case "Key":
-			z.Key, bts, err = msgp.ReadInt64Bytes(bts)
+		case "JewelSocket":
+			z.JewelSocket, bts, err = msgp.ReadBoolBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Key")
+				err = msgp.WrapError(err, "JewelSocket")
+				return
+			}
+		case "Notable":
+			z.Notable, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Notable")
 				return
 			}
 		default:
@@ -20356,31 +20706,31 @@ func (z *PassiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *PassiveSkill) Msgsize() (s int) {
-	s = 3 + 3 + msgp.StringPrefixSize + len(z.ID) + 5 + msgp.StringPrefixSize + len(z.Icon) + 6 + msgp.ArrayHeaderSize + (len(z.Stats) * (msgp.Int64Size)) + 6 + msgp.Int64Size + 6 + msgp.Int64Size + 6 + msgp.Int64Size + 6 + msgp.Int64Size + 5 + msgp.Int64Size + 5 + msgp.StringPrefixSize + len(z.Name) + 11 + msgp.ArrayHeaderSize + (len(z.ClassStart) * (msgp.Int64Size)) + 9 + msgp.BoolSize + 8 + msgp.BoolSize + 8 + msgp.StringPrefixSize + len(z.Flavour) + 8 + msgp.BoolSize + 12
-	if z.Achievement == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.Int64Size
-	}
-	s += 12 + msgp.BoolSize + 11
-	if z.Ascendancy == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.Int64Size
-	}
-	s += 16 + msgp.BoolSize + 14 + msgp.ArrayHeaderSize + (len(z.ReminderTexts) * (msgp.Int64Size)) + 21 + msgp.Int64Size + 15 + msgp.BoolSize + 21 + msgp.BoolSize + 6 + msgp.Int64Size + 6 + msgp.ArrayHeaderSize + (len(z.Buffs) * (msgp.Int64Size)) + 14
-	if z.GrantedEffect == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.Int64Size
-	}
-	s += 9 + msgp.BoolSize + 12 + msgp.BoolSize + 6 + msgp.BoolSize + 5 + msgp.Int64Size + 13
+	s = 3 + 13
 	if z.MasteryGroup == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.Int64Size
 	}
-	s += 4 + msgp.Int64Size
+	s += 14
+	if z.GrantedEffect == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.Int64Size
+	}
+	s += 11
+	if z.Ascendancy == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.Int64Size
+	}
+	s += 12
+	if z.Achievement == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.Int64Size
+	}
+	s += 8 + msgp.StringPrefixSize + len(z.Flavour) + 5 + msgp.StringPrefixSize + len(z.Icon) + 3 + msgp.StringPrefixSize + len(z.ID) + 5 + msgp.StringPrefixSize + len(z.Name) + 6 + msgp.ArrayHeaderSize + (len(z.Stats) * (msgp.Int64Size)) + 6 + msgp.ArrayHeaderSize + (len(z.Buffs) * (msgp.Int64Size)) + 14 + msgp.ArrayHeaderSize + (len(z.ReminderTexts) * (msgp.Int64Size)) + 11 + msgp.ArrayHeaderSize + (len(z.ClassStart) * (msgp.Int64Size)) + 5 + msgp.Int64Size + 6 + msgp.Int64Size + 4 + msgp.Int64Size + 6 + msgp.Int64Size + 5 + msgp.Int64Size + 6 + msgp.Int64Size + 6 + msgp.Int64Size + 21 + msgp.Int64Size + 6 + msgp.Int64Size + 21 + msgp.BoolSize + 8 + msgp.BoolSize + 15 + msgp.BoolSize + 16 + msgp.BoolSize + 9 + msgp.BoolSize + 12 + msgp.BoolSize + 6 + msgp.BoolSize + 9 + msgp.BoolSize + 12 + msgp.BoolSize + 8 + msgp.BoolSize
 	return
 }
 
@@ -20408,24 +20758,6 @@ func (z *PassiveTreeExpansionJewel) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Art")
 				return
 			}
-		case "BaseItemTypesKey":
-			z.BaseItemTypesKey, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "BaseItemTypesKey")
-				return
-			}
-		case "MaxNodes":
-			z.MaxNodes, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "MaxNodes")
-				return
-			}
-		case "MinNodes":
-			z.MinNodes, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "MinNodes")
-				return
-			}
 		case "NotableIndices":
 			var zb0002 uint32
 			zb0002, err = dc.ReadArrayHeader()
@@ -20444,12 +20776,6 @@ func (z *PassiveTreeExpansionJewel) DecodeMsg(dc *msgp.Reader) (err error) {
 					err = msgp.WrapError(err, "NotableIndices", za0001)
 					return
 				}
-			}
-		case "PassiveTreeExpansionJewelSizesKey":
-			z.PassiveTreeExpansionJewelSizesKey, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "PassiveTreeExpansionJewelSizesKey")
-				return
 			}
 		case "SmallIndices":
 			var zb0003 uint32
@@ -20488,6 +20814,30 @@ func (z *PassiveTreeExpansionJewel) DecodeMsg(dc *msgp.Reader) (err error) {
 					err = msgp.WrapError(err, "SocketIndices", za0003)
 					return
 				}
+			}
+		case "BaseItemTypesKey":
+			z.BaseItemTypesKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "BaseItemTypesKey")
+				return
+			}
+		case "MaxNodes":
+			z.MaxNodes, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "MaxNodes")
+				return
+			}
+		case "MinNodes":
+			z.MinNodes, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "MinNodes")
+				return
+			}
+		case "PassiveTreeExpansionJewelSizesKey":
+			z.PassiveTreeExpansionJewelSizesKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "PassiveTreeExpansionJewelSizesKey")
+				return
 			}
 		case "SoundEffectsKey":
 			z.SoundEffectsKey, err = dc.ReadInt()
@@ -20531,36 +20881,6 @@ func (z *PassiveTreeExpansionJewel) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Art")
 		return
 	}
-	// write "BaseItemTypesKey"
-	err = en.Append(0xb0, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.BaseItemTypesKey)
-	if err != nil {
-		err = msgp.WrapError(err, "BaseItemTypesKey")
-		return
-	}
-	// write "MaxNodes"
-	err = en.Append(0xa8, 0x4d, 0x61, 0x78, 0x4e, 0x6f, 0x64, 0x65, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.MaxNodes)
-	if err != nil {
-		err = msgp.WrapError(err, "MaxNodes")
-		return
-	}
-	// write "MinNodes"
-	err = en.Append(0xa8, 0x4d, 0x69, 0x6e, 0x4e, 0x6f, 0x64, 0x65, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.MinNodes)
-	if err != nil {
-		err = msgp.WrapError(err, "MinNodes")
-		return
-	}
 	// write "NotableIndices"
 	err = en.Append(0xae, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x49, 0x6e, 0x64, 0x69, 0x63, 0x65, 0x73)
 	if err != nil {
@@ -20577,16 +20897,6 @@ func (z *PassiveTreeExpansionJewel) EncodeMsg(en *msgp.Writer) (err error) {
 			err = msgp.WrapError(err, "NotableIndices", za0001)
 			return
 		}
-	}
-	// write "PassiveTreeExpansionJewelSizesKey"
-	err = en.Append(0xd9, 0x21, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x54, 0x72, 0x65, 0x65, 0x45, 0x78, 0x70, 0x61, 0x6e, 0x73, 0x69, 0x6f, 0x6e, 0x4a, 0x65, 0x77, 0x65, 0x6c, 0x53, 0x69, 0x7a, 0x65, 0x73, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.PassiveTreeExpansionJewelSizesKey)
-	if err != nil {
-		err = msgp.WrapError(err, "PassiveTreeExpansionJewelSizesKey")
-		return
 	}
 	// write "SmallIndices"
 	err = en.Append(0xac, 0x53, 0x6d, 0x61, 0x6c, 0x6c, 0x49, 0x6e, 0x64, 0x69, 0x63, 0x65, 0x73)
@@ -20621,6 +20931,46 @@ func (z *PassiveTreeExpansionJewel) EncodeMsg(en *msgp.Writer) (err error) {
 			err = msgp.WrapError(err, "SocketIndices", za0003)
 			return
 		}
+	}
+	// write "BaseItemTypesKey"
+	err = en.Append(0xb0, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.BaseItemTypesKey)
+	if err != nil {
+		err = msgp.WrapError(err, "BaseItemTypesKey")
+		return
+	}
+	// write "MaxNodes"
+	err = en.Append(0xa8, 0x4d, 0x61, 0x78, 0x4e, 0x6f, 0x64, 0x65, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MaxNodes)
+	if err != nil {
+		err = msgp.WrapError(err, "MaxNodes")
+		return
+	}
+	// write "MinNodes"
+	err = en.Append(0xa8, 0x4d, 0x69, 0x6e, 0x4e, 0x6f, 0x64, 0x65, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MinNodes)
+	if err != nil {
+		err = msgp.WrapError(err, "MinNodes")
+		return
+	}
+	// write "PassiveTreeExpansionJewelSizesKey"
+	err = en.Append(0xd9, 0x21, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x54, 0x72, 0x65, 0x65, 0x45, 0x78, 0x70, 0x61, 0x6e, 0x73, 0x69, 0x6f, 0x6e, 0x4a, 0x65, 0x77, 0x65, 0x6c, 0x53, 0x69, 0x7a, 0x65, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.PassiveTreeExpansionJewelSizesKey)
+	if err != nil {
+		err = msgp.WrapError(err, "PassiveTreeExpansionJewelSizesKey")
+		return
 	}
 	// write "SoundEffectsKey"
 	err = en.Append(0xaf, 0x53, 0x6f, 0x75, 0x6e, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x4b, 0x65, 0x79)
@@ -20662,24 +21012,12 @@ func (z *PassiveTreeExpansionJewel) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "Art"
 	o = append(o, 0x8b, 0xa3, 0x41, 0x72, 0x74)
 	o = msgp.AppendString(o, z.Art)
-	// string "BaseItemTypesKey"
-	o = append(o, 0xb0, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.BaseItemTypesKey)
-	// string "MaxNodes"
-	o = append(o, 0xa8, 0x4d, 0x61, 0x78, 0x4e, 0x6f, 0x64, 0x65, 0x73)
-	o = msgp.AppendInt(o, z.MaxNodes)
-	// string "MinNodes"
-	o = append(o, 0xa8, 0x4d, 0x69, 0x6e, 0x4e, 0x6f, 0x64, 0x65, 0x73)
-	o = msgp.AppendInt(o, z.MinNodes)
 	// string "NotableIndices"
 	o = append(o, 0xae, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x49, 0x6e, 0x64, 0x69, 0x63, 0x65, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.NotableIndices)))
 	for za0001 := range z.NotableIndices {
 		o = msgp.AppendInt(o, z.NotableIndices[za0001])
 	}
-	// string "PassiveTreeExpansionJewelSizesKey"
-	o = append(o, 0xd9, 0x21, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x54, 0x72, 0x65, 0x65, 0x45, 0x78, 0x70, 0x61, 0x6e, 0x73, 0x69, 0x6f, 0x6e, 0x4a, 0x65, 0x77, 0x65, 0x6c, 0x53, 0x69, 0x7a, 0x65, 0x73, 0x4b, 0x65, 0x79)
-	o = msgp.AppendInt(o, z.PassiveTreeExpansionJewelSizesKey)
 	// string "SmallIndices"
 	o = append(o, 0xac, 0x53, 0x6d, 0x61, 0x6c, 0x6c, 0x49, 0x6e, 0x64, 0x69, 0x63, 0x65, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.SmallIndices)))
@@ -20692,6 +21030,18 @@ func (z *PassiveTreeExpansionJewel) MarshalMsg(b []byte) (o []byte, err error) {
 	for za0003 := range z.SocketIndices {
 		o = msgp.AppendInt(o, z.SocketIndices[za0003])
 	}
+	// string "BaseItemTypesKey"
+	o = append(o, 0xb0, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.BaseItemTypesKey)
+	// string "MaxNodes"
+	o = append(o, 0xa8, 0x4d, 0x61, 0x78, 0x4e, 0x6f, 0x64, 0x65, 0x73)
+	o = msgp.AppendInt(o, z.MaxNodes)
+	// string "MinNodes"
+	o = append(o, 0xa8, 0x4d, 0x69, 0x6e, 0x4e, 0x6f, 0x64, 0x65, 0x73)
+	o = msgp.AppendInt(o, z.MinNodes)
+	// string "PassiveTreeExpansionJewelSizesKey"
+	o = append(o, 0xd9, 0x21, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x54, 0x72, 0x65, 0x65, 0x45, 0x78, 0x70, 0x61, 0x6e, 0x73, 0x69, 0x6f, 0x6e, 0x4a, 0x65, 0x77, 0x65, 0x6c, 0x53, 0x69, 0x7a, 0x65, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.PassiveTreeExpansionJewelSizesKey)
 	// string "SoundEffectsKey"
 	o = append(o, 0xaf, 0x53, 0x6f, 0x75, 0x6e, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.SoundEffectsKey)
@@ -20728,24 +21078,6 @@ func (z *PassiveTreeExpansionJewel) UnmarshalMsg(bts []byte) (o []byte, err erro
 				err = msgp.WrapError(err, "Art")
 				return
 			}
-		case "BaseItemTypesKey":
-			z.BaseItemTypesKey, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "BaseItemTypesKey")
-				return
-			}
-		case "MaxNodes":
-			z.MaxNodes, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "MaxNodes")
-				return
-			}
-		case "MinNodes":
-			z.MinNodes, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "MinNodes")
-				return
-			}
 		case "NotableIndices":
 			var zb0002 uint32
 			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
@@ -20764,12 +21096,6 @@ func (z *PassiveTreeExpansionJewel) UnmarshalMsg(bts []byte) (o []byte, err erro
 					err = msgp.WrapError(err, "NotableIndices", za0001)
 					return
 				}
-			}
-		case "PassiveTreeExpansionJewelSizesKey":
-			z.PassiveTreeExpansionJewelSizesKey, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "PassiveTreeExpansionJewelSizesKey")
-				return
 			}
 		case "SmallIndices":
 			var zb0003 uint32
@@ -20809,6 +21135,30 @@ func (z *PassiveTreeExpansionJewel) UnmarshalMsg(bts []byte) (o []byte, err erro
 					return
 				}
 			}
+		case "BaseItemTypesKey":
+			z.BaseItemTypesKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "BaseItemTypesKey")
+				return
+			}
+		case "MaxNodes":
+			z.MaxNodes, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MaxNodes")
+				return
+			}
+		case "MinNodes":
+			z.MinNodes, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MinNodes")
+				return
+			}
+		case "PassiveTreeExpansionJewelSizesKey":
+			z.PassiveTreeExpansionJewelSizesKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "PassiveTreeExpansionJewelSizesKey")
+				return
+			}
 		case "SoundEffectsKey":
 			z.SoundEffectsKey, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
@@ -20841,7 +21191,7 @@ func (z *PassiveTreeExpansionJewel) UnmarshalMsg(bts []byte) (o []byte, err erro
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *PassiveTreeExpansionJewel) Msgsize() (s int) {
-	s = 1 + 4 + msgp.StringPrefixSize + len(z.Art) + 17 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 15 + msgp.ArrayHeaderSize + (len(z.NotableIndices) * (msgp.IntSize)) + 35 + msgp.IntSize + 13 + msgp.ArrayHeaderSize + (len(z.SmallIndices) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.SocketIndices) * (msgp.IntSize)) + 16 + msgp.IntSize + 13 + msgp.IntSize + 4 + msgp.IntSize
+	s = 1 + 4 + msgp.StringPrefixSize + len(z.Art) + 15 + msgp.ArrayHeaderSize + (len(z.NotableIndices) * (msgp.IntSize)) + 13 + msgp.ArrayHeaderSize + (len(z.SmallIndices) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.SocketIndices) * (msgp.IntSize)) + 17 + msgp.IntSize + 9 + msgp.IntSize + 9 + msgp.IntSize + 35 + msgp.IntSize + 16 + msgp.IntSize + 13 + msgp.IntSize + 4 + msgp.IntSize
 	return
 }
 
@@ -21412,55 +21762,6 @@ func (z *SkillGem) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "BaseItemType":
-			z.BaseItemType, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "BaseItemType")
-				return
-			}
-		case "GrantedEffect":
-			z.GrantedEffect, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "GrantedEffect")
-				return
-			}
-		case "Str":
-			z.Str, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Str")
-				return
-			}
-		case "Dex":
-			z.Dex, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Dex")
-				return
-			}
-		case "Int":
-			z.Int, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Int")
-				return
-			}
-		case "Tags":
-			var zb0002 uint32
-			zb0002, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "Tags")
-				return
-			}
-			if cap(z.Tags) >= int(zb0002) {
-				z.Tags = (z.Tags)[:zb0002]
-			} else {
-				z.Tags = make([]int, zb0002)
-			}
-			for za0001 := range z.Tags {
-				z.Tags[za0001], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "Tags", za0001)
-					return
-				}
-			}
 		case "VaalGem":
 			if dc.IsNil() {
 				err = dc.ReadNil()
@@ -21476,96 +21777,6 @@ func (z *SkillGem) DecodeMsg(dc *msgp.Reader) (err error) {
 				*z.VaalGem, err = dc.ReadInt()
 				if err != nil {
 					err = msgp.WrapError(err, "VaalGem")
-					return
-				}
-			}
-		case "IsVaalGem":
-			z.IsVaalGem, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "IsVaalGem")
-				return
-			}
-		case "Description":
-			z.Description, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "Description")
-				return
-			}
-		case "HungryLoopMod":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "HungryLoopMod")
-					return
-				}
-				z.HungryLoopMod = nil
-			} else {
-				if z.HungryLoopMod == nil {
-					z.HungryLoopMod = new(int)
-				}
-				*z.HungryLoopMod, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "HungryLoopMod")
-					return
-				}
-			}
-		case "SecondaryGrantedEffect":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "SecondaryGrantedEffect")
-					return
-				}
-				z.SecondaryGrantedEffect = nil
-			} else {
-				if z.SecondaryGrantedEffect == nil {
-					z.SecondaryGrantedEffect = new(int)
-				}
-				*z.SecondaryGrantedEffect, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "SecondaryGrantedEffect")
-					return
-				}
-			}
-		case "GlobalGemLevelStat":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "GlobalGemLevelStat")
-					return
-				}
-				z.GlobalGemLevelStat = nil
-			} else {
-				if z.GlobalGemLevelStat == nil {
-					z.GlobalGemLevelStat = new(int)
-				}
-				*z.GlobalGemLevelStat, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "GlobalGemLevelStat")
-					return
-				}
-			}
-		case "SecondarySupportName":
-			z.SecondarySupportName, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "SecondarySupportName")
-				return
-			}
-		case "AwakenedVariant":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "AwakenedVariant")
-					return
-				}
-				z.AwakenedVariant = nil
-			} else {
-				if z.AwakenedVariant == nil {
-					z.AwakenedVariant = new(int)
-				}
-				*z.AwakenedVariant, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "AwakenedVariant")
 					return
 				}
 			}
@@ -21587,10 +21798,149 @@ func (z *SkillGem) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
+		case "AwakenedVariant":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "AwakenedVariant")
+					return
+				}
+				z.AwakenedVariant = nil
+			} else {
+				if z.AwakenedVariant == nil {
+					z.AwakenedVariant = new(int)
+				}
+				*z.AwakenedVariant, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "AwakenedVariant")
+					return
+				}
+			}
+		case "GlobalGemLevelStat":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "GlobalGemLevelStat")
+					return
+				}
+				z.GlobalGemLevelStat = nil
+			} else {
+				if z.GlobalGemLevelStat == nil {
+					z.GlobalGemLevelStat = new(int)
+				}
+				*z.GlobalGemLevelStat, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "GlobalGemLevelStat")
+					return
+				}
+			}
+		case "SecondaryGrantedEffect":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "SecondaryGrantedEffect")
+					return
+				}
+				z.SecondaryGrantedEffect = nil
+			} else {
+				if z.SecondaryGrantedEffect == nil {
+					z.SecondaryGrantedEffect = new(int)
+				}
+				*z.SecondaryGrantedEffect, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "SecondaryGrantedEffect")
+					return
+				}
+			}
+		case "HungryLoopMod":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "HungryLoopMod")
+					return
+				}
+				z.HungryLoopMod = nil
+			} else {
+				if z.HungryLoopMod == nil {
+					z.HungryLoopMod = new(int)
+				}
+				*z.HungryLoopMod, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "HungryLoopMod")
+					return
+				}
+			}
+		case "SecondarySupportName":
+			z.SecondarySupportName, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "SecondarySupportName")
+				return
+			}
+		case "Description":
+			z.Description, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "Description")
+				return
+			}
+		case "Tags":
+			var zb0002 uint32
+			zb0002, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Tags")
+				return
+			}
+			if cap(z.Tags) >= int(zb0002) {
+				z.Tags = (z.Tags)[:zb0002]
+			} else {
+				z.Tags = make([]int, zb0002)
+			}
+			for za0001 := range z.Tags {
+				z.Tags[za0001], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "Tags", za0001)
+					return
+				}
+			}
+		case "Int":
+			z.Int, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Int")
+				return
+			}
+		case "Dex":
+			z.Dex, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Dex")
+				return
+			}
+		case "BaseItemType":
+			z.BaseItemType, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "BaseItemType")
+				return
+			}
+		case "Str":
+			z.Str, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Str")
+				return
+			}
+		case "GrantedEffect":
+			z.GrantedEffect, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "GrantedEffect")
+				return
+			}
 		case "Key":
 			z.Key, err = dc.ReadInt()
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "IsVaalGem":
+			z.IsVaalGem, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IsVaalGem")
 				return
 			}
 		default:
@@ -21607,75 +21957,8 @@ func (z *SkillGem) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *SkillGem) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 16
-	// write "BaseItemType"
-	err = en.Append(0xde, 0x0, 0x10, 0xac, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.BaseItemType)
-	if err != nil {
-		err = msgp.WrapError(err, "BaseItemType")
-		return
-	}
-	// write "GrantedEffect"
-	err = en.Append(0xad, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.GrantedEffect)
-	if err != nil {
-		err = msgp.WrapError(err, "GrantedEffect")
-		return
-	}
-	// write "Str"
-	err = en.Append(0xa3, 0x53, 0x74, 0x72)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Str)
-	if err != nil {
-		err = msgp.WrapError(err, "Str")
-		return
-	}
-	// write "Dex"
-	err = en.Append(0xa3, 0x44, 0x65, 0x78)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Dex)
-	if err != nil {
-		err = msgp.WrapError(err, "Dex")
-		return
-	}
-	// write "Int"
-	err = en.Append(0xa3, 0x49, 0x6e, 0x74)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Int)
-	if err != nil {
-		err = msgp.WrapError(err, "Int")
-		return
-	}
-	// write "Tags"
-	err = en.Append(0xa4, 0x54, 0x61, 0x67, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.Tags)))
-	if err != nil {
-		err = msgp.WrapError(err, "Tags")
-		return
-	}
-	for za0001 := range z.Tags {
-		err = en.WriteInt(z.Tags[za0001])
-		if err != nil {
-			err = msgp.WrapError(err, "Tags", za0001)
-			return
-		}
-	}
 	// write "VaalGem"
-	err = en.Append(0xa7, 0x56, 0x61, 0x61, 0x6c, 0x47, 0x65, 0x6d)
+	err = en.Append(0xde, 0x0, 0x10, 0xa7, 0x56, 0x61, 0x61, 0x6c, 0x47, 0x65, 0x6d)
 	if err != nil {
 		return
 	}
@@ -21688,104 +21971,6 @@ func (z *SkillGem) EncodeMsg(en *msgp.Writer) (err error) {
 		err = en.WriteInt(*z.VaalGem)
 		if err != nil {
 			err = msgp.WrapError(err, "VaalGem")
-			return
-		}
-	}
-	// write "IsVaalGem"
-	err = en.Append(0xa9, 0x49, 0x73, 0x56, 0x61, 0x61, 0x6c, 0x47, 0x65, 0x6d)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.IsVaalGem)
-	if err != nil {
-		err = msgp.WrapError(err, "IsVaalGem")
-		return
-	}
-	// write "Description"
-	err = en.Append(0xab, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.Description)
-	if err != nil {
-		err = msgp.WrapError(err, "Description")
-		return
-	}
-	// write "HungryLoopMod"
-	err = en.Append(0xad, 0x48, 0x75, 0x6e, 0x67, 0x72, 0x79, 0x4c, 0x6f, 0x6f, 0x70, 0x4d, 0x6f, 0x64)
-	if err != nil {
-		return
-	}
-	if z.HungryLoopMod == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.HungryLoopMod)
-		if err != nil {
-			err = msgp.WrapError(err, "HungryLoopMod")
-			return
-		}
-	}
-	// write "SecondaryGrantedEffect"
-	err = en.Append(0xb6, 0x53, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x61, 0x72, 0x79, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
-	if err != nil {
-		return
-	}
-	if z.SecondaryGrantedEffect == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.SecondaryGrantedEffect)
-		if err != nil {
-			err = msgp.WrapError(err, "SecondaryGrantedEffect")
-			return
-		}
-	}
-	// write "GlobalGemLevelStat"
-	err = en.Append(0xb2, 0x47, 0x6c, 0x6f, 0x62, 0x61, 0x6c, 0x47, 0x65, 0x6d, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x53, 0x74, 0x61, 0x74)
-	if err != nil {
-		return
-	}
-	if z.GlobalGemLevelStat == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.GlobalGemLevelStat)
-		if err != nil {
-			err = msgp.WrapError(err, "GlobalGemLevelStat")
-			return
-		}
-	}
-	// write "SecondarySupportName"
-	err = en.Append(0xb4, 0x53, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x61, 0x72, 0x79, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x4e, 0x61, 0x6d, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.SecondarySupportName)
-	if err != nil {
-		err = msgp.WrapError(err, "SecondarySupportName")
-		return
-	}
-	// write "AwakenedVariant"
-	err = en.Append(0xaf, 0x41, 0x77, 0x61, 0x6b, 0x65, 0x6e, 0x65, 0x64, 0x56, 0x61, 0x72, 0x69, 0x61, 0x6e, 0x74)
-	if err != nil {
-		return
-	}
-	if z.AwakenedVariant == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.AwakenedVariant)
-		if err != nil {
-			err = msgp.WrapError(err, "AwakenedVariant")
 			return
 		}
 	}
@@ -21806,6 +21991,161 @@ func (z *SkillGem) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
+	// write "AwakenedVariant"
+	err = en.Append(0xaf, 0x41, 0x77, 0x61, 0x6b, 0x65, 0x6e, 0x65, 0x64, 0x56, 0x61, 0x72, 0x69, 0x61, 0x6e, 0x74)
+	if err != nil {
+		return
+	}
+	if z.AwakenedVariant == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.AwakenedVariant)
+		if err != nil {
+			err = msgp.WrapError(err, "AwakenedVariant")
+			return
+		}
+	}
+	// write "GlobalGemLevelStat"
+	err = en.Append(0xb2, 0x47, 0x6c, 0x6f, 0x62, 0x61, 0x6c, 0x47, 0x65, 0x6d, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x53, 0x74, 0x61, 0x74)
+	if err != nil {
+		return
+	}
+	if z.GlobalGemLevelStat == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.GlobalGemLevelStat)
+		if err != nil {
+			err = msgp.WrapError(err, "GlobalGemLevelStat")
+			return
+		}
+	}
+	// write "SecondaryGrantedEffect"
+	err = en.Append(0xb6, 0x53, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x61, 0x72, 0x79, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
+	if err != nil {
+		return
+	}
+	if z.SecondaryGrantedEffect == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.SecondaryGrantedEffect)
+		if err != nil {
+			err = msgp.WrapError(err, "SecondaryGrantedEffect")
+			return
+		}
+	}
+	// write "HungryLoopMod"
+	err = en.Append(0xad, 0x48, 0x75, 0x6e, 0x67, 0x72, 0x79, 0x4c, 0x6f, 0x6f, 0x70, 0x4d, 0x6f, 0x64)
+	if err != nil {
+		return
+	}
+	if z.HungryLoopMod == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.HungryLoopMod)
+		if err != nil {
+			err = msgp.WrapError(err, "HungryLoopMod")
+			return
+		}
+	}
+	// write "SecondarySupportName"
+	err = en.Append(0xb4, 0x53, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x61, 0x72, 0x79, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x4e, 0x61, 0x6d, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.SecondarySupportName)
+	if err != nil {
+		err = msgp.WrapError(err, "SecondarySupportName")
+		return
+	}
+	// write "Description"
+	err = en.Append(0xab, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Description)
+	if err != nil {
+		err = msgp.WrapError(err, "Description")
+		return
+	}
+	// write "Tags"
+	err = en.Append(0xa4, 0x54, 0x61, 0x67, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Tags)))
+	if err != nil {
+		err = msgp.WrapError(err, "Tags")
+		return
+	}
+	for za0001 := range z.Tags {
+		err = en.WriteInt(z.Tags[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "Tags", za0001)
+			return
+		}
+	}
+	// write "Int"
+	err = en.Append(0xa3, 0x49, 0x6e, 0x74)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Int)
+	if err != nil {
+		err = msgp.WrapError(err, "Int")
+		return
+	}
+	// write "Dex"
+	err = en.Append(0xa3, 0x44, 0x65, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Dex)
+	if err != nil {
+		err = msgp.WrapError(err, "Dex")
+		return
+	}
+	// write "BaseItemType"
+	err = en.Append(0xac, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.BaseItemType)
+	if err != nil {
+		err = msgp.WrapError(err, "BaseItemType")
+		return
+	}
+	// write "Str"
+	err = en.Append(0xa3, 0x53, 0x74, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Str)
+	if err != nil {
+		err = msgp.WrapError(err, "Str")
+		return
+	}
+	// write "GrantedEffect"
+	err = en.Append(0xad, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.GrantedEffect)
+	if err != nil {
+		err = msgp.WrapError(err, "GrantedEffect")
+		return
+	}
 	// write "Key"
 	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
 	if err != nil {
@@ -21816,6 +22156,16 @@ func (z *SkillGem) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Key")
 		return
 	}
+	// write "IsVaalGem"
+	err = en.Append(0xa9, 0x49, 0x73, 0x56, 0x61, 0x61, 0x6c, 0x47, 0x65, 0x6d)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IsVaalGem)
+	if err != nil {
+		err = msgp.WrapError(err, "IsVaalGem")
+		return
+	}
 	return
 }
 
@@ -21823,70 +22173,12 @@ func (z *SkillGem) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *SkillGem) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 16
-	// string "BaseItemType"
-	o = append(o, 0xde, 0x0, 0x10, 0xac, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65)
-	o = msgp.AppendInt(o, z.BaseItemType)
-	// string "GrantedEffect"
-	o = append(o, 0xad, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
-	o = msgp.AppendInt(o, z.GrantedEffect)
-	// string "Str"
-	o = append(o, 0xa3, 0x53, 0x74, 0x72)
-	o = msgp.AppendInt(o, z.Str)
-	// string "Dex"
-	o = append(o, 0xa3, 0x44, 0x65, 0x78)
-	o = msgp.AppendInt(o, z.Dex)
-	// string "Int"
-	o = append(o, 0xa3, 0x49, 0x6e, 0x74)
-	o = msgp.AppendInt(o, z.Int)
-	// string "Tags"
-	o = append(o, 0xa4, 0x54, 0x61, 0x67, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.Tags)))
-	for za0001 := range z.Tags {
-		o = msgp.AppendInt(o, z.Tags[za0001])
-	}
 	// string "VaalGem"
-	o = append(o, 0xa7, 0x56, 0x61, 0x61, 0x6c, 0x47, 0x65, 0x6d)
+	o = append(o, 0xde, 0x0, 0x10, 0xa7, 0x56, 0x61, 0x61, 0x6c, 0x47, 0x65, 0x6d)
 	if z.VaalGem == nil {
 		o = msgp.AppendNil(o)
 	} else {
 		o = msgp.AppendInt(o, *z.VaalGem)
-	}
-	// string "IsVaalGem"
-	o = append(o, 0xa9, 0x49, 0x73, 0x56, 0x61, 0x61, 0x6c, 0x47, 0x65, 0x6d)
-	o = msgp.AppendBool(o, z.IsVaalGem)
-	// string "Description"
-	o = append(o, 0xab, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
-	o = msgp.AppendString(o, z.Description)
-	// string "HungryLoopMod"
-	o = append(o, 0xad, 0x48, 0x75, 0x6e, 0x67, 0x72, 0x79, 0x4c, 0x6f, 0x6f, 0x70, 0x4d, 0x6f, 0x64)
-	if z.HungryLoopMod == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.HungryLoopMod)
-	}
-	// string "SecondaryGrantedEffect"
-	o = append(o, 0xb6, 0x53, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x61, 0x72, 0x79, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
-	if z.SecondaryGrantedEffect == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.SecondaryGrantedEffect)
-	}
-	// string "GlobalGemLevelStat"
-	o = append(o, 0xb2, 0x47, 0x6c, 0x6f, 0x62, 0x61, 0x6c, 0x47, 0x65, 0x6d, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x53, 0x74, 0x61, 0x74)
-	if z.GlobalGemLevelStat == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.GlobalGemLevelStat)
-	}
-	// string "SecondarySupportName"
-	o = append(o, 0xb4, 0x53, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x61, 0x72, 0x79, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x4e, 0x61, 0x6d, 0x65)
-	o = msgp.AppendString(o, z.SecondarySupportName)
-	// string "AwakenedVariant"
-	o = append(o, 0xaf, 0x41, 0x77, 0x61, 0x6b, 0x65, 0x6e, 0x65, 0x64, 0x56, 0x61, 0x72, 0x69, 0x61, 0x6e, 0x74)
-	if z.AwakenedVariant == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.AwakenedVariant)
 	}
 	// string "RegularVariant"
 	o = append(o, 0xae, 0x52, 0x65, 0x67, 0x75, 0x6c, 0x61, 0x72, 0x56, 0x61, 0x72, 0x69, 0x61, 0x6e, 0x74)
@@ -21895,9 +22187,67 @@ func (z *SkillGem) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.RegularVariant)
 	}
+	// string "AwakenedVariant"
+	o = append(o, 0xaf, 0x41, 0x77, 0x61, 0x6b, 0x65, 0x6e, 0x65, 0x64, 0x56, 0x61, 0x72, 0x69, 0x61, 0x6e, 0x74)
+	if z.AwakenedVariant == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.AwakenedVariant)
+	}
+	// string "GlobalGemLevelStat"
+	o = append(o, 0xb2, 0x47, 0x6c, 0x6f, 0x62, 0x61, 0x6c, 0x47, 0x65, 0x6d, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x53, 0x74, 0x61, 0x74)
+	if z.GlobalGemLevelStat == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.GlobalGemLevelStat)
+	}
+	// string "SecondaryGrantedEffect"
+	o = append(o, 0xb6, 0x53, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x61, 0x72, 0x79, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
+	if z.SecondaryGrantedEffect == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.SecondaryGrantedEffect)
+	}
+	// string "HungryLoopMod"
+	o = append(o, 0xad, 0x48, 0x75, 0x6e, 0x67, 0x72, 0x79, 0x4c, 0x6f, 0x6f, 0x70, 0x4d, 0x6f, 0x64)
+	if z.HungryLoopMod == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.HungryLoopMod)
+	}
+	// string "SecondarySupportName"
+	o = append(o, 0xb4, 0x53, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x61, 0x72, 0x79, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x4e, 0x61, 0x6d, 0x65)
+	o = msgp.AppendString(o, z.SecondarySupportName)
+	// string "Description"
+	o = append(o, 0xab, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
+	o = msgp.AppendString(o, z.Description)
+	// string "Tags"
+	o = append(o, 0xa4, 0x54, 0x61, 0x67, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Tags)))
+	for za0001 := range z.Tags {
+		o = msgp.AppendInt(o, z.Tags[za0001])
+	}
+	// string "Int"
+	o = append(o, 0xa3, 0x49, 0x6e, 0x74)
+	o = msgp.AppendInt(o, z.Int)
+	// string "Dex"
+	o = append(o, 0xa3, 0x44, 0x65, 0x78)
+	o = msgp.AppendInt(o, z.Dex)
+	// string "BaseItemType"
+	o = append(o, 0xac, 0x42, 0x61, 0x73, 0x65, 0x49, 0x74, 0x65, 0x6d, 0x54, 0x79, 0x70, 0x65)
+	o = msgp.AppendInt(o, z.BaseItemType)
+	// string "Str"
+	o = append(o, 0xa3, 0x53, 0x74, 0x72)
+	o = msgp.AppendInt(o, z.Str)
+	// string "GrantedEffect"
+	o = append(o, 0xad, 0x47, 0x72, 0x61, 0x6e, 0x74, 0x65, 0x64, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74)
+	o = msgp.AppendInt(o, z.GrantedEffect)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
+	// string "IsVaalGem"
+	o = append(o, 0xa9, 0x49, 0x73, 0x56, 0x61, 0x61, 0x6c, 0x47, 0x65, 0x6d)
+	o = msgp.AppendBool(o, z.IsVaalGem)
 	return
 }
 
@@ -21919,34 +22269,118 @@ func (z *SkillGem) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "BaseItemType":
-			z.BaseItemType, bts, err = msgp.ReadIntBytes(bts)
+		case "VaalGem":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.VaalGem = nil
+			} else {
+				if z.VaalGem == nil {
+					z.VaalGem = new(int)
+				}
+				*z.VaalGem, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "VaalGem")
+					return
+				}
+			}
+		case "RegularVariant":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.RegularVariant = nil
+			} else {
+				if z.RegularVariant == nil {
+					z.RegularVariant = new(int)
+				}
+				*z.RegularVariant, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "RegularVariant")
+					return
+				}
+			}
+		case "AwakenedVariant":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.AwakenedVariant = nil
+			} else {
+				if z.AwakenedVariant == nil {
+					z.AwakenedVariant = new(int)
+				}
+				*z.AwakenedVariant, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "AwakenedVariant")
+					return
+				}
+			}
+		case "GlobalGemLevelStat":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.GlobalGemLevelStat = nil
+			} else {
+				if z.GlobalGemLevelStat == nil {
+					z.GlobalGemLevelStat = new(int)
+				}
+				*z.GlobalGemLevelStat, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "GlobalGemLevelStat")
+					return
+				}
+			}
+		case "SecondaryGrantedEffect":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.SecondaryGrantedEffect = nil
+			} else {
+				if z.SecondaryGrantedEffect == nil {
+					z.SecondaryGrantedEffect = new(int)
+				}
+				*z.SecondaryGrantedEffect, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "SecondaryGrantedEffect")
+					return
+				}
+			}
+		case "HungryLoopMod":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.HungryLoopMod = nil
+			} else {
+				if z.HungryLoopMod == nil {
+					z.HungryLoopMod = new(int)
+				}
+				*z.HungryLoopMod, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "HungryLoopMod")
+					return
+				}
+			}
+		case "SecondarySupportName":
+			z.SecondarySupportName, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "BaseItemType")
+				err = msgp.WrapError(err, "SecondarySupportName")
 				return
 			}
-		case "GrantedEffect":
-			z.GrantedEffect, bts, err = msgp.ReadIntBytes(bts)
+		case "Description":
+			z.Description, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "GrantedEffect")
-				return
-			}
-		case "Str":
-			z.Str, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Str")
-				return
-			}
-		case "Dex":
-			z.Dex, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Dex")
-				return
-			}
-		case "Int":
-			z.Int, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Int")
+				err = msgp.WrapError(err, "Description")
 				return
 			}
 		case "Tags":
@@ -21968,130 +22402,46 @@ func (z *SkillGem) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "VaalGem":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.VaalGem = nil
-			} else {
-				if z.VaalGem == nil {
-					z.VaalGem = new(int)
-				}
-				*z.VaalGem, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "VaalGem")
-					return
-				}
-			}
-		case "IsVaalGem":
-			z.IsVaalGem, bts, err = msgp.ReadBoolBytes(bts)
+		case "Int":
+			z.Int, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "IsVaalGem")
+				err = msgp.WrapError(err, "Int")
 				return
 			}
-		case "Description":
-			z.Description, bts, err = msgp.ReadStringBytes(bts)
+		case "Dex":
+			z.Dex, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Description")
+				err = msgp.WrapError(err, "Dex")
 				return
 			}
-		case "HungryLoopMod":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.HungryLoopMod = nil
-			} else {
-				if z.HungryLoopMod == nil {
-					z.HungryLoopMod = new(int)
-				}
-				*z.HungryLoopMod, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "HungryLoopMod")
-					return
-				}
-			}
-		case "SecondaryGrantedEffect":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.SecondaryGrantedEffect = nil
-			} else {
-				if z.SecondaryGrantedEffect == nil {
-					z.SecondaryGrantedEffect = new(int)
-				}
-				*z.SecondaryGrantedEffect, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "SecondaryGrantedEffect")
-					return
-				}
-			}
-		case "GlobalGemLevelStat":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.GlobalGemLevelStat = nil
-			} else {
-				if z.GlobalGemLevelStat == nil {
-					z.GlobalGemLevelStat = new(int)
-				}
-				*z.GlobalGemLevelStat, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "GlobalGemLevelStat")
-					return
-				}
-			}
-		case "SecondarySupportName":
-			z.SecondarySupportName, bts, err = msgp.ReadStringBytes(bts)
+		case "BaseItemType":
+			z.BaseItemType, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "SecondarySupportName")
+				err = msgp.WrapError(err, "BaseItemType")
 				return
 			}
-		case "AwakenedVariant":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.AwakenedVariant = nil
-			} else {
-				if z.AwakenedVariant == nil {
-					z.AwakenedVariant = new(int)
-				}
-				*z.AwakenedVariant, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "AwakenedVariant")
-					return
-				}
+		case "Str":
+			z.Str, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Str")
+				return
 			}
-		case "RegularVariant":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.RegularVariant = nil
-			} else {
-				if z.RegularVariant == nil {
-					z.RegularVariant = new(int)
-				}
-				*z.RegularVariant, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "RegularVariant")
-					return
-				}
+		case "GrantedEffect":
+			z.GrantedEffect, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "GrantedEffect")
+				return
 			}
 		case "Key":
 			z.Key, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "IsVaalGem":
+			z.IsVaalGem, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IsVaalGem")
 				return
 			}
 		default:
@@ -22108,32 +22458,8 @@ func (z *SkillGem) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *SkillGem) Msgsize() (s int) {
-	s = 3 + 13 + msgp.IntSize + 14 + msgp.IntSize + 4 + msgp.IntSize + 4 + msgp.IntSize + 4 + msgp.IntSize + 5 + msgp.ArrayHeaderSize + (len(z.Tags) * (msgp.IntSize)) + 8
+	s = 3 + 8
 	if z.VaalGem == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 10 + msgp.BoolSize + 12 + msgp.StringPrefixSize + len(z.Description) + 14
-	if z.HungryLoopMod == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 23
-	if z.SecondaryGrantedEffect == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 19
-	if z.GlobalGemLevelStat == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
-	s += 21 + msgp.StringPrefixSize + len(z.SecondarySupportName) + 16
-	if z.AwakenedVariant == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
@@ -22144,7 +22470,31 @@ func (z *SkillGem) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 4 + msgp.IntSize
+	s += 16
+	if z.AwakenedVariant == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 19
+	if z.GlobalGemLevelStat == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 23
+	if z.SecondaryGrantedEffect == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 14
+	if z.HungryLoopMod == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += 21 + msgp.StringPrefixSize + len(z.SecondarySupportName) + 12 + msgp.StringPrefixSize + len(z.Description) + 5 + msgp.ArrayHeaderSize + (len(z.Tags) * (msgp.IntSize)) + 4 + msgp.IntSize + 4 + msgp.IntSize + 13 + msgp.IntSize + 4 + msgp.IntSize + 14 + msgp.IntSize + 4 + msgp.IntSize + 10 + msgp.BoolSize
 	return
 }
 
@@ -22447,22 +22797,21 @@ func (z *Stat) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "BelongsStatsKey":
-			var zb0002 uint32
-			zb0002, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "BelongsStatsKey")
-				return
-			}
-			if cap(z.BelongsStatsKey) >= int(zb0002) {
-				z.BelongsStatsKey = (z.BelongsStatsKey)[:zb0002]
-			} else {
-				z.BelongsStatsKey = make([]string, zb0002)
-			}
-			for za0001 := range z.BelongsStatsKey {
-				z.BelongsStatsKey[za0001], err = dc.ReadString()
+		case "MainHandAliasStatsKey":
+			if dc.IsNil() {
+				err = dc.ReadNil()
 				if err != nil {
-					err = msgp.WrapError(err, "BelongsStatsKey", za0001)
+					err = msgp.WrapError(err, "MainHandAliasStatsKey")
+					return
+				}
+				z.MainHandAliasStatsKey = nil
+			} else {
+				if z.MainHandAliasStatsKey == nil {
+					z.MainHandAliasStatsKey = new(int)
+				}
+				*z.MainHandAliasStatsKey, err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "MainHandAliasStatsKey")
 					return
 				}
 			}
@@ -22484,79 +22833,6 @@ func (z *Stat) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "ContextFlags":
-			var zb0003 uint32
-			zb0003, err = dc.ReadArrayHeader()
-			if err != nil {
-				err = msgp.WrapError(err, "ContextFlags")
-				return
-			}
-			if cap(z.ContextFlags) >= int(zb0003) {
-				z.ContextFlags = (z.ContextFlags)[:zb0003]
-			} else {
-				z.ContextFlags = make([]int, zb0003)
-			}
-			for za0002 := range z.ContextFlags {
-				z.ContextFlags[za0002], err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "ContextFlags", za0002)
-					return
-				}
-			}
-		case "Hash32":
-			z.Hash32, err = dc.ReadInt()
-			if err != nil {
-				err = msgp.WrapError(err, "Hash32")
-				return
-			}
-		case "ID":
-			z.ID, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "ID")
-				return
-			}
-		case "IsLocal":
-			z.IsLocal, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "IsLocal")
-				return
-			}
-		case "IsScalable":
-			z.IsScalable, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "IsScalable")
-				return
-			}
-		case "IsVirtual":
-			z.IsVirtual, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "IsVirtual")
-				return
-			}
-		case "IsWeaponLocal":
-			z.IsWeaponLocal, err = dc.ReadBool()
-			if err != nil {
-				err = msgp.WrapError(err, "IsWeaponLocal")
-				return
-			}
-		case "MainHandAliasStatsKey":
-			if dc.IsNil() {
-				err = dc.ReadNil()
-				if err != nil {
-					err = msgp.WrapError(err, "MainHandAliasStatsKey")
-					return
-				}
-				z.MainHandAliasStatsKey = nil
-			} else {
-				if z.MainHandAliasStatsKey == nil {
-					z.MainHandAliasStatsKey = new(int)
-				}
-				*z.MainHandAliasStatsKey, err = dc.ReadInt()
-				if err != nil {
-					err = msgp.WrapError(err, "MainHandAliasStatsKey")
-					return
-				}
-			}
 		case "OffHandAliasStatsKey":
 			if dc.IsNil() {
 				err = dc.ReadNil()
@@ -22575,10 +22851,10 @@ func (z *Stat) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
-		case "Semantics":
-			z.Semantics, err = dc.ReadInt()
+		case "ID":
+			z.ID, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "Semantics")
+				err = msgp.WrapError(err, "ID")
 				return
 			}
 		case "Text":
@@ -22587,10 +22863,84 @@ func (z *Stat) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Text")
 				return
 			}
+		case "ContextFlags":
+			var zb0002 uint32
+			zb0002, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "ContextFlags")
+				return
+			}
+			if cap(z.ContextFlags) >= int(zb0002) {
+				z.ContextFlags = (z.ContextFlags)[:zb0002]
+			} else {
+				z.ContextFlags = make([]int, zb0002)
+			}
+			for za0001 := range z.ContextFlags {
+				z.ContextFlags[za0001], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "ContextFlags", za0001)
+					return
+				}
+			}
+		case "BelongsStatsKey":
+			var zb0003 uint32
+			zb0003, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "BelongsStatsKey")
+				return
+			}
+			if cap(z.BelongsStatsKey) >= int(zb0003) {
+				z.BelongsStatsKey = (z.BelongsStatsKey)[:zb0003]
+			} else {
+				z.BelongsStatsKey = make([]string, zb0003)
+			}
+			for za0002 := range z.BelongsStatsKey {
+				z.BelongsStatsKey[za0002], err = dc.ReadString()
+				if err != nil {
+					err = msgp.WrapError(err, "BelongsStatsKey", za0002)
+					return
+				}
+			}
+		case "Hash32":
+			z.Hash32, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Hash32")
+				return
+			}
+		case "Semantics":
+			z.Semantics, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Semantics")
+				return
+			}
 		case "Key":
 			z.Key, err = dc.ReadInt()
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "IsWeaponLocal":
+			z.IsWeaponLocal, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IsWeaponLocal")
+				return
+			}
+		case "IsVirtual":
+			z.IsVirtual, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IsVirtual")
+				return
+			}
+		case "IsScalable":
+			z.IsScalable, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IsScalable")
+				return
+			}
+		case "IsLocal":
+			z.IsLocal, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IsLocal")
 				return
 			}
 		default:
@@ -22607,20 +22957,20 @@ func (z *Stat) DecodeMsg(dc *msgp.Reader) (err error) {
 // EncodeMsg implements msgp.Encodable
 func (z *Stat) EncodeMsg(en *msgp.Writer) (err error) {
 	// map header, size 14
-	// write "BelongsStatsKey"
-	err = en.Append(0x8e, 0xaf, 0x42, 0x65, 0x6c, 0x6f, 0x6e, 0x67, 0x73, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79)
+	// write "MainHandAliasStatsKey"
+	err = en.Append(0x8e, 0xb5, 0x4d, 0x61, 0x69, 0x6e, 0x48, 0x61, 0x6e, 0x64, 0x41, 0x6c, 0x69, 0x61, 0x73, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
-	err = en.WriteArrayHeader(uint32(len(z.BelongsStatsKey)))
-	if err != nil {
-		err = msgp.WrapError(err, "BelongsStatsKey")
-		return
-	}
-	for za0001 := range z.BelongsStatsKey {
-		err = en.WriteString(z.BelongsStatsKey[za0001])
+	if z.MainHandAliasStatsKey == nil {
+		err = en.WriteNil()
 		if err != nil {
-			err = msgp.WrapError(err, "BelongsStatsKey", za0001)
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.MainHandAliasStatsKey)
+		if err != nil {
+			err = msgp.WrapError(err, "MainHandAliasStatsKey")
 			return
 		}
 	}
@@ -22641,100 +22991,6 @@ func (z *Stat) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "ContextFlags"
-	err = en.Append(0xac, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x46, 0x6c, 0x61, 0x67, 0x73)
-	if err != nil {
-		return
-	}
-	err = en.WriteArrayHeader(uint32(len(z.ContextFlags)))
-	if err != nil {
-		err = msgp.WrapError(err, "ContextFlags")
-		return
-	}
-	for za0002 := range z.ContextFlags {
-		err = en.WriteInt(z.ContextFlags[za0002])
-		if err != nil {
-			err = msgp.WrapError(err, "ContextFlags", za0002)
-			return
-		}
-	}
-	// write "Hash32"
-	err = en.Append(0xa6, 0x48, 0x61, 0x73, 0x68, 0x33, 0x32)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt(z.Hash32)
-	if err != nil {
-		err = msgp.WrapError(err, "Hash32")
-		return
-	}
-	// write "ID"
-	err = en.Append(0xa2, 0x49, 0x44)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.ID)
-	if err != nil {
-		err = msgp.WrapError(err, "ID")
-		return
-	}
-	// write "IsLocal"
-	err = en.Append(0xa7, 0x49, 0x73, 0x4c, 0x6f, 0x63, 0x61, 0x6c)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.IsLocal)
-	if err != nil {
-		err = msgp.WrapError(err, "IsLocal")
-		return
-	}
-	// write "IsScalable"
-	err = en.Append(0xaa, 0x49, 0x73, 0x53, 0x63, 0x61, 0x6c, 0x61, 0x62, 0x6c, 0x65)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.IsScalable)
-	if err != nil {
-		err = msgp.WrapError(err, "IsScalable")
-		return
-	}
-	// write "IsVirtual"
-	err = en.Append(0xa9, 0x49, 0x73, 0x56, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.IsVirtual)
-	if err != nil {
-		err = msgp.WrapError(err, "IsVirtual")
-		return
-	}
-	// write "IsWeaponLocal"
-	err = en.Append(0xad, 0x49, 0x73, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4c, 0x6f, 0x63, 0x61, 0x6c)
-	if err != nil {
-		return
-	}
-	err = en.WriteBool(z.IsWeaponLocal)
-	if err != nil {
-		err = msgp.WrapError(err, "IsWeaponLocal")
-		return
-	}
-	// write "MainHandAliasStatsKey"
-	err = en.Append(0xb5, 0x4d, 0x61, 0x69, 0x6e, 0x48, 0x61, 0x6e, 0x64, 0x41, 0x6c, 0x69, 0x61, 0x73, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79)
-	if err != nil {
-		return
-	}
-	if z.MainHandAliasStatsKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.MainHandAliasStatsKey)
-		if err != nil {
-			err = msgp.WrapError(err, "MainHandAliasStatsKey")
-			return
-		}
-	}
 	// write "OffHandAliasStatsKey"
 	err = en.Append(0xb4, 0x4f, 0x66, 0x66, 0x48, 0x61, 0x6e, 0x64, 0x41, 0x6c, 0x69, 0x61, 0x73, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
@@ -22752,14 +23008,14 @@ func (z *Stat) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
-	// write "Semantics"
-	err = en.Append(0xa9, 0x53, 0x65, 0x6d, 0x61, 0x6e, 0x74, 0x69, 0x63, 0x73)
+	// write "ID"
+	err = en.Append(0xa2, 0x49, 0x44)
 	if err != nil {
 		return
 	}
-	err = en.WriteInt(z.Semantics)
+	err = en.WriteString(z.ID)
 	if err != nil {
-		err = msgp.WrapError(err, "Semantics")
+		err = msgp.WrapError(err, "ID")
 		return
 	}
 	// write "Text"
@@ -22772,6 +23028,60 @@ func (z *Stat) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Text")
 		return
 	}
+	// write "ContextFlags"
+	err = en.Append(0xac, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x46, 0x6c, 0x61, 0x67, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.ContextFlags)))
+	if err != nil {
+		err = msgp.WrapError(err, "ContextFlags")
+		return
+	}
+	for za0001 := range z.ContextFlags {
+		err = en.WriteInt(z.ContextFlags[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "ContextFlags", za0001)
+			return
+		}
+	}
+	// write "BelongsStatsKey"
+	err = en.Append(0xaf, 0x42, 0x65, 0x6c, 0x6f, 0x6e, 0x67, 0x73, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.BelongsStatsKey)))
+	if err != nil {
+		err = msgp.WrapError(err, "BelongsStatsKey")
+		return
+	}
+	for za0002 := range z.BelongsStatsKey {
+		err = en.WriteString(z.BelongsStatsKey[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "BelongsStatsKey", za0002)
+			return
+		}
+	}
+	// write "Hash32"
+	err = en.Append(0xa6, 0x48, 0x61, 0x73, 0x68, 0x33, 0x32)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Hash32)
+	if err != nil {
+		err = msgp.WrapError(err, "Hash32")
+		return
+	}
+	// write "Semantics"
+	err = en.Append(0xa9, 0x53, 0x65, 0x6d, 0x61, 0x6e, 0x74, 0x69, 0x63, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Semantics)
+	if err != nil {
+		err = msgp.WrapError(err, "Semantics")
+		return
+	}
 	// write "Key"
 	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
 	if err != nil {
@@ -22782,6 +23092,46 @@ func (z *Stat) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Key")
 		return
 	}
+	// write "IsWeaponLocal"
+	err = en.Append(0xad, 0x49, 0x73, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4c, 0x6f, 0x63, 0x61, 0x6c)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IsWeaponLocal)
+	if err != nil {
+		err = msgp.WrapError(err, "IsWeaponLocal")
+		return
+	}
+	// write "IsVirtual"
+	err = en.Append(0xa9, 0x49, 0x73, 0x56, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IsVirtual)
+	if err != nil {
+		err = msgp.WrapError(err, "IsVirtual")
+		return
+	}
+	// write "IsScalable"
+	err = en.Append(0xaa, 0x49, 0x73, 0x53, 0x63, 0x61, 0x6c, 0x61, 0x62, 0x6c, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IsScalable)
+	if err != nil {
+		err = msgp.WrapError(err, "IsScalable")
+		return
+	}
+	// write "IsLocal"
+	err = en.Append(0xa7, 0x49, 0x73, 0x4c, 0x6f, 0x63, 0x61, 0x6c)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IsLocal)
+	if err != nil {
+		err = msgp.WrapError(err, "IsLocal")
+		return
+	}
 	return
 }
 
@@ -22789,11 +23139,12 @@ func (z *Stat) EncodeMsg(en *msgp.Writer) (err error) {
 func (z *Stat) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// map header, size 14
-	// string "BelongsStatsKey"
-	o = append(o, 0x8e, 0xaf, 0x42, 0x65, 0x6c, 0x6f, 0x6e, 0x67, 0x73, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.BelongsStatsKey)))
-	for za0001 := range z.BelongsStatsKey {
-		o = msgp.AppendString(o, z.BelongsStatsKey[za0001])
+	// string "MainHandAliasStatsKey"
+	o = append(o, 0x8e, 0xb5, 0x4d, 0x61, 0x69, 0x6e, 0x48, 0x61, 0x6e, 0x64, 0x41, 0x6c, 0x69, 0x61, 0x73, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79)
+	if z.MainHandAliasStatsKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.MainHandAliasStatsKey)
 	}
 	// string "Category"
 	o = append(o, 0xa8, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79)
@@ -22802,37 +23153,6 @@ func (z *Stat) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.Category)
 	}
-	// string "ContextFlags"
-	o = append(o, 0xac, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x46, 0x6c, 0x61, 0x67, 0x73)
-	o = msgp.AppendArrayHeader(o, uint32(len(z.ContextFlags)))
-	for za0002 := range z.ContextFlags {
-		o = msgp.AppendInt(o, z.ContextFlags[za0002])
-	}
-	// string "Hash32"
-	o = append(o, 0xa6, 0x48, 0x61, 0x73, 0x68, 0x33, 0x32)
-	o = msgp.AppendInt(o, z.Hash32)
-	// string "ID"
-	o = append(o, 0xa2, 0x49, 0x44)
-	o = msgp.AppendString(o, z.ID)
-	// string "IsLocal"
-	o = append(o, 0xa7, 0x49, 0x73, 0x4c, 0x6f, 0x63, 0x61, 0x6c)
-	o = msgp.AppendBool(o, z.IsLocal)
-	// string "IsScalable"
-	o = append(o, 0xaa, 0x49, 0x73, 0x53, 0x63, 0x61, 0x6c, 0x61, 0x62, 0x6c, 0x65)
-	o = msgp.AppendBool(o, z.IsScalable)
-	// string "IsVirtual"
-	o = append(o, 0xa9, 0x49, 0x73, 0x56, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c)
-	o = msgp.AppendBool(o, z.IsVirtual)
-	// string "IsWeaponLocal"
-	o = append(o, 0xad, 0x49, 0x73, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4c, 0x6f, 0x63, 0x61, 0x6c)
-	o = msgp.AppendBool(o, z.IsWeaponLocal)
-	// string "MainHandAliasStatsKey"
-	o = append(o, 0xb5, 0x4d, 0x61, 0x69, 0x6e, 0x48, 0x61, 0x6e, 0x64, 0x41, 0x6c, 0x69, 0x61, 0x73, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79)
-	if z.MainHandAliasStatsKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.MainHandAliasStatsKey)
-	}
 	// string "OffHandAliasStatsKey"
 	o = append(o, 0xb4, 0x4f, 0x66, 0x66, 0x48, 0x61, 0x6e, 0x64, 0x41, 0x6c, 0x69, 0x61, 0x73, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79)
 	if z.OffHandAliasStatsKey == nil {
@@ -22840,15 +23160,45 @@ func (z *Stat) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.OffHandAliasStatsKey)
 	}
-	// string "Semantics"
-	o = append(o, 0xa9, 0x53, 0x65, 0x6d, 0x61, 0x6e, 0x74, 0x69, 0x63, 0x73)
-	o = msgp.AppendInt(o, z.Semantics)
+	// string "ID"
+	o = append(o, 0xa2, 0x49, 0x44)
+	o = msgp.AppendString(o, z.ID)
 	// string "Text"
 	o = append(o, 0xa4, 0x54, 0x65, 0x78, 0x74)
 	o = msgp.AppendString(o, z.Text)
+	// string "ContextFlags"
+	o = append(o, 0xac, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x46, 0x6c, 0x61, 0x67, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ContextFlags)))
+	for za0001 := range z.ContextFlags {
+		o = msgp.AppendInt(o, z.ContextFlags[za0001])
+	}
+	// string "BelongsStatsKey"
+	o = append(o, 0xaf, 0x42, 0x65, 0x6c, 0x6f, 0x6e, 0x67, 0x73, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.BelongsStatsKey)))
+	for za0002 := range z.BelongsStatsKey {
+		o = msgp.AppendString(o, z.BelongsStatsKey[za0002])
+	}
+	// string "Hash32"
+	o = append(o, 0xa6, 0x48, 0x61, 0x73, 0x68, 0x33, 0x32)
+	o = msgp.AppendInt(o, z.Hash32)
+	// string "Semantics"
+	o = append(o, 0xa9, 0x53, 0x65, 0x6d, 0x61, 0x6e, 0x74, 0x69, 0x63, 0x73)
+	o = msgp.AppendInt(o, z.Semantics)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
+	// string "IsWeaponLocal"
+	o = append(o, 0xad, 0x49, 0x73, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x4c, 0x6f, 0x63, 0x61, 0x6c)
+	o = msgp.AppendBool(o, z.IsWeaponLocal)
+	// string "IsVirtual"
+	o = append(o, 0xa9, 0x49, 0x73, 0x56, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c)
+	o = msgp.AppendBool(o, z.IsVirtual)
+	// string "IsScalable"
+	o = append(o, 0xaa, 0x49, 0x73, 0x53, 0x63, 0x61, 0x6c, 0x61, 0x62, 0x6c, 0x65)
+	o = msgp.AppendBool(o, z.IsScalable)
+	// string "IsLocal"
+	o = append(o, 0xa7, 0x49, 0x73, 0x4c, 0x6f, 0x63, 0x61, 0x6c)
+	o = msgp.AppendBool(o, z.IsLocal)
 	return
 }
 
@@ -22870,22 +23220,20 @@ func (z *Stat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "BelongsStatsKey":
-			var zb0002 uint32
-			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "BelongsStatsKey")
-				return
-			}
-			if cap(z.BelongsStatsKey) >= int(zb0002) {
-				z.BelongsStatsKey = (z.BelongsStatsKey)[:zb0002]
-			} else {
-				z.BelongsStatsKey = make([]string, zb0002)
-			}
-			for za0001 := range z.BelongsStatsKey {
-				z.BelongsStatsKey[za0001], bts, err = msgp.ReadStringBytes(bts)
+		case "MainHandAliasStatsKey":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
 				if err != nil {
-					err = msgp.WrapError(err, "BelongsStatsKey", za0001)
+					return
+				}
+				z.MainHandAliasStatsKey = nil
+			} else {
+				if z.MainHandAliasStatsKey == nil {
+					z.MainHandAliasStatsKey = new(int)
+				}
+				*z.MainHandAliasStatsKey, bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "MainHandAliasStatsKey")
 					return
 				}
 			}
@@ -22906,78 +23254,6 @@ func (z *Stat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "ContextFlags":
-			var zb0003 uint32
-			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ContextFlags")
-				return
-			}
-			if cap(z.ContextFlags) >= int(zb0003) {
-				z.ContextFlags = (z.ContextFlags)[:zb0003]
-			} else {
-				z.ContextFlags = make([]int, zb0003)
-			}
-			for za0002 := range z.ContextFlags {
-				z.ContextFlags[za0002], bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "ContextFlags", za0002)
-					return
-				}
-			}
-		case "Hash32":
-			z.Hash32, bts, err = msgp.ReadIntBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Hash32")
-				return
-			}
-		case "ID":
-			z.ID, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "ID")
-				return
-			}
-		case "IsLocal":
-			z.IsLocal, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "IsLocal")
-				return
-			}
-		case "IsScalable":
-			z.IsScalable, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "IsScalable")
-				return
-			}
-		case "IsVirtual":
-			z.IsVirtual, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "IsVirtual")
-				return
-			}
-		case "IsWeaponLocal":
-			z.IsWeaponLocal, bts, err = msgp.ReadBoolBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "IsWeaponLocal")
-				return
-			}
-		case "MainHandAliasStatsKey":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
-				}
-				z.MainHandAliasStatsKey = nil
-			} else {
-				if z.MainHandAliasStatsKey == nil {
-					z.MainHandAliasStatsKey = new(int)
-				}
-				*z.MainHandAliasStatsKey, bts, err = msgp.ReadIntBytes(bts)
-				if err != nil {
-					err = msgp.WrapError(err, "MainHandAliasStatsKey")
-					return
-				}
-			}
 		case "OffHandAliasStatsKey":
 			if msgp.IsNil(bts) {
 				bts, err = msgp.ReadNilBytes(bts)
@@ -22995,10 +23271,10 @@ func (z *Stat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 					return
 				}
 			}
-		case "Semantics":
-			z.Semantics, bts, err = msgp.ReadIntBytes(bts)
+		case "ID":
+			z.ID, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Semantics")
+				err = msgp.WrapError(err, "ID")
 				return
 			}
 		case "Text":
@@ -23007,10 +23283,84 @@ func (z *Stat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Text")
 				return
 			}
+		case "ContextFlags":
+			var zb0002 uint32
+			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ContextFlags")
+				return
+			}
+			if cap(z.ContextFlags) >= int(zb0002) {
+				z.ContextFlags = (z.ContextFlags)[:zb0002]
+			} else {
+				z.ContextFlags = make([]int, zb0002)
+			}
+			for za0001 := range z.ContextFlags {
+				z.ContextFlags[za0001], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "ContextFlags", za0001)
+					return
+				}
+			}
+		case "BelongsStatsKey":
+			var zb0003 uint32
+			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "BelongsStatsKey")
+				return
+			}
+			if cap(z.BelongsStatsKey) >= int(zb0003) {
+				z.BelongsStatsKey = (z.BelongsStatsKey)[:zb0003]
+			} else {
+				z.BelongsStatsKey = make([]string, zb0003)
+			}
+			for za0002 := range z.BelongsStatsKey {
+				z.BelongsStatsKey[za0002], bts, err = msgp.ReadStringBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "BelongsStatsKey", za0002)
+					return
+				}
+			}
+		case "Hash32":
+			z.Hash32, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Hash32")
+				return
+			}
+		case "Semantics":
+			z.Semantics, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Semantics")
+				return
+			}
 		case "Key":
 			z.Key, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "Key")
+				return
+			}
+		case "IsWeaponLocal":
+			z.IsWeaponLocal, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IsWeaponLocal")
+				return
+			}
+		case "IsVirtual":
+			z.IsVirtual, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IsVirtual")
+				return
+			}
+		case "IsScalable":
+			z.IsScalable, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IsScalable")
+				return
+			}
+		case "IsLocal":
+			z.IsLocal, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IsLocal")
 				return
 			}
 		default:
@@ -23027,18 +23377,14 @@ func (z *Stat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *Stat) Msgsize() (s int) {
-	s = 1 + 16 + msgp.ArrayHeaderSize
-	for za0001 := range z.BelongsStatsKey {
-		s += msgp.StringPrefixSize + len(z.BelongsStatsKey[za0001])
-	}
-	s += 9
-	if z.Category == nil {
+	s = 1 + 22
+	if z.MainHandAliasStatsKey == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
 	}
-	s += 13 + msgp.ArrayHeaderSize + (len(z.ContextFlags) * (msgp.IntSize)) + 7 + msgp.IntSize + 3 + msgp.StringPrefixSize + len(z.ID) + 8 + msgp.BoolSize + 11 + msgp.BoolSize + 10 + msgp.BoolSize + 14 + msgp.BoolSize + 22
-	if z.MainHandAliasStatsKey == nil {
+	s += 9
+	if z.Category == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.IntSize
@@ -23049,7 +23395,11 @@ func (z *Stat) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 10 + msgp.IntSize + 5 + msgp.StringPrefixSize + len(z.Text) + 4 + msgp.IntSize
+	s += 3 + msgp.StringPrefixSize + len(z.ID) + 5 + msgp.StringPrefixSize + len(z.Text) + 13 + msgp.ArrayHeaderSize + (len(z.ContextFlags) * (msgp.IntSize)) + 16 + msgp.ArrayHeaderSize
+	for za0002 := range z.BelongsStatsKey {
+		s += msgp.StringPrefixSize + len(z.BelongsStatsKey[za0002])
+	}
+	s += 7 + msgp.IntSize + 10 + msgp.IntSize + 4 + msgp.IntSize + 14 + msgp.BoolSize + 10 + msgp.BoolSize + 11 + msgp.BoolSize + 8 + msgp.BoolSize
 	return
 }
 
