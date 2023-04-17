@@ -2,6 +2,8 @@ package st
 
 import (
 	"bytes"
+	"compress/gzip"
+	"encoding/json"
 	"io"
 	"io/fs"
 	"os"
@@ -207,6 +209,33 @@ func (t *TranslationParser) SaveTo(outDir string, translationName string) error 
 	}
 
 	for lang, translations := range fullOut {
+		b, err := json.Marshal(translations)
+		if err != nil {
+			return errors.Wrap(err, "failed to marshal translations file")
+		}
+
+		outPathGzip := filepath.Join(outDir, languageMap[lang], translationName+".json.gz")
+		println("writing to", outPathGzip)
+
+		if err := os.MkdirAll(filepath.Dir(outPathGzip), 0o755); err != nil {
+			if !os.IsExist(err) {
+				return errors.Wrap(err, "could not create directory tree")
+			}
+		}
+
+		fGzip, err := os.OpenFile(outPathGzip, os.O_WRONLY|os.O_CREATE, 0o755)
+		if err != nil {
+			return errors.Wrap(err, "could not open file for writing")
+		}
+
+		writerGzip := gzip.NewWriter(fGzip)
+		if _, err := writerGzip.Write(b); err != nil {
+			return errors.Wrap(err, "could not compress to gzip")
+		}
+
+		_ = writerGzip.Close()
+		_ = fGzip.Close()
+
 		fullPath := filepath.Join(outDir, languageMap[lang], translationName+".msgpack.br")
 		println("writing to", fullPath)
 
