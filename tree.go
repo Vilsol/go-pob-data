@@ -66,7 +66,7 @@ func downloadTreeData(treeVersion string, gameVersion string) error {
 		}
 	}
 
-	fGzip, err := os.OpenFile(dataJSONOutPathGzip, os.O_WRONLY|os.O_CREATE, 0o755)
+	fGzip, err := os.OpenFile(dataJSONOutPathGzip, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o755)
 	if err != nil {
 		return errors.Wrap(err, "could not open file for writing")
 	}
@@ -81,7 +81,7 @@ func downloadTreeData(treeVersion string, gameVersion string) error {
 
 	dataJSONOutPathBrotli := filepath.Join("data", gameVersion, "tree", "data.json.br")
 
-	fBrotli, err := os.OpenFile(dataJSONOutPathBrotli, os.O_WRONLY|os.O_CREATE, 0o755)
+	fBrotli, err := os.OpenFile(dataJSONOutPathBrotli, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o755)
 	if err != nil {
 		return errors.Wrap(err, "could not open file for writing")
 	}

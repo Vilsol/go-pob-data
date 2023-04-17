@@ -248,7 +248,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 			}
 		}
 
-		fGzip, err := os.OpenFile(outPathGzip, os.O_WRONLY|os.O_CREATE, 0o755)
+		fGzip, err := os.OpenFile(outPathGzip, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o755)
 		if err != nil {
 			return errors.Wrap(err, "could not open file for writing")
 		}
@@ -264,7 +264,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 		outNameBrotli := strings.Split(filepath.Base(file.Path), ".")[0] + ".json.br"
 		outPathBrotli := filepath.Join("data", gameVersion, "raw", outNameBrotli)
 
-		fBrotli, err := os.OpenFile(outPathBrotli, os.O_WRONLY|os.O_CREATE, 0o755)
+		fBrotli, err := os.OpenFile(outPathBrotli, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o755)
 		if err != nil {
 			return errors.Wrap(err, "could not open file for writing")
 		}
@@ -280,7 +280,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 		outNameMsgpBrotli := strings.Split(filepath.Base(file.Path), ".")[0] + ".msgpack.br"
 		outPathMsgpBrotli := filepath.Join("data", gameVersion, "raw", outNameMsgpBrotli)
 
-		fMsgpBrotli, err := os.OpenFile(outPathMsgpBrotli, os.O_WRONLY|os.O_CREATE, 0o755)
+		fMsgpBrotli, err := os.OpenFile(outPathMsgpBrotli, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o755)
 		if err != nil {
 			return errors.Wrap(err, "could not open file for writing")
 		}

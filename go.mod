@@ -1,6 +1,6 @@
 module github.com/Vilsol/go-pob-data
 
-go 1.19
+go 1.20
 
 require (
 	github.com/MarvinJWendt/testza v0.5.2
