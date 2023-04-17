@@ -28,7 +28,7 @@ var (
 	statLimitRegex       = regexp.MustCompile(`[!\d\-#|]+`)
 	statLimitNumberRegex = regexp.MustCompile(`^-?\d+$`)
 	statLimitNegateRegex = regexp.MustCompile(`^!(-?\d+)$`)
-	statLimitPipeRegex   = regexp.MustCompile(`^([\d\-#]+)|([\d\-#]+)$`)
+	statLimitPipeRegex   = regexp.MustCompile(`^([\d\-#]+?)\|([\d\-#]+?)(?:\|.+?)?$`)
 	specialRegex         = regexp.MustCompile(`([\w%_]+) (\w+)`)
 	statsRegex           = regexp.MustCompile(`\d+\s+([\w_+\-% ]+)`)
 	statRegex            = regexp.MustCompile(`[\w_+\-%]+`)
@@ -157,10 +157,18 @@ func (t *TranslationParser) ParseFile(name string) error {
 								pipeMatch := statLimitPipeRegex.FindAllStringSubmatch(statLimit, -1)
 								n1, _ := strconv.Atoi(pipeMatch[0][1])
 								n2, _ := strconv.Atoi(pipeMatch[0][2])
-								desc.Conditions = append(desc.Conditions, raw.Condition{
-									Min: &n1,
-									Max: &n2,
-								})
+
+								condition := raw.Condition{}
+
+								if pipeMatch[0][1] != "#" {
+									condition.Min = &n1
+								}
+
+								if pipeMatch[0][2] != "#" {
+									condition.Min = &n2
+								}
+
+								desc.Conditions = append(desc.Conditions, condition)
 							}
 						}
 					}
