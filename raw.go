@@ -1,11 +1,13 @@
 package main
 
 import (
+	"bytes"
 	"compress/gzip"
 	"encoding/json"
 	"fmt"
 	"io"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"reflect"
 	"sort"
@@ -14,7 +16,6 @@ import (
 	"github.com/andybalholm/brotli"
 	"github.com/pkg/errors"
 	"github.com/tinylib/msgp/msgp"
-	"github.com/yusukebe/go-pngquant"
 	"gopkg.in/gographics/imagick.v3/imagick"
 
 	"github.com/Vilsol/go-pob-data/extractor"
@@ -337,7 +338,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 
 		uncompressed := mw.GetImageBlob()
 
-		finalImage, err := pngquant.CompressBytes(uncompressed, "one")
+		finalImage, err := CompressBytes(uncompressed, "1")
 		if err != nil {
 			return errors.Wrap(err, "failed to crush png image")
 		}
@@ -347,4 +348,19 @@ func extractRawData(gamePath string, gameVersion string) error {
 		}
 	}
 	return nil
+}
+
+func CompressBytes(input []byte, speed string) ([]byte, error) {
+	cmd := exec.Command("pngquant", "-", "--speed", speed)
+	cmd.Stdin = strings.NewReader(string(input))
+
+	var o bytes.Buffer
+	cmd.Stdout = &o
+
+	var e bytes.Buffer
+	cmd.Stderr = &e
+
+	err := cmd.Run()
+
+	return o.Bytes(), errors.Wrap(err, e.String())
 }

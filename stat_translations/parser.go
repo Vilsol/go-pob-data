@@ -133,7 +133,10 @@ func (t *TranslationParser) ParseFile(name string) error {
 
 						if statLimit == "#" {
 							// Do nothing
-						} else if statLimitNumberRegex.MatchString(statLimit) {
+							continue
+						}
+
+						if statLimitNumberRegex.MatchString(statLimit) {
 							n, _ := strconv.Atoi(statLimit)
 							desc.Conditions = append(desc.Conditions, raw.Condition{
 								Min: &n,
