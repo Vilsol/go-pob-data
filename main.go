@@ -28,20 +28,20 @@ func main() {
 	}
 
 	gamePath := os.Args[1]
-	//treeVersion := os.Args[2]
+	treeVersion := os.Args[2]
 	gameVersion := os.Args[3]
 
-	//if err := extractRawData(gamePath, gameVersion); err != nil {
-	//	println(err.Error())
-	//	os.Exit(1)
-	//	return
-	//}
-	//
-	//if err := downloadTreeData(treeVersion, gameVersion); err != nil {
-	//	println(err.Error())
-	//	os.Exit(1)
-	//	return
-	//}
+	if err := extractRawData(gamePath, gameVersion); err != nil {
+		println(err.Error())
+		os.Exit(1)
+		return
+	}
+
+	if err := downloadTreeData(treeVersion, gameVersion); err != nil {
+		println(err.Error())
+		os.Exit(1)
+		return
+	}
 
 	if err := extractTranslations(gamePath, gameVersion); err != nil {
 		println(err.Error())
