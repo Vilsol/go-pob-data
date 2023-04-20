@@ -7,6 +7,8 @@ if [ "$#" -ne 3 ]; then
     exit 1
 fi
 
+set -ex
+
 mkdir -p "data/$3"
 
 curl -L https://github.com/poe-tool-dev/dat-schema/releases/download/latest/schema.min.json > "data/$3/schema.min.json"

@@ -23853,6 +23853,255 @@ func (z TagName) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *TranslationFile) DecodeMsg(dc *msgp.Reader) (err error) {
+	var field []byte
+	_ = field
+	var zb0001 uint32
+	zb0001, err = dc.ReadMapHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	for zb0001 > 0 {
+		zb0001--
+		field, err = dc.ReadMapKeyPtr()
+		if err != nil {
+			err = msgp.WrapError(err)
+			return
+		}
+		switch msgp.UnsafeString(field) {
+		case "Descriptors":
+			var zb0002 uint32
+			zb0002, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Descriptors")
+				return
+			}
+			if cap(z.Descriptors) >= int(zb0002) {
+				z.Descriptors = (z.Descriptors)[:zb0002]
+			} else {
+				z.Descriptors = make([]*StatTranslation, zb0002)
+			}
+			for za0001 := range z.Descriptors {
+				if dc.IsNil() {
+					err = dc.ReadNil()
+					if err != nil {
+						err = msgp.WrapError(err, "Descriptors", za0001)
+						return
+					}
+					z.Descriptors[za0001] = nil
+				} else {
+					if z.Descriptors[za0001] == nil {
+						z.Descriptors[za0001] = new(StatTranslation)
+					}
+					err = z.Descriptors[za0001].DecodeMsg(dc)
+					if err != nil {
+						err = msgp.WrapError(err, "Descriptors", za0001)
+						return
+					}
+				}
+			}
+		case "Includes":
+			var zb0003 uint32
+			zb0003, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Includes")
+				return
+			}
+			if cap(z.Includes) >= int(zb0003) {
+				z.Includes = (z.Includes)[:zb0003]
+			} else {
+				z.Includes = make([]string, zb0003)
+			}
+			for za0002 := range z.Includes {
+				z.Includes[za0002], err = dc.ReadString()
+				if err != nil {
+					err = msgp.WrapError(err, "Includes", za0002)
+					return
+				}
+			}
+		default:
+			err = dc.Skip()
+			if err != nil {
+				err = msgp.WrapError(err)
+				return
+			}
+		}
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *TranslationFile) EncodeMsg(en *msgp.Writer) (err error) {
+	// map header, size 2
+	// write "Descriptors"
+	err = en.Append(0x82, 0xab, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x6f, 0x72, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Descriptors)))
+	if err != nil {
+		err = msgp.WrapError(err, "Descriptors")
+		return
+	}
+	for za0001 := range z.Descriptors {
+		if z.Descriptors[za0001] == nil {
+			err = en.WriteNil()
+			if err != nil {
+				return
+			}
+		} else {
+			err = z.Descriptors[za0001].EncodeMsg(en)
+			if err != nil {
+				err = msgp.WrapError(err, "Descriptors", za0001)
+				return
+			}
+		}
+	}
+	// write "Includes"
+	err = en.Append(0xa8, 0x49, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Includes)))
+	if err != nil {
+		err = msgp.WrapError(err, "Includes")
+		return
+	}
+	for za0002 := range z.Includes {
+		err = en.WriteString(z.Includes[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "Includes", za0002)
+			return
+		}
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *TranslationFile) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// map header, size 2
+	// string "Descriptors"
+	o = append(o, 0x82, 0xab, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x6f, 0x72, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Descriptors)))
+	for za0001 := range z.Descriptors {
+		if z.Descriptors[za0001] == nil {
+			o = msgp.AppendNil(o)
+		} else {
+			o, err = z.Descriptors[za0001].MarshalMsg(o)
+			if err != nil {
+				err = msgp.WrapError(err, "Descriptors", za0001)
+				return
+			}
+		}
+	}
+	// string "Includes"
+	o = append(o, 0xa8, 0x49, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Includes)))
+	for za0002 := range z.Includes {
+		o = msgp.AppendString(o, z.Includes[za0002])
+	}
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *TranslationFile) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var field []byte
+	_ = field
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadMapHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	for zb0001 > 0 {
+		zb0001--
+		field, bts, err = msgp.ReadMapKeyZC(bts)
+		if err != nil {
+			err = msgp.WrapError(err)
+			return
+		}
+		switch msgp.UnsafeString(field) {
+		case "Descriptors":
+			var zb0002 uint32
+			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Descriptors")
+				return
+			}
+			if cap(z.Descriptors) >= int(zb0002) {
+				z.Descriptors = (z.Descriptors)[:zb0002]
+			} else {
+				z.Descriptors = make([]*StatTranslation, zb0002)
+			}
+			for za0001 := range z.Descriptors {
+				if msgp.IsNil(bts) {
+					bts, err = msgp.ReadNilBytes(bts)
+					if err != nil {
+						return
+					}
+					z.Descriptors[za0001] = nil
+				} else {
+					if z.Descriptors[za0001] == nil {
+						z.Descriptors[za0001] = new(StatTranslation)
+					}
+					bts, err = z.Descriptors[za0001].UnmarshalMsg(bts)
+					if err != nil {
+						err = msgp.WrapError(err, "Descriptors", za0001)
+						return
+					}
+				}
+			}
+		case "Includes":
+			var zb0003 uint32
+			zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Includes")
+				return
+			}
+			if cap(z.Includes) >= int(zb0003) {
+				z.Includes = (z.Includes)[:zb0003]
+			} else {
+				z.Includes = make([]string, zb0003)
+			}
+			for za0002 := range z.Includes {
+				z.Includes[za0002], bts, err = msgp.ReadStringBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Includes", za0002)
+					return
+				}
+			}
+		default:
+			bts, err = msgp.Skip(bts)
+			if err != nil {
+				err = msgp.WrapError(err)
+				return
+			}
+		}
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *TranslationFile) Msgsize() (s int) {
+	s = 1 + 12 + msgp.ArrayHeaderSize
+	for za0001 := range z.Descriptors {
+		if z.Descriptors[za0001] == nil {
+			s += msgp.NilSize
+		} else {
+			s += z.Descriptors[za0001].Msgsize()
+		}
+	}
+	s += 9 + msgp.ArrayHeaderSize
+	for za0002 := range z.Includes {
+		s += msgp.StringPrefixSize + len(z.Includes[za0002])
+	}
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *WeaponType) DecodeMsg(dc *msgp.Reader) (err error) {
 	var field []byte
 	_ = field

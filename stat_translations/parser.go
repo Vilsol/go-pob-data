@@ -37,6 +37,7 @@ var (
 type TranslationParser struct {
 	loader      fs.FS
 	descriptors map[string]*Description
+	includes    []string
 	loaded      map[string]bool
 	order       int
 }
@@ -45,6 +46,7 @@ func NewTranslationParser(loader fs.FS) *TranslationParser {
 	return &TranslationParser{
 		order:       1,
 		descriptors: make(map[string]*Description),
+		includes:    make([]string, 0),
 		loader:      loader,
 		loaded:      make(map[string]bool),
 	}
@@ -81,9 +83,7 @@ func (t *TranslationParser) ParseFile(name string) error {
 	for _, line := range lineRegex.FindAll(all, -1) {
 		include := includeRegex.FindAllSubmatch(line, -1)
 		if len(include) > 0 {
-			if err := t.ParseFile(string(include[0][1])); err != nil {
-				return err
-			}
+			t.includes = append(t.includes, string(include[0][1]))
 			continue
 		}
 
@@ -202,14 +202,17 @@ var languageMap = map[string]string{
 }
 
 func (t *TranslationParser) SaveTo(outDir string, translationName string) error {
-	fullOut := make(map[string][]*raw.StatTranslation)
+	fullOut := make(map[string]*raw.TranslationFile)
 	for _, description := range t.descriptors {
 		for lang, translations := range description.Lang {
 			if _, ok := fullOut[lang]; !ok {
-				fullOut[lang] = make([]*raw.StatTranslation, 0)
+				fullOut[lang] = &raw.TranslationFile{
+					Descriptors: make([]*raw.StatTranslation, 0),
+					Includes:    t.includes,
+				}
 			}
 
-			fullOut[lang] = append(fullOut[lang], &raw.StatTranslation{
+			fullOut[lang].Descriptors = append(fullOut[lang].Descriptors, &raw.StatTranslation{
 				IDs:  description.Stats,
 				List: translations,
 			})
