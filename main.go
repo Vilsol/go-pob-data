@@ -48,4 +48,10 @@ func main() {
 		os.Exit(1)
 		return
 	}
+
+	if err := generateMeta(); err != nil {
+		println(err.Error())
+		os.Exit(1)
+		return
+	}
 }
