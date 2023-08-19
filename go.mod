@@ -26,6 +26,7 @@ require (
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/mattn/go-runewidth v0.0.14 // indirect
 	github.com/mcuadros/go-version v0.0.0-20190830083331-035f6764e8d2 // indirect
+	github.com/nfisher/gstream v0.0.0-20190503025049-55c78d87ebc2 // indirect
 	github.com/oriath-net/gooz v1.0.1 // indirect
 	github.com/philhofer/fwd v1.1.2 // indirect
 	github.com/pterm/pterm v0.12.53 // indirect
@@ -36,4 +37,5 @@ require (
 	golang.org/x/term v0.3.0 // indirect
 )
 
-replace github.com/oriath-net/pogo v0.0.0-20220205020622-67c41a643bc3 => github.com/Vilsol/pogo v0.0.0-20230101233036-865008308ccc
+//replace github.com/oriath-net/pogo v0.0.0-20220205020622-67c41a643bc3 => github.com/Vilsol/pogo v0.0.0-20230101233036-865008308ccc
+replace github.com/oriath-net/pogo v0.0.0-20220205020622-67c41a643bc3 => ../pogo

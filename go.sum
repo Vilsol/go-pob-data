@@ -13,8 +13,6 @@ github.com/MarvinJWendt/testza v0.3.0/go.mod h1:eFcL4I0idjtIx8P9C6KkAuLgATNKpX4/
 github.com/MarvinJWendt/testza v0.4.2/go.mod h1:mSdhXiKH8sg/gQehJ63bINcCKp7RtYewEjXsvsVUPbE=
 github.com/MarvinJWendt/testza v0.5.2 h1:53KDo64C1z/h/d/stCYCPY69bt/OSwjq5KpFNwi+zB4=
 github.com/MarvinJWendt/testza v0.5.2/go.mod h1:xu53QFE5sCdjtMCKk8YMQ2MnymimEctc4n3EjyIYvEY=
-github.com/Vilsol/pogo v0.0.0-20230101233036-865008308ccc h1:W5BlbcmnJ8Vk/o8SZfRJgwf6GRkLrk3G6dRYeer7+Wg=
-github.com/Vilsol/pogo v0.0.0-20230101233036-865008308ccc/go.mod h1:P0brhP4S29OGdpNvNKoHAMRZHONioQwJK3P2KltOKSw=
 github.com/andybalholm/brotli v1.0.5 h1:8uQZIdzKmjc/iuPu7O2ioW48L81FgatrcpfFmiq/cCs=
 github.com/andybalholm/brotli v1.0.5/go.mod h1:fO7iG3H7G2nSZ7m0zPUDn85XEX2GTukHGRSepvi9Eig=
 github.com/atomicgo/cursor v0.0.1/go.mod h1:cBON2QmmrysudxNBFthvMtN32r3jxVRIvzkUiF/RuIk=
@@ -48,6 +46,8 @@ github.com/mattn/go-runewidth v0.0.14 h1:+xnbZSEeDbOIg5/mE6JF0w6n9duR1l3/WmbinWV
 github.com/mattn/go-runewidth v0.0.14/go.mod h1:Jdepj2loyihRzMpdS35Xk/zdY8IAYHsh153qUoGf23w=
 github.com/mcuadros/go-version v0.0.0-20190830083331-035f6764e8d2 h1:YocNLcTBdEdvY3iDK6jfWXvEaM5OCKkjxPKoJRdB3Gg=
 github.com/mcuadros/go-version v0.0.0-20190830083331-035f6764e8d2/go.mod h1:76rfSfYPWj01Z85hUf/ituArm797mNKcvINh1OlsZKo=
+github.com/nfisher/gstream v0.0.0-20190503025049-55c78d87ebc2 h1:7F1BxMd56b2FkV1yqSe98VBPRoaRyhlIbc1rv3/4Kj8=
+github.com/nfisher/gstream v0.0.0-20190503025049-55c78d87ebc2/go.mod h1:D044McCAv7YdlwgwW6dJlrdGOyCkGkcTBj/0W46GQEc=
 github.com/oriath-net/gooz v1.0.1 h1:YOWkJi1LfyED0bEIMoiI4UZluG2z5VSjYhLRRbh0zRs=
 github.com/oriath-net/gooz v1.0.1/go.mod h1:cpLRjbOkL4ILkfR+8+fzF+JeYpTmOewjbVBKjV6nEe8=
 github.com/philhofer/fwd v1.1.2 h1:bnDivRJ1EWPjUIRXV5KfORO897HTbpFAQddBdE8t7Gw=
