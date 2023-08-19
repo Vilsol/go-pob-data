@@ -37,5 +37,4 @@ require (
 	golang.org/x/term v0.3.0 // indirect
 )
 
-//replace github.com/oriath-net/pogo v0.0.0-20220205020622-67c41a643bc3 => github.com/Vilsol/pogo v0.0.0-20230101233036-865008308ccc
-replace github.com/oriath-net/pogo v0.0.0-20220205020622-67c41a643bc3 => ../pogo
+replace github.com/oriath-net/pogo v0.0.0-20220205020622-67c41a643bc3 => github.com/Vilsol/pogo v0.0.0-20230819000347-369f6b8b106d
