@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install ImageMagick
-        run: sudo apt install -y imagemagick
+        run: sudo apt install -y libmagickwand-6-headers
 
       - uses: golangci/golangci-lint-action@v3
         with:
@@ -39,7 +39,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install ImageMagick
-        run: sudo apt install -y imagemagick
+        run: sudo apt install -y libmagickwand-6-headers
 
       - name: Test
         run: go test -v ./...
