@@ -11,8 +11,10 @@ type ActiveSkillType struct {
 	raw.ActiveSkillType
 }
 
-var ActiveSkillTypes []*ActiveSkillType
-var ActiveSkillTypesByID map[string]*ActiveSkillType
+var (
+	ActiveSkillTypes     []*ActiveSkillType
+	ActiveSkillTypesByID map[string]*ActiveSkillType
+)
 
 func InitializeActiveSkillTypes(ctx context.Context, version string, assetCache loader.AssetCache) error {
 	return loader.InitHelper(ctx, version, "ActiveSkillType", &ActiveSkillTypes, func(count int64) {

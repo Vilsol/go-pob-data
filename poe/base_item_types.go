@@ -13,8 +13,10 @@ type BaseItemType struct {
 
 var BaseItemTypes []*BaseItemType
 
-var BaseItemTypeByIDMap map[string]*BaseItemType
-var BaseItemTypeByNameMap map[string]*BaseItemType
+var (
+	BaseItemTypeByIDMap   map[string]*BaseItemType
+	BaseItemTypeByNameMap map[string]*BaseItemType
+)
 
 func InitializeBaseItemTypes(ctx context.Context, version string, assetCache loader.AssetCache) error {
 	return loader.InitHelper(ctx, version, "BaseItemTypes", &BaseItemTypes, func(count int64) {

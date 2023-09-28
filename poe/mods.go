@@ -17,17 +17,17 @@ func InitializeMods(ctx context.Context, version string, assetCache loader.Asset
 	return loader.InitHelper(ctx, version, "Mods", &Mods, nil, assetCache)
 }
 
-type modStat struct {
+type ModStat struct {
 	Stat *Stat
 	Min  int
 	Max  int
 }
 
-func (m *Mod) Stats() []modStat {
-	stats := make([]modStat, 0, 4)
+func (m *Mod) Stats() []ModStat {
+	stats := make([]ModStat, 0, 4)
 
 	if m.StatsKey1 != nil {
-		stats = append(stats, modStat{
+		stats = append(stats, ModStat{
 			Stat: Stats[*m.StatsKey1],
 			Min:  m.Stat1Min,
 			Max:  m.Stat1Max,
@@ -35,7 +35,7 @@ func (m *Mod) Stats() []modStat {
 	}
 
 	if m.StatsKey2 != nil {
-		stats = append(stats, modStat{
+		stats = append(stats, ModStat{
 			Stat: Stats[*m.StatsKey2],
 			Min:  m.Stat2Min,
 			Max:  m.Stat2Max,
@@ -43,7 +43,7 @@ func (m *Mod) Stats() []modStat {
 	}
 
 	if m.StatsKey3 != nil {
-		stats = append(stats, modStat{
+		stats = append(stats, ModStat{
 			Stat: Stats[*m.StatsKey3],
 			Min:  m.Stat3Min,
 			Max:  m.Stat3Max,
@@ -51,7 +51,7 @@ func (m *Mod) Stats() []modStat {
 	}
 
 	if m.StatsKey4 != nil {
-		stats = append(stats, modStat{
+		stats = append(stats, ModStat{
 			Stat: Stats[*m.StatsKey4],
 			Min:  m.Stat4Min,
 			Max:  m.Stat4Max,
@@ -59,7 +59,7 @@ func (m *Mod) Stats() []modStat {
 	}
 
 	if m.StatsKey5 != nil {
-		stats = append(stats, modStat{
+		stats = append(stats, ModStat{
 			Stat: Stats[*m.StatsKey5],
 			Min:  m.Stat5Min,
 			Max:  m.Stat5Max,
@@ -67,7 +67,7 @@ func (m *Mod) Stats() []modStat {
 	}
 
 	if m.StatsKey6 != nil {
-		stats = append(stats, modStat{
+		stats = append(stats, ModStat{
 			Stat: Stats[*m.StatsKey6],
 			Min:  m.Stat6Min,
 			Max:  m.Stat6Max,

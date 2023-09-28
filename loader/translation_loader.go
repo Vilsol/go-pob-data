@@ -4,14 +4,16 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/Vilsol/go-pob-data/raw"
+	"io"
+	"log/slog"
+	"net/http"
+
 	"github.com/Vilsol/slox"
 	"github.com/andybalholm/brotli"
 	"github.com/pkg/errors"
 	"github.com/tinylib/msgp/msgp"
-	"io"
-	"log/slog"
-	"net/http"
+
+	"github.com/Vilsol/go-pob-data/raw"
 )
 
 const cdnTranslationBase = "https://go-pob-data.pages.dev/data/%s/stat_translations/%s/%s.msgpack.br"

@@ -89,8 +89,8 @@ func (g *ActiveSkill) GetActiveSkillBaseFlagsAndTypes() (map[SkillFlag]bool, map
 		case SkillTypeDamage:
 			flags[SkillFlagHit] = true
 			// TODO SkillFlagCast
-			//case data.SkillType...:
-			//	flags[SkillFlagCast] = true
+			// case data.SkillType...:
+			//	 flags[SkillFlagCast] = true
 		}
 	}
 	return flags, types
