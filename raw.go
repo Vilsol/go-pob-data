@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
-	"fmt"
 	"io"
+	"log/slog"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -216,7 +216,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 	}
 
 	for _, file := range filesToExport {
-		println("Extracting", file.Path)
+		slog.Info("extracting", slog.String("path", file.Path))
 
 		data, err := loader.Open(file.Path)
 		if err != nil {
@@ -225,7 +225,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 
 		dat, err := extractor.ParseDat(data, filepath.Base(file.Path))
 		if err != nil {
-			fmt.Println(errors.Wrap(err, "failed to parse dat file"))
+			slog.Error("failed to parse dat file", slog.String("error", err.Error()), slog.String("path", file.Path))
 			continue
 		}
 
@@ -307,7 +307,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 	mw := imagick.NewMagickWand()
 
 	for _, img := range imagesToExport {
-		println("Extracting", img)
+		slog.Info("extracting", slog.String("path", img))
 
 		data, err := loader.Open(img)
 		if err != nil {

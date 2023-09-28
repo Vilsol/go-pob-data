@@ -43,3 +43,8 @@ linters-settings:
       - prefix(github.com/Vilsol/go-pob-data)
       - blank
       - dot
+
+  wrapcheck:
+    ignorePackageGlobs:
+      - github.com/Vilsol/go-pob-data/*
+      - golang.org/x/sync/errgroup*

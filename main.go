@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log/slog"
 	"os"
 
 	_ "github.com/andybalholm/brotli"
@@ -10,19 +11,19 @@ import (
 
 func main() {
 	if len(os.Args) < 2 {
-		println("please provide path to the game directory")
+		slog.Error("please provide path to the game directory")
 		os.Exit(1)
 		return
 	}
 
 	if len(os.Args) < 3 {
-		println("please provide passive tree version")
+		slog.Error("please provide passive tree version")
 		os.Exit(1)
 		return
 	}
 
 	if len(os.Args) < 4 {
-		println("please provide game version")
+		slog.Error("please provide game version")
 		os.Exit(1)
 		return
 	}
@@ -32,25 +33,25 @@ func main() {
 	gameVersion := os.Args[3]
 
 	if err := extractRawData(gamePath, gameVersion); err != nil {
-		println(err.Error())
+		slog.Error(err.Error())
 		os.Exit(1)
 		return
 	}
 
 	if err := downloadTreeData(treeVersion, gameVersion); err != nil {
-		println(err.Error())
+		slog.Error(err.Error())
 		os.Exit(1)
 		return
 	}
 
 	if err := extractTranslations(gamePath, gameVersion); err != nil {
-		println(err.Error())
+		slog.Error(err.Error())
 		os.Exit(1)
 		return
 	}
 
 	if err := generateMeta(); err != nil {
-		println(err.Error())
+		slog.Error(err.Error())
 		os.Exit(1)
 		return
 	}

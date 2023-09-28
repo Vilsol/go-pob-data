@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
 	"net/url"
 	"os"
@@ -123,7 +124,7 @@ func downloadTreeData(treeVersion string, gameVersion string) error {
 		}
 		downloaded[fileName] = true
 
-		println("Downloading", fileName)
+		slog.Info("downloading", slog.String("fileName", fileName))
 
 		response, err := http.DefaultClient.Get(repoVersionBase + "/assets/" + fileName)
 		if err != nil {

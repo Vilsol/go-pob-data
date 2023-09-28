@@ -29,5 +29,5 @@ func generateMeta() error {
 		return errors.Wrap(err, "failed marshaling metadata")
 	}
 
-	return errors.Wrap(os.WriteFile("data/meta.json", bs, 0644), "failed writing metadata")
+	return errors.Wrap(os.WriteFile("data/meta.json", bs, 0o644), "failed writing metadata")
 }

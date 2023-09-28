@@ -5,41 +5,35 @@ permissions: read-all
 on: [push, pull_request]
 
 env:
-  GO_VERSION: "1.20.3"
+  GO_VERSION: "1.21.0"
 
 jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Go
-        uses: actions/setup-go@v2
+      - uses: actions/setup-go@v4
         with:
           go-version: ${{ env.GO_VERSION }}
-          stable: false
 
-      - name: Check out code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Lint
-        uses: golangci/golangci-lint-action@v2
+      - uses: golangci/golangci-lint-action@v3
         with:
           skip-pkg-cache: true
           skip-build-cache: true
           args: --timeout 5m
+          version: latest
 
   test:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Go
-        uses: actions/setup-go@v2
+      - uses: actions/setup-go@v4
         with:
           go-version: ${{ env.GO_VERSION }}
-          stable: false
 
-      - name: Check out code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Test
         run: go test -v ./...

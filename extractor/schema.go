@@ -14,8 +14,10 @@ var (
 	tableMap   map[string]Table
 )
 
+var dataPath = "data"
+
 func LoadSchema(gameVersion string) {
-	schemaRaw, err := os.ReadFile(filepath.Join("data", gameVersion, "schema.min.json"))
+	schemaRaw, err := os.ReadFile(filepath.Join(dataPath, gameVersion, "schema.min.json"))
 	if err != nil {
 		panic(err)
 	}

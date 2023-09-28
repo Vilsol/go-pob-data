@@ -6,8 +6,6 @@ import (
 	"io/fs"
 )
 
-const gameVersion = "3.18.1.5"
-
 const cdnTemplate = "https://patchcdn.pathofexile.com/%s/"
 
 var _ fs.FS = (*WebFS)(nil)
@@ -16,7 +14,7 @@ type WebFS struct {
 	BasePath string
 }
 
-func NewWebFS() *WebFS {
+func NewWebFS(gameVersion string) *WebFS {
 	return &WebFS{
 		BasePath: fmt.Sprintf(cdnTemplate, gameVersion),
 	}

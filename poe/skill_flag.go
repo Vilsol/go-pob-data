@@ -1,0 +1,32 @@
+package poe
+
+type SkillFlag string
+
+const (
+	SkillFlagBrand            = SkillFlag("brand")
+	SkillFlagHex              = SkillFlag("hex")
+	SkillFlagCurse            = SkillFlag("curse")
+	SkillFlagAttack           = SkillFlag("attack")
+	SkillFlagWeapon1Attack    = SkillFlag("weapon1Attack")
+	SkillFlagWeapon2Attack    = SkillFlag("weapon2Attack")
+	SkillFlagSelfCast         = SkillFlag("selfCast")
+	SkillFlagNotAverage       = SkillFlag("notAverage")
+	SkillFlagShowAverage      = SkillFlag("showAverage")
+	SkillFlagHit              = SkillFlag("hit")
+	SkillFlagProjectile       = SkillFlag("projectile")
+	SkillFlagTrap             = SkillFlag("trap")
+	SkillFlagMine             = SkillFlag("mine")
+	SkillFlagTotem            = SkillFlag("totem")
+	SkillFlagBothWeaponAttack = SkillFlag("bothWeaponAttack")
+	SkillFlagBuffs            = SkillFlag("buffs")
+	SkillFlagCombat           = SkillFlag("combat")
+	SkillFlagEffective        = SkillFlag("effective")
+	SkillFlagSpell            = SkillFlag("spell")
+	SkillFlagMelee            = SkillFlag("melee")
+	SkillFlagChaining         = SkillFlag("chaining")
+	SkillFlagArea             = SkillFlag("area")
+	SkillFlagCast             = SkillFlag("cast")
+	SkillFlagShieldAttack     = SkillFlag("shieldAttack")
+	SkillFlagForceMainHand    = SkillFlag("forceMainHand")
+	SkillFlagDisable          = SkillFlag("disable")
+)

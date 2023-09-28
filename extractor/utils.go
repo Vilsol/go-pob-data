@@ -3,6 +3,7 @@ package extractor
 import (
 	"crypto/tls"
 	"io"
+	"log/slog"
 	"net/http"
 )
 
@@ -11,6 +12,7 @@ var downloadClient = &http.Client{Transport: &http.Transport{
 }}
 
 func Fetch(url string) []byte {
+	slog.Debug("fetching", slog.String("url", url))
 	resp, err := downloadClient.Get(url)
 	if err != nil {
 		panic(err)

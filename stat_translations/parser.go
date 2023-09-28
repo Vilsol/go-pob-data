@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"io"
 	"io/fs"
+	"log/slog"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -37,8 +38,8 @@ var (
 type TranslationParser struct {
 	loader      fs.FS
 	descriptors map[string]*Description
-	includes    []string
 	loaded      map[string]bool
+	includes    []string
 	order       int
 }
 
@@ -64,7 +65,7 @@ func (t *TranslationParser) ParseFile(name string) error {
 	}
 	t.loaded[name] = true
 
-	println("parsing", name)
+	slog.Info("parsing", slog.String("name", name))
 
 	data, err := t.loader.Open(name)
 	if err != nil {
@@ -226,7 +227,7 @@ func (t *TranslationParser) SaveTo(outDir string, translationName string) error 
 		}
 
 		fullPath := filepath.Join(outDir, languageMap[lang], translationName+".msgpack.br")
-		println("writing to", fullPath)
+		slog.Info("writing to", slog.String("path", fullPath))
 
 		if err := os.MkdirAll(filepath.Dir(fullPath), 0o755); err != nil {
 			return errors.Wrap(err, "failed to make translation directories")
@@ -252,7 +253,7 @@ func (t *TranslationParser) SaveTo(outDir string, translationName string) error 
 		_ = f.Close()
 
 		outPathGzip := filepath.Join(outDir, languageMap[lang], translationName+".json.gz")
-		println("writing to", outPathGzip)
+		slog.Info("writing to", slog.String("path", outPathGzip))
 
 		fGzip, err := os.OpenFile(outPathGzip, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o755)
 		if err != nil {
