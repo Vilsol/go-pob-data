@@ -1,9 +1,26 @@
 package testdata
 
-import "strings"
+import (
+	"io"
+	"net/http"
+	"strings"
+	"sync"
+)
 
-const GameVersion = "3.22.1.5"
+var GameVersion = sync.OnceValue(func() string {
+	resp, err := http.DefaultClient.Get("https://raw.githubusercontent.com/poe-tool-dev/latest-patch-version/main/latest.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+
+	return string(body)
+})
 
 func ShortGameVersion() string {
-	return strings.Join(strings.Split(GameVersion, ".")[:2], ".")
+	return strings.Join(strings.Split(GameVersion(), ".")[:2], ".")
 }

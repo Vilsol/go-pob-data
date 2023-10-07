@@ -14,12 +14,12 @@ func init() {
 }
 
 func TestReadIndex(t *testing.T) {
-	_, err := GetBundleLoader(NewWebFS(testdata.GameVersion))
+	_, err := GetBundleLoader(NewWebFS(testdata.GameVersion()))
 	testza.AssertNoError(t, err)
 }
 
 func TestReadSkillGems(t *testing.T) {
-	loader, err := GetBundleLoader(NewWebFS(testdata.GameVersion))
+	loader, err := GetBundleLoader(NewWebFS(testdata.GameVersion()))
 	testza.AssertNoError(t, err)
 
 	skillGems, err := loader.Open("Data/SkillGems.dat64")
@@ -42,13 +42,13 @@ func TestLoadSchema(t *testing.T) {
 
 	schema := GetSchema("SkillGems")
 	testza.AssertEqual(t, "SkillGems", schema.Name)
-	testza.AssertEqual(t, 25, len(schema.Columns))
+	testza.AssertEqual(t, 26, len(schema.Columns))
 }
 
 func TestParseDat(t *testing.T) {
 	LoadParser(testdata.ShortGameVersion())
 
-	loader, err := GetBundleLoader(NewWebFS(testdata.GameVersion))
+	loader, err := GetBundleLoader(NewWebFS(testdata.GameVersion()))
 	testza.AssertNoError(t, err)
 
 	testFiles := []struct {
@@ -70,19 +70,19 @@ func TestParseDat(t *testing.T) {
 		{Name: "Data/Flasks.dat64", Count: 51},
 		{Name: "Data/ComponentCharges.dat64", Count: 51},
 		{Name: "Data/ComponentAttributeRequirements.dat64", Count: 797},
-		{Name: "Data/BaseItemTypes.dat64", Count: 10526},
-		{Name: "Data/Stats.dat64", Count: 18998},
+		{Name: "Data/BaseItemTypes.dat64", Count: 10537},
+		{Name: "Data/Stats.dat64", Count: 19002},
 		{Name: "Data/AlternatePassiveSkills.dat64", Count: 155},
 		{Name: "Data/AlternatePassiveAdditions.dat64", Count: 94},
 		{Name: "Data/DefaultMonsterStats.dat64", Count: 100},
-		{Name: "Data/SkillTotemVariations.dat64", Count: 249},
-		{Name: "Data/MonsterVarieties.dat64", Count: 9316},
+		{Name: "Data/SkillTotemVariations.dat64", Count: 250},
+		{Name: "Data/MonsterVarieties.dat64", Count: 9317},
 		{Name: "Data/MonsterMapDifficulty.dat64", Count: 25},
 		{Name: "Data/MonsterMapBossDifficulty.dat64", Count: 90},
-		{Name: "Data/GrantedEffects.dat64", Count: 10745},
+		{Name: "Data/GrantedEffects.dat64", Count: 10746},
 		{Name: "Data/SkillTotems.dat64", Count: 21},
-		{Name: "Data/GrantedEffectStatSetsPerLevel.dat64", Count: 49870},
-		{Name: "Data/GrantedEffectsPerLevel.dat64", Count: 49824},
+		{Name: "Data/GrantedEffectStatSetsPerLevel.dat64", Count: 49872},
+		{Name: "Data/GrantedEffectsPerLevel.dat64", Count: 49825},
 		{Name: "Data/GrantedEffectQualityStats.dat64", Count: 1579},
 		{Name: "Data/SkillGems.dat64", Count: 750},
 		{Name: "Data/ItemExperiencePerLevel.dat64", Count: 321},

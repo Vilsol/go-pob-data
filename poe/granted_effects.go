@@ -15,11 +15,17 @@ var GrantedEffects []*GrantedEffect
 
 var grantedEffectsByIDMap map[string]*GrantedEffect
 
+var GrantedEffectByActiveSkillName map[string]*GrantedEffect
+
 func InitializeGrantedEffects(ctx context.Context, version string, assetCache loader.AssetCache) error {
 	return loader.InitHelper(ctx, version, "GrantedEffects", &GrantedEffects, func(count int64) {
 		grantedEffectsByIDMap = make(map[string]*GrantedEffect, count)
+		GrantedEffectByActiveSkillName = make(map[string]*GrantedEffect)
 	}, assetCache, func(obj *GrantedEffect) {
 		grantedEffectsByIDMap[obj.ID] = obj
+		if obj.ActiveSkill != nil {
+			GrantedEffectByActiveSkillName[obj.GetActiveSkill().DisplayedName] = obj
+		}
 	})
 }
 

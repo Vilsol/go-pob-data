@@ -9,6 +9,7 @@ type ActiveSkill struct {
 	IconDDSFile                          string `json:"Icon_DDSFile"`
 	ID                                   string `json:"Id"`
 	WebsiteDescription                   string `json:"WebsiteDescription"`
+	SkillID                              string `json:"Var3"`
 	WeaponRestrictionItemClassesKeys     []int  `json:"WeaponRestriction_ItemClassesKeys"`
 	MinionActiveSkillTypes               []int  `json:"MinionActiveSkillTypes"`
 	OutputStatKeys                       []int  `json:"Output_StatKeys"`

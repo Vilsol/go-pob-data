@@ -338,6 +338,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 
 		uncompressed := mw.GetImageBlob()
 
+		slog.Info("compressing", slog.String("path", img))
 		finalImage, err := CompressBytes(uncompressed, "1")
 		if err != nil {
 			return errors.Wrap(err, "failed to crush png image")

@@ -216,6 +216,12 @@ func (z *ActiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "IsManuallyCasted")
 				return
 			}
+		case "SkillID":
+			z.SkillID, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "SkillID")
+				return
+			}
 		default:
 			err = dc.Skip()
 			if err != nil {
@@ -229,9 +235,9 @@ func (z *ActiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *ActiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 17
+	// map header, size 18
 	// write "AlternateSkillTargetingBehavioursKey"
-	err = en.Append(0xde, 0x0, 0x11, 0xd9, 0x24, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6f, 0x75, 0x72, 0x73, 0x4b, 0x65, 0x79)
+	err = en.Append(0xde, 0x0, 0x12, 0xd9, 0x24, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6f, 0x75, 0x72, 0x73, 0x4b, 0x65, 0x79)
 	if err != nil {
 		return
 	}
@@ -449,15 +455,25 @@ func (z *ActiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "IsManuallyCasted")
 		return
 	}
+	// write "SkillID"
+	err = en.Append(0xa7, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x49, 0x44)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.SkillID)
+	if err != nil {
+		err = msgp.WrapError(err, "SkillID")
+		return
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
 func (z *ActiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 17
+	// map header, size 18
 	// string "AlternateSkillTargetingBehavioursKey"
-	o = append(o, 0xde, 0x0, 0x11, 0xd9, 0x24, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6f, 0x75, 0x72, 0x73, 0x4b, 0x65, 0x79)
+	o = append(o, 0xde, 0x0, 0x12, 0xd9, 0x24, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x42, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6f, 0x75, 0x72, 0x73, 0x4b, 0x65, 0x79)
 	if z.AlternateSkillTargetingBehavioursKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
@@ -529,6 +545,9 @@ func (z *ActiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "IsManuallyCasted"
 	o = append(o, 0xb0, 0x49, 0x73, 0x4d, 0x61, 0x6e, 0x75, 0x61, 0x6c, 0x6c, 0x79, 0x43, 0x61, 0x73, 0x74, 0x65, 0x64)
 	o = msgp.AppendBool(o, z.IsManuallyCasted)
+	// string "SkillID"
+	o = append(o, 0xa7, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x49, 0x44)
+	o = msgp.AppendString(o, z.SkillID)
 	return
 }
 
@@ -741,6 +760,12 @@ func (z *ActiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "IsManuallyCasted")
 				return
 			}
+		case "SkillID":
+			z.SkillID, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "SkillID")
+				return
+			}
 		default:
 			bts, err = msgp.Skip(bts)
 			if err != nil {
@@ -761,7 +786,7 @@ func (z *ActiveSkill) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 7 + msgp.StringPrefixSize + len(z.AIFile) + 13 + msgp.StringPrefixSize + len(z.WebsiteImage) + 12 + msgp.StringPrefixSize + len(z.Description) + 14 + msgp.StringPrefixSize + len(z.DisplayedName) + 12 + msgp.StringPrefixSize + len(z.IconDDSFile) + 3 + msgp.StringPrefixSize + len(z.ID) + 19 + msgp.StringPrefixSize + len(z.WebsiteDescription) + 34 + msgp.ArrayHeaderSize + (len(z.WeaponRestrictionItemClassesKeys) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.MinionActiveSkillTypes) * (msgp.IntSize)) + 15 + msgp.ArrayHeaderSize + (len(z.OutputStatKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.InputStatKeys) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.ActiveSkillTypes) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.ActiveSkillTargetTypes) * (msgp.IntSize)) + 13 + msgp.IntSize + 4 + msgp.IntSize + 17 + msgp.BoolSize
+	s += 7 + msgp.StringPrefixSize + len(z.AIFile) + 13 + msgp.StringPrefixSize + len(z.WebsiteImage) + 12 + msgp.StringPrefixSize + len(z.Description) + 14 + msgp.StringPrefixSize + len(z.DisplayedName) + 12 + msgp.StringPrefixSize + len(z.IconDDSFile) + 3 + msgp.StringPrefixSize + len(z.ID) + 19 + msgp.StringPrefixSize + len(z.WebsiteDescription) + 34 + msgp.ArrayHeaderSize + (len(z.WeaponRestrictionItemClassesKeys) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.MinionActiveSkillTypes) * (msgp.IntSize)) + 15 + msgp.ArrayHeaderSize + (len(z.OutputStatKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.InputStatKeys) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.ActiveSkillTypes) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.ActiveSkillTargetTypes) * (msgp.IntSize)) + 13 + msgp.IntSize + 4 + msgp.IntSize + 17 + msgp.BoolSize + 8 + msgp.StringPrefixSize + len(z.SkillID)
 	return
 }
 

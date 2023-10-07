@@ -17,8 +17,9 @@ import (
 type InitFunction func(ctx context.Context, version string, assetCache loader.AssetCache) error
 
 type initBlock struct {
-	Func InitFunction
-	Name string
+	Func    InitFunction
+	Name    string
+	Depends []string
 }
 
 func (i initBlock) Load(ctx context.Context, version string, assetCache loader.AssetCache) error {
@@ -97,8 +98,9 @@ var initFunctions = []initBlock{
 		Name: "GrantedEffectStatSetsPerLevels",
 	},
 	{
-		Func: InitializeGrantedEffects,
-		Name: "GrantedEffects",
+		Func:    InitializeGrantedEffects,
+		Name:    "GrantedEffects",
+		Depends: []string{"ActiveSkills"},
 	},
 	{
 		Func: InitializeGrantedEffectsPerLevels,
@@ -194,16 +196,46 @@ func InitializeAll(ctx context.Context, version string, assetCache loader.AssetC
 			}
 		}
 	} else {
-		g := new(errgroup.Group)
-		for _, function := range initFunctions {
-			fn := function
-			g.Go(func() error {
-				return fn.Load(ctx, version, assetCache)
-			})
-		}
+		loaded := make(map[string]bool, len(initFunctions))
+		for len(loaded) < len(initFunctions) {
+			before := len(loaded)
 
-		if err := g.Wait(); err != nil {
-			return err
+			g := new(errgroup.Group)
+			for _, function := range initFunctions {
+				// Do not load again
+				if _, ok := loaded[function.Name]; ok {
+					continue
+				}
+
+				// Check if all dependencies are loaded
+				canLoad := true
+				for _, depend := range function.Depends {
+					if _, ok := loaded[depend]; !ok {
+						canLoad = false
+						break
+					}
+				}
+
+				if !canLoad {
+					continue
+				}
+
+				fn := function
+				g.Go(func() error {
+					defer func() {
+						loaded[fn.Name] = true
+					}()
+					return fn.Load(ctx, version, assetCache)
+				})
+			}
+
+			if err := g.Wait(); err != nil {
+				return err
+			}
+
+			if len(loaded) == before {
+				return errors.New("failed resolving initialization dependency tree")
+			}
 		}
 	}
 

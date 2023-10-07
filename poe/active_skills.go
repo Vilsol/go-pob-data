@@ -13,8 +13,14 @@ type ActiveSkill struct {
 
 var ActiveSkills []*ActiveSkill
 
+var ActiveSkillTypesBySkillID map[string]*ActiveSkill
+
 func InitializeActiveSkills(ctx context.Context, version string, assetCache loader.AssetCache) error {
-	return loader.InitHelper(ctx, version, "ActiveSkills", &ActiveSkills, nil, assetCache)
+	return loader.InitHelper(ctx, version, "ActiveSkills", &ActiveSkills, func(count int64) {
+		ActiveSkillTypesBySkillID = make(map[string]*ActiveSkill, count)
+	}, assetCache, func(obj *ActiveSkill) {
+		ActiveSkillTypesBySkillID[obj.SkillID] = obj
+	})
 }
 
 func (g *ActiveSkill) GetActiveSkillTypes() []*ActiveSkillType {
