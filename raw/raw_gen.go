@@ -84,6 +84,12 @@ func (z *ActiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "WebsiteDescription")
 				return
 			}
+		case "SkillID":
+			z.SkillID, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "SkillID")
+				return
+			}
 		case "WeaponRestrictionItemClassesKeys":
 			var zb0002 uint32
 			zb0002, err = dc.ReadArrayHeader()
@@ -216,12 +222,6 @@ func (z *ActiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "IsManuallyCasted")
 				return
 			}
-		case "SkillID":
-			z.SkillID, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "SkillID")
-				return
-			}
 		default:
 			err = dc.Skip()
 			if err != nil {
@@ -321,6 +321,16 @@ func (z *ActiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 	err = en.WriteString(z.WebsiteDescription)
 	if err != nil {
 		err = msgp.WrapError(err, "WebsiteDescription")
+		return
+	}
+	// write "SkillID"
+	err = en.Append(0xa7, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x49, 0x44)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.SkillID)
+	if err != nil {
+		err = msgp.WrapError(err, "SkillID")
 		return
 	}
 	// write "WeaponRestrictionItemClassesKeys"
@@ -455,16 +465,6 @@ func (z *ActiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "IsManuallyCasted")
 		return
 	}
-	// write "SkillID"
-	err = en.Append(0xa7, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x49, 0x44)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.SkillID)
-	if err != nil {
-		err = msgp.WrapError(err, "SkillID")
-		return
-	}
 	return
 }
 
@@ -500,6 +500,9 @@ func (z *ActiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "WebsiteDescription"
 	o = append(o, 0xb2, 0x57, 0x65, 0x62, 0x73, 0x69, 0x74, 0x65, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e)
 	o = msgp.AppendString(o, z.WebsiteDescription)
+	// string "SkillID"
+	o = append(o, 0xa7, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x49, 0x44)
+	o = msgp.AppendString(o, z.SkillID)
 	// string "WeaponRestrictionItemClassesKeys"
 	o = append(o, 0xd9, 0x20, 0x57, 0x65, 0x61, 0x70, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x74, 0x72, 0x69, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x65, 0x73, 0x4b, 0x65, 0x79, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.WeaponRestrictionItemClassesKeys)))
@@ -545,9 +548,6 @@ func (z *ActiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "IsManuallyCasted"
 	o = append(o, 0xb0, 0x49, 0x73, 0x4d, 0x61, 0x6e, 0x75, 0x61, 0x6c, 0x6c, 0x79, 0x43, 0x61, 0x73, 0x74, 0x65, 0x64)
 	o = msgp.AppendBool(o, z.IsManuallyCasted)
-	// string "SkillID"
-	o = append(o, 0xa7, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x49, 0x44)
-	o = msgp.AppendString(o, z.SkillID)
 	return
 }
 
@@ -626,6 +626,12 @@ func (z *ActiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			z.WebsiteDescription, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "WebsiteDescription")
+				return
+			}
+		case "SkillID":
+			z.SkillID, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "SkillID")
 				return
 			}
 		case "WeaponRestrictionItemClassesKeys":
@@ -760,12 +766,6 @@ func (z *ActiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "IsManuallyCasted")
 				return
 			}
-		case "SkillID":
-			z.SkillID, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "SkillID")
-				return
-			}
 		default:
 			bts, err = msgp.Skip(bts)
 			if err != nil {
@@ -786,7 +786,7 @@ func (z *ActiveSkill) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += 7 + msgp.StringPrefixSize + len(z.AIFile) + 13 + msgp.StringPrefixSize + len(z.WebsiteImage) + 12 + msgp.StringPrefixSize + len(z.Description) + 14 + msgp.StringPrefixSize + len(z.DisplayedName) + 12 + msgp.StringPrefixSize + len(z.IconDDSFile) + 3 + msgp.StringPrefixSize + len(z.ID) + 19 + msgp.StringPrefixSize + len(z.WebsiteDescription) + 34 + msgp.ArrayHeaderSize + (len(z.WeaponRestrictionItemClassesKeys) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.MinionActiveSkillTypes) * (msgp.IntSize)) + 15 + msgp.ArrayHeaderSize + (len(z.OutputStatKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.InputStatKeys) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.ActiveSkillTypes) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.ActiveSkillTargetTypes) * (msgp.IntSize)) + 13 + msgp.IntSize + 4 + msgp.IntSize + 17 + msgp.BoolSize + 8 + msgp.StringPrefixSize + len(z.SkillID)
+	s += 7 + msgp.StringPrefixSize + len(z.AIFile) + 13 + msgp.StringPrefixSize + len(z.WebsiteImage) + 12 + msgp.StringPrefixSize + len(z.Description) + 14 + msgp.StringPrefixSize + len(z.DisplayedName) + 12 + msgp.StringPrefixSize + len(z.IconDDSFile) + 3 + msgp.StringPrefixSize + len(z.ID) + 19 + msgp.StringPrefixSize + len(z.WebsiteDescription) + 8 + msgp.StringPrefixSize + len(z.SkillID) + 34 + msgp.ArrayHeaderSize + (len(z.WeaponRestrictionItemClassesKeys) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.MinionActiveSkillTypes) * (msgp.IntSize)) + 15 + msgp.ArrayHeaderSize + (len(z.OutputStatKeys) * (msgp.IntSize)) + 14 + msgp.ArrayHeaderSize + (len(z.InputStatKeys) * (msgp.IntSize)) + 17 + msgp.ArrayHeaderSize + (len(z.ActiveSkillTypes) * (msgp.IntSize)) + 23 + msgp.ArrayHeaderSize + (len(z.ActiveSkillTargetTypes) * (msgp.IntSize)) + 13 + msgp.IntSize + 4 + msgp.IntSize + 17 + msgp.BoolSize
 	return
 }
 
