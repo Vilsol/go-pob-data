@@ -193,6 +193,14 @@ var filesToExport = []PackedFile{
 		Path: "Data/AlternateTreeVersions.dat64",
 		Fn:   ReEncode[*raw.AlternateTreeVersion](),
 	},
+	{
+		Path: "Data/AtlasNode.dat64",
+		Fn:   ReEncode[*raw.AtlasNode](),
+	},
+	{
+		Path: "Data/AtlasNodeDefinition.dat64",
+		Fn:   ReEncode[*raw.AtlasNodeDefinition](),
+	},
 }
 
 var imagesToExport = []string{

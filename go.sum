@@ -144,6 +144,8 @@ gopkg.in/djherbis/stream.v1 v1.3.1 h1:uGfmsOY1qqMjQQphhRBSGLyA9qumJ56exkRu9ASTjC
 gopkg.in/djherbis/stream.v1 v1.3.1/go.mod h1:aEV8CBVRmSpLamVJfM903Npic1IKmb2qS30VAZ+sssg=
 gopkg.in/gographics/imagick.v3 v3.4.3 h1:9plKFE/Us913jBN6KohtLG9FNW8LPvfpjiGAORIiEHg=
 gopkg.in/gographics/imagick.v3 v3.4.3/go.mod h1:+Q9nyA2xRZXrDyTtJ/eko+8V/5E7bWYs08ndkZp8UmA=
+gopkg.in/gographics/imagick.v3 v3.5.3 h1:Ho8/2Uu76Y1Z5P65dUBhh5ZeKS3ZcvYH12amWZNpSFA=
+gopkg.in/gographics/imagick.v3 v3.5.3/go.mod h1:+Q9nyA2xRZXrDyTtJ/eko+8V/5E7bWYs08ndkZp8UmA=
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 gopkg.in/yaml.v2 v2.2.4/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 gopkg.in/yaml.v2 v2.4.0/go.mod h1:RDklbk79AGWmwhnvt/jBztapEOGDOx6ZbXqjP6csGnQ=

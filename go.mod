@@ -12,7 +12,7 @@ require (
 	golang.org/x/sync v0.1.0
 	golang.org/x/text v0.13.0
 	gopkg.in/djherbis/fscache.v0 v0.10.1
-	gopkg.in/gographics/imagick.v3 v3.4.3
+	gopkg.in/gographics/imagick.v3 v3.5.3
 )
 
 require (
@@ -40,4 +40,5 @@ require (
 	gopkg.in/djherbis/stream.v1 v1.3.1 // indirect
 )
 
-replace github.com/oriath-net/pogo v0.0.0-20230425190806-78985d9ea758 => github.com/Vilsol/pogo v0.0.0-20230819000347-369f6b8b106d
+// replace github.com/oriath-net/pogo v0.0.0-20230425190806-78985d9ea758 => github.com/Vilsol/pogo v0.0.0-20230819000347-369f6b8b106d
+replace github.com/oriath-net/pogo v0.0.0-20230425190806-78985d9ea758 => ../pogo

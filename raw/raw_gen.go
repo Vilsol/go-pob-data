@@ -2734,6 +2734,1038 @@ func (z *ArmourType) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *AtlasNode) DecodeMsg(dc *msgp.Reader) (err error) {
+	var field []byte
+	_ = field
+	var zb0001 uint32
+	zb0001, err = dc.ReadMapHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	for zb0001 > 0 {
+		zb0001--
+		field, err = dc.ReadMapKeyPtr()
+		if err != nil {
+			err = msgp.WrapError(err)
+			return
+		}
+		switch msgp.UnsafeString(field) {
+		case "WorldAreasKey":
+			z.WorldAreasKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "WorldAreasKey")
+				return
+			}
+		case "ItemVisualIdentityKey":
+			z.ItemVisualIdentityKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "ItemVisualIdentityKey")
+				return
+			}
+		case "Var2":
+			z.Var2, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "Var2")
+				return
+			}
+		case "MapsKey":
+			z.MapsKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "MapsKey")
+				return
+			}
+		case "FlavourTextKey":
+			z.FlavourTextKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "FlavourTextKey")
+				return
+			}
+		case "AtlasNodeKeys":
+			var zb0002 uint32
+			zb0002, err = dc.ReadArrayHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "AtlasNodeKeys")
+				return
+			}
+			if cap(z.AtlasNodeKeys) >= int(zb0002) {
+				z.AtlasNodeKeys = (z.AtlasNodeKeys)[:zb0002]
+			} else {
+				z.AtlasNodeKeys = make([]int, zb0002)
+			}
+			for za0001 := range z.AtlasNodeKeys {
+				z.AtlasNodeKeys[za0001], err = dc.ReadInt()
+				if err != nil {
+					err = msgp.WrapError(err, "AtlasNodeKeys", za0001)
+					return
+				}
+			}
+		case "Tier0":
+			z.Tier0, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Tier0")
+				return
+			}
+		case "Tier1":
+			z.Tier1, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Tier1")
+				return
+			}
+		case "Tier2":
+			z.Tier2, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Tier2")
+				return
+			}
+		case "Tier3":
+			z.Tier3, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Tier3")
+				return
+			}
+		case "Tier4":
+			z.Tier4, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Tier4")
+				return
+			}
+		case "Var11":
+			z.Var11, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "Var11")
+				return
+			}
+		case "Var12":
+			z.Var12, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "Var12")
+				return
+			}
+		case "Var13":
+			z.Var13, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "Var13")
+				return
+			}
+		case "Var14":
+			z.Var14, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "Var14")
+				return
+			}
+		case "Var15":
+			z.Var15, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "Var15")
+				return
+			}
+		case "DDSFile":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "DDSFile")
+					return
+				}
+				z.DDSFile = nil
+			} else {
+				if z.DDSFile == nil {
+					z.DDSFile = new(string)
+				}
+				*z.DDSFile, err = dc.ReadString()
+				if err != nil {
+					err = msgp.WrapError(err, "DDSFile")
+					return
+				}
+			}
+		case "Var17":
+			z.Var17, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "Var17")
+				return
+			}
+		case "NotOnAtlas":
+			z.NotOnAtlas, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "NotOnAtlas")
+				return
+			}
+		case "Var19":
+			z.Var19, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Var19")
+				return
+			}
+		case "Var20":
+			z.Var20, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Var20")
+				return
+			}
+		case "Var21":
+			z.Var21, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Var21")
+				return
+			}
+		case "Var22":
+			z.Var22, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Var22")
+				return
+			}
+		case "Key":
+			z.Key, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Key")
+				return
+			}
+		default:
+			err = dc.Skip()
+			if err != nil {
+				err = msgp.WrapError(err)
+				return
+			}
+		}
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *AtlasNode) EncodeMsg(en *msgp.Writer) (err error) {
+	// map header, size 24
+	// write "WorldAreasKey"
+	err = en.Append(0xde, 0x0, 0x18, 0xad, 0x57, 0x6f, 0x72, 0x6c, 0x64, 0x41, 0x72, 0x65, 0x61, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.WorldAreasKey)
+	if err != nil {
+		err = msgp.WrapError(err, "WorldAreasKey")
+		return
+	}
+	// write "ItemVisualIdentityKey"
+	err = en.Append(0xb5, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.ItemVisualIdentityKey)
+	if err != nil {
+		err = msgp.WrapError(err, "ItemVisualIdentityKey")
+		return
+	}
+	// write "Var2"
+	err = en.Append(0xa4, 0x56, 0x61, 0x72, 0x32)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.Var2)
+	if err != nil {
+		err = msgp.WrapError(err, "Var2")
+		return
+	}
+	// write "MapsKey"
+	err = en.Append(0xa7, 0x4d, 0x61, 0x70, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MapsKey)
+	if err != nil {
+		err = msgp.WrapError(err, "MapsKey")
+		return
+	}
+	// write "FlavourTextKey"
+	err = en.Append(0xae, 0x46, 0x6c, 0x61, 0x76, 0x6f, 0x75, 0x72, 0x54, 0x65, 0x78, 0x74, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.FlavourTextKey)
+	if err != nil {
+		err = msgp.WrapError(err, "FlavourTextKey")
+		return
+	}
+	// write "AtlasNodeKeys"
+	err = en.Append(0xad, 0x41, 0x74, 0x6c, 0x61, 0x73, 0x4e, 0x6f, 0x64, 0x65, 0x4b, 0x65, 0x79, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.AtlasNodeKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "AtlasNodeKeys")
+		return
+	}
+	for za0001 := range z.AtlasNodeKeys {
+		err = en.WriteInt(z.AtlasNodeKeys[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "AtlasNodeKeys", za0001)
+			return
+		}
+	}
+	// write "Tier0"
+	err = en.Append(0xa5, 0x54, 0x69, 0x65, 0x72, 0x30)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Tier0)
+	if err != nil {
+		err = msgp.WrapError(err, "Tier0")
+		return
+	}
+	// write "Tier1"
+	err = en.Append(0xa5, 0x54, 0x69, 0x65, 0x72, 0x31)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Tier1)
+	if err != nil {
+		err = msgp.WrapError(err, "Tier1")
+		return
+	}
+	// write "Tier2"
+	err = en.Append(0xa5, 0x54, 0x69, 0x65, 0x72, 0x32)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Tier2)
+	if err != nil {
+		err = msgp.WrapError(err, "Tier2")
+		return
+	}
+	// write "Tier3"
+	err = en.Append(0xa5, 0x54, 0x69, 0x65, 0x72, 0x33)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Tier3)
+	if err != nil {
+		err = msgp.WrapError(err, "Tier3")
+		return
+	}
+	// write "Tier4"
+	err = en.Append(0xa5, 0x54, 0x69, 0x65, 0x72, 0x34)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Tier4)
+	if err != nil {
+		err = msgp.WrapError(err, "Tier4")
+		return
+	}
+	// write "Var11"
+	err = en.Append(0xa5, 0x56, 0x61, 0x72, 0x31, 0x31)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.Var11)
+	if err != nil {
+		err = msgp.WrapError(err, "Var11")
+		return
+	}
+	// write "Var12"
+	err = en.Append(0xa5, 0x56, 0x61, 0x72, 0x31, 0x32)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.Var12)
+	if err != nil {
+		err = msgp.WrapError(err, "Var12")
+		return
+	}
+	// write "Var13"
+	err = en.Append(0xa5, 0x56, 0x61, 0x72, 0x31, 0x33)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.Var13)
+	if err != nil {
+		err = msgp.WrapError(err, "Var13")
+		return
+	}
+	// write "Var14"
+	err = en.Append(0xa5, 0x56, 0x61, 0x72, 0x31, 0x34)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.Var14)
+	if err != nil {
+		err = msgp.WrapError(err, "Var14")
+		return
+	}
+	// write "Var15"
+	err = en.Append(0xa5, 0x56, 0x61, 0x72, 0x31, 0x35)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.Var15)
+	if err != nil {
+		err = msgp.WrapError(err, "Var15")
+		return
+	}
+	// write "DDSFile"
+	err = en.Append(0xa7, 0x44, 0x44, 0x53, 0x46, 0x69, 0x6c, 0x65)
+	if err != nil {
+		return
+	}
+	if z.DDSFile == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteString(*z.DDSFile)
+		if err != nil {
+			err = msgp.WrapError(err, "DDSFile")
+			return
+		}
+	}
+	// write "Var17"
+	err = en.Append(0xa5, 0x56, 0x61, 0x72, 0x31, 0x37)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.Var17)
+	if err != nil {
+		err = msgp.WrapError(err, "Var17")
+		return
+	}
+	// write "NotOnAtlas"
+	err = en.Append(0xaa, 0x4e, 0x6f, 0x74, 0x4f, 0x6e, 0x41, 0x74, 0x6c, 0x61, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.NotOnAtlas)
+	if err != nil {
+		err = msgp.WrapError(err, "NotOnAtlas")
+		return
+	}
+	// write "Var19"
+	err = en.Append(0xa5, 0x56, 0x61, 0x72, 0x31, 0x39)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Var19)
+	if err != nil {
+		err = msgp.WrapError(err, "Var19")
+		return
+	}
+	// write "Var20"
+	err = en.Append(0xa5, 0x56, 0x61, 0x72, 0x32, 0x30)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Var20)
+	if err != nil {
+		err = msgp.WrapError(err, "Var20")
+		return
+	}
+	// write "Var21"
+	err = en.Append(0xa5, 0x56, 0x61, 0x72, 0x32, 0x31)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Var21)
+	if err != nil {
+		err = msgp.WrapError(err, "Var21")
+		return
+	}
+	// write "Var22"
+	err = en.Append(0xa5, 0x56, 0x61, 0x72, 0x32, 0x32)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Var22)
+	if err != nil {
+		err = msgp.WrapError(err, "Var22")
+		return
+	}
+	// write "Key"
+	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *AtlasNode) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// map header, size 24
+	// string "WorldAreasKey"
+	o = append(o, 0xde, 0x0, 0x18, 0xad, 0x57, 0x6f, 0x72, 0x6c, 0x64, 0x41, 0x72, 0x65, 0x61, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.WorldAreasKey)
+	// string "ItemVisualIdentityKey"
+	o = append(o, 0xb5, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.ItemVisualIdentityKey)
+	// string "Var2"
+	o = append(o, 0xa4, 0x56, 0x61, 0x72, 0x32)
+	o = msgp.AppendBool(o, z.Var2)
+	// string "MapsKey"
+	o = append(o, 0xa7, 0x4d, 0x61, 0x70, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.MapsKey)
+	// string "FlavourTextKey"
+	o = append(o, 0xae, 0x46, 0x6c, 0x61, 0x76, 0x6f, 0x75, 0x72, 0x54, 0x65, 0x78, 0x74, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.FlavourTextKey)
+	// string "AtlasNodeKeys"
+	o = append(o, 0xad, 0x41, 0x74, 0x6c, 0x61, 0x73, 0x4e, 0x6f, 0x64, 0x65, 0x4b, 0x65, 0x79, 0x73)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.AtlasNodeKeys)))
+	for za0001 := range z.AtlasNodeKeys {
+		o = msgp.AppendInt(o, z.AtlasNodeKeys[za0001])
+	}
+	// string "Tier0"
+	o = append(o, 0xa5, 0x54, 0x69, 0x65, 0x72, 0x30)
+	o = msgp.AppendInt(o, z.Tier0)
+	// string "Tier1"
+	o = append(o, 0xa5, 0x54, 0x69, 0x65, 0x72, 0x31)
+	o = msgp.AppendInt(o, z.Tier1)
+	// string "Tier2"
+	o = append(o, 0xa5, 0x54, 0x69, 0x65, 0x72, 0x32)
+	o = msgp.AppendInt(o, z.Tier2)
+	// string "Tier3"
+	o = append(o, 0xa5, 0x54, 0x69, 0x65, 0x72, 0x33)
+	o = msgp.AppendInt(o, z.Tier3)
+	// string "Tier4"
+	o = append(o, 0xa5, 0x54, 0x69, 0x65, 0x72, 0x34)
+	o = msgp.AppendInt(o, z.Tier4)
+	// string "Var11"
+	o = append(o, 0xa5, 0x56, 0x61, 0x72, 0x31, 0x31)
+	o = msgp.AppendFloat64(o, z.Var11)
+	// string "Var12"
+	o = append(o, 0xa5, 0x56, 0x61, 0x72, 0x31, 0x32)
+	o = msgp.AppendFloat64(o, z.Var12)
+	// string "Var13"
+	o = append(o, 0xa5, 0x56, 0x61, 0x72, 0x31, 0x33)
+	o = msgp.AppendFloat64(o, z.Var13)
+	// string "Var14"
+	o = append(o, 0xa5, 0x56, 0x61, 0x72, 0x31, 0x34)
+	o = msgp.AppendFloat64(o, z.Var14)
+	// string "Var15"
+	o = append(o, 0xa5, 0x56, 0x61, 0x72, 0x31, 0x35)
+	o = msgp.AppendFloat64(o, z.Var15)
+	// string "DDSFile"
+	o = append(o, 0xa7, 0x44, 0x44, 0x53, 0x46, 0x69, 0x6c, 0x65)
+	if z.DDSFile == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendString(o, *z.DDSFile)
+	}
+	// string "Var17"
+	o = append(o, 0xa5, 0x56, 0x61, 0x72, 0x31, 0x37)
+	o = msgp.AppendBool(o, z.Var17)
+	// string "NotOnAtlas"
+	o = append(o, 0xaa, 0x4e, 0x6f, 0x74, 0x4f, 0x6e, 0x41, 0x74, 0x6c, 0x61, 0x73)
+	o = msgp.AppendBool(o, z.NotOnAtlas)
+	// string "Var19"
+	o = append(o, 0xa5, 0x56, 0x61, 0x72, 0x31, 0x39)
+	o = msgp.AppendInt(o, z.Var19)
+	// string "Var20"
+	o = append(o, 0xa5, 0x56, 0x61, 0x72, 0x32, 0x30)
+	o = msgp.AppendInt(o, z.Var20)
+	// string "Var21"
+	o = append(o, 0xa5, 0x56, 0x61, 0x72, 0x32, 0x31)
+	o = msgp.AppendInt(o, z.Var21)
+	// string "Var22"
+	o = append(o, 0xa5, 0x56, 0x61, 0x72, 0x32, 0x32)
+	o = msgp.AppendInt(o, z.Var22)
+	// string "Key"
+	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *AtlasNode) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var field []byte
+	_ = field
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadMapHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	for zb0001 > 0 {
+		zb0001--
+		field, bts, err = msgp.ReadMapKeyZC(bts)
+		if err != nil {
+			err = msgp.WrapError(err)
+			return
+		}
+		switch msgp.UnsafeString(field) {
+		case "WorldAreasKey":
+			z.WorldAreasKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "WorldAreasKey")
+				return
+			}
+		case "ItemVisualIdentityKey":
+			z.ItemVisualIdentityKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ItemVisualIdentityKey")
+				return
+			}
+		case "Var2":
+			z.Var2, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var2")
+				return
+			}
+		case "MapsKey":
+			z.MapsKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MapsKey")
+				return
+			}
+		case "FlavourTextKey":
+			z.FlavourTextKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "FlavourTextKey")
+				return
+			}
+		case "AtlasNodeKeys":
+			var zb0002 uint32
+			zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AtlasNodeKeys")
+				return
+			}
+			if cap(z.AtlasNodeKeys) >= int(zb0002) {
+				z.AtlasNodeKeys = (z.AtlasNodeKeys)[:zb0002]
+			} else {
+				z.AtlasNodeKeys = make([]int, zb0002)
+			}
+			for za0001 := range z.AtlasNodeKeys {
+				z.AtlasNodeKeys[za0001], bts, err = msgp.ReadIntBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "AtlasNodeKeys", za0001)
+					return
+				}
+			}
+		case "Tier0":
+			z.Tier0, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Tier0")
+				return
+			}
+		case "Tier1":
+			z.Tier1, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Tier1")
+				return
+			}
+		case "Tier2":
+			z.Tier2, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Tier2")
+				return
+			}
+		case "Tier3":
+			z.Tier3, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Tier3")
+				return
+			}
+		case "Tier4":
+			z.Tier4, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Tier4")
+				return
+			}
+		case "Var11":
+			z.Var11, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var11")
+				return
+			}
+		case "Var12":
+			z.Var12, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var12")
+				return
+			}
+		case "Var13":
+			z.Var13, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var13")
+				return
+			}
+		case "Var14":
+			z.Var14, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var14")
+				return
+			}
+		case "Var15":
+			z.Var15, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var15")
+				return
+			}
+		case "DDSFile":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.DDSFile = nil
+			} else {
+				if z.DDSFile == nil {
+					z.DDSFile = new(string)
+				}
+				*z.DDSFile, bts, err = msgp.ReadStringBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "DDSFile")
+					return
+				}
+			}
+		case "Var17":
+			z.Var17, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var17")
+				return
+			}
+		case "NotOnAtlas":
+			z.NotOnAtlas, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "NotOnAtlas")
+				return
+			}
+		case "Var19":
+			z.Var19, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var19")
+				return
+			}
+		case "Var20":
+			z.Var20, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var20")
+				return
+			}
+		case "Var21":
+			z.Var21, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var21")
+				return
+			}
+		case "Var22":
+			z.Var22, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var22")
+				return
+			}
+		case "Key":
+			z.Key, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Key")
+				return
+			}
+		default:
+			bts, err = msgp.Skip(bts)
+			if err != nil {
+				err = msgp.WrapError(err)
+				return
+			}
+		}
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *AtlasNode) Msgsize() (s int) {
+	s = 3 + 14 + msgp.IntSize + 22 + msgp.IntSize + 5 + msgp.BoolSize + 8 + msgp.IntSize + 15 + msgp.IntSize + 14 + msgp.ArrayHeaderSize + (len(z.AtlasNodeKeys) * (msgp.IntSize)) + 6 + msgp.IntSize + 6 + msgp.IntSize + 6 + msgp.IntSize + 6 + msgp.IntSize + 6 + msgp.IntSize + 6 + msgp.Float64Size + 6 + msgp.Float64Size + 6 + msgp.Float64Size + 6 + msgp.Float64Size + 6 + msgp.Float64Size + 8
+	if z.DDSFile == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.StringPrefixSize + len(*z.DDSFile)
+	}
+	s += 6 + msgp.BoolSize + 11 + msgp.BoolSize + 6 + msgp.IntSize + 6 + msgp.IntSize + 6 + msgp.IntSize + 6 + msgp.IntSize + 4 + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *AtlasNodeDefinition) DecodeMsg(dc *msgp.Reader) (err error) {
+	var field []byte
+	_ = field
+	var zb0001 uint32
+	zb0001, err = dc.ReadMapHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	for zb0001 > 0 {
+		zb0001--
+		field, err = dc.ReadMapKeyPtr()
+		if err != nil {
+			err = msgp.WrapError(err)
+			return
+		}
+		switch msgp.UnsafeString(field) {
+		case "WorldAreasKey":
+			z.WorldAreasKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "WorldAreasKey")
+				return
+			}
+		case "ItemVisualIdentityKey":
+			z.ItemVisualIdentityKey, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "ItemVisualIdentityKey")
+				return
+			}
+		case "Var2":
+			z.Var2, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "Var2")
+				return
+			}
+		case "Tier":
+			z.Tier, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Tier")
+				return
+			}
+		case "Var4":
+			z.Var4, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Var4")
+				return
+			}
+		case "Var5":
+			z.Var5, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Var5")
+				return
+			}
+		case "Var6":
+			z.Var6, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "Var6")
+				return
+			}
+		case "Key":
+			z.Key, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Key")
+				return
+			}
+		default:
+			err = dc.Skip()
+			if err != nil {
+				err = msgp.WrapError(err)
+				return
+			}
+		}
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *AtlasNodeDefinition) EncodeMsg(en *msgp.Writer) (err error) {
+	// map header, size 8
+	// write "WorldAreasKey"
+	err = en.Append(0x88, 0xad, 0x57, 0x6f, 0x72, 0x6c, 0x64, 0x41, 0x72, 0x65, 0x61, 0x73, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.WorldAreasKey)
+	if err != nil {
+		err = msgp.WrapError(err, "WorldAreasKey")
+		return
+	}
+	// write "ItemVisualIdentityKey"
+	err = en.Append(0xb5, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.ItemVisualIdentityKey)
+	if err != nil {
+		err = msgp.WrapError(err, "ItemVisualIdentityKey")
+		return
+	}
+	// write "Var2"
+	err = en.Append(0xa4, 0x56, 0x61, 0x72, 0x32)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.Var2)
+	if err != nil {
+		err = msgp.WrapError(err, "Var2")
+		return
+	}
+	// write "Tier"
+	err = en.Append(0xa4, 0x54, 0x69, 0x65, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Tier)
+	if err != nil {
+		err = msgp.WrapError(err, "Tier")
+		return
+	}
+	// write "Var4"
+	err = en.Append(0xa4, 0x56, 0x61, 0x72, 0x34)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Var4)
+	if err != nil {
+		err = msgp.WrapError(err, "Var4")
+		return
+	}
+	// write "Var5"
+	err = en.Append(0xa4, 0x56, 0x61, 0x72, 0x35)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Var5)
+	if err != nil {
+		err = msgp.WrapError(err, "Var5")
+		return
+	}
+	// write "Var6"
+	err = en.Append(0xa4, 0x56, 0x61, 0x72, 0x36)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.Var6)
+	if err != nil {
+		err = msgp.WrapError(err, "Var6")
+		return
+	}
+	// write "Key"
+	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *AtlasNodeDefinition) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// map header, size 8
+	// string "WorldAreasKey"
+	o = append(o, 0x88, 0xad, 0x57, 0x6f, 0x72, 0x6c, 0x64, 0x41, 0x72, 0x65, 0x61, 0x73, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.WorldAreasKey)
+	// string "ItemVisualIdentityKey"
+	o = append(o, 0xb5, 0x49, 0x74, 0x65, 0x6d, 0x56, 0x69, 0x73, 0x75, 0x61, 0x6c, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.ItemVisualIdentityKey)
+	// string "Var2"
+	o = append(o, 0xa4, 0x56, 0x61, 0x72, 0x32)
+	o = msgp.AppendBool(o, z.Var2)
+	// string "Tier"
+	o = append(o, 0xa4, 0x54, 0x69, 0x65, 0x72)
+	o = msgp.AppendInt(o, z.Tier)
+	// string "Var4"
+	o = append(o, 0xa4, 0x56, 0x61, 0x72, 0x34)
+	o = msgp.AppendInt(o, z.Var4)
+	// string "Var5"
+	o = append(o, 0xa4, 0x56, 0x61, 0x72, 0x35)
+	o = msgp.AppendInt(o, z.Var5)
+	// string "Var6"
+	o = append(o, 0xa4, 0x56, 0x61, 0x72, 0x36)
+	o = msgp.AppendBool(o, z.Var6)
+	// string "Key"
+	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *AtlasNodeDefinition) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var field []byte
+	_ = field
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadMapHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	for zb0001 > 0 {
+		zb0001--
+		field, bts, err = msgp.ReadMapKeyZC(bts)
+		if err != nil {
+			err = msgp.WrapError(err)
+			return
+		}
+		switch msgp.UnsafeString(field) {
+		case "WorldAreasKey":
+			z.WorldAreasKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "WorldAreasKey")
+				return
+			}
+		case "ItemVisualIdentityKey":
+			z.ItemVisualIdentityKey, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ItemVisualIdentityKey")
+				return
+			}
+		case "Var2":
+			z.Var2, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var2")
+				return
+			}
+		case "Tier":
+			z.Tier, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Tier")
+				return
+			}
+		case "Var4":
+			z.Var4, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var4")
+				return
+			}
+		case "Var5":
+			z.Var5, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var5")
+				return
+			}
+		case "Var6":
+			z.Var6, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Var6")
+				return
+			}
+		case "Key":
+			z.Key, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Key")
+				return
+			}
+		default:
+			bts, err = msgp.Skip(bts)
+			if err != nil {
+				err = msgp.WrapError(err)
+				return
+			}
+		}
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *AtlasNodeDefinition) Msgsize() (s int) {
+	s = 1 + 14 + msgp.IntSize + 22 + msgp.IntSize + 5 + msgp.BoolSize + 5 + msgp.IntSize + 5 + msgp.IntSize + 5 + msgp.IntSize + 5 + msgp.BoolSize + 4 + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *BaseItemType) DecodeMsg(dc *msgp.Reader) (err error) {
 	var field []byte
 	_ = field

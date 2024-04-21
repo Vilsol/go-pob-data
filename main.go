@@ -32,24 +32,28 @@ func main() {
 	treeVersion := os.Args[2]
 	gameVersion := os.Args[3]
 
+	slog.Info("extracting raw data")
 	if err := extractRawData(gamePath, gameVersion); err != nil {
 		slog.Error(err.Error())
 		os.Exit(1)
 		return
 	}
 
+	slog.Info("downloading tree data")
 	if err := downloadTreeData(treeVersion, gameVersion); err != nil {
 		slog.Error(err.Error())
 		os.Exit(1)
 		return
 	}
 
+	slog.Info("extracting translations")
 	if err := extractTranslations(gamePath, gameVersion); err != nil {
 		slog.Error(err.Error())
 		os.Exit(1)
 		return
 	}
 
+	slog.Info("generating meta")
 	if err := generateMeta(); err != nil {
 		slog.Error(err.Error())
 		os.Exit(1)
