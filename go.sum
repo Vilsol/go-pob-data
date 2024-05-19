@@ -15,8 +15,8 @@ github.com/MarvinJWendt/testza v0.3.0/go.mod h1:eFcL4I0idjtIx8P9C6KkAuLgATNKpX4/
 github.com/MarvinJWendt/testza v0.4.2/go.mod h1:mSdhXiKH8sg/gQehJ63bINcCKp7RtYewEjXsvsVUPbE=
 github.com/MarvinJWendt/testza v0.5.2 h1:53KDo64C1z/h/d/stCYCPY69bt/OSwjq5KpFNwi+zB4=
 github.com/MarvinJWendt/testza v0.5.2/go.mod h1:xu53QFE5sCdjtMCKk8YMQ2MnymimEctc4n3EjyIYvEY=
-github.com/Vilsol/pogo v0.0.0-20230819000347-369f6b8b106d h1:BBXzd5XFscacmfinqW+WTAHq3OeVf4k4iBWCa1FFEGA=
-github.com/Vilsol/pogo v0.0.0-20230819000347-369f6b8b106d/go.mod h1:LdNVaM3ruX9WEISzmrNFMt0hoKHHGg3b32cPTZOgXSU=
+github.com/Vilsol/pogo v0.0.0-20240519163018-e64d4122b1b6 h1:U4mlvNRyD7EsyEiAl5Gq7QiTdYH4p4eX9q1j9aOwt/Q=
+github.com/Vilsol/pogo v0.0.0-20240519163018-e64d4122b1b6/go.mod h1:LdNVaM3ruX9WEISzmrNFMt0hoKHHGg3b32cPTZOgXSU=
 github.com/Vilsol/slox v0.0.1 h1:X5iskI+WLDxW5FNxYV9izEEWliFzRUNxcItHWetwnOk=
 github.com/Vilsol/slox v0.0.1/go.mod h1:1mhhQdJHAzUVobE9RE0k7vxaSn17C0b4WSMPjHCizJo=
 github.com/andybalholm/brotli v1.0.5 h1:8uQZIdzKmjc/iuPu7O2ioW48L81FgatrcpfFmiq/cCs=
@@ -142,8 +142,6 @@ gopkg.in/djherbis/fscache.v0 v0.10.1 h1:yR4BF9YhXv+2B+of3wn0r9KYXtfbvLLkHvCkYAwr
 gopkg.in/djherbis/fscache.v0 v0.10.1/go.mod h1:izqJMuO+STCEMBEGFiwW5zPlamuiUOxMRpNzHT5cQHc=
 gopkg.in/djherbis/stream.v1 v1.3.1 h1:uGfmsOY1qqMjQQphhRBSGLyA9qumJ56exkRu9ASTjCw=
 gopkg.in/djherbis/stream.v1 v1.3.1/go.mod h1:aEV8CBVRmSpLamVJfM903Npic1IKmb2qS30VAZ+sssg=
-gopkg.in/gographics/imagick.v3 v3.4.3 h1:9plKFE/Us913jBN6KohtLG9FNW8LPvfpjiGAORIiEHg=
-gopkg.in/gographics/imagick.v3 v3.4.3/go.mod h1:+Q9nyA2xRZXrDyTtJ/eko+8V/5E7bWYs08ndkZp8UmA=
 gopkg.in/gographics/imagick.v3 v3.5.3 h1:Ho8/2Uu76Y1Z5P65dUBhh5ZeKS3ZcvYH12amWZNpSFA=
 gopkg.in/gographics/imagick.v3 v3.5.3/go.mod h1:+Q9nyA2xRZXrDyTtJ/eko+8V/5E7bWYs08ndkZp8UmA=
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=

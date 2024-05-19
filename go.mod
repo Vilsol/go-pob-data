@@ -40,5 +40,4 @@ require (
 	gopkg.in/djherbis/stream.v1 v1.3.1 // indirect
 )
 
-// replace github.com/oriath-net/pogo v0.0.0-20230425190806-78985d9ea758 => github.com/Vilsol/pogo v0.0.0-20230819000347-369f6b8b106d
-replace github.com/oriath-net/pogo v0.0.0-20230425190806-78985d9ea758 => ../pogo
+replace github.com/oriath-net/pogo v0.0.0-20230425190806-78985d9ea758 => github.com/Vilsol/pogo v0.0.0-20240519163018-e64d4122b1b6
