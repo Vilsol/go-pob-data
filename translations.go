@@ -23,7 +23,7 @@ func extractTranslations(gamePath string, gameVersion string) error {
 	}
 
 	extractor.LoadParser(gameVersion)
-	loader, err := extractor.GetBundleLoader(os.DirFS(gamePath))
+	loader, err := extractor.GetBundleLoader(os.DirFS(gamePath), IsNewHash(gameVersion))
 	if err != nil {
 		return errors.Wrap(err, "could not initialize bundle loader")
 	}

@@ -102,7 +102,7 @@ func (t *TranslationParser) ParseFile(name string) error {
 				Order: t.order,
 			}
 			t.order++
-		} else if curDescriptor.Stats == nil {
+		} else if curDescriptor != nil && curDescriptor.Stats == nil {
 			stats := statsRegex.FindAllSubmatch(line, -1)
 			if len(stats) > 0 {
 				statNames := statRegex.FindAll(stats[0][1], -1)
@@ -113,7 +113,7 @@ func (t *TranslationParser) ParseFile(name string) error {
 					t.descriptors[statNameStr] = curDescriptor
 				}
 			}
-		} else {
+		} else if curDescriptor != nil {
 			langName := langRegex.FindAllSubmatch(line, -1)
 			if len(langName) > 0 {
 				curLang = string(langName[0][1])

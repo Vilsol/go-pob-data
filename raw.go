@@ -24,7 +24,15 @@ import (
 
 type PackedFile struct {
 	Fn   func(jsonData []byte, w *msgp.Writer) error
-	Path string
+	path string
+}
+
+func (f PackedFile) FilePath(gameVersion string) string {
+	ext := GetFileExtension(gameVersion)
+	if IsNewHash(gameVersion) {
+		return strings.ToLower(f.path) + "." + ext
+	}
+	return f.path + "." + ext
 }
 
 func ReEncode[T msgp.Encodable]() func(jsonData []byte, w *msgp.Writer) error {
@@ -46,159 +54,159 @@ func ReEncode[T msgp.Encodable]() func(jsonData []byte, w *msgp.Writer) error {
 
 var filesToExport = []PackedFile{
 	{
-		Path: "Data/PassiveTreeExpansionJewels.dat64",
+		path: "Data/PassiveTreeExpansionJewels",
 		Fn:   ReEncode[*raw.PassiveTreeExpansionJewel](),
 	},
 	{
-		Path: "Data/PassiveTreeExpansionSkills.dat64",
+		path: "Data/PassiveTreeExpansionSkills",
 		Fn:   ReEncode[*raw.PassiveTreeExpansionSkill](),
 	},
 	{
-		Path: "Data/PassiveTreeExpansionSpecialSkills.dat64",
+		path: "Data/PassiveTreeExpansionSpecialSkills",
 		Fn:   ReEncode[*raw.PassiveTreeExpansionSpecialSkill](),
 	},
 	{
-		Path: "Data/CostTypes.dat64",
+		path: "Data/CostTypes",
 		Fn:   ReEncode[*raw.CostType](),
 	},
 	{
-		Path: "Data/Mods.dat64",
+		path: "Data/Mods",
 		Fn:   ReEncode[*raw.Mod](),
 	},
 	{
-		Path: "Data/ActiveSkills.dat64",
+		path: "Data/ActiveSkills",
 		Fn:   ReEncode[*raw.ActiveSkill](),
 	},
 	{
-		Path: "Data/Essences.dat64",
+		path: "Data/Essences",
 		Fn:   ReEncode[*raw.Essence](),
 	},
 	{
-		Path: "Data/CraftingBenchOptions.dat64",
+		path: "Data/CraftingBenchOptions",
 		Fn:   ReEncode[*raw.CraftingBenchOption](),
 	},
 	{
-		Path: "Data/PantheonPanelLayout.dat64",
+		path: "Data/PantheonPanelLayout",
 		Fn:   ReEncode[*raw.PantheonPanelLayout](),
 	},
 	{
-		Path: "Data/WeaponTypes.dat64",
+		path: "Data/WeaponTypes",
 		Fn:   ReEncode[*raw.WeaponType](),
 	},
 	{
-		Path: "Data/ArmourTypes.dat64",
+		path: "Data/ArmourTypes",
 		Fn:   ReEncode[*raw.ArmourType](),
 	},
 	{
-		Path: "Data/ShieldTypes.dat64",
+		path: "Data/ShieldTypes",
 		Fn:   ReEncode[*raw.ShieldType](),
 	},
 	{
-		Path: "Data/Flasks.dat64",
+		path: "Data/Flasks",
 		Fn:   ReEncode[*raw.Flask](),
 	},
 	{
-		Path: "Data/ComponentCharges.dat64",
+		path: "Data/ComponentCharges",
 		Fn:   ReEncode[*raw.ComponentCharge](),
 	},
 	{
-		Path: "Data/ComponentAttributeRequirements.dat64",
+		path: "Data/ComponentAttributeRequirements",
 		Fn:   ReEncode[*raw.ComponentAttributeRequirement](),
 	},
 	{
-		Path: "Data/BaseItemTypes.dat64",
+		path: "Data/BaseItemTypes",
 		Fn:   ReEncode[*raw.BaseItemType](),
 	},
 	{
-		Path: "Data/Stats.dat64",
+		path: "Data/Stats",
 		Fn:   ReEncode[*raw.Stat](),
 	},
 	{
-		Path: "Data/AlternatePassiveSkills.dat64",
+		path: "Data/AlternatePassiveSkills",
 		Fn:   ReEncode[*raw.AlternatePassiveSkill](),
 	},
 	{
-		Path: "Data/AlternatePassiveAdditions.dat64",
+		path: "Data/AlternatePassiveAdditions",
 		Fn:   ReEncode[*raw.AlternatePassiveAddition](),
 	},
 	{
-		Path: "Data/DefaultMonsterStats.dat64",
+		path: "Data/DefaultMonsterStats",
 		Fn:   ReEncode[*raw.DefaultMonsterStat](),
 	},
 	{
-		Path: "Data/SkillTotemVariations.dat64",
+		path: "Data/SkillTotemVariations",
 		Fn:   ReEncode[*raw.SkillTotemVariation](),
 	},
 	{
-		Path: "Data/MonsterVarieties.dat64",
+		path: "Data/MonsterVarieties",
 		Fn:   ReEncode[*raw.MonsterVariety](),
 	},
 	{
-		Path: "Data/MonsterMapDifficulty.dat64",
+		path: "Data/MonsterMapDifficulty",
 		Fn:   ReEncode[*raw.MonsterMapDifficulty](),
 	},
 	{
-		Path: "Data/MonsterMapBossDifficulty.dat64",
+		path: "Data/MonsterMapBossDifficulty",
 		Fn:   ReEncode[*raw.MonsterMapBossDifficulty](),
 	},
 	{
-		Path: "Data/GrantedEffects.dat64",
+		path: "Data/GrantedEffects",
 		Fn:   ReEncode[*raw.GrantedEffect](),
 	},
 	{
-		Path: "Data/SkillTotems.dat64",
+		path: "Data/SkillTotems",
 		Fn:   ReEncode[*raw.SkillTotem](),
 	},
 	{
-		Path: "Data/GrantedEffectStatSetsPerLevel.dat64",
+		path: "Data/GrantedEffectStatSetsPerLevel",
 		Fn:   ReEncode[*raw.GrantedEffectStatSetsPerLevel](),
 	},
 	{
-		Path: "Data/GrantedEffectsPerLevel.dat64",
+		path: "Data/GrantedEffectsPerLevel",
 		Fn:   ReEncode[*raw.GrantedEffectsPerLevel](),
 	},
 	{
-		Path: "Data/GrantedEffectQualityStats.dat64",
+		path: "Data/GrantedEffectQualityStats",
 		Fn:   ReEncode[*raw.GrantedEffectQualityStat](),
 	},
 	{
-		Path: "Data/SkillGems.dat64",
+		path: "Data/SkillGems",
 		Fn:   ReEncode[*raw.SkillGem](),
 	},
 	{
-		Path: "Data/ItemExperiencePerLevel.dat64",
+		path: "Data/ItemExperiencePerLevel",
 		Fn:   ReEncode[*raw.ItemExperiencePerLevel](),
 	},
 	{
-		Path: "Data/Tags.dat64",
+		path: "Data/Tags",
 		Fn:   ReEncode[*raw.Tag](),
 	},
 	{
-		Path: "Data/ActiveSkillType.dat64",
+		path: "Data/ActiveSkillType",
 		Fn:   ReEncode[*raw.ActiveSkillType](),
 	},
 	{
-		Path: "Data/ItemClasses.dat64",
+		path: "Data/ItemClasses",
 		Fn:   ReEncode[*raw.ItemClass](),
 	},
 	{
-		Path: "Data/GrantedEffectStatSets.dat64",
+		path: "Data/GrantedEffectStatSets",
 		Fn:   ReEncode[*raw.GrantedEffectStatSet](),
 	},
 	{
-		Path: "Data/PassiveSkills.dat64",
+		path: "Data/PassiveSkills",
 		Fn:   ReEncode[*raw.PassiveSkill](),
 	},
 	{
-		Path: "Data/AlternateTreeVersions.dat64",
+		path: "Data/AlternateTreeVersions",
 		Fn:   ReEncode[*raw.AlternateTreeVersion](),
 	},
 	{
-		Path: "Data/AtlasNode.dat64",
+		path: "Data/AtlasNode",
 		Fn:   ReEncode[*raw.AtlasNode](),
 	},
 	{
-		Path: "Data/AtlasNodeDefinition.dat64",
+		path: "Data/AtlasNodeDefinition",
 		Fn:   ReEncode[*raw.AtlasNodeDefinition](),
 	},
 }
@@ -218,22 +226,25 @@ func extractRawData(gamePath string, gameVersion string) error {
 	}
 
 	extractor.LoadParser(gameVersion)
-	loader, err := extractor.GetBundleLoader(os.DirFS(gamePath))
+	loader, err := extractor.GetBundleLoader(os.DirFS(gamePath), IsNewHash(gameVersion))
 	if err != nil {
 		return errors.Wrap(err, "could not initialize bundle loader")
 	}
 
 	for _, file := range filesToExport {
-		slog.Info("extracting", slog.String("path", file.Path))
+		pathWithExt := file.path + "." + GetFileExtension(gameVersion)
 
-		data, err := loader.Open(file.Path)
+		slog.Info("extracting", slog.String("path", pathWithExt))
+
+		data, err := loader.Open(file.FilePath(gameVersion))
 		if err != nil {
-			return errors.Wrap(err, "could not open file")
+			slog.Error("failed to open dat file", slog.String("error", err.Error()), slog.String("path", pathWithExt))
+			continue
 		}
 
-		dat, err := extractor.ParseDat(data, filepath.Base(file.Path))
+		dat, err := extractor.ParseDat(data, filepath.Base(pathWithExt))
 		if err != nil {
-			slog.Error("failed to parse dat file", slog.String("error", err.Error()), slog.String("path", file.Path))
+			slog.Error("failed to parse dat file", slog.String("error", err.Error()), slog.String("path", pathWithExt))
 			continue
 		}
 
@@ -247,7 +258,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 			return errors.Wrap(err, "failed to marshal dat file")
 		}
 
-		outNameGzip := strings.Split(filepath.Base(file.Path), ".")[0] + ".json.gz"
+		outNameGzip := strings.Split(filepath.Base(pathWithExt), ".")[0] + ".json.gz"
 		outPathGzip := filepath.Join("data", gameVersion, "raw", outNameGzip)
 
 		if err := os.MkdirAll(filepath.Dir(outPathGzip), 0o755); err != nil {
@@ -269,7 +280,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 		_ = writerGzip.Close()
 		_ = fGzip.Close()
 
-		outNameBrotli := strings.Split(filepath.Base(file.Path), ".")[0] + ".json.br"
+		outNameBrotli := strings.Split(filepath.Base(pathWithExt), ".")[0] + ".json.br"
 		outPathBrotli := filepath.Join("data", gameVersion, "raw", outNameBrotli)
 
 		fBrotli, err := os.OpenFile(outPathBrotli, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o755)
@@ -285,7 +296,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 		_ = writerBrotli.Close()
 		_ = fBrotli.Close()
 
-		outNameMsgpBrotli := strings.Split(filepath.Base(file.Path), ".")[0] + ".msgpack.br"
+		outNameMsgpBrotli := strings.Split(filepath.Base(pathWithExt), ".")[0] + ".msgpack.br"
 		outPathMsgpBrotli := filepath.Join("data", gameVersion, "raw", outNameMsgpBrotli)
 
 		fMsgpBrotli, err := os.OpenFile(outPathMsgpBrotli, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o755)

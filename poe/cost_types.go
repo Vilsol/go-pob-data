@@ -13,6 +13,12 @@ type CostType struct {
 
 var CostTypes []*CostType
 
+var CostTypesByID map[string]*CostType
+
 func InitializeCostTypes(ctx context.Context, version string, assetCache loader.AssetCache) error {
-	return loader.InitHelper(ctx, version, "CostTypes", &CostTypes, nil, assetCache)
+	return loader.InitHelper(ctx, version, "CostTypes", &CostTypes, func(count int64) {
+		CostTypesByID = make(map[string]*CostType, count)
+	}, assetCache, func(obj *CostType) {
+		CostTypesByID[obj.ID] = obj
+	})
 }

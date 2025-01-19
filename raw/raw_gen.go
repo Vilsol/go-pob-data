@@ -5499,6 +5499,12 @@ func (z *CostType) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "StatsKey")
 				return
 			}
+		case "Divisor":
+			z.Divisor, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "Divisor")
+				return
+			}
 		case "Key":
 			z.Key, err = dc.ReadInt()
 			if err != nil {
@@ -5518,9 +5524,9 @@ func (z *CostType) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *CostType) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 4
+	// map header, size 5
 	// write "FormatText"
-	err = en.Append(0x84, 0xaa, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x54, 0x65, 0x78, 0x74)
+	err = en.Append(0x85, 0xaa, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x54, 0x65, 0x78, 0x74)
 	if err != nil {
 		return
 	}
@@ -5549,6 +5555,16 @@ func (z *CostType) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "StatsKey")
 		return
 	}
+	// write "Divisor"
+	err = en.Append(0xa7, 0x44, 0x69, 0x76, 0x69, 0x73, 0x6f, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Divisor)
+	if err != nil {
+		err = msgp.WrapError(err, "Divisor")
+		return
+	}
 	// write "Key"
 	err = en.Append(0xa3, 0x4b, 0x65, 0x79)
 	if err != nil {
@@ -5565,9 +5581,9 @@ func (z *CostType) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *CostType) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 4
+	// map header, size 5
 	// string "FormatText"
-	o = append(o, 0x84, 0xaa, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x54, 0x65, 0x78, 0x74)
+	o = append(o, 0x85, 0xaa, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x54, 0x65, 0x78, 0x74)
 	o = msgp.AppendString(o, z.FormatText)
 	// string "ID"
 	o = append(o, 0xa2, 0x49, 0x44)
@@ -5575,6 +5591,9 @@ func (z *CostType) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "StatsKey"
 	o = append(o, 0xa8, 0x53, 0x74, 0x61, 0x74, 0x73, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.StatsKey)
+	// string "Divisor"
+	o = append(o, 0xa7, 0x44, 0x69, 0x76, 0x69, 0x73, 0x6f, 0x72)
+	o = msgp.AppendInt(o, z.Divisor)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
 	o = msgp.AppendInt(o, z.Key)
@@ -5617,6 +5636,12 @@ func (z *CostType) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "StatsKey")
 				return
 			}
+		case "Divisor":
+			z.Divisor, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Divisor")
+				return
+			}
 		case "Key":
 			z.Key, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
@@ -5637,7 +5662,7 @@ func (z *CostType) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *CostType) Msgsize() (s int) {
-	s = 1 + 11 + msgp.StringPrefixSize + len(z.FormatText) + 3 + msgp.StringPrefixSize + len(z.ID) + 9 + msgp.IntSize + 4 + msgp.IntSize
+	s = 1 + 11 + msgp.StringPrefixSize + len(z.FormatText) + 3 + msgp.StringPrefixSize + len(z.ID) + 9 + msgp.IntSize + 8 + msgp.IntSize + 4 + msgp.IntSize
 	return
 }
 

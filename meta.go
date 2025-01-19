@@ -3,6 +3,8 @@ package main
 import (
 	"encoding/json"
 	"os"
+	"strconv"
+	"strings"
 
 	"github.com/pkg/errors"
 )
@@ -30,4 +32,17 @@ func generateMeta() error {
 	}
 
 	return errors.Wrap(os.WriteFile("data/meta.json", bs, 0o644), "failed writing metadata")
+}
+
+func IsNewHash(gameVersion string) bool {
+	n, _ := strconv.Atoi(strings.Split(gameVersion, ".")[1])
+	return n >= 22
+}
+
+func GetFileExtension(gameVersion string) string {
+	n, _ := strconv.Atoi(strings.Split(gameVersion, ".")[1])
+	if n >= 25 {
+		return "datc64"
+	}
+	return "dat64"
 }

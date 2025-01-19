@@ -7,7 +7,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-func GetBundleLoader(source fs.FS) (fs.FS, error) {
-	loader, err := bundle.NewLoader(source)
+func GetBundleLoader(source fs.FS, newHashFunc bool) (fs.FS, error) {
+	loader, err := bundle.NewLoader(source, newHashFunc)
 	return loader, errors.Wrap(err, "failed to make a new bundle loader")
 }

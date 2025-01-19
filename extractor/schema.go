@@ -3,6 +3,7 @@ package extractor
 import (
 	"encoding/json"
 	"fmt"
+	"log/slog"
 	"os"
 	"path/filepath"
 
@@ -79,6 +80,10 @@ func (t Table) ToJSONFormat() dat.JsonFormat {
 		}
 
 		tName := typeToType[column.Type]
+		if tName == "" {
+			slog.Error("unknown type", slog.String("type", string(column.Type)), slog.String("file", t.Name))
+		}
+
 		if column.Array {
 			tName += "[]"
 		}
@@ -105,6 +110,9 @@ var typeToType = map[Type]string{
 	TypeI32:        "i32",
 	TypeRow:        "shortid",
 	TypeString:     "string",
+	TypeU16:        "u16",
+	TypeI16:        "i16",
+	TypeU32:        "u32",
 }
 
 type Column struct {
@@ -138,6 +146,9 @@ const (
 	TypeI32        Type = "i32"
 	TypeRow        Type = "row"
 	TypeString     Type = "string"
+	TypeU16        Type = "u16"
+	TypeI16        Type = "i16"
+	TypeU32        Type = "u32"
 )
 
 func GetSchema(name string) Table {

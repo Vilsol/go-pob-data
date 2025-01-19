@@ -1,6 +1,6 @@
 module github.com/Vilsol/go-pob-data
 
-go 1.21
+go 1.23.3
 
 require (
 	github.com/MarvinJWendt/testza v0.5.2
@@ -40,4 +40,4 @@ require (
 	gopkg.in/djherbis/stream.v1 v1.3.1 // indirect
 )
 
-replace github.com/oriath-net/pogo v0.0.0-20230425190806-78985d9ea758 => github.com/Vilsol/pogo v0.0.0-20240519163018-e64d4122b1b6
+replace github.com/oriath-net/pogo v0.0.0-20230425190806-78985d9ea758 => github.com/Vilsol/pogo v0.0.0-20250119025017-735f5b0cf613

@@ -14,12 +14,12 @@ func init() {
 }
 
 func TestReadIndex(t *testing.T) {
-	_, err := GetBundleLoader(NewWebFS(testdata.GameVersion()))
+	_, err := GetBundleLoader(NewWebFS(testdata.GameVersion()), true)
 	testza.AssertNoError(t, err)
 }
 
 func TestReadSkillGems(t *testing.T) {
-	loader, err := GetBundleLoader(NewWebFS(testdata.GameVersion()))
+	loader, err := GetBundleLoader(NewWebFS(testdata.GameVersion()), true)
 	testza.AssertNoError(t, err)
 
 	skillGems, err := loader.Open("Data/SkillGems.dat64")
@@ -48,7 +48,7 @@ func TestLoadSchema(t *testing.T) {
 func TestParseDat(t *testing.T) {
 	LoadParser(testdata.ShortGameVersion())
 
-	loader, err := GetBundleLoader(NewWebFS(testdata.GameVersion()))
+	loader, err := GetBundleLoader(NewWebFS(testdata.GameVersion()), true)
 	testza.AssertNoError(t, err)
 
 	testFiles := []struct {
