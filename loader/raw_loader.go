@@ -15,7 +15,7 @@ import (
 	"github.com/tinylib/msgp/msgp"
 )
 
-const cdnRawBase = "https://go-pob-data.pages.dev/data/%s/raw/%s.msgpack.br"
+const cdnRawBase = "https://data.pob.gg/data/%s/raw/%s.msgpack.br"
 
 // LoadRaw loads a raw brotli-compressed json dump from remote source
 //

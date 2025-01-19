@@ -16,7 +16,7 @@ import (
 	"github.com/Vilsol/go-pob-data/raw"
 )
 
-const cdnTranslationBase = "https://go-pob-data.pages.dev/data/%s/stat_translations/%s/%s.msgpack.br"
+const cdnTranslationBase = "https://data.pob.gg/data/%s/stat_translations/%s/%s.msgpack.br"
 
 // LoadTranslation loads a raw brotli-compressed json dump from remote source
 //
