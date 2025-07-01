@@ -29,6 +29,13 @@ func LoadSchema(gameVersion string) {
 
 	tableMap = make(map[string]Table, len(schemaFile.Tables))
 	for _, table := range schemaFile.Tables {
+		if t, ok := tableMap[table.Name]; ok {
+			if t.ValidFor < table.ValidFor {
+				// Ignore newer versions of the table
+				continue
+			}
+		}
+
 		tableMap[table.Name] = table
 	}
 }
@@ -47,8 +54,9 @@ type Enumeration struct {
 }
 
 type Table struct {
-	Name    string   `json:"name"`
-	Columns []Column `json:"columns"`
+	ValidFor int      `json:"validFor"`
+	Name     string   `json:"name"`
+	Columns  []Column `json:"columns"`
 }
 
 func (t Table) ToJSONFormat() dat.JsonFormat {

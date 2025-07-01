@@ -30,7 +30,7 @@ func extractTranslations(gamePath string, gameVersion string) error {
 
 	for _, translation := range translations {
 		parser := st.NewTranslationParser(loader)
-		if err := parser.ParseFile(translation); err != nil {
+		if err := parser.ParseFile(strings.ToLower(translation)); err != nil {
 			return errors.Wrap(err, "failed to parse translation file")
 		}
 		if err := parser.SaveTo(filepath.Join("data", gameVersion, "stat_translations"), strings.Split(filepath.Base(translation), ".")[0]); err != nil {

@@ -328,7 +328,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 	for _, img := range imagesToExport {
 		slog.Info("extracting", slog.String("path", img))
 
-		data, err := loader.Open(img)
+		data, err := loader.Open(strings.ToLower(img))
 		if err != nil {
 			return errors.Wrap(err, "could not open file")
 		}
