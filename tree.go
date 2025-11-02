@@ -124,6 +124,11 @@ func downloadTreeData(treeVersion string, gameVersion string) error {
 		}
 		downloaded[fileName] = true
 
+		if fileName == "." {
+			// Ignore
+			continue
+		}
+
 		slog.Info("downloading", slog.String("fileName", fileName))
 
 		response, err := http.DefaultClient.Get(repoVersionBase + "/assets/" + fileName)
