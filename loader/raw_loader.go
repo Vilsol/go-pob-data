@@ -4,9 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io"
 	"log/slog"
-	"net/http"
 	"reflect"
 
 	"github.com/Vilsol/slox"
@@ -29,44 +27,56 @@ func LoadRaw[T msgp.Decodable](ctx context.Context, version string, name string,
 		slog.String("name", name),
 	)
 
-	var b []byte
-	if assetCache.Exists(url) {
-		get, err := assetCache.Get(url)
-		if err != nil {
-			return nil, errors.Wrap(err, "failed to retrieve url from cache: "+url)
-		}
-		b = get
-	} else {
-		slox.From(ctx).Debug(
-			"fetching",
-			slog.String("url", url),
+	b, fromCache, err := loadAsset(ctx, url, assetCache)
+	if errors.Is(err, ErrAssetNotFound) {
+		// Table sets differ between game versions, so an asset the CDN does not have
+		// is an absent table rather than a failure. Loud, but not fatal.
+		slox.From(ctx).Warn(
+			"no such asset for this version",
+			slog.String("version", version),
+			slog.String("name", name),
 		)
 
-		request, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-		if err != nil {
-			return nil, errors.Wrap(err, "failed to create request")
+		if onInit != nil {
+			onInit(0)
 		}
 
-		response, err := http.DefaultClient.Do(request)
-		if err != nil {
-			return nil, errors.Wrap(err, "failed to fetch url: "+url)
-		}
-		defer response.Body.Close()
-
-		b, err = io.ReadAll(response.Body)
-		if err != nil {
-			return nil, errors.Wrap(err, "failed to read response body")
-		}
-
-		defer func() {
-			_ = assetCache.Set(url, b)
-		}()
+		return []T{}, nil
 	}
 
-	unzipStream := brotli.NewReader(bytes.NewReader(b))
+	if err != nil {
+		return nil, err
+	}
 
-	r := msgp.NewReader(unzipStream)
-	elementCount, _ := r.ReadInt64()
+	r := msgp.NewReader(brotli.NewReader(bytes.NewReader(b)))
+
+	elementCount, err := r.ReadInt64()
+	if err != nil && fromCache {
+		// Nothing has been emitted yet, so a cached asset we cannot even read a
+		// header out of is safe to throw away and fetch again.
+		slox.From(ctx).Warn(
+			"discarding unreadable cached asset",
+			slog.String("url", url),
+			slog.Any("error", err),
+		)
+
+		b, err = fetchAsset(ctx, url, assetCache)
+		if err != nil {
+			return nil, err
+		}
+
+		r = msgp.NewReader(brotli.NewReader(bytes.NewReader(b)))
+		elementCount, err = r.ReadInt64()
+	}
+
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to read element count: "+url)
+	}
+
+	if elementCount < 0 {
+		return nil, errors.Errorf("negative element count %d: %s", elementCount, url)
+	}
+
 	if onInit != nil {
 		onInit(elementCount)
 	}

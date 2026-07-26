@@ -4,9 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io"
 	"log/slog"
-	"net/http"
 
 	"github.com/Vilsol/slox"
 	"github.com/andybalholm/brotli"
@@ -31,47 +29,34 @@ func LoadTranslation(ctx context.Context, version string, language string, name 
 		slog.String("language", language),
 	)
 
-	var b []byte
-	if assetCache.Exists(url) {
-		get, err := assetCache.Get(url)
-		if err != nil {
-			return nil, errors.Wrap(err, "failed to retrieve url from cache: "+url)
-		}
-		b = get
-	} else {
-		slox.From(ctx).Debug(
-			"fetching",
-			slog.String("url", url),
-		)
-
-		request, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-		if err != nil {
-			return nil, errors.Wrap(err, "failed to create request")
-		}
-
-		response, err := http.DefaultClient.Do(request)
-		if err != nil {
-			return nil, errors.Wrap(err, "failed to fetch url: "+url)
-		}
-		defer response.Body.Close()
-
-		b, err = io.ReadAll(response.Body)
-		if err != nil {
-			return nil, errors.Wrap(err, "failed to read response body")
-		}
-
-		defer func() {
-			_ = assetCache.Set(url, b)
-		}()
+	b, fromCache, err := loadAsset(ctx, url, assetCache)
+	if err != nil {
+		return nil, err
 	}
 
-	unzipStream := brotli.NewReader(bytes.NewReader(b))
-
-	r := msgp.NewReader(unzipStream)
-
 	var out raw.TranslationFile
-	if err := out.DecodeMsg(r); err != nil {
-		return nil, errors.Wrap(err, "failed to read message")
+
+	err = out.DecodeMsg(msgp.NewReader(brotli.NewReader(bytes.NewReader(b))))
+	if err != nil && fromCache {
+		// Nothing is returned to the caller until the whole file decodes, so a
+		// cached asset that fails to decode is safe to throw away and fetch again.
+		slox.From(ctx).Warn(
+			"discarding unreadable cached asset",
+			slog.String("url", url),
+			slog.Any("error", err),
+		)
+
+		b, err = fetchAsset(ctx, url, assetCache)
+		if err != nil {
+			return nil, err
+		}
+
+		out = raw.TranslationFile{}
+		err = out.DecodeMsg(msgp.NewReader(brotli.NewReader(bytes.NewReader(b))))
+	}
+
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to read message: "+url)
 	}
 
 	return &out, nil
