@@ -186,8 +186,20 @@ func InitializeAll(ctx context.Context, version string, assetCache loader.AssetC
 	}
 	alreadyInitialized = true
 
+	if err := initializeFunctions(ctx, initFunctions, version, assetCache, updateFunc); err != nil {
+		return err
+	}
+
+	for _, hook := range utils.RegisteredHooks {
+		hook()
+	}
+
+	return nil
+}
+
+func initializeFunctions(ctx context.Context, functions []initBlock, version string, assetCache loader.AssetCache, updateFunc UpdateFunc) error {
 	if runtime.GOMAXPROCS(0) == 1 {
-		for _, function := range initFunctions {
+		for _, function := range functions {
 			if updateFunc != nil {
 				updateFunc(function.Name)
 			}
@@ -195,52 +207,55 @@ func InitializeAll(ctx context.Context, version string, assetCache loader.AssetC
 				return err
 			}
 		}
-	} else {
-		loaded := make(map[string]bool, len(initFunctions))
-		for len(loaded) < len(initFunctions) {
-			before := len(loaded)
 
-			g := new(errgroup.Group)
-			for _, function := range initFunctions {
-				// Do not load again
-				if _, ok := loaded[function.Name]; ok {
-					continue
-				}
-
-				// Check if all dependencies are loaded
-				canLoad := true
-				for _, depend := range function.Depends {
-					if _, ok := loaded[depend]; !ok {
-						canLoad = false
-						break
-					}
-				}
-
-				if !canLoad {
-					continue
-				}
-
-				fn := function
-				g.Go(func() error {
-					defer func() {
-						loaded[fn.Name] = true
-					}()
-					return fn.Load(ctx, version, assetCache)
-				})
-			}
-
-			if err := g.Wait(); err != nil {
-				return err
-			}
-
-			if len(loaded) == before {
-				return errors.New("failed resolving initialization dependency tree")
-			}
-		}
+		return nil
 	}
 
-	for _, hook := range utils.RegisteredHooks {
-		hook()
+	loaded := make(map[string]bool, len(functions))
+	for len(loaded) < len(functions) {
+		before := len(loaded)
+
+		g := new(errgroup.Group)
+		round := make([]string, 0, len(functions))
+		for _, function := range functions {
+			// Do not load again
+			if _, ok := loaded[function.Name]; ok {
+				continue
+			}
+
+			// Check if all dependencies are loaded
+			canLoad := true
+			for _, depend := range function.Depends {
+				if _, ok := loaded[depend]; !ok {
+					canLoad = false
+					break
+				}
+			}
+
+			if !canLoad {
+				continue
+			}
+
+			round = append(round, function.Name)
+
+			fn := function
+			g.Go(func() error {
+				return fn.Load(ctx, version, assetCache)
+			})
+		}
+
+		if err := g.Wait(); err != nil {
+			return err
+		}
+
+		// Only the round owner touches `loaded`, after every goroutine of the round is done
+		for _, name := range round {
+			loaded[name] = true
+		}
+
+		if len(loaded) == before {
+			return errors.New("failed resolving initialization dependency tree")
+		}
 	}
 
 	return nil
