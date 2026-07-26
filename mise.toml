@@ -1,0 +1,4 @@
+[tools]
+go = "1.23.3"
+"go:github.com/tinylib/msgp" = "1.6.4"
+imagemagick = "7.1.2_27"
