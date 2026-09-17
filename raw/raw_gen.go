@@ -2169,6 +2169,18 @@ func (z *AlternateTreeVersion) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "AreSmallNormalPassiveSkillsReplaced")
 				return
 			}
+		case "MinimumAdditionsSmallAttribute":
+			z.MinimumAdditionsSmallAttribute, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "MinimumAdditionsSmallAttribute")
+				return
+			}
+		case "MaximumAdditionsSmallAttribute":
+			z.MaximumAdditionsSmallAttribute, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "MaximumAdditionsSmallAttribute")
+				return
+			}
 		case "MinimumAdditions":
 			z.MinimumAdditions, err = dc.ReadInt()
 			if err != nil {
@@ -2179,6 +2191,18 @@ func (z *AlternateTreeVersion) DecodeMsg(dc *msgp.Reader) (err error) {
 			z.MaximumAdditions, err = dc.ReadInt()
 			if err != nil {
 				err = msgp.WrapError(err, "MaximumAdditions")
+				return
+			}
+		case "MinimumAdditionsNotable":
+			z.MinimumAdditionsNotable, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "MinimumAdditionsNotable")
+				return
+			}
+		case "MaximumAdditionsNotable":
+			z.MaximumAdditionsNotable, err = dc.ReadInt()
+			if err != nil {
+				err = msgp.WrapError(err, "MaximumAdditionsNotable")
 				return
 			}
 		case "NotableReplacementSpawnWeight":
@@ -2200,9 +2224,9 @@ func (z *AlternateTreeVersion) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *AlternateTreeVersion) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 7
+	// map header, size 11
 	// write "ConquerorType"
-	err = en.Append(0x87, 0xad, 0x43, 0x6f, 0x6e, 0x71, 0x75, 0x65, 0x72, 0x6f, 0x72, 0x54, 0x79, 0x70, 0x65)
+	err = en.Append(0x8b, 0xad, 0x43, 0x6f, 0x6e, 0x71, 0x75, 0x65, 0x72, 0x6f, 0x72, 0x54, 0x79, 0x70, 0x65)
 	if err != nil {
 		return
 	}
@@ -2241,6 +2265,26 @@ func (z *AlternateTreeVersion) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "AreSmallNormalPassiveSkillsReplaced")
 		return
 	}
+	// write "MinimumAdditionsSmallAttribute"
+	err = en.Append(0xbe, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x53, 0x6d, 0x61, 0x6c, 0x6c, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MinimumAdditionsSmallAttribute)
+	if err != nil {
+		err = msgp.WrapError(err, "MinimumAdditionsSmallAttribute")
+		return
+	}
+	// write "MaximumAdditionsSmallAttribute"
+	err = en.Append(0xbe, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x53, 0x6d, 0x61, 0x6c, 0x6c, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MaximumAdditionsSmallAttribute)
+	if err != nil {
+		err = msgp.WrapError(err, "MaximumAdditionsSmallAttribute")
+		return
+	}
 	// write "MinimumAdditions"
 	err = en.Append(0xb0, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73)
 	if err != nil {
@@ -2261,6 +2305,26 @@ func (z *AlternateTreeVersion) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "MaximumAdditions")
 		return
 	}
+	// write "MinimumAdditionsNotable"
+	err = en.Append(0xb7, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MinimumAdditionsNotable)
+	if err != nil {
+		err = msgp.WrapError(err, "MinimumAdditionsNotable")
+		return
+	}
+	// write "MaximumAdditionsNotable"
+	err = en.Append(0xb7, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MaximumAdditionsNotable)
+	if err != nil {
+		err = msgp.WrapError(err, "MaximumAdditionsNotable")
+		return
+	}
 	// write "NotableReplacementSpawnWeight"
 	err = en.Append(0xbd, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74)
 	if err != nil {
@@ -2277,9 +2341,9 @@ func (z *AlternateTreeVersion) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *AlternateTreeVersion) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 7
+	// map header, size 11
 	// string "ConquerorType"
-	o = append(o, 0x87, 0xad, 0x43, 0x6f, 0x6e, 0x71, 0x75, 0x65, 0x72, 0x6f, 0x72, 0x54, 0x79, 0x70, 0x65)
+	o = append(o, 0x8b, 0xad, 0x43, 0x6f, 0x6e, 0x71, 0x75, 0x65, 0x72, 0x6f, 0x72, 0x54, 0x79, 0x70, 0x65)
 	o = msgp.AppendString(o, z.ConquerorType)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
@@ -2290,12 +2354,24 @@ func (z *AlternateTreeVersion) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "AreSmallNormalPassiveSkillsReplaced"
 	o = append(o, 0xd9, 0x23, 0x41, 0x72, 0x65, 0x53, 0x6d, 0x61, 0x6c, 0x6c, 0x4e, 0x6f, 0x72, 0x6d, 0x61, 0x6c, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x53, 0x6b, 0x69, 0x6c, 0x6c, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x64)
 	o = msgp.AppendBool(o, z.AreSmallNormalPassiveSkillsReplaced)
+	// string "MinimumAdditionsSmallAttribute"
+	o = append(o, 0xbe, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x53, 0x6d, 0x61, 0x6c, 0x6c, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65)
+	o = msgp.AppendInt(o, z.MinimumAdditionsSmallAttribute)
+	// string "MaximumAdditionsSmallAttribute"
+	o = append(o, 0xbe, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x53, 0x6d, 0x61, 0x6c, 0x6c, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65)
+	o = msgp.AppendInt(o, z.MaximumAdditionsSmallAttribute)
 	// string "MinimumAdditions"
 	o = append(o, 0xb0, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73)
 	o = msgp.AppendInt(o, z.MinimumAdditions)
 	// string "MaximumAdditions"
 	o = append(o, 0xb0, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73)
 	o = msgp.AppendInt(o, z.MaximumAdditions)
+	// string "MinimumAdditionsNotable"
+	o = append(o, 0xb7, 0x4d, 0x69, 0x6e, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65)
+	o = msgp.AppendInt(o, z.MinimumAdditionsNotable)
+	// string "MaximumAdditionsNotable"
+	o = append(o, 0xb7, 0x4d, 0x61, 0x78, 0x69, 0x6d, 0x75, 0x6d, 0x41, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65)
+	o = msgp.AppendInt(o, z.MaximumAdditionsNotable)
 	// string "NotableReplacementSpawnWeight"
 	o = append(o, 0xbd, 0x4e, 0x6f, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x57, 0x65, 0x69, 0x67, 0x68, 0x74)
 	o = msgp.AppendInt(o, z.NotableReplacementSpawnWeight)
@@ -2344,6 +2420,18 @@ func (z *AlternateTreeVersion) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "AreSmallNormalPassiveSkillsReplaced")
 				return
 			}
+		case "MinimumAdditionsSmallAttribute":
+			z.MinimumAdditionsSmallAttribute, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MinimumAdditionsSmallAttribute")
+				return
+			}
+		case "MaximumAdditionsSmallAttribute":
+			z.MaximumAdditionsSmallAttribute, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MaximumAdditionsSmallAttribute")
+				return
+			}
 		case "MinimumAdditions":
 			z.MinimumAdditions, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
@@ -2354,6 +2442,18 @@ func (z *AlternateTreeVersion) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			z.MaximumAdditions, bts, err = msgp.ReadIntBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "MaximumAdditions")
+				return
+			}
+		case "MinimumAdditionsNotable":
+			z.MinimumAdditionsNotable, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MinimumAdditionsNotable")
+				return
+			}
+		case "MaximumAdditionsNotable":
+			z.MaximumAdditionsNotable, bts, err = msgp.ReadIntBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MaximumAdditionsNotable")
 				return
 			}
 		case "NotableReplacementSpawnWeight":
@@ -2376,7 +2476,7 @@ func (z *AlternateTreeVersion) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *AlternateTreeVersion) Msgsize() (s int) {
-	s = 1 + 14 + msgp.StringPrefixSize + len(z.ConquerorType) + 4 + msgp.IntSize + 40 + msgp.BoolSize + 37 + msgp.BoolSize + 17 + msgp.IntSize + 17 + msgp.IntSize + 30 + msgp.IntSize
+	s = 1 + 14 + msgp.StringPrefixSize + len(z.ConquerorType) + 4 + msgp.IntSize + 40 + msgp.BoolSize + 37 + msgp.BoolSize + 31 + msgp.IntSize + 31 + msgp.IntSize + 17 + msgp.IntSize + 17 + msgp.IntSize + 24 + msgp.IntSize + 24 + msgp.IntSize + 30 + msgp.IntSize
 	return
 }
 
@@ -15116,17 +15216,19 @@ func (z *LangTranslation) DecodeMsg(dc *msgp.Reader) (err error) {
 			if z.IndexHandlers == nil {
 				z.IndexHandlers = make(map[string]string, zb0002)
 			} else if len(z.IndexHandlers) > 0 {
-				clear(z.IndexHandlers)
+				for key := range z.IndexHandlers {
+					delete(z.IndexHandlers, key)
+				}
 			}
 			for zb0002 > 0 {
 				zb0002--
 				var za0001 string
+				var za0002 string
 				za0001, err = dc.ReadString()
 				if err != nil {
 					err = msgp.WrapError(err, "IndexHandlers")
 					return
 				}
-				var za0002 string
 				za0002, err = dc.ReadString()
 				if err != nil {
 					err = msgp.WrapError(err, "IndexHandlers", za0001)
@@ -15280,12 +15382,14 @@ func (z *LangTranslation) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			if z.IndexHandlers == nil {
 				z.IndexHandlers = make(map[string]string, zb0002)
 			} else if len(z.IndexHandlers) > 0 {
-				clear(z.IndexHandlers)
+				for key := range z.IndexHandlers {
+					delete(z.IndexHandlers, key)
+				}
 			}
 			for zb0002 > 0 {
+				var za0001 string
 				var za0002 string
 				zb0002--
-				var za0001 string
 				za0001, bts, err = msgp.ReadStringBytes(bts)
 				if err != nil {
 					err = msgp.WrapError(err, "IndexHandlers")
@@ -21511,6 +21615,24 @@ func (z *PassiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 					return
 				}
 			}
+		case "Descendancy":
+			if dc.IsNil() {
+				err = dc.ReadNil()
+				if err != nil {
+					err = msgp.WrapError(err, "Descendancy")
+					return
+				}
+				z.Descendancy = nil
+			} else {
+				if z.Descendancy == nil {
+					z.Descendancy = new(int64)
+				}
+				*z.Descendancy, err = dc.ReadInt64()
+				if err != nil {
+					err = msgp.WrapError(err, "Descendancy")
+					return
+				}
+			}
 		case "Achievement":
 			if dc.IsNil() {
 				err = dc.ReadNil()
@@ -21756,9 +21878,9 @@ func (z *PassiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *PassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 31
+	// map header, size 32
 	// write "MasteryGroup"
-	err = en.Append(0xde, 0x0, 0x1f, 0xac, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70)
+	err = en.Append(0xde, 0x0, 0x20, 0xac, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70)
 	if err != nil {
 		return
 	}
@@ -21805,6 +21927,23 @@ func (z *PassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 		err = en.WriteInt64(*z.Ascendancy)
 		if err != nil {
 			err = msgp.WrapError(err, "Ascendancy")
+			return
+		}
+	}
+	// write "Descendancy"
+	err = en.Append(0xab, 0x44, 0x65, 0x73, 0x63, 0x65, 0x6e, 0x64, 0x61, 0x6e, 0x63, 0x79)
+	if err != nil {
+		return
+	}
+	if z.Descendancy == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt64(*z.Descendancy)
+		if err != nil {
+			err = msgp.WrapError(err, "Descendancy")
 			return
 		}
 	}
@@ -22129,9 +22268,9 @@ func (z *PassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *PassiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 31
+	// map header, size 32
 	// string "MasteryGroup"
-	o = append(o, 0xde, 0x0, 0x1f, 0xac, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70)
+	o = append(o, 0xde, 0x0, 0x20, 0xac, 0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70)
 	if z.MasteryGroup == nil {
 		o = msgp.AppendNil(o)
 	} else {
@@ -22150,6 +22289,13 @@ func (z *PassiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
 		o = msgp.AppendNil(o)
 	} else {
 		o = msgp.AppendInt64(o, *z.Ascendancy)
+	}
+	// string "Descendancy"
+	o = append(o, 0xab, 0x44, 0x65, 0x73, 0x63, 0x65, 0x6e, 0x64, 0x61, 0x6e, 0x63, 0x79)
+	if z.Descendancy == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt64(o, *z.Descendancy)
 	}
 	// string "Achievement"
 	o = append(o, 0xab, 0x41, 0x63, 0x68, 0x69, 0x65, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74)
@@ -22320,6 +22466,23 @@ func (z *PassiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				*z.Ascendancy, bts, err = msgp.ReadInt64Bytes(bts)
 				if err != nil {
 					err = msgp.WrapError(err, "Ascendancy")
+					return
+				}
+			}
+		case "Descendancy":
+			if msgp.IsNil(bts) {
+				bts, err = msgp.ReadNilBytes(bts)
+				if err != nil {
+					return
+				}
+				z.Descendancy = nil
+			} else {
+				if z.Descendancy == nil {
+					z.Descendancy = new(int64)
+				}
+				*z.Descendancy, bts, err = msgp.ReadInt64Bytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Descendancy")
 					return
 				}
 			}
@@ -22582,6 +22745,12 @@ func (z *PassiveSkill) Msgsize() (s int) {
 	}
 	s += 11
 	if z.Ascendancy == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.Int64Size
+	}
+	s += 12
+	if z.Descendancy == nil {
 		s += msgp.NilSize
 	} else {
 		s += msgp.Int64Size

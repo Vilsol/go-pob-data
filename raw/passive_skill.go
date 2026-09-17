@@ -4,6 +4,7 @@ type PassiveSkill struct {
 	MasteryGroup         *int64  `json:"MasteryGroup"`
 	GrantedEffect        *int64  `json:"GrantedEffectsPerLevel"`
 	Ascendancy           *int64  `json:"AscendancyKey"`
+	Descendancy          *int64  `json:"DescendancyKey"`
 	Achievement          *int64  `json:"AchievementItem"`
 	Flavour              string  `json:"FlavourText"`
 	Icon                 string  `json:"Icon_DDSFile"`
