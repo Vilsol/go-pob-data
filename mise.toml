@@ -2,3 +2,7 @@
 go = "1.23.3"
 "go:github.com/tinylib/msgp" = "1.6.4"
 imagemagick = "7.1.2_27"
+
+[tasks.test-artifacts]
+description = "Check every msgpack.br matches a re-encode of its json.gz (needs cgo)"
+run = "nix-shell -p gcc pkg-config imagemagick --run 'CGO_ENABLED=1 go test -count=1 -run TestMsgpackMatchesJSON .'"
