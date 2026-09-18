@@ -30,6 +30,6 @@ func TestRawLoader(t *testing.T) {
 	h := slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{Level: slog.LevelDebug})
 	slog.SetDefault(slog.New(h))
 
-	_, err := LoadRaw[*raw.GrantedEffectStatSet](context.Background(), testdata.ShortGameVersion(), "GrantedEffectStatSets", nil, FakeCache{})
+	_, err := LoadRaw[*raw.GrantedEffectStatSet](context.Background(), testdata.LatestDataVersion(), "GrantedEffectStatSets", nil, FakeCache{})
 	testza.AssertNoError(t, err)
 }

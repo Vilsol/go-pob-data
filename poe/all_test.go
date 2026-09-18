@@ -30,14 +30,14 @@ func TestAll(t *testing.T) {
 	h := slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{Level: slog.LevelDebug})
 	slog.SetDefault(slog.New(h))
 
-	err := InitializeAll(context.Background(), testdata.ShortGameVersion(), FakeCache{}, nil)
+	err := InitializeAll(context.Background(), testdata.LatestDataVersion(), FakeCache{}, nil)
 	testza.AssertNoError(t, err)
 
 	effect := GrantedEffectByID("PlayerMelee")
 	testza.AssertEqual(t, false, effect.IsSupport)
 	testza.AssertEqual(t, 1000, effect.CastTime)
 	testza.AssertEqual(t, 4, effect.Attribute)
-	testza.AssertEqual(t, utils.Ptr(65), effect.ActiveSkill)
+	testza.AssertEqual(t, utils.Ptr(108), effect.ActiveSkill)
 
 	skill := effect.GetActiveSkill()
 	testza.AssertEqual(t, "melee", skill.ID)
@@ -55,6 +55,6 @@ func BenchmarkAll(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		alreadyInitialized = false
-		_ = InitializeAll(context.Background(), testdata.ShortGameVersion(), nil, nil)
+		_ = InitializeAll(context.Background(), testdata.LatestDataVersion(), nil, nil)
 	}
 }
