@@ -54,9 +54,9 @@ type Enumeration struct {
 }
 
 type Table struct {
-	ValidFor int      `json:"validFor"`
 	Name     string   `json:"name"`
 	Columns  []Column `json:"columns"`
+	ValidFor int      `json:"validFor"`
 }
 
 func (t Table) ToJSONFormat() dat.JsonFormat {

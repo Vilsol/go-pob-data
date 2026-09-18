@@ -10,7 +10,7 @@ type CraftingBenchOption struct {
 	CostBaseItemTypes           []int  `json:"Cost_BaseItemTypes"`
 	CostValues                  []int  `json:"Cost_Values"`
 	CraftingItemClassCategories []int  `json:"CraftingItemClassCategories"`
-	RecipeIDS                   []int  `json:"RecipeIds"`
+	RecipeIDS                   []int  `json:"RecipeIds"` //nolint:revive // the field name is the msgpack key
 	ItemClasses                 []int  `json:"ItemClasses"`
 	Links                       int    `json:"Links"`
 	CraftingBenchCustomAction   int    `json:"CraftingBenchCustomAction"`
