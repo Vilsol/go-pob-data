@@ -14,34 +14,22 @@ import (
 	"github.com/tinylib/msgp/msgp"
 )
 
-const (
-	staleCompression = "same msgpack, brotli bytes differ from a re-encode"
-	staleSchema      = "older dat schema than the struct (3.28+), re-encoding would drop its columns"
-)
+const staleSchema = "older dat schema than the struct (3.28+), re-encoding would drop its columns"
 
 var update = flag.Bool("update", false, "rewrite msgpack.br files that do not match their json.gz")
 
 // Known mismatches, predating this test. Drop an entry and run with -update to rebuild it.
 var knownStale = map[string]string{
-	"3.18/AtlasNode":                     staleSchema,
-	"3.18/AtlasNodeDefinition":           staleSchema,
-	"3.20/BaseItemTypes":                 staleCompression,
-	"3.20/CraftingBenchOptions":          staleCompression,
-	"3.20/Essences":                      staleCompression,
-	"3.20/Flasks":                        staleCompression,
-	"3.20/GrantedEffectStatSets":         staleCompression,
-	"3.20/GrantedEffectStatSetsPerLevel": staleCompression,
-	"3.20/ItemClasses":                   staleCompression,
-	"3.20/Mods":                          staleCompression,
-	"3.20/MonsterVarieties":              staleCompression,
-	"3.24/AtlasNode":                     staleSchema,
-	"3.24/AtlasNodeDefinition":           staleSchema,
-	"3.25/AtlasNode":                     staleSchema,
-	"3.25/AtlasNodeDefinition":           staleSchema,
-	"3.26/AtlasNode":                     staleSchema,
-	"3.26/AtlasNodeDefinition":           staleSchema,
-	"3.27/AtlasNode":                     staleSchema,
-	"3.27/AtlasNodeDefinition":           staleSchema,
+	"3.18/AtlasNode":           staleSchema,
+	"3.18/AtlasNodeDefinition": staleSchema,
+	"3.24/AtlasNode":           staleSchema,
+	"3.24/AtlasNodeDefinition": staleSchema,
+	"3.25/AtlasNode":           staleSchema,
+	"3.25/AtlasNodeDefinition": staleSchema,
+	"3.26/AtlasNode":           staleSchema,
+	"3.26/AtlasNodeDefinition": staleSchema,
+	"3.27/AtlasNode":           staleSchema,
+	"3.27/AtlasNodeDefinition": staleSchema,
 }
 
 // A struct that gains a field without its artifacts being rebuilt silently ships msgpack without that column.
