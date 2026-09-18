@@ -5,4 +5,7 @@ with nixpkgs; mkShell {
     pkg-config
     pngquant
   ];
+  buildInputs = [
+    imagemagick
+  ];
 }
