@@ -6,7 +6,7 @@ import (
 	"io/fs"
 )
 
-const cdnTemplate = "https://patchcdn.pathofexile.com/%s/"
+const cdnTemplate = "https://patch.poecdn.com/%s/"
 
 var _ fs.FS = (*WebFS)(nil)
 
