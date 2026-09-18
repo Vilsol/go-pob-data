@@ -17,8 +17,6 @@ import (
 const (
 	staleCompression = "same msgpack, brotli bytes differ from a re-encode"
 	staleSchema      = "older dat schema than the struct (3.28+), re-encoding would drop its columns"
-	staleDivisor     = "missing CostTypes Divisor"
-	staleSkillID     = "missing ActiveSkills SkillID"
 )
 
 var update = flag.Bool("update", false, "rewrite msgpack.br files that do not match their json.gz")
@@ -27,9 +25,7 @@ var update = flag.Bool("update", false, "rewrite msgpack.br files that do not ma
 var knownStale = map[string]string{
 	"3.18/AtlasNode":                     staleSchema,
 	"3.18/AtlasNodeDefinition":           staleSchema,
-	"3.20/ActiveSkills":                  staleSkillID,
 	"3.20/BaseItemTypes":                 staleCompression,
-	"3.20/CostTypes":                     staleDivisor,
 	"3.20/CraftingBenchOptions":          staleCompression,
 	"3.20/Essences":                      staleCompression,
 	"3.20/Flasks":                        staleCompression,
@@ -38,17 +34,10 @@ var knownStale = map[string]string{
 	"3.20/ItemClasses":                   staleCompression,
 	"3.20/Mods":                          staleCompression,
 	"3.20/MonsterVarieties":              staleCompression,
-	"3.21/ActiveSkills":                  staleSkillID,
-	"3.21/CostTypes":                     staleDivisor,
-	"3.22/ActiveSkills":                  staleSkillID,
-	"3.22/CostTypes":                     staleDivisor,
-	"3.23/CostTypes":                     staleDivisor,
 	"3.24/AtlasNode":                     staleSchema,
 	"3.24/AtlasNodeDefinition":           staleSchema,
-	"3.24/CostTypes":                     staleDivisor,
 	"3.25/AtlasNode":                     staleSchema,
 	"3.25/AtlasNodeDefinition":           staleSchema,
-	"3.25/CostTypes":                     staleDivisor,
 	"3.26/AtlasNode":                     staleSchema,
 	"3.26/AtlasNodeDefinition":           staleSchema,
 	"3.27/AtlasNode":                     staleSchema,
