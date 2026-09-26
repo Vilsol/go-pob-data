@@ -2,6 +2,7 @@ package extractor
 
 import (
 	"crypto/tls"
+	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
@@ -19,6 +20,10 @@ func Fetch(url string) []byte {
 	}
 
 	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		panic(fmt.Sprintf("fetching %s: %s", url, resp.Status))
+	}
+
 	all, err := io.ReadAll(resp.Body)
 	if err != nil {
 		panic(err)
