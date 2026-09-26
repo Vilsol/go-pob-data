@@ -16,6 +16,7 @@ import (
 
 //nolint:govet // fields follow the export key order
 type passiveSkill struct {
+	ID                       string `json:"Id"`
 	Icon                     string `json:"Icon_DDSFile"`
 	Stats                    []int  `json:"Stats"`
 	Stat1Value               int    `json:"Stat1Value"`
@@ -126,6 +127,10 @@ type expansionSkill struct {
 
 type expansionSpecialSkill struct {
 	PassiveSkill int `json:"PassiveSkillsKey"`
+}
+
+type passiveSkillOverride struct {
+	AllocatedPassiveSkill *int `json:"AllocatedPassiveSkill"`
 }
 
 type passiveSkillTree struct {

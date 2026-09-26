@@ -69,6 +69,7 @@ type gameData struct {
 	trees                  []passiveSkillTree
 	expansionSkills        []expansionSkill
 	expansionSpecialSkills []expansionSpecialSkill
+	overrides              []passiveSkillOverride
 }
 
 func loadGameData(loader fs.FS, gameVersion string) (*gameData, error) {
@@ -90,6 +91,7 @@ func loadGameData(loader fs.FS, gameVersion string) (*gameData, error) {
 	loadTable(l, "PassiveSkillTrees", &d.trees)
 	loadTable(l, "PassiveTreeExpansionSkills", &d.expansionSkills)
 	loadTable(l, "PassiveTreeExpansionSpecialSkills", &d.expansionSpecialSkills)
+	loadTable(l, "PassiveSkillOverrides", &d.overrides)
 	return d, l.err
 }
 
@@ -169,6 +171,10 @@ func Generate(loader fs.FS, gameVersion string) (*Tree, error) {
 	}
 
 	if err := buildClusterNodes(tree, d, lookups); err != nil {
+		return nil, err
+	}
+
+	if err := buildGrantedNodes(tree, d, lookups); err != nil {
 		return nil, err
 	}
 
@@ -420,6 +426,58 @@ func buildClusterNodes(tree *Tree, d *gameData, l *lookups) error {
 			return errors.Wrapf(err, "cluster node %d", d.passiveSkills[row].PassiveSkillGraphID)
 		}
 		node.IsMastery = node.IsMastery || masteries[row]
+		tree.Nodes.List = append(tree.Nodes.List, node)
+	}
+	return nil
+}
+
+// forbiddenJewelPrefix marks the ascendancy passives only Forbidden Flame/Flesh grant: GGG names
+// them AscendancySpecialEldritch*, and the jewels' mods roll the passive hash at runtime.
+const forbiddenJewelPrefix = "AscendancySpecial"
+
+// buildGrantedNodes adds the passives an item can allocate that are neither in the graph nor on
+// a cluster jewel: the ascendancy passives in the Forbidden Tattoo pools (PassiveSkillOverrides)
+// and the Forbidden Flame/Flesh ascendancy passives.
+func buildGrantedNodes(tree *Tree, d *gameData, l *lookups) error {
+	emitted := make(map[uint32]bool, len(tree.Nodes.List))
+	for _, n := range tree.Nodes.List {
+		emitted[n.Skill] = true
+	}
+
+	granted := make(map[int]bool)
+	for _, o := range d.overrides {
+		if o.AllocatedPassiveSkill != nil {
+			granted[*o.AllocatedPassiveSkill] = true
+		}
+	}
+	if len(granted) == 0 {
+		return errors.New("no PassiveSkillOverrides allocate a passive")
+	}
+
+	forbidden := 0
+	for i, p := range d.passiveSkills {
+		if p.AscendancyKey != nil && strings.HasPrefix(p.ID, forbiddenJewelPrefix) {
+			granted[i] = true
+			forbidden++
+		}
+	}
+	if forbidden == 0 {
+		return fmt.Errorf("no %s ascendancy passives", forbiddenJewelPrefix)
+	}
+
+	rows := make([]int, 0, len(granted))
+	for row := range granted {
+		if !emitted[d.passiveSkills[row].PassiveSkillGraphID] {
+			rows = append(rows, row)
+		}
+	}
+	slices.Sort(rows)
+
+	for _, row := range rows {
+		node, err := buildNode(d, row, l)
+		if err != nil {
+			return errors.Wrapf(err, "granted node %d", d.passiveSkills[row].PassiveSkillGraphID)
+		}
 		tree.Nodes.List = append(tree.Nodes.List, node)
 	}
 	return nil

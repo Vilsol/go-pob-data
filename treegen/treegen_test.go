@@ -241,3 +241,78 @@ func compact(v any) string {
 	}
 	return string(b)
 }
+
+// TestNodePositions checks that every node is either fully placed in a group that lists it or has
+// no position at all, and that nothing references a missing or positionless node.
+func TestNodePositions(t *testing.T) {
+	tree, _ := generateLive(t)
+	b, err := tree.Marshal()
+	testza.AssertNoError(t, err)
+	gen := decode(t, bytes.NewReader(b))
+	nodes, groups := gen["nodes"].(map[string]any), gen["groups"].(map[string]any)
+
+	positionKeys := []string{"group", "orbit", "orbitIndex", "out", "in"}
+	positioned := make(map[string]bool)
+	for id, n := range nodes {
+		node := n.(map[string]any)
+		present := 0
+		for _, k := range positionKeys {
+			if _, ok := node[k]; ok {
+				present++
+			}
+		}
+		switch present {
+		case 0:
+			continue
+		case len(positionKeys):
+			positioned[id] = true
+		default:
+			t.Errorf("node %s has a partial position", id)
+			continue
+		}
+		if id == "root" {
+			continue
+		}
+		group, ok := groups[fmt.Sprint(node["group"])].(map[string]any)
+		if !ok || !slices.Contains(group["nodes"].([]any), any(id)) {
+			t.Errorf("node %s is not listed by its group %v", id, node["group"])
+		}
+	}
+
+	ref := func(from, id string) {
+		if !positioned[id] {
+			t.Errorf("%s references %s, which is missing or has no position", from, id)
+		}
+	}
+	for id, n := range nodes {
+		node := n.(map[string]any)
+		for _, k := range []string{"out", "in"} {
+			edges, _ := node[k].([]any)
+			for _, e := range edges {
+				ref("node "+id+" "+k, e.(string))
+			}
+		}
+		if ej, ok := node["expansionJewel"].(map[string]any); ok {
+			ref("node "+id+" expansionJewel.proxy", ej["proxy"].(string))
+			if parent, ok := ej["parent"].(string); ok {
+				ref("node "+id+" expansionJewel.parent", parent)
+			}
+		}
+	}
+	for id, g := range groups {
+		for _, n := range g.(map[string]any)["nodes"].([]any) {
+			ref("group "+id, n.(string))
+		}
+	}
+	for _, s := range gen["jewelSlots"].([]any) {
+		ref("jewelSlots", fmt.Sprint(s))
+	}
+
+	// Forbidden Flame/Flesh and Forbidden Tattoo ascendancy passives outside the graph.
+	for _, id := range []string{"27602", "57568", "52435", "42469", "18054", "19355", "5029"} {
+		node, ok := nodes[id].(map[string]any)
+		if !ok || positioned[id] || node["ascendancyName"] == nil {
+			t.Errorf("node %s should be an out-of-graph ascendancy node", id)
+		}
+	}
+}
