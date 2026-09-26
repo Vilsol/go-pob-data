@@ -76,6 +76,11 @@ var knownMismatches = map[string]string{
 	"nodes.stats 40059": swappedOrder,
 }
 
+// exportPath is the frozen skilltree-export data.json of a version; data/<version>/tree now holds our own output.
+func exportPath(short string) string {
+	return filepath.Join("treegen", "testdata", "export-"+short+".json.gz")
+}
+
 func generateLive(t *testing.T) (*Tree, string) {
 	t.Helper()
 	short := testdata.ShortGameVersion()
@@ -170,12 +175,12 @@ func sortedKeys[V any](m map[string]V) []string {
 	return keys
 }
 
-// TestDiffAgainstExport compares the generated tree with the committed skilltree-export data.json
+// TestDiffAgainstExport compares the generated tree with the frozen skilltree-export data.json
 // field by field and fails on any mismatch without an entry in knownMismatches.
 func TestDiffAgainstExport(t *testing.T) {
 	tree, short := generateLive(t)
 
-	exportFile, err := os.Open(filepath.Join("data", short, "tree", "data.json.gz"))
+	exportFile, err := os.Open(exportPath(short))
 	if err != nil {
 		t.Skipf("no committed export for %s", short)
 	}

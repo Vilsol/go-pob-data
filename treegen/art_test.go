@@ -148,7 +148,7 @@ func TestWriteArt(t *testing.T) {
 	})
 
 	t.Run("export coverage", func(t *testing.T) {
-		f, err := os.Open(filepath.Join("data", short, "tree", "data.json.gz"))
+		f, err := os.Open(exportPath(short))
 		if err != nil {
 			t.Skipf("no committed export for %s", short)
 		}
