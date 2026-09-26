@@ -370,21 +370,11 @@ func TestTupleMatchesJSON(t *testing.T) {
 						t.Skip("known stale: no TranslationFile to encode")
 					}
 
-					jsonData := readGzip(t, base+".json.gz")
-
-					// IndexHandlers is a map, which msgp encodes in random order, so compare decoded.
-					// Decoding a fresh encode, rather than the json itself, keeps empty and nil slices alike.
-					source := encodeTranslation(t, jsonData)
-					want, err := translationCodecs.tuple(source)
-					if err != nil {
-						t.Fatal(err)
-					}
-
+					source := encodeTranslation(t, readGzip(t, base+".json.gz"))
 					committed := readAsset(t, tuplePath)
-					got, err := translationCodecs.tuple(committed)
 
 					switch {
-					case committed != nil && err == nil && bytes.Equal(got, want):
+					case bytes.Equal(source, committed):
 					case *update:
 						if err := os.WriteFile(tuplePath, source, 0o755); err != nil {
 							t.Fatal(err)

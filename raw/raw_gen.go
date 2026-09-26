@@ -11341,55 +11341,31 @@ func (z *LangTranslation) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.ArrayError{Wanted: 3, Got: zb0001}
 		return
 	}
-	var zb0002 uint32
-	zb0002, err = dc.ReadMapHeader()
+	err = z.IndexHandlers.DecodeMsg(dc)
 	if err != nil {
 		err = msgp.WrapError(err, "IndexHandlers")
 		return
-	}
-	if z.IndexHandlers == nil {
-		z.IndexHandlers = make(map[string]string, zb0002)
-	} else if len(z.IndexHandlers) > 0 {
-		clear(z.IndexHandlers)
-	}
-	var field []byte
-	_ = field
-	for zb0002 > 0 {
-		zb0002--
-		var za0001 string
-		za0001, err = dc.ReadString()
-		if err != nil {
-			err = msgp.WrapError(err, "IndexHandlers")
-			return
-		}
-		var za0002 string
-		za0002, err = dc.ReadString()
-		if err != nil {
-			err = msgp.WrapError(err, "IndexHandlers", za0001)
-			return
-		}
-		z.IndexHandlers[za0001] = za0002
 	}
 	z.String, err = dc.ReadString()
 	if err != nil {
 		err = msgp.WrapError(err, "String")
 		return
 	}
-	var zb0003 uint32
-	zb0003, err = dc.ReadArrayHeader()
+	var zb0002 uint32
+	zb0002, err = dc.ReadArrayHeader()
 	if err != nil {
 		err = msgp.WrapError(err, "Conditions")
 		return
 	}
-	if cap(z.Conditions) >= int(zb0003) {
-		z.Conditions = (z.Conditions)[:zb0003]
+	if cap(z.Conditions) >= int(zb0002) {
+		z.Conditions = (z.Conditions)[:zb0002]
 	} else {
-		z.Conditions = make([]Condition, zb0003)
+		z.Conditions = make([]Condition, zb0002)
 	}
-	for za0003 := range z.Conditions {
-		err = z.Conditions[za0003].DecodeMsg(dc)
+	for za0001 := range z.Conditions {
+		err = z.Conditions[za0001].DecodeMsg(dc)
 		if err != nil {
-			err = msgp.WrapError(err, "Conditions", za0003)
+			err = msgp.WrapError(err, "Conditions", za0001)
 			return
 		}
 	}
@@ -11403,22 +11379,10 @@ func (z *LangTranslation) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteMapHeader(uint32(len(z.IndexHandlers)))
+	err = z.IndexHandlers.EncodeMsg(en)
 	if err != nil {
 		err = msgp.WrapError(err, "IndexHandlers")
 		return
-	}
-	for za0001, za0002 := range z.IndexHandlers {
-		err = en.WriteString(za0001)
-		if err != nil {
-			err = msgp.WrapError(err, "IndexHandlers")
-			return
-		}
-		err = en.WriteString(za0002)
-		if err != nil {
-			err = msgp.WrapError(err, "IndexHandlers", za0001)
-			return
-		}
 	}
 	err = en.WriteString(z.String)
 	if err != nil {
@@ -11430,10 +11394,10 @@ func (z *LangTranslation) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Conditions")
 		return
 	}
-	for za0003 := range z.Conditions {
-		err = z.Conditions[za0003].EncodeMsg(en)
+	for za0001 := range z.Conditions {
+		err = z.Conditions[za0001].EncodeMsg(en)
 		if err != nil {
-			err = msgp.WrapError(err, "Conditions", za0003)
+			err = msgp.WrapError(err, "Conditions", za0001)
 			return
 		}
 	}
@@ -11445,17 +11409,17 @@ func (z *LangTranslation) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// array header, size 3
 	o = append(o, 0x93)
-	o = msgp.AppendMapHeader(o, uint32(len(z.IndexHandlers)))
-	for za0001, za0002 := range z.IndexHandlers {
-		o = msgp.AppendString(o, za0001)
-		o = msgp.AppendString(o, za0002)
+	o, err = z.IndexHandlers.MarshalMsg(o)
+	if err != nil {
+		err = msgp.WrapError(err, "IndexHandlers")
+		return
 	}
 	o = msgp.AppendString(o, z.String)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.Conditions)))
-	for za0003 := range z.Conditions {
-		o, err = z.Conditions[za0003].MarshalMsg(o)
+	for za0001 := range z.Conditions {
+		o, err = z.Conditions[za0001].MarshalMsg(o)
 		if err != nil {
-			err = msgp.WrapError(err, "Conditions", za0003)
+			err = msgp.WrapError(err, "Conditions", za0001)
 			return
 		}
 	}
@@ -11474,55 +11438,31 @@ func (z *LangTranslation) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.ArrayError{Wanted: 3, Got: zb0001}
 		return
 	}
-	var zb0002 uint32
-	zb0002, bts, err = msgp.ReadMapHeaderBytes(bts)
+	bts, err = z.IndexHandlers.UnmarshalMsg(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "IndexHandlers")
 		return
-	}
-	if z.IndexHandlers == nil {
-		z.IndexHandlers = make(map[string]string, zb0002)
-	} else if len(z.IndexHandlers) > 0 {
-		clear(z.IndexHandlers)
-	}
-	var field []byte
-	_ = field
-	for zb0002 > 0 {
-		var za0002 string
-		zb0002--
-		var za0001 string
-		za0001, bts, err = msgp.ReadStringBytes(bts)
-		if err != nil {
-			err = msgp.WrapError(err, "IndexHandlers")
-			return
-		}
-		za0002, bts, err = msgp.ReadStringBytes(bts)
-		if err != nil {
-			err = msgp.WrapError(err, "IndexHandlers", za0001)
-			return
-		}
-		z.IndexHandlers[za0001] = za0002
 	}
 	z.String, bts, err = msgp.ReadStringBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "String")
 		return
 	}
-	var zb0003 uint32
-	zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	var zb0002 uint32
+	zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "Conditions")
 		return
 	}
-	if cap(z.Conditions) >= int(zb0003) {
-		z.Conditions = (z.Conditions)[:zb0003]
+	if cap(z.Conditions) >= int(zb0002) {
+		z.Conditions = (z.Conditions)[:zb0002]
 	} else {
-		z.Conditions = make([]Condition, zb0003)
+		z.Conditions = make([]Condition, zb0002)
 	}
-	for za0003 := range z.Conditions {
-		bts, err = z.Conditions[za0003].UnmarshalMsg(bts)
+	for za0001 := range z.Conditions {
+		bts, err = z.Conditions[za0001].UnmarshalMsg(bts)
 		if err != nil {
-			err = msgp.WrapError(err, "Conditions", za0003)
+			err = msgp.WrapError(err, "Conditions", za0001)
 			return
 		}
 	}
@@ -11532,16 +11472,9 @@ func (z *LangTranslation) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *LangTranslation) Msgsize() (s int) {
-	s = 1 + msgp.MapHeaderSize
-	if z.IndexHandlers != nil {
-		for za0001, za0002 := range z.IndexHandlers {
-			_ = za0002
-			s += msgp.StringPrefixSize + len(za0001) + msgp.StringPrefixSize + len(za0002)
-		}
-	}
-	s += msgp.StringPrefixSize + len(z.String) + msgp.ArrayHeaderSize
-	for za0003 := range z.Conditions {
-		s += z.Conditions[za0003].Msgsize()
+	s = 1 + z.IndexHandlers.Msgsize() + msgp.StringPrefixSize + len(z.String) + msgp.ArrayHeaderSize
+	for za0001 := range z.Conditions {
+		s += z.Conditions[za0001].Msgsize()
 	}
 	return
 }

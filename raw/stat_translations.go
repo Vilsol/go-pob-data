@@ -7,9 +7,9 @@ type Condition struct {
 }
 
 type LangTranslation struct {
-	IndexHandlers map[string]string `json:"index_handlers,omitempty"`
-	String        string            `json:"string"`
-	Conditions    []Condition       `json:"conditions,omitempty"`
+	IndexHandlers IndexHandlers `json:"index_handlers,omitempty"`
+	String        string        `json:"string"`
+	Conditions    []Condition   `json:"conditions,omitempty"`
 }
 
 type StatTranslation struct {
