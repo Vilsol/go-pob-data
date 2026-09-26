@@ -12,18 +12,45 @@ import (
 
 //nolint:govet // fields follow the export key order
 type Tree struct {
-	Tree                  string        `json:"tree"`
-	Classes               []*Class      `json:"classes"`
-	AlternateAscendancies []*Ascendancy `json:"alternate_ascendancies,omitempty"`
-	Groups                Groups        `json:"groups"`
-	Nodes                 Nodes         `json:"nodes"`
-	JewelSlots            []uint32      `json:"jewelSlots"`
-	MinX                  int           `json:"min_x"`
-	MinY                  int           `json:"min_y"`
-	MaxX                  int           `json:"max_x"`
-	MaxY                  int           `json:"max_y"`
-	Constants             Constants     `json:"constants"`
-	Points                Points        `json:"points"`
+	Tree                  string                    `json:"tree"`
+	Classes               []*Class                  `json:"classes"`
+	AlternateAscendancies []*Ascendancy             `json:"alternate_ascendancies,omitempty"`
+	Groups                Groups                    `json:"groups"`
+	Nodes                 Nodes                     `json:"nodes"`
+	ExtraImages           Ordered[*ExtraImage]      `json:"extraImages,omitempty"`
+	JewelSlots            []uint32                  `json:"jewelSlots"`
+	MinX                  int                       `json:"min_x"`
+	MinY                  int                       `json:"min_y"`
+	MaxX                  int                       `json:"max_x"`
+	MaxY                  int                       `json:"max_y"`
+	Constants             Constants                 `json:"constants"`
+	Sprites               Ordered[Ordered[*Sprite]] `json:"sprites,omitempty"`
+	ImageZoomLevels       []float64                 `json:"imageZoomLevels,omitempty"`
+	Points                Points                    `json:"points"`
+}
+
+// ExtraImage is a class illustration drawn behind the tree, top-left corner at X, Y.
+//
+//nolint:govet // fields follow the export key order
+type ExtraImage struct {
+	X     Float  `json:"x"`
+	Y     Float  `json:"y"`
+	Image string `json:"image"`
+}
+
+//nolint:govet // fields follow the export key order
+type Sprite struct {
+	Filename string         `json:"filename"`
+	W        int            `json:"w"`
+	H        int            `json:"h"`
+	Coords   Ordered[Coord] `json:"coords"`
+}
+
+type Coord struct {
+	X int `json:"x"`
+	Y int `json:"y"`
+	W int `json:"w"`
+	H int `json:"h"`
 }
 
 //nolint:govet // fields follow the export key order

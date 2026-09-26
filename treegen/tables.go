@@ -60,6 +60,11 @@ type character struct {
 	BaseDexterity    int    `json:"BaseDexterity"`
 	BaseIntelligence int    `json:"BaseIntelligence"`
 	AttrsAsID        string `json:"AttrsAsId"`
+	PassiveTreeImage string `json:"PassiveTreeImage"`
+	// ArtOffsetX/Y place the PassiveTreeImage relative to the class start group (unnamed in the schema).
+	ArtOffsetX          int    `json:"Var33"`
+	ArtOffsetY          int    `json:"Var34"`
+	SkillTreeBackground string `json:"SkillTreeBackground"`
 }
 
 //nolint:govet // fields follow the export key order
@@ -71,14 +76,19 @@ type ascendancy struct {
 	RGBFlavourTextColour string `json:"RGBFlavourTextColour"`
 	Name                 string `json:"Name"`
 	FlavourText          string `json:"FlavourText"`
+	BackgroundImage      string `json:"BackgroundImage"`
+	LeagueBackground     string `json:"LeagueBackgroundImage"`
 }
 
 type descendancy struct {
+	PassiveTreeUIArt     *int   `json:"PassiveTreeUIArt"`
+	UIArt                *int   `json:"UIArt"`
 	ID                   string `json:"Id"`
 	Name                 string `json:"Name"`
 	FlavourText          string `json:"FlavourText"`
 	CoordinateRect       string `json:"CoordinateRect"`
 	RGBFlavourTextColour string `json:"RGBFlavourTextColour"`
+	BackgroundImage      string `json:"BackgroundImage"`
 }
 
 type masteryGroup struct {
@@ -142,6 +152,7 @@ type blightItem struct {
 }
 
 type baseItemType struct {
+	ID   string `json:"Id"`
 	Name string `json:"Name"`
 }
 
@@ -155,7 +166,50 @@ type expansionSpecialSkill struct {
 }
 
 type passiveSkillOverride struct {
-	AllocatedPassiveSkill *int `json:"AllocatedPassiveSkill"`
+	AllocatedPassiveSkill *int   `json:"AllocatedPassiveSkill"`
+	Type                  *int   `json:"Type"`
+	NodeIcon              string `json:"NodeIcon"`
+	PassiveBG             string `json:"PassiveBG"`
+}
+
+type passiveSkillOverrideType struct {
+	ID string `json:"Id"`
+}
+
+type nodeFrameArt struct {
+	ID          string `json:"Id"`
+	Normal      string `json:"Normal"`
+	CanAllocate string `json:"CanAllocate"`
+	Active      string `json:"Active"`
+}
+
+type jewelArt struct {
+	SocketedImage      string `json:"SocketedImage"`
+	SocketedImageLarge string `json:"SocketedImageLarge"`
+	BaseItemType       int    `json:"BaseItemTypesKey"`
+}
+
+// ascendancyTreeArt is a PassiveSkillTreeUIArtAscendancy row: the frames of an ascendancy's nodes.
+type ascendancyTreeArt struct {
+	ID                      string `json:"Id"`
+	StartNode               string `json:"StartNode"`
+	PassiveFrameNormal      string `json:"PassiveFrameNormal"`
+	PassiveFrameCanAllocate string `json:"PassiveFrameCanAllocate"`
+	PassiveFrameActive      string `json:"PassiveFrameActive"`
+	NotableFrameNormal      string `json:"NotableFrameNormal"`
+	NotableFrameCanAllocate string `json:"NotableFrameCanAllocate"`
+	NotableFrameActive      string `json:"NotableFrameActive"`
+	SocketFrameNormal       string `json:"SocketFrameNormal"`
+	SocketFrameCanAllocate  string `json:"SocketFrameCanAllocate"`
+	SocketFrameActive       string `json:"SocketFrameActive"`
+}
+
+// ascendancyUIArt is a UIArtAscendancy row: the ascendancy's buttons.
+type ascendancyUIArt struct {
+	ID              string `json:"Id"`
+	ButtonNormal    string `json:"AscendancyButtonNormal"`
+	ButtonHighlight string `json:"AscendancyButtonHighlight"`
+	ButtonPressed   string `json:"AscendancyButtonPressed"`
 }
 
 type passiveSkillTree struct {

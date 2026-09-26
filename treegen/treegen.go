@@ -117,26 +117,21 @@ func loadGameData(loader fs.FS, gameVersion string) (*gameData, error) {
 // Generate builds the passive tree in the skilltree-export shape from the game files
 // behind loader (see extractor.GetBundleLoader). gameVersion is the short version, e.g. "3.29".
 func Generate(loader fs.FS, gameVersion string) (*Tree, error) {
+	tree, _, err := generate(loader, gameVersion)
+	return tree, err
+}
+
+func generate(loader fs.FS, gameVersion string) (*Tree, *gameData, error) {
 	extractor.LoadParser(gameVersion)
 
 	d, err := loadGameData(loader, gameVersion)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	treeIdx := slices.IndexFunc(d.trees, func(t passiveSkillTree) bool { return t.ID == mainTreeID })
-	if treeIdx < 0 {
-		return nil, fmt.Errorf("no PassiveSkillTrees row %q", mainTreeID)
-	}
-	graphPath := d.trees[treeIdx].PassiveSkillGraph + ".psg"
-
-	f, err := loader.Open(gamePath(gameVersion, graphPath))
+	graph, err := loadGraph(loader, gameVersion, d, mainTreeID)
 	if err != nil {
-		return nil, errors.Wrapf(err, "failed to open %s", graphPath)
-	}
-	graph, err := extractor.ParsePassiveSkillGraph(f)
-	if err != nil {
-		return nil, errors.Wrapf(err, "failed to parse %s", graphPath)
+		return nil, nil, err
 	}
 
 	tree := &Tree{
@@ -151,7 +146,7 @@ func Generate(loader fs.FS, gameVersion string) (*Tree, error) {
 	}
 
 	if tree.Classes, tree.Constants.Classes, err = buildClasses(d); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	for _, desc := range d.descendancies {
@@ -161,7 +156,7 @@ func Generate(loader fs.FS, gameVersion string) (*Tree, error) {
 		}
 		a, err := buildAscendancy(desc.ID, desc.Name, desc.FlavourText, desc.RGBFlavourTextColour, desc.CoordinateRect)
 		if err != nil {
-			return nil, err
+			return nil, nil, err
 		}
 		tree.AlternateAscendancies = append(tree.AlternateAscendancies, a)
 	}
@@ -170,34 +165,50 @@ func Generate(loader fs.FS, gameVersion string) (*Tree, error) {
 		tree.Constants.SkillsPerOrbit = append(tree.Constants.SkillsPerOrbit, int(spo))
 	}
 	if len(graph.SkillsPerOrbit) != len(orbitRadii) {
-		return nil, fmt.Errorf("graph has %d orbits but orbitRadii has %d", len(graph.SkillsPerOrbit), len(orbitRadii))
+		return nil, nil, fmt.Errorf("graph has %d orbits but orbitRadii has %d", len(graph.SkillsPerOrbit), len(orbitRadii))
 	}
 
 	for _, slot := range d.jewelSlots {
 		if slot.Slot == nil {
-			return nil, errors.New("jewel slot without a passive skill")
+			return nil, nil, errors.New("jewel slot without a passive skill")
 		}
 		tree.JewelSlots = append(tree.JewelSlots, d.passiveSkills[*slot.Slot].PassiveSkillGraphID)
 	}
 
 	lookups, err := buildLookups(d)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	if err := buildGraph(tree, graph, d, lookups); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	if err := buildClusterNodes(tree, d, lookups); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	if err := buildGrantedNodes(tree, d, lookups); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	return tree, nil
+	return tree, d, nil
+}
+
+// loadGraph parses the passive skill graph of a PassiveSkillTrees row.
+func loadGraph(loader fs.FS, gameVersion string, d *gameData, treeID string) (*extractor.PassiveSkillGraph, error) {
+	treeIdx := slices.IndexFunc(d.trees, func(t passiveSkillTree) bool { return t.ID == treeID })
+	if treeIdx < 0 {
+		return nil, fmt.Errorf("no PassiveSkillTrees row %q", treeID)
+	}
+	graphPath := d.trees[treeIdx].PassiveSkillGraph + ".psg"
+
+	f, err := loader.Open(gamePath(gameVersion, graphPath))
+	if err != nil {
+		return nil, errors.Wrapf(err, "failed to open %s", graphPath)
+	}
+	graph, err := extractor.ParsePassiveSkillGraph(f)
+	return graph, errors.Wrapf(err, "failed to parse %s", graphPath)
 }
 
 func buildClasses(d *gameData) ([]*Class, Ordered[int], error) {
