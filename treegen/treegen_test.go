@@ -34,9 +34,6 @@ var knownMismatches = map[string]string{
 	"nodes.stats":                       "phase 3: stat text rendering",
 	"nodes.masteryEffects.stats":        "phase 3: stat text rendering",
 	"nodes.masteryEffects.reminderText": "phase 3: stat description reminder text",
-	"constants.PSSCentreInnerRadius":    "not in game data",
-	"constants.orbitRadii":              "not in game data",
-	"constants.characterAttributes":     "not in game data",
 }
 
 func generateLive(t *testing.T) (*Tree, string) {
@@ -180,6 +177,7 @@ func TestDiffAgainstExport(t *testing.T) {
 	}
 
 	d.compareObjects("constants", "", gen["constants"].(map[string]any), exp["constants"].(map[string]any))
+	d.compareObjects("points", "", gen["points"].(map[string]any), exp["points"].(map[string]any))
 
 	for _, key := range []string{"tree", "jewelSlots", "min_x", "min_y", "max_x", "max_y"} {
 		d.compare(key, "", gen[key], exp[key])

@@ -23,6 +23,7 @@ type Tree struct {
 	MaxX                  int           `json:"max_x"`
 	MaxY                  int           `json:"max_y"`
 	Constants             Constants     `json:"constants"`
+	Points                Points        `json:"points"`
 }
 
 //nolint:govet // fields follow the export key order
@@ -128,8 +129,16 @@ type ExpansionJewel struct {
 
 //nolint:govet // fields follow the export key order
 type Constants struct {
-	Classes        Ordered[int] `json:"classes"`
-	SkillsPerOrbit []int        `json:"skillsPerOrbit"`
+	Classes              Ordered[int] `json:"classes"`
+	CharacterAttributes  Ordered[int] `json:"characterAttributes"`
+	PSSCentreInnerRadius int          `json:"PSSCentreInnerRadius"`
+	SkillsPerOrbit       []int        `json:"skillsPerOrbit"`
+	OrbitRadii           []int        `json:"orbitRadii"`
+}
+
+type Points struct {
+	TotalPoints      int `json:"totalPoints"`
+	AscendancyPoints int `json:"ascendancyPoints"`
 }
 
 // Float marshals like the export: 6 significant digits, never in exponent form.

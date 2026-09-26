@@ -20,6 +20,26 @@ const mainTreeID = "Default"
 // the 72-slot orbits 5 and 6 never add them.
 const maxListedOrbit = 4
 
+// The values below are hardcoded in the game client; the game files don't contain them.
+const (
+	// pssCentreInnerRadius is a game-client value absent from the game files.
+	pssCentreInnerRadius = 130
+	// totalPoints is a game-client value absent from the game files.
+	totalPoints = 123
+	// ascendancyPoints is a game-client value absent from the game files.
+	ascendancyPoints = 8
+)
+
+// orbitRadii is a game-client value absent from the game files, one radius per orbit.
+var orbitRadii = []int{0, 82, 162, 335, 493, 662, 846}
+
+// characterAttributes is a game-client value absent from the game files.
+var characterAttributes = Ordered[int]{
+	{Key: "Strength", Value: 0},
+	{Key: "Dexterity", Value: 1},
+	{Key: "Intelligence", Value: 2},
+}
+
 // grantedAttributeStats are the stats the export sums into grantedStrength/Dexterity/Intelligence (S, D, I).
 var grantedAttributeStats = map[string]string{
 	"base_strength":                     "S",
@@ -96,6 +116,12 @@ func Generate(loader fs.FS, gameVersion string) (*Tree, error) {
 	tree := &Tree{
 		Tree:       mainTreeID,
 		JewelSlots: make([]uint32, 0, len(d.jewelSlots)),
+		Constants: Constants{
+			CharacterAttributes:  characterAttributes,
+			PSSCentreInnerRadius: pssCentreInnerRadius,
+			OrbitRadii:           orbitRadii,
+		},
+		Points: Points{TotalPoints: totalPoints, AscendancyPoints: ascendancyPoints},
 	}
 
 	if tree.Classes, tree.Constants.Classes, err = buildClasses(d); err != nil {
@@ -116,6 +142,9 @@ func Generate(loader fs.FS, gameVersion string) (*Tree, error) {
 
 	for _, spo := range graph.SkillsPerOrbit {
 		tree.Constants.SkillsPerOrbit = append(tree.Constants.SkillsPerOrbit, int(spo))
+	}
+	if len(graph.SkillsPerOrbit) != len(orbitRadii) {
+		return nil, fmt.Errorf("graph has %d orbits but orbitRadii has %d", len(graph.SkillsPerOrbit), len(orbitRadii))
 	}
 
 	for _, slot := range d.jewelSlots {
