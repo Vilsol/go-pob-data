@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strconv"
+	"strings"
 
 	"github.com/andybalholm/brotli"
 	"github.com/pkg/errors"
@@ -36,12 +37,17 @@ var (
 	statRegex            = regexp.MustCompile(`[\w_+\-%]+`)
 )
 
+// defaultLang is the language of a description's lines before any lang block.
+const defaultLang = "English"
+
 type TranslationParser struct {
 	loader      fs.FS
 	descriptors map[string]*Description
 	loaded      map[string]bool
 	includes    []string
 	order       int
+	// followIncludes parses included files in place, so a file's own descriptions override theirs.
+	followIncludes bool
 }
 
 func NewTranslationParser(loader fs.FS) *TranslationParser {
@@ -57,7 +63,9 @@ func NewTranslationParser(loader fs.FS) *TranslationParser {
 type Description struct {
 	Lang  map[string][]raw.LangTranslation
 	Stats []string
-	Order int
+	// variants are the English lines as Describe renders them.
+	variants []variant
+	Order    int
 }
 
 func (t *TranslationParser) ParseFile(name string) error {
@@ -80,12 +88,17 @@ func (t *TranslationParser) ParseFile(name string) error {
 	}
 
 	var curDescriptor *Description
-	curLang := "English"
+	curLang := defaultLang
 
 	for _, line := range lineRegex.FindAll(all, -1) {
 		include := includeRegex.FindAllSubmatch(line, -1)
 		if len(include) > 0 {
 			t.includes = append(t.includes, string(include[0][1]))
+			if t.followIncludes {
+				if err := t.ParseFile(strings.ToLower(string(include[0][1]))); err != nil {
+					return err
+				}
+			}
 			continue
 		}
 
@@ -95,7 +108,7 @@ func (t *TranslationParser) ParseFile(name string) error {
 				Order: 0,
 			}
 		} else if bytes.Contains(line, []byte("handed_description")) || (bytes.Contains(line, []byte("description")) && !bytes.Contains(line, []byte("_description"))) {
-			curLang = "English"
+			curLang = defaultLang
 			curDescriptor = &Description{
 				Lang: map[string][]raw.LangTranslation{
 					curLang: make([]raw.LangTranslation, 0),
@@ -120,6 +133,12 @@ func (t *TranslationParser) ParseFile(name string) error {
 				curLang = string(langName[0][1])
 				curDescriptor.Lang[curLang] = make([]raw.LangTranslation, 0)
 			} else {
+				if curLang == defaultLang {
+					if v, ok := parseVariant(string(line)); ok {
+						curDescriptor.variants = append(curDescriptor.variants, v)
+					}
+				}
+
 				statMatches := statLineRegex.FindAllSubmatch(line, -1)
 				if len(statMatches) > 0 {
 					statLimits := statMatches[0][1]
