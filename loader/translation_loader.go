@@ -3,7 +3,6 @@ package loader
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"log/slog"
 
 	"github.com/Vilsol/slox"
@@ -14,13 +13,11 @@ import (
 	"github.com/Vilsol/go-pob-data/raw"
 )
 
-const cdnTranslationBase = "https://data.pob.gg/data/%s/stat_translations/%s/%s.msgpack.br"
-
 // LoadTranslation loads a raw brotli-compressed json dump from remote source
 //
 // Returns data from cache if found
 func LoadTranslation(ctx context.Context, version string, language string, name string, assetCache AssetCache) (*raw.TranslationFile, error) {
-	url := fmt.Sprintf(cdnTranslationBase, version, language, name)
+	url := TranslationURL(version, language, name)
 
 	slox.From(ctx).Debug(
 		"loading translation asset",

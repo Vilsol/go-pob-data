@@ -3,7 +3,6 @@ package loader
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"log/slog"
 	"reflect"
 
@@ -13,13 +12,11 @@ import (
 	"github.com/tinylib/msgp/msgp"
 )
 
-const cdnRawBase = "https://data.pob.gg/data/%s/raw/%s.msgpack.br"
-
 // LoadRaw loads a raw brotli-compressed json dump from remote source
 //
 // Returns data from cache if found
 func LoadRaw[T msgp.Decodable](ctx context.Context, version string, name string, onInit func(count int64), assetCache AssetCache, hooks ...func(obj T)) ([]T, error) {
-	url := fmt.Sprintf(cdnRawBase, version, name)
+	url := RawURL[T](version, name)
 
 	slox.From(ctx).Debug(
 		"loading raw asset",
@@ -29,8 +26,16 @@ func LoadRaw[T msgp.Decodable](ctx context.Context, version string, name string,
 
 	b, fromCache, err := loadAsset(ctx, url, assetCache)
 	if errors.Is(err, ErrAssetNotFound) {
-		// Table sets differ between game versions, so an asset the CDN does not have
-		// is an absent table rather than a failure. Loud, but not fatal.
+		// A version that has the table always has its json. Without it, the table is absent from
+		// this version; with it, T's layout was never published for it, and an empty table would hide that.
+		hasTable, probeErr := assetExists(ctx, cdnBase+version+"/raw/"+name+".json.gz")
+		if probeErr != nil {
+			return nil, probeErr
+		}
+		if hasTable {
+			return nil, errors.Wrap(err, "table exists but has no asset for this layout")
+		}
+
 		slox.From(ctx).Warn(
 			"no such asset for this version",
 			slog.String("version", version),

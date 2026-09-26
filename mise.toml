@@ -4,5 +4,9 @@ go = "1.23.3"
 imagemagick = "7.1.2_27"
 
 [tasks.test-artifacts]
-description = "Check every msgpack.br matches a re-encode of its json.gz (needs cgo)"
-run = "nix-shell -p gcc pkg-config imagemagick --run 'CGO_ENABLED=1 go test -count=1 -run TestMsgpackMatchesJSON .'"
+description = "Check the tuple assets against their json.gz and the frozen map assets, and the map assets against their pinned sha256 (needs cgo)"
+run = '''nix-shell -p gcc pkg-config imagemagick --run "CGO_ENABLED=1 go test -count=1 -run 'TestTupleMatchesJSON|TestTupleMatchesLegacy|TestLegacyAssetsPinned' ."'''
+
+[tasks.reencode-artifacts]
+description = "Write every missing or stale tuple asset of every committed version from its json.gz (needs cgo)"
+run = "nix-shell -p gcc pkg-config imagemagick --run 'CGO_ENABLED=1 go test -count=1 -run TestTupleMatchesJSON . -update'"

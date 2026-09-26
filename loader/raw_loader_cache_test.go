@@ -41,14 +41,18 @@ func (s *stubCache) Exists(_ string) bool {
 }
 
 type stubTransport struct {
-	body  []byte
-	code  int
-	calls int
+	body     []byte
+	code     int
+	headCode int
+	calls    int
 }
 
 func (s *stubTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	s.calls++
 	code := s.code
+	if req.Method == http.MethodHead && s.headCode != 0 {
+		code = s.headCode
+	}
 	if code == 0 {
 		code = http.StatusOK
 	}
@@ -131,7 +135,7 @@ func TestLoadRawEmptyCachedAssetRefetches(t *testing.T) {
 	testza.AssertNoError(t, err)
 	testza.AssertEqual(t, []string{"Mana", "Life"}, ids(out))
 	testza.AssertEqual(t, 1, transport.calls)
-	testza.AssertEqual(t, payload, cache.stored["https://data.pob.gg/data/3.18/raw/CostTypes.msgpack.br"])
+	testza.AssertEqual(t, payload, cache.stored[RawURL[*raw.CostType]("3.18", "CostTypes")])
 }
 
 // TestLoadRawCorruptCachedAsset pins that a non-empty but undecodable payload
@@ -225,7 +229,7 @@ func TestLoadRawNegativeElementCount(t *testing.T) {
 	testza.AssertNotNil(t, err)
 }
 
-// TestLoadRawMissingAsset pins the absent-table policy: a 404 is an empty table, and
+// TestLoadRawMissingAsset pins the absent-table policy: a 404 for a table without json is an empty table, and
 // the error body never reaches the cache.
 func TestLoadRawMissingAsset(t *testing.T) {
 	serveCDN(t, &stubTransport{code: http.StatusNotFound, body: []byte("<html>404</html>")})
@@ -238,6 +242,18 @@ func TestLoadRawMissingAsset(t *testing.T) {
 	testza.AssertNoError(t, err)
 	testza.AssertEqual(t, 0, len(out))
 	testza.AssertEqual(t, int64(0), initCount)
+	testza.AssertEqual(t, 0, len(cache.stored))
+}
+
+// TestLoadRawUnpublishedLayout pins that a table the version has (its json exists) but whose
+// tuple asset for this layout is missing is an error, not an empty table.
+func TestLoadRawUnpublishedLayout(t *testing.T) {
+	serveCDN(t, &stubTransport{code: http.StatusNotFound, headCode: http.StatusOK, body: []byte("<html>404</html>")})
+
+	cache := &stubCache{exists: false}
+
+	_, err := LoadRaw[*raw.CostType](context.Background(), "3.29", "CostTypes", nil, cache)
+	testza.AssertTrue(t, errors.Is(err, ErrAssetNotFound))
 	testza.AssertEqual(t, 0, len(cache.stored))
 }
 

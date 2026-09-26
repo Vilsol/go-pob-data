@@ -17,6 +17,7 @@ import (
 	"github.com/tinylib/msgp/msgp"
 	"golang.org/x/text/encoding/unicode"
 
+	"github.com/Vilsol/go-pob-data/loader"
 	"github.com/Vilsol/go-pob-data/raw"
 )
 
@@ -226,7 +227,7 @@ func (t *TranslationParser) SaveTo(outDir string, translationName string) error 
 			return errors.Wrap(err, "failed to marshal translations file")
 		}
 
-		fullPath := filepath.Join(outDir, languageMap[lang], translationName+".msgpack.br")
+		fullPath := loader.AssetPath(filepath.Join(outDir, languageMap[lang], translationName), loader.TupleVariant(translations))
 		slog.Info("writing to", slog.String("path", fullPath))
 
 		if err := os.MkdirAll(filepath.Dir(fullPath), 0o755); err != nil {

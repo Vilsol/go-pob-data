@@ -19,12 +19,19 @@ import (
 	"gopkg.in/gographics/imagick.v3/imagick"
 
 	"github.com/Vilsol/go-pob-data/extractor"
+	"github.com/Vilsol/go-pob-data/loader"
 	"github.com/Vilsol/go-pob-data/raw"
 )
 
 type PackedFile struct {
-	Fn   func(jsonData []byte, w *msgp.Writer) error
+	Codec
 	path string
+}
+
+type Codec struct {
+	// Encode turns a table's json into its brotli tuple asset: an int64 row count, then the rows.
+	Encode  func(jsonData []byte) ([]byte, error)
+	Variant string
 }
 
 func (f PackedFile) FilePath(gameVersion string) string {
@@ -35,179 +42,198 @@ func (f PackedFile) FilePath(gameVersion string) string {
 	return f.path + "." + ext
 }
 
-func ReEncode[T msgp.Encodable]() func(jsonData []byte, w *msgp.Writer) error {
-	return func(jsonData []byte, w *msgp.Writer) error {
-		out := make([]T, 0)
-		if err := json.Unmarshal(jsonData, &out); err != nil {
-			return errors.Wrap(err, "failed to unmarshal data")
-		}
-
-		for _, obj := range out {
-			if err := obj.EncodeMsg(w); err != nil {
-				return errors.Wrap(err, "failed to encode msgpack")
+func ReEncode[T msgp.Encodable]() Codec {
+	var row T
+	return Codec{
+		Variant: loader.TupleVariant(row),
+		Encode: func(jsonData []byte) ([]byte, error) {
+			out := make([]T, 0)
+			if err := json.Unmarshal(jsonData, &out); err != nil {
+				return nil, errors.Wrap(err, "failed to unmarshal data")
 			}
-		}
 
-		return nil
+			var buf bytes.Buffer
+			bw := brotli.NewWriter(&buf)
+			w := msgp.NewWriter(bw)
+			if err := w.WriteInt64(int64(len(out))); err != nil {
+				return nil, errors.Wrap(err, "failed to encode msgpack")
+			}
+
+			for _, obj := range out {
+				if err := obj.EncodeMsg(w); err != nil {
+					return nil, errors.Wrap(err, "failed to encode msgpack")
+				}
+			}
+
+			if err := w.Flush(); err != nil {
+				return nil, errors.Wrap(err, "failed to flush msgpack")
+			}
+
+			if err := bw.Close(); err != nil {
+				return nil, errors.Wrap(err, "failed to compress msgpack")
+			}
+
+			return buf.Bytes(), nil
+		},
 	}
 }
 
 var filesToExport = []PackedFile{
 	{
-		path: "Data/PassiveTreeExpansionJewels",
-		Fn:   ReEncode[*raw.PassiveTreeExpansionJewel](),
+		path:  "Data/PassiveTreeExpansionJewels",
+		Codec: ReEncode[*raw.PassiveTreeExpansionJewel](),
 	},
 	{
-		path: "Data/PassiveTreeExpansionSkills",
-		Fn:   ReEncode[*raw.PassiveTreeExpansionSkill](),
+		path:  "Data/PassiveTreeExpansionSkills",
+		Codec: ReEncode[*raw.PassiveTreeExpansionSkill](),
 	},
 	{
-		path: "Data/PassiveTreeExpansionSpecialSkills",
-		Fn:   ReEncode[*raw.PassiveTreeExpansionSpecialSkill](),
+		path:  "Data/PassiveTreeExpansionSpecialSkills",
+		Codec: ReEncode[*raw.PassiveTreeExpansionSpecialSkill](),
 	},
 	{
-		path: "Data/CostTypes",
-		Fn:   ReEncode[*raw.CostType](),
+		path:  "Data/CostTypes",
+		Codec: ReEncode[*raw.CostType](),
 	},
 	{
-		path: "Data/Mods",
-		Fn:   ReEncode[*raw.Mod](),
+		path:  "Data/Mods",
+		Codec: ReEncode[*raw.Mod](),
 	},
 	{
-		path: "Data/ActiveSkills",
-		Fn:   ReEncode[*raw.ActiveSkill](),
+		path:  "Data/ActiveSkills",
+		Codec: ReEncode[*raw.ActiveSkill](),
 	},
 	{
-		path: "Data/Essences",
-		Fn:   ReEncode[*raw.Essence](),
+		path:  "Data/Essences",
+		Codec: ReEncode[*raw.Essence](),
 	},
 	{
-		path: "Data/CraftingBenchOptions",
-		Fn:   ReEncode[*raw.CraftingBenchOption](),
+		path:  "Data/CraftingBenchOptions",
+		Codec: ReEncode[*raw.CraftingBenchOption](),
 	},
 	{
-		path: "Data/PantheonPanelLayout",
-		Fn:   ReEncode[*raw.PantheonPanelLayout](),
+		path:  "Data/PantheonPanelLayout",
+		Codec: ReEncode[*raw.PantheonPanelLayout](),
 	},
 	{
-		path: "Data/WeaponTypes",
-		Fn:   ReEncode[*raw.WeaponType](),
+		path:  "Data/WeaponTypes",
+		Codec: ReEncode[*raw.WeaponType](),
 	},
 	{
-		path: "Data/ArmourTypes",
-		Fn:   ReEncode[*raw.ArmourType](),
+		path:  "Data/ArmourTypes",
+		Codec: ReEncode[*raw.ArmourType](),
 	},
 	{
-		path: "Data/ShieldTypes",
-		Fn:   ReEncode[*raw.ShieldType](),
+		path:  "Data/ShieldTypes",
+		Codec: ReEncode[*raw.ShieldType](),
 	},
 	{
-		path: "Data/Flasks",
-		Fn:   ReEncode[*raw.Flask](),
+		path:  "Data/Flasks",
+		Codec: ReEncode[*raw.Flask](),
 	},
 	{
-		path: "Data/ComponentCharges",
-		Fn:   ReEncode[*raw.ComponentCharge](),
+		path:  "Data/ComponentCharges",
+		Codec: ReEncode[*raw.ComponentCharge](),
 	},
 	{
-		path: "Data/ComponentAttributeRequirements",
-		Fn:   ReEncode[*raw.ComponentAttributeRequirement](),
+		path:  "Data/ComponentAttributeRequirements",
+		Codec: ReEncode[*raw.ComponentAttributeRequirement](),
 	},
 	{
-		path: "Data/BaseItemTypes",
-		Fn:   ReEncode[*raw.BaseItemType](),
+		path:  "Data/BaseItemTypes",
+		Codec: ReEncode[*raw.BaseItemType](),
 	},
 	{
-		path: "Data/Stats",
-		Fn:   ReEncode[*raw.Stat](),
+		path:  "Data/Stats",
+		Codec: ReEncode[*raw.Stat](),
 	},
 	{
-		path: "Data/AlternatePassiveSkills",
-		Fn:   ReEncode[*raw.AlternatePassiveSkill](),
+		path:  "Data/AlternatePassiveSkills",
+		Codec: ReEncode[*raw.AlternatePassiveSkill](),
 	},
 	{
-		path: "Data/AlternatePassiveAdditions",
-		Fn:   ReEncode[*raw.AlternatePassiveAddition](),
+		path:  "Data/AlternatePassiveAdditions",
+		Codec: ReEncode[*raw.AlternatePassiveAddition](),
 	},
 	{
-		path: "Data/DefaultMonsterStats",
-		Fn:   ReEncode[*raw.DefaultMonsterStat](),
+		path:  "Data/DefaultMonsterStats",
+		Codec: ReEncode[*raw.DefaultMonsterStat](),
 	},
 	{
-		path: "Data/SkillTotemVariations",
-		Fn:   ReEncode[*raw.SkillTotemVariation](),
+		path:  "Data/SkillTotemVariations",
+		Codec: ReEncode[*raw.SkillTotemVariation](),
 	},
 	{
-		path: "Data/MonsterVarieties",
-		Fn:   ReEncode[*raw.MonsterVariety](),
+		path:  "Data/MonsterVarieties",
+		Codec: ReEncode[*raw.MonsterVariety](),
 	},
 	{
-		path: "Data/MonsterMapDifficulty",
-		Fn:   ReEncode[*raw.MonsterMapDifficulty](),
+		path:  "Data/MonsterMapDifficulty",
+		Codec: ReEncode[*raw.MonsterMapDifficulty](),
 	},
 	{
-		path: "Data/MonsterMapBossDifficulty",
-		Fn:   ReEncode[*raw.MonsterMapBossDifficulty](),
+		path:  "Data/MonsterMapBossDifficulty",
+		Codec: ReEncode[*raw.MonsterMapBossDifficulty](),
 	},
 	{
-		path: "Data/GrantedEffects",
-		Fn:   ReEncode[*raw.GrantedEffect](),
+		path:  "Data/GrantedEffects",
+		Codec: ReEncode[*raw.GrantedEffect](),
 	},
 	{
-		path: "Data/SkillTotems",
-		Fn:   ReEncode[*raw.SkillTotem](),
+		path:  "Data/SkillTotems",
+		Codec: ReEncode[*raw.SkillTotem](),
 	},
 	{
-		path: "Data/GrantedEffectStatSetsPerLevel",
-		Fn:   ReEncode[*raw.GrantedEffectStatSetsPerLevel](),
+		path:  "Data/GrantedEffectStatSetsPerLevel",
+		Codec: ReEncode[*raw.GrantedEffectStatSetsPerLevel](),
 	},
 	{
-		path: "Data/GrantedEffectsPerLevel",
-		Fn:   ReEncode[*raw.GrantedEffectsPerLevel](),
+		path:  "Data/GrantedEffectsPerLevel",
+		Codec: ReEncode[*raw.GrantedEffectsPerLevel](),
 	},
 	{
-		path: "Data/GrantedEffectQualityStats",
-		Fn:   ReEncode[*raw.GrantedEffectQualityStat](),
+		path:  "Data/GrantedEffectQualityStats",
+		Codec: ReEncode[*raw.GrantedEffectQualityStat](),
 	},
 	{
-		path: "Data/SkillGems",
-		Fn:   ReEncode[*raw.SkillGem](),
+		path:  "Data/SkillGems",
+		Codec: ReEncode[*raw.SkillGem](),
 	},
 	{
-		path: "Data/ItemExperiencePerLevel",
-		Fn:   ReEncode[*raw.ItemExperiencePerLevel](),
+		path:  "Data/ItemExperiencePerLevel",
+		Codec: ReEncode[*raw.ItemExperiencePerLevel](),
 	},
 	{
-		path: "Data/Tags",
-		Fn:   ReEncode[*raw.Tag](),
+		path:  "Data/Tags",
+		Codec: ReEncode[*raw.Tag](),
 	},
 	{
-		path: "Data/ActiveSkillType",
-		Fn:   ReEncode[*raw.ActiveSkillType](),
+		path:  "Data/ActiveSkillType",
+		Codec: ReEncode[*raw.ActiveSkillType](),
 	},
 	{
-		path: "Data/ItemClasses",
-		Fn:   ReEncode[*raw.ItemClass](),
+		path:  "Data/ItemClasses",
+		Codec: ReEncode[*raw.ItemClass](),
 	},
 	{
-		path: "Data/GrantedEffectStatSets",
-		Fn:   ReEncode[*raw.GrantedEffectStatSet](),
+		path:  "Data/GrantedEffectStatSets",
+		Codec: ReEncode[*raw.GrantedEffectStatSet](),
 	},
 	{
-		path: "Data/PassiveSkills",
-		Fn:   ReEncode[*raw.PassiveSkill](),
+		path:  "Data/PassiveSkills",
+		Codec: ReEncode[*raw.PassiveSkill](),
 	},
 	{
-		path: "Data/AlternateTreeVersions",
-		Fn:   ReEncode[*raw.AlternateTreeVersion](),
+		path:  "Data/AlternateTreeVersions",
+		Codec: ReEncode[*raw.AlternateTreeVersion](),
 	},
 	{
-		path: "Data/AtlasNode",
-		Fn:   ReEncode[*raw.AtlasNode](),
+		path:  "Data/AtlasNode",
+		Codec: ReEncode[*raw.AtlasNode](),
 	},
 	{
-		path: "Data/AtlasNodeDefinition",
-		Fn:   ReEncode[*raw.AtlasNodeDefinition](),
+		path:  "Data/AtlasNodeDefinition",
+		Codec: ReEncode[*raw.AtlasNodeDefinition](),
 	},
 }
 
@@ -226,7 +252,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 	}
 
 	extractor.LoadParser(gameVersion)
-	loader, err := extractor.GetBundleLoader(os.DirFS(gamePath), IsNewHash(gameVersion))
+	bundles, err := extractor.GetBundleLoader(os.DirFS(gamePath), IsNewHash(gameVersion))
 	if err != nil {
 		return errors.Wrap(err, "could not initialize bundle loader")
 	}
@@ -236,7 +262,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 
 		slog.Info("extracting", slog.String("path", pathWithExt))
 
-		data, err := loader.Open(file.FilePath(gameVersion))
+		data, err := bundles.Open(file.FilePath(gameVersion))
 		if err != nil {
 			slog.Error("failed to open dat file", slog.String("error", err.Error()), slog.String("path", pathWithExt))
 			continue
@@ -296,28 +322,16 @@ func extractRawData(gamePath string, gameVersion string) error {
 		_ = writerBrotli.Close()
 		_ = fBrotli.Close()
 
-		outNameMsgpBrotli := strings.Split(filepath.Base(pathWithExt), ".")[0] + ".msgpack.br"
-		outPathMsgpBrotli := filepath.Join("data", gameVersion, "raw", outNameMsgpBrotli)
-
-		fMsgpBrotli, err := os.OpenFile(outPathMsgpBrotli, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o755)
+		name := strings.Split(filepath.Base(pathWithExt), ".")[0]
+		asset, err := file.Encode(b)
 		if err != nil {
-			return errors.Wrap(err, "could not open file for writing")
+			return errors.Wrap(err, "could not encode "+name)
 		}
 
-		writerMsgpBrotli := brotli.NewWriter(fMsgpBrotli)
-
-		msgpWriter := msgp.NewWriter(writerMsgpBrotli)
-		_ = msgpWriter.WriteInt64(int64(len(dat)))
-		if err := file.Fn(b, msgpWriter); err != nil {
-			return errors.Wrap(err, "could not write to msgpack")
+		outPathTuple := filepath.Join("data", gameVersion, loader.AssetPath("raw/"+name, file.Variant))
+		if err := os.WriteFile(outPathTuple, asset, 0o755); err != nil {
+			return errors.Wrap(err, "could not write "+outPathTuple)
 		}
-
-		if err := msgpWriter.Flush(); err != nil {
-			return errors.Wrap(err, "could not flush msgpack")
-		}
-
-		_ = writerMsgpBrotli.Close()
-		_ = fMsgpBrotli.Close()
 	}
 
 	imagick.Initialize()
@@ -328,7 +342,7 @@ func extractRawData(gamePath string, gameVersion string) error {
 	for _, img := range imagesToExport {
 		slog.Info("extracting", slog.String("path", img))
 
-		data, err := loader.Open(strings.ToLower(img))
+		data, err := bundles.Open(strings.ToLower(img))
 		if err != nil {
 			return errors.Wrap(err, "could not open file")
 		}

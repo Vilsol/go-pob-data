@@ -89,3 +89,26 @@ func fetchAsset(ctx context.Context, url string, assetCache AssetCache) ([]byte,
 
 	return b, nil
 }
+
+// assetExists asks the CDN whether url exists, without downloading it.
+func assetExists(ctx context.Context, url string) (bool, error) {
+	request, err := http.NewRequestWithContext(ctx, http.MethodHead, url, nil)
+	if err != nil {
+		return false, errors.Wrap(err, "failed to create request")
+	}
+
+	response, err := http.DefaultClient.Do(request)
+	if err != nil {
+		return false, errors.Wrap(err, "failed to fetch url: "+url)
+	}
+	defer response.Body.Close()
+
+	switch response.StatusCode {
+	case http.StatusOK:
+		return true, nil
+	case http.StatusNotFound:
+		return false, nil
+	}
+
+	return false, errors.Errorf("unexpected status %d probing url: %s", response.StatusCode, url)
+}
