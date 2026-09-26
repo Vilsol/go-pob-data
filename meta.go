@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"os"
-	"strconv"
-	"strings"
 
 	"github.com/pkg/errors"
+
+	"github.com/Vilsol/go-pob-data/extractor"
 )
 
 type Metadata struct {
@@ -35,14 +35,9 @@ func generateMeta() error {
 }
 
 func IsNewHash(gameVersion string) bool {
-	n, _ := strconv.Atoi(strings.Split(gameVersion, ".")[1])
-	return n >= 22
+	return extractor.IsNewHash(gameVersion)
 }
 
 func GetFileExtension(gameVersion string) string {
-	n, _ := strconv.Atoi(strings.Split(gameVersion, ".")[1])
-	if n >= 25 {
-		return "datc64"
-	}
-	return "dat64"
+	return extractor.GetFileExtension(gameVersion)
 }
