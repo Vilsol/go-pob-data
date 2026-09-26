@@ -97,6 +97,8 @@ type Node struct {
 	ReminderText           []string         `json:"reminderText,omitempty"`
 	FlavourText            []string         `json:"flavourText,omitempty"`
 	ClassStartIndex        *int             `json:"classStartIndex,omitempty"`
+	// Undescribed are the node's stats without a description, which the game doesn't show.
+	Undescribed []string `json:"-"`
 	// Position is nil for nodes outside the graph, which omits all of its keys.
 	*Position
 }
@@ -121,8 +123,9 @@ type RootNode struct {
 
 //nolint:govet // fields follow the export key order
 type MasteryEffect struct {
-	Effect uint16   `json:"effect"`
-	Stats  []string `json:"stats"`
+	Effect       uint16   `json:"effect"`
+	Stats        []string `json:"stats"`
+	ReminderText []string `json:"reminderText,omitempty"`
 }
 
 //nolint:govet // fields follow the export key order

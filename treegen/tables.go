@@ -41,6 +41,7 @@ type passiveSkill struct {
 	IsProxyPassive           bool   `json:"IsProxyPassive"`
 	MasteryGroup             *int   `json:"MasteryGroup"`
 	DescendancyKey           *int   `json:"DescendancyKey"`
+	PassiveSkillBuffs        []int  `json:"PassiveSkillBuffs"`
 }
 
 func (p *passiveSkill) statValues() []int {
@@ -88,7 +89,15 @@ type masteryGroup struct {
 }
 
 type masteryEffect struct {
-	Hash16 uint16 `json:"HASH16"`
+	Stats      []int  `json:"Stats"`
+	Hash16     uint16 `json:"HASH16"`
+	Stat1Value int    `json:"Stat1Value"`
+	Stat2Value int    `json:"Stat2Value"`
+	Stat3Value int    `json:"Stat3Value"`
+}
+
+func (m *masteryEffect) statValues() []int {
+	return []int{m.Stat1Value, m.Stat2Value, m.Stat3Value}
 }
 
 type jewelSlot struct {
@@ -100,6 +109,22 @@ type jewelSlot struct {
 }
 
 type reminderText struct {
+	ID   string `json:"Id"`
+	Text string `json:"Text"`
+}
+
+type buffTemplate struct {
+	BuffDefinition *int  `json:"BuffDefinitionsKey"`
+	StatValues     []int `json:"Buff_StatValues"`
+}
+
+type buffDefinition struct {
+	Stats        []int `json:"StatsKeys"`
+	GrantedFlags []int `json:"GrantedFlags"`
+}
+
+type clientString struct {
+	ID   string `json:"Id"`
 	Text string `json:"Text"`
 }
 

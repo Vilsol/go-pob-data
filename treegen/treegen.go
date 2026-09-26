@@ -53,6 +53,8 @@ var grantedAttributeStats = map[string]string{
 }
 
 type gameData struct {
+	descriptions           *descriptions
+	reminderByID           map[string]string
 	passiveSkills          []passiveSkill
 	stats                  []stat
 	characters             []character
@@ -70,6 +72,9 @@ type gameData struct {
 	expansionSkills        []expansionSkill
 	expansionSpecialSkills []expansionSpecialSkill
 	overrides              []passiveSkillOverride
+	buffTemplates          []buffTemplate
+	buffDefinitions        []buffDefinition
+	clientStrings          []clientString
 }
 
 func loadGameData(loader fs.FS, gameVersion string) (*gameData, error) {
@@ -92,7 +97,21 @@ func loadGameData(loader fs.FS, gameVersion string) (*gameData, error) {
 	loadTable(l, "PassiveTreeExpansionSkills", &d.expansionSkills)
 	loadTable(l, "PassiveTreeExpansionSpecialSkills", &d.expansionSpecialSkills)
 	loadTable(l, "PassiveSkillOverrides", &d.overrides)
-	return d, l.err
+	loadTable(l, "BuffTemplates", &d.buffTemplates)
+	loadTable(l, "BuffDefinitions", &d.buffDefinitions)
+	loadTable(l, "ClientStrings", &d.clientStrings)
+	if l.err != nil {
+		return nil, l.err
+	}
+
+	d.reminderByID = make(map[string]string, len(d.reminderTexts))
+	for _, r := range d.reminderTexts {
+		d.reminderByID[r.ID] = r.Text
+	}
+
+	var err error
+	d.descriptions, err = loadDescriptions(loader, gameVersion)
+	return d, err
 }
 
 // Generate builds the passive tree in the skilltree-export shape from the game files
@@ -509,10 +528,11 @@ func buildNode(d *gameData, skillIdx int, l *lookups) (*Node, error) {
 		node.ActiveIcon = iconPath(mg.ActiveIcon)
 		node.ActiveEffectImage = iconPath(mg.ActiveEffectImage)
 		for _, e := range mg.MasteryEffects {
-			node.MasteryEffects = append(node.MasteryEffects, &MasteryEffect{
-				Effect: d.masteryEffects[e].Hash16,
-				Stats:  []string{},
-			})
+			effect, err := d.describeMasteryEffect(&d.masteryEffects[e])
+			if err != nil {
+				return nil, errors.Wrapf(err, "mastery effect %d", d.masteryEffects[e].Hash16)
+			}
+			node.MasteryEffects = append(node.MasteryEffects, effect)
 		}
 	}
 
@@ -559,8 +579,8 @@ func buildNode(d *gameData, skillIdx int, l *lookups) (*Node, error) {
 		node.IsBloodline = true
 	}
 
-	for _, r := range p.ReminderStrings {
-		node.ReminderText = append(node.ReminderText, d.reminderTexts[r].Text)
+	if err := d.describeNode(node, &p); err != nil {
+		return nil, err
 	}
 
 	if p.FlavourText != "" {

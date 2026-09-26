@@ -28,12 +28,52 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-// knownMismatches are export fields the generator can't reproduce yet, with the reason.
+const (
+	// staleAbyssal: the export predates a patch that reworked these Abyssal bloodline nodes. The
+	// generated text is what PoB's newer 3.29.1 export shows.
+	staleAbyssal = "export predates the patch that reworked this Abyssal node"
+	// staleReflect: no live description file has the export's "... from your Hits cannot be
+	// Reflected"; the live text is PoB's newer 3.29.1 export's "Prevent +X% of Reflected ...".
+	staleReflect = "export text is from before the reflect wording changed"
+	// swappedOrder: the export lists two adjacent descriptions of the override file (critical
+	// strike chance/multiplier and zombies/spectres in passive_skill_stat_descriptions.txt,
+	// Inquisitor's two aura lines in passive_skill_aura_stat_descriptions.txt) in the opposite of
+	// their file order, while every other pair follows file order. No rule in the live files
+	// reproduces it; PoB's 3.29.1 export has the same order.
+	swappedOrder = "export swaps two adjacent descriptions against the live file order"
+)
+
+// knownMismatches are export values the generator doesn't reproduce, keyed by "<field> <id>", with the reason.
 var knownMismatches = map[string]string{
-	"nodes.reminderText":                "phase 3: the export merges stat description reminder text into ReminderText rows",
-	"nodes.stats":                       "phase 3: stat text rendering",
-	"nodes.masteryEffects.stats":        "phase 3: stat text rendering",
-	"nodes.masteryEffects.reminderText": "phase 3: stat description reminder text",
+	"nodes.stats 16287":        staleAbyssal,
+	"nodes.stats 19208":        staleAbyssal,
+	"nodes.reminderText 19208": staleAbyssal,
+	"nodes.stats 28609":        staleAbyssal,
+
+	"nodes.masteryEffects.stats 12169[0]": staleReflect,
+	"nodes.masteryEffects.stats 12239[0]": staleReflect,
+	"nodes.masteryEffects.stats 12503[0]": staleReflect,
+	"nodes.masteryEffects.stats 12873[0]": staleReflect,
+	"nodes.masteryEffects.stats 13387[1]": staleReflect,
+	"nodes.masteryEffects.stats 17127[0]": staleReflect,
+	"nodes.masteryEffects.stats 20675[0]": staleReflect,
+	"nodes.masteryEffects.stats 31818[0]": staleReflect,
+	"nodes.masteryEffects.stats 33657[0]": staleReflect,
+	"nodes.masteryEffects.stats 34317[1]": staleReflect,
+	"nodes.masteryEffects.stats 42792[0]": staleReflect,
+	"nodes.masteryEffects.stats 44298[1]": staleReflect,
+	"nodes.masteryEffects.stats 48660[1]": staleReflect,
+	"nodes.masteryEffects.stats 52220[0]": staleReflect,
+	"nodes.masteryEffects.stats 5348[1]":  staleReflect,
+	"nodes.masteryEffects.stats 5726[1]":  staleReflect,
+	"nodes.masteryEffects.stats 64042[0]": staleReflect,
+
+	"nodes.stats 6064":  swappedOrder,
+	"nodes.stats 9014":  swappedOrder,
+	"nodes.stats 28754": swappedOrder,
+	"nodes.stats 30471": swappedOrder,
+	"nodes.stats 19897": swappedOrder,
+	"nodes.stats 40059": swappedOrder,
 }
 
 func generateLive(t *testing.T) (*Tree, string) {
@@ -216,18 +256,34 @@ func TestDiffAgainstExport(t *testing.T) {
 		fmt.Fprintf(&report, "%-40s %d/%d\n", field, d.matched[field], d.total[field])
 	}
 
+	undescribed := make(map[string][]string)
+	for _, n := range tree.Nodes.List {
+		undescribed[nodeID(n.Skill)] = n.Undescribed
+	}
+
+	hit := make(map[string]bool)
 	for _, field := range sortedKeys(d.mismatches) {
 		ms := d.mismatches[field]
 		slices.SortFunc(ms, func(a, b mismatch) int { return strings.Compare(a.id, b.id) })
 
-		reason, known := knownMismatches[field]
-		if !known {
-			reason = "UNEXPLAINED"
-			t.Fail()
-		}
-		fmt.Fprintf(&report, "\n%s: %d mismatches (%s)\n", field, len(ms), reason)
+		fmt.Fprintf(&report, "\n%s: %d mismatches\n", field, len(ms))
 		for _, m := range ms {
-			fmt.Fprintf(&report, "  %s: generated=%s export=%s\n", m.id, compact(m.gen), compact(m.exp))
+			key := field + " " + m.id
+			reason, known := knownMismatches[key]
+			hit[key] = true
+			if !known {
+				reason = "UNEXPLAINED"
+				t.Fail()
+			}
+			if u := undescribed[m.id]; field == "nodes.stats" && len(u) > 0 {
+				reason += fmt.Sprintf(", stats without a description: %v", u)
+			}
+			fmt.Fprintf(&report, "  %s (%s): generated=%s export=%s\n", m.id, reason, compact(m.gen), compact(m.exp))
+		}
+	}
+	for _, key := range sortedKeys(knownMismatches) {
+		if !hit[key] {
+			t.Errorf("known mismatch %q no longer happens", key)
 		}
 	}
 
