@@ -29,6 +29,7 @@ func (f FakeCache) Exists(_ string) bool {
 func TestAll(t *testing.T) {
 	h := slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{Level: slog.LevelDebug})
 	slog.SetDefault(slog.New(h))
+	testdata.ServeCommittedData(t)
 
 	err := InitializeAll(context.Background(), testdata.LatestDataVersion(), FakeCache{}, nil)
 	testza.AssertNoError(t, err)
@@ -51,6 +52,7 @@ func TestAll(t *testing.T) {
 func BenchmarkAll(b *testing.B) {
 	h := slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{Level: slog.Level(9)})
 	slog.SetDefault(slog.New(h))
+	testdata.ServeCommittedData(b)
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {

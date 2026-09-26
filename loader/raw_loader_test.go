@@ -29,6 +29,7 @@ func (f FakeCache) Exists(_ string) bool {
 func TestRawLoader(t *testing.T) {
 	h := slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{Level: slog.LevelDebug})
 	slog.SetDefault(slog.New(h))
+	testdata.ServeCommittedData(t)
 
 	_, err := LoadRaw[*raw.GrantedEffectStatSet](context.Background(), testdata.LatestDataVersion(), "GrantedEffectStatSets", nil, FakeCache{})
 	testza.AssertNoError(t, err)
