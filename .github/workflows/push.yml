@@ -6,7 +6,7 @@ on: [push, pull_request]
 
 env:
   GO_VERSION: "1.21.0"
-  LFS_INCLUDE: "data/**/*.msgpack.br,data/**/*.json.gz"
+  LFS_INCLUDE: "data/**/*.msgpack.br,data/**/*.json.gz,treegen/testdata/*.gz"
 
 jobs:
   lint:
@@ -48,6 +48,16 @@ jobs:
 
       - name: Pull LFS artifacts
         run: git lfs pull --include "$LFS_INCLUDE"
+
+      # The extractor and treegen tests read the live patch's bundles from the patch CDN; the
+      # cache holds them per patch, so only the first run after a patch downloads them.
+      - name: Resolve live patch
+        run: echo "POE_PATCH=$(curl -fsSL https://raw.githubusercontent.com/poe-tool-dev/latest-patch-version/main/latest.txt)" >> "$GITHUB_ENV"
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/go-pob-data/bundles
+          key: poe-bundles-${{ env.POE_PATCH }}
 
       - uses: cachix/install-nix-action@v31
         with:
