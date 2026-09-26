@@ -5,6 +5,7 @@ import (
 	"compress/gzip"
 	"encoding/json"
 	"io"
+	"io/fs"
 	"log/slog"
 	"os"
 	"os/exec"
@@ -246,17 +247,7 @@ var imagesToExport = []string{
 	"Art/2DArt/BaseClassIllustrations/DexInt.dds",
 }
 
-func extractRawData(gamePath string, gameVersion string) error {
-	if _, err := os.Stat(filepath.Join(gamePath, "Bundles2", "_.index.bin")); err != nil {
-		return errors.Wrap(err, "could not find _.index.bin")
-	}
-
-	extractor.LoadParser(gameVersion)
-	bundles, err := extractor.GetBundleLoader(os.DirFS(gamePath), IsNewHash(gameVersion))
-	if err != nil {
-		return errors.Wrap(err, "could not initialize bundle loader")
-	}
-
+func extractRawData(bundles fs.FS, gameVersion string) error {
 	for _, file := range filesToExport {
 		pathWithExt := file.path + "." + GetFileExtension(gameVersion)
 
@@ -335,9 +326,9 @@ func extractRawData(gamePath string, gameVersion string) error {
 	}
 
 	imagick.Initialize()
-	defer imagick.Terminate()
 
 	mw := imagick.NewMagickWand()
+	defer mw.Destroy()
 
 	for _, img := range imagesToExport {
 		slog.Info("extracting", slog.String("path", img))

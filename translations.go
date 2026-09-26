@@ -1,13 +1,12 @@
 package main
 
 import (
-	"os"
+	"io/fs"
 	"path/filepath"
 	"strings"
 
 	"github.com/pkg/errors"
 
-	"github.com/Vilsol/go-pob-data/extractor"
 	st "github.com/Vilsol/go-pob-data/stat_translations"
 )
 
@@ -17,17 +16,7 @@ var translations = []string{
 	"Metadata/StatDescriptions/passive_skill_stat_descriptions.txt",
 }
 
-func extractTranslations(gamePath string, gameVersion string) error {
-	if _, err := os.Stat(filepath.Join(gamePath, "Bundles2", "_.index.bin")); err != nil {
-		return errors.Wrap(err, "could not find _.index.bin")
-	}
-
-	extractor.LoadParser(gameVersion)
-	loader, err := extractor.GetBundleLoader(os.DirFS(gamePath), IsNewHash(gameVersion))
-	if err != nil {
-		return errors.Wrap(err, "could not initialize bundle loader")
-	}
-
+func extractTranslations(loader fs.FS, gameVersion string) error {
 	for _, translation := range translations {
 		parser := st.NewTranslationParser(loader)
 		if err := parser.ParseFile(strings.ToLower(translation)); err != nil {

@@ -14,3 +14,11 @@ run = "nix-shell -p gcc pkg-config imagemagick --run 'CGO_ENABLED=1 go test -cou
 [tasks.project-min]
 description = "Write the .min assets of every version that has a field list (fields/<version>.json) from its committed full tuple assets"
 run = "go run ./cmd/project"
+
+[tasks.tree]
+description = "Regenerate only data/<version>/tree from the patch CDN (defaults to the live patch)"
+usage = 'arg "[patch]" help="Full patch version, e.g. 3.29.3.3"'
+run = '''
+patch="${usage_patch:-$(curl -fsSL https://raw.githubusercontent.com/poe-tool-dev/latest-patch-version/main/latest.txt)}"
+nix-shell --run "CGO_ENABLED=1 go run . -tree-only cdn:$patch ${patch%.*.*}"
+'''
