@@ -159,10 +159,6 @@ var initFunctions = []initBlock{
 		Name: "SkillTotemVariations",
 	},
 	{
-		Func: InitializeSkillTotems,
-		Name: "SkillTotems",
-	},
-	{
 		Func: InitializeStats,
 		Name: "Stats",
 	},

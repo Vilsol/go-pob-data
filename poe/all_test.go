@@ -60,3 +60,12 @@ func BenchmarkAll(b *testing.B) {
 		_ = InitializeAll(context.Background(), testdata.LatestDataVersion(), nil, nil)
 	}
 }
+
+// TestInitializeAllRequestsOnlyPresentTables catches default initializers for tables the game no
+// longer ships (SkillTotems is gone since 3.26), which cost a 404 on every cold load.
+func TestInitializeAllRequestsOnlyPresentTables(t *testing.T) {
+	cdn := testdata.ServeCommittedData(t)
+
+	testza.AssertNoError(t, initializeFunctions(context.Background(), initFunctions, testdata.LatestDataVersion(), FakeCache{}, nil))
+	testza.AssertEqual(t, []string(nil), cdn.Misses())
+}
