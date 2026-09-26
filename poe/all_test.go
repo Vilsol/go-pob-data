@@ -8,6 +8,8 @@ import (
 
 	"github.com/MarvinJWendt/testza"
 
+	"github.com/Vilsol/go-pob-data/fields"
+	"github.com/Vilsol/go-pob-data/loader"
 	"github.com/Vilsol/go-pob-data/testdata"
 	"github.com/Vilsol/go-pob-data/utils"
 )
@@ -68,4 +70,19 @@ func TestInitializeAllRequestsOnlyPresentTables(t *testing.T) {
 
 	testza.AssertNoError(t, initializeFunctions(context.Background(), initFunctions, testdata.LatestDataVersion(), FakeCache{}, nil))
 	testza.AssertEqual(t, []string(nil), cdn.Misses())
+}
+
+// go-pob reads the .min assets by loading under loader.WithVariants(ctx, fields.MinVariant).
+func TestInitializeAllReadsMinAssets(t *testing.T) {
+	cdn := testdata.ServeCommittedData(t)
+	ctx := loader.WithVariants(context.Background(), fields.MinVariant)
+
+	// Later tests read the full tables.
+	t.Cleanup(func() {
+		testza.AssertNoError(t, initializeFunctions(context.Background(), initFunctions, testdata.LatestDataVersion(), FakeCache{}, nil))
+	})
+
+	testza.AssertNoError(t, initializeFunctions(ctx, initFunctions, testdata.LatestDataVersion(), FakeCache{}, nil))
+	testza.AssertEqual(t, []string(nil), cdn.Misses())
+	testza.AssertEqual(t, "", Mods[0].ID, "Mods.ID is not listed, so the .min holds zero")
 }

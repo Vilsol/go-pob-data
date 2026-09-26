@@ -16,7 +16,8 @@ import (
 //
 // Returns data from cache if found
 func LoadRaw[T msgp.Decodable](ctx context.Context, version string, name string, onInit func(count int64), assetCache AssetCache, hooks ...func(obj T)) ([]T, error) {
-	url := RawURL[T](version, name)
+	var row T
+	url := VariantURL(ctx, version, "raw/"+name, row)
 
 	slox.From(ctx).Debug(
 		"loading raw asset",

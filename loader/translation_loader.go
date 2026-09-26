@@ -17,7 +17,7 @@ import (
 //
 // Returns data from cache if found
 func LoadTranslation(ctx context.Context, version string, language string, name string, assetCache AssetCache) (*raw.TranslationFile, error) {
-	url := TranslationURL(version, language, name)
+	url := VariantURL(ctx, version, "stat_translations/"+language+"/"+name, raw.TranslationFile{})
 
 	slox.From(ctx).Debug(
 		"loading translation asset",
