@@ -71,7 +71,7 @@ type GroupBackground struct {
 type Node struct {
 	Skill                  uint32           `json:"skill"`
 	Name                   string           `json:"name"`
-	Icon                   string           `json:"icon"`
+	Icon                   string           `json:"icon,omitempty"`
 	IsKeystone             bool             `json:"isKeystone,omitempty"`
 	IsNotable              bool             `json:"isNotable,omitempty"`
 	IsMastery              bool             `json:"isMastery,omitempty"`
@@ -97,11 +97,17 @@ type Node struct {
 	ReminderText           []string         `json:"reminderText,omitempty"`
 	FlavourText            []string         `json:"flavourText,omitempty"`
 	ClassStartIndex        *int             `json:"classStartIndex,omitempty"`
-	Group                  int              `json:"group"`
-	Orbit                  uint32           `json:"orbit"`
-	OrbitIndex             uint32           `json:"orbitIndex"`
-	Out                    []string         `json:"out"`
-	In                     []string         `json:"in"`
+	// Position is nil for nodes outside the graph, which omits all of its keys.
+	*Position
+}
+
+//nolint:govet // fields follow the export key order
+type Position struct {
+	Group      int      `json:"group"`
+	Orbit      uint32   `json:"orbit"`
+	OrbitIndex uint32   `json:"orbitIndex"`
+	Out        []string `json:"out"`
+	In         []string `json:"in"`
 }
 
 //nolint:govet // fields follow the export key order

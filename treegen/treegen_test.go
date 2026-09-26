@@ -151,19 +151,28 @@ func TestDiffAgainstExport(t *testing.T) {
 	d := &differ{matched: map[string]int{}, total: map[string]int{}, mismatches: map[string][]mismatch{}}
 
 	genNodes, expNodes := gen["nodes"].(map[string]any), exp["nodes"].(map[string]any)
-	exportOnly := 0
 	for id, n := range expNodes {
 		if _, ok := genNodes[id]; !ok {
-			exportOnly++
+			d.compare("nodes", id, nil, "present")
 			continue
 		}
 		d.compareObjects("nodes", id, genNodes[id].(map[string]any), n.(map[string]any))
 	}
-	for id := range genNodes {
-		if _, ok := expNodes[id]; !ok {
-			d.compare("nodes", id, "present", nil)
+	// The export lacks the out-of-graph ascendancy nodes; any other node it lacks is a mismatch.
+	generatedOnly := make([]string, 0)
+	for id, n := range genNodes {
+		if _, ok := expNodes[id]; ok {
+			continue
 		}
+		node := n.(map[string]any)
+		_, positioned := node["group"]
+		if _, ascendancy := node["ascendancyName"]; positioned || !ascendancy {
+			d.compare("nodes", id, "present", nil)
+			continue
+		}
+		generatedOnly = append(generatedOnly, id)
 	}
+	sort.Strings(generatedOnly)
 
 	genGroups, expGroups := gen["groups"].(map[string]any), exp["groups"].(map[string]any)
 	for id, g := range expGroups {
@@ -198,7 +207,10 @@ func TestDiffAgainstExport(t *testing.T) {
 	}
 
 	var report strings.Builder
-	fmt.Fprintf(&report, "export-only nodes (not in the graph, phase 2): %d\n", exportOnly)
+	fmt.Fprintf(&report, "generated out-of-graph nodes the export lacks: %d\n", len(generatedOnly))
+	for _, id := range generatedOnly {
+		fmt.Fprintf(&report, "  %s: %s\n", id, compact(genNodes[id]))
+	}
 	fmt.Fprintf(&report, "%-40s %s\n", "field", "matched/total")
 	for _, field := range sortedKeys(d.total) {
 		fmt.Fprintf(&report, "%-40s %d/%d\n", field, d.matched[field], d.total[field])

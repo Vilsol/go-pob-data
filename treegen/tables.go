@@ -119,6 +119,15 @@ type baseItemType struct {
 	Name string `json:"Name"`
 }
 
+type expansionSkill struct {
+	Mastery      *int `json:"Mastery_PassiveSkillsKey"`
+	PassiveSkill int  `json:"PassiveSkillsKey"`
+}
+
+type expansionSpecialSkill struct {
+	PassiveSkill int `json:"PassiveSkillsKey"`
+}
+
 type passiveSkillTree struct {
 	ID                string `json:"Id"`
 	PassiveSkillGraph string `json:"PassiveSkillGraph"`

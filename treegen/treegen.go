@@ -49,23 +49,26 @@ var grantedAttributeStats = map[string]string{
 	"base_strength_and_intelligence":    "SI",
 	"base_dexterity_and_intelligence":   "DI",
 	"additional_strength_and_dexterity": "SD",
+	"additional_all_attributes":         "SDI",
 }
 
 type gameData struct {
-	passiveSkills  []passiveSkill
-	stats          []stat
-	characters     []character
-	ascendancies   []ascendancy
-	descendancies  []descendancy
-	masteryGroups  []masteryGroup
-	masteryEffects []masteryEffect
-	jewelSlots     []jewelSlot
-	reminderTexts  []reminderText
-	blightRecipes  []blightRecipe
-	blightResults  []blightResult
-	blightItems    []blightItem
-	baseItemTypes  []baseItemType
-	trees          []passiveSkillTree
+	passiveSkills          []passiveSkill
+	stats                  []stat
+	characters             []character
+	ascendancies           []ascendancy
+	descendancies          []descendancy
+	masteryGroups          []masteryGroup
+	masteryEffects         []masteryEffect
+	jewelSlots             []jewelSlot
+	reminderTexts          []reminderText
+	blightRecipes          []blightRecipe
+	blightResults          []blightResult
+	blightItems            []blightItem
+	baseItemTypes          []baseItemType
+	trees                  []passiveSkillTree
+	expansionSkills        []expansionSkill
+	expansionSpecialSkills []expansionSpecialSkill
 }
 
 func loadGameData(loader fs.FS, gameVersion string) (*gameData, error) {
@@ -85,6 +88,8 @@ func loadGameData(loader fs.FS, gameVersion string) (*gameData, error) {
 	loadTable(l, "BlightCraftingItems", &d.blightItems)
 	loadTable(l, "BaseItemTypes", &d.baseItemTypes)
 	loadTable(l, "PassiveSkillTrees", &d.trees)
+	loadTable(l, "PassiveTreeExpansionSkills", &d.expansionSkills)
+	loadTable(l, "PassiveTreeExpansionSpecialSkills", &d.expansionSpecialSkills)
 	return d, l.err
 }
 
@@ -154,7 +159,16 @@ func Generate(loader fs.FS, gameVersion string) (*Tree, error) {
 		tree.JewelSlots = append(tree.JewelSlots, d.passiveSkills[*slot.Slot].PassiveSkillGraphID)
 	}
 
-	if err := buildGraph(tree, graph, d); err != nil {
+	lookups, err := buildLookups(d)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := buildGraph(tree, graph, d, lookups); err != nil {
+		return nil, err
+	}
+
+	if err := buildClusterNodes(tree, d, lookups); err != nil {
 		return nil, err
 	}
 
@@ -244,6 +258,9 @@ func parseInts(s string, n int) ([]int, error) {
 }
 
 func iconPath(ddsPath string) string {
+	if ddsPath == "" {
+		return ""
+	}
 	return strings.TrimSuffix(ddsPath, ".dds") + ".png"
 }
 
@@ -251,12 +268,13 @@ func nodeID(id uint32) string {
 	return strconv.FormatUint(uint64(id), 10)
 }
 
-func buildGraph(tree *Tree, graph *extractor.PassiveSkillGraph, d *gameData) error {
-	byGraphID := make(map[uint32]int, len(d.passiveSkills))
-	for i, p := range d.passiveSkills {
-		byGraphID[p.PassiveSkillGraphID] = i
-	}
+// lookups index game data by PassiveSkills row.
+type lookups struct {
+	jewelSlotBySkill map[int]int
+	recipeBySkill    map[int][]string
+}
 
+func buildLookups(d *gameData) (*lookups, error) {
 	jewelSlotBySkill := make(map[int]int, len(d.jewelSlots))
 	for i, s := range d.jewelSlots {
 		jewelSlotBySkill[*s.Slot] = i
@@ -269,18 +287,27 @@ func buildGraph(tree *Tree, graph *extractor.PassiveSkillGraph, d *gameData) err
 		}
 		skill := *d.blightResults[*r.Result].PassiveSkill
 		if _, ok := recipeBySkill[skill]; ok {
-			return fmt.Errorf("passive skill %d has more than one blight recipe", skill)
+			return nil, fmt.Errorf("passive skill %d has more than one blight recipe", skill)
 		}
 		recipe := make([]string, 0, len(r.Items))
 		for _, item := range r.Items {
 			oil := d.blightItems[item].Oil
 			if oil == nil {
-				return fmt.Errorf("blight crafting item %d has no base item", item)
+				return nil, fmt.Errorf("blight crafting item %d has no base item", item)
 			}
 			// The export names oils by their base item name without spaces, e.g. "GoldenOil".
 			recipe = append(recipe, strings.ReplaceAll(d.baseItemTypes[*oil].Name, " ", ""))
 		}
 		recipeBySkill[skill] = recipe
+	}
+
+	return &lookups{jewelSlotBySkill: jewelSlotBySkill, recipeBySkill: recipeBySkill}, nil
+}
+
+func buildGraph(tree *Tree, graph *extractor.PassiveSkillGraph, d *gameData, l *lookups) error {
+	byGraphID := make(map[uint32]int, len(d.passiveSkills))
+	for i, p := range d.passiveSkills {
+		byGraphID[p.PassiveSkillGraphID] = i
 	}
 
 	in := make(map[uint32][]string)
@@ -313,18 +340,20 @@ func buildGraph(tree *Tree, graph *extractor.PassiveSkillGraph, d *gameData) err
 			if !ok {
 				return fmt.Errorf("graph node %d has no PassiveSkills row", n.ID)
 			}
-			node, err := buildNode(d, skillIdx, jewelSlotBySkill, recipeBySkill)
+			node, err := buildNode(d, skillIdx, l)
 			if err != nil {
 				return errors.Wrapf(err, "node %d", n.ID)
 			}
-			node.Group = gi + 1
-			node.Orbit = n.Orbit
-			node.OrbitIndex = n.OrbitIndex
-			node.Out = make([]string, 0, len(n.Out))
+			node.Position = &Position{
+				Group:      gi + 1,
+				Orbit:      n.Orbit,
+				OrbitIndex: n.OrbitIndex,
+				Out:        make([]string, 0, len(n.Out)),
+				In:         append([]string{}, in[n.ID]...),
+			}
 			for _, out := range n.Out {
 				node.Out = append(node.Out, nodeID(out))
 			}
-			node.In = append([]string{}, in[n.ID]...)
 			tree.Nodes.List = append(tree.Nodes.List, node)
 
 			group.Nodes = append(group.Nodes, nodeID(n.ID))
@@ -360,7 +389,43 @@ func buildGraph(tree *Tree, graph *extractor.PassiveSkillGraph, d *gameData) err
 	return nil
 }
 
-func buildNode(d *gameData, skillIdx int, jewelSlotBySkill map[int]int, recipeBySkill map[int][]string) (*Node, error) {
+// buildClusterNodes adds the nodes cluster jewels place on the tree, in the export's order:
+// the special (notable/keystone) skills, then each small skill followed by its mastery.
+func buildClusterNodes(tree *Tree, d *gameData, l *lookups) error {
+	rows := make([]int, 0, len(d.expansionSpecialSkills)+2*len(d.expansionSkills))
+	for _, s := range d.expansionSpecialSkills {
+		rows = append(rows, s.PassiveSkill)
+	}
+	masteries := make(map[int]bool)
+	for _, s := range d.expansionSkills {
+		rows = append(rows, s.PassiveSkill)
+		if s.Mastery != nil {
+			rows = append(rows, *s.Mastery)
+			masteries[*s.Mastery] = true
+		}
+	}
+	if len(masteries) == 0 {
+		return errors.New("no cluster jewel mastery passives")
+	}
+
+	seen := make(map[int]bool, len(rows))
+	for _, row := range rows {
+		if seen[row] {
+			continue
+		}
+		seen[row] = true
+
+		node, err := buildNode(d, row, l)
+		if err != nil {
+			return errors.Wrapf(err, "cluster node %d", d.passiveSkills[row].PassiveSkillGraphID)
+		}
+		node.IsMastery = node.IsMastery || masteries[row]
+		tree.Nodes.List = append(tree.Nodes.List, node)
+	}
+	return nil
+}
+
+func buildNode(d *gameData, skillIdx int, l *lookups) (*Node, error) {
 	p := d.passiveSkills[skillIdx]
 	node := &Node{
 		Skill:                  p.PassiveSkillGraphID,
@@ -370,7 +435,7 @@ func buildNode(d *gameData, skillIdx int, jewelSlotBySkill map[int]int, recipeBy
 		IsNotable:              p.IsNotable,
 		IsJewelSocket:          p.IsJewelSocket,
 		IsBlighted:             p.IsAnointmentOnly,
-		Recipe:                 recipeBySkill[skillIdx],
+		Recipe:                 l.recipeBySkill[skillIdx],
 		IsAscendancyStart:      p.IsAscendancyStartingNode,
 		IsMultipleChoice:       p.IsMultipleChoice,
 		IsMultipleChoiceOption: p.IsMultipleChoiceOption,
@@ -393,7 +458,7 @@ func buildNode(d *gameData, skillIdx int, jewelSlotBySkill map[int]int, recipeBy
 		}
 	}
 
-	if slotIdx, ok := jewelSlotBySkill[skillIdx]; ok {
+	if slotIdx, ok := l.jewelSlotBySkill[skillIdx]; ok {
 		slot := d.jewelSlots[slotIdx]
 		if slot.ClusterJewelSize != nil {
 			if slot.ProxySlot == nil {
