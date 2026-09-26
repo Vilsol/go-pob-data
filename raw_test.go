@@ -11,6 +11,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -19,6 +20,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/tinylib/msgp/msgp"
 
+	"github.com/Vilsol/go-pob-data/fields"
 	"github.com/Vilsol/go-pob-data/loader"
 	"github.com/Vilsol/go-pob-data/raw"
 	"github.com/Vilsol/go-pob-data/testdata/legacyraw"
@@ -196,6 +198,11 @@ func readAsset(t *testing.T, path string) []byte {
 	return b
 }
 
+// isMapAsset tells a frozen map asset from a tuple (.t-) or .min (.min-) variant.
+func isMapAsset(path string) bool {
+	return !strings.Contains(strings.TrimSuffix(filepath.Base(path), ".msgpack.br"), ".")
+}
+
 func translationNames() []string {
 	names := make([]string, 0, len(translations))
 	for _, translation := range translations {
@@ -265,7 +272,7 @@ func TestLegacyAssetsPinned(t *testing.T) {
 	}
 	for _, path := range append(onDisk, translationAssets...) {
 		path = strings.TrimPrefix(filepath.ToSlash(path), "data/")
-		if !strings.Contains(path, ".t-") && !slices.Contains(pinned, path) {
+		if isMapAsset(path) && !slices.Contains(pinned, path) {
 			t.Errorf("%s is a new map asset, the extractor should only write tuple assets", path)
 		}
 	}
@@ -423,7 +430,7 @@ func TestTupleMatchesLegacy(t *testing.T) {
 	}
 
 	for _, legacyPath := range append(legacyAssets, translationAssets...) {
-		if strings.Contains(legacyPath, ".t-") {
+		if !isMapAsset(legacyPath) {
 			continue
 		}
 
@@ -464,5 +471,26 @@ func TestTupleMatchesLegacy(t *testing.T) {
 				t.Errorf("tuple asset decodes to different rows than %s", legacyPath)
 			}
 		})
+	}
+}
+
+// fields names a list's assets and their row types on its own, so it must agree with what is extracted.
+func TestFieldsKnowEveryAsset(t *testing.T) {
+	for _, file := range filesToExport {
+		name := filepath.Base(file.path)
+		rowType, ok := fields.RowType("raw/" + name)
+		if !ok {
+			t.Errorf("fields does not know raw/%s", name)
+			continue
+		}
+		if variant := loader.TupleVariant(reflect.New(rowType).Interface()); variant != file.Variant {
+			t.Errorf("raw/%s: fields decodes it in %s, the extractor writes %s", name, variant, file.Variant)
+		}
+	}
+
+	for _, name := range translationNames() {
+		if _, ok := fields.RowType("stat_translations/en/" + name); !ok {
+			t.Errorf("fields does not know stat_translations/<lang>/%s", name)
+		}
 	}
 }
