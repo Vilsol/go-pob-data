@@ -16932,6 +16932,327 @@ func (z *PantheonPanelLayout) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *PassiveJewelSlot) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 7 {
+		err = msgp.ArrayError{Wanted: 7, Got: zb0001}
+		return
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "ClusterJewelSize")
+			return
+		}
+		z.ClusterJewelSize = nil
+	} else {
+		if z.ClusterJewelSize == nil {
+			z.ClusterJewelSize = new(int)
+		}
+		*z.ClusterJewelSize, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "ClusterJewelSize")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "ReplacesSlot")
+			return
+		}
+		z.ReplacesSlot = nil
+	} else {
+		if z.ReplacesSlot == nil {
+			z.ReplacesSlot = new(int)
+		}
+		*z.ReplacesSlot, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "ReplacesSlot")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "ProxySlot")
+			return
+		}
+		z.ProxySlot = nil
+	} else {
+		if z.ProxySlot == nil {
+			z.ProxySlot = new(int)
+		}
+		*z.ProxySlot, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "ProxySlot")
+			return
+		}
+	}
+	var zb0002 uint32
+	zb0002, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "StartIndices")
+		return
+	}
+	if cap(z.StartIndices) >= int(zb0002) {
+		z.StartIndices = (z.StartIndices)[:zb0002]
+	} else {
+		z.StartIndices = make([]int, zb0002)
+	}
+	for za0001 := range z.StartIndices {
+		z.StartIndices[za0001], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "StartIndices", za0001)
+			return
+		}
+	}
+	z.Slot, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Slot")
+		return
+	}
+	z.ClusterIndex, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "ClusterIndex")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *PassiveJewelSlot) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 7
+	err = en.Append(0x97)
+	if err != nil {
+		return
+	}
+	if z.ClusterJewelSize == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.ClusterJewelSize)
+		if err != nil {
+			err = msgp.WrapError(err, "ClusterJewelSize")
+			return
+		}
+	}
+	if z.ReplacesSlot == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.ReplacesSlot)
+		if err != nil {
+			err = msgp.WrapError(err, "ReplacesSlot")
+			return
+		}
+	}
+	if z.ProxySlot == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.ProxySlot)
+		if err != nil {
+			err = msgp.WrapError(err, "ProxySlot")
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.StartIndices)))
+	if err != nil {
+		err = msgp.WrapError(err, "StartIndices")
+		return
+	}
+	for za0001 := range z.StartIndices {
+		err = en.WriteInt(z.StartIndices[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "StartIndices", za0001)
+			return
+		}
+	}
+	err = en.WriteInt(z.Slot)
+	if err != nil {
+		err = msgp.WrapError(err, "Slot")
+		return
+	}
+	err = en.WriteInt(z.ClusterIndex)
+	if err != nil {
+		err = msgp.WrapError(err, "ClusterIndex")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *PassiveJewelSlot) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 7
+	o = append(o, 0x97)
+	if z.ClusterJewelSize == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.ClusterJewelSize)
+	}
+	if z.ReplacesSlot == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.ReplacesSlot)
+	}
+	if z.ProxySlot == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.ProxySlot)
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.StartIndices)))
+	for za0001 := range z.StartIndices {
+		o = msgp.AppendInt(o, z.StartIndices[za0001])
+	}
+	o = msgp.AppendInt(o, z.Slot)
+	o = msgp.AppendInt(o, z.ClusterIndex)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *PassiveJewelSlot) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 7 {
+		err = msgp.ArrayError{Wanted: 7, Got: zb0001}
+		return
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.ClusterJewelSize = nil
+	} else {
+		if z.ClusterJewelSize == nil {
+			z.ClusterJewelSize = new(int)
+		}
+		*z.ClusterJewelSize, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "ClusterJewelSize")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.ReplacesSlot = nil
+	} else {
+		if z.ReplacesSlot == nil {
+			z.ReplacesSlot = new(int)
+		}
+		*z.ReplacesSlot, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "ReplacesSlot")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.ProxySlot = nil
+	} else {
+		if z.ProxySlot == nil {
+			z.ProxySlot = new(int)
+		}
+		*z.ProxySlot, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "ProxySlot")
+			return
+		}
+	}
+	var zb0002 uint32
+	zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "StartIndices")
+		return
+	}
+	if cap(z.StartIndices) >= int(zb0002) {
+		z.StartIndices = (z.StartIndices)[:zb0002]
+	} else {
+		z.StartIndices = make([]int, zb0002)
+	}
+	for za0001 := range z.StartIndices {
+		z.StartIndices[za0001], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "StartIndices", za0001)
+			return
+		}
+	}
+	z.Slot, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Slot")
+		return
+	}
+	z.ClusterIndex, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ClusterIndex")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *PassiveJewelSlot) Msgsize() (s int) {
+	s = 1
+	if z.ClusterJewelSize == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.ReplacesSlot == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.ProxySlot == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.ArrayHeaderSize + (len(z.StartIndices) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *PassiveOverrideLimit) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()
@@ -19303,6 +19624,93 @@ func (z *PassiveTreeExpansionJewel) UnmarshalMsg(bts []byte) (o []byte, err erro
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *PassiveTreeExpansionJewel) Msgsize() (s int) {
 	s = 1 + msgp.StringPrefixSize + len(z.Art) + msgp.ArrayHeaderSize + (len(z.NotableIndices) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.SmallIndices) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.SocketIndices) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *PassiveTreeExpansionJewelSize) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 2 {
+		err = msgp.ArrayError{Wanted: 2, Got: zb0001}
+		return
+	}
+	z.Name, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z PassiveTreeExpansionJewelSize) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 2
+	err = en.Append(0x92)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z PassiveTreeExpansionJewelSize) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 2
+	o = append(o, 0x92)
+	o = msgp.AppendString(o, z.Name)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *PassiveTreeExpansionJewelSize) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 2 {
+		err = msgp.ArrayError{Wanted: 2, Got: zb0001}
+		return
+	}
+	z.Name, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z PassiveTreeExpansionJewelSize) Msgsize() (s int) {
+	s = 1 + msgp.StringPrefixSize + len(z.Name) + msgp.IntSize
 	return
 }
 

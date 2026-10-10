@@ -292,6 +292,14 @@ var filesToExport = []PackedFile{
 		path:  "Data/WeaponPassiveSkillTypes",
 		Codec: ReEncode[*raw.WeaponPassiveSkillType](),
 	},
+	{
+		path:  "Data/PassiveJewelSlots",
+		Codec: ReEncode[*raw.PassiveJewelSlot](),
+	},
+	{
+		path:  "Data/PassiveTreeExpansionJewelSizes",
+		Codec: ReEncode[*raw.PassiveTreeExpansionJewelSize](),
+	},
 }
 
 var imagesToExport = []string{
