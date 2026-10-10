@@ -312,6 +312,18 @@ var filesToExport = []PackedFile{
 		path:  "Data/VillageBalancePerLevelShared",
 		Codec: ReEncode[*raw.VillageBalancePerLevelShared](),
 	},
+	{
+		path:  "Data/AlternateTreeArt",
+		Codec: ReEncode[*raw.AlternateTreeArt](),
+	},
+	{
+		path:  "Data/PassiveSkillTreeNodeFrameArt",
+		Codec: ReEncode[*raw.PassiveSkillTreeNodeFrameArt](),
+	},
+	{
+		path:  "Data/PassiveSkillTreeConnectionArt",
+		Codec: ReEncode[*raw.PassiveSkillTreeConnectionArt](),
+	},
 }
 
 var imagesToExport = []string{

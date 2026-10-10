@@ -1559,6 +1559,369 @@ func (z *AlternatePassiveSkill) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *AlternateTreeArt) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 7 {
+		err = msgp.ArrayError{Wanted: 7, Got: zb0001}
+		return
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "ConnectionArt")
+			return
+		}
+		z.ConnectionArt = nil
+	} else {
+		if z.ConnectionArt == nil {
+			z.ConnectionArt = new(int)
+		}
+		*z.ConnectionArt, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "ConnectionArt")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "KeystoneFrameArt")
+			return
+		}
+		z.KeystoneFrameArt = nil
+	} else {
+		if z.KeystoneFrameArt == nil {
+			z.KeystoneFrameArt = new(int)
+		}
+		*z.KeystoneFrameArt, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "KeystoneFrameArt")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "NotableFrameArt")
+			return
+		}
+		z.NotableFrameArt = nil
+	} else {
+		if z.NotableFrameArt == nil {
+			z.NotableFrameArt = new(int)
+		}
+		*z.NotableFrameArt, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "NotableFrameArt")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "AscendancyFrameArt")
+			return
+		}
+		z.AscendancyFrameArt = nil
+	} else {
+		if z.AscendancyFrameArt == nil {
+			z.AscendancyFrameArt = new(int)
+		}
+		*z.AscendancyFrameArt, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "AscendancyFrameArt")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "RadiiArt")
+			return
+		}
+		z.RadiiArt = nil
+	} else {
+		if z.RadiiArt == nil {
+			z.RadiiArt = new(int)
+		}
+		*z.RadiiArt, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "RadiiArt")
+			return
+		}
+	}
+	z.TreeVersion, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "TreeVersion")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *AlternateTreeArt) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 7
+	err = en.Append(0x97)
+	if err != nil {
+		return
+	}
+	if z.ConnectionArt == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.ConnectionArt)
+		if err != nil {
+			err = msgp.WrapError(err, "ConnectionArt")
+			return
+		}
+	}
+	if z.KeystoneFrameArt == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.KeystoneFrameArt)
+		if err != nil {
+			err = msgp.WrapError(err, "KeystoneFrameArt")
+			return
+		}
+	}
+	if z.NotableFrameArt == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.NotableFrameArt)
+		if err != nil {
+			err = msgp.WrapError(err, "NotableFrameArt")
+			return
+		}
+	}
+	if z.AscendancyFrameArt == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.AscendancyFrameArt)
+		if err != nil {
+			err = msgp.WrapError(err, "AscendancyFrameArt")
+			return
+		}
+	}
+	if z.RadiiArt == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.RadiiArt)
+		if err != nil {
+			err = msgp.WrapError(err, "RadiiArt")
+			return
+		}
+	}
+	err = en.WriteInt(z.TreeVersion)
+	if err != nil {
+		err = msgp.WrapError(err, "TreeVersion")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *AlternateTreeArt) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 7
+	o = append(o, 0x97)
+	if z.ConnectionArt == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.ConnectionArt)
+	}
+	if z.KeystoneFrameArt == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.KeystoneFrameArt)
+	}
+	if z.NotableFrameArt == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.NotableFrameArt)
+	}
+	if z.AscendancyFrameArt == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.AscendancyFrameArt)
+	}
+	if z.RadiiArt == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.RadiiArt)
+	}
+	o = msgp.AppendInt(o, z.TreeVersion)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *AlternateTreeArt) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 7 {
+		err = msgp.ArrayError{Wanted: 7, Got: zb0001}
+		return
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.ConnectionArt = nil
+	} else {
+		if z.ConnectionArt == nil {
+			z.ConnectionArt = new(int)
+		}
+		*z.ConnectionArt, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "ConnectionArt")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.KeystoneFrameArt = nil
+	} else {
+		if z.KeystoneFrameArt == nil {
+			z.KeystoneFrameArt = new(int)
+		}
+		*z.KeystoneFrameArt, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "KeystoneFrameArt")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.NotableFrameArt = nil
+	} else {
+		if z.NotableFrameArt == nil {
+			z.NotableFrameArt = new(int)
+		}
+		*z.NotableFrameArt, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "NotableFrameArt")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.AscendancyFrameArt = nil
+	} else {
+		if z.AscendancyFrameArt == nil {
+			z.AscendancyFrameArt = new(int)
+		}
+		*z.AscendancyFrameArt, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "AscendancyFrameArt")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.RadiiArt = nil
+	} else {
+		if z.RadiiArt == nil {
+			z.RadiiArt = new(int)
+		}
+		*z.RadiiArt, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "RadiiArt")
+			return
+		}
+	}
+	z.TreeVersion, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "TreeVersion")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *AlternateTreeArt) Msgsize() (s int) {
+	s = 1
+	if z.ConnectionArt == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.KeystoneFrameArt == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.NotableFrameArt == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.AscendancyFrameArt == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.RadiiArt == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *AlternateTreeVersion) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()
@@ -19691,6 +20054,372 @@ func (z *PassiveSkillTattooTargetSet) UnmarshalMsg(bts []byte) (o []byte, err er
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *PassiveSkillTattooTargetSet) Msgsize() (s int) {
 	s = 1 + msgp.StringPrefixSize + len(z.ID) + msgp.StringPrefixSize + len(z.Name) + msgp.StringPrefixSize + len(z.Qualifier) + msgp.ArrayHeaderSize + (len(z.Set) * (msgp.IntSize)) + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *PassiveSkillTreeConnectionArt) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 9 {
+		err = msgp.ArrayError{Wanted: 9, Got: zb0001}
+		return
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Normal, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Normal")
+		return
+	}
+	z.Intermediate, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Intermediate")
+		return
+	}
+	z.Intermediate2, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Intermediate2")
+		return
+	}
+	z.Active, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Active")
+		return
+	}
+	z.Mask, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Mask")
+		return
+	}
+	z.Ornament1, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Ornament1")
+		return
+	}
+	z.Ornament2, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Ornament2")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *PassiveSkillTreeConnectionArt) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 9
+	err = en.Append(0x99)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteString(z.Normal)
+	if err != nil {
+		err = msgp.WrapError(err, "Normal")
+		return
+	}
+	err = en.WriteString(z.Intermediate)
+	if err != nil {
+		err = msgp.WrapError(err, "Intermediate")
+		return
+	}
+	err = en.WriteString(z.Intermediate2)
+	if err != nil {
+		err = msgp.WrapError(err, "Intermediate2")
+		return
+	}
+	err = en.WriteString(z.Active)
+	if err != nil {
+		err = msgp.WrapError(err, "Active")
+		return
+	}
+	err = en.WriteString(z.Mask)
+	if err != nil {
+		err = msgp.WrapError(err, "Mask")
+		return
+	}
+	err = en.WriteString(z.Ornament1)
+	if err != nil {
+		err = msgp.WrapError(err, "Ornament1")
+		return
+	}
+	err = en.WriteString(z.Ornament2)
+	if err != nil {
+		err = msgp.WrapError(err, "Ornament2")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *PassiveSkillTreeConnectionArt) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 9
+	o = append(o, 0x99)
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendString(o, z.Normal)
+	o = msgp.AppendString(o, z.Intermediate)
+	o = msgp.AppendString(o, z.Intermediate2)
+	o = msgp.AppendString(o, z.Active)
+	o = msgp.AppendString(o, z.Mask)
+	o = msgp.AppendString(o, z.Ornament1)
+	o = msgp.AppendString(o, z.Ornament2)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *PassiveSkillTreeConnectionArt) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 9 {
+		err = msgp.ArrayError{Wanted: 9, Got: zb0001}
+		return
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Normal, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Normal")
+		return
+	}
+	z.Intermediate, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Intermediate")
+		return
+	}
+	z.Intermediate2, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Intermediate2")
+		return
+	}
+	z.Active, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Active")
+		return
+	}
+	z.Mask, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Mask")
+		return
+	}
+	z.Ornament1, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Ornament1")
+		return
+	}
+	z.Ornament2, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Ornament2")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *PassiveSkillTreeConnectionArt) Msgsize() (s int) {
+	s = 1 + msgp.StringPrefixSize + len(z.ID) + msgp.StringPrefixSize + len(z.Normal) + msgp.StringPrefixSize + len(z.Intermediate) + msgp.StringPrefixSize + len(z.Intermediate2) + msgp.StringPrefixSize + len(z.Active) + msgp.StringPrefixSize + len(z.Mask) + msgp.StringPrefixSize + len(z.Ornament1) + msgp.StringPrefixSize + len(z.Ornament2) + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *PassiveSkillTreeNodeFrameArt) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 7 {
+		err = msgp.ArrayError{Wanted: 7, Got: zb0001}
+		return
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Normal, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Normal")
+		return
+	}
+	z.CanAllocate, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "CanAllocate")
+		return
+	}
+	z.Active, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Active")
+		return
+	}
+	z.Mask, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Mask")
+		return
+	}
+	z.Header, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Header")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *PassiveSkillTreeNodeFrameArt) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 7
+	err = en.Append(0x97)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteString(z.Normal)
+	if err != nil {
+		err = msgp.WrapError(err, "Normal")
+		return
+	}
+	err = en.WriteString(z.CanAllocate)
+	if err != nil {
+		err = msgp.WrapError(err, "CanAllocate")
+		return
+	}
+	err = en.WriteString(z.Active)
+	if err != nil {
+		err = msgp.WrapError(err, "Active")
+		return
+	}
+	err = en.WriteString(z.Mask)
+	if err != nil {
+		err = msgp.WrapError(err, "Mask")
+		return
+	}
+	err = en.WriteString(z.Header)
+	if err != nil {
+		err = msgp.WrapError(err, "Header")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *PassiveSkillTreeNodeFrameArt) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 7
+	o = append(o, 0x97)
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendString(o, z.Normal)
+	o = msgp.AppendString(o, z.CanAllocate)
+	o = msgp.AppendString(o, z.Active)
+	o = msgp.AppendString(o, z.Mask)
+	o = msgp.AppendString(o, z.Header)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *PassiveSkillTreeNodeFrameArt) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 7 {
+		err = msgp.ArrayError{Wanted: 7, Got: zb0001}
+		return
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Normal, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Normal")
+		return
+	}
+	z.CanAllocate, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "CanAllocate")
+		return
+	}
+	z.Active, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Active")
+		return
+	}
+	z.Mask, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Mask")
+		return
+	}
+	z.Header, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Header")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *PassiveSkillTreeNodeFrameArt) Msgsize() (s int) {
+	s = 1 + msgp.StringPrefixSize + len(z.ID) + msgp.StringPrefixSize + len(z.Normal) + msgp.StringPrefixSize + len(z.CanAllocate) + msgp.StringPrefixSize + len(z.Active) + msgp.StringPrefixSize + len(z.Mask) + msgp.StringPrefixSize + len(z.Header) + msgp.IntSize
 	return
 }
 
