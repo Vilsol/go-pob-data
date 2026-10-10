@@ -336,6 +336,18 @@ var filesToExport = []PackedFile{
 		path:  "Data/Tinctures",
 		Codec: ReEncode[*raw.Tincture](),
 	},
+	{
+		path:  "Data/ModType",
+		Codec: ReEncode[*raw.ModType](),
+	},
+	{
+		path:  "Data/BuffTemplates",
+		Codec: ReEncode[*raw.BuffTemplate](),
+	},
+	{
+		path:  "Data/VirtualStatContextFlags",
+		Codec: ReEncode[*raw.VirtualStatContextFlag](),
+	},
 }
 
 var imagesToExport = []string{
