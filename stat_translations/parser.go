@@ -23,18 +23,15 @@ import (
 )
 
 var (
-	lineRegex            = regexp.MustCompile(`[^\r\n]+`)
-	includeRegex         = regexp.MustCompile(`include "(Metadata/StatDescriptions/.+\.txt)"$`)
-	noDescRegex          = regexp.MustCompile(`no_description ([\w_%+\-]+)`)
-	langRegex            = regexp.MustCompile(`lang "(.+)"`)
-	statLineRegex        = regexp.MustCompile(`([\d%\-#| ]+) "(.*)" *(.*)`)
-	statLimitRegex       = regexp.MustCompile(`[!\d\-#|]+`)
-	statLimitNumberRegex = regexp.MustCompile(`^-?\d+$`)
-	statLimitNegateRegex = regexp.MustCompile(`^!(-?\d+)$`)
-	statLimitPipeRegex   = regexp.MustCompile(`^([\d\-#]+?)\|([\d\-#]+?)(?:\|.+?)?$`)
-	specialRegex         = regexp.MustCompile(`([\w%_]+) (\w+)`)
-	statsRegex           = regexp.MustCompile(`\d+\s+([\w_+\-% ]+)`)
-	statRegex            = regexp.MustCompile(`[\w_+\-%]+`)
+	includeRegex     = regexp.MustCompile(`^include "(Metadata/StatDescriptions/.+\.txt)"$`)
+	noDescRegex      = regexp.MustCompile(`^no_description (\S+)$`)
+	descriptionRegex = regexp.MustCompile(`^(handed_)?description(?: (\S+))?$`)
+	langRegex        = regexp.MustCompile(`^lang "(.+)"$`)
+	countRegex       = regexp.MustCompile(`^\d+$`)
+	statsRegex       = regexp.MustCompile(`^(\d+)\s+(.+)$`)
+	variantRegex     = regexp.MustCompile(`^([-\d#|!]+(?:\s+[-\d#|!]+)*)\s+(?:([a-z_]+)\s+)?"(.*)"\s*(.*)$`)
+	// A third part, as in a `1|1|#` typo of the game, is ignored like the game and PoB do.
+	limitRegex = regexp.MustCompile(`^(!)?(-?\d+|#)(?:\|(-?\d+|#))?(?:\|(?:-?\d+|#))*$`)
 )
 
 // defaultLang is the language of a description's lines before any lang block.
@@ -44,8 +41,11 @@ type TranslationParser struct {
 	loader      fs.FS
 	descriptors map[string]*Description
 	loaded      map[string]bool
-	includes    []string
-	order       int
+	// ordered are this file's descriptions in file order, without those of included files.
+	ordered       []*Description
+	includes      []string
+	noDescription []string
+	order         int
 	// followIncludes parses included files in place, so a file's own descriptions override theirs.
 	followIncludes bool
 }
@@ -61,13 +61,28 @@ func NewTranslationParser(loader fs.FS) *TranslationParser {
 }
 
 type Description struct {
-	Lang  map[string][]raw.LangTranslation
-	Stats []string
+	Lang       map[string][]raw.LangTranslation
+	Identifier string
+	Stats      []string
+	OffHand    []string
 	// variants are the English lines as Describe renders them.
 	variants []variant
 	Order    int
 }
 
+// descriptionState is what the next line of a description must be.
+type descriptionState int
+
+const (
+	wantStats descriptionState = iota
+	wantMainHandStats
+	wantOffHandStats
+	wantCount
+	wantVariant
+)
+
+// ParseFile parses a stat description file. Every line must be one the format defines: anything else
+// fails the parse rather than being dropped.
 func (t *TranslationParser) ParseFile(name string) error {
 	if _, ok := t.loaded[name]; ok {
 		return nil
@@ -87,125 +102,176 @@ func (t *TranslationParser) ParseFile(name string) error {
 		return errors.Wrap(err, "failed to parse input file")
 	}
 
-	var curDescriptor *Description
+	var cur *Description
+	var handed bool
+	state := wantStats
 	curLang := defaultLang
+	remaining := 0
+	statCount := 0
 
-	for _, line := range lineRegex.FindAll(all, -1) {
-		include := includeRegex.FindAllSubmatch(line, -1)
-		if len(include) > 0 {
-			t.includes = append(t.includes, string(include[0][1]))
-			if t.followIncludes {
-				if err := t.ParseFile(strings.ToLower(string(include[0][1]))); err != nil {
-					return err
-				}
-			}
+	for i, rawLine := range bytes.Split(all, []byte("\n")) {
+		line := strings.TrimSpace(strings.TrimPrefix(string(rawLine), "\ufeff"))
+		if line == "" {
 			continue
 		}
 
-		noDesc := noDescRegex.FindAllSubmatch(line, -1)
-		if len(noDesc) > 0 {
-			t.descriptors[string(noDesc[0][1])] = &Description{
-				Order: 0,
+		fail := func(reason string) error {
+			return errors.Errorf("%s:%d: %s: %q", name, i+1, reason, line)
+		}
+
+		// A description ends after its last variant, so these only start a new one there.
+		topLevel := cur == nil || (state == wantVariant && remaining == 0)
+
+		switch {
+		case topLevel && includeRegex.MatchString(line):
+			include := includeRegex.FindStringSubmatch(line)[1]
+			t.includes = append(t.includes, include)
+			if t.followIncludes {
+				if err := t.ParseFile(strings.ToLower(include)); err != nil {
+					return err
+				}
 			}
-		} else if bytes.Contains(line, []byte("handed_description")) || (bytes.Contains(line, []byte("description")) && !bytes.Contains(line, []byte("_description"))) {
-			curLang = defaultLang
-			curDescriptor = &Description{
-				Lang: map[string][]raw.LangTranslation{
-					curLang: make([]raw.LangTranslation, 0),
-				},
-				Order: t.order,
+			cur = nil
+		case topLevel && noDescRegex.MatchString(line):
+			stat := noDescRegex.FindStringSubmatch(line)[1]
+			t.descriptors[stat] = &Description{}
+			t.noDescription = append(t.noDescription, stat)
+			cur = nil
+		case topLevel && (line == "has_identifiers" || line == "no_identifiers"):
+			cur = nil
+		case topLevel && descriptionRegex.MatchString(line):
+			m := descriptionRegex.FindStringSubmatch(line)
+			handed = m[1] != ""
+			cur = &Description{
+				Lang:       map[string][]raw.LangTranslation{},
+				Identifier: m[2],
+				Order:      t.order,
 			}
 			t.order++
-		} else if curDescriptor != nil && curDescriptor.Stats == nil {
-			stats := statsRegex.FindAllSubmatch(line, -1)
-			if len(stats) > 0 {
-				statNames := statRegex.FindAll(stats[0][1], -1)
-				curDescriptor.Stats = make([]string, len(statNames))
-				for i, statName := range statNames {
-					statNameStr := string(statName)
-					curDescriptor.Stats[i] = statNameStr
-					t.descriptors[statNameStr] = curDescriptor
-				}
+			t.ordered = append(t.ordered, cur)
+			state, curLang = wantStats, defaultLang
+		case cur != nil && state == wantVariant && remaining == 0 && langRegex.MatchString(line):
+			curLang = langRegex.FindStringSubmatch(line)[1]
+			if _, ok := cur.Lang[curLang]; ok {
+				return fail("language repeated")
 			}
-		} else if curDescriptor != nil {
-			langName := langRegex.FindAllSubmatch(line, -1)
-			if len(langName) > 0 {
-				curLang = string(langName[0][1])
-				curDescriptor.Lang[curLang] = make([]raw.LangTranslation, 0)
-			} else {
-				if curLang == defaultLang {
-					if v, ok := parseVariant(string(line)); ok {
-						curDescriptor.variants = append(curDescriptor.variants, v)
-					}
-				}
-
-				statMatches := statLineRegex.FindAllSubmatch(line, -1)
-				if len(statMatches) > 0 {
-					statLimits := statMatches[0][1]
-					special := statMatches[0][3]
-
-					desc := raw.LangTranslation{
-						String:        string(statMatches[0][2]),
-						Conditions:    make([]raw.Condition, 0),
-						IndexHandlers: make(map[string]string),
-					}
-
-					statLimitMatch := statLimitRegex.FindAllSubmatch(statLimits, -1)
-					for _, match := range statLimitMatch {
-						statLimit := string(match[0])
-
-						if statLimit == "#" {
-							// Do nothing
-							continue
-						}
-
-						if statLimitNumberRegex.MatchString(statLimit) {
-							n, _ := strconv.Atoi(statLimit)
-							desc.Conditions = append(desc.Conditions, raw.Condition{
-								Min: &n,
-								Max: &n,
-							})
-						} else {
-							negate := statLimitNegateRegex.FindAllStringSubmatch(statLimit, -1)
-							if len(negate) > 0 {
-								n, _ := strconv.Atoi(negate[0][1])
-								desc.Conditions = append(desc.Conditions, raw.Condition{
-									Negated: true,
-									Min:     &n,
-									Max:     &n,
-								})
-							} else {
-								pipeMatch := statLimitPipeRegex.FindAllStringSubmatch(statLimit, -1)
-								n1, _ := strconv.Atoi(pipeMatch[0][1])
-								n2, _ := strconv.Atoi(pipeMatch[0][2])
-
-								condition := raw.Condition{}
-
-								if pipeMatch[0][1] != "#" {
-									condition.Min = &n1
-								}
-
-								if pipeMatch[0][2] != "#" {
-									condition.Min = &n2
-								}
-
-								desc.Conditions = append(desc.Conditions, condition)
-							}
-						}
-					}
-
-					specialMatch := specialRegex.FindAllSubmatch(special, -1)
-					for _, match := range specialMatch {
-						desc.IndexHandlers[string(match[1])] = string(match[2])
-					}
-
-					curDescriptor.Lang[curLang] = append(curDescriptor.Lang[curLang], desc)
-				}
+			state = wantCount
+		case cur != nil && state == wantStats && handed && countRegex.MatchString(line):
+			// A handed description lists its count, then the main hand stats, then the off hand ones.
+			statCount, _ = strconv.Atoi(line)
+			state = wantMainHandStats
+		case cur != nil && state == wantMainHandStats:
+			cur.Stats = strings.Fields(line)
+			if len(cur.Stats) != statCount {
+				return fail("stat count does not match the stats")
 			}
+			for _, stat := range cur.Stats {
+				t.descriptors[stat] = cur
+			}
+			state = wantOffHandStats
+		case cur != nil && state == wantStats:
+			m := statsRegex.FindStringSubmatch(line)
+			if m == nil {
+				return fail("expected the stat list")
+			}
+			cur.Stats = strings.Fields(m[2])
+			if n, _ := strconv.Atoi(m[1]); n != len(cur.Stats) {
+				return fail("stat count does not match the stats")
+			}
+			for _, stat := range cur.Stats {
+				t.descriptors[stat] = cur
+			}
+			state = wantCount
+			if handed {
+				state = wantOffHandStats
+			}
+		case cur != nil && state == wantOffHandStats:
+			cur.OffHand = strings.Fields(line)
+			if len(cur.OffHand) != len(cur.Stats) {
+				return fail("off hand stats do not match the main hand stats")
+			}
+			state = wantCount
+		case cur != nil && state == wantCount && countRegex.MatchString(line):
+			remaining, _ = strconv.Atoi(line)
+			cur.Lang[curLang] = make([]raw.LangTranslation, 0, remaining)
+			state = wantVariant
+		case cur != nil && state == wantVariant && remaining > 0:
+			translation, v, err := parseLine(line, len(cur.Stats))
+			if err != nil {
+				return fail(err.Error())
+			}
+			cur.Lang[curLang] = append(cur.Lang[curLang], translation)
+			if curLang == defaultLang {
+				cur.variants = append(cur.variants, v)
+			}
+			remaining--
+		default:
+			return fail("unexpected line")
 		}
 	}
 
+	if cur != nil && (state != wantVariant || remaining != 0) {
+		return errors.Errorf("%s: last description is incomplete", name)
+	}
+
 	return nil
+}
+
+// parseLine parses a line like `1|# # gem_quality "{0}% increased {1}" negate 1 reminderstring ReminderTextX`
+// of a description of statCount stats.
+func parseLine(line string, statCount int) (raw.LangTranslation, variant, error) {
+	m := variantRegex.FindStringSubmatch(line)
+	if m == nil {
+		return raw.LangTranslation{}, variant{}, errors.New("expected a variant")
+	}
+
+	limits := strings.Fields(m[1])
+	if len(limits) != statCount {
+		return raw.LangTranslation{}, variant{}, errors.Errorf("%d limits for %d stats", len(limits), statCount)
+	}
+
+	out := raw.LangTranslation{
+		String:        m[3],
+		Qualifier:     m[2],
+		Conditions:    make([]raw.Condition, 0, len(limits)),
+		IndexHandlers: make(raw.IndexHandlers),
+	}
+	v := variant{text: strings.ReplaceAll(m[3], `\n`, "\n"), qualifier: m[2]}
+
+	for _, l := range limits {
+		lm := limitRegex.FindStringSubmatch(l)
+		if lm == nil {
+			return raw.LangTranslation{}, variant{}, errors.Errorf("bad limit %q", l)
+		}
+		lo, hi := lm[2], lm[3]
+		if lm[3] == "" {
+			hi = lo
+		}
+		c := raw.Condition{Negated: lm[1] != ""}
+		if n, err := strconv.Atoi(lo); err == nil {
+			c.Min = &n
+		}
+		if n, err := strconv.Atoi(hi); err == nil {
+			c.Max = &n
+		}
+		out.Conditions = append(out.Conditions, c)
+		v.limits = append(v.limits, parseLimit(l))
+	}
+
+	tokens := strings.Fields(m[4])
+	for i := 0; i < len(tokens); i++ {
+		h := raw.IndexHandler{Name: tokens[i]}
+		// Handlers take a 1-based stat index, reminderstring a ReminderText id, canonical_line nothing.
+		if i+1 < len(tokens) && (h.Name == "reminderstring" || isInt(tokens[i+1])) {
+			i++
+			h.Arg = tokens[i]
+		}
+		out.Handlers = append(out.Handlers, h)
+		out.IndexHandlers[h.Name] = h.Arg
+		v.handlers = append(v.handlers, handler{name: h.Name, arg: h.Arg})
+	}
+
+	return out, v, nil
 }
 
 var languageMap = map[string]string{
@@ -223,19 +289,28 @@ var languageMap = map[string]string{
 }
 
 func (t *TranslationParser) SaveTo(outDir string, translationName string) error {
-	fullOut := make(map[string]*raw.TranslationFile)
-	for _, description := range t.descriptors {
+	// Every language gets the file, so a file without descriptions of its own still carries its
+	// includes and hidden stats.
+	fullOut := make(map[string]*raw.TranslationFile, len(languageMap))
+	for lang := range languageMap {
+		fullOut[lang] = &raw.TranslationFile{
+			Descriptors:   make([]*raw.StatTranslation, 0),
+			Includes:      t.includes,
+			NoDescription: t.noDescription,
+		}
+	}
+
+	for _, description := range t.ordered {
 		for lang, translations := range description.Lang {
 			if _, ok := fullOut[lang]; !ok {
-				fullOut[lang] = &raw.TranslationFile{
-					Descriptors: make([]*raw.StatTranslation, 0),
-					Includes:    t.includes,
-				}
+				return errors.Errorf("unknown language %q", lang)
 			}
 
 			fullOut[lang].Descriptors = append(fullOut[lang].Descriptors, &raw.StatTranslation{
-				IDs:  description.Stats,
-				List: translations,
+				Identifier: description.Identifier,
+				IDs:        description.Stats,
+				OffHandIDs: description.OffHand,
+				List:       translations,
 			})
 		}
 	}

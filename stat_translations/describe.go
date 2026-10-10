@@ -11,7 +11,6 @@ import (
 )
 
 var (
-	variantRegex     = regexp.MustCompile(`^\s*([^"]*?)\s*"(.*)"\s*(.*?)\s*$`)
 	placeholderRegex = regexp.MustCompile(`\{(\d*)(?::([^}]*))?\}`)
 	decimalsRegex    = regexp.MustCompile(`_(\d)dp(_if_required)?$`)
 )
@@ -42,34 +41,11 @@ type handler struct {
 }
 
 type variant struct {
-	text     string
-	limits   []limit
-	handlers []handler
-}
-
-// parseVariant parses a line like `1|# "{0}% increased Damage" negate 1 reminderstring ReminderTextX`.
-func parseVariant(line string) (variant, bool) {
-	m := variantRegex.FindStringSubmatch(line)
-	if m == nil {
-		return variant{}, false
-	}
-
-	v := variant{text: strings.ReplaceAll(m[2], `\n`, "\n")}
-	for _, l := range strings.Fields(m[1]) {
-		v.limits = append(v.limits, parseLimit(l))
-	}
-
-	tokens := strings.Fields(m[3])
-	for i := 0; i < len(tokens); i++ {
-		h := handler{name: tokens[i]}
-		// Handlers take a 1-based stat index, reminderstring a ReminderText id, canonical_line nothing.
-		if i+1 < len(tokens) && (h.name == "reminderstring" || isInt(tokens[i+1])) {
-			i++
-			h.arg = tokens[i]
-		}
-		v.handlers = append(v.handlers, h)
-	}
-	return v, true
+	text string
+	// qualifier limits the line to a context such as gem_quality, which Describe never renders in.
+	qualifier string
+	limits    []limit
+	handlers  []handler
 }
 
 func isInt(s string) bool {
@@ -185,6 +161,9 @@ func (n number) format(sign bool) string {
 // render returns the empty string when no variant matches: the game hides the stats then.
 func (d *Description) render(values []int) (string, []string, error) {
 	idx := slices.IndexFunc(d.variants, func(v variant) bool {
+		if v.qualifier != "" {
+			return false
+		}
 		for i, l := range v.limits {
 			if i >= len(values) || !l.matches(values[i]) {
 				return false
