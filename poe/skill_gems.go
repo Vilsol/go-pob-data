@@ -82,3 +82,29 @@ func (s *SkillGem) GetBaseItemType() *BaseItemType {
 func (s *SkillGem) GetNonVaal() *SkillGem {
 	return skillGemVaalBase[s.BaseItemType]
 }
+
+// GetGemVariants needs InitializeGemEffects.
+func (s *SkillGem) GetGemVariants() []*GemEffect {
+	out := make([]*GemEffect, len(s.GemVariants))
+	for i, key := range s.GemVariants {
+		out[i] = GemEffects[key]
+	}
+
+	return out
+}
+
+// GetLevelProgression returns the gem's ItemExperiencePerLevel rows, in level order.
+func (s *SkillGem) GetLevelProgression() []*ItemExperiencePerLevel {
+	if s.GemLevelProgression == nil {
+		return nil
+	}
+
+	var out []*ItemExperiencePerLevel
+	for _, level := range ItemExperiencePerLevels {
+		if level.ItemExperienceType != nil && *level.ItemExperienceType == *s.GemLevelProgression {
+			out = append(out, level)
+		}
+	}
+
+	return out
+}

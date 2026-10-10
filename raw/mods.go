@@ -1,8 +1,15 @@
 package raw
 
+import (
+	"encoding/json"
+
+	"github.com/pkg/errors"
+)
+
 type Mod struct {
-	HeistStatsKey1                   *int          `json:"Heist_StatsKey1"`
-	ArchnemesisMinionMod             *int          `json:"ArchnemesisMinionMod"`
+	HeistStatsKey1       *int `json:"Heist_StatsKey1"`
+	ArchnemesisMinionMod *int `json:"ArchnemesisMinionMod"`
+	// BuffTemplate is BuffTemplate1 in the schema since 3.28.
 	BuffTemplate                     *int          `json:"BuffTemplate"`
 	StatsKey2                        *int          `json:"StatsKey2"`
 	StatsKey3                        *int          `json:"StatsKey3"`
@@ -29,6 +36,8 @@ type Mod struct {
 	AchievementItemsKey              []interface{} `json:"AchievementItemsKey"`
 	ChestModType                     []int         `json:"ChestModType"`
 	ModifyMapsAchievements           []int         `json:"ModifyMapsAchievements"`
+	Families                         []int         `json:"Families"`
+	BuffTemplate2                    []int         `json:"BuffTemplate2"`
 	MaxLevel                         int           `json:"MaxLevel"`
 	Stat4Min                         int           `json:"Stat4Min"`
 	Level                            int           `json:"Level"`
@@ -55,4 +64,21 @@ type Mod struct {
 	GenerationType                   int           `json:"GenerationType"`
 	Domain                           int           `json:"Domain"`
 	IsEssenceOnlyModifier            bool          `json:"IsEssenceOnlyModifier"`
+}
+
+// UnmarshalJSON reads BuffTemplate under its 3.28+ schema name BuffTemplate1 too.
+func (m *Mod) UnmarshalJSON(b []byte) error {
+	type plain Mod
+	var named struct {
+		BuffTemplate1 *int `json:"BuffTemplate1"`
+		plain
+	}
+	if err := json.Unmarshal(b, &named); err != nil {
+		return errors.Wrap(err, "failed to decode mod")
+	}
+	*m = Mod(named.plain)
+	if named.BuffTemplate1 != nil {
+		m.BuffTemplate = named.BuffTemplate1
+	}
+	return nil
 }

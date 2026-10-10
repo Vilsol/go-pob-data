@@ -79,6 +79,7 @@ var rawTables = map[string]reflect.Type{
 	"ItemExperiencePerLevel":            reflect.TypeFor[raw.ItemExperiencePerLevel](),
 	"ItemVisualIdentity":                reflect.TypeFor[raw.ItemVisualIdentity](),
 	"ModType":                           reflect.TypeFor[raw.ModType](),
+	"ModFamily":                         reflect.TypeFor[raw.ModFamily](),
 	"Mods":                              reflect.TypeFor[raw.Mod](),
 	"MonsterMapBossDifficulty":          reflect.TypeFor[raw.MonsterMapBossDifficulty](),
 	"MonsterMapDifficulty":              reflect.TypeFor[raw.MonsterMapDifficulty](),

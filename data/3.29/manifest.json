@@ -32,6 +32,7 @@
 		"ItemClasses",
 		"ItemExperiencePerLevel",
 		"ItemVisualIdentity",
+		"ModFamily",
 		"ModType",
 		"Mods",
 		"MonsterMapBossDifficulty",

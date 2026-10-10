@@ -56,10 +56,19 @@ const staleTranslations = "3.20"
 // after its map assets were frozen, so its assets no longer decode to the rows of their map assets.
 const reextracted = "3.29"
 
-// rowCodecs decodes a table's tuple asset and its frozen map asset to the json of their rows.
+// rowCodecs decodes a table's tuple asset and its frozen map asset to the json of their rows. The tuple
+// rows are projected onto the legacy row type, so columns added since the map assets froze are not compared.
 type rowCodecs struct {
 	tuple  func(asset []byte) ([]byte, error)
 	legacy func(asset []byte) ([]byte, error)
+}
+
+// Legacy columns whose map assets missed their value because the schema renamed the column, which the
+// tuple assets now carry: SkillGems' Str/Dex/Int from 3.24 and Mods' BuffTemplate from 3.28. They are not
+// compared.
+var correctedColumns = map[string][]string{
+	"SkillGems": {"Str", "Dex", "Int"},
+	"Mods":      {"BuffTemplate"},
 }
 
 func codecs[T, L any, PT interface {
@@ -69,7 +78,44 @@ func codecs[T, L any, PT interface {
 	*L
 	msgp.Decodable
 }]() rowCodecs {
-	return rowCodecs{tuple: rowsJSON[T, PT], legacy: rowsJSON[L, PL]}
+	return rowCodecs{tuple: asLegacy[L](rowsJSON[T, PT]), legacy: rowsJSON[L, PL]}
+}
+
+func asLegacy[L any](decode func(asset []byte) ([]byte, error)) func(asset []byte) ([]byte, error) {
+	return func(asset []byte) ([]byte, error) {
+		b, err := decode(asset)
+		if err != nil {
+			return nil, err
+		}
+
+		var rows []L
+		if err := json.Unmarshal(b, &rows); err != nil {
+			return nil, errors.Wrap(err, "failed to project rows")
+		}
+
+		b, err = json.Marshal(rows)
+		return b, errors.Wrap(err, "failed to marshal rows")
+	}
+}
+
+func withoutColumns(t *testing.T, rowsJSON []byte, columns []string) []byte {
+	t.Helper()
+
+	var rows []map[string]any
+	if err := json.Unmarshal(rowsJSON, &rows); err != nil {
+		t.Fatal(err)
+	}
+	for _, row := range rows {
+		for _, column := range columns {
+			delete(row, column)
+		}
+	}
+
+	b, err := json.Marshal(rows)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return b
 }
 
 var tables = map[string]rowCodecs{
@@ -470,6 +516,10 @@ func TestTupleMatchesLegacy(t *testing.T) {
 			got, err := codec.tuple(tuple)
 			if err != nil {
 				t.Fatal(err)
+			}
+
+			if columns, ok := correctedColumns[name]; ok {
+				got, want = withoutColumns(t, got, columns), withoutColumns(t, want, columns)
 			}
 
 			if !bytes.Equal(got, want) {

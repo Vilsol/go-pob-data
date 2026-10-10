@@ -76,3 +76,26 @@ func (m *Mod) Stats() []ModStat {
 
 	return stats
 }
+
+// GetFamilies needs InitializeModFamilies.
+func (m *Mod) GetFamilies() []*ModFamily {
+	out := make([]*ModFamily, len(m.Families))
+	for i, key := range m.Families {
+		out[i] = ModFamilies[key]
+	}
+
+	return out
+}
+
+// GetBuffTemplates returns BuffTemplate, then BuffTemplate2. It needs InitializeBuffTemplates.
+func (m *Mod) GetBuffTemplates() []*BuffTemplate {
+	out := make([]*BuffTemplate, 0, 1+len(m.BuffTemplate2))
+	if m.BuffTemplate != nil {
+		out = append(out, BuffTemplates[*m.BuffTemplate])
+	}
+	for _, key := range m.BuffTemplate2 {
+		out = append(out, BuffTemplates[key])
+	}
+
+	return out
+}

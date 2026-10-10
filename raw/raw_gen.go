@@ -13267,9 +13267,26 @@ func (z *ItemExperiencePerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 4 {
-		err = msgp.ArrayError{Wanted: 4, Got: zb0001}
+	if zb0001 != 5 {
+		err = msgp.ArrayError{Wanted: 5, Got: zb0001}
 		return
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "ItemExperienceType")
+			return
+		}
+		z.ItemExperienceType = nil
+	} else {
+		if z.ItemExperienceType == nil {
+			z.ItemExperienceType = new(int)
+		}
+		*z.ItemExperienceType, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "ItemExperienceType")
+			return
+		}
 	}
 	z.BaseItemTypesKey, err = dc.ReadInt()
 	if err != nil {
@@ -13296,10 +13313,22 @@ func (z *ItemExperiencePerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *ItemExperiencePerLevel) EncodeMsg(en *msgp.Writer) (err error) {
-	// array header, size 4
-	err = en.Append(0x94)
+	// array header, size 5
+	err = en.Append(0x95)
 	if err != nil {
 		return
+	}
+	if z.ItemExperienceType == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.ItemExperienceType)
+		if err != nil {
+			err = msgp.WrapError(err, "ItemExperienceType")
+			return
+		}
 	}
 	err = en.WriteInt(z.BaseItemTypesKey)
 	if err != nil {
@@ -13327,8 +13356,13 @@ func (z *ItemExperiencePerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *ItemExperiencePerLevel) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// array header, size 4
-	o = append(o, 0x94)
+	// array header, size 5
+	o = append(o, 0x95)
+	if z.ItemExperienceType == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.ItemExperienceType)
+	}
 	o = msgp.AppendInt(o, z.BaseItemTypesKey)
 	o = msgp.AppendInt(o, z.Experience)
 	o = msgp.AppendInt(o, z.ItemCurrentLevel)
@@ -13344,9 +13378,25 @@ func (z *ItemExperiencePerLevel) UnmarshalMsg(bts []byte) (o []byte, err error) 
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 4 {
-		err = msgp.ArrayError{Wanted: 4, Got: zb0001}
+	if zb0001 != 5 {
+		err = msgp.ArrayError{Wanted: 5, Got: zb0001}
 		return
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.ItemExperienceType = nil
+	} else {
+		if z.ItemExperienceType == nil {
+			z.ItemExperienceType = new(int)
+		}
+		*z.ItemExperienceType, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "ItemExperienceType")
+			return
+		}
 	}
 	z.BaseItemTypesKey, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
@@ -13374,7 +13424,13 @@ func (z *ItemExperiencePerLevel) UnmarshalMsg(bts []byte) (o []byte, err error) 
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *ItemExperiencePerLevel) Msgsize() (s int) {
-	s = 1 + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	s = 1
+	if z.ItemExperienceType == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
 	return
 }
 
@@ -13786,8 +13842,8 @@ func (z *Mod) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 54 {
-		err = msgp.ArrayError{Wanted: 54, Got: zb0001}
+	if zb0001 != 56 {
+		err = msgp.ArrayError{Wanted: 56, Got: zb0001}
 		return
 	}
 	if dc.IsNil() {
@@ -14219,6 +14275,42 @@ func (z *Mod) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 	}
+	var zb0015 uint32
+	zb0015, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "Families")
+		return
+	}
+	if cap(z.Families) >= int(zb0015) {
+		z.Families = (z.Families)[:zb0015]
+	} else {
+		z.Families = make([]int, zb0015)
+	}
+	for za0014 := range z.Families {
+		z.Families[za0014], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Families", za0014)
+			return
+		}
+	}
+	var zb0016 uint32
+	zb0016, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "BuffTemplate2")
+		return
+	}
+	if cap(z.BuffTemplate2) >= int(zb0016) {
+		z.BuffTemplate2 = (z.BuffTemplate2)[:zb0016]
+	} else {
+		z.BuffTemplate2 = make([]int, zb0016)
+	}
+	for za0015 := range z.BuffTemplate2 {
+		z.BuffTemplate2[za0015], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "BuffTemplate2", za0015)
+			return
+		}
+	}
 	z.MaxLevel, err = dc.ReadInt()
 	if err != nil {
 		err = msgp.WrapError(err, "MaxLevel")
@@ -14354,8 +14446,8 @@ func (z *Mod) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *Mod) EncodeMsg(en *msgp.Writer) (err error) {
-	// array header, size 54
-	err = en.Append(0xdc, 0x0, 0x36)
+	// array header, size 56
+	err = en.Append(0xdc, 0x0, 0x38)
 	if err != nil {
 		return
 	}
@@ -14660,6 +14752,30 @@ func (z *Mod) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
+	err = en.WriteArrayHeader(uint32(len(z.Families)))
+	if err != nil {
+		err = msgp.WrapError(err, "Families")
+		return
+	}
+	for za0014 := range z.Families {
+		err = en.WriteInt(z.Families[za0014])
+		if err != nil {
+			err = msgp.WrapError(err, "Families", za0014)
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.BuffTemplate2)))
+	if err != nil {
+		err = msgp.WrapError(err, "BuffTemplate2")
+		return
+	}
+	for za0015 := range z.BuffTemplate2 {
+		err = en.WriteInt(z.BuffTemplate2[za0015])
+		if err != nil {
+			err = msgp.WrapError(err, "BuffTemplate2", za0015)
+			return
+		}
+	}
 	err = en.WriteInt(z.MaxLevel)
 	if err != nil {
 		err = msgp.WrapError(err, "MaxLevel")
@@ -14796,8 +14912,8 @@ func (z *Mod) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *Mod) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// array header, size 54
-	o = append(o, 0xdc, 0x0, 0x36)
+	// array header, size 56
+	o = append(o, 0xdc, 0x0, 0x38)
 	if z.HeistStatsKey1 == nil {
 		o = msgp.AppendNil(o)
 	} else {
@@ -14913,6 +15029,14 @@ func (z *Mod) MarshalMsg(b []byte) (o []byte, err error) {
 	for za0013 := range z.ModifyMapsAchievements {
 		o = msgp.AppendInt(o, z.ModifyMapsAchievements[za0013])
 	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Families)))
+	for za0014 := range z.Families {
+		o = msgp.AppendInt(o, z.Families[za0014])
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.BuffTemplate2)))
+	for za0015 := range z.BuffTemplate2 {
+		o = msgp.AppendInt(o, z.BuffTemplate2[za0015])
+	}
 	o = msgp.AppendInt(o, z.MaxLevel)
 	o = msgp.AppendInt(o, z.Stat4Min)
 	o = msgp.AppendInt(o, z.Level)
@@ -14950,8 +15074,8 @@ func (z *Mod) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 54 {
-		err = msgp.ArrayError{Wanted: 54, Got: zb0001}
+	if zb0001 != 56 {
+		err = msgp.ArrayError{Wanted: 56, Got: zb0001}
 		return
 	}
 	if msgp.IsNil(bts) {
@@ -15373,6 +15497,42 @@ func (z *Mod) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 	}
+	var zb0015 uint32
+	zb0015, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Families")
+		return
+	}
+	if cap(z.Families) >= int(zb0015) {
+		z.Families = (z.Families)[:zb0015]
+	} else {
+		z.Families = make([]int, zb0015)
+	}
+	for za0014 := range z.Families {
+		z.Families[za0014], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Families", za0014)
+			return
+		}
+	}
+	var zb0016 uint32
+	zb0016, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "BuffTemplate2")
+		return
+	}
+	if cap(z.BuffTemplate2) >= int(zb0016) {
+		z.BuffTemplate2 = (z.BuffTemplate2)[:zb0016]
+	} else {
+		z.BuffTemplate2 = make([]int, zb0016)
+	}
+	for za0015 := range z.BuffTemplate2 {
+		z.BuffTemplate2[za0015], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "BuffTemplate2", za0015)
+			return
+		}
+	}
 	z.MaxLevel, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "MaxLevel")
@@ -15568,7 +15728,94 @@ func (z *Mod) Msgsize() (s int) {
 	for za0011 := range z.AchievementItemsKey {
 		s += msgp.GuessSize(z.AchievementItemsKey[za0011])
 	}
-	s += msgp.ArrayHeaderSize + (len(z.ChestModType) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.ModifyMapsAchievements) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize
+	s += msgp.ArrayHeaderSize + (len(z.ChestModType) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.ModifyMapsAchievements) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.Families) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.BuffTemplate2) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *ModFamily) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 2 {
+		err = msgp.ArrayError{Wanted: 2, Got: zb0001}
+		return
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z ModFamily) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 2
+	err = en.Append(0x92)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z ModFamily) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 2
+	o = append(o, 0x92)
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *ModFamily) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 2 {
+		err = msgp.ArrayError{Wanted: 2, Got: zb0001}
+		return
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z ModFamily) Msgsize() (s int) {
+	s = 1 + msgp.StringPrefixSize + len(z.ID) + msgp.IntSize
 	return
 }
 
@@ -22472,8 +22719,8 @@ func (z *SkillGem) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 16 {
-		err = msgp.ArrayError{Wanted: 16, Got: zb0001}
+	if zb0001 != 20 {
+		err = msgp.ArrayError{Wanted: 20, Got: zb0001}
 		return
 	}
 	if dc.IsNil() {
@@ -22578,6 +22825,23 @@ func (z *SkillGem) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "GemLevelProgression")
+			return
+		}
+		z.GemLevelProgression = nil
+	} else {
+		if z.GemLevelProgression == nil {
+			z.GemLevelProgression = new(int)
+		}
+		*z.GemLevelProgression, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "GemLevelProgression")
+			return
+		}
+	}
 	z.SecondarySupportName, err = dc.ReadString()
 	if err != nil {
 		err = msgp.WrapError(err, "SecondarySupportName")
@@ -22606,6 +22870,24 @@ func (z *SkillGem) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 	}
+	var zb0003 uint32
+	zb0003, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "GemVariants")
+		return
+	}
+	if cap(z.GemVariants) >= int(zb0003) {
+		z.GemVariants = (z.GemVariants)[:zb0003]
+	} else {
+		z.GemVariants = make([]int, zb0003)
+	}
+	for za0002 := range z.GemVariants {
+		z.GemVariants[za0002], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "GemVariants", za0002)
+			return
+		}
+	}
 	z.Int, err = dc.ReadInt()
 	if err != nil {
 		err = msgp.WrapError(err, "Int")
@@ -22631,6 +22913,11 @@ func (z *SkillGem) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err, "GrantedEffect")
 		return
 	}
+	z.GemColour, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "GemColour")
+		return
+	}
 	z.Key, err = dc.ReadInt()
 	if err != nil {
 		err = msgp.WrapError(err, "Key")
@@ -22641,13 +22928,18 @@ func (z *SkillGem) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err, "IsVaalGem")
 		return
 	}
+	z.IsSupport, err = dc.ReadBool()
+	if err != nil {
+		err = msgp.WrapError(err, "IsSupport")
+		return
+	}
 	return
 }
 
 // EncodeMsg implements msgp.Encodable
 func (z *SkillGem) EncodeMsg(en *msgp.Writer) (err error) {
-	// array header, size 16
-	err = en.Append(0xdc, 0x0, 0x10)
+	// array header, size 20
+	err = en.Append(0xdc, 0x0, 0x14)
 	if err != nil {
 		return
 	}
@@ -22723,6 +23015,18 @@ func (z *SkillGem) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
+	if z.GemLevelProgression == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.GemLevelProgression)
+		if err != nil {
+			err = msgp.WrapError(err, "GemLevelProgression")
+			return
+		}
+	}
 	err = en.WriteString(z.SecondarySupportName)
 	if err != nil {
 		err = msgp.WrapError(err, "SecondarySupportName")
@@ -22742,6 +23046,18 @@ func (z *SkillGem) EncodeMsg(en *msgp.Writer) (err error) {
 		err = en.WriteInt(z.Tags[za0001])
 		if err != nil {
 			err = msgp.WrapError(err, "Tags", za0001)
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.GemVariants)))
+	if err != nil {
+		err = msgp.WrapError(err, "GemVariants")
+		return
+	}
+	for za0002 := range z.GemVariants {
+		err = en.WriteInt(z.GemVariants[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "GemVariants", za0002)
 			return
 		}
 	}
@@ -22770,6 +23086,11 @@ func (z *SkillGem) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "GrantedEffect")
 		return
 	}
+	err = en.WriteInt(z.GemColour)
+	if err != nil {
+		err = msgp.WrapError(err, "GemColour")
+		return
+	}
 	err = en.WriteInt(z.Key)
 	if err != nil {
 		err = msgp.WrapError(err, "Key")
@@ -22780,14 +23101,19 @@ func (z *SkillGem) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "IsVaalGem")
 		return
 	}
+	err = en.WriteBool(z.IsSupport)
+	if err != nil {
+		err = msgp.WrapError(err, "IsSupport")
+		return
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
 func (z *SkillGem) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// array header, size 16
-	o = append(o, 0xdc, 0x0, 0x10)
+	// array header, size 20
+	o = append(o, 0xdc, 0x0, 0x14)
 	if z.VaalGem == nil {
 		o = msgp.AppendNil(o)
 	} else {
@@ -22818,19 +23144,30 @@ func (z *SkillGem) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.HungryLoopMod)
 	}
+	if z.GemLevelProgression == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.GemLevelProgression)
+	}
 	o = msgp.AppendString(o, z.SecondarySupportName)
 	o = msgp.AppendString(o, z.Description)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.Tags)))
 	for za0001 := range z.Tags {
 		o = msgp.AppendInt(o, z.Tags[za0001])
 	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.GemVariants)))
+	for za0002 := range z.GemVariants {
+		o = msgp.AppendInt(o, z.GemVariants[za0002])
+	}
 	o = msgp.AppendInt(o, z.Int)
 	o = msgp.AppendInt(o, z.Dex)
 	o = msgp.AppendInt(o, z.BaseItemType)
 	o = msgp.AppendInt(o, z.Str)
 	o = msgp.AppendInt(o, z.GrantedEffect)
+	o = msgp.AppendInt(o, z.GemColour)
 	o = msgp.AppendInt(o, z.Key)
 	o = msgp.AppendBool(o, z.IsVaalGem)
+	o = msgp.AppendBool(o, z.IsSupport)
 	return
 }
 
@@ -22842,8 +23179,8 @@ func (z *SkillGem) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 16 {
-		err = msgp.ArrayError{Wanted: 16, Got: zb0001}
+	if zb0001 != 20 {
+		err = msgp.ArrayError{Wanted: 20, Got: zb0001}
 		return
 	}
 	if msgp.IsNil(bts) {
@@ -22942,6 +23279,22 @@ func (z *SkillGem) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.GemLevelProgression = nil
+	} else {
+		if z.GemLevelProgression == nil {
+			z.GemLevelProgression = new(int)
+		}
+		*z.GemLevelProgression, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "GemLevelProgression")
+			return
+		}
+	}
 	z.SecondarySupportName, bts, err = msgp.ReadStringBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "SecondarySupportName")
@@ -22970,6 +23323,24 @@ func (z *SkillGem) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 	}
+	var zb0003 uint32
+	zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "GemVariants")
+		return
+	}
+	if cap(z.GemVariants) >= int(zb0003) {
+		z.GemVariants = (z.GemVariants)[:zb0003]
+	} else {
+		z.GemVariants = make([]int, zb0003)
+	}
+	for za0002 := range z.GemVariants {
+		z.GemVariants[za0002], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "GemVariants", za0002)
+			return
+		}
+	}
 	z.Int, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "Int")
@@ -22995,6 +23366,11 @@ func (z *SkillGem) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.WrapError(err, "GrantedEffect")
 		return
 	}
+	z.GemColour, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "GemColour")
+		return
+	}
 	z.Key, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "Key")
@@ -23003,6 +23379,11 @@ func (z *SkillGem) UnmarshalMsg(bts []byte) (o []byte, err error) {
 	z.IsVaalGem, bts, err = msgp.ReadBoolBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "IsVaalGem")
+		return
+	}
+	z.IsSupport, bts, err = msgp.ReadBoolBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "IsSupport")
 		return
 	}
 	o = bts
@@ -23042,7 +23423,12 @@ func (z *SkillGem) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += msgp.StringPrefixSize + len(z.SecondarySupportName) + msgp.StringPrefixSize + len(z.Description) + msgp.ArrayHeaderSize + (len(z.Tags) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize
+	if z.GemLevelProgression == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.StringPrefixSize + len(z.SecondarySupportName) + msgp.StringPrefixSize + len(z.Description) + msgp.ArrayHeaderSize + (len(z.Tags) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.GemVariants) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize + msgp.BoolSize
 	return
 }
 
