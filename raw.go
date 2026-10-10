@@ -236,6 +236,34 @@ var filesToExport = []PackedFile{
 		path:  "Data/AtlasNodeDefinition",
 		Codec: ReEncode[*raw.AtlasNodeDefinition](),
 	},
+	{
+		path:  "Data/PassiveSkillOverrides",
+		Codec: ReEncode[*raw.PassiveSkillOverride](),
+	},
+	{
+		path:  "Data/PassiveSkillOverrideTypes",
+		Codec: ReEncode[*raw.PassiveSkillOverrideType](),
+	},
+	{
+		path:  "Data/PassiveSkillTattoos",
+		Codec: ReEncode[*raw.PassiveSkillTattoo](),
+	},
+	{
+		path:  "Data/PassiveSkillTattooTargetSets",
+		Codec: ReEncode[*raw.PassiveSkillTattooTargetSet](),
+	},
+	{
+		path:  "Data/PassiveOverrideLimits",
+		Codec: ReEncode[*raw.PassiveOverrideLimit](),
+	},
+	{
+		path:  "Data/ClientStrings",
+		Codec: ReEncode[*raw.ClientString](),
+	},
+	{
+		path:  "Data/CurrencyExchange",
+		Codec: ReEncode[*raw.CurrencyExchange](),
+	},
 }
 
 var imagesToExport = []string{
