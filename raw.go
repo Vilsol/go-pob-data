@@ -284,6 +284,14 @@ var filesToExport = []PackedFile{
 		path:  "Data/ItemVisualIdentity",
 		Codec: ReEncode[*raw.ItemVisualIdentity](),
 	},
+	{
+		path:  "Data/WeaponPassiveSkills",
+		Codec: ReEncode[*raw.WeaponPassiveSkill](),
+	},
+	{
+		path:  "Data/WeaponPassiveSkillTypes",
+		Codec: ReEncode[*raw.WeaponPassiveSkillType](),
+	},
 }
 
 var imagesToExport = []string{

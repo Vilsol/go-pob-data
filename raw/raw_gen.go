@@ -22159,6 +22159,400 @@ func (z *UniqueStashType) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *WeaponPassiveSkill) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 9 {
+		err = msgp.ArrayError{Wanted: 9, Got: zb0001}
+		return
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Icon, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Icon")
+		return
+	}
+	var zb0002 uint32
+	zb0002, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "NodeSpawnLocation")
+		return
+	}
+	if cap(z.NodeSpawnLocation) >= int(zb0002) {
+		z.NodeSpawnLocation = (z.NodeSpawnLocation)[:zb0002]
+	} else {
+		z.NodeSpawnLocation = make([]int, zb0002)
+	}
+	for za0001 := range z.NodeSpawnLocation {
+		z.NodeSpawnLocation[za0001], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "NodeSpawnLocation", za0001)
+			return
+		}
+	}
+	var zb0003 uint32
+	zb0003, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "Tags")
+		return
+	}
+	if cap(z.Tags) >= int(zb0003) {
+		z.Tags = (z.Tags)[:zb0003]
+	} else {
+		z.Tags = make([]int, zb0003)
+	}
+	for za0002 := range z.Tags {
+		z.Tags[za0002], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Tags", za0002)
+			return
+		}
+	}
+	var zb0004 uint32
+	zb0004, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "Achievements")
+		return
+	}
+	if cap(z.Achievements) >= int(zb0004) {
+		z.Achievements = (z.Achievements)[:zb0004]
+	} else {
+		z.Achievements = make([]int, zb0004)
+	}
+	for za0003 := range z.Achievements {
+		z.Achievements[za0003], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Achievements", za0003)
+			return
+		}
+	}
+	z.Tier, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Tier")
+		return
+	}
+	z.Mod, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Mod")
+		return
+	}
+	z.Type, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Type")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *WeaponPassiveSkill) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 9
+	err = en.Append(0x99)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteString(z.Icon)
+	if err != nil {
+		err = msgp.WrapError(err, "Icon")
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.NodeSpawnLocation)))
+	if err != nil {
+		err = msgp.WrapError(err, "NodeSpawnLocation")
+		return
+	}
+	for za0001 := range z.NodeSpawnLocation {
+		err = en.WriteInt(z.NodeSpawnLocation[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "NodeSpawnLocation", za0001)
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Tags)))
+	if err != nil {
+		err = msgp.WrapError(err, "Tags")
+		return
+	}
+	for za0002 := range z.Tags {
+		err = en.WriteInt(z.Tags[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "Tags", za0002)
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Achievements)))
+	if err != nil {
+		err = msgp.WrapError(err, "Achievements")
+		return
+	}
+	for za0003 := range z.Achievements {
+		err = en.WriteInt(z.Achievements[za0003])
+		if err != nil {
+			err = msgp.WrapError(err, "Achievements", za0003)
+			return
+		}
+	}
+	err = en.WriteInt(z.Tier)
+	if err != nil {
+		err = msgp.WrapError(err, "Tier")
+		return
+	}
+	err = en.WriteInt(z.Mod)
+	if err != nil {
+		err = msgp.WrapError(err, "Mod")
+		return
+	}
+	err = en.WriteInt(z.Type)
+	if err != nil {
+		err = msgp.WrapError(err, "Type")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *WeaponPassiveSkill) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 9
+	o = append(o, 0x99)
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendString(o, z.Icon)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.NodeSpawnLocation)))
+	for za0001 := range z.NodeSpawnLocation {
+		o = msgp.AppendInt(o, z.NodeSpawnLocation[za0001])
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Tags)))
+	for za0002 := range z.Tags {
+		o = msgp.AppendInt(o, z.Tags[za0002])
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Achievements)))
+	for za0003 := range z.Achievements {
+		o = msgp.AppendInt(o, z.Achievements[za0003])
+	}
+	o = msgp.AppendInt(o, z.Tier)
+	o = msgp.AppendInt(o, z.Mod)
+	o = msgp.AppendInt(o, z.Type)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *WeaponPassiveSkill) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 9 {
+		err = msgp.ArrayError{Wanted: 9, Got: zb0001}
+		return
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Icon, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Icon")
+		return
+	}
+	var zb0002 uint32
+	zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "NodeSpawnLocation")
+		return
+	}
+	if cap(z.NodeSpawnLocation) >= int(zb0002) {
+		z.NodeSpawnLocation = (z.NodeSpawnLocation)[:zb0002]
+	} else {
+		z.NodeSpawnLocation = make([]int, zb0002)
+	}
+	for za0001 := range z.NodeSpawnLocation {
+		z.NodeSpawnLocation[za0001], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "NodeSpawnLocation", za0001)
+			return
+		}
+	}
+	var zb0003 uint32
+	zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Tags")
+		return
+	}
+	if cap(z.Tags) >= int(zb0003) {
+		z.Tags = (z.Tags)[:zb0003]
+	} else {
+		z.Tags = make([]int, zb0003)
+	}
+	for za0002 := range z.Tags {
+		z.Tags[za0002], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Tags", za0002)
+			return
+		}
+	}
+	var zb0004 uint32
+	zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Achievements")
+		return
+	}
+	if cap(z.Achievements) >= int(zb0004) {
+		z.Achievements = (z.Achievements)[:zb0004]
+	} else {
+		z.Achievements = make([]int, zb0004)
+	}
+	for za0003 := range z.Achievements {
+		z.Achievements[za0003], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Achievements", za0003)
+			return
+		}
+	}
+	z.Tier, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Tier")
+		return
+	}
+	z.Mod, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Mod")
+		return
+	}
+	z.Type, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Type")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *WeaponPassiveSkill) Msgsize() (s int) {
+	s = 1 + msgp.StringPrefixSize + len(z.ID) + msgp.StringPrefixSize + len(z.Icon) + msgp.ArrayHeaderSize + (len(z.NodeSpawnLocation) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.Tags) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.Achievements) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *WeaponPassiveSkillType) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 2 {
+		err = msgp.ArrayError{Wanted: 2, Got: zb0001}
+		return
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z WeaponPassiveSkillType) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 2
+	err = en.Append(0x92)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z WeaponPassiveSkillType) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 2
+	o = append(o, 0x92)
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *WeaponPassiveSkillType) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 2 {
+		err = msgp.ArrayError{Wanted: 2, Got: zb0001}
+		return
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z WeaponPassiveSkillType) Msgsize() (s int) {
+	s = 1 + msgp.StringPrefixSize + len(z.ID) + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *WeaponType) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()

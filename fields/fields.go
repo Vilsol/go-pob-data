@@ -95,6 +95,8 @@ var rawTables = map[string]reflect.Type{
 	"Tags":                              reflect.TypeFor[raw.Tag](),
 	"UniqueStashLayout":                 reflect.TypeFor[raw.UniqueStashLayout](),
 	"UniqueStashTypes":                  reflect.TypeFor[raw.UniqueStashType](),
+	"WeaponPassiveSkillTypes":           reflect.TypeFor[raw.WeaponPassiveSkillType](),
+	"WeaponPassiveSkills":               reflect.TypeFor[raw.WeaponPassiveSkill](),
 	"WeaponTypes":                       reflect.TypeFor[raw.WeaponType](),
 	"Words":                             reflect.TypeFor[raw.Word](),
 }
