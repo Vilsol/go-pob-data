@@ -64,6 +64,7 @@ var rawTables = map[string]reflect.Type{
 	"DefaultMonsterStats":               reflect.TypeFor[raw.DefaultMonsterStat](),
 	"Essences":                          reflect.TypeFor[raw.Essence](),
 	"Flasks":                            reflect.TypeFor[raw.Flask](),
+	"FlavourText":                       reflect.TypeFor[raw.FlavourText](),
 	"GrantedEffectQualityStats":         reflect.TypeFor[raw.GrantedEffectQualityStat](),
 	"GrantedEffectStatSets":             reflect.TypeFor[raw.GrantedEffectStatSet](),
 	"GrantedEffectStatSetsPerLevel":     reflect.TypeFor[raw.GrantedEffectStatSetsPerLevel](),
@@ -71,6 +72,7 @@ var rawTables = map[string]reflect.Type{
 	"GrantedEffectsPerLevel":            reflect.TypeFor[raw.GrantedEffectsPerLevel](),
 	"ItemClasses":                       reflect.TypeFor[raw.ItemClass](),
 	"ItemExperiencePerLevel":            reflect.TypeFor[raw.ItemExperiencePerLevel](),
+	"ItemVisualIdentity":                reflect.TypeFor[raw.ItemVisualIdentity](),
 	"Mods":                              reflect.TypeFor[raw.Mod](),
 	"MonsterMapBossDifficulty":          reflect.TypeFor[raw.MonsterMapBossDifficulty](),
 	"MonsterMapDifficulty":              reflect.TypeFor[raw.MonsterMapDifficulty](),
@@ -91,7 +93,10 @@ var rawTables = map[string]reflect.Type{
 	"SkillTotems":                       reflect.TypeFor[raw.SkillTotem](),
 	"Stats":                             reflect.TypeFor[raw.Stat](),
 	"Tags":                              reflect.TypeFor[raw.Tag](),
+	"UniqueStashLayout":                 reflect.TypeFor[raw.UniqueStashLayout](),
+	"UniqueStashTypes":                  reflect.TypeFor[raw.UniqueStashType](),
 	"WeaponTypes":                       reflect.TypeFor[raw.WeaponType](),
+	"Words":                             reflect.TypeFor[raw.Word](),
 }
 
 // RowType is the type the loader decodes asset into: a raw table's row ("raw/Mods") or a

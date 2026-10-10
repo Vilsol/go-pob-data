@@ -264,6 +264,26 @@ var filesToExport = []PackedFile{
 		path:  "Data/CurrencyExchange",
 		Codec: ReEncode[*raw.CurrencyExchange](),
 	},
+	{
+		path:  "Data/FlavourText",
+		Codec: ReEncode[*raw.FlavourText](),
+	},
+	{
+		path:  "Data/UniqueStashLayout",
+		Codec: ReEncode[*raw.UniqueStashLayout](),
+	},
+	{
+		path:  "Data/UniqueStashTypes",
+		Codec: ReEncode[*raw.UniqueStashType](),
+	},
+	{
+		path:  "Data/Words",
+		Codec: ReEncode[*raw.Word](),
+	},
+	{
+		path:  "Data/ItemVisualIdentity",
+		Codec: ReEncode[*raw.ItemVisualIdentity](),
+	},
 }
 
 var imagesToExport = []string{
