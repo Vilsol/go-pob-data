@@ -67,6 +67,8 @@ var rawTables = map[string]reflect.Type{
 	"Flasks":                            reflect.TypeFor[raw.Flask](),
 	"FlavourText":                       reflect.TypeFor[raw.FlavourText](),
 	"GameConstants":                     reflect.TypeFor[raw.GameConstant](),
+	"GemEffects":                        reflect.TypeFor[raw.GemEffect](),
+	"GemTags":                           reflect.TypeFor[raw.GemTag](),
 	"GrantedEffectQualityStats":         reflect.TypeFor[raw.GrantedEffectQualityStat](),
 	"GrantedEffectStatSets":             reflect.TypeFor[raw.GrantedEffectStatSet](),
 	"GrantedEffectStatSetsPerLevel":     reflect.TypeFor[raw.GrantedEffectStatSetsPerLevel](),

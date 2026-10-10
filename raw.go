@@ -324,6 +324,14 @@ var filesToExport = []PackedFile{
 		path:  "Data/PassiveSkillTreeConnectionArt",
 		Codec: ReEncode[*raw.PassiveSkillTreeConnectionArt](),
 	},
+	{
+		path:  "Data/GemEffects",
+		Codec: ReEncode[*raw.GemEffect](),
+	},
+	{
+		path:  "Data/GemTags",
+		Codec: ReEncode[*raw.GemTag](),
+	},
 }
 
 var imagesToExport = []string{

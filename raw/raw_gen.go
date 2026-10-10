@@ -9435,6 +9435,770 @@ func (z *GameConstant) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *GemEffect) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 12 {
+		err = msgp.ArrayError{Wanted: 12, Got: zb0001}
+		return
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffectHardmode")
+			return
+		}
+		z.GrantedEffectHardmode = nil
+	} else {
+		if z.GrantedEffectHardmode == nil {
+			z.GrantedEffectHardmode = new(int)
+		}
+		*z.GrantedEffectHardmode, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffectHardmode")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffect2")
+			return
+		}
+		z.GrantedEffect2 = nil
+	} else {
+		if z.GrantedEffect2 == nil {
+			z.GrantedEffect2 = new(int)
+		}
+		*z.GrantedEffect2, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffect2")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffect2Hardmode")
+			return
+		}
+		z.GrantedEffect2Hardmode = nil
+	} else {
+		if z.GrantedEffect2Hardmode == nil {
+			z.GrantedEffect2Hardmode = new(int)
+		}
+		*z.GrantedEffect2Hardmode, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffect2Hardmode")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "ConsumedMod")
+			return
+		}
+		z.ConsumedMod = nil
+	} else {
+		if z.ConsumedMod == nil {
+			z.ConsumedMod = new(int)
+		}
+		*z.ConsumedMod, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "ConsumedMod")
+			return
+		}
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Name, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.SupportText, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "SupportText")
+		return
+	}
+	z.SupportName, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "SupportName")
+		return
+	}
+	var zb0002 uint32
+	zb0002, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "GemTags")
+		return
+	}
+	if cap(z.GemTags) >= int(zb0002) {
+		z.GemTags = (z.GemTags)[:zb0002]
+	} else {
+		z.GemTags = make([]int, zb0002)
+	}
+	for za0001 := range z.GemTags {
+		z.GemTags[za0001], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "GemTags", za0001)
+			return
+		}
+	}
+	z.GrantedEffect, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "GrantedEffect")
+		return
+	}
+	z.ItemColor, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "ItemColor")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *GemEffect) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 12
+	err = en.Append(0x9c)
+	if err != nil {
+		return
+	}
+	if z.GrantedEffectHardmode == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.GrantedEffectHardmode)
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffectHardmode")
+			return
+		}
+	}
+	if z.GrantedEffect2 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.GrantedEffect2)
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffect2")
+			return
+		}
+	}
+	if z.GrantedEffect2Hardmode == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.GrantedEffect2Hardmode)
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffect2Hardmode")
+			return
+		}
+	}
+	if z.ConsumedMod == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.ConsumedMod)
+		if err != nil {
+			err = msgp.WrapError(err, "ConsumedMod")
+			return
+		}
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	err = en.WriteString(z.SupportText)
+	if err != nil {
+		err = msgp.WrapError(err, "SupportText")
+		return
+	}
+	err = en.WriteString(z.SupportName)
+	if err != nil {
+		err = msgp.WrapError(err, "SupportName")
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.GemTags)))
+	if err != nil {
+		err = msgp.WrapError(err, "GemTags")
+		return
+	}
+	for za0001 := range z.GemTags {
+		err = en.WriteInt(z.GemTags[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "GemTags", za0001)
+			return
+		}
+	}
+	err = en.WriteInt(z.GrantedEffect)
+	if err != nil {
+		err = msgp.WrapError(err, "GrantedEffect")
+		return
+	}
+	err = en.WriteInt(z.ItemColor)
+	if err != nil {
+		err = msgp.WrapError(err, "ItemColor")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *GemEffect) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 12
+	o = append(o, 0x9c)
+	if z.GrantedEffectHardmode == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.GrantedEffectHardmode)
+	}
+	if z.GrantedEffect2 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.GrantedEffect2)
+	}
+	if z.GrantedEffect2Hardmode == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.GrantedEffect2Hardmode)
+	}
+	if z.ConsumedMod == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.ConsumedMod)
+	}
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendString(o, z.Name)
+	o = msgp.AppendString(o, z.SupportText)
+	o = msgp.AppendString(o, z.SupportName)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.GemTags)))
+	for za0001 := range z.GemTags {
+		o = msgp.AppendInt(o, z.GemTags[za0001])
+	}
+	o = msgp.AppendInt(o, z.GrantedEffect)
+	o = msgp.AppendInt(o, z.ItemColor)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *GemEffect) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 12 {
+		err = msgp.ArrayError{Wanted: 12, Got: zb0001}
+		return
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.GrantedEffectHardmode = nil
+	} else {
+		if z.GrantedEffectHardmode == nil {
+			z.GrantedEffectHardmode = new(int)
+		}
+		*z.GrantedEffectHardmode, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffectHardmode")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.GrantedEffect2 = nil
+	} else {
+		if z.GrantedEffect2 == nil {
+			z.GrantedEffect2 = new(int)
+		}
+		*z.GrantedEffect2, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffect2")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.GrantedEffect2Hardmode = nil
+	} else {
+		if z.GrantedEffect2Hardmode == nil {
+			z.GrantedEffect2Hardmode = new(int)
+		}
+		*z.GrantedEffect2Hardmode, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffect2Hardmode")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.ConsumedMod = nil
+	} else {
+		if z.ConsumedMod == nil {
+			z.ConsumedMod = new(int)
+		}
+		*z.ConsumedMod, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "ConsumedMod")
+			return
+		}
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Name, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.SupportText, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "SupportText")
+		return
+	}
+	z.SupportName, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "SupportName")
+		return
+	}
+	var zb0002 uint32
+	zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "GemTags")
+		return
+	}
+	if cap(z.GemTags) >= int(zb0002) {
+		z.GemTags = (z.GemTags)[:zb0002]
+	} else {
+		z.GemTags = make([]int, zb0002)
+	}
+	for za0001 := range z.GemTags {
+		z.GemTags[za0001], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "GemTags", za0001)
+			return
+		}
+	}
+	z.GrantedEffect, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "GrantedEffect")
+		return
+	}
+	z.ItemColor, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ItemColor")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *GemEffect) Msgsize() (s int) {
+	s = 1
+	if z.GrantedEffectHardmode == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.GrantedEffect2 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.GrantedEffect2Hardmode == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.ConsumedMod == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.StringPrefixSize + len(z.ID) + msgp.StringPrefixSize + len(z.Name) + msgp.StringPrefixSize + len(z.SupportText) + msgp.StringPrefixSize + len(z.SupportName) + msgp.ArrayHeaderSize + (len(z.GemTags) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *GemTag) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 7 {
+		err = msgp.ArrayError{Wanted: 7, Got: zb0001}
+		return
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat1")
+			return
+		}
+		z.Stat1 = nil
+	} else {
+		if z.Stat1 == nil {
+			z.Stat1 = new(int)
+		}
+		*z.Stat1, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat1")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat2")
+			return
+		}
+		z.Stat2 = nil
+	} else {
+		if z.Stat2 == nil {
+			z.Stat2 = new(int)
+		}
+		*z.Stat2, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat2")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat3")
+			return
+		}
+		z.Stat3 = nil
+	} else {
+		if z.Stat3 == nil {
+			z.Stat3 = new(int)
+		}
+		*z.Stat3, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat3")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat4")
+			return
+		}
+		z.Stat4 = nil
+	} else {
+		if z.Stat4 == nil {
+			z.Stat4 = new(int)
+		}
+		*z.Stat4, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat4")
+			return
+		}
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Tag, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Tag")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *GemTag) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 7
+	err = en.Append(0x97)
+	if err != nil {
+		return
+	}
+	if z.Stat1 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat1)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat1")
+			return
+		}
+	}
+	if z.Stat2 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat2)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat2")
+			return
+		}
+	}
+	if z.Stat3 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat3)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat3")
+			return
+		}
+	}
+	if z.Stat4 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat4)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat4")
+			return
+		}
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteString(z.Tag)
+	if err != nil {
+		err = msgp.WrapError(err, "Tag")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *GemTag) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 7
+	o = append(o, 0x97)
+	if z.Stat1 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat1)
+	}
+	if z.Stat2 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat2)
+	}
+	if z.Stat3 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat3)
+	}
+	if z.Stat4 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat4)
+	}
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendString(o, z.Tag)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *GemTag) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 7 {
+		err = msgp.ArrayError{Wanted: 7, Got: zb0001}
+		return
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat1 = nil
+	} else {
+		if z.Stat1 == nil {
+			z.Stat1 = new(int)
+		}
+		*z.Stat1, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat1")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat2 = nil
+	} else {
+		if z.Stat2 == nil {
+			z.Stat2 = new(int)
+		}
+		*z.Stat2, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat2")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat3 = nil
+	} else {
+		if z.Stat3 == nil {
+			z.Stat3 = new(int)
+		}
+		*z.Stat3, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat3")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat4 = nil
+	} else {
+		if z.Stat4 == nil {
+			z.Stat4 = new(int)
+		}
+		*z.Stat4, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat4")
+			return
+		}
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Tag, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Tag")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *GemTag) Msgsize() (s int) {
+	s = 1
+	if z.Stat1 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.Stat2 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.Stat3 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.Stat4 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.StringPrefixSize + len(z.ID) + msgp.StringPrefixSize + len(z.Tag) + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *GrantedEffect) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()
