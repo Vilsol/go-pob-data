@@ -8953,6 +8953,125 @@ func (z FlavourText) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *GameConstant) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 4 {
+		err = msgp.ArrayError{Wanted: 4, Got: zb0001}
+		return
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Value, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Value")
+		return
+	}
+	z.Divisor, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Divisor")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *GameConstant) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 4
+	err = en.Append(0x94)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteInt(z.Value)
+	if err != nil {
+		err = msgp.WrapError(err, "Value")
+		return
+	}
+	err = en.WriteInt(z.Divisor)
+	if err != nil {
+		err = msgp.WrapError(err, "Divisor")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *GameConstant) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 4
+	o = append(o, 0x94)
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendInt(o, z.Value)
+	o = msgp.AppendInt(o, z.Divisor)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *GameConstant) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 4 {
+		err = msgp.ArrayError{Wanted: 4, Got: zb0001}
+		return
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Value, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Value")
+		return
+	}
+	z.Divisor, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Divisor")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *GameConstant) Msgsize() (s int) {
+	s = 1 + msgp.StringPrefixSize + len(z.ID) + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *GrantedEffect) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()
@@ -14514,6 +14633,293 @@ func (z *MonsterMapDifficulty) UnmarshalMsg(bts []byte) (o []byte, err error) {
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *MonsterMapDifficulty) Msgsize() (s int) {
 	s = 1 + msgp.GuessSize(z.StatsKey3) + msgp.GuessSize(z.StatsKey4) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *MonsterType) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 12 {
+		err = msgp.ArrayError{Wanted: 12, Got: zb0001}
+		return
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Resistances")
+			return
+		}
+		z.Resistances = nil
+	} else {
+		if z.Resistances == nil {
+			z.Resistances = new(int)
+		}
+		*z.Resistances, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Resistances")
+			return
+		}
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Accuracy, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Accuracy")
+		return
+	}
+	z.Armour, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Armour")
+		return
+	}
+	z.Evasion, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Evasion")
+		return
+	}
+	z.EnergyShield, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "EnergyShield")
+		return
+	}
+	z.DamageSpread, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "DamageSpread")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	z.IsPlayerMinion, err = dc.ReadBool()
+	if err != nil {
+		err = msgp.WrapError(err, "IsPlayerMinion")
+		return
+	}
+	z.AltLife1, err = dc.ReadBool()
+	if err != nil {
+		err = msgp.WrapError(err, "AltLife1")
+		return
+	}
+	z.AltLife2, err = dc.ReadBool()
+	if err != nil {
+		err = msgp.WrapError(err, "AltLife2")
+		return
+	}
+	z.BaseDamageIgnoresAttackSpeed, err = dc.ReadBool()
+	if err != nil {
+		err = msgp.WrapError(err, "BaseDamageIgnoresAttackSpeed")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *MonsterType) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 12
+	err = en.Append(0x9c)
+	if err != nil {
+		return
+	}
+	if z.Resistances == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Resistances)
+		if err != nil {
+			err = msgp.WrapError(err, "Resistances")
+			return
+		}
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteInt(z.Accuracy)
+	if err != nil {
+		err = msgp.WrapError(err, "Accuracy")
+		return
+	}
+	err = en.WriteInt(z.Armour)
+	if err != nil {
+		err = msgp.WrapError(err, "Armour")
+		return
+	}
+	err = en.WriteInt(z.Evasion)
+	if err != nil {
+		err = msgp.WrapError(err, "Evasion")
+		return
+	}
+	err = en.WriteInt(z.EnergyShield)
+	if err != nil {
+		err = msgp.WrapError(err, "EnergyShield")
+		return
+	}
+	err = en.WriteInt(z.DamageSpread)
+	if err != nil {
+		err = msgp.WrapError(err, "DamageSpread")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	err = en.WriteBool(z.IsPlayerMinion)
+	if err != nil {
+		err = msgp.WrapError(err, "IsPlayerMinion")
+		return
+	}
+	err = en.WriteBool(z.AltLife1)
+	if err != nil {
+		err = msgp.WrapError(err, "AltLife1")
+		return
+	}
+	err = en.WriteBool(z.AltLife2)
+	if err != nil {
+		err = msgp.WrapError(err, "AltLife2")
+		return
+	}
+	err = en.WriteBool(z.BaseDamageIgnoresAttackSpeed)
+	if err != nil {
+		err = msgp.WrapError(err, "BaseDamageIgnoresAttackSpeed")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *MonsterType) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 12
+	o = append(o, 0x9c)
+	if z.Resistances == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Resistances)
+	}
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendInt(o, z.Accuracy)
+	o = msgp.AppendInt(o, z.Armour)
+	o = msgp.AppendInt(o, z.Evasion)
+	o = msgp.AppendInt(o, z.EnergyShield)
+	o = msgp.AppendInt(o, z.DamageSpread)
+	o = msgp.AppendInt(o, z.Key)
+	o = msgp.AppendBool(o, z.IsPlayerMinion)
+	o = msgp.AppendBool(o, z.AltLife1)
+	o = msgp.AppendBool(o, z.AltLife2)
+	o = msgp.AppendBool(o, z.BaseDamageIgnoresAttackSpeed)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *MonsterType) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 12 {
+		err = msgp.ArrayError{Wanted: 12, Got: zb0001}
+		return
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Resistances = nil
+	} else {
+		if z.Resistances == nil {
+			z.Resistances = new(int)
+		}
+		*z.Resistances, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Resistances")
+			return
+		}
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Accuracy, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Accuracy")
+		return
+	}
+	z.Armour, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Armour")
+		return
+	}
+	z.Evasion, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Evasion")
+		return
+	}
+	z.EnergyShield, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "EnergyShield")
+		return
+	}
+	z.DamageSpread, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "DamageSpread")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	z.IsPlayerMinion, bts, err = msgp.ReadBoolBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "IsPlayerMinion")
+		return
+	}
+	z.AltLife1, bts, err = msgp.ReadBoolBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "AltLife1")
+		return
+	}
+	z.AltLife2, bts, err = msgp.ReadBoolBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "AltLife2")
+		return
+	}
+	z.BaseDamageIgnoresAttackSpeed, bts, err = msgp.ReadBoolBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "BaseDamageIgnoresAttackSpeed")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *MonsterType) Msgsize() (s int) {
+	s = 1
+	if z.Resistances == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.StringPrefixSize + len(z.ID) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize
 	return
 }
 
@@ -22563,6 +22969,109 @@ func (z *UniqueStashType) UnmarshalMsg(bts []byte) (o []byte, err error) {
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *UniqueStashType) Msgsize() (s int) {
 	s = 1 + msgp.StringPrefixSize + len(z.ID) + msgp.StringPrefixSize + len(z.Name) + msgp.StringPrefixSize + len(z.Image) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *VillageBalancePerLevelShared) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 3 {
+		err = msgp.ArrayError{Wanted: 3, Got: zb0001}
+		return
+	}
+	z.MaxAccountLevel, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "MaxAccountLevel")
+		return
+	}
+	z.GoldRespecCost, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "GoldRespecCost")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z VillageBalancePerLevelShared) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 3
+	err = en.Append(0x93)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.MaxAccountLevel)
+	if err != nil {
+		err = msgp.WrapError(err, "MaxAccountLevel")
+		return
+	}
+	err = en.WriteInt(z.GoldRespecCost)
+	if err != nil {
+		err = msgp.WrapError(err, "GoldRespecCost")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z VillageBalancePerLevelShared) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 3
+	o = append(o, 0x93)
+	o = msgp.AppendInt(o, z.MaxAccountLevel)
+	o = msgp.AppendInt(o, z.GoldRespecCost)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *VillageBalancePerLevelShared) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 3 {
+		err = msgp.ArrayError{Wanted: 3, Got: zb0001}
+		return
+	}
+	z.MaxAccountLevel, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "MaxAccountLevel")
+		return
+	}
+	z.GoldRespecCost, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "GoldRespecCost")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z VillageBalancePerLevelShared) Msgsize() (s int) {
+	s = 1 + msgp.IntSize + msgp.IntSize + msgp.IntSize
 	return
 }
 

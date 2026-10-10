@@ -300,6 +300,18 @@ var filesToExport = []PackedFile{
 		path:  "Data/PassiveTreeExpansionJewelSizes",
 		Codec: ReEncode[*raw.PassiveTreeExpansionJewelSize](),
 	},
+	{
+		path:  "Data/MonsterTypes",
+		Codec: ReEncode[*raw.MonsterType](),
+	},
+	{
+		path:  "Data/GameConstants",
+		Codec: ReEncode[*raw.GameConstant](),
+	},
+	{
+		path:  "Data/VillageBalancePerLevelShared",
+		Codec: ReEncode[*raw.VillageBalancePerLevelShared](),
+	},
 }
 
 var imagesToExport = []string{
