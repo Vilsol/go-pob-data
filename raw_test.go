@@ -23,6 +23,7 @@ import (
 	"github.com/Vilsol/go-pob-data/fields"
 	"github.com/Vilsol/go-pob-data/loader"
 	"github.com/Vilsol/go-pob-data/raw"
+	st "github.com/Vilsol/go-pob-data/stat_translations"
 	"github.com/Vilsol/go-pob-data/testdata/legacyraw"
 )
 
@@ -207,14 +208,6 @@ func isMapAsset(path string) bool {
 	return !strings.Contains(strings.TrimSuffix(filepath.Base(path), ".msgpack.br"), ".")
 }
 
-func translationNames() []string {
-	names := make([]string, 0, len(translations))
-	for _, translation := range translations {
-		names = append(names, strings.Split(filepath.Base(translation), ".")[0])
-	}
-	return names
-}
-
 func encodeTranslation(t *testing.T, jsonData []byte) []byte {
 	t.Helper()
 
@@ -303,7 +296,7 @@ func TestTupleMatchesJSON(t *testing.T) {
 		name, variant, _ := strings.Cut(strings.TrimSuffix(filepath.Base(path), ".msgpack.br"), ".")
 		want, ok := variants[name]
 		if strings.Contains(path, "stat_translations") {
-			want, ok = translationVariant, slices.Contains(translationNames(), name)
+			want, ok = translationVariant, slices.Contains(st.Files, name)
 		}
 		switch {
 		case !ok:
@@ -370,7 +363,7 @@ func TestTupleMatchesJSON(t *testing.T) {
 		}
 
 		for _, lang := range langDirs(t, version) {
-			for _, name := range translationNames() {
+			for _, name := range st.Files {
 				t.Run(version+"/"+lang+"/"+name, func(t *testing.T) {
 					base := filepath.Join("data", version, "stat_translations", lang, name)
 					tuplePath := loader.AssetPath(base, translationVariant)
@@ -379,6 +372,10 @@ func TestTupleMatchesJSON(t *testing.T) {
 							t.Errorf("%s exists, but its source is not a TranslationFile", tuplePath)
 						}
 						t.Skip("known stale: no TranslationFile to encode")
+					}
+
+					if _, err := os.Stat(base + ".json.gz"); os.IsNotExist(err) {
+						t.Skip("not extracted for this version")
 					}
 
 					source := encodeTranslation(t, readGzip(t, base+".json.gz"))
@@ -496,7 +493,7 @@ func TestFieldsKnowEveryAsset(t *testing.T) {
 		}
 	}
 
-	for _, name := range translationNames() {
+	for _, name := range st.Files {
 		if _, ok := fields.RowType("stat_translations/en/" + name); !ok {
 			t.Errorf("fields does not know stat_translations/<lang>/%s", name)
 		}

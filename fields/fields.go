@@ -19,6 +19,7 @@ import (
 
 	"github.com/Vilsol/go-pob-data/loader"
 	"github.com/Vilsol/go-pob-data/raw"
+	st "github.com/Vilsol/go-pob-data/stat_translations"
 )
 
 // Format is the list format this package reads.
@@ -86,8 +87,6 @@ var rawTables = map[string]reflect.Type{
 	"WeaponTypes":                       reflect.TypeFor[raw.WeaponType](),
 }
 
-var translationNames = []string{"stat_descriptions", "passive_skill_aura_stat_descriptions", "passive_skill_stat_descriptions"}
-
 // RowType is the type the loader decodes asset into: a raw table's row ("raw/Mods") or a
 // TranslationFile ("stat_translations/en/stat_descriptions").
 func RowType(asset string) (reflect.Type, bool) {
@@ -97,7 +96,7 @@ func RowType(asset string) (reflect.Type, bool) {
 	}
 
 	parts := strings.Split(asset, "/")
-	if len(parts) == 3 && parts[0] == "stat_translations" && parts[1] != "" && slices.Contains(translationNames, parts[2]) {
+	if len(parts) == 3 && parts[0] == "stat_translations" && parts[1] != "" && slices.Contains(st.Files, parts[2]) {
 		return reflect.TypeFor[raw.TranslationFile](), true
 	}
 
