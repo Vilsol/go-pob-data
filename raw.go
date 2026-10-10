@@ -332,6 +332,10 @@ var filesToExport = []PackedFile{
 		path:  "Data/GemTags",
 		Codec: ReEncode[*raw.GemTag](),
 	},
+	{
+		path:  "Data/Tinctures",
+		Codec: ReEncode[*raw.Tincture](),
+	},
 }
 
 var imagesToExport = []string{

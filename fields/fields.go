@@ -102,6 +102,7 @@ var rawTables = map[string]reflect.Type{
 	"SkillTotems":                       reflect.TypeFor[raw.SkillTotem](),
 	"Stats":                             reflect.TypeFor[raw.Stat](),
 	"Tags":                              reflect.TypeFor[raw.Tag](),
+	"Tinctures":                         reflect.TypeFor[raw.Tincture](),
 	"UniqueStashLayout":                 reflect.TypeFor[raw.UniqueStashLayout](),
 	"UniqueStashTypes":                  reflect.TypeFor[raw.UniqueStashType](),
 	"VillageBalancePerLevelShared":      reflect.TypeFor[raw.VillageBalancePerLevelShared](),

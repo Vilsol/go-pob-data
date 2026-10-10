@@ -23661,6 +23661,125 @@ func (z TagName) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *Tincture) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 4 {
+		err = msgp.ArrayError{Wanted: 4, Got: zb0001}
+		return
+	}
+	z.BaseItem, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "BaseItem")
+		return
+	}
+	z.DebuffInterval, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "DebuffInterval")
+		return
+	}
+	z.Cooldown, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Cooldown")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *Tincture) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 4
+	err = en.Append(0x94)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.BaseItem)
+	if err != nil {
+		err = msgp.WrapError(err, "BaseItem")
+		return
+	}
+	err = en.WriteInt(z.DebuffInterval)
+	if err != nil {
+		err = msgp.WrapError(err, "DebuffInterval")
+		return
+	}
+	err = en.WriteInt(z.Cooldown)
+	if err != nil {
+		err = msgp.WrapError(err, "Cooldown")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *Tincture) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 4
+	o = append(o, 0x94)
+	o = msgp.AppendInt(o, z.BaseItem)
+	o = msgp.AppendInt(o, z.DebuffInterval)
+	o = msgp.AppendInt(o, z.Cooldown)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *Tincture) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 4 {
+		err = msgp.ArrayError{Wanted: 4, Got: zb0001}
+		return
+	}
+	z.BaseItem, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "BaseItem")
+		return
+	}
+	z.DebuffInterval, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "DebuffInterval")
+		return
+	}
+	z.Cooldown, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Cooldown")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *Tincture) Msgsize() (s int) {
+	s = 1 + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *TranslationFile) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()
