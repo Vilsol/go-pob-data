@@ -85,6 +85,11 @@ func run(gamePath string, gameVersion string, treeOnly bool) error {
 		return err
 	}
 
+	slog.Info("extracting text files")
+	if err := extractTextFiles(loader, gameVersion); err != nil {
+		return err
+	}
+
 	slog.Info("generating meta")
 	return generateMeta()
 }
