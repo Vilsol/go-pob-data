@@ -2,11 +2,16 @@ package main
 
 import (
 	"encoding/json"
+	"io/fs"
 	"os"
+	"path/filepath"
+	"slices"
+	"strings"
 
 	"github.com/pkg/errors"
 
 	"github.com/Vilsol/go-pob-data/extractor"
+	"github.com/Vilsol/go-pob-data/loader"
 )
 
 type Metadata struct {
@@ -23,6 +28,14 @@ func generateMeta() error {
 	for _, entry := range dir {
 		if entry.IsDir() {
 			metadata.Versions = append(metadata.Versions, entry.Name())
+
+			manifest, err := manifestJSON(filepath.Join("data", entry.Name()))
+			if err != nil {
+				return err
+			}
+			if err := os.WriteFile(filepath.Join("data", entry.Name(), "manifest.json"), manifest, 0o644); err != nil {
+				return errors.Wrap(err, "failed writing manifest")
+			}
 		}
 	}
 
@@ -32,6 +45,64 @@ func generateMeta() error {
 	}
 
 	return errors.Wrap(os.WriteFile("data/meta.json", bs, 0o644), "failed writing metadata")
+}
+
+// manifestJSON lists what versionDir publishes. Every table and translation has a json.gz, whichever
+// tuple layouts it also has.
+func manifestJSON(versionDir string) ([]byte, error) {
+	manifest := loader.Manifest{
+		Tables:           []string{},
+		StatTranslations: []string{},
+		Languages:        []string{},
+		Files:            []string{},
+	}
+
+	tables, err := filepath.Glob(filepath.Join(versionDir, "raw", "*.json.gz"))
+	if err != nil {
+		return nil, errors.Wrap(err, "failed listing tables")
+	}
+	for _, table := range tables {
+		manifest.Tables = append(manifest.Tables, strings.TrimSuffix(filepath.Base(table), ".json.gz"))
+	}
+
+	languages, err := os.ReadDir(filepath.Join(versionDir, "stat_translations"))
+	if err != nil && !os.IsNotExist(err) {
+		return nil, errors.Wrap(err, "failed listing languages")
+	}
+	for _, language := range languages {
+		if language.IsDir() {
+			manifest.Languages = append(manifest.Languages, language.Name())
+		}
+	}
+
+	translations, err := filepath.Glob(filepath.Join(versionDir, "stat_translations", "en", "*.json.gz"))
+	if err != nil {
+		return nil, errors.Wrap(err, "failed listing translations")
+	}
+	for _, translation := range translations {
+		manifest.StatTranslations = append(manifest.StatTranslations, strings.TrimSuffix(filepath.Base(translation), ".json.gz"))
+	}
+
+	filesDir := filepath.Join(versionDir, "files")
+	err = filepath.WalkDir(filesDir, func(path string, d fs.DirEntry, err error) error {
+		if err != nil || d.IsDir() {
+			return err
+		}
+		rel, err := filepath.Rel(filesDir, path)
+		if err != nil {
+			return errors.Wrap(err, "failed resolving file path")
+		}
+		manifest.Files = append(manifest.Files, strings.TrimSuffix(filepath.ToSlash(rel), ".br"))
+		return nil
+	})
+	if err != nil && !os.IsNotExist(err) {
+		return nil, errors.Wrap(err, "failed listing files")
+	}
+
+	slices.Sort(manifest.Files)
+
+	b, err := json.MarshalIndent(manifest, "", "\t")
+	return append(b, '\n'), errors.Wrap(err, "failed marshaling manifest")
 }
 
 func IsNewHash(gameVersion string) bool {
