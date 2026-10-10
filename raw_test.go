@@ -51,9 +51,9 @@ var knownStale = map[string]string{
 // from absent, and no json. The current decoder already fails on them, so they have no tuple asset.
 const staleTranslations = "3.20"
 
-// 3.29 translations were re-extracted by the strict stat description parser after their map assets were
-// frozen, so they no longer decode to the rows of their map assets.
-const reparsedTranslations = "3.29"
+// 3.29 was re-extracted from patch 3.29.3.3, and its translations by the strict stat description parser,
+// after its map assets were frozen, so its assets no longer decode to the rows of their map assets.
+const reextracted = "3.29"
 
 // rowCodecs decodes a table's tuple asset and its frozen map asset to the json of their rows.
 type rowCodecs struct {
@@ -444,13 +444,14 @@ func TestTupleMatchesLegacy(t *testing.T) {
 
 			version := strings.Split(filepath.ToSlash(legacyPath), "/")[1]
 
+			if version == reextracted {
+				t.Skip("re-extracted after its map asset was frozen")
+			}
+
 			codec, variant := tables[name], variants[name]
 			if strings.Contains(legacyPath, "stat_translations") {
 				if version == staleTranslations {
 					t.Skip("known stale: no TranslationFile to decode")
-				}
-				if version == reparsedTranslations {
-					t.Skip("re-extracted after its map asset was frozen")
 				}
 				codec, variant = translationCodecs, loader.TupleVariant(raw.TranslationFile{})
 			} else if knownStale[version+"/"+name] == undecodable {
