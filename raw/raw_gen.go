@@ -11080,8 +11080,8 @@ func (z *GrantedEffect) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 18 {
-		err = msgp.ArrayError{Wanted: 18, Got: zb0001}
+	if zb0001 != 19 {
+		err = msgp.ArrayError{Wanted: 19, Got: zb0001}
 		return
 	}
 	if dc.IsNil() {
@@ -11235,6 +11235,24 @@ func (z *GrantedEffect) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 	}
+	var zb0007 uint32
+	zb0007, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "StatSet2")
+		return
+	}
+	if cap(z.StatSet2) >= int(zb0007) {
+		z.StatSet2 = (z.StatSet2)[:zb0007]
+	} else {
+		z.StatSet2 = make([]int, zb0007)
+	}
+	for za0006 := range z.StatSet2 {
+		z.StatSet2[za0006], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "StatSet2", za0006)
+			return
+		}
+	}
 	z.Attribute, err = dc.ReadInt()
 	if err != nil {
 		err = msgp.WrapError(err, "Attribute")
@@ -11280,8 +11298,8 @@ func (z *GrantedEffect) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *GrantedEffect) EncodeMsg(en *msgp.Writer) (err error) {
-	// array header, size 18
-	err = en.Append(0xdc, 0x0, 0x12)
+	// array header, size 19
+	err = en.Append(0xdc, 0x0, 0x13)
 	if err != nil {
 		return
 	}
@@ -11391,6 +11409,18 @@ func (z *GrantedEffect) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
+	err = en.WriteArrayHeader(uint32(len(z.StatSet2)))
+	if err != nil {
+		err = msgp.WrapError(err, "StatSet2")
+		return
+	}
+	for za0006 := range z.StatSet2 {
+		err = en.WriteInt(z.StatSet2[za0006])
+		if err != nil {
+			err = msgp.WrapError(err, "StatSet2", za0006)
+			return
+		}
+	}
 	err = en.WriteInt(z.Attribute)
 	if err != nil {
 		err = msgp.WrapError(err, "Attribute")
@@ -11437,8 +11467,8 @@ func (z *GrantedEffect) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *GrantedEffect) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// array header, size 18
-	o = append(o, 0xdc, 0x0, 0x12)
+	// array header, size 19
+	o = append(o, 0xdc, 0x0, 0x13)
 	if z.ActiveSkill == nil {
 		o = msgp.AppendNil(o)
 	} else {
@@ -11476,6 +11506,10 @@ func (z *GrantedEffect) MarshalMsg(b []byte) (o []byte, err error) {
 	for za0005 := range z.AddMinionTypes {
 		o = msgp.AppendInt(o, z.AddMinionTypes[za0005])
 	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.StatSet2)))
+	for za0006 := range z.StatSet2 {
+		o = msgp.AppendInt(o, z.StatSet2[za0006])
+	}
 	o = msgp.AppendInt(o, z.Attribute)
 	o = msgp.AppendInt(o, z.CastTime)
 	o = msgp.AppendInt(o, z.GrantedEffectStatSets)
@@ -11495,8 +11529,8 @@ func (z *GrantedEffect) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 18 {
-		err = msgp.ArrayError{Wanted: 18, Got: zb0001}
+	if zb0001 != 19 {
+		err = msgp.ArrayError{Wanted: 19, Got: zb0001}
 		return
 	}
 	if msgp.IsNil(bts) {
@@ -11647,6 +11681,24 @@ func (z *GrantedEffect) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 	}
+	var zb0007 uint32
+	zb0007, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "StatSet2")
+		return
+	}
+	if cap(z.StatSet2) >= int(zb0007) {
+		z.StatSet2 = (z.StatSet2)[:zb0007]
+	} else {
+		z.StatSet2 = make([]int, zb0007)
+	}
+	for za0006 := range z.StatSet2 {
+		z.StatSet2[za0006], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "StatSet2", za0006)
+			return
+		}
+	}
 	z.Attribute, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "Attribute")
@@ -11709,7 +11761,7 @@ func (z *GrantedEffect) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	s += msgp.StringPrefixSize + len(z.SupportGemLetter) + msgp.StringPrefixSize + len(z.ID) + msgp.ArrayHeaderSize + (len(z.SupportTypes) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.AddTypes) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.ExcludeTypes) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.WeaponRestrictions) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.AddMinionTypes) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize
+	s += msgp.StringPrefixSize + len(z.SupportGemLetter) + msgp.StringPrefixSize + len(z.ID) + msgp.ArrayHeaderSize + (len(z.SupportTypes) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.AddTypes) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.ExcludeTypes) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.WeaponRestrictions) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.AddMinionTypes) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.StatSet2) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize
 	return
 }
 

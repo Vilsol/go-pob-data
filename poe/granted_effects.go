@@ -66,8 +66,19 @@ func (g *GrantedEffect) Levels() map[int]*GrantedEffectsPerLevel {
 	return grantedEffectsPerLevelsByIDMap[g.Key]
 }
 
+// GetGrantedEffectStatSet returns the effect's StatSet1.
 func (g *GrantedEffect) GetGrantedEffectStatSet() *GrantedEffectStatSet {
 	return GrantedEffectStatSets[g.GrantedEffectStatSets]
+}
+
+// GetAdditionalStatSets returns the effect's StatSet2.
+func (g *GrantedEffect) GetAdditionalStatSets() []*GrantedEffectStatSet {
+	out := make([]*GrantedEffectStatSet, len(g.StatSet2))
+	for i, key := range g.StatSet2 {
+		out[i] = GrantedEffectStatSets[key]
+	}
+
+	return out
 }
 
 func (g *GrantedEffect) GetSupportTypes() []*ActiveSkillType {
