@@ -1,5 +1,11 @@
 package raw
 
+import (
+	"encoding/json"
+
+	"github.com/pkg/errors"
+)
+
 type GrantedEffectsPerLevel struct {
 	CostAmounts                []int `json:"CostAmounts"`
 	CostTypes                  []int `json:"CostTypes"`
@@ -20,5 +26,22 @@ type GrantedEffectsPerLevel struct {
 	StoredUses                 int   `json:"StoredUses"`
 	VaalSouls                  int   `json:"VaalSouls"`
 	VaalStoredUses             int   `json:"VaalStoredUses"`
+	PvPDamageMultiplier        int   `json:"PvPDamageMultiplier"` // a MORE modifier, in percent
 	Key                        int   `json:"_key"`
+}
+
+// UnmarshalJSON reads PvPDamageMultiplier as Var10 too, the name tables extracted before 3.29 give
+// that column.
+func (g *GrantedEffectsPerLevel) UnmarshalJSON(b []byte) error {
+	type plain GrantedEffectsPerLevel
+	var named struct {
+		Var10 *int `json:"Var10"`
+		plain
+	}
+	if err := json.Unmarshal(b, &named); err != nil {
+		return errors.Wrap(err, "failed to decode granted effect level")
+	}
+	*g = GrantedEffectsPerLevel(named.plain)
+	setFrom(&g.PvPDamageMultiplier, named.Var10)
+	return nil
 }

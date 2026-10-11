@@ -12870,8 +12870,8 @@ func (z *GrantedEffectsPerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 20 {
-		err = msgp.ArrayError{Wanted: 20, Got: zb0001}
+	if zb0001 != 21 {
+		err = msgp.ArrayError{Wanted: 21, Got: zb0001}
 		return
 	}
 	var zb0002 uint32
@@ -12995,6 +12995,11 @@ func (z *GrantedEffectsPerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err, "VaalStoredUses")
 		return
 	}
+	z.PvPDamageMultiplier, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "PvPDamageMultiplier")
+		return
+	}
 	z.Key, err = dc.ReadInt()
 	if err != nil {
 		err = msgp.WrapError(err, "Key")
@@ -13005,8 +13010,8 @@ func (z *GrantedEffectsPerLevel) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *GrantedEffectsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
-	// array header, size 20
-	err = en.Append(0xdc, 0x0, 0x14)
+	// array header, size 21
+	err = en.Append(0xdc, 0x0, 0x15)
 	if err != nil {
 		return
 	}
@@ -13119,6 +13124,11 @@ func (z *GrantedEffectsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "VaalStoredUses")
 		return
 	}
+	err = en.WriteInt(z.PvPDamageMultiplier)
+	if err != nil {
+		err = msgp.WrapError(err, "PvPDamageMultiplier")
+		return
+	}
 	err = en.WriteInt(z.Key)
 	if err != nil {
 		err = msgp.WrapError(err, "Key")
@@ -13130,8 +13140,8 @@ func (z *GrantedEffectsPerLevel) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *GrantedEffectsPerLevel) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// array header, size 20
-	o = append(o, 0xdc, 0x0, 0x14)
+	// array header, size 21
+	o = append(o, 0xdc, 0x0, 0x15)
 	o = msgp.AppendArrayHeader(o, uint32(len(z.CostAmounts)))
 	for za0001 := range z.CostAmounts {
 		o = msgp.AppendInt(o, z.CostAmounts[za0001])
@@ -13157,6 +13167,7 @@ func (z *GrantedEffectsPerLevel) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.AppendInt(o, z.StoredUses)
 	o = msgp.AppendInt(o, z.VaalSouls)
 	o = msgp.AppendInt(o, z.VaalStoredUses)
+	o = msgp.AppendInt(o, z.PvPDamageMultiplier)
 	o = msgp.AppendInt(o, z.Key)
 	return
 }
@@ -13169,8 +13180,8 @@ func (z *GrantedEffectsPerLevel) UnmarshalMsg(bts []byte) (o []byte, err error) 
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 20 {
-		err = msgp.ArrayError{Wanted: 20, Got: zb0001}
+	if zb0001 != 21 {
+		err = msgp.ArrayError{Wanted: 21, Got: zb0001}
 		return
 	}
 	var zb0002 uint32
@@ -13294,6 +13305,11 @@ func (z *GrantedEffectsPerLevel) UnmarshalMsg(bts []byte) (o []byte, err error) 
 		err = msgp.WrapError(err, "VaalStoredUses")
 		return
 	}
+	z.PvPDamageMultiplier, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "PvPDamageMultiplier")
+		return
+	}
 	z.Key, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "Key")
@@ -13305,7 +13321,7 @@ func (z *GrantedEffectsPerLevel) UnmarshalMsg(bts []byte) (o []byte, err error) 
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *GrantedEffectsPerLevel) Msgsize() (s int) {
-	s = 3 + msgp.ArrayHeaderSize + (len(z.CostAmounts) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.CostTypes) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	s = 3 + msgp.ArrayHeaderSize + (len(z.CostAmounts) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.CostTypes) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
 	return
 }
 
