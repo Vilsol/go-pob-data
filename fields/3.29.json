@@ -1,6 +1,6 @@
 {
   "format": "go-pob-data-fields/1",
-  "dataModule": "github.com/Vilsol/go-pob-data@v0.5.0",
+  "dataModule": "github.com/Vilsol/go-pob-data@v0.5.1",
   "version": "3.29",
   "assets": {
     "raw/ActiveSkillType": {
@@ -354,10 +354,18 @@
     },
     "raw/ItemExperiencePerLevel": {
       "type": "ItemExperiencePerLevel",
-      "keep": []
+      "keep": [
+        "ItemExperienceType"
+      ]
     },
     "raw/ItemVisualIdentity": {
       "type": "ItemVisualIdentity",
+      "keep": [
+        "ID"
+      ]
+    },
+    "raw/ModFamily": {
+      "type": "ModFamily",
       "keep": [
         "ID"
       ]
@@ -371,6 +379,9 @@
     "raw/Mods": {
       "type": "Mod",
       "keep": [
+        "BuffTemplate",
+        "BuffTemplate2",
+        "Families",
         "Key",
         "Level",
         "Stat1Max",
@@ -518,10 +529,14 @@
         "BaseItemType",
         "Description",
         "Dex",
+        "GemColour",
+        "GemLevelProgression",
+        "GemVariants",
         "GlobalGemLevelStat",
         "GrantedEffect",
         "HungryLoopMod",
         "Int",
+        "IsSupport",
         "IsVaalGem",
         "Key",
         "RegularVariant",
@@ -642,48 +657,48 @@
   "wholeTypes": {
     "ActiveSkill": [
       "*github.com/Vilsol/go-pob-data/poe.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:38261",
-      "*github.com/Vilsol/go-pob-data/raw.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2ActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:40538",
+      "*github.com/Vilsol/go-pob-data/raw.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2ActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:40572",
       "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38091",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:40482",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:40516",
       "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38222",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:40499",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:40533",
       "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:38234",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:40511"
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:40545"
     ],
     "ActiveSkillType": [
       "*github.com/Vilsol/go-pob-data/poe.ActiveSkillType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeActiveSkillType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:38385",
-      "*github.com/Vilsol/go-pob-data/raw.ActiveSkillType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2ActiveSkillType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:40692",
+      "*github.com/Vilsol/go-pob-data/raw.ActiveSkillType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2ActiveSkillType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:40726",
       "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38329",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:40636",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:40670",
       "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38346",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:40653",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:40687",
       "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:38358",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:40665"
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:40699"
     ],
     "BaseItemType": [
       "*github.com/Vilsol/go-pob-data/poe.BaseItemType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeBaseItemType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:38510",
-      "*github.com/Vilsol/go-pob-data/raw.BaseItemType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2BaseItemType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:41147",
+      "*github.com/Vilsol/go-pob-data/raw.BaseItemType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2BaseItemType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:41181",
       "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38446",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41091",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41125",
       "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38463",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41108",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41142",
       "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:38475",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:41120"
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:41154"
     ],
     "CostType": [
-      "*github.com/Vilsol/go-pob-data/poe.CostType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeCostType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:38634",
-      "*github.com/Vilsol/go-pob-data/raw.CostType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2CostType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:41321",
+      "*github.com/Vilsol/go-pob-data/poe.CostType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeCostType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:38651",
+      "*github.com/Vilsol/go-pob-data/raw.CostType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2CostType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:41372",
       "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38578",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41265",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41299",
       "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38595",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41282",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41316",
       "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:38607",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:41294"
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:41328"
     ],
     "GrantedEffect": [
       "*github.com/Vilsol/go-pob-data/poe.GrantedEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorGrantedEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:15209",
-      "*github.com/Vilsol/go-pob-data/poe.GrantedEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:38906",
-      "*github.com/Vilsol/go-pob-data/raw.GrantedEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:41742",
+      "*github.com/Vilsol/go-pob-data/poe.GrantedEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:38923",
+      "*github.com/Vilsol/go-pob-data/raw.GrantedEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:41793",
       "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:7880",
       "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8392",
       "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8604",
@@ -727,74 +742,74 @@
       "*github.com/Vilsol/go-pob/wasm/exposition.TimelessSearch converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalExpositionTimelessSearch (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:31521",
       "[]*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to interface{} in github.com/Vilsol/go-pob/calculator.initEnvSpecKeep (reflection or an unfollowed dynamic call may read any field) @ calculator/env.go:1339",
       "[]*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to interface{} in github.com/Vilsol/go-pob/calculator.initEnvSpecKeep (reflection or an unfollowed dynamic call may read any field) @ calculator/env.go:1341",
-      "github.com/Vilsol/go-pob/calculator.Breakdown converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:71",
-      "github.com/Vilsol/go-pob/calculator.Calculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:70",
-      "github.com/Vilsol/go-pob/calculator.ComparePowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:181",
-      "github.com/Vilsol/go-pob/wasm/exposition.MiscCalculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:86",
+      "github.com/Vilsol/go-pob/calculator.Breakdown converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:72",
+      "github.com/Vilsol/go-pob/calculator.Calculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:71",
+      "github.com/Vilsol/go-pob/calculator.ComparePowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:186",
+      "github.com/Vilsol/go-pob/wasm/exposition.MiscCalculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:87",
       "github.com/Vilsol/go-pob/wasm/exposition.PowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.PowerReportExports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/power_report.go:15",
       "github.com/Vilsol/go-pob/wasm/exposition.TimelessSearch converted to any in github.com/Vilsol/go-pob/wasm/exposition.TreeTimelessExports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/tree_timeless.go:22",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38702",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41686",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38867",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41703",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:38879",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:41715"
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38719",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41737",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38884",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41754",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:38896",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:41766"
     ],
     "GrantedEffectQualityStat": [
-      "*github.com/Vilsol/go-pob-data/poe.GrantedEffectQualityStat converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffectQualityStat (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:39050",
-      "*github.com/Vilsol/go-pob-data/raw.GrantedEffectQualityStat converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffectQualityStat (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:41953",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38974",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41897",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39011",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41914",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:39023",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:41926"
+      "*github.com/Vilsol/go-pob-data/poe.GrantedEffectQualityStat converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffectQualityStat (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:39067",
+      "*github.com/Vilsol/go-pob-data/raw.GrantedEffectQualityStat converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffectQualityStat (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:42004",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:38991",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41948",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39028",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41965",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:39040",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:41977"
     ],
     "GrantedEffectStatSet": [
-      "*github.com/Vilsol/go-pob-data/poe.GrantedEffectStatSet converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffectStatSet (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:39214",
-      "*github.com/Vilsol/go-pob-data/raw.GrantedEffectStatSet converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffectStatSet (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:42189",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39118",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42133",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39175",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42150",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:39187",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:42162"
+      "*github.com/Vilsol/go-pob-data/poe.GrantedEffectStatSet converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffectStatSet (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:39231",
+      "*github.com/Vilsol/go-pob-data/raw.GrantedEffectStatSet converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffectStatSet (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:42240",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39135",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42184",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39192",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42201",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:39204",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:42213"
     ],
     "GrantedEffectStatSetsPerLevel": [
-      "*github.com/Vilsol/go-pob-data/poe.GrantedEffectStatSetsPerLevel converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffectStatSetsPerLevel (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:39398",
-      "*github.com/Vilsol/go-pob-data/raw.GrantedEffectStatSetsPerLevel converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffectStatSetsPerLevel (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:42627",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39282",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42571",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39359",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42588",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:39371",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:42600"
+      "*github.com/Vilsol/go-pob-data/poe.GrantedEffectStatSetsPerLevel converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffectStatSetsPerLevel (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:39415",
+      "*github.com/Vilsol/go-pob-data/raw.GrantedEffectStatSetsPerLevel converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffectStatSetsPerLevel (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:42678",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39299",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42622",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39376",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42639",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:39388",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:42651"
     ],
     "GrantedEffectsPerLevel": [
-      "*github.com/Vilsol/go-pob-data/poe.GrantedEffectsPerLevel converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffectsPerLevel (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:39542",
-      "*github.com/Vilsol/go-pob-data/raw.GrantedEffectsPerLevel converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffectsPerLevel (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:43020",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39466",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42964",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39503",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42981",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:39515",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:42993"
+      "*github.com/Vilsol/go-pob-data/poe.GrantedEffectsPerLevel converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffectsPerLevel (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:39559",
+      "*github.com/Vilsol/go-pob-data/raw.GrantedEffectsPerLevel converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffectsPerLevel (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:43071",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39483",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43015",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39520",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43032",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:39532",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:43044"
     ],
     "ItemClass": [
-      "*github.com/Vilsol/go-pob-data/poe.ItemClass converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeItemClass (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:39666",
-      "*github.com/Vilsol/go-pob-data/raw.ItemClass converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2ItemClass (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:43387",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39610",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43331",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39627",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43348",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:39639",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:43360"
+      "*github.com/Vilsol/go-pob-data/poe.ItemClass converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeItemClass (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:39683",
+      "*github.com/Vilsol/go-pob-data/raw.ItemClass converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2ItemClass (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:43438",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39627",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43382",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39644",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43399",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:39656",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:43411"
     ],
     "SkillGem": [
       "*github.com/Vilsol/go-pob-data/poe.SkillGem converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorGemEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:14854",
       "*github.com/Vilsol/go-pob-data/poe.SkillGem converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalModdbListCfg (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:31993",
-      "*github.com/Vilsol/go-pob-data/poe.SkillGem converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeSkillGem (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:39869",
-      "*github.com/Vilsol/go-pob-data/raw.SkillGem converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2SkillGem (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:43752",
+      "*github.com/Vilsol/go-pob-data/poe.SkillGem converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeSkillGem (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:39903",
+      "*github.com/Vilsol/go-pob-data/raw.SkillGem converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2SkillGem (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:43890",
       "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:7880",
       "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8392",
       "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8604",
@@ -846,41 +861,44 @@
       "*github.com/Vilsol/go-pob/wasm/exposition.TimelessSearch converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalExpositionTimelessSearch (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:31521",
       "[]*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to interface{} in github.com/Vilsol/go-pob/calculator.initEnvSpecKeep (reflection or an unfollowed dynamic call may read any field) @ calculator/env.go:1339",
       "[]*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to interface{} in github.com/Vilsol/go-pob/calculator.initEnvSpecKeep (reflection or an unfollowed dynamic call may read any field) @ calculator/env.go:1341",
-      "github.com/Vilsol/go-pob/calculator.Breakdown converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:71",
-      "github.com/Vilsol/go-pob/calculator.Calculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:70",
-      "github.com/Vilsol/go-pob/calculator.ComparePowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:181",
-      "github.com/Vilsol/go-pob/wasm/exposition.MiscCalculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:86",
+      "github.com/Vilsol/go-pob-data/poe.SkillGem converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:121",
+      "github.com/Vilsol/go-pob/calculator.Breakdown converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:72",
+      "github.com/Vilsol/go-pob/calculator.Calculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:71",
+      "github.com/Vilsol/go-pob/calculator.ComparePowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:186",
+      "github.com/Vilsol/go-pob/wasm/exposition.MiscCalculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:87",
       "github.com/Vilsol/go-pob/wasm/exposition.PowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.PowerReportExports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/power_report.go:15",
       "github.com/Vilsol/go-pob/wasm/exposition.TimelessSearch converted to any in github.com/Vilsol/go-pob/wasm/exposition.TreeTimelessExports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/tree_timeless.go:22",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39742",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43696",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39830",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43713",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:39842",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:43725"
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39759",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43817",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39847",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43834",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:39859",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:43846"
     ],
     "Stat": [
-      "*github.com/Vilsol/go-pob-data/poe.Stat converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeStat (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:39993",
-      "*github.com/Vilsol/go-pob-data/raw.Stat converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2Stat (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:44103",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39937",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44047",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39954",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44064",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:39966",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:44076"
+      "*github.com/Vilsol/go-pob-data/poe.Stat converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeStat (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:40027",
+      "*github.com/Vilsol/go-pob-data/raw.Stat converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2Stat (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:44241",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39971",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44185",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:39988",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44202",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:40000",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:44214"
     ],
     "Tag": [
-      "*github.com/Vilsol/go-pob-data/poe.Tag converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeTag (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:40117",
-      "*github.com/Vilsol/go-pob-data/raw.Tag converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2Tag (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:44264",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:40061",
-      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44208",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:40078",
-      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44225",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:40090",
-      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:44237"
+      "*github.com/Vilsol/go-pob-data/poe.Tag converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeTag (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:40151",
+      "*github.com/Vilsol/go-pob-data/raw.Tag converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2Tag (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:44402",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:40095",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44346",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:40112",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44363",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:40124",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:44375"
     ],
     "plain": [
-      "*struct{Divisor *int \"json:\\\"Divisor\\\"\"; github.com/Vilsol/go-pob-data/raw.plain} converted to any in (*github.com/Vilsol/go-pob-data/raw.CostType).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.0/raw/cost_types.go:25"
+      "*struct{BuffTemplate1 *int \"json:\\\"BuffTemplate1\\\"\"; github.com/Vilsol/go-pob-data/raw.plain} converted to any in (*github.com/Vilsol/go-pob-data/raw.Mod).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.1/raw/mods.go:76",
+      "*struct{Divisor *int \"json:\\\"Divisor\\\"\"; github.com/Vilsol/go-pob-data/raw.plain} converted to any in (*github.com/Vilsol/go-pob-data/raw.CostType).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.1/raw/cost_types.go:25",
+      "*struct{Str *int \"json:\\\"StrengthRequirementPercent\\\"\"; Dex *int \"json:\\\"DexterityRequirementPercent\\\"\"; Int *int \"json:\\\"IntelligenceRequirementPercent\\\"\"; github.com/Vilsol/go-pob-data/raw.plain} converted to any in (*github.com/Vilsol/go-pob-data/raw.SkillGem).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.1/raw/skill_gems.go:43"
     ]
   },
   "testOnlyReads": {
@@ -956,19 +974,19 @@
   },
   "allowlistedConversions": {
     "github.com/Vilsol/go-pob-data/loader.LoadRaw -> github.com/Vilsol/go-pob-data/loader.VariantURL": [
-      "go-pob-data@v0.5.0/loader/raw_loader.go:18"
+      "go-pob-data@v0.5.1/loader/raw_loader.go:18"
     ],
     "github.com/Vilsol/go-pob-data/loader.LoadRaw -> reflect.ValueOf": [
-      "go-pob-data@v0.5.0/loader/raw_loader.go:18"
+      "go-pob-data@v0.5.1/loader/raw_loader.go:18"
     ],
     "github.com/Vilsol/go-pob-data/loader.LoadTranslation -> github.com/Vilsol/go-pob-data/loader.VariantURL": [
-      "go-pob-data@v0.5.0/loader/translation_loader.go:19"
+      "go-pob-data@v0.5.1/loader/translation_loader.go:19"
     ],
     "github.com/Vilsol/go-pob-data/loader.RawURL -> github.com/Vilsol/go-pob-data/loader.TupleVariant": [
-      "go-pob-data@v0.5.0/loader/naming.go:105"
+      "go-pob-data@v0.5.1/loader/naming.go:105"
     ],
     "github.com/Vilsol/go-pob-data/loader.TranslationURL -> github.com/Vilsol/go-pob-data/loader.TupleVariant": [
-      "go-pob-data@v0.5.0/loader/naming.go:111"
+      "go-pob-data@v0.5.1/loader/naming.go:111"
     ]
   },
   "droppedKeys": {
@@ -1169,6 +1187,9 @@
       "IsAlternateArt",
       "Key"
     ],
+    "raw/ModFamily": [
+      "Key"
+    ],
     "raw/ModType": [
       "Key",
       "ModSellPriceTypesKeys",
@@ -1177,7 +1198,6 @@
     "raw/Mods": [
       "AchievementItemsKey",
       "ArchnemesisMinionMod",
-      "BuffTemplate",
       "ChestModType",
       "CorrectGroup",
       "CraftingItemClassRestrictions",
