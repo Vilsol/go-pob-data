@@ -22,8 +22,16 @@ import (
 	st "github.com/Vilsol/go-pob-data/stat_translations"
 )
 
-// Format is the list format this package reads.
-const Format = "go-pob-data-fields/1"
+// Format is the newest list format this package reads. Format 2 adds KeepAll; a format 1 list reads as
+// before.
+const (
+	Format   = "go-pob-data-fields/2"
+	FormatV1 = "go-pob-data-fields/1"
+)
+
+// KeepAll as an asset's only key path keeps every field of its rows, so the .min is the full asset and a
+// column added to the row type needs no new list. Format 2 only.
+const KeepAll = "*"
 
 //go:embed *.json
 var embedded embed.FS
@@ -39,7 +47,8 @@ type List struct {
 
 // Asset lists the key paths to keep of one asset. A path is Go field names joined by dots: "A.B" keeps
 // B inside the value under A, through slices, arrays and pointers. A path with no listed children keeps
-// its whole value; one with children keeps only those. An empty Keep keeps only the row count.
+// its whole value; one with children keeps only those. An empty Keep keeps only the row count, and
+// []string{KeepAll} every field.
 type Asset struct {
 	Type string   `json:"type"`
 	Keep []string `json:"keep"`
@@ -142,8 +151,8 @@ func Parse(b []byte) (*List, error) {
 		return nil, errors.Wrap(err, "failed to decode list")
 	}
 
-	if l.Format != Format {
-		return nil, errors.Errorf("list format %q, this package reads %q", l.Format, Format)
+	if l.Format != Format && l.Format != FormatV1 {
+		return nil, errors.Errorf("list format %q, this package reads %q and %q", l.Format, Format, FormatV1)
 	}
 	if l.Version == "" {
 		return nil, errors.New("list has no version")
@@ -157,6 +166,9 @@ func Parse(b []byte) (*List, error) {
 		}
 		if a.Type != t.Name() {
 			return nil, errors.Errorf("%s %s: type %q, the loader decodes it as %s", l.Version, asset, a.Type, t.Name())
+		}
+		if l.Format == FormatV1 && slices.Contains(a.Keep, KeepAll) {
+			return nil, errors.Errorf("%s %s: key path %q needs format %q", l.Version, asset, KeepAll, Format)
 		}
 		if _, err := keepTree(t, a.Keep); err != nil {
 			return nil, errors.Wrapf(err, "%s %s", l.Version, asset)
@@ -237,10 +249,19 @@ func (l *List) MinVariant(asset string) (string, bool) {
 
 type node struct {
 	children map[string]*node
+	// all keeps the whole value, KeepAll's root.
+	all bool
 }
 
 // keepTree rejects a path that names no field, or descends into a value that has no fields.
 func keepTree(t reflect.Type, keep []string) (*node, error) {
+	if slices.Contains(keep, KeepAll) {
+		if len(keep) != 1 {
+			return nil, errors.Errorf("key path %q must be the only one", KeepAll)
+		}
+		return &node{all: true}, nil
+	}
+
 	root := &node{}
 	for _, p := range keep {
 		n, ft := root, t

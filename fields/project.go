@@ -65,6 +65,10 @@ func Project(asset string, keep []string, full []byte) ([]byte, error) {
 }
 
 func zeroUnkept(v reflect.Value, n *node) {
+	if n.all {
+		return
+	}
+
 	switch v.Kind() {
 	case reflect.Pointer:
 		if !v.IsNil() {

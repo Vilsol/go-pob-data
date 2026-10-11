@@ -81,8 +81,8 @@ func TestParseRejects(t *testing.T) {
 		},
 		{
 			name: "unknown format",
-			edit: func(list map[string]any) { list["format"] = "go-pob-data-fields/2" },
-			want: `list format "go-pob-data-fields/2", this package reads "go-pob-data-fields/1"`,
+			edit: func(list map[string]any) { list["format"] = "go-pob-data-fields/3" },
+			want: `list format "go-pob-data-fields/3", this package reads "go-pob-data-fields/2" and "go-pob-data-fields/1"`,
 		},
 		{
 			name: "unknown asset",
@@ -90,6 +90,22 @@ func TestParseRejects(t *testing.T) {
 				list["assets"].(map[string]any)["raw/NoSuchTable"] = map[string]any{"type": "Mod", "keep": []any{}}
 			},
 			want: `3.29 raw/NoSuchTable: unknown asset`,
+		},
+		{
+			name: "keep every key in format 1",
+			edit: func(list map[string]any) {
+				list["format"] = FormatV1
+				weaponTypes(list)["keep"] = []any{KeepAll}
+			},
+			want: `3.29 raw/WeaponTypes: key path "*" needs format "go-pob-data-fields/2"`,
+		},
+		{
+			name: "keep every key beside other paths",
+			edit: func(list map[string]any) {
+				list["format"] = Format
+				weaponTypes(list)["keep"] = []any{KeepAll, "Key"}
+			},
+			want: `3.29 raw/WeaponTypes: key path "*" must be the only one`,
 		},
 		{
 			name: "unknown type",
@@ -105,5 +121,22 @@ func TestParseRejects(t *testing.T) {
 				t.Errorf("got %v\nwant %s", err, test.want)
 			}
 		})
+	}
+}
+
+func TestParseKeepAll(t *testing.T) {
+	l, err := Parse(plant(t, func(list map[string]any) {
+		list["format"] = Format
+		weaponTypes(list)["keep"] = []any{KeepAll}
+	}))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	listed, _ := For("3.29")
+	keepAll, _ := l.MinVariant("raw/WeaponTypes")
+	partial, _ := listed.MinVariant("raw/WeaponTypes")
+	if keepAll == partial {
+		t.Error("keeping every key names the same .min as the partial list")
 	}
 }

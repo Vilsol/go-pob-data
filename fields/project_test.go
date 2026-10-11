@@ -88,6 +88,13 @@ func isZero(v reflect.Value) bool {
 // holds full's value, an unlisted field is zero, and pointers and slices on a listed path match full's
 // nil-ness and length.
 func projected(at string, full reflect.Value, minAsset reflect.Value, n *node) error {
+	if n.all {
+		if !reflect.DeepEqual(full.Interface(), minAsset.Interface()) {
+			return errors.Errorf("%s: every key is kept, but differs in .min", at)
+		}
+		return nil
+	}
+
 	switch full.Kind() {
 	case reflect.Pointer:
 		if full.IsNil() != minAsset.IsNil() {
@@ -153,9 +160,25 @@ func assertRoundTrip(t *testing.T, asset string, keep []string, full []byte, min
 	}
 }
 
+// No committed list keeps every key yet, so the tests project these with KeepAll themselves.
+var keepAllAssets = []string{"raw/BaseItemTypes", "stat_translations/en/stat_descriptions"}
+
+const keepAllVersion = "3.29"
+
 // Decoding a committed .min yields the full asset's value at every listed path, zero everywhere else,
 // and the same row count.
 func TestMinRoundTrip(t *testing.T) {
+	for _, asset := range keepAllAssets {
+		t.Run("keep every key/"+asset, func(t *testing.T) {
+			full := fullAsset(t, keepAllVersion, asset)
+			minAsset, err := Project(asset, []string{KeepAll}, full)
+			if err != nil {
+				t.Fatal(err)
+			}
+			assertRoundTrip(t, asset, []string{KeepAll}, full, minAsset)
+		})
+	}
+
 	for _, version := range Versions() {
 		l, _ := For(version)
 		for asset, a := range l.Assets {
@@ -177,6 +200,20 @@ func TestMinRoundTrip(t *testing.T) {
 // Projecting the committed full assets with the committed lists reproduces every committed .min, and
 // every .min on disk is of a list revision (the current one, or an older one kept for older consumers).
 func TestMinMatchesList(t *testing.T) {
+	// A KeepAll .min is the full asset itself: the same rows, encoded and compressed the same way.
+	for _, asset := range keepAllAssets {
+		t.Run("keep every key/"+asset, func(t *testing.T) {
+			full := fullAsset(t, keepAllVersion, asset)
+			minAsset, err := Project(asset, []string{KeepAll}, full)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if !bytes.Equal(minAsset, full) {
+				t.Error("keeping every key does not reproduce the full asset")
+			}
+		})
+	}
+
 	for _, version := range Versions() {
 		l, _ := For(version)
 		for asset, a := range l.Assets {
