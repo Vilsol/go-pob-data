@@ -6745,8 +6745,8 @@ func (z *DefaultMonsterStat) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 11 {
-		err = msgp.ArrayError{Wanted: 11, Got: zb0001}
+	if zb0001 != 18 {
+		err = msgp.ArrayError{Wanted: 18, Got: zb0001}
 		return
 	}
 	z.DisplayLevel, err = dc.ReadString()
@@ -6754,34 +6754,24 @@ func (z *DefaultMonsterStat) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err, "DisplayLevel")
 		return
 	}
-	z.Accuracy, err = dc.ReadInt()
-	if err != nil {
-		err = msgp.WrapError(err, "Accuracy")
-		return
-	}
-	z.AllyLife, err = dc.ReadInt()
-	if err != nil {
-		err = msgp.WrapError(err, "AllyLife")
-		return
-	}
-	z.Armour, err = dc.ReadInt()
-	if err != nil {
-		err = msgp.WrapError(err, "Armour")
-		return
-	}
 	z.Damage, err = dc.ReadFloat64()
 	if err != nil {
 		err = msgp.WrapError(err, "Damage")
 		return
 	}
-	z.Damage2, err = dc.ReadFloat64()
+	z.MinionDamage, err = dc.ReadFloat64()
 	if err != nil {
-		err = msgp.WrapError(err, "Damage2")
+		err = msgp.WrapError(err, "MinionDamage")
 		return
 	}
-	z.Difficulty, err = dc.ReadInt()
+	z.AltDamage1, err = dc.ReadFloat64()
 	if err != nil {
-		err = msgp.WrapError(err, "Difficulty")
+		err = msgp.WrapError(err, "AltDamage1")
+		return
+	}
+	z.AltDamage2, err = dc.ReadFloat64()
+	if err != nil {
+		err = msgp.WrapError(err, "AltDamage2")
 		return
 	}
 	z.Evasion, err = dc.ReadInt()
@@ -6789,14 +6779,59 @@ func (z *DefaultMonsterStat) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err, "Evasion")
 		return
 	}
+	z.Accuracy, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Accuracy")
+		return
+	}
+	z.MonsterLife, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterLife")
+		return
+	}
 	z.Experience, err = dc.ReadInt()
 	if err != nil {
 		err = msgp.WrapError(err, "Experience")
 		return
 	}
-	z.Life, err = dc.ReadInt()
+	z.MinionLife, err = dc.ReadInt()
 	if err != nil {
-		err = msgp.WrapError(err, "Life")
+		err = msgp.WrapError(err, "MinionLife")
+		return
+	}
+	z.Armour, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Armour")
+		return
+	}
+	z.Difficulty, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Difficulty")
+		return
+	}
+	z.AltLife1, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "AltLife1")
+		return
+	}
+	z.AltLife2, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "AltLife2")
+		return
+	}
+	z.EvasiveEvasion, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "EvasiveEvasion")
+		return
+	}
+	z.AilmentThreshold, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "AilmentThreshold")
+		return
+	}
+	z.MonsterPhysConversionMulti, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterPhysConversionMulti")
 		return
 	}
 	z.Key, err = dc.ReadInt()
@@ -6809,8 +6844,8 @@ func (z *DefaultMonsterStat) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *DefaultMonsterStat) EncodeMsg(en *msgp.Writer) (err error) {
-	// array header, size 11
-	err = en.Append(0x9b)
+	// array header, size 18
+	err = en.Append(0xdc, 0x0, 0x12)
 	if err != nil {
 		return
 	}
@@ -6819,34 +6854,24 @@ func (z *DefaultMonsterStat) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "DisplayLevel")
 		return
 	}
-	err = en.WriteInt(z.Accuracy)
-	if err != nil {
-		err = msgp.WrapError(err, "Accuracy")
-		return
-	}
-	err = en.WriteInt(z.AllyLife)
-	if err != nil {
-		err = msgp.WrapError(err, "AllyLife")
-		return
-	}
-	err = en.WriteInt(z.Armour)
-	if err != nil {
-		err = msgp.WrapError(err, "Armour")
-		return
-	}
 	err = en.WriteFloat64(z.Damage)
 	if err != nil {
 		err = msgp.WrapError(err, "Damage")
 		return
 	}
-	err = en.WriteFloat64(z.Damage2)
+	err = en.WriteFloat64(z.MinionDamage)
 	if err != nil {
-		err = msgp.WrapError(err, "Damage2")
+		err = msgp.WrapError(err, "MinionDamage")
 		return
 	}
-	err = en.WriteInt(z.Difficulty)
+	err = en.WriteFloat64(z.AltDamage1)
 	if err != nil {
-		err = msgp.WrapError(err, "Difficulty")
+		err = msgp.WrapError(err, "AltDamage1")
+		return
+	}
+	err = en.WriteFloat64(z.AltDamage2)
+	if err != nil {
+		err = msgp.WrapError(err, "AltDamage2")
 		return
 	}
 	err = en.WriteInt(z.Evasion)
@@ -6854,14 +6879,59 @@ func (z *DefaultMonsterStat) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Evasion")
 		return
 	}
+	err = en.WriteInt(z.Accuracy)
+	if err != nil {
+		err = msgp.WrapError(err, "Accuracy")
+		return
+	}
+	err = en.WriteInt(z.MonsterLife)
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterLife")
+		return
+	}
 	err = en.WriteInt(z.Experience)
 	if err != nil {
 		err = msgp.WrapError(err, "Experience")
 		return
 	}
-	err = en.WriteInt(z.Life)
+	err = en.WriteInt(z.MinionLife)
 	if err != nil {
-		err = msgp.WrapError(err, "Life")
+		err = msgp.WrapError(err, "MinionLife")
+		return
+	}
+	err = en.WriteInt(z.Armour)
+	if err != nil {
+		err = msgp.WrapError(err, "Armour")
+		return
+	}
+	err = en.WriteInt(z.Difficulty)
+	if err != nil {
+		err = msgp.WrapError(err, "Difficulty")
+		return
+	}
+	err = en.WriteInt(z.AltLife1)
+	if err != nil {
+		err = msgp.WrapError(err, "AltLife1")
+		return
+	}
+	err = en.WriteInt(z.AltLife2)
+	if err != nil {
+		err = msgp.WrapError(err, "AltLife2")
+		return
+	}
+	err = en.WriteInt(z.EvasiveEvasion)
+	if err != nil {
+		err = msgp.WrapError(err, "EvasiveEvasion")
+		return
+	}
+	err = en.WriteInt(z.AilmentThreshold)
+	if err != nil {
+		err = msgp.WrapError(err, "AilmentThreshold")
+		return
+	}
+	err = en.WriteInt(z.MonsterPhysConversionMulti)
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterPhysConversionMulti")
 		return
 	}
 	err = en.WriteInt(z.Key)
@@ -6875,18 +6945,25 @@ func (z *DefaultMonsterStat) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *DefaultMonsterStat) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// array header, size 11
-	o = append(o, 0x9b)
+	// array header, size 18
+	o = append(o, 0xdc, 0x0, 0x12)
 	o = msgp.AppendString(o, z.DisplayLevel)
-	o = msgp.AppendInt(o, z.Accuracy)
-	o = msgp.AppendInt(o, z.AllyLife)
-	o = msgp.AppendInt(o, z.Armour)
 	o = msgp.AppendFloat64(o, z.Damage)
-	o = msgp.AppendFloat64(o, z.Damage2)
-	o = msgp.AppendInt(o, z.Difficulty)
+	o = msgp.AppendFloat64(o, z.MinionDamage)
+	o = msgp.AppendFloat64(o, z.AltDamage1)
+	o = msgp.AppendFloat64(o, z.AltDamage2)
 	o = msgp.AppendInt(o, z.Evasion)
+	o = msgp.AppendInt(o, z.Accuracy)
+	o = msgp.AppendInt(o, z.MonsterLife)
 	o = msgp.AppendInt(o, z.Experience)
-	o = msgp.AppendInt(o, z.Life)
+	o = msgp.AppendInt(o, z.MinionLife)
+	o = msgp.AppendInt(o, z.Armour)
+	o = msgp.AppendInt(o, z.Difficulty)
+	o = msgp.AppendInt(o, z.AltLife1)
+	o = msgp.AppendInt(o, z.AltLife2)
+	o = msgp.AppendInt(o, z.EvasiveEvasion)
+	o = msgp.AppendInt(o, z.AilmentThreshold)
+	o = msgp.AppendInt(o, z.MonsterPhysConversionMulti)
 	o = msgp.AppendInt(o, z.Key)
 	return
 }
@@ -6899,8 +6976,8 @@ func (z *DefaultMonsterStat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 11 {
-		err = msgp.ArrayError{Wanted: 11, Got: zb0001}
+	if zb0001 != 18 {
+		err = msgp.ArrayError{Wanted: 18, Got: zb0001}
 		return
 	}
 	z.DisplayLevel, bts, err = msgp.ReadStringBytes(bts)
@@ -6908,34 +6985,24 @@ func (z *DefaultMonsterStat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.WrapError(err, "DisplayLevel")
 		return
 	}
-	z.Accuracy, bts, err = msgp.ReadIntBytes(bts)
-	if err != nil {
-		err = msgp.WrapError(err, "Accuracy")
-		return
-	}
-	z.AllyLife, bts, err = msgp.ReadIntBytes(bts)
-	if err != nil {
-		err = msgp.WrapError(err, "AllyLife")
-		return
-	}
-	z.Armour, bts, err = msgp.ReadIntBytes(bts)
-	if err != nil {
-		err = msgp.WrapError(err, "Armour")
-		return
-	}
 	z.Damage, bts, err = msgp.ReadFloat64Bytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "Damage")
 		return
 	}
-	z.Damage2, bts, err = msgp.ReadFloat64Bytes(bts)
+	z.MinionDamage, bts, err = msgp.ReadFloat64Bytes(bts)
 	if err != nil {
-		err = msgp.WrapError(err, "Damage2")
+		err = msgp.WrapError(err, "MinionDamage")
 		return
 	}
-	z.Difficulty, bts, err = msgp.ReadIntBytes(bts)
+	z.AltDamage1, bts, err = msgp.ReadFloat64Bytes(bts)
 	if err != nil {
-		err = msgp.WrapError(err, "Difficulty")
+		err = msgp.WrapError(err, "AltDamage1")
+		return
+	}
+	z.AltDamage2, bts, err = msgp.ReadFloat64Bytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "AltDamage2")
 		return
 	}
 	z.Evasion, bts, err = msgp.ReadIntBytes(bts)
@@ -6943,14 +7010,59 @@ func (z *DefaultMonsterStat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.WrapError(err, "Evasion")
 		return
 	}
+	z.Accuracy, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Accuracy")
+		return
+	}
+	z.MonsterLife, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterLife")
+		return
+	}
 	z.Experience, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "Experience")
 		return
 	}
-	z.Life, bts, err = msgp.ReadIntBytes(bts)
+	z.MinionLife, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
-		err = msgp.WrapError(err, "Life")
+		err = msgp.WrapError(err, "MinionLife")
+		return
+	}
+	z.Armour, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Armour")
+		return
+	}
+	z.Difficulty, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Difficulty")
+		return
+	}
+	z.AltLife1, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "AltLife1")
+		return
+	}
+	z.AltLife2, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "AltLife2")
+		return
+	}
+	z.EvasiveEvasion, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "EvasiveEvasion")
+		return
+	}
+	z.AilmentThreshold, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "AilmentThreshold")
+		return
+	}
+	z.MonsterPhysConversionMulti, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterPhysConversionMulti")
 		return
 	}
 	z.Key, bts, err = msgp.ReadIntBytes(bts)
@@ -6964,7 +7076,7 @@ func (z *DefaultMonsterStat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *DefaultMonsterStat) Msgsize() (s int) {
-	s = 1 + msgp.StringPrefixSize + len(z.DisplayLevel) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.Float64Size + msgp.Float64Size + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	s = 3 + msgp.StringPrefixSize + len(z.DisplayLevel) + msgp.Float64Size + msgp.Float64Size + msgp.Float64Size + msgp.Float64Size + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
 	return
 }
 
@@ -16557,59 +16669,119 @@ func (z *MonsterMapBossDifficulty) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.ArrayError{Wanted: 12, Got: zb0001}
 		return
 	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat1")
+			return
+		}
+		z.Stat1 = nil
+	} else {
+		if z.Stat1 == nil {
+			z.Stat1 = new(int)
+		}
+		*z.Stat1, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat1")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat2")
+			return
+		}
+		z.Stat2 = nil
+	} else {
+		if z.Stat2 == nil {
+			z.Stat2 = new(int)
+		}
+		*z.Stat2, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat2")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat3")
+			return
+		}
+		z.Stat3 = nil
+	} else {
+		if z.Stat3 == nil {
+			z.Stat3 = new(int)
+		}
+		*z.Stat3, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat3")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat4")
+			return
+		}
+		z.Stat4 = nil
+	} else {
+		if z.Stat4 == nil {
+			z.Stat4 = new(int)
+		}
+		*z.Stat4, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat4")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat5")
+			return
+		}
+		z.Stat5 = nil
+	} else {
+		if z.Stat5 == nil {
+			z.Stat5 = new(int)
+		}
+		*z.Stat5, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat5")
+			return
+		}
+	}
 	z.MapLevel, err = dc.ReadInt()
 	if err != nil {
 		err = msgp.WrapError(err, "MapLevel")
 		return
 	}
-	z.Stat1Value, err = dc.ReadInt()
+	z.BossLifePercentIncrease, err = dc.ReadInt()
 	if err != nil {
-		err = msgp.WrapError(err, "Stat1Value")
+		err = msgp.WrapError(err, "BossLifePercentIncrease")
 		return
 	}
-	z.Stat2Value, err = dc.ReadInt()
+	z.BossDamagePercentIncrease, err = dc.ReadInt()
 	if err != nil {
-		err = msgp.WrapError(err, "Stat2Value")
+		err = msgp.WrapError(err, "BossDamagePercentIncrease")
 		return
 	}
-	z.Stat3Value, err = dc.ReadInt()
+	z.BossIncItemQuantity, err = dc.ReadInt()
 	if err != nil {
-		err = msgp.WrapError(err, "Stat3Value")
+		err = msgp.WrapError(err, "BossIncItemQuantity")
 		return
 	}
-	z.Stat4Value, err = dc.ReadInt()
+	z.BossIncItemRarity, err = dc.ReadInt()
 	if err != nil {
-		err = msgp.WrapError(err, "Stat4Value")
+		err = msgp.WrapError(err, "BossIncItemRarity")
 		return
 	}
-	z.Stat5Value, err = dc.ReadInt()
+	z.BossAilmentPercentDecrease, err = dc.ReadInt()
 	if err != nil {
-		err = msgp.WrapError(err, "Stat5Value")
-		return
-	}
-	z.StatsKey1, err = dc.ReadInt()
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey1")
-		return
-	}
-	z.StatsKey2, err = dc.ReadInt()
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey2")
-		return
-	}
-	z.StatsKey3, err = dc.ReadInt()
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey3")
-		return
-	}
-	z.StatsKey4, err = dc.ReadInt()
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey4")
-		return
-	}
-	z.StatsKey5, err = dc.ReadInt()
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey5")
+		err = msgp.WrapError(err, "BossAilmentPercentDecrease")
 		return
 	}
 	z.Key, err = dc.ReadInt()
@@ -16627,59 +16799,94 @@ func (z *MonsterMapBossDifficulty) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
+	if z.Stat1 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat1)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat1")
+			return
+		}
+	}
+	if z.Stat2 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat2)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat2")
+			return
+		}
+	}
+	if z.Stat3 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat3)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat3")
+			return
+		}
+	}
+	if z.Stat4 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat4)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat4")
+			return
+		}
+	}
+	if z.Stat5 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat5)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat5")
+			return
+		}
+	}
 	err = en.WriteInt(z.MapLevel)
 	if err != nil {
 		err = msgp.WrapError(err, "MapLevel")
 		return
 	}
-	err = en.WriteInt(z.Stat1Value)
+	err = en.WriteInt(z.BossLifePercentIncrease)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat1Value")
+		err = msgp.WrapError(err, "BossLifePercentIncrease")
 		return
 	}
-	err = en.WriteInt(z.Stat2Value)
+	err = en.WriteInt(z.BossDamagePercentIncrease)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat2Value")
+		err = msgp.WrapError(err, "BossDamagePercentIncrease")
 		return
 	}
-	err = en.WriteInt(z.Stat3Value)
+	err = en.WriteInt(z.BossIncItemQuantity)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat3Value")
+		err = msgp.WrapError(err, "BossIncItemQuantity")
 		return
 	}
-	err = en.WriteInt(z.Stat4Value)
+	err = en.WriteInt(z.BossIncItemRarity)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat4Value")
+		err = msgp.WrapError(err, "BossIncItemRarity")
 		return
 	}
-	err = en.WriteInt(z.Stat5Value)
+	err = en.WriteInt(z.BossAilmentPercentDecrease)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat5Value")
-		return
-	}
-	err = en.WriteInt(z.StatsKey1)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey1")
-		return
-	}
-	err = en.WriteInt(z.StatsKey2)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey2")
-		return
-	}
-	err = en.WriteInt(z.StatsKey3)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey3")
-		return
-	}
-	err = en.WriteInt(z.StatsKey4)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey4")
-		return
-	}
-	err = en.WriteInt(z.StatsKey5)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey5")
+		err = msgp.WrapError(err, "BossAilmentPercentDecrease")
 		return
 	}
 	err = en.WriteInt(z.Key)
@@ -16695,17 +16902,37 @@ func (z *MonsterMapBossDifficulty) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// array header, size 12
 	o = append(o, 0x9c)
+	if z.Stat1 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat1)
+	}
+	if z.Stat2 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat2)
+	}
+	if z.Stat3 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat3)
+	}
+	if z.Stat4 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat4)
+	}
+	if z.Stat5 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat5)
+	}
 	o = msgp.AppendInt(o, z.MapLevel)
-	o = msgp.AppendInt(o, z.Stat1Value)
-	o = msgp.AppendInt(o, z.Stat2Value)
-	o = msgp.AppendInt(o, z.Stat3Value)
-	o = msgp.AppendInt(o, z.Stat4Value)
-	o = msgp.AppendInt(o, z.Stat5Value)
-	o = msgp.AppendInt(o, z.StatsKey1)
-	o = msgp.AppendInt(o, z.StatsKey2)
-	o = msgp.AppendInt(o, z.StatsKey3)
-	o = msgp.AppendInt(o, z.StatsKey4)
-	o = msgp.AppendInt(o, z.StatsKey5)
+	o = msgp.AppendInt(o, z.BossLifePercentIncrease)
+	o = msgp.AppendInt(o, z.BossDamagePercentIncrease)
+	o = msgp.AppendInt(o, z.BossIncItemQuantity)
+	o = msgp.AppendInt(o, z.BossIncItemRarity)
+	o = msgp.AppendInt(o, z.BossAilmentPercentDecrease)
 	o = msgp.AppendInt(o, z.Key)
 	return
 }
@@ -16722,59 +16949,114 @@ func (z *MonsterMapBossDifficulty) UnmarshalMsg(bts []byte) (o []byte, err error
 		err = msgp.ArrayError{Wanted: 12, Got: zb0001}
 		return
 	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat1 = nil
+	} else {
+		if z.Stat1 == nil {
+			z.Stat1 = new(int)
+		}
+		*z.Stat1, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat1")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat2 = nil
+	} else {
+		if z.Stat2 == nil {
+			z.Stat2 = new(int)
+		}
+		*z.Stat2, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat2")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat3 = nil
+	} else {
+		if z.Stat3 == nil {
+			z.Stat3 = new(int)
+		}
+		*z.Stat3, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat3")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat4 = nil
+	} else {
+		if z.Stat4 == nil {
+			z.Stat4 = new(int)
+		}
+		*z.Stat4, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat4")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat5 = nil
+	} else {
+		if z.Stat5 == nil {
+			z.Stat5 = new(int)
+		}
+		*z.Stat5, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat5")
+			return
+		}
+	}
 	z.MapLevel, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "MapLevel")
 		return
 	}
-	z.Stat1Value, bts, err = msgp.ReadIntBytes(bts)
+	z.BossLifePercentIncrease, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat1Value")
+		err = msgp.WrapError(err, "BossLifePercentIncrease")
 		return
 	}
-	z.Stat2Value, bts, err = msgp.ReadIntBytes(bts)
+	z.BossDamagePercentIncrease, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat2Value")
+		err = msgp.WrapError(err, "BossDamagePercentIncrease")
 		return
 	}
-	z.Stat3Value, bts, err = msgp.ReadIntBytes(bts)
+	z.BossIncItemQuantity, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat3Value")
+		err = msgp.WrapError(err, "BossIncItemQuantity")
 		return
 	}
-	z.Stat4Value, bts, err = msgp.ReadIntBytes(bts)
+	z.BossIncItemRarity, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat4Value")
+		err = msgp.WrapError(err, "BossIncItemRarity")
 		return
 	}
-	z.Stat5Value, bts, err = msgp.ReadIntBytes(bts)
+	z.BossAilmentPercentDecrease, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat5Value")
-		return
-	}
-	z.StatsKey1, bts, err = msgp.ReadIntBytes(bts)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey1")
-		return
-	}
-	z.StatsKey2, bts, err = msgp.ReadIntBytes(bts)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey2")
-		return
-	}
-	z.StatsKey3, bts, err = msgp.ReadIntBytes(bts)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey3")
-		return
-	}
-	z.StatsKey4, bts, err = msgp.ReadIntBytes(bts)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey4")
-		return
-	}
-	z.StatsKey5, bts, err = msgp.ReadIntBytes(bts)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey5")
+		err = msgp.WrapError(err, "BossAilmentPercentDecrease")
 		return
 	}
 	z.Key, bts, err = msgp.ReadIntBytes(bts)
@@ -16788,7 +17070,33 @@ func (z *MonsterMapBossDifficulty) UnmarshalMsg(bts []byte) (o []byte, err error
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *MonsterMapBossDifficulty) Msgsize() (s int) {
-	s = 1 + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	s = 1
+	if z.Stat1 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.Stat2 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.Stat3 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.Stat4 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.Stat5 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
 	return
 }
 
@@ -16804,29 +17112,87 @@ func (z *MonsterMapDifficulty) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.ArrayError{Wanted: 10, Got: zb0001}
 		return
 	}
-	z.StatsKey3, err = dc.ReadIntf()
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey3")
-		return
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat1")
+			return
+		}
+		z.Stat1 = nil
+	} else {
+		if z.Stat1 == nil {
+			z.Stat1 = new(int)
+		}
+		*z.Stat1, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat1")
+			return
+		}
 	}
-	z.StatsKey4, err = dc.ReadIntf()
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey4")
-		return
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat2")
+			return
+		}
+		z.Stat2 = nil
+	} else {
+		if z.Stat2 == nil {
+			z.Stat2 = new(int)
+		}
+		*z.Stat2, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat2")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat3")
+			return
+		}
+		z.Stat3 = nil
+	} else {
+		if z.Stat3 == nil {
+			z.Stat3 = new(int)
+		}
+		*z.Stat3, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat3")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat4")
+			return
+		}
+		z.Stat4 = nil
+	} else {
+		if z.Stat4 == nil {
+			z.Stat4 = new(int)
+		}
+		*z.Stat4, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat4")
+			return
+		}
 	}
 	z.MapLevel, err = dc.ReadInt()
 	if err != nil {
 		err = msgp.WrapError(err, "MapLevel")
 		return
 	}
-	z.Stat1Value, err = dc.ReadInt()
+	z.LifePercentIncrease, err = dc.ReadInt()
 	if err != nil {
-		err = msgp.WrapError(err, "Stat1Value")
+		err = msgp.WrapError(err, "LifePercentIncrease")
 		return
 	}
-	z.Stat2Value, err = dc.ReadInt()
+	z.DamagePercentIncrease, err = dc.ReadInt()
 	if err != nil {
-		err = msgp.WrapError(err, "Stat2Value")
+		err = msgp.WrapError(err, "DamagePercentIncrease")
 		return
 	}
 	z.Stat3Value, err = dc.ReadInt()
@@ -16837,16 +17203,6 @@ func (z *MonsterMapDifficulty) DecodeMsg(dc *msgp.Reader) (err error) {
 	z.Stat4Value, err = dc.ReadInt()
 	if err != nil {
 		err = msgp.WrapError(err, "Stat4Value")
-		return
-	}
-	z.StatsKey1, err = dc.ReadInt()
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey1")
-		return
-	}
-	z.StatsKey2, err = dc.ReadInt()
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey2")
 		return
 	}
 	z.Key, err = dc.ReadInt()
@@ -16864,29 +17220,67 @@ func (z *MonsterMapDifficulty) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteIntf(z.StatsKey3)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey3")
-		return
+	if z.Stat1 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat1)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat1")
+			return
+		}
 	}
-	err = en.WriteIntf(z.StatsKey4)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey4")
-		return
+	if z.Stat2 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat2)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat2")
+			return
+		}
+	}
+	if z.Stat3 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat3)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat3")
+			return
+		}
+	}
+	if z.Stat4 == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat4)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat4")
+			return
+		}
 	}
 	err = en.WriteInt(z.MapLevel)
 	if err != nil {
 		err = msgp.WrapError(err, "MapLevel")
 		return
 	}
-	err = en.WriteInt(z.Stat1Value)
+	err = en.WriteInt(z.LifePercentIncrease)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat1Value")
+		err = msgp.WrapError(err, "LifePercentIncrease")
 		return
 	}
-	err = en.WriteInt(z.Stat2Value)
+	err = en.WriteInt(z.DamagePercentIncrease)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat2Value")
+		err = msgp.WrapError(err, "DamagePercentIncrease")
 		return
 	}
 	err = en.WriteInt(z.Stat3Value)
@@ -16897,16 +17291,6 @@ func (z *MonsterMapDifficulty) EncodeMsg(en *msgp.Writer) (err error) {
 	err = en.WriteInt(z.Stat4Value)
 	if err != nil {
 		err = msgp.WrapError(err, "Stat4Value")
-		return
-	}
-	err = en.WriteInt(z.StatsKey1)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey1")
-		return
-	}
-	err = en.WriteInt(z.StatsKey2)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey2")
 		return
 	}
 	err = en.WriteInt(z.Key)
@@ -16922,23 +17306,31 @@ func (z *MonsterMapDifficulty) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
 	// array header, size 10
 	o = append(o, 0x9a)
-	o, err = msgp.AppendIntf(o, z.StatsKey3)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey3")
-		return
+	if z.Stat1 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat1)
 	}
-	o, err = msgp.AppendIntf(o, z.StatsKey4)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey4")
-		return
+	if z.Stat2 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat2)
+	}
+	if z.Stat3 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat3)
+	}
+	if z.Stat4 == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat4)
 	}
 	o = msgp.AppendInt(o, z.MapLevel)
-	o = msgp.AppendInt(o, z.Stat1Value)
-	o = msgp.AppendInt(o, z.Stat2Value)
+	o = msgp.AppendInt(o, z.LifePercentIncrease)
+	o = msgp.AppendInt(o, z.DamagePercentIncrease)
 	o = msgp.AppendInt(o, z.Stat3Value)
 	o = msgp.AppendInt(o, z.Stat4Value)
-	o = msgp.AppendInt(o, z.StatsKey1)
-	o = msgp.AppendInt(o, z.StatsKey2)
 	o = msgp.AppendInt(o, z.Key)
 	return
 }
@@ -16955,29 +17347,83 @@ func (z *MonsterMapDifficulty) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.ArrayError{Wanted: 10, Got: zb0001}
 		return
 	}
-	z.StatsKey3, bts, err = msgp.ReadIntfBytes(bts)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey3")
-		return
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat1 = nil
+	} else {
+		if z.Stat1 == nil {
+			z.Stat1 = new(int)
+		}
+		*z.Stat1, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat1")
+			return
+		}
 	}
-	z.StatsKey4, bts, err = msgp.ReadIntfBytes(bts)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey4")
-		return
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat2 = nil
+	} else {
+		if z.Stat2 == nil {
+			z.Stat2 = new(int)
+		}
+		*z.Stat2, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat2")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat3 = nil
+	} else {
+		if z.Stat3 == nil {
+			z.Stat3 = new(int)
+		}
+		*z.Stat3, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat3")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat4 = nil
+	} else {
+		if z.Stat4 == nil {
+			z.Stat4 = new(int)
+		}
+		*z.Stat4, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat4")
+			return
+		}
 	}
 	z.MapLevel, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "MapLevel")
 		return
 	}
-	z.Stat1Value, bts, err = msgp.ReadIntBytes(bts)
+	z.LifePercentIncrease, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat1Value")
+		err = msgp.WrapError(err, "LifePercentIncrease")
 		return
 	}
-	z.Stat2Value, bts, err = msgp.ReadIntBytes(bts)
+	z.DamagePercentIncrease, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
-		err = msgp.WrapError(err, "Stat2Value")
+		err = msgp.WrapError(err, "DamagePercentIncrease")
 		return
 	}
 	z.Stat3Value, bts, err = msgp.ReadIntBytes(bts)
@@ -16988,16 +17434,6 @@ func (z *MonsterMapDifficulty) UnmarshalMsg(bts []byte) (o []byte, err error) {
 	z.Stat4Value, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "Stat4Value")
-		return
-	}
-	z.StatsKey1, bts, err = msgp.ReadIntBytes(bts)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey1")
-		return
-	}
-	z.StatsKey2, bts, err = msgp.ReadIntBytes(bts)
-	if err != nil {
-		err = msgp.WrapError(err, "StatsKey2")
 		return
 	}
 	z.Key, bts, err = msgp.ReadIntBytes(bts)
@@ -17011,7 +17447,28 @@ func (z *MonsterMapDifficulty) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *MonsterMapDifficulty) Msgsize() (s int) {
-	s = 1 + msgp.GuessSize(z.StatsKey3) + msgp.GuessSize(z.StatsKey4) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	s = 1
+	if z.Stat1 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.Stat2 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.Stat3 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.Stat4 == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
 	return
 }
 

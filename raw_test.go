@@ -63,12 +63,16 @@ type rowCodecs struct {
 	legacy func(asset []byte) ([]byte, error)
 }
 
-// Legacy columns whose map assets missed their value because the schema renamed the column, which the
-// tuple assets now carry: SkillGems' Str/Dex/Int from 3.24 and Mods' BuffTemplate from 3.28. They are not
-// compared.
+// Legacy columns that are not compared. The schema renamed them, so their map assets missed their value
+// (SkillGems' Str/Dex/Int from 3.24, Mods' BuffTemplate from 3.28), or the row type now carries them
+// under the current schema names (DefaultMonsterStats, whose pre-3.28 Armour was AilmentThreshold, and
+// the map difficulty tables); TestTupleMatchesJSON still checks them against the json.gz.
 var correctedColumns = map[string][]string{
-	"SkillGems": {"Str", "Dex", "Int"},
-	"Mods":      {"BuffTemplate"},
+	"SkillGems":                {"Str", "Dex", "Int"},
+	"Mods":                     {"BuffTemplate"},
+	"DefaultMonsterStats":      {"Life", "AllyLife", "Damage2", "Armour"},
+	"MonsterMapDifficulty":     {"StatsKey1", "StatsKey2", "StatsKey3", "StatsKey4", "Stat1Value", "Stat2Value"},
+	"MonsterMapBossDifficulty": {"StatsKey1", "StatsKey2", "StatsKey3", "StatsKey4", "StatsKey5", "Stat1Value", "Stat2Value", "Stat3Value", "Stat4Value", "Stat5Value"},
 }
 
 func codecs[T, L any, PT interface {
