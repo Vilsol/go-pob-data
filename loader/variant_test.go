@@ -31,7 +31,7 @@ func TestWithVariantsReadsMin(t *testing.T) {
 	testza.AssertEqual(t, len(full), len(minRows))
 	testza.AssertNotEqual(t, "", full[0].ID)
 	testza.AssertEqual(t, "", minRows[0].ID, "ID is not listed, so the .min holds zero")
-	testza.AssertEqual(t, full[0].StatsKey1, minRows[0].StatsKey1)
+	testza.AssertEqual(t, full[0].Level, minRows[0].Level)
 
 	translation, err := loader.LoadTranslation(minCtx, version, "en", "stat_descriptions", noCache{})
 	testza.AssertNoError(t, err)
