@@ -95,6 +95,7 @@ func TestParseRejects(t *testing.T) {
 			name: "keep every key in format 1",
 			edit: func(list map[string]any) {
 				list["format"] = FormatV1
+				list["assets"] = map[string]any{"raw/WeaponTypes": weaponTypes(list)}
 				weaponTypes(list)["keep"] = []any{KeepAll}
 			},
 			want: `3.29 raw/WeaponTypes: key path "*" needs format "go-pob-data-fields/2"`,
