@@ -24969,8 +24969,8 @@ func (z *Stat) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 14 {
-		err = msgp.ArrayError{Wanted: 14, Got: zb0001}
+	if zb0001 != 15 {
+		err = msgp.ArrayError{Wanted: 15, Got: zb0001}
 		return
 	}
 	if dc.IsNil() {
@@ -25105,13 +25105,18 @@ func (z *Stat) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err, "IsLocal")
 		return
 	}
+	z.CannotGrantToMinion, err = dc.ReadBool()
+	if err != nil {
+		err = msgp.WrapError(err, "CannotGrantToMinion")
+		return
+	}
 	return
 }
 
 // EncodeMsg implements msgp.Encodable
 func (z *Stat) EncodeMsg(en *msgp.Writer) (err error) {
-	// array header, size 14
-	err = en.Append(0x9e)
+	// array header, size 15
+	err = en.Append(0x9f)
 	if err != nil {
 		return
 	}
@@ -25220,14 +25225,19 @@ func (z *Stat) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "IsLocal")
 		return
 	}
+	err = en.WriteBool(z.CannotGrantToMinion)
+	if err != nil {
+		err = msgp.WrapError(err, "CannotGrantToMinion")
+		return
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
 func (z *Stat) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// array header, size 14
-	o = append(o, 0x9e)
+	// array header, size 15
+	o = append(o, 0x9f)
 	if z.MainHandAliasStatsKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
@@ -25260,6 +25270,7 @@ func (z *Stat) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.AppendBool(o, z.IsVirtual)
 	o = msgp.AppendBool(o, z.IsScalable)
 	o = msgp.AppendBool(o, z.IsLocal)
+	o = msgp.AppendBool(o, z.CannotGrantToMinion)
 	return
 }
 
@@ -25271,8 +25282,8 @@ func (z *Stat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 14 {
-		err = msgp.ArrayError{Wanted: 14, Got: zb0001}
+	if zb0001 != 15 {
+		err = msgp.ArrayError{Wanted: 15, Got: zb0001}
 		return
 	}
 	if msgp.IsNil(bts) {
@@ -25404,6 +25415,11 @@ func (z *Stat) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.WrapError(err, "IsLocal")
 		return
 	}
+	z.CannotGrantToMinion, bts, err = msgp.ReadBoolBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "CannotGrantToMinion")
+		return
+	}
 	o = bts
 	return
 }
@@ -25430,7 +25446,7 @@ func (z *Stat) Msgsize() (s int) {
 	for za0002 := range z.BelongsStatsKey {
 		s += msgp.StringPrefixSize + len(z.BelongsStatsKey[za0002])
 	}
-	s += msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize
+	s += msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize
 	return
 }
 

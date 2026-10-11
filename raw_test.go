@@ -554,3 +554,28 @@ func TestFieldsKnowEveryAsset(t *testing.T) {
 		}
 	}
 }
+
+// CannotGrantToMinion moved between unnamed columns across schema versions; every version carries it.
+func TestStatsCannotGrantToMinion(t *testing.T) {
+	jsons, err := filepath.Glob("data/*/raw/Stats.json.gz")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, path := range jsons {
+		t.Run(path, func(t *testing.T) {
+			var stats []raw.Stat
+			if err := json.Unmarshal(readGzip(t, path), &stats); err != nil {
+				t.Fatal(err)
+			}
+			flagged := 0
+			for _, stat := range stats {
+				if stat.CannotGrantToMinion {
+					flagged++
+				}
+			}
+			if flagged < 300 || flagged > 600 {
+				t.Errorf("%d stats cannot be granted to minions", flagged)
+			}
+		})
+	}
+}
