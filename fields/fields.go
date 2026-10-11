@@ -74,6 +74,7 @@ var rawTables = map[string]reflect.Type{
 	"CraftingBenchOptions":              reflect.TypeFor[raw.CraftingBenchOption](),
 	"CurrencyExchange":                  reflect.TypeFor[raw.CurrencyExchange](),
 	"DefaultMonsterStats":               reflect.TypeFor[raw.DefaultMonsterStat](),
+	"EffectivenessCostConstants":        reflect.TypeFor[raw.EffectivenessCostConstant](),
 	"Essences":                          reflect.TypeFor[raw.Essence](),
 	"Flasks":                            reflect.TypeFor[raw.Flask](),
 	"FlavourText":                       reflect.TypeFor[raw.FlavourText](),

@@ -353,6 +353,10 @@ var filesToExport = []PackedFile{
 		Codec: ReEncode[*raw.MonsterResistance](),
 	},
 	{
+		path:  "Data/EffectivenessCostConstants",
+		Codec: ReEncode[*raw.EffectivenessCostConstant](),
+	},
+	{
 		path:  "Data/BuffTemplates",
 		Codec: ReEncode[*raw.BuffTemplate](),
 	},

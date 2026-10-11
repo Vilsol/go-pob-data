@@ -64,3 +64,13 @@ func (g *GrantedEffectStatSetsPerLevel) GetAdditionalBooleanStats() []*Stat {
 	}
 	return out
 }
+
+// GetInterpolationBases needs InitializeEffectivenessCostConstants.
+func (g *GrantedEffectStatSetsPerLevel) GetInterpolationBases() []*EffectivenessCostConstant {
+	out := make([]*EffectivenessCostConstant, len(g.InterpolationBases))
+	for i, key := range g.InterpolationBases {
+		out[i] = EffectivenessCostConstants[key]
+	}
+
+	return out
+}
