@@ -17473,6 +17473,285 @@ func (z *MonsterMapDifficulty) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *MonsterResistance) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 14 {
+		err = msgp.ArrayError{Wanted: 14, Got: zb0001}
+		return
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.FireNormal, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "FireNormal")
+		return
+	}
+	z.ColdNormal, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "ColdNormal")
+		return
+	}
+	z.LightningNormal, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "LightningNormal")
+		return
+	}
+	z.ChaosNormal, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "ChaosNormal")
+		return
+	}
+	z.FireCruel, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "FireCruel")
+		return
+	}
+	z.ColdCruel, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "ColdCruel")
+		return
+	}
+	z.LightningCruel, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "LightningCruel")
+		return
+	}
+	z.ChaosCruel, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "ChaosCruel")
+		return
+	}
+	z.FireMerciless, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "FireMerciless")
+		return
+	}
+	z.ColdMerciless, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "ColdMerciless")
+		return
+	}
+	z.LightningMerciless, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "LightningMerciless")
+		return
+	}
+	z.ChaosMerciless, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "ChaosMerciless")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *MonsterResistance) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 14
+	err = en.Append(0x9e)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteInt(z.FireNormal)
+	if err != nil {
+		err = msgp.WrapError(err, "FireNormal")
+		return
+	}
+	err = en.WriteInt(z.ColdNormal)
+	if err != nil {
+		err = msgp.WrapError(err, "ColdNormal")
+		return
+	}
+	err = en.WriteInt(z.LightningNormal)
+	if err != nil {
+		err = msgp.WrapError(err, "LightningNormal")
+		return
+	}
+	err = en.WriteInt(z.ChaosNormal)
+	if err != nil {
+		err = msgp.WrapError(err, "ChaosNormal")
+		return
+	}
+	err = en.WriteInt(z.FireCruel)
+	if err != nil {
+		err = msgp.WrapError(err, "FireCruel")
+		return
+	}
+	err = en.WriteInt(z.ColdCruel)
+	if err != nil {
+		err = msgp.WrapError(err, "ColdCruel")
+		return
+	}
+	err = en.WriteInt(z.LightningCruel)
+	if err != nil {
+		err = msgp.WrapError(err, "LightningCruel")
+		return
+	}
+	err = en.WriteInt(z.ChaosCruel)
+	if err != nil {
+		err = msgp.WrapError(err, "ChaosCruel")
+		return
+	}
+	err = en.WriteInt(z.FireMerciless)
+	if err != nil {
+		err = msgp.WrapError(err, "FireMerciless")
+		return
+	}
+	err = en.WriteInt(z.ColdMerciless)
+	if err != nil {
+		err = msgp.WrapError(err, "ColdMerciless")
+		return
+	}
+	err = en.WriteInt(z.LightningMerciless)
+	if err != nil {
+		err = msgp.WrapError(err, "LightningMerciless")
+		return
+	}
+	err = en.WriteInt(z.ChaosMerciless)
+	if err != nil {
+		err = msgp.WrapError(err, "ChaosMerciless")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *MonsterResistance) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 14
+	o = append(o, 0x9e)
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendInt(o, z.FireNormal)
+	o = msgp.AppendInt(o, z.ColdNormal)
+	o = msgp.AppendInt(o, z.LightningNormal)
+	o = msgp.AppendInt(o, z.ChaosNormal)
+	o = msgp.AppendInt(o, z.FireCruel)
+	o = msgp.AppendInt(o, z.ColdCruel)
+	o = msgp.AppendInt(o, z.LightningCruel)
+	o = msgp.AppendInt(o, z.ChaosCruel)
+	o = msgp.AppendInt(o, z.FireMerciless)
+	o = msgp.AppendInt(o, z.ColdMerciless)
+	o = msgp.AppendInt(o, z.LightningMerciless)
+	o = msgp.AppendInt(o, z.ChaosMerciless)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *MonsterResistance) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 14 {
+		err = msgp.ArrayError{Wanted: 14, Got: zb0001}
+		return
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.FireNormal, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "FireNormal")
+		return
+	}
+	z.ColdNormal, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ColdNormal")
+		return
+	}
+	z.LightningNormal, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "LightningNormal")
+		return
+	}
+	z.ChaosNormal, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ChaosNormal")
+		return
+	}
+	z.FireCruel, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "FireCruel")
+		return
+	}
+	z.ColdCruel, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ColdCruel")
+		return
+	}
+	z.LightningCruel, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "LightningCruel")
+		return
+	}
+	z.ChaosCruel, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ChaosCruel")
+		return
+	}
+	z.FireMerciless, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "FireMerciless")
+		return
+	}
+	z.ColdMerciless, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ColdMerciless")
+		return
+	}
+	z.LightningMerciless, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "LightningMerciless")
+		return
+	}
+	z.ChaosMerciless, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ChaosMerciless")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *MonsterResistance) Msgsize() (s int) {
+	s = 1 + msgp.StringPrefixSize + len(z.ID) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *MonsterType) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()

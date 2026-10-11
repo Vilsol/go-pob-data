@@ -349,6 +349,10 @@ var filesToExport = []PackedFile{
 		Codec: ReEncode[*raw.CraftingItemClassCategory](),
 	},
 	{
+		path:  "Data/MonsterResistances",
+		Codec: ReEncode[*raw.MonsterResistance](),
+	},
+	{
 		path:  "Data/BuffTemplates",
 		Codec: ReEncode[*raw.BuffTemplate](),
 	},

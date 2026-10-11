@@ -22,3 +22,12 @@ func InitializeMonsterTypes(ctx context.Context, version string, assetCache load
 		MonsterTypesByID[obj.ID] = obj
 	})
 }
+
+// GetResistances needs InitializeMonsterResistances.
+func (m *MonsterType) GetResistances() *MonsterResistance {
+	if m.Resistances == nil {
+		return nil
+	}
+
+	return MonsterResistances[*m.Resistances]
+}
