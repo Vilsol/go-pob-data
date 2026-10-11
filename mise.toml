@@ -22,3 +22,10 @@ run = '''
 patch="${usage_patch:-$(curl -fsSL https://raw.githubusercontent.com/poe-tool-dev/latest-patch-version/main/latest.txt)}"
 nix-shell --run "CGO_ENABLED=1 go run . -tree-only cdn:$patch ${patch%.*.*}"
 '''
+
+[tasks.monster-varieties]
+description = "Regenerate monster_varieties.txt (the monsters whose .ot templates are published) from PoB's minion and spectre export templates"
+usage = 'arg "[pob]" help="Path of Building checkout" default="../PathOfBuilding"'
+run = '''
+grep -h '^#\(monster\|spectre\) ' "${usage_pob}/src/Export/Minions/Minions.txt" "${usage_pob}/src/Export/Minions/Spectres.txt" | awk '{print $2}' | LC_ALL=C sort -u > monster_varieties.txt
+'''

@@ -18,6 +18,8 @@ import (
 	"golang.org/x/text/encoding/unicode"
 
 	"github.com/Vilsol/go-pob-data/loader"
+
+	_ "embed"
 )
 
 // textFilesToExport are published as they are, transcoded from the game's UTF-16 to UTF-8. The .ot files
@@ -32,8 +34,16 @@ var textFilesToExport = []string{
 
 var extendsRegex = regexp.MustCompile(`(?m)^extends "([^"]+)"`)
 
-// extractTextFiles publishes textFilesToExport and the item templates (.it) bases inherit from: every
-// base's InheritsFrom and, through their extends lines, its ancestors. Bases read their tags from them.
+// monsterVarieties are the monsters PoB's minion and spectre export templates name, one MonsterVarieties
+// Id per line (mise run monster-varieties); their .ot templates are published.
+//
+//go:embed monster_varieties.txt
+var monsterVarieties string
+
+// extractTextFiles publishes textFilesToExport and the templates rows inherit from, with their ancestors
+// through their extends lines: the item templates (.it) of every base's InheritsFrom, where bases read
+// their tags, and the monster templates (.ot) of monsterVarieties' BaseMonsterTypeIndex, where those
+// monsters read their base stats.
 func extractTextFiles(bundles fs.FS, gameVersion string) error {
 	for _, file := range textFilesToExport {
 		if _, err := extractTextFile(bundles, gameVersion, file); err != nil {
@@ -41,12 +51,52 @@ func extractTextFiles(bundles fs.FS, gameVersion string) error {
 		}
 	}
 
-	queue, err := baseInheritsFrom(gameVersion)
+	bases, err := readRows[struct {
+		InheritsFrom string `json:"InheritsFrom"`
+	}](gameVersion, "BaseItemTypes")
 	if err != nil {
 		return err
 	}
+	itemRoots := make([]string, 0, len(bases))
+	for _, base := range bases {
+		itemRoots = append(itemRoots, base.InheritsFrom)
+	}
+	if err := extractTemplates(bundles, gameVersion, itemRoots, ".it"); err != nil {
+		return err
+	}
 
-	seen := map[string]bool{"nothing": true}
+	varieties, err := readRows[struct {
+		ID                   string `json:"Id"`
+		BaseMonsterTypeIndex string `json:"BaseMonsterTypeIndex"`
+	}](gameVersion, "MonsterVarieties")
+	if err != nil {
+		return err
+	}
+	objectTypes := make(map[string]string, len(varieties))
+	for _, variety := range varieties {
+		objectTypes[variety.ID] = variety.BaseMonsterTypeIndex
+	}
+	monsterRoots := make([]string, 0)
+	for _, id := range strings.Fields(monsterVarieties) {
+		objectType, ok := objectTypes[id]
+		if !ok {
+			return errors.New("monster_varieties.txt names a variety the game does not have: " + id)
+		}
+		monsterRoots = append(monsterRoots, objectType)
+	}
+	return extractTemplates(bundles, gameVersion, monsterRoots, ".ot")
+}
+
+// extractTemplates publishes the templates of roots and of their ancestors, up to "nothing" or a template
+// textFilesToExport already publishes (Metadata/Monsters/Monster).
+func extractTemplates(bundles fs.FS, gameVersion string, roots []string, ext string) error {
+	seen := map[string]bool{"": true, "nothing": true}
+	for _, file := range textFilesToExport {
+		seen[strings.TrimSuffix(file, ext)] = true
+	}
+
+	queue := slices.Clone(roots)
+	slices.Sort(queue)
 	for len(queue) > 0 {
 		template := queue[0]
 		queue = queue[1:]
@@ -55,7 +105,7 @@ func extractTextFiles(bundles fs.FS, gameVersion string) error {
 		}
 		seen[template] = true
 
-		text, err := extractTextFile(bundles, gameVersion, template+".it")
+		text, err := extractTextFile(bundles, gameVersion, template+ext)
 		if err != nil {
 			return err
 		}
@@ -67,34 +117,21 @@ func extractTextFiles(bundles fs.FS, gameVersion string) error {
 	return nil
 }
 
-// baseInheritsFrom reads the InheritsFrom of every base from the BaseItemTypes extractRawData wrote.
-func baseInheritsFrom(gameVersion string) ([]string, error) {
-	f, err := os.Open(filepath.Join("data", gameVersion, "raw", "BaseItemTypes.json.gz"))
+// readRows decodes the rows of a table extractRawData wrote.
+func readRows[T any](gameVersion string, table string) ([]T, error) {
+	f, err := os.Open(filepath.Join("data", gameVersion, "raw", table+".json.gz"))
 	if err != nil {
-		return nil, errors.Wrap(err, "could not open BaseItemTypes")
+		return nil, errors.Wrap(err, "could not open "+table)
 	}
 	defer f.Close()
 
 	r, err := gzip.NewReader(f)
 	if err != nil {
-		return nil, errors.Wrap(err, "could not decompress BaseItemTypes")
+		return nil, errors.Wrap(err, "could not decompress "+table)
 	}
 
-	var bases []struct {
-		InheritsFrom string `json:"InheritsFrom"`
-	}
-	if err := json.NewDecoder(r).Decode(&bases); err != nil {
-		return nil, errors.Wrap(err, "could not decode BaseItemTypes")
-	}
-
-	out := make([]string, 0, len(bases))
-	for _, base := range bases {
-		if base.InheritsFrom != "" {
-			out = append(out, base.InheritsFrom)
-		}
-	}
-	slices.Sort(out)
-	return slices.Compact(out), nil
+	var rows []T
+	return rows, errors.Wrap(json.NewDecoder(r).Decode(&rows), "could not decode "+table)
 }
 
 // extractTextFile publishes file as UTF-8 and returns its text.
