@@ -1,5 +1,8 @@
 package raw
 
+// Essence uses dat-schema's column names. PoB's essence.lua calls Level "Tier", Display_Quiver_ModsKey
+// "QuiverMod", OneHandThrustingSword_ModsKey "ThrustingOneHandSwordMod", and the other <Type>_ModsKey
+// columns "<Type>Mod" (Amulet_ModsKey is AmuletMod).
 type Essence struct {
 	DisplayShieldModsKey             *int  `json:"Display_Shield_ModsKey"`
 	ClawModsKey                      *int  `json:"Claw_ModsKey"`
@@ -43,6 +46,9 @@ type Essence struct {
 	OneHandMaceModsKey               *int  `json:"OneHandMace_ModsKey"`
 	OneHandSwordModsKey              *int  `json:"OneHandSword_ModsKey"`
 	MonsterModsKeys                  []int `json:"Monster_ModsKeys"`
+	DropLevel                        []int `json:"DropLevel"`
+	Level2                           []int `json:"Level2"`
+	MemoryLines                      []int `json:"MemoryLines"`
 	Level                            int   `json:"Level"`
 	ItemLevelRestriction             int   `json:"ItemLevelRestriction"`
 	EssenceTypeKey                   int   `json:"EssenceTypeKey"`

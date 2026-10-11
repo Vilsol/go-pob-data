@@ -61,6 +61,7 @@ var rawTables = map[string]reflect.Type{
 	"ComponentAttributeRequirements":    reflect.TypeFor[raw.ComponentAttributeRequirement](),
 	"ComponentCharges":                  reflect.TypeFor[raw.ComponentCharge](),
 	"CostTypes":                         reflect.TypeFor[raw.CostType](),
+	"CraftingItemClassCategories":       reflect.TypeFor[raw.CraftingItemClassCategory](),
 	"CraftingBenchOptions":              reflect.TypeFor[raw.CraftingBenchOption](),
 	"CurrencyExchange":                  reflect.TypeFor[raw.CurrencyExchange](),
 	"DefaultMonsterStats":               reflect.TypeFor[raw.DefaultMonsterStat](),

@@ -345,6 +345,10 @@ var filesToExport = []PackedFile{
 		Codec: ReEncode[*raw.ModFamily](),
 	},
 	{
+		path:  "Data/CraftingItemClassCategories",
+		Codec: ReEncode[*raw.CraftingItemClassCategory](),
+	},
+	{
 		path:  "Data/BuffTemplates",
 		Codec: ReEncode[*raw.BuffTemplate](),
 	},

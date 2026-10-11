@@ -101,3 +101,21 @@ func (g *ActiveSkill) GetActiveSkillBaseFlagsAndTypes() (map[SkillFlag]bool, map
 	}
 	return flags, types
 }
+
+// GetSkillSpecificStats returns the stats of InputStatKeys, which PoB calls SkillSpecificStat.
+func (g *ActiveSkill) GetSkillSpecificStats() []*Stat {
+	return statsByKey(g.InputStatKeys)
+}
+
+func (g *ActiveSkill) GetSecondarySkillSpecificStats() []*Stat {
+	return statsByKey(g.SecondarySkillSpecificStats)
+}
+
+func statsByKey(keys []int) []*Stat {
+	out := make([]*Stat, len(keys))
+	for i, key := range keys {
+		out[i] = Stats[key]
+	}
+
+	return out
+}

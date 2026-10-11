@@ -38,6 +38,7 @@ type Mod struct {
 	ModifyMapsAchievements           []int         `json:"ModifyMapsAchievements"`
 	Families                         []int         `json:"Families"`
 	BuffTemplate2                    []int         `json:"BuffTemplate2"`
+	AuraFlags                        []int         `json:"AuraFlags"` // ModAuraFlags enum values (3.29+)
 	MaxLevel                         int           `json:"MaxLevel"`
 	Stat4Min                         int           `json:"Stat4Min"`
 	Level                            int           `json:"Level"`

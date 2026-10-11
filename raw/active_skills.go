@@ -13,7 +13,8 @@ type ActiveSkill struct {
 	WeaponRestrictionItemClassesKeys     []int  `json:"WeaponRestriction_ItemClassesKeys"`
 	MinionActiveSkillTypes               []int  `json:"MinionActiveSkillTypes"`
 	OutputStatKeys                       []int  `json:"Output_StatKeys"`
-	InputStatKeys                        []int  `json:"Input_StatKeys"`
+	InputStatKeys                        []int  `json:"Input_StatKeys"`              // PoB's SkillSpecificStat
+	SecondarySkillSpecificStats          []int  `json:"SecondarySkillSpecificStats"` // 3.29+
 	ActiveSkillTypes                     []int  `json:"ActiveSkillTypes"`
 	ActiveSkillTargetTypes               []int  `json:"ActiveSkillTargetTypes"`
 	SkillTotemID                         int    `json:"SkillTotemId"`

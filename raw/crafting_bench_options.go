@@ -2,15 +2,15 @@ package raw
 
 type CraftingBenchOption struct {
 	AddEnchantment              *int   `json:"AddEnchantment"`
-	AddMod                      *int   `json:"AddMod"`
+	AddMod                      *int   `json:"AddMod"` // PoB's Mod
 	UnlockCategory              *int   `json:"UnlockCategory"`
 	Description                 string `json:"Description"`
 	SocketColours               string `json:"SocketColours"`
 	Name                        string `json:"Name"`
 	CostBaseItemTypes           []int  `json:"Cost_BaseItemTypes"`
 	CostValues                  []int  `json:"Cost_Values"`
-	CraftingItemClassCategories []int  `json:"CraftingItemClassCategories"`
-	RecipeIDS                   []int  `json:"RecipeIds"` //nolint:revive // the field name is the msgpack key
+	CraftingItemClassCategories []int  `json:"CraftingItemClassCategories"` // PoB's ItemCategories
+	RecipeIDS                   []int  `json:"RecipeIds"`                   //nolint:revive // the field name is the msgpack key
 	ItemClasses                 []int  `json:"ItemClasses"`
 	Links                       int    `json:"Links"`
 	CraftingBenchCustomAction   int    `json:"CraftingBenchCustomAction"`

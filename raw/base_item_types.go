@@ -10,6 +10,7 @@ type BaseItemType struct {
 	Inflection                    string        `json:"Inflection"`
 	InheritsFrom                  string        `json:"InheritsFrom"`
 	TagsKeys                      []int         `json:"TagsKeys"`
+	EnchantMods                   []int         `json:"TalismanEnchants"` // TalismanEnchants in the schema (3.29+)
 	IdentifyMagicAchievementItems []interface{} `json:"IdentifyMagic_AchievementItems"`
 	IdentifyAchievementItems      []interface{} `json:"Identify_AchievementItems"`
 	ImplicitModsKeys              []int         `json:"Implicit_ModsKeys"`

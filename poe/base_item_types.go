@@ -31,3 +31,12 @@ func InitializeBaseItemTypes(ctx context.Context, version string, assetCache loa
 func (b *BaseItemType) SkillGem() *SkillGem {
 	return skillGemsByBaseItemTypeMap[b.Key]
 }
+
+func (b *BaseItemType) GetEnchantMods() []*Mod {
+	out := make([]*Mod, len(b.EnchantMods))
+	for i, key := range b.EnchantMods {
+		out[i] = Mods[key]
+	}
+
+	return out
+}
