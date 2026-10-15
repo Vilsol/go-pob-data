@@ -11,14 +11,16 @@ import (
 )
 
 var (
-	schemaFile *SchemaFile
-	tableMap   map[string]Table
+	schemaFile  *SchemaFile
+	tableMap    map[string]Table
+	tableSource map[string]string
 )
 
 var dataPath = "data"
 
 func LoadSchema(gameVersion string) {
-	schemaRaw, err := os.ReadFile(filepath.Join(dataPath, gameVersion, "schema.min.json"))
+	schemaPath := filepath.Join(dataPath, gameVersion, "schema.min.json")
+	schemaRaw, err := os.ReadFile(schemaPath)
 	if err != nil {
 		panic(err)
 	}
@@ -28,6 +30,7 @@ func LoadSchema(gameVersion string) {
 	}
 
 	tableMap = make(map[string]Table, len(schemaFile.Tables))
+	tableSource = make(map[string]string, len(schemaFile.Tables))
 	for _, table := range schemaFile.Tables {
 		if t, ok := tableMap[table.Name]; ok {
 			if t.ValidFor < table.ValidFor {
@@ -37,6 +40,7 @@ func LoadSchema(gameVersion string) {
 		}
 
 		tableMap[table.Name] = table
+		tableSource[table.Name] = schemaPath
 	}
 }
 
