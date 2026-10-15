@@ -66,7 +66,7 @@ type Table struct {
 func (t Table) ToJSONFormat() dat.JsonFormat {
 	out := dat.JsonFormat{
 		File:   t.Name,
-		Fields: make([]dat.JsonField, len(t.Columns)),
+		Fields: make([]dat.JsonField, 0, len(t.Columns)),
 	}
 
 	for i, column := range t.Columns {
@@ -100,7 +100,7 @@ func (t Table) ToJSONFormat() dat.JsonFormat {
 			tName += "[]"
 		}
 
-		out.Fields[i] = dat.JsonField{
+		field := dat.JsonField{
 			Name:        name,
 			Type:        tName,
 			Description: description,
@@ -108,6 +108,15 @@ func (t Table) ToJSONFormat() dat.JsonFormat {
 			Ref:         ref,
 			RefField:    refField,
 		}
+
+		// An interval is a min and a max of its type; pogo has no interval type.
+		if column.Interval {
+			field.Name = name + "Min"
+			out.Fields = append(out.Fields, field)
+			field.Name = name + "Max"
+		}
+
+		out.Fields = append(out.Fields, field)
 	}
 
 	return out
@@ -138,6 +147,7 @@ type Column struct {
 	Array       bool        `json:"array"`
 	Unique      bool        `json:"unique"`
 	Localized   bool        `json:"localized"`
+	Interval    bool        `json:"interval"`
 }
 
 type References struct {

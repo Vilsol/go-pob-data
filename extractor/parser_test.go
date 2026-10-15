@@ -3,6 +3,7 @@ package extractor
 import (
 	"bytes"
 	"encoding/binary"
+	"encoding/json"
 	"strings"
 	"testing"
 
@@ -68,4 +69,23 @@ func TestParseDatUnknownTable(t *testing.T) {
 	_, err := ParseDat(bytes.NewReader(datFile(1, 5)), "NoSuchTable.datc64")
 	testza.AssertNotNil(t, err)
 	testza.AssertTrue(t, strings.Contains(err.Error(), "schema row width 0"), err.Error())
+}
+
+func TestParseDatIntervalWidth(t *testing.T) {
+	useWidthFixture(t)
+	tableMap["Interval"] = Table{Name: "Interval", Columns: []Column{{Type: TypeI32, Interval: true}, {Type: TypeBool}}}
+
+	file := binary.LittleEndian.AppendUint32(nil, 1)
+	file = binary.LittleEndian.AppendUint32(file, 7)
+	file = binary.LittleEndian.AppendUint32(file, 9)
+	file = append(file, 1)
+	file = append(file, datBoundary...)
+
+	rows, err := ParseDat(bytes.NewReader(file), "Interval.datc64")
+	testza.AssertNoError(t, err)
+	testza.AssertLen(t, rows, 1)
+
+	b, err := json.Marshal(rows[0])
+	testza.AssertNoError(t, err)
+	testza.AssertTrue(t, strings.Contains(string(b), `"Var0Min":7,"Var0Max":9,"Var1":true`), string(b))
 }
