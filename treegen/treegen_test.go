@@ -88,7 +88,7 @@ func generateLive(t *testing.T) (*Tree, string) {
 		t.Skipf("no committed schema for live version %s", short)
 	}
 
-	loader, err := extractor.GetBundleLoader(extractor.NewWebFS(testdata.GameVersion()), extractor.IsNewHash(short))
+	loader, err := extractor.GetBundleLoader(extractor.NewWebFS(extractor.PoE1, testdata.GameVersion()), extractor.IsNewHash(extractor.PoE1, short))
 	testza.AssertNoError(t, err)
 
 	tree, err := Generate(loader, short)
@@ -101,7 +101,7 @@ func TestGenerateDeterministic(t *testing.T) {
 	a, err := first.Marshal()
 	testza.AssertNoError(t, err)
 
-	loader, err := extractor.GetBundleLoader(extractor.NewWebFS(testdata.GameVersion()), extractor.IsNewHash(short))
+	loader, err := extractor.GetBundleLoader(extractor.NewWebFS(extractor.PoE1, testdata.GameVersion()), extractor.IsNewHash(extractor.PoE1, short))
 	testza.AssertNoError(t, err)
 	second, err := Generate(loader, short)
 	testza.AssertNoError(t, err)

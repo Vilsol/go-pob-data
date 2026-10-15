@@ -23,6 +23,17 @@ patch="${usage_patch:-$(curl -fsSL https://raw.githubusercontent.com/poe-tool-de
 nix-shell --run "CGO_ENABLED=1 go run . -tree-only cdn:$patch ${patch%.*.*}"
 '''
 
+[tasks.extract]
+description = "Extract a game's live patch (or the given one) from the patch CDN into data/<version> (needs cgo)"
+usage = '''
+arg "[game]" help="poe1 or poe2" default="poe1"
+arg "[patch]" help="Full patch version, e.g. 3.29.3.3 or 0.5.5.4.2 (defaults to the live patch)"
+'''
+run = '''
+patch="${usage_patch:-$(nix-shell -p gcc pkg-config imagemagick --run "CGO_ENABLED=1 go run . -game ${usage_game} -latest")}"
+nix-shell -p gcc pkg-config imagemagick --run "CGO_ENABLED=1 ./extract.sh cdn:$patch $(echo "$patch" | cut -d. -f1,2) ${usage_game}"
+'''
+
 [tasks.monster-varieties]
 description = "Regenerate monster_varieties.txt (the monsters whose .ot templates are published) from PoB's minion and spectre export templates"
 usage = 'arg "[pob]" help="Path of Building checkout" default="../PathOfBuilding"'

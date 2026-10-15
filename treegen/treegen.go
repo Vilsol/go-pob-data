@@ -122,7 +122,7 @@ func Generate(loader fs.FS, gameVersion string) (*Tree, error) {
 }
 
 func generate(loader fs.FS, gameVersion string) (*Tree, *gameData, error) {
-	extractor.LoadParser(gameVersion)
+	extractor.LoadParser(extractor.PoE1, gameVersion)
 
 	d, err := loadGameData(loader, gameVersion)
 	if err != nil {

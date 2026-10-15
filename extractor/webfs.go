@@ -8,7 +8,10 @@ import (
 	"path/filepath"
 )
 
-const cdnTemplate = "https://patch.poecdn.com/%s/"
+var cdnTemplate = map[Game]string{
+	PoE1: "https://patch.poecdn.com/%s/",
+	PoE2: "https://patch-poe2.poecdn.com/%s/",
+}
 
 var _ fs.FS = (*WebFS)(nil)
 
@@ -18,9 +21,9 @@ type WebFS struct {
 	CacheDir string
 }
 
-func NewWebFS(gameVersion string) *WebFS {
+func NewWebFS(game Game, gameVersion string) *WebFS {
 	return &WebFS{
-		BasePath: fmt.Sprintf(cdnTemplate, gameVersion),
+		BasePath: fmt.Sprintf(cdnTemplate[game], gameVersion),
 		CacheDir: bundleCacheDir(gameVersion),
 	}
 }

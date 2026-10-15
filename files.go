@@ -17,6 +17,7 @@ import (
 	"github.com/pkg/errors"
 	"golang.org/x/text/encoding/unicode"
 
+	"github.com/Vilsol/go-pob-data/extractor"
 	"github.com/Vilsol/go-pob-data/loader"
 
 	_ "embed"
@@ -44,7 +45,7 @@ var monsterVarieties string
 // through their extends lines: the item templates (.it) of every base's InheritsFrom, where bases read
 // their tags, and the monster templates (.ot) of monsterVarieties' BaseMonsterTypeIndex, where those
 // monsters read their base stats.
-func extractTextFiles(bundles fs.FS, gameVersion string) error {
+func extractTextFiles(bundles fs.FS, _ extractor.Game, gameVersion string) error {
 	for _, file := range textFilesToExport {
 		if _, err := extractTextFile(bundles, gameVersion, file); err != nil {
 			return err

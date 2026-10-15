@@ -218,7 +218,7 @@ type passiveSkillTree struct {
 }
 
 func gamePath(gameVersion string, path string) string {
-	if extractor.IsNewHash(gameVersion) {
+	if extractor.IsNewHash(extractor.PoE1, gameVersion) {
 		return strings.ToLower(path)
 	}
 	return path
@@ -238,12 +238,12 @@ func loadTable[T any](l *tableLoader, name string, dst *[]T) {
 }
 
 func decodeTable[T any](loader fs.FS, gameVersion string, name string) ([]T, error) {
-	f, err := loader.Open(gamePath(gameVersion, "Data/"+name+"."+extractor.GetFileExtension(gameVersion)))
+	f, err := loader.Open(gamePath(gameVersion, "Data/"+name+"."+extractor.GetFileExtension(extractor.PoE1, gameVersion)))
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to open %s", name)
 	}
 
-	rows, err := extractor.ParseDat(f, name+"."+extractor.GetFileExtension(gameVersion))
+	rows, err := extractor.ParseDat(f, name+"."+extractor.GetFileExtension(extractor.PoE1, gameVersion))
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to parse %s", name)
 	}

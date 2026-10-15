@@ -18,7 +18,7 @@ var (
 
 var dataPath = "data"
 
-func LoadSchema(gameVersion string) {
+func LoadSchema(game Game, gameVersion string) {
 	schemaPath := filepath.Join(dataPath, gameVersion, "schema.min.json")
 	schemaRaw, err := os.ReadFile(schemaPath)
 	if err != nil {
@@ -32,6 +32,9 @@ func LoadSchema(gameVersion string) {
 	tableMap = make(map[string]Table, len(schemaFile.Tables))
 	tableSource = make(map[string]string, len(schemaFile.Tables))
 	for _, table := range schemaFile.Tables {
+		if table.ValidFor&game.validFor() == 0 {
+			continue
+		}
 		if t, ok := tableMap[table.Name]; ok {
 			if t.ValidFor < table.ValidFor {
 				// Ignore newer versions of the table

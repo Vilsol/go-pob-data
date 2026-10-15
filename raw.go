@@ -35,9 +35,9 @@ type Codec struct {
 	Variant string
 }
 
-func (f PackedFile) FilePath(gameVersion string) string {
-	ext := GetFileExtension(gameVersion)
-	if IsNewHash(gameVersion) {
+func (f PackedFile) FilePath(game extractor.Game, gameVersion string) string {
+	ext := GetFileExtension(game, gameVersion)
+	if IsNewHash(game, gameVersion) {
 		return strings.ToLower(f.path) + "." + ext
 	}
 	return f.path + "." + ext
@@ -375,13 +375,13 @@ var imagesToExport = []string{
 	"Art/2DArt/BaseClassIllustrations/DexInt.dds",
 }
 
-func extractRawData(bundles fs.FS, gameVersion string) error {
+func extractRawData(bundles fs.FS, game extractor.Game, gameVersion string) error {
 	for _, file := range filesToExport {
-		pathWithExt := file.path + "." + GetFileExtension(gameVersion)
+		pathWithExt := file.path + "." + GetFileExtension(game, gameVersion)
 
 		slog.Info("extracting", slog.String("path", pathWithExt))
 
-		data, err := bundles.Open(file.FilePath(gameVersion))
+		data, err := bundles.Open(file.FilePath(game, gameVersion))
 		if err != nil {
 			slog.Error("failed to open dat file", slog.String("error", err.Error()), slog.String("path", pathWithExt))
 			continue

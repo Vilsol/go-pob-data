@@ -16,8 +16,8 @@ import (
 
 var parser *dat.DataParser
 
-func LoadParser(gameVersion string) {
-	LoadSchema(gameVersion)
+func LoadParser(game Game, gameVersion string) {
+	LoadSchema(game, gameVersion)
 	parser = dat.InitParser(gameVersion, &schemaFS{})
 }
 

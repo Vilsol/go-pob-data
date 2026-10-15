@@ -24,8 +24,8 @@ func TestGuards(t *testing.T) {
 	if _, err := os.Stat(filepath.Join("data", short, "schema.min.json")); err != nil {
 		t.Skipf("no committed schema for live version %s", short)
 	}
-	extractor.LoadParser(short)
-	loader, err := extractor.GetBundleLoader(extractor.NewWebFS(testdata.GameVersion()), extractor.IsNewHash(short))
+	extractor.LoadParser(extractor.PoE1, short)
+	loader, err := extractor.GetBundleLoader(extractor.NewWebFS(extractor.PoE1, testdata.GameVersion()), extractor.IsNewHash(extractor.PoE1, short))
 	testza.AssertNoError(t, err)
 
 	t.Run("missing table", func(t *testing.T) {

@@ -28,12 +28,12 @@ func datPath(name string) string {
 }
 
 func TestReadIndex(t *testing.T) {
-	_, err := GetBundleLoader(NewWebFS(testdata.GameVersion()), true)
+	_, err := GetBundleLoader(NewWebFS(PoE1, testdata.GameVersion()), true)
 	testza.AssertNoError(t, err)
 }
 
 func TestReadSkillGems(t *testing.T) {
-	loader, err := GetBundleLoader(NewWebFS(testdata.GameVersion()), true)
+	loader, err := GetBundleLoader(NewWebFS(PoE1, testdata.GameVersion()), true)
 	testza.AssertNoError(t, err)
 
 	skillGems, err := loader.Open(datPath("SkillGems"))
@@ -50,7 +50,7 @@ func TestReadSkillGems(t *testing.T) {
 
 func TestLoadSchema(t *testing.T) {
 	requireLiveSchema(t)
-	LoadSchema(testdata.ShortGameVersion())
+	LoadSchema(PoE1, testdata.ShortGameVersion())
 
 	testza.AssertNotNil(t, schemaFile)
 
@@ -61,9 +61,9 @@ func TestLoadSchema(t *testing.T) {
 
 func TestParseDat(t *testing.T) {
 	requireLiveSchema(t)
-	LoadParser(testdata.ShortGameVersion())
+	LoadParser(PoE1, testdata.ShortGameVersion())
 
-	loader, err := GetBundleLoader(NewWebFS(testdata.GameVersion()), true)
+	loader, err := GetBundleLoader(NewWebFS(PoE1, testdata.GameVersion()), true)
 	testza.AssertNoError(t, err)
 
 	tables := []string{

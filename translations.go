@@ -6,10 +6,11 @@ import (
 
 	"github.com/pkg/errors"
 
+	"github.com/Vilsol/go-pob-data/extractor"
 	st "github.com/Vilsol/go-pob-data/stat_translations"
 )
 
-func extractTranslations(loader fs.FS, gameVersion string) error {
+func extractTranslations(loader fs.FS, _ extractor.Game, gameVersion string) error {
 	for _, name := range st.Files {
 		parser := st.NewTranslationParser(loader)
 		if err := parser.ParseFile("metadata/statdescriptions/" + name + ".txt"); err != nil {

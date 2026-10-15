@@ -77,7 +77,7 @@ func TestParsePassiveSkillGraphTrailingBytes(t *testing.T) {
 func TestParseLivePassiveSkillGraph(t *testing.T) {
 	requireLiveSchema(t)
 
-	loader, err := GetBundleLoader(NewWebFS(testdata.GameVersion()), true)
+	loader, err := GetBundleLoader(NewWebFS(PoE1, testdata.GameVersion()), true)
 	testza.AssertNoError(t, err)
 
 	f, err := loader.Open("metadata/passiveskillgraph.psg")

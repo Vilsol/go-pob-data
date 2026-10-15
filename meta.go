@@ -105,10 +105,10 @@ func manifestJSON(versionDir string) ([]byte, error) {
 	return append(b, '\n'), errors.Wrap(err, "failed marshaling manifest")
 }
 
-func IsNewHash(gameVersion string) bool {
-	return extractor.IsNewHash(gameVersion)
+func IsNewHash(game extractor.Game, gameVersion string) bool {
+	return extractor.IsNewHash(game, gameVersion)
 }
 
-func GetFileExtension(gameVersion string) string {
-	return extractor.GetFileExtension(gameVersion)
+func GetFileExtension(game extractor.Game, gameVersion string) string {
+	return extractor.GetFileExtension(game, gameVersion)
 }
