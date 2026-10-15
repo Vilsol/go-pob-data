@@ -11,6 +11,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"reflect"
+	"slices"
 	"sort"
 	"strings"
 
@@ -366,6 +367,119 @@ var filesToExport = []PackedFile{
 	},
 }
 
+// poe2TablesToExport are published as json only: the raw structs are PoE1 layouts. The first group is
+// filesToExport less the 8 tables PoE2 does not ship; the second is what PoB-PoE2's exporter reads besides.
+var poe2TablesToExport = slices.Concat([]string{
+	"ActiveSkills",
+	"ActiveSkillType",
+	"AlternatePassiveAdditions",
+	"AlternatePassiveSkills",
+	"AlternateTreeArt",
+	"AlternateTreeVersions",
+	"ArmourTypes",
+	"AtlasNode",
+	"AtlasNodeDefinition",
+	"BaseItemTypes",
+	"BuffTemplates",
+	"ClientStrings",
+	"ComponentCharges",
+	"CostTypes",
+	"CraftingBenchOptions",
+	"CraftingItemClassCategories",
+	"CurrencyExchange",
+	"DefaultMonsterStats",
+	"EffectivenessCostConstants",
+	"Essences",
+	"Flasks",
+	"FlavourText",
+	"GameConstants",
+	"GemEffects",
+	"GemTags",
+	"GrantedEffectQualityStats",
+	"GrantedEffects",
+	"GrantedEffectsPerLevel",
+	"GrantedEffectStatSets",
+	"GrantedEffectStatSetsPerLevel",
+	"ItemClasses",
+	"ItemExperiencePerLevel",
+	"ItemVisualIdentity",
+	"ModFamily",
+	"Mods",
+	"ModType",
+	"MonsterMapBossDifficulty",
+	"MonsterMapDifficulty",
+	"MonsterResistances",
+	"MonsterTypes",
+	"MonsterVarieties",
+	"PantheonPanelLayout",
+	"PassiveJewelSlots",
+	"PassiveOverrideLimits",
+	"PassiveSkillOverrides",
+	"PassiveSkillOverrideTypes",
+	"PassiveSkills",
+	"PassiveSkillTreeConnectionArt",
+	"PassiveSkillTreeNodeFrameArt",
+	"PassiveTreeExpansionJewels",
+	"PassiveTreeExpansionJewelSizes",
+	"PassiveTreeExpansionSkills",
+	"PassiveTreeExpansionSpecialSkills",
+	"ShieldTypes",
+	"SkillGems",
+	"SkillTotemVariations",
+	"Stats",
+	"Tags",
+	"UniqueStashLayout",
+	"UniqueStashTypes",
+	"VirtualStatContextFlags",
+	"WeaponTypes",
+	"Words",
+}, []string{
+	"Ascendancy",
+	"AscendancyPassiveSkillOverrides",
+	"AttributeRequirements",
+	"BlightCraftingRecipes",
+	"BlightCraftingResults",
+	"BuildPlannerInventories",
+	"CharacterMeleeSkills",
+	"ClassPassiveSkillOverrides",
+	"EndgameMaps",
+	"EssenceMods",
+	"Expedition2VerisiumCrafts",
+	"FlatPhysicalDamageValues",
+	"GoldRespecPrices",
+	"ItemInherentSkills",
+	"ItemSpirit",
+	"LiquidEmotionOutcomes",
+	"MinionGemLevelScaling",
+	"ModGrantedSkills",
+	"MonsterCategories",
+	"MonsterPackEntries",
+	"MonsterPacks",
+	"PassiveJewelArt",
+	"PassiveJewelUniqueArt",
+	"PassiveSkillTrees",
+	"PlayerMinionIntrinsicStats",
+	"SkillGemSupports",
+	"SoulCores",
+	"SoulCoreStats",
+	"SpectreOverrides",
+	"SupportGems",
+	"UniqueOrigins",
+	"WorldAreas",
+})
+
+// tablesToExport is game's export list.
+func tablesToExport(game extractor.Game) []PackedFile {
+	if game != extractor.PoE2 {
+		return filesToExport
+	}
+	files := make([]PackedFile, 0, len(poe2TablesToExport))
+	for _, name := range poe2TablesToExport {
+		files = append(files, PackedFile{path: game.TableDir() + name})
+	}
+	return files
+}
+
 var imagesToExport = []string{
 	"Art/2DArt/BaseClassIllustrations/Str.dds",
 	"Art/2DArt/BaseClassIllustrations/Dex.dds",
@@ -376,7 +490,7 @@ var imagesToExport = []string{
 }
 
 func extractRawData(bundles fs.FS, game extractor.Game, gameVersion string) error {
-	for _, file := range filesToExport {
+	for _, file := range tablesToExport(game) {
 		pathWithExt := file.path + "." + GetFileExtension(game, gameVersion)
 
 		slog.Info("extracting", slog.String("path", pathWithExt))
@@ -440,6 +554,10 @@ func extractRawData(bundles fs.FS, game extractor.Game, gameVersion string) erro
 
 		_ = writerBrotli.Close()
 		_ = fBrotli.Close()
+
+		if file.Encode == nil {
+			continue
+		}
 
 		name := strings.Split(filepath.Base(pathWithExt), ".")[0]
 		asset, err := file.Encode(b)
