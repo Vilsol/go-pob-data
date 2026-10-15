@@ -9,6 +9,7 @@ import (
 	"log/slog"
 	"os"
 	"path/filepath"
+	"reflect"
 	"regexp"
 	"strconv"
 	"strings"
@@ -23,7 +24,7 @@ import (
 )
 
 var (
-	includeRegex     = regexp.MustCompile(`^include "(Metadata/StatDescriptions/.+\.txt)"$`)
+	includeRegex     = regexp.MustCompile(`^include "(Metadata/StatDescriptions/.+\.txt|Data/StatDescriptions/.+\.csd)"$`)
 	noDescRegex      = regexp.MustCompile(`^no_description (\S+)$`)
 	descriptionRegex = regexp.MustCompile(`^(handed_)?description(?: (\S+))?$`)
 	langRegex        = regexp.MustCompile(`^lang "(.+)"$`)
@@ -108,6 +109,8 @@ func (t *TranslationParser) ParseFile(name string) error {
 	curLang := defaultLang
 	remaining := 0
 	statCount := 0
+	// repeated is the first block of a language the current block repeats, which PoE2 files do.
+	var repeated []raw.LangTranslation
 
 	for i, rawLine := range bytes.Split(all, []byte("\n")) {
 		line := strings.TrimSpace(strings.TrimPrefix(string(rawLine), "\ufeff"))
@@ -117,6 +120,16 @@ func (t *TranslationParser) ParseFile(name string) error {
 
 		fail := func(reason string) error {
 			return errors.Errorf("%s:%d: %s: %q", name, i+1, reason, line)
+		}
+		endRepeat := func() error {
+			if remaining > 0 || repeated == nil {
+				return nil
+			}
+			if !reflect.DeepEqual(repeated, cur.Lang[curLang]) {
+				return fail("language repeated with different lines")
+			}
+			repeated = nil
+			return nil
 		}
 
 		// A description ends after its last variant, so these only start a new one there.
@@ -152,8 +165,11 @@ func (t *TranslationParser) ParseFile(name string) error {
 			state, curLang = wantStats, defaultLang
 		case cur != nil && state == wantVariant && remaining == 0 && langRegex.MatchString(line):
 			curLang = langRegex.FindStringSubmatch(line)[1]
-			if _, ok := cur.Lang[curLang]; ok {
-				return fail("language repeated")
+			if first, ok := cur.Lang[curLang]; ok {
+				if curLang == defaultLang {
+					return fail("language repeated")
+				}
+				repeated = first
 			}
 			state = wantCount
 		case cur != nil && state == wantStats && handed && countRegex.MatchString(line):
@@ -195,6 +211,9 @@ func (t *TranslationParser) ParseFile(name string) error {
 			remaining, _ = strconv.Atoi(line)
 			cur.Lang[curLang] = make([]raw.LangTranslation, 0, remaining)
 			state = wantVariant
+			if err := endRepeat(); err != nil {
+				return err
+			}
 		case cur != nil && state == wantVariant && remaining > 0:
 			translation, v, err := parseLine(line, len(cur.Stats))
 			if err != nil {
@@ -205,6 +224,9 @@ func (t *TranslationParser) ParseFile(name string) error {
 				cur.variants = append(cur.variants, v)
 			}
 			remaining--
+			if err := endRepeat(); err != nil {
+				return err
+			}
 		default:
 			return fail("unexpected line")
 		}

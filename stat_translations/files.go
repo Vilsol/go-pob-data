@@ -48,3 +48,39 @@ var Files = []string{
 	"variable_duration_skill_stat_descriptions",
 	"village_stat_descriptions",
 }
+
+// PoE2Files are PoE2's stat description files under Data/StatDescriptions (.csd), by name without
+// extension; the files under SpecificSkillDir are found in the game rather than listed.
+var PoE2Files = []string{
+	"active_skill_gem_stat_descriptions",
+	"advanced_mod_stat_descriptions",
+	"atlas_stat_descriptions",
+	"atlas_variant_stat_descriptions",
+	"character_panel_gamepad_stat_descriptions",
+	"character_panel_stat_descriptions",
+	"chest_stat_descriptions",
+	"endgame_map_stat_descriptions",
+	"expedition_relic_special_stat_descriptions",
+	"expedition_relic_stat_descriptions",
+	"gem_stat_descriptions",
+	"heist_equipment_stat_descriptions",
+	"leaguestone_stat_descriptions",
+	"map_stat_descriptions",
+	"map_temple_room_stat_descriptions",
+	"meta_gem_stat_descriptions",
+	"monster_stat_descriptions",
+	"passive_skill_aura_stat_descriptions",
+	"passive_skill_stat_descriptions",
+	"passive_skill_variant_stat_descriptions",
+	"primordial_altar_stat_descriptions",
+	"sanctum_relic_stat_descriptions",
+	"sentinel_stat_descriptions",
+	"skill_stat_descriptions",
+	"stat_descriptions",
+	"tablet_stat_descriptions",
+	"utility_flask_buff_stat_descriptions",
+}
+
+// SpecificSkillDir holds PoE2's per-skill stat description files, some of them one directory deeper per
+// stat set.
+const SpecificSkillDir = "specific_skill_stat_descriptions"

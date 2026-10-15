@@ -78,10 +78,39 @@ func TestParseFileRejects(t *testing.T) {
 		"off hand mismatch":    "handed_description\n\t2 a b\n\t\tc\n\t1\n\t\t# # \"x\"\n",
 		"bad limit":            "description\n\t1 a\n\t1\n\t\t1|x \"x\"\n",
 		"line outside a block": "description\n\t1 a\n\t1\n\t\t# \"x\"\n\t\t# \"y\"\n",
+		"repeat differs":       "description\n\t1 a\n\t1\n\t\t# \"x\"\n\tlang \"German\"\n\t1\n\t\t# \"y\"\n\tlang \"German\"\n\t1\n\t\t# \"z\"\n",
+		"repeat is shorter":    "description\n\t1 a\n\t1\n\t\t# \"x\"\n\tlang \"German\"\n\t1\n\t\t# \"y\"\n\tlang \"German\"\n\t0\n",
+		"english repeated":     "description\n\t1 a\n\t1\n\t\t# \"x\"\n\tlang \"English\"\n\t1\n\t\t# \"x\"\n",
 	} {
 		t.Run(name, func(t *testing.T) {
 			_, err := parse(t, text)
 			testza.AssertNotNil(t, err)
 		})
+	}
+}
+
+// PoE2's atlas_variant_stat_descriptions.csd repeats a language block with the same lines.
+func TestParseFileRepeatedLanguage(t *testing.T) {
+	p, err := parse(t, "description\n\t1 a\n\t1\n\t\t# \"x\"\n\tlang \"German\"\n\t1\n\t\t# \"y\"\n\tlang \"French\"\n\t1\n\t\t# \"z\"\n\tlang \"German\"\n\t1\n\t\t# \"y\"\n")
+	testza.AssertNoError(t, err)
+	testza.AssertLen(t, p.ordered[0].Lang["German"], 1)
+	testza.AssertEqual(t, "y", p.ordered[0].Lang["German"][0].String)
+}
+
+// PoE2's .csd files include each other under Data/StatDescriptions.
+func TestParseFileCsd(t *testing.T) {
+	text := "include \"Data/StatDescriptions/stat_descriptions.csd\"\ndescription\n\t1 a\n\t1\n\t\t# \"x\"\n"
+	loader := fstest.MapFS{"data/statdescriptions/skill.csd": {Data: utf16(t, text)}}
+	p := NewTranslationParser(loader)
+	testza.AssertNoError(t, p.ParseFile("data/statdescriptions/skill.csd"))
+	testza.AssertEqual(t, []string{"Data/StatDescriptions/stat_descriptions.csd"}, p.includes)
+	testza.AssertLen(t, p.ordered, 1)
+
+	for _, line := range []string{
+		`include "Data/StatDescriptions/stat_descriptions.txt"`,
+		`include "Metadata/StatDescriptions/stat_descriptions.csd"`,
+	} {
+		_, err := parse(t, line+"\n")
+		testza.AssertNotNil(t, err, line)
 	}
 }
