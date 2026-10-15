@@ -368,7 +368,8 @@ var filesToExport = []PackedFile{
 }
 
 // poe2TablesToExport are published as json only: the raw structs are PoE1 layouts. The first group is
-// filesToExport less the 8 tables PoE2 does not ship; the second is what PoB-PoE2's exporter reads besides.
+// filesToExport less the 8 tables PoE2 does not ship; the second is what PoB-PoE2's exporter reads besides,
+// and Characters, which names the class illustrations.
 var poe2TablesToExport = slices.Concat([]string{
 	"ActiveSkills",
 	"ActiveSkillType",
@@ -441,6 +442,7 @@ var poe2TablesToExport = slices.Concat([]string{
 	"BlightCraftingResults",
 	"BuildPlannerInventories",
 	"CharacterMeleeSkills",
+	"Characters",
 	"ClassPassiveSkillOverrides",
 	"EndgameMaps",
 	"EssenceMods",
@@ -487,6 +489,27 @@ var imagesToExport = []string{
 	"Art/2DArt/BaseClassIllustrations/StrDex.dds",
 	"Art/2DArt/BaseClassIllustrations/StrInt.dds",
 	"Art/2DArt/BaseClassIllustrations/DexInt.dds",
+}
+
+// imagesFor is game's images: PoE2's are the passive tree illustrations its Characters table names, since
+// its index also carries the PoE1 art.
+func imagesFor(game extractor.Game, gameVersion string) ([]string, error) {
+	if game != extractor.PoE2 {
+		return imagesToExport, nil
+	}
+	characters, err := readRows[struct {
+		PassiveTreeImage string `json:"PassiveTreeImage"`
+	}](gameVersion, "Characters")
+	if err != nil {
+		return nil, err
+	}
+	images := make([]string, 0, len(characters))
+	for _, c := range characters {
+		if c.PassiveTreeImage != "" && !slices.Contains(images, c.PassiveTreeImage) {
+			images = append(images, c.PassiveTreeImage)
+		}
+	}
+	return images, nil
 }
 
 func extractRawData(bundles fs.FS, game extractor.Game, gameVersion string) error {
@@ -571,12 +594,17 @@ func extractRawData(bundles fs.FS, game extractor.Game, gameVersion string) erro
 		}
 	}
 
+	images, err := imagesFor(game, gameVersion)
+	if err != nil {
+		return err
+	}
+
 	imagick.Initialize()
 
 	mw := imagick.NewMagickWand()
 	defer mw.Destroy()
 
-	for _, img := range imagesToExport {
+	for _, img := range images {
 		slog.Info("extracting", slog.String("path", img))
 
 		data, err := bundles.Open(strings.ToLower(img))

@@ -33,6 +33,13 @@ var textFilesToExport = []string{
 	"art/uiimages1.txt",
 }
 
+// poe2TextFilesToExport is textFilesToExport less skillpopup_stat_filters.txt, which PoE2 does not ship.
+var poe2TextFilesToExport = []string{
+	"Metadata/Characters/Character.ot",
+	"Metadata/Monsters/Monster.ot",
+	"art/uiimages1.txt",
+}
+
 var extendsRegex = regexp.MustCompile(`(?m)^extends "([^"]+)"`)
 
 // monsterVarieties are the monsters PoB's minion and spectre export templates name, one MonsterVarieties
@@ -41,12 +48,26 @@ var extendsRegex = regexp.MustCompile(`(?m)^extends "([^"]+)"`)
 //go:embed monster_varieties.txt
 var monsterVarieties string
 
+// poe2MonsterVarieties is monsterVarieties from PoB-PoE2's templates (mise run monster-varieties <pob> poe2).
+//
+//go:embed monster_varieties_poe2.txt
+var poe2MonsterVarieties string
+
+// textFiles are game's textFilesToExport and monsterVarieties.
+func textFiles(game extractor.Game) ([]string, string) {
+	if game == extractor.PoE2 {
+		return poe2TextFilesToExport, poe2MonsterVarieties
+	}
+	return textFilesToExport, monsterVarieties
+}
+
 // extractTextFiles publishes textFilesToExport and the templates rows inherit from, with their ancestors
 // through their extends lines: the item templates (.it) of every base's InheritsFrom, where bases read
 // their tags, and the monster templates (.ot) of monsterVarieties' BaseMonsterTypeIndex, where those
 // monsters read their base stats.
-func extractTextFiles(bundles fs.FS, _ extractor.Game, gameVersion string) error {
-	for _, file := range textFilesToExport {
+func extractTextFiles(bundles fs.FS, game extractor.Game, gameVersion string) error {
+	files, varieties := textFiles(game)
+	for _, file := range files {
 		if _, err := extractTextFile(bundles, gameVersion, file); err != nil {
 			return err
 		}
@@ -62,37 +83,43 @@ func extractTextFiles(bundles fs.FS, _ extractor.Game, gameVersion string) error
 	for _, base := range bases {
 		itemRoots = append(itemRoots, base.InheritsFrom)
 	}
-	if err := extractTemplates(bundles, gameVersion, itemRoots, ".it"); err != nil {
+	if err := extractTemplates(bundles, game, gameVersion, itemRoots, ".it"); err != nil {
 		return err
 	}
 
-	varieties, err := readRows[struct {
+	rows, err := readRows[struct {
 		ID                   string `json:"Id"`
 		BaseMonsterTypeIndex string `json:"BaseMonsterTypeIndex"`
 	}](gameVersion, "MonsterVarieties")
 	if err != nil {
 		return err
 	}
-	objectTypes := make(map[string]string, len(varieties))
-	for _, variety := range varieties {
+	objectTypes := make(map[string]string, len(rows))
+	for _, variety := range rows {
 		objectTypes[variety.ID] = variety.BaseMonsterTypeIndex
 	}
 	monsterRoots := make([]string, 0)
-	for _, id := range strings.Fields(monsterVarieties) {
+	for _, id := range strings.Fields(varieties) {
 		objectType, ok := objectTypes[id]
+		// PoB-PoE2's templates follow its own patch, so PoE2 skips a variety the game no longer has.
+		if !ok && game == extractor.PoE2 {
+			slog.Warn("skipping a monster variety the game does not have", slog.String("id", id))
+			continue
+		}
 		if !ok {
 			return errors.New("monster_varieties.txt names a variety the game does not have: " + id)
 		}
 		monsterRoots = append(monsterRoots, objectType)
 	}
-	return extractTemplates(bundles, gameVersion, monsterRoots, ".ot")
+	return extractTemplates(bundles, game, gameVersion, monsterRoots, ".ot")
 }
 
 // extractTemplates publishes the templates of roots and of their ancestors, up to "nothing" or a template
-// textFilesToExport already publishes (Metadata/Monsters/Monster).
-func extractTemplates(bundles fs.FS, gameVersion string, roots []string, ext string) error {
+// textFiles already publishes (Metadata/Monsters/Monster).
+func extractTemplates(bundles fs.FS, game extractor.Game, gameVersion string, roots []string, ext string) error {
+	files, _ := textFiles(game)
 	seen := map[string]bool{"": true, "nothing": true}
-	for _, file := range textFilesToExport {
+	for _, file := range files {
 		seen[strings.TrimSuffix(file, ext)] = true
 	}
 
@@ -107,6 +134,11 @@ func extractTemplates(bundles fs.FS, gameVersion string, roots []string, ext str
 		seen[template] = true
 
 		text, err := extractTextFile(bundles, gameVersion, template+ext)
+		// PoE2 names templates it does not ship (BloodClan); PoB-PoE2 skips them too (minions.lua:55-57).
+		if errors.Is(err, fs.ErrNotExist) && game == extractor.PoE2 {
+			slog.Warn("skipping a template the game does not have", slog.String("path", template+ext))
+			continue
+		}
 		if err != nil {
 			return err
 		}

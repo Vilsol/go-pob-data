@@ -35,8 +35,13 @@ nix-shell -p gcc pkg-config imagemagick --run "CGO_ENABLED=1 ./extract.sh cdn:$p
 '''
 
 [tasks.monster-varieties]
-description = "Regenerate monster_varieties.txt (the monsters whose .ot templates are published) from PoB's minion and spectre export templates"
-usage = 'arg "[pob]" help="Path of Building checkout" default="../PathOfBuilding"'
+description = "Regenerate monster_varieties.txt, or monster_varieties_poe2.txt from PoB-PoE2 (the monsters whose .ot templates are published), from PoB's minion and spectre export templates"
+usage = '''
+arg "[pob]" help="Path of Building checkout" default="../PathOfBuilding"
+arg "[game]" help="poe1 or poe2" default="poe1"
+'''
 run = '''
-grep -h '^#\(monster\|spectre\) ' "${usage_pob}/src/Export/Minions/Minions.txt" "${usage_pob}/src/Export/Minions/Spectres.txt" | awk '{print $2}' | LC_ALL=C sort -u > monster_varieties.txt
+out=monster_varieties.txt
+[ "${usage_game}" = poe2 ] && out=monster_varieties_poe2.txt
+grep -h '^#\(monster\|spectre\) ' "${usage_pob}/src/Export/Minions/Minions.txt" "${usage_pob}/src/Export/Minions/Spectres.txt" | awk '{print $2}' | LC_ALL=C sort -u > "$out"
 '''
