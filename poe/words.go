@@ -13,6 +13,12 @@ type Word struct {
 
 var Words []*Word
 
+var wordsByText map[string][]*Word
+
 func InitializeWords(ctx context.Context, version string, assetCache loader.AssetCache) error {
-	return loader.InitHelper(ctx, version, "Words", &Words, nil, assetCache)
+	return loader.InitHelper(ctx, version, "Words", &Words, func(count int64) {
+		wordsByText = make(map[string][]*Word, count)
+	}, assetCache, func(obj *Word) {
+		wordsByText[obj.Text] = append(wordsByText[obj.Text], obj)
+	})
 }

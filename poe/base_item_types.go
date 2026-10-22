@@ -40,3 +40,10 @@ func (b *BaseItemType) GetEnchantMods() []*Mod {
 
 	return out
 }
+
+func (b *BaseItemType) GetItemVisualIdentity() *ItemVisualIdentity {
+	if b.ItemVisualIdentity < 0 || b.ItemVisualIdentity >= len(ItemVisualIdentities) {
+		return nil
+	}
+	return ItemVisualIdentities[b.ItemVisualIdentity]
+}
