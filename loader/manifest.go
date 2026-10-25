@@ -20,6 +20,9 @@ type Manifest struct {
 	Languages []string `json:"languages"`
 	// Files are the game text files LoadFile reads, by game path.
 	Files []string `json:"files"`
+	// JSONOnly is set when the tables have no tuple assets, only json.gz and json.br, so LoadRaw cannot
+	// read them. Stat translations are unaffected.
+	JSONOnly bool `json:"jsonOnly,omitempty"`
 }
 
 func (m *Manifest) HasTable(name string) bool {

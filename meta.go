@@ -65,6 +65,12 @@ func manifestJSON(versionDir string) ([]byte, error) {
 		manifest.Tables = append(manifest.Tables, strings.TrimSuffix(filepath.Base(table), ".json.gz"))
 	}
 
+	tuples, err := filepath.Glob(filepath.Join(versionDir, "raw", "*.t-*.msgpack.br"))
+	if err != nil {
+		return nil, errors.Wrap(err, "failed listing tuple assets")
+	}
+	manifest.JSONOnly = len(tables) > 0 && len(tuples) == 0
+
 	languages, err := os.ReadDir(filepath.Join(versionDir, "stat_translations"))
 	if err != nil && !os.IsNotExist(err) {
 		return nil, errors.Wrap(err, "failed listing languages")
@@ -75,13 +81,23 @@ func manifestJSON(versionDir string) ([]byte, error) {
 		}
 	}
 
-	translations, err := filepath.Glob(filepath.Join(versionDir, "stat_translations", "en", "*.json.gz"))
-	if err != nil {
+	// PoE2 nests its per-skill descriptions under specific_skill_stat_descriptions/.
+	enDir := filepath.Join(versionDir, "stat_translations", "en")
+	err = filepath.WalkDir(enDir, func(path string, d fs.DirEntry, err error) error {
+		if err != nil || d.IsDir() || !strings.HasSuffix(path, ".json.gz") {
+			return err
+		}
+		rel, err := filepath.Rel(enDir, path)
+		if err != nil {
+			return errors.Wrap(err, "failed resolving translation path")
+		}
+		manifest.StatTranslations = append(manifest.StatTranslations, strings.TrimSuffix(filepath.ToSlash(rel), ".json.gz"))
+		return nil
+	})
+	if err != nil && !os.IsNotExist(err) {
 		return nil, errors.Wrap(err, "failed listing translations")
 	}
-	for _, translation := range translations {
-		manifest.StatTranslations = append(manifest.StatTranslations, strings.TrimSuffix(filepath.Base(translation), ".json.gz"))
-	}
+	slices.Sort(manifest.StatTranslations)
 
 	filesDir := filepath.Join(versionDir, "files")
 	err = filepath.WalkDir(filesDir, func(path string, d fs.DirEntry, err error) error {
