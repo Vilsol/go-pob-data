@@ -369,7 +369,8 @@ var filesToExport = []PackedFile{
 
 // poe2TablesToExport are published as json only: the raw structs are PoE1 layouts. The first group is
 // filesToExport less the 8 tables PoE2 does not ship; the second is what PoB-PoE2's exporter reads besides,
-// and Characters, which names the class illustrations.
+// and Characters, which names the class illustrations; the third holds the quest rewards and the unique
+// name lists.
 var poe2TablesToExport = slices.Concat([]string{
 	"ActiveSkills",
 	"ActiveSkillType",
@@ -468,6 +469,12 @@ var poe2TablesToExport = slices.Concat([]string{
 	"SupportGems",
 	"UniqueOrigins",
 	"WorldAreas",
+}, []string{
+	"KeywordPopupItemReference",
+	"Quest",
+	"QuestFlags",
+	"QuestStaticRewards",
+	"UniqueGoldPrices",
 })
 
 // tablesToExport is game's export list.
