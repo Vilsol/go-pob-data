@@ -347,7 +347,7 @@ func TestTupleMatchesJSON(t *testing.T) {
 		name, variant, _ := strings.Cut(strings.TrimSuffix(filepath.Base(path), ".msgpack.br"), ".")
 		want, ok := variants[name]
 		if strings.Contains(path, "stat_translations") {
-			want, ok = translationVariant, slices.Contains(st.Files, name)
+			want, ok = translationVariant, slices.Contains(st.Files, name) || slices.Contains(st.PoE2Files, name)
 		}
 		switch {
 		case !ok:
@@ -365,7 +365,11 @@ func TestTupleMatchesJSON(t *testing.T) {
 
 	for _, dir := range dirs {
 		version := filepath.Base(filepath.Dir(dir))
+		manifest := readManifest(t, version)
 		for _, file := range filesToExport {
+			if manifest.JSONOnly {
+				break
+			}
 			name := filepath.Base(file.path)
 			key := version + "/" + name
 			t.Run(key, func(t *testing.T) {
@@ -414,7 +418,7 @@ func TestTupleMatchesJSON(t *testing.T) {
 		}
 
 		for _, lang := range langDirs(t, version) {
-			for _, name := range st.Files {
+			for _, name := range manifest.StatTranslations {
 				t.Run(version+"/"+lang+"/"+name, func(t *testing.T) {
 					base := filepath.Join("data", version, "stat_translations", lang, name)
 					tuplePath := loader.AssetPath(base, translationVariant)
@@ -445,6 +449,20 @@ func TestTupleMatchesJSON(t *testing.T) {
 			}
 		}
 	}
+}
+
+func readManifest(t *testing.T, version string) loader.Manifest {
+	t.Helper()
+
+	b, err := os.ReadFile(filepath.Join("data", version, "manifest.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var m loader.Manifest
+	if err := json.Unmarshal(b, &m); err != nil {
+		t.Fatal(err)
+	}
+	return m
 }
 
 func langDirs(t *testing.T, version string) []string {
@@ -563,6 +581,10 @@ func TestStatsCannotGrantToMinion(t *testing.T) {
 	}
 	for _, path := range jsons {
 		t.Run(path, func(t *testing.T) {
+			// raw.Stat is a PoE1 layout.
+			if readManifest(t, filepath.Base(filepath.Dir(filepath.Dir(path)))).JSONOnly {
+				t.Skip("json only")
+			}
 			var stats []raw.Stat
 			if err := json.Unmarshal(readGzip(t, path), &stats); err != nil {
 				t.Fatal(err)
