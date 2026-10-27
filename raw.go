@@ -436,6 +436,7 @@ var poe2TablesToExport = slices.Concat([]string{
 	"WeaponTypes",
 	"Words",
 }, []string{
+	"ActiveSkillWeaponRequirement",
 	"Ascendancy",
 	"AscendancyPassiveSkillOverrides",
 	"AttributeRequirements",
@@ -450,6 +451,8 @@ var poe2TablesToExport = slices.Concat([]string{
 	"Expedition2VerisiumCrafts",
 	"FlatPhysicalDamageValues",
 	"GoldRespecPrices",
+	"GrantedEffectLabels",
+	"ItemClassCategories",
 	"ItemInherentSkills",
 	"ItemSpirit",
 	"LiquidEmotionOutcomes",
@@ -466,8 +469,10 @@ var poe2TablesToExport = slices.Concat([]string{
 	"SoulCores",
 	"SoulCoreStats",
 	"SpectreOverrides",
+	"SupportGemFamily",
 	"SupportGems",
 	"UniqueOrigins",
+	"WieldableClasses",
 	"WorldAreas",
 }, []string{
 	"KeywordPopupItemReference",

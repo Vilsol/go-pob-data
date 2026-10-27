@@ -1,6 +1,7 @@
 {
 	"tables": [
 		"ActiveSkillType",
+		"ActiveSkillWeaponRequirement",
 		"ActiveSkills",
 		"AlternatePassiveAdditions",
 		"AlternatePassiveSkills",
@@ -39,11 +40,13 @@
 		"GemEffects",
 		"GemTags",
 		"GoldRespecPrices",
+		"GrantedEffectLabels",
 		"GrantedEffectQualityStats",
 		"GrantedEffectStatSets",
 		"GrantedEffectStatSetsPerLevel",
 		"GrantedEffects",
 		"GrantedEffectsPerLevel",
+		"ItemClassCategories",
 		"ItemClasses",
 		"ItemExperiencePerLevel",
 		"ItemInherentSkills",
@@ -91,6 +94,7 @@
 		"SoulCores",
 		"SpectreOverrides",
 		"Stats",
+		"SupportGemFamily",
 		"SupportGems",
 		"Tags",
 		"UniqueGoldPrices",
@@ -99,6 +103,7 @@
 		"UniqueStashTypes",
 		"VirtualStatContextFlags",
 		"WeaponTypes",
+		"WieldableClasses",
 		"Words",
 		"WorldAreas"
 	],
