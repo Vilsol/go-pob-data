@@ -5,8 +5,8 @@ permissions: read-all
 on: [push, pull_request]
 
 env:
-  GO_VERSION: "1.21.0"
-  LFS_INCLUDE: "data/**/*.msgpack.br,data/**/*.json.gz,treegen/testdata/*.gz"
+  GO_VERSION: "1.23.3"
+  LFS_INCLUDE: "data/**/*.msgpack.br,data/**/*.json.gz,data/**/files/**,treegen/testdata/*.gz"
 
 jobs:
   lint:
