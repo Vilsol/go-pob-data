@@ -109,8 +109,9 @@ type AlternatePassiveAddition struct {
 
 // Stat resolves the stat keys of the other rows.
 type Stat struct {
-	ID  string `json:"Id"`
-	Key int    `json:"_key"`
+	ID                  string `json:"Id"`
+	Key                 int    `json:"_key"`
+	CannotGrantToMinion bool   `json:"Var13"`
 }
 
 // BaseItemType resolves SoulCore.BaseItemType.
