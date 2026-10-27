@@ -4,6 +4,8 @@ import (
 	"context"
 	"slices"
 
+	"github.com/pkg/errors"
+
 	"github.com/Vilsol/go-pob-data/loader"
 )
 
@@ -50,6 +52,10 @@ func loadTable[T any](ctx context.Context, version string, name string, cache lo
 	rows, err := loader.LoadJSONTable[T](ctx, version, name, cache)
 	if err != nil {
 		return err
+	}
+	// Every skill table has rows; an empty one is a version that does not publish it.
+	if len(rows) == 0 {
+		return errors.New(version + " publishes no rows of " + name)
 	}
 	*out = rows
 	return nil
