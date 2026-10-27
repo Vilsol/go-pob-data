@@ -10,10 +10,11 @@ import (
 	"github.com/andybalholm/brotli"
 	"github.com/pkg/errors"
 
+	"github.com/Vilsol/go-pob-data/extractor"
 	"github.com/Vilsol/go-pob-data/treegen"
 )
 
-func generateTreeData(loader fs.FS, gameVersion string) error {
+func generateTreeData(loader fs.FS, game extractor.Game, gameVersion string) error {
 	dir := filepath.Join("data", gameVersion, "tree")
 
 	// Start clean so sheets that are no longer produced don't linger.
@@ -21,7 +22,14 @@ func generateTreeData(loader fs.FS, gameVersion string) error {
 		return errors.Wrap(err, "failed to remove old tree assets")
 	}
 
-	if _, err := treegen.Write(loader, gameVersion, dir); err != nil {
+	var err error
+	if game == extractor.PoE2 {
+		// The PoE2 tree has no sprite sheets yet.
+		_, err = treegen.WritePoE2(loader, gameVersion, dir)
+	} else {
+		_, err = treegen.Write(loader, gameVersion, dir)
+	}
+	if err != nil {
 		return errors.Wrap(err, "failed to generate tree")
 	}
 

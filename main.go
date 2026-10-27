@@ -92,14 +92,9 @@ func run(game extractor.Game, gamePath string, gameVersion string, treeOnly bool
 		}
 	}
 
-	// treegen reads the PoE1 passive skill graph and tables only.
-	if game == extractor.PoE1 {
-		slog.Info("generating tree data")
-		if err := generateTreeData(loader, gameVersion); err != nil {
-			return err
-		}
-	} else if treeOnly {
-		return errors.New("no tree generator for " + string(game))
+	slog.Info("generating tree data")
+	if err := generateTreeData(loader, game, gameVersion); err != nil {
+		return err
 	}
 
 	if treeOnly {

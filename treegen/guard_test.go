@@ -29,7 +29,7 @@ func TestGuards(t *testing.T) {
 	testza.AssertNoError(t, err)
 
 	t.Run("missing table", func(t *testing.T) {
-		_, err := decodeTable[passiveSkillTree](loader, short, "NoSuchTable")
+		_, err := decodeTable[passiveSkillTree](loader, extractor.PoE1, short, "NoSuchTable")
 		testza.AssertNotNil(t, err)
 	})
 
@@ -37,7 +37,7 @@ func TestGuards(t *testing.T) {
 		type renamed struct {
 			ID string `json:"NoSuchColumn"`
 		}
-		_, err := decodeTable[renamed](loader, short, "PassiveSkillTrees")
+		_, err := decodeTable[renamed](loader, extractor.PoE1, short, "PassiveSkillTrees")
 		testza.AssertNotNil(t, err)
 	})
 

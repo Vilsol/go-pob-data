@@ -79,7 +79,7 @@ type gameData struct {
 
 func loadGameData(loader fs.FS, gameVersion string) (*gameData, error) {
 	d := &gameData{}
-	l := &tableLoader{loader: loader, gameVersion: gameVersion}
+	l := &tableLoader{loader: loader, game: extractor.PoE1, gameVersion: gameVersion}
 	loadTable(l, "PassiveSkills", &d.passiveSkills)
 	loadTable(l, "Stats", &d.stats)
 	loadTable(l, "Characters", &d.characters)

@@ -218,7 +218,11 @@ type passiveSkillTree struct {
 }
 
 func gamePath(gameVersion string, path string) string {
-	if extractor.IsNewHash(extractor.PoE1, gameVersion) {
+	return gameFilePath(extractor.PoE1, gameVersion, path)
+}
+
+func gameFilePath(game extractor.Game, gameVersion string, path string) string {
+	if extractor.IsNewHash(game, gameVersion) {
 		return strings.ToLower(path)
 	}
 	return path
@@ -227,23 +231,24 @@ func gamePath(gameVersion string, path string) string {
 type tableLoader struct {
 	loader      fs.FS
 	err         error
+	game        extractor.Game
 	gameVersion string
 }
 
 // loadTable decodes table name into dst; after the first failure it does nothing and l.err holds the error.
 func loadTable[T any](l *tableLoader, name string, dst *[]T) {
 	if l.err == nil {
-		*dst, l.err = decodeTable[T](l.loader, l.gameVersion, name)
+		*dst, l.err = decodeTable[T](l.loader, l.game, l.gameVersion, name)
 	}
 }
 
-func decodeTable[T any](loader fs.FS, gameVersion string, name string) ([]T, error) {
-	f, err := loader.Open(gamePath(gameVersion, "Data/"+name+"."+extractor.GetFileExtension(extractor.PoE1, gameVersion)))
+func decodeTable[T any](loader fs.FS, game extractor.Game, gameVersion string, name string) ([]T, error) {
+	f, err := loader.Open(gameFilePath(game, gameVersion, game.TableDir()+name+"."+extractor.GetFileExtension(game, gameVersion)))
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to open %s", name)
 	}
 
-	rows, err := extractor.ParseDat(f, name+"."+extractor.GetFileExtension(extractor.PoE1, gameVersion))
+	rows, err := extractor.ParseDat(f, name+"."+extractor.GetFileExtension(game, gameVersion))
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to parse %s", name)
 	}
