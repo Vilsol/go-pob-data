@@ -207,7 +207,7 @@ func loadGraph(loader fs.FS, gameVersion string, d *gameData, treeID string) (*e
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to open %s", graphPath)
 	}
-	graph, err := extractor.ParsePassiveSkillGraph(f)
+	graph, err := extractor.ParsePassiveSkillGraph(f, extractor.PoE1)
 	return graph, errors.Wrapf(err, "failed to parse %s", graphPath)
 }
 
