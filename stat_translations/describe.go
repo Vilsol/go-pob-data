@@ -22,6 +22,7 @@ var valueDivisors = map[string]float64{
 	"deciseconds_to_seconds":   10,
 	"divide_by_one_hundred":    100,
 	"locations_to_metres":      10,
+	"divide_by_ten":            10,
 }
 
 // defaultDecimals is how many decimals a rescaled value keeps when its handler doesn't say.
@@ -208,6 +209,8 @@ func (d *Description) render(values []int) (string, []string, error) {
 			n.value /= divisor
 		case name == "negate":
 			n.value = -n.value
+		case name == "add_one":
+			n.value++
 		case name == "canonical_stat":
 		default:
 			return "", nil, fmt.Errorf("unsupported index handler %s", h.name)

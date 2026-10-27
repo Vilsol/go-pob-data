@@ -27,6 +27,14 @@ description
 	1 overridden
 	1
 		# "base wording"
+description
+	1 range_+
+	1
+		# "{0:+d} metres to Range" divide_by_ten_1dp_if_required 1
+description
+	1 max_stacks
+	1
+		# "up to {0} stacks" add_one 1
 `
 
 const overrideDescriptions = `include "Metadata/StatDescriptions/base.txt"
@@ -91,6 +99,12 @@ func TestDescribe(t *testing.T) {
 			ids:    []string{"damage_+%", "hidden_stat", "unknown_stat"},
 			values: []int{0, 1, 1},
 			want:   Described{Undescribed: []string{"unknown_stat"}},
+		},
+		{
+			name:   "tenths and an added one",
+			ids:    []string{"range_+", "max_stacks"},
+			values: []int{4, 1},
+			want:   Described{Lines: []string{"+0.4 metres to Range", "up to 2 stacks"}},
 		},
 		{
 			name:   "negated limits and fixed decimals",
