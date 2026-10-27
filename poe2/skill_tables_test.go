@@ -15,11 +15,7 @@ import (
 // pobSkill is a skill as PoB-PoE2's src/Data/Skills/*.lua holds it. testdata/pob_skill_levels.json is
 // three skills of each act_*/other/sup_* file of the pin, dumped with luajit.
 type pobSkill struct {
-	ID           string           `json:"id"`
-	File         string           `json:"file"`
-	Levels       []map[string]any `json:"levels"`
-	QualityStats [][]any          `json:"qualityStats"`
-	Set          *struct {
+	Set *struct {
 		ID                             string     `json:"id"`
 		Stats                          []string   `json:"stats"`
 		ConstantStats                  [][]any    `json:"constantStats"`
@@ -28,8 +24,12 @@ type pobSkill struct {
 		DamageIncrementalEffectiveness *float64   `json:"damageIncrementalEffectiveness"`
 		Levels                         []pobLevel `json:"levels"`
 	} `json:"set"`
-	CastTime float64 `json:"castTime"`
-	Support  bool    `json:"support"`
+	ID           string           `json:"id"`
+	File         string           `json:"file"`
+	Levels       []map[string]any `json:"levels"`
+	QualityStats [][]any          `json:"qualityStats"`
+	CastTime     float64          `json:"castTime"`
+	Support      bool             `json:"support"`
 }
 
 type pobLevel struct {
@@ -178,14 +178,14 @@ func checkFirstSet(s *SkillTables, want pobSkill) error {
 		return fmt.Errorf("no stat set %s", want.Set.ID)
 	}
 	for _, e := range []struct {
+		pobSide *float64
 		name    string
 		got     float64
 		skip    float64
-		pobSide *float64
 	}{
-		{"baseEffectiveness", set.BaseEffectiveness, 1, want.Set.BaseEffectiveness},
-		{"incrementalEffectiveness", set.IncrementalEffectiveness, 0, want.Set.IncrementalEffectiveness},
-		{"damageIncrementalEffectiveness", set.DamageIncrementalEffectiveness, 0, want.Set.DamageIncrementalEffectiveness},
+		{want.Set.BaseEffectiveness, "baseEffectiveness", set.BaseEffectiveness, 1},
+		{want.Set.IncrementalEffectiveness, "incrementalEffectiveness", set.IncrementalEffectiveness, 0},
+		{want.Set.DamageIncrementalEffectiveness, "damageIncrementalEffectiveness", set.DamageIncrementalEffectiveness, 0},
 	} {
 		if (e.got != e.skip) != (e.pobSide != nil) || (e.pobSide != nil && !near(e.got, *e.pobSide)) {
 			return fmt.Errorf("%s %v, PoB %v", e.name, e.got, e.pobSide)

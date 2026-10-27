@@ -28,8 +28,8 @@ const (
 )
 
 type ActiveSkillType struct {
-	ID       string `json:"Id"`
 	FlagStat *int   `json:"FlagStat"`
+	ID       string `json:"Id"`
 	Key      int    `json:"_key"`
 }
 
@@ -59,9 +59,9 @@ type WieldableClass struct {
 }
 
 type ItemClass struct {
+	ItemClassCategory *int   `json:"ItemClassCategory"`
 	ID                string `json:"Id"`
 	Name              string `json:"Name"`
-	ItemClassCategory *int   `json:"ItemClassCategory"`
 	Key               int    `json:"_key"`
 }
 

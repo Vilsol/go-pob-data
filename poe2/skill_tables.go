@@ -10,6 +10,18 @@ import (
 // SkillTables holds the tables PoB-PoE2's skill exporter reads, with the lookups it makes
 // (src/Export/Scripts/skills.lua). A foreign key is the index into the slice it names.
 type SkillTables struct {
+	grantedEffectByID   map[string]int
+	statSetByID         map[string]int
+	perLevel            map[int][]int
+	statSetPerLevel     map[int][]int
+	effectStatPerLevel  map[int][]int
+	qualityStats        map[int]int
+	gemEffectByEffect   map[int]int
+	gemEffectByAddition map[int][]int
+	skillGemByGemEffect map[int]int
+	supportGemBySkill   map[int]int
+	itemExperience      map[int][]int
+
 	ActiveSkillTypes              []ActiveSkillType
 	ActiveSkills                  []ActiveSkill
 	ActiveSkillWeaponRequirements []ActiveSkillWeaponRequirement
@@ -32,18 +44,6 @@ type SkillTables struct {
 	EffectivenessCostConstants    []EffectivenessCostConstant
 	Stats                         []Stat
 	BaseItemTypes                 []BaseItemType
-
-	grantedEffectByID   map[string]int
-	statSetByID         map[string]int
-	perLevel            map[int][]int
-	statSetPerLevel     map[int][]int
-	effectStatPerLevel  map[int][]int
-	qualityStats        map[int]int
-	gemEffectByEffect   map[int]int
-	gemEffectByAddition map[int][]int
-	skillGemByGemEffect map[int]int
-	supportGemBySkill   map[int]int
-	itemExperience      map[int][]int
 }
 
 func loadTable[T any](ctx context.Context, version string, name string, cache loader.AssetCache, out *[]T) error {
