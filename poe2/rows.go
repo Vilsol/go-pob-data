@@ -11,6 +11,9 @@ const (
 	PlayerMinionIntrinsicStatsTable = "PlayerMinionIntrinsicStats"
 	SoulCoresTable                  = "SoulCores"
 	SoulCoreStatsTable              = "SoulCoreStats"
+	SoulCoreTypesTable              = "SoulCoreTypes"
+	SoulCoreLimitsTable             = "SoulCoreLimits"
+	SoulCoreStatCategoriesTable     = "SoulCoreStatCategories"
 	QuestStaticRewardsTable         = "QuestStaticRewards"
 	AlternatePassiveSkillsTable     = "AlternatePassiveSkills"
 	AlternatePassiveAdditionsTable  = "AlternatePassiveAdditions"
@@ -53,6 +56,31 @@ type SoulCoreStat struct {
 	Key               int   `json:"_key"`
 	SoulCore          int   `json:"SoulCore"`
 	StatCategory      int   `json:"StatCategory"`
+}
+
+// SoulCoreType resolves SoulCore.Type.
+type SoulCoreType struct {
+	EffectStat   *int   `json:"EffectStat"`
+	ID           string `json:"Id"`
+	Name         string `json:"Name"`
+	Key          int    `json:"_key"`
+	SocketedStat int    `json:"SocketedStat"` // CountStat
+}
+
+// SoulCoreLimit resolves SoulCore.Limit.
+type SoulCoreLimit struct {
+	ID    string `json:"Id"`
+	Text  string `json:"Text"` // Description
+	Key   int    `json:"_key"`
+	Limit int    `json:"Limit"`
+}
+
+// SoulCoreStatCategory resolves SoulCoreStat.StatCategory.
+type SoulCoreStatCategory struct {
+	ID                string `json:"Id"`
+	Display           string `json:"Display"`           // Text
+	TargetItemClasses []int  `json:"TargetItemClasses"` // ItemClass
+	Key               int    `json:"_key"`
 }
 
 type QuestStaticReward struct {
@@ -116,7 +144,12 @@ type Stat struct {
 
 // BaseItemType resolves SoulCore.BaseItemType.
 type BaseItemType struct {
-	ID   string `json:"Id"`
-	Name string `json:"Name"`
-	Key  int    `json:"_key"`
+	ID           string `json:"Id"`
+	Name         string `json:"Name"`
+	InheritsFrom string `json:"InheritsFrom"`  // BaseType
+	ImplicitMods []int  `json:"Implicit_Mods"` // ImplicitMods
+	Tags         []int  `json:"Tags"`
+	Key          int    `json:"_key"`
+	ItemClass    int    `json:"ItemClass"`
+	DropLevel    int    `json:"DropLevel"`
 }
