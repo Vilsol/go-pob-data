@@ -115,6 +115,7 @@ func checkAll(t *testing.T) {
 	checkRows[ItemExperienceType](t, ItemExperienceTypesTable)
 	checkRows[Tag](t, TagsTable)
 	checkRows[SkillGemSupport](t, SkillGemSupportsTable)
+	checkRows[CharacterMeleeSkill](t, CharacterMeleeSkillsTable)
 }
 
 func TestRows(t *testing.T) {

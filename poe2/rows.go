@@ -19,6 +19,7 @@ const (
 	AlternatePassiveAdditionsTable  = "AlternatePassiveAdditions"
 	StatsTable                      = "Stats"
 	BaseItemTypesTable              = "BaseItemTypes"
+	CharacterMeleeSkillsTable       = "CharacterMeleeSkills"
 )
 
 type GameConstant struct {
@@ -152,4 +153,13 @@ type BaseItemType struct {
 	Key          int    `json:"_key"`
 	ItemClass    int    `json:"ItemClass"`
 	DropLevel    int    `json:"DropLevel"`
+}
+
+// CharacterMeleeSkill is a default attack: the skill gems granted for a main-hand and off-hand
+// WieldableClasses pair.
+type CharacterMeleeSkill struct {
+	SkillGems []int `json:"SkillGems"` // SkillGem
+	Key       int   `json:"_key"`
+	MainHand  int   `json:"MainHand"` // MainHandItem
+	OffHand   int   `json:"OffHand"`  // OffHandItem
 }

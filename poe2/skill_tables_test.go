@@ -9,6 +9,7 @@ import (
 	"slices"
 	"testing"
 
+	"github.com/Vilsol/go-pob-data/loader"
 	"github.com/Vilsol/go-pob-data/testdata"
 )
 
@@ -371,4 +372,41 @@ func TestSkillForeignKeys(t *testing.T) {
 		in(StatsTable, stats, r.Stat)
 	}
 	t.Logf("%d foreign keys resolve", checked)
+}
+
+// testdata/pob_character_melee_skills.json is the pin's src/Data/CharacterMeleeSkills.lua, dumped with luajit.
+func TestCharacterMeleeSkillsMatchPoB(t *testing.T) {
+	testdata.ServeCommittedData(t)
+	ctx := context.Background()
+	s, err := LoadSkillTables(ctx, version, nopCache{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	melee, err := loader.LoadJSONTable[CharacterMeleeSkill](ctx, version, CharacterMeleeSkillsTable, nopCache{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	b, err := os.ReadFile("testdata/pob_character_melee_skills.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var want map[string]map[string][]string
+	if err := json.Unmarshal(b, &want); err != nil {
+		t.Fatal(err)
+	}
+	got := s.CharacterMeleeSkills(melee)
+	for mainHand, offHands := range want {
+		for offHand, gems := range offHands {
+			if !slices.Equal(got[mainHand][offHand], gems) {
+				t.Errorf("%s/%s: %v, PoB %v", mainHand, offHand, got[mainHand][offHand], gems)
+			}
+		}
+	}
+	for mainHand, offHands := range got {
+		for offHand, gems := range offHands {
+			if _, ok := want[mainHand][offHand]; !ok {
+				t.Errorf("%s/%s: %v, absent from PoB", mainHand, offHand, gems)
+			}
+		}
+	}
 }

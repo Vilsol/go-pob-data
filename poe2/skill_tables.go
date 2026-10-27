@@ -293,3 +293,23 @@ func (s *SkillTables) WeaponClasses(activeSkill int) []*ItemClass {
 	}
 	return out
 }
+
+// CharacterMeleeSkills is PoB's data.characterMeleeSkills as src/Export/Scripts/miscdata.lua:183-193 builds it:
+// the BaseItemTypes ids of each row's skill gems, keyed by the main-hand then the off-hand item class id. A
+// later row for the same pair replaces an earlier one.
+func (s *SkillTables) CharacterMeleeSkills(melee []CharacterMeleeSkill) map[string]map[string][]string {
+	out := make(map[string]map[string][]string)
+	for _, row := range melee {
+		mainHand := s.ItemClasses[s.WieldableClasses[row.MainHand].ItemClass].ID
+		offHand := s.ItemClasses[s.WieldableClasses[row.OffHand].ItemClass].ID
+		gems := make([]string, len(row.SkillGems))
+		for i, gem := range row.SkillGems {
+			gems[i] = s.BaseItemTypes[s.SkillGems[gem].BaseItemType].ID
+		}
+		if out[mainHand] == nil {
+			out[mainHand] = make(map[string][]string)
+		}
+		out[mainHand][offHand] = gems
+	}
+	return out
+}
