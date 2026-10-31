@@ -116,6 +116,15 @@ func checkAll(t *testing.T) {
 	checkRows[Tag](t, TagsTable)
 	checkRows[SkillGemSupport](t, SkillGemSupportsTable)
 	checkRows[CharacterMeleeSkill](t, CharacterMeleeSkillsTable)
+	checkRows[MonsterVariety](t, MonsterVarietiesTable)
+	checkRows[MonsterType](t, MonsterTypesTable)
+	checkRows[MonsterResistance](t, MonsterResistancesTable)
+	checkRows[MonsterCategory](t, MonsterCategoriesTable)
+	checkRows[MonsterPack](t, MonsterPacksTable)
+	checkRows[MonsterPackEntry](t, MonsterPackEntriesTable)
+	checkRows[WorldArea](t, WorldAreasTable)
+	checkRows[EndgameMap](t, EndgameMapsTable)
+	checkRows[Mod](t, ModsTable)
 }
 
 func TestRows(t *testing.T) {
