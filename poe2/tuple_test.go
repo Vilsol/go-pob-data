@@ -5,6 +5,7 @@ import (
 	"compress/gzip"
 	"context"
 	"encoding/json"
+	"errors"
 	"go/ast"
 	"go/parser"
 	"go/token"
@@ -73,7 +74,7 @@ func TestTupleCoversAllStructs(t *testing.T) {
 		t.Errorf("//msgp:tuple and //msgp:ignore must list exactly the structs of poe2\nstructs: %v\nlisted:  %v", structs, listed)
 	}
 
-	var rows []string
+	rows := make([]string, 0, len(Tables))
 	for _, rt := range Tables {
 		rows = append(rows, rt.Name())
 	}
@@ -113,7 +114,7 @@ func TestTupleMatchesJSON(t *testing.T) {
 					t.Fatalf("row %d: %v", i, err)
 				}
 			}
-			if _, err := r.R.ReadByte(); err != io.EOF {
+			if _, err := r.R.ReadByte(); !errors.Is(err, io.EOF) {
 				t.Fatal("trailing bytes after the last row")
 			}
 
