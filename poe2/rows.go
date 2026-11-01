@@ -1,6 +1,7 @@
-// Package poe2 holds rows of Path of Exile 2's json tables, for loader.LoadJSONTable:
+// Package poe2 holds rows of Path of Exile 2's tables, for loader.LoadRaw (the tuple assets of these
+// rows, Tables) or loader.LoadJSONTable:
 //
-//	rows, err := loader.LoadJSONTable[poe2.GameConstant](ctx, "0.5", poe2.GameConstantsTable, cache)
+//	rows, err := loader.LoadRaw[*poe2.GameConstant](ctx, "0.5", poe2.GameConstantsTable, nil, cache)
 //
 // Only the columns consumers read are declared. A foreign key is the row index (Key) of the table it
 // names, and a nullable one is a pointer.

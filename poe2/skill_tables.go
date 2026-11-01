@@ -5,6 +5,7 @@ import (
 	"slices"
 
 	"github.com/pkg/errors"
+	"github.com/tinylib/msgp/msgp"
 
 	"github.com/Vilsol/go-pob-data/loader"
 )
@@ -48,8 +49,11 @@ type SkillTables struct {
 	BaseItemTypes                 []BaseItemType
 }
 
-func loadTable[T any](ctx context.Context, version string, name string, cache loader.AssetCache, out *[]T) error {
-	rows, err := loader.LoadJSONTable[T](ctx, version, name, cache)
+func loadTable[T any, PT interface {
+	*T
+	msgp.Decodable
+}](ctx context.Context, version string, name string, cache loader.AssetCache, out *[]T) error {
+	rows, err := loader.LoadRaw[PT](ctx, version, name, nil, cache)
 	if err != nil {
 		return err
 	}
@@ -57,7 +61,10 @@ func loadTable[T any](ctx context.Context, version string, name string, cache lo
 	if len(rows) == 0 {
 		return errors.New(version + " publishes no rows of " + name)
 	}
-	*out = rows
+	*out = make([]T, len(rows))
+	for i, row := range rows {
+		(*out)[i] = *row
+	}
 	return nil
 }
 
