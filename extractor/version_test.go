@@ -35,6 +35,7 @@ func TestGameGates(t *testing.T) {
 			testza.AssertEqual(t, c.extension, GetFileExtension(c.game, c.version))
 			testza.AssertEqual(t, c.tableDir, c.game.TableDir())
 			testza.AssertEqual(t, c.cdn, NewWebFS(c.game, c.version).BasePath)
+			testza.AssertEqual(t, c.game, GameOf(c.version))
 		})
 	}
 }

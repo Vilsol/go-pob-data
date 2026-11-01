@@ -58,3 +58,11 @@ func GetFileExtension(game Game, gameVersion string) string {
 	}
 	return "dat64"
 }
+
+// GameOf is the game a published version belongs to: PoE2's versions start at 0.
+func GameOf(gameVersion string) Game {
+	if strings.HasPrefix(gameVersion, "0.") {
+		return PoE2
+	}
+	return PoE1
+}

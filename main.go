@@ -18,6 +18,7 @@ import (
 )
 
 //go:generate msgp -v -file ./raw
+//go:generate msgp -v -file ./poe2
 
 // cdnPrefix selects the patch CDN instead of a local install, e.g. cdn:3.29.3.3.
 const cdnPrefix = "cdn:"

@@ -14,7 +14,8 @@ import (
 	"github.com/Vilsol/go-pob-data/testdata"
 )
 
-const jsonOnlyVersion = "0.5"
+// A version whose tables are not in raw's layouts.
+const jsonVersion = "0.5"
 
 type gameConstant struct {
 	ID      string `json:"Id"`
@@ -27,11 +28,7 @@ func TestLoadJSONTable(t *testing.T) {
 	testdata.ServeCommittedData(t)
 	ctx := context.Background()
 
-	m, err := LoadManifest(ctx, jsonOnlyVersion)
-	testza.AssertNoError(t, err)
-	testza.AssertTrue(t, m.JSONOnly)
-
-	typed, err := LoadJSONTable[gameConstant](ctx, jsonOnlyVersion, "GameConstants", FakeCache{})
+	typed, err := LoadJSONTable[gameConstant](ctx, jsonVersion, "GameConstants", FakeCache{})
 	testza.AssertNoError(t, err)
 	testza.AssertGreater(t, len(typed), 100)
 	for i, row := range typed {
@@ -39,12 +36,12 @@ func TestLoadJSONTable(t *testing.T) {
 		testza.AssertNotEqual(t, "", row.ID)
 	}
 
-	generic, err := LoadJSONTable[map[string]any](ctx, jsonOnlyVersion, "GameConstants", FakeCache{})
+	generic, err := LoadJSONTable[map[string]any](ctx, jsonVersion, "GameConstants", FakeCache{})
 	testza.AssertNoError(t, err)
 	testza.AssertEqual(t, len(typed), len(generic))
 	testza.AssertEqual(t, typed[0].ID, generic[0]["Id"])
 
-	messages, err := LoadJSONTable[json.RawMessage](ctx, jsonOnlyVersion, "GameConstants", FakeCache{})
+	messages, err := LoadJSONTable[json.RawMessage](ctx, jsonVersion, "GameConstants", FakeCache{})
 	testza.AssertNoError(t, err)
 	testza.AssertEqual(t, len(typed), len(messages))
 
@@ -57,7 +54,7 @@ func TestLoadJSONTable(t *testing.T) {
 func TestLoadJSONTableNotInManifest(t *testing.T) {
 	testdata.ServeCommittedData(t)
 
-	rows, err := LoadJSONTable[gameConstant](context.Background(), jsonOnlyVersion, "NoSuchTable", FakeCache{})
+	rows, err := LoadJSONTable[gameConstant](context.Background(), jsonVersion, "NoSuchTable", FakeCache{})
 	testza.AssertNoError(t, err)
 	testza.AssertNotNil(t, rows)
 	testza.AssertEqual(t, 0, len(rows))
@@ -80,10 +77,10 @@ func (m *missingTable) RoundTrip(req *http.Request) (*http.Response, error) {
 
 func TestLoadJSONTableListedButMissing(t *testing.T) {
 	cdn := testdata.ServeCommittedData(t)
-	missing := &missingTable{cdn: cdn, url: JSONTableURL(jsonOnlyVersion, "GameConstants")}
+	missing := &missingTable{cdn: cdn, url: JSONTableURL(jsonVersion, "GameConstants")}
 	http.DefaultClient.Transport = missing
 
-	_, err := LoadJSONTable[gameConstant](context.Background(), jsonOnlyVersion, "GameConstants", FakeCache{})
+	_, err := LoadJSONTable[gameConstant](context.Background(), jsonVersion, "GameConstants", FakeCache{})
 	testza.AssertErrorIs(t, err, ErrAssetNotFound)
 	testza.AssertEqual(t, 1, missing.hits)
 }
@@ -129,7 +126,7 @@ func TestLoadJSONTableCachedAsset(t *testing.T) {
 			serveCDN(t, transport)
 			cache := &stubCache{exists: true, get: c.cached}
 
-			rows, err := LoadJSONTable[gameConstant](context.Background(), jsonOnlyVersion, "GameConstants", cache)
+			rows, err := LoadJSONTable[gameConstant](context.Background(), jsonVersion, "GameConstants", cache)
 			testza.AssertEqual(t, c.fetches, transport.calls)
 			if c.wantErr {
 				testza.AssertNotNil(t, err)
@@ -138,7 +135,7 @@ func TestLoadJSONTableCachedAsset(t *testing.T) {
 			testza.AssertNoError(t, err)
 			testza.AssertEqual(t, []gameConstant{{Key: 0, ID: "A", Value: 1, Divisor: 1}, {Key: 1, ID: "B", Value: 2, Divisor: 10}}, rows)
 			if c.fetches > 0 {
-				testza.AssertEqual(t, c.served, cache.stored[JSONTableURL(jsonOnlyVersion, "GameConstants")])
+				testza.AssertEqual(t, c.served, cache.stored[JSONTableURL(jsonVersion, "GameConstants")])
 			}
 		})
 	}
@@ -151,11 +148,11 @@ func TestLoadJSONTableLive(t *testing.T) {
 	}
 	ctx := context.Background()
 
-	live, err := LoadJSONTable[gameConstant](ctx, jsonOnlyVersion, "GameConstants", FakeCache{})
+	live, err := LoadJSONTable[gameConstant](ctx, jsonVersion, "GameConstants", FakeCache{})
 	testza.AssertNoError(t, err)
 
 	testdata.ServeCommittedData(t)
-	committed, err := LoadJSONTable[gameConstant](ctx, jsonOnlyVersion, "GameConstants", FakeCache{})
+	committed, err := LoadJSONTable[gameConstant](ctx, jsonVersion, "GameConstants", FakeCache{})
 	testza.AssertNoError(t, err)
 
 	testza.AssertEqual(t, committed, live)

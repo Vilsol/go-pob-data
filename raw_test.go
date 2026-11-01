@@ -20,6 +20,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/tinylib/msgp/msgp"
 
+	"github.com/Vilsol/go-pob-data/extractor"
 	"github.com/Vilsol/go-pob-data/fields"
 	"github.com/Vilsol/go-pob-data/loader"
 	"github.com/Vilsol/go-pob-data/raw"
@@ -329,9 +330,14 @@ func TestLegacyAssetsPinned(t *testing.T) {
 // Every table has a tuple asset under the current layout of its row type, and it is a byte-identical
 // re-encode of its json.gz (or, for knownStale, of its frozen map asset).
 func TestTupleMatchesJSON(t *testing.T) {
-	variants := map[string]string{}
-	for _, file := range filesToExport {
-		variants[filepath.Base(file.path)] = file.Variant
+	variants := map[extractor.Game]map[string]string{}
+	for _, game := range []extractor.Game{extractor.PoE1, extractor.PoE2} {
+		variants[game] = map[string]string{}
+		for _, file := range tablesToExport(game) {
+			if file.Encode != nil {
+				variants[game][filepath.Base(file.path)] = file.Variant
+			}
+		}
 	}
 	translationVariant := loader.TupleVariant(raw.TranslationFile{})
 
@@ -345,7 +351,7 @@ func TestTupleMatchesJSON(t *testing.T) {
 	}
 	for _, path := range append(rawAssets, translationAssets...) {
 		name, variant, _ := strings.Cut(strings.TrimSuffix(filepath.Base(path), ".msgpack.br"), ".")
-		want, ok := variants[name]
+		want, ok := variants[extractor.GameOf(strings.Split(filepath.ToSlash(path), "/")[1])][name]
 		if strings.Contains(path, "stat_translations") {
 			want, ok = translationVariant, slices.Contains(st.Files, name) || slices.Contains(st.PoE2Files, name)
 		}
@@ -366,9 +372,9 @@ func TestTupleMatchesJSON(t *testing.T) {
 	for _, dir := range dirs {
 		version := filepath.Base(filepath.Dir(dir))
 		manifest := readManifest(t, version)
-		for _, file := range filesToExport {
-			if manifest.JSONOnly {
-				break
+		for _, file := range tablesToExport(extractor.GameOf(version)) {
+			if file.Encode == nil {
+				continue
 			}
 			name := filepath.Base(file.path)
 			key := version + "/" + name
@@ -582,8 +588,8 @@ func TestStatsCannotGrantToMinion(t *testing.T) {
 	for _, path := range jsons {
 		t.Run(path, func(t *testing.T) {
 			// raw.Stat is a PoE1 layout.
-			if readManifest(t, filepath.Base(filepath.Dir(filepath.Dir(path)))).JSONOnly {
-				t.Skip("json only")
+			if extractor.GameOf(filepath.Base(filepath.Dir(filepath.Dir(path)))) == extractor.PoE2 {
+				t.Skip("poe2")
 			}
 			var stats []raw.Stat
 			if err := json.Unmarshal(readGzip(t, path), &stats); err != nil {

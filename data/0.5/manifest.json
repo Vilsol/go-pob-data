@@ -1410,6 +1410,5 @@
 		"Metadata/Monsters/Zombies/PlayerSummoned/ZombiePlayerSummoned.ot",
 		"Metadata/Monsters/Zombies/UpperPrison/PrisonZombie.ot",
 		"art/uiimages1.txt"
-	],
-	"jsonOnly": true
+	]
 }

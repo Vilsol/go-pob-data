@@ -22,6 +22,7 @@ import (
 
 	"github.com/Vilsol/go-pob-data/extractor"
 	"github.com/Vilsol/go-pob-data/loader"
+	"github.com/Vilsol/go-pob-data/poe2"
 	"github.com/Vilsol/go-pob-data/raw"
 )
 
@@ -63,6 +64,43 @@ func ReEncode[T msgp.Encodable]() Codec {
 
 			for _, obj := range out {
 				if err := obj.EncodeMsg(w); err != nil {
+					return nil, errors.Wrap(err, "failed to encode msgpack")
+				}
+			}
+
+			if err := w.Flush(); err != nil {
+				return nil, errors.Wrap(err, "failed to flush msgpack")
+			}
+
+			if err := bw.Close(); err != nil {
+				return nil, errors.Wrap(err, "failed to compress msgpack")
+			}
+
+			return buf.Bytes(), nil
+		},
+	}
+}
+
+// ReEncodeType is ReEncode for rows of type t, whose pointer is msgp.Encodable.
+func ReEncodeType(t reflect.Type) Codec {
+	return Codec{
+		Variant: loader.TupleVariant(reflect.New(t).Interface()),
+		Encode: func(jsonData []byte) ([]byte, error) {
+			out := reflect.New(reflect.SliceOf(t))
+			if err := json.Unmarshal(jsonData, out.Interface()); err != nil {
+				return nil, errors.Wrap(err, "failed to unmarshal data")
+			}
+
+			var buf bytes.Buffer
+			bw := brotli.NewWriter(&buf)
+			w := msgp.NewWriter(bw)
+			rows := out.Elem()
+			if err := w.WriteInt64(int64(rows.Len())); err != nil {
+				return nil, errors.Wrap(err, "failed to encode msgpack")
+			}
+
+			for i := range rows.Len() {
+				if err := rows.Index(i).Addr().Interface().(msgp.Encodable).EncodeMsg(w); err != nil {
 					return nil, errors.Wrap(err, "failed to encode msgpack")
 				}
 			}
@@ -367,7 +405,8 @@ var filesToExport = []PackedFile{
 	},
 }
 
-// poe2TablesToExport are published as json only: the raw structs are PoE1 layouts. The first group is
+// poe2TablesToExport are published as json, and those poe2 declares rows for also as tuple assets of
+// those rows: the raw structs are PoE1 layouts. The first group is
 // filesToExport less the 8 tables PoE2 does not ship; the second is what PoB-PoE2's exporter reads besides,
 // and Characters, which names the class illustrations; the third holds the quest rewards and the unique
 // name lists.
@@ -502,7 +541,11 @@ func tablesToExport(game extractor.Game) []PackedFile {
 	}
 	files := make([]PackedFile, 0, len(poe2TablesToExport))
 	for _, name := range poe2TablesToExport {
-		files = append(files, PackedFile{path: game.TableDir() + name})
+		file := PackedFile{path: game.TableDir() + name}
+		if t, ok := poe2.Tables[name]; ok {
+			file.Codec = ReEncodeType(t)
+		}
+		files = append(files, file)
 	}
 	return files
 }
