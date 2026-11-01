@@ -111,7 +111,86 @@ func extractTextFiles(bundles fs.FS, game extractor.Game, gameVersion string) er
 		}
 		monsterRoots = append(monsterRoots, objectType)
 	}
-	return extractTemplates(bundles, game, gameVersion, monsterRoots, ".ot")
+	if err := extractTemplates(bundles, game, gameVersion, monsterRoots, ".ot"); err != nil {
+		return err
+	}
+
+	return writeFileBundle(filepath.Join("data", gameVersion), ".ot")
+}
+
+// fileBundle is the LoadFileBundle asset of every file under versionDir's files/ with extension ext, at
+// its loader.FileBundlePath; false when there is none.
+func fileBundle(versionDir string, ext string) (string, []byte, bool, error) {
+	filesDir := filepath.Join(versionDir, "files")
+	files := map[string][]byte{}
+	err := filepath.WalkDir(filesDir, func(path string, d fs.DirEntry, err error) error {
+		if err != nil || d.IsDir() || !strings.HasSuffix(path, ext+".br") {
+			return err
+		}
+		rel, err := filepath.Rel(filesDir, path)
+		if err != nil {
+			return errors.Wrap(err, "failed resolving file path")
+		}
+		b, err := os.ReadFile(path)
+		if err != nil {
+			return errors.Wrap(err, "could not read "+path)
+		}
+		if bytes.HasPrefix(b, []byte("version https://git-lfs")) {
+			return errors.New(path + " is a git lfs pointer, run git lfs pull")
+		}
+		text, err := io.ReadAll(brotli.NewReader(bytes.NewReader(b)))
+		if err != nil {
+			return errors.Wrap(err, "could not decompress "+path)
+		}
+		files[strings.TrimSuffix(filepath.ToSlash(rel), ".br")] = text
+		return nil
+	})
+	if os.IsNotExist(err) || len(files) == 0 {
+		return "", nil, false, nil
+	}
+	if err != nil {
+		return "", nil, false, errors.Wrap(err, "failed listing "+ext+" files")
+	}
+
+	encoded := loader.EncodeFileBundle(files)
+	var buf bytes.Buffer
+	w := brotli.NewWriter(&buf)
+	if _, err := w.Write(encoded); err != nil {
+		return "", nil, false, errors.Wrap(err, "could not compress the "+ext+" bundle")
+	}
+	if err := w.Close(); err != nil {
+		return "", nil, false, errors.Wrap(err, "could not compress the "+ext+" bundle")
+	}
+	return loader.FileBundlePath(ext, encoded), buf.Bytes(), true, nil
+}
+
+// staleFileBundles are versionDir's ext bundles other than keep.
+func staleFileBundles(versionDir string, ext string, keep string) ([]string, error) {
+	paths, err := filepath.Glob(filepath.Join(versionDir, loader.AssetPath("files", strings.TrimPrefix(ext, ".")+"-*")))
+	if err != nil {
+		return nil, errors.Wrap(err, "failed listing file bundles")
+	}
+	return slices.DeleteFunc(paths, func(path string) bool {
+		return path == filepath.Join(versionDir, keep)
+	}), nil
+}
+
+// writeFileBundle writes versionDir's ext bundle and removes the bundles it replaces.
+func writeFileBundle(versionDir string, ext string) error {
+	path, b, ok, err := fileBundle(versionDir, ext)
+	if err != nil || !ok {
+		return err
+	}
+	stale, err := staleFileBundles(versionDir, ext, path)
+	if err != nil {
+		return err
+	}
+	for _, old := range stale {
+		if err := os.Remove(old); err != nil {
+			return errors.Wrap(err, "could not remove "+old)
+		}
+	}
+	return errors.Wrap(os.WriteFile(filepath.Join(versionDir, path), b, 0o644), "could not write the "+ext+" bundle")
 }
 
 // extractTemplates publishes the templates of roots and of their ancestors, up to "nothing" or a template

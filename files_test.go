@@ -65,3 +65,42 @@ func TestMonsterTemplatesPublished(t *testing.T) {
 		check(objectType)
 	}
 }
+
+// Every version that publishes .ot files has its .ot bundle, current with them, and no other.
+func TestFileBundlesCurrent(t *testing.T) {
+	dirs, err := filepath.Glob("data/*/files")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	for _, dir := range dirs {
+		versionDir := filepath.Dir(dir)
+		t.Run(filepath.Base(versionDir), func(t *testing.T) {
+			if *update {
+				if err := writeFileBundle(versionDir, ".ot"); err != nil {
+					t.Fatal(err)
+				}
+			}
+
+			path, want, ok, err := fileBundle(versionDir, ".ot")
+			if err != nil {
+				t.Fatal(err)
+			}
+			stale, err := staleFileBundles(versionDir, ".ot", path)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if len(stale) > 0 {
+				t.Errorf("stale bundles %v: run with -update", stale)
+			}
+			if !ok {
+				return
+			}
+
+			got, err := os.ReadFile(filepath.Join(versionDir, path))
+			if err != nil || !bytes.Equal(got, want) {
+				t.Errorf("%s is missing or stale: run with -update", filepath.Join(versionDir, path))
+			}
+		})
+	}
+}

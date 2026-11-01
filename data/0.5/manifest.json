@@ -1,4 +1,7 @@
 {
+	"fileBundles": {
+		".ot": "files.ot-453cc8c7.msgpack.br"
+	},
 	"tables": [
 		"ActiveSkillType",
 		"ActiveSkillWeaponRequirement",

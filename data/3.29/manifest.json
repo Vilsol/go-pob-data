@@ -1,4 +1,7 @@
 {
+	"fileBundles": {
+		".ot": "files.ot-8967fd56.msgpack.br"
+	},
 	"tables": [
 		"ActiveSkillType",
 		"ActiveSkills",

@@ -117,6 +117,20 @@ func manifestJSON(versionDir string) ([]byte, error) {
 
 	slices.Sort(manifest.Files)
 
+	bundles, err := filepath.Glob(filepath.Join(versionDir, loader.AssetPath("files", "*")))
+	if err != nil {
+		return nil, errors.Wrap(err, "failed listing file bundles")
+	}
+	for _, bundle := range bundles {
+		name := filepath.Base(bundle)
+		variant := strings.TrimSuffix(strings.TrimPrefix(name, "files."), ".msgpack.br")
+		ext, _, _ := strings.Cut(variant, "-")
+		if manifest.FileBundles == nil {
+			manifest.FileBundles = map[string]string{}
+		}
+		manifest.FileBundles["."+ext] = name
+	}
+
 	b, err := json.MarshalIndent(manifest, "", "\t")
 	return append(b, '\n'), errors.Wrap(err, "failed marshaling manifest")
 }

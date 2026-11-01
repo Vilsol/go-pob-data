@@ -12,6 +12,9 @@ import (
 // Manifest lists what a version publishes, so a consumer can tell a table the version does not have
 // from a fetch that failed. The extractor writes it to <version>/manifest.json.
 type Manifest struct {
+	// FileBundles are the LoadFileBundle assets by file extension, such as ".ot", each holding every file of
+	// Files with that extension.
+	FileBundles map[string]string `json:"fileBundles,omitempty"`
 	// Tables are the raw tables by name, such as "Mods".
 	Tables []string `json:"tables"`
 	// StatTranslations are the stat description files by name, such as "stat_descriptions".
