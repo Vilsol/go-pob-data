@@ -21,6 +21,7 @@ import (
 
 	"github.com/Vilsol/go-pob-data/fields"
 	"github.com/Vilsol/go-pob-data/loader"
+	"github.com/Vilsol/go-pob-data/poe2"
 )
 
 func main() {
@@ -29,7 +30,7 @@ func main() {
 
 	versions := flag.Args()
 	if len(versions) == 0 {
-		versions = fields.Versions()
+		versions = append(fields.Versions(), poe2.FieldVersions()...)
 	}
 
 	for _, version := range versions {
@@ -43,11 +44,14 @@ func main() {
 func project(dataDir string, version string) error {
 	list, ok := fields.For(version)
 	if !ok {
+		list, ok = poe2.FieldList(version)
+	}
+	if !ok {
 		return errors.Errorf("no field list for %s", version)
 	}
 
 	for _, asset := range slices.Sorted(maps.Keys(list.Assets)) {
-		t, _ := fields.RowType(asset)
+		t, _ := list.RowType(asset)
 		fullPath := filepath.Join(dataDir, version, loader.AssetPath(asset, loader.TupleVariant(reflect.New(t).Interface())))
 		full, err := os.ReadFile(fullPath)
 		if os.IsNotExist(err) {
@@ -65,7 +69,7 @@ func project(dataDir string, version string) error {
 			return errors.Errorf("%s is a git lfs pointer, run git lfs pull", fullPath)
 		}
 
-		minAsset, err := fields.Project(asset, list.Assets[asset].Keep, full)
+		minAsset, err := fields.ProjectType(t, asset, list.Assets[asset].Keep, full)
 		if err != nil {
 			return err
 		}

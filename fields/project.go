@@ -19,6 +19,11 @@ func Project(asset string, keep []string, full []byte) ([]byte, error) {
 	if !ok {
 		return nil, errors.Errorf("%s: unknown asset", asset)
 	}
+	return ProjectType(t, asset, keep, full)
+}
+
+// ProjectType is Project for an asset whose rows are of type t, e.g. another game's.
+func ProjectType(t reflect.Type, asset string, keep []string, full []byte) ([]byte, error) {
 	tree, err := keepTree(t, keep)
 	if err != nil {
 		return nil, errors.Wrap(err, asset)

@@ -1,0 +1,341 @@
+{
+  "format": "go-pob-data-fields/2",
+  "dataModule": "github.com/Vilsol/go-pob-data@v0.5.11",
+  "version": "0.5",
+  "assets": {
+    "raw/ActiveSkillType": {
+      "type": "ActiveSkillType",
+      "keep": [
+        "ID"
+      ]
+    },
+    "raw/ActiveSkillWeaponRequirement": {
+      "type": "ActiveSkillWeaponRequirement",
+      "keep": [
+        "WieldableClasses"
+      ]
+    },
+    "raw/ActiveSkills": {
+      "type": "ActiveSkill",
+      "keep": [
+        "ActiveSkillTypes",
+        "Description",
+        "DisplayedName",
+        "IconDDSFile",
+        "MinionActiveSkillTypes",
+        "SkillTotemID",
+        "StatDescription",
+        "WeaponRequirements"
+      ]
+    },
+    "raw/BaseItemTypes": {
+      "type": "BaseItemType",
+      "keep": [
+        "ID",
+        "Name"
+      ]
+    },
+    "raw/CharacterMeleeSkills": {
+      "type": "CharacterMeleeSkill",
+      "keep": [
+        "MainHand",
+        "OffHand",
+        "SkillGems"
+      ]
+    },
+    "raw/CostTypes": {
+      "type": "CostType",
+      "keep": [
+        "Divisor",
+        "ID"
+      ]
+    },
+    "raw/EffectivenessCostConstants": {
+      "type": "EffectivenessCostConstant",
+      "keep": [
+        "Multiplier"
+      ]
+    },
+    "raw/EndgameMaps": {
+      "type": "EndgameMap",
+      "keep": [
+        "NativePacks",
+        "WorldArea"
+      ]
+    },
+    "raw/FlavourText": {
+      "type": "FlavourText",
+      "keep": [
+        "Text"
+      ]
+    },
+    "raw/GemEffects": {
+      "type": "GemEffect",
+      "keep": [
+        "AdditionalGrantedEffects",
+        "GemTags",
+        "GrantedEffect",
+        "ID",
+        "Key",
+        "Name",
+        "SupportText"
+      ]
+    },
+    "raw/GemTags": {
+      "type": "GemTag",
+      "keep": [
+        "ID"
+      ]
+    },
+    "raw/GrantedEffectLabels": {
+      "type": "GrantedEffectLabel",
+      "keep": [
+        "Text"
+      ]
+    },
+    "raw/GrantedEffectQualityStats": {
+      "type": "GrantedEffectQualityStat",
+      "keep": [
+        "AltApplyToStatSets",
+        "AltStatValuesPermille",
+        "AltStats",
+        "ApplyToStatSets",
+        "GrantedEffect",
+        "Stats",
+        "StatsValuesPermille"
+      ]
+    },
+    "raw/GrantedEffectStatSets": {
+      "type": "GrantedEffectStatSet",
+      "keep": [
+        "BaseEffectiveness",
+        "ConstantStats",
+        "ConstantStatsValues",
+        "DamageIncrementalEffectiveness",
+        "ID",
+        "IgnoredStats",
+        "ImplicitStats",
+        "IncrementalEffectiveness",
+        "Key",
+        "Label",
+        "UseSetAttackMulti"
+      ]
+    },
+    "raw/GrantedEffectStatSetsPerLevel": {
+      "type": "GrantedEffectStatSetPerLevel",
+      "keep": [
+        "ActorLevel",
+        "AdditionalFlags",
+        "AdditionalStats",
+        "AdditionalStatsValues",
+        "AttackCritChance",
+        "BaseMultiplier",
+        "BaseResolvedValues",
+        "FloatStats",
+        "FloatStatsValues",
+        "GemLevel",
+        "GrantedEffects",
+        "InterpolationBases",
+        "SpellCritChance",
+        "StatInterpolations",
+        "StatSet"
+      ]
+    },
+    "raw/GrantedEffects": {
+      "type": "GrantedEffect",
+      "keep": [
+        "ActiveSkill",
+        "AddedActiveSkillTypes",
+        "AllowedActiveSkillTypes",
+        "CannotBeSupported",
+        "CastTime",
+        "CostTypes",
+        "ExcludedActiveSkillTypes",
+        "ID",
+        "IgnoreMinionTypes",
+        "IsSupport",
+        "Key",
+        "SupportsGemsOnly"
+      ]
+    },
+    "raw/GrantedEffectsPerLevel": {
+      "type": "GrantedEffectPerLevel",
+      "keep": [
+        "AttackSpeedMultiplier",
+        "AttackTime",
+        "Cooldown",
+        "CostAmounts",
+        "CostMultiplier",
+        "EffectOnPlayer",
+        "GrantedEffect",
+        "Level",
+        "PvPDamageMultiplier",
+        "Reservation",
+        "SoulGainPreventionDuration",
+        "StoredUses",
+        "VaalSouls",
+        "VaalStoredUses"
+      ]
+    },
+    "raw/ItemClassCategories": {
+      "type": "ItemClassCategory",
+      "keep": []
+    },
+    "raw/ItemClasses": {
+      "type": "ItemClass",
+      "keep": [
+        "ID"
+      ]
+    },
+    "raw/ItemExperiencePerLevel": {
+      "type": "ItemExperiencePerLevel",
+      "keep": [
+        "ItemExperienceType",
+        "Level"
+      ]
+    },
+    "raw/Mods": {
+      "type": "Mod",
+      "keep": [
+        "ID",
+        "Stat1",
+        "Stat1Value",
+        "Stat2",
+        "Stat2Value",
+        "Stat3",
+        "Stat3Value",
+        "Stat4",
+        "Stat4Value",
+        "Stat5",
+        "Stat5Value",
+        "Stat6",
+        "Stat6Value"
+      ]
+    },
+    "raw/MonsterCategories": {
+      "type": "MonsterCategory",
+      "keep": [
+        "Type"
+      ]
+    },
+    "raw/MonsterPackEntries": {
+      "type": "MonsterPackEntry",
+      "keep": [
+        "MonsterPacksKey",
+        "MonsterVarietiesKey"
+      ]
+    },
+    "raw/MonsterPacks": {
+      "type": "MonsterPack",
+      "keep": [
+        "AdditionalMonsters",
+        "BossMonsters",
+        "ID",
+        "WorldAreas"
+      ]
+    },
+    "raw/MonsterResistances": {
+      "type": "MonsterResistance",
+      "keep": [
+        "NormalChaos",
+        "NormalCold",
+        "NormalFire",
+        "NormalLightning",
+        "RareChaos",
+        "RareCold",
+        "RareFire",
+        "RareLightning"
+      ]
+    },
+    "raw/MonsterTypes": {
+      "type": "MonsterType",
+      "keep": [
+        "Armour",
+        "BaseDamageIgnoresAttackSpeed",
+        "DamageSpread",
+        "EnergyShield",
+        "Evasion",
+        "Resistances"
+      ]
+    },
+    "raw/MonsterVarieties": {
+      "type": "MonsterVariety",
+      "keep": [
+        "AttackCrit",
+        "AttackDuration",
+        "DamageMultiplier",
+        "ExperienceMultiplier",
+        "GrantedEffects",
+        "ID",
+        "LifeMultiplier",
+        "MainHandItemClass",
+        "MaximumAttackRange",
+        "Mods",
+        "MonsterCategory",
+        "MonsterType",
+        "MovementSpeed",
+        "Name",
+        "ObjectType",
+        "OffHandItemClass",
+        "SpecialMods",
+        "Tags"
+      ]
+    },
+    "raw/SkillGems": {
+      "type": "SkillGem",
+      "keep": [
+        "BaseItemType",
+        "DexterityRequirementPercent",
+        "GemEffects",
+        "GemType",
+        "IntelligenceRequirementPercent",
+        "ItemExperienceType",
+        "Key",
+        "StrengthRequirementPercent"
+      ]
+    },
+    "raw/Stats": {
+      "type": "Stat",
+      "keep": [
+        "CannotGrantToMinion",
+        "ID"
+      ]
+    },
+    "raw/SupportGemFamily": {
+      "type": "SupportGemFamily",
+      "keep": [
+        "ID"
+      ]
+    },
+    "raw/SupportGems": {
+      "type": "SupportGem",
+      "keep": [
+        "Family",
+        "FlavourText",
+        "IsLineage",
+        "SkillGem"
+      ]
+    },
+    "raw/Tags": {
+      "type": "Tag",
+      "keep": [
+        "ID"
+      ]
+    },
+    "raw/WieldableClasses": {
+      "type": "WieldableClass",
+      "keep": [
+        "ItemClass"
+      ]
+    },
+    "raw/WorldAreas": {
+      "type": "WorldArea",
+      "keep": [
+        "Act",
+        "ID",
+        "Name",
+        "Tags"
+      ]
+    }
+  }
+}

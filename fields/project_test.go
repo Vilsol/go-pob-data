@@ -260,6 +260,10 @@ func TestMinMatchesList(t *testing.T) {
 		version, file, _ := strings.Cut(filepath.ToSlash(rel), "/")
 		asset, variant, _ := strings.Cut(strings.TrimSuffix(file, ".msgpack.br"), ".")
 
+		// PoE2's lists and .min assets are poe2's, and its tests check them.
+		if strings.HasPrefix(version, "0.") {
+			continue
+		}
 		l, ok := For(version)
 		if !ok {
 			t.Errorf("%s: %s has no list", path, version)

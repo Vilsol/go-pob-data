@@ -40,10 +40,14 @@ var embedded embed.FS
 // are not decoded.
 type List struct {
 	Assets     map[string]Asset `json:"assets"`
-	Format     string           `json:"format"`
-	DataModule string           `json:"dataModule"`
-	Version    string           `json:"version"`
+	rowType    RowTypes
+	Format     string `json:"format"`
+	DataModule string `json:"dataModule"`
+	Version    string `json:"version"`
 }
+
+// RowTypes names the type the loader decodes an asset into; RowType is PoE1's.
+type RowTypes func(asset string) (reflect.Type, bool)
 
 // Asset lists the key paths to keep of one asset. A path is Go field names joined by dots: "A.B" keeps
 // B inside the value under A, through slices, arrays and pointers. A path with no listed children keeps
@@ -147,7 +151,12 @@ func RowType(asset string) (reflect.Type, bool) {
 // Parse reads and validates a list: its format, that every asset is one the loader reads with the
 // listed type, and that every key path names fields of that type.
 func Parse(b []byte) (*List, error) {
-	var l List
+	return ParseFor(b, RowType)
+}
+
+// ParseFor is Parse for a list whose assets decode into the types rowType names, e.g. another game's.
+func ParseFor(b []byte, rowType RowTypes) (*List, error) {
+	l := List{rowType: rowType}
 	if err := json.Unmarshal(b, &l); err != nil {
 		return nil, errors.Wrap(err, "failed to decode list")
 	}
@@ -161,7 +170,7 @@ func Parse(b []byte) (*List, error) {
 
 	for _, asset := range slices.Sorted(maps.Keys(l.Assets)) {
 		a := l.Assets[asset]
-		t, ok := RowType(asset)
+		t, ok := rowType(asset)
 		if !ok {
 			return nil, errors.Errorf("%s %s: unknown asset", l.Version, asset)
 		}
@@ -238,7 +247,7 @@ func (l *List) MinVariant(asset string) (string, bool) {
 	if !ok {
 		return "", false
 	}
-	t, ok := RowType(asset)
+	t, ok := l.RowType(asset)
 	if !ok {
 		return "", false
 	}
@@ -246,6 +255,14 @@ func (l *List) MinVariant(asset string) (string, bool) {
 	keep := slices.Compact(slices.Sorted(slices.Values(a.Keep)))
 	sum := sha256.Sum256([]byte(loader.LayoutHash(reflect.New(t).Interface()) + "\n" + strings.Join(keep, "\n")))
 	return "min-" + hex.EncodeToString(sum[:4]), true
+}
+
+// RowType is the type the loader decodes asset of l's version into.
+func (l *List) RowType(asset string) (reflect.Type, bool) {
+	if l.rowType == nil {
+		return RowType(asset)
+	}
+	return l.rowType(asset)
 }
 
 type node struct {
