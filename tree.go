@@ -24,7 +24,6 @@ func generateTreeData(loader fs.FS, game extractor.Game, gameVersion string) err
 
 	var err error
 	if game == extractor.PoE2 {
-		// The PoE2 tree has no sprite sheets yet.
 		_, err = treegen.WritePoE2(loader, gameVersion, dir)
 	} else {
 		_, err = treegen.Write(loader, gameVersion, dir)

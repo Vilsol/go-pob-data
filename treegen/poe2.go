@@ -54,6 +54,9 @@ type Tree2 struct {
 	MinY          float64            `json:"min_y"`
 	MaxX          float64            `json:"max_x"`
 	MaxY          float64            `json:"max_y"`
+	// Sprites and ImageZoomLevels are PoE1's sprite sheet format; PoB-PoE2 has assets and ddsCoords instead.
+	Sprites         Ordered[Ordered[*Sprite]] `json:"sprites,omitempty"`
+	ImageZoomLevels []float64                 `json:"imageZoomLevels,omitempty"`
 }
 
 type Constants2 struct {
@@ -394,30 +397,36 @@ func calcOrbitAngles(nodesInOrbit int) []float64 {
 
 // GeneratePoE2 builds the PoE2 passive tree from the game files behind loader in the shape of
 // PathOfBuilding-PoE2's src/TreeData/<version>/tree.json, as its src/Export/Scripts/passivetree.lua
-// does, without the sprite sheets (assets, ddsCoords). gameVersion is the short version, e.g. "0.5".
+// does, without the sprite sheets. gameVersion is the short version, e.g. "0.5".
 func GeneratePoE2(loader fs.FS, gameVersion string) (*Tree2, error) {
+	tree, _, err := generatePoE2(loader, gameVersion)
+	return tree, err
+}
+
+func generatePoE2(loader fs.FS, gameVersion string) (*Tree2, *gameData2, error) {
 	extractor.LoadParser(extractor.PoE2, gameVersion)
 
 	d, err := loadGameData2(loader, gameVersion)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	treeIdx := slices.IndexFunc(d.trees, func(t passiveSkillTree) bool { return t.ID == mainTreeID })
 	if treeIdx < 0 {
-		return nil, fmt.Errorf("no PassiveSkillTrees row %q", mainTreeID)
+		return nil, nil, fmt.Errorf("no PassiveSkillTrees row %q", mainTreeID)
 	}
 	graphPath := d.trees[treeIdx].PassiveSkillGraph + ".psg"
 	f, err := loader.Open(gameFilePath(extractor.PoE2, gameVersion, graphPath))
 	if err != nil {
-		return nil, errors.Wrapf(err, "failed to open %s", graphPath)
+		return nil, nil, errors.Wrapf(err, "failed to open %s", graphPath)
 	}
 	graph, err := extractor.ParsePassiveSkillGraph(f, extractor.PoE2)
 	if err != nil {
-		return nil, errors.Wrapf(err, "failed to parse %s", graphPath)
+		return nil, nil, errors.Wrapf(err, "failed to parse %s", graphPath)
 	}
 
-	return buildTree2(d, graph)
+	tree, err := buildTree2(d, graph)
+	return tree, d, err
 }
 
 //nolint:gocognit,gocyclo,cyclop,maintidx // a port of passivetree.lua's generation, kept in its order
@@ -906,10 +915,13 @@ func (t *Tree2) Marshal() ([]byte, error) {
 	return b, errors.Wrap(err, "failed to marshal tree")
 }
 
-// WritePoE2 generates the PoE2 tree and writes it to dir/data.json.
+// WritePoE2 generates the PoE2 tree with its sprite sheets and writes dir/data.json and the sheets into dir/assets.
 func WritePoE2(loader fs.FS, gameVersion string, dir string) (*Tree2, error) {
-	tree, err := GeneratePoE2(loader, gameVersion)
+	tree, d, err := generatePoE2(loader, gameVersion)
 	if err != nil {
+		return nil, err
+	}
+	if err := buildArt2(tree, d, loader, gameVersion, filepath.Join(dir, "assets")); err != nil {
 		return nil, err
 	}
 	b, err := tree.Marshal()

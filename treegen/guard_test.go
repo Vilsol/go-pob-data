@@ -50,7 +50,7 @@ func TestGuards(t *testing.T) {
 	})
 
 	t.Run("missing atlas image", func(t *testing.T) {
-		r, err := newRenderer(loader, short)
+		r, err := newRenderer(loader, extractor.PoE1, short)
 		testza.AssertNoError(t, err)
 		defer r.close()
 		_, err = r.load(source{atlas: "NoSuchAtlasImage"})
@@ -58,7 +58,7 @@ func TestGuards(t *testing.T) {
 	})
 
 	t.Run("missing icon", func(t *testing.T) {
-		r, err := newRenderer(loader, short)
+		r, err := newRenderer(loader, extractor.PoE1, short)
 		testza.AssertNoError(t, err)
 		defer r.close()
 		_, err = r.load(source{file: "Art/2DArt/SkillIcons/passives/NoSuchIcon.dds"})

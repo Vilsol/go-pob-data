@@ -13,6 +13,8 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
+
+	"github.com/Vilsol/go-pob-data/extractor"
 )
 
 // zoomLevel is the scale the sprites are rendered at: the largest of the export's imageZoomLevels.
@@ -226,7 +228,7 @@ func buildArt(tree *Tree, d *gameData, loader fs.FS, gameVersion string, dir str
 	if err != nil {
 		return err
 	}
-	r, err := newRenderer(loader, gameVersion)
+	r, err := newRenderer(loader, extractor.PoE1, gameVersion)
 	if err != nil {
 		return err
 	}
@@ -242,20 +244,31 @@ func buildArt(tree *Tree, d *gameData, loader fs.FS, gameVersion string, dir str
 		}
 	}
 
-	if err := os.MkdirAll(dir, 0o755); err != nil {
-		return errors.Wrap(err, "failed to create assets directory")
+	tree.Sprites, err = writeSheets(dir, gameVersion, b.sheets, b.sprites)
+	if err != nil {
+		return err
 	}
-	for _, s := range b.sheets {
+	tree.ImageZoomLevels = []float64{zoomLevel}
+	return nil
+}
+
+// writeSheets packs and writes the sheets into dir and returns the sprites object of refs.
+func writeSheets(dir string, gameVersion string, sheets []*sheet, refs []spriteRef) (Ordered[Ordered[*Sprite]], error) {
+	if err := os.MkdirAll(dir, 0o755); err != nil {
+		return nil, errors.Wrap(err, "failed to create assets directory")
+	}
+	for _, s := range sheets {
 		if s.image == nil {
 			s.pack()
 		}
 		if err := s.write(dir); err != nil {
-			return err
+			return nil, err
 		}
 	}
 
+	var sprites Ordered[Ordered[*Sprite]]
 	base := fmt.Sprintf(assetsURL, gameVersion)
-	for _, ref := range b.sprites {
+	for _, ref := range refs {
 		sprite := &Sprite{Filename: base + ref.sheet.file, W: ref.sheet.image.Rect.Dx(), H: ref.sheet.image.Rect.Dy()}
 		for _, e := range ref.sheet.entries {
 			if e.group == ref.group {
@@ -263,13 +276,12 @@ func buildArt(tree *Tree, d *gameData, loader fs.FS, gameVersion string, dir str
 			}
 		}
 		if len(sprite.Coords) == 0 {
-			return fmt.Errorf("sprite group %s is empty", ref.key)
+			return nil, fmt.Errorf("sprite group %s is empty", ref.key)
 		}
 		zoom := strconv.FormatFloat(ref.zoom, 'f', -1, 64)
-		tree.Sprites = append(tree.Sprites, Entry[Ordered[*Sprite]]{Key: ref.key, Value: Ordered[*Sprite]{{Key: zoom, Value: sprite}}})
+		sprites = append(sprites, Entry[Ordered[*Sprite]]{Key: ref.key, Value: Ordered[*Sprite]{{Key: zoom, Value: sprite}}})
 	}
-	tree.ImageZoomLevels = []float64{zoomLevel}
-	return nil
+	return sprites, nil
 }
 
 func (b *artBuilder) background() error {

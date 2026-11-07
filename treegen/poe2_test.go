@@ -1,7 +1,6 @@
 package treegen
 
 import (
-	"bytes"
 	"compress/gzip"
 	"encoding/json"
 	"fmt"
@@ -9,6 +8,7 @@ import (
 	"math"
 	"os"
 	"path/filepath"
+	"reflect"
 	"slices"
 	"sort"
 	"strings"
@@ -239,5 +239,13 @@ func TestPoE2TreeAgainstPoB(t *testing.T) {
 	testza.AssertNoError(t, err)
 	committedJSON, err := io.ReadAll(r)
 	testza.AssertNoError(t, err)
-	testza.AssertTrue(t, bytes.Equal(b, committedJSON), "%s is stale; regenerate it with -game poe2 -tree-only", committed)
+	// The committed tree also carries the sprite sheets' coordinates, which GeneratePoE2 leaves out.
+	var committedTree map[string]any
+	testza.AssertNoError(t, json.Unmarshal(committedJSON, &committedTree))
+	testza.AssertNotNil(t, committedTree["sprites"], "%s has no sprites", committed)
+	delete(committedTree, "sprites")
+	delete(committedTree, "imageZoomLevels")
+	var generated map[string]any
+	testza.AssertNoError(t, json.Unmarshal(b, &generated))
+	testza.AssertTrue(t, reflect.DeepEqual(generated, committedTree), "%s is stale; regenerate it with -game poe2 -tree-only", committed)
 }

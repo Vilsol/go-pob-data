@@ -13,6 +13,8 @@ import (
 	"github.com/pkg/errors"
 	"golang.org/x/text/encoding/unicode"
 	"gopkg.in/gographics/imagick.v3/imagick"
+
+	"github.com/Vilsol/go-pob-data/extractor"
 )
 
 // uiAtlasFile lists the named UI images and where each sits on its atlas page.
@@ -24,8 +26,8 @@ type atlasSprite struct {
 }
 
 // loadUIAtlas parses lines of the form `"name" "page.dds" x1 y1 x2 y2`; the corners are inclusive.
-func loadUIAtlas(loader fs.FS, gameVersion string) (map[string]atlasSprite, error) {
-	f, err := loader.Open(gamePath(gameVersion, uiAtlasFile))
+func loadUIAtlas(loader fs.FS, game extractor.Game, gameVersion string) (map[string]atlasSprite, error) {
+	f, err := loader.Open(gameFilePath(game, gameVersion, uiAtlasFile))
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to open %s", uiAtlasFile)
 	}
@@ -87,19 +89,21 @@ type renderer struct {
 	atlas       map[string]atlasSprite
 	pages       map[string]*imagick.MagickWand
 	arts        map[artKey]*art
+	game        extractor.Game
 	gameVersion string
 }
 
-func newRenderer(loader fs.FS, gameVersion string) (*renderer, error) {
+func newRenderer(loader fs.FS, game extractor.Game, gameVersion string) (*renderer, error) {
 	// ImageMagick can't be initialized again after imagick.Terminate, so terminating is left to the caller.
 	imagick.Initialize()
 
-	atlas, err := loadUIAtlas(loader, gameVersion)
+	atlas, err := loadUIAtlas(loader, game, gameVersion)
 	if err != nil {
 		return nil, err
 	}
 	return &renderer{
 		loader:      loader,
+		game:        game,
 		gameVersion: gameVersion,
 		atlas:       atlas,
 		pages:       make(map[string]*imagick.MagickWand),
@@ -114,7 +118,7 @@ func (r *renderer) close() {
 }
 
 func (r *renderer) decode(path string) (*imagick.MagickWand, error) {
-	f, err := r.loader.Open(gamePath(r.gameVersion, path))
+	f, err := r.loader.Open(gameFilePath(r.game, r.gameVersion, path))
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to open %s", path)
 	}

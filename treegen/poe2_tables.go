@@ -51,6 +51,7 @@ type character2 struct {
 	BaseStrength     int    `json:"BaseStrength"`
 	BaseDexterity    int    `json:"BaseDexterity"`
 	BaseIntelligence int    `json:"BaseIntelligence"`
+	PassiveTreeImage string `json:"PassiveTreeImage"`
 }
 
 //nolint:govet // fields follow the export key order
@@ -62,10 +63,18 @@ type ascendancy2 struct {
 	Disabled         bool   `json:"Disabled"`         // isDisabled
 	BaseAscendancy   *int   `json:"BaseAscendancy"`   // Replace
 	UIArt            *int   `json:"UIArt"`
+	PassiveTreeImage string `json:"PassiveTreeImage"`
 }
 
 type treeUIArt2 struct {
-	JewelFrame *int `json:"JewelFrame"`
+	GroupBackgroundSmall  string `json:"GroupBackgroundSmall"`
+	GroupBackgroundMedium string `json:"GroupBackgroundMedium"`
+	GroupBackgroundLarge  string `json:"GroupBackgroundLarge"`
+	Connection            *int   `json:"Connection"` // ConnectionsArt
+	PassiveFrame          *int   `json:"PassiveFrame"`
+	NotableFrame          *int   `json:"NotableFrame"`
+	KeystoneFrame         *int   `json:"KeystoneFrame"`
+	JewelFrame            *int   `json:"JewelFrame"`
 }
 
 type nodeFrameArt2 struct {
