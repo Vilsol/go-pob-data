@@ -6,7 +6,7 @@ on: [push, pull_request]
 
 env:
   GO_VERSION: "1.23.3"
-  LFS_INCLUDE: "data/**/*.msgpack.br,data/**/*.json.gz,data/**/files/**,treegen/testdata/*.gz"
+  LFS_INCLUDE: "data/**/*.msgpack.br,data/**/*.json.gz,data/**/files/**,treegen/testdata/*.gz,data/**/tree/assets/line-*.png"
 
 jobs:
   lint:

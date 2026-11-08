@@ -339,7 +339,9 @@ func TestLineSpritesHoldOneArc(t *testing.T) {
 		testza.AssertNoError(t, err)
 		decoded, err := png.Decode(f)
 		f.Close()
-		testza.AssertNoError(t, err)
+		if err != nil {
+			t.Fatalf("%s: %v (an LFS pointer if git lfs did not fetch it)", sp.Filename, err)
+		}
 		img := image.NewNRGBA(decoded.Bounds())
 		draw.Draw(img, img.Rect, decoded, image.Point{}, draw.Src)
 
