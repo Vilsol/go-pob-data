@@ -21,7 +21,6 @@ const zoomLevel2 = 1
 var groupZoom2 = map[string]float64{
 	"ascendancyBackground": zoomLevel,
 	"masteryActiveEffect":  0.5,
-	"legion":               0.5,
 	"line":                 0.5,
 }
 
@@ -73,8 +72,8 @@ const (
 var connectionArt2 = []string{"Character", "CharacterAscendancy", "CharacterPlanned"}
 
 type passiveSkillTreeArt2 struct {
-	ID    string `json:"Id"`
 	UIArt *int   `json:"UIArt"`
+	ID    string `json:"Id"`
 }
 
 type connectionArt2Row struct {
@@ -85,8 +84,8 @@ type connectionArt2Row struct {
 }
 
 type jewelArt2 struct {
-	BaseItemType int    `json:"BaseItemTypesKey"`
 	JewelArt     string `json:"SocketedImage"`
+	BaseItemType int    `json:"BaseItemTypesKey"`
 }
 
 type uniqueJewelArt2 struct {
@@ -253,7 +252,7 @@ func buildArt2(tree *Tree2, d *gameData2, loader fs.FS, gameVersion string, dir 
 // options it can switch to (:649, :937, :973). PoB-PoE2 draws unallocated icons as they are, so the
 // inactive groups share the active sheet.
 func (b *artBuilder2) nodeIcons() error {
-	s := b.newSheet("skills-3.jpg")
+	s := b.newSheet("skills-3.webp")
 	add := func(group, icon string) error {
 		if icon == "" {
 			return nil
@@ -592,14 +591,14 @@ func (b *artBuilder2) lines() error {
 			if err != nil {
 				return err
 			}
-			// The textures carry a padding row and column, faintly bled into by compression, past the
-			// corner the arcs are centred on.
+			// The textures carry a padding row and column past the corner the arcs are centred on, and
+			// compression speckles their faint shadows, so arcs are found by their solid cores.
 			size := a.img.Rect.Dx()
-			for size > 1 && len(opaqueRuns(a.img, image.Pt(1, 0), image.Pt(0, size-1), size)) != len(byRadius) {
+			for size > 1 && len(solidRuns(a.img, image.Pt(1, 0), image.Pt(0, size-1), size)) == 0 {
 				size--
 			}
 
-			arcs := opaqueRuns(a.img, image.Pt(1, 0), image.Pt(0, size-1), size)
+			arcs := solidRuns(a.img, image.Pt(1, 0), image.Pt(0, size-1), size)
 			if len(arcs) != len(byRadius) {
 				return fmt.Errorf("found %d orbit arcs in the %s %s connection art, want %d", len(arcs), id, state[0], len(byRadius))
 			}
@@ -607,13 +606,47 @@ func (b *artBuilder2) lines() error {
 				s.entries = append(s.entries, sheetEntry{group: "line", name: id + "Orbit" + strconv.Itoa(byRadius[i]) + state[0], art: a, sub: image.Rect(arc[0], arc[0], size, size)})
 			}
 
-			// Left of the largest arc only the connector and its compression-speckled shadow cross a column.
-			connector := opaqueRuns(a.img, image.Pt(0, 1), image.Pt(arcs[0][0]/2, 0), size)
-			if len(connector) == 0 {
-				return fmt.Errorf("found no connector in the %s %s connection art", id, state[0])
+			// Left of the largest arc only the connector crosses a column.
+			connector := solidRuns(a.img, image.Pt(0, 1), image.Pt(arcs[0][0]/2, 0), size)
+			if len(connector) != 1 {
+				return fmt.Errorf("found %d connectors in the %s %s connection art, want 1", len(connector), id, state[0])
 			}
-			s.entries = append(s.entries, sheetEntry{group: "line", name: id + "LineConnector" + state[0], art: a, sub: image.Rect(0, connector[0][0], size, connector[len(connector)-1][1])})
+			s.entries = append(s.entries, sheetEntry{group: "line", name: id + "LineConnector" + state[0], art: a, sub: image.Rect(0, connector[0][0], size, connector[0][1])})
 		}
 	}
 	return nil
+}
+
+// solidRuns are the runs of opaqueRuns that hold a solid pixel, each widened over the faint
+// pixels around it up to its neighbours.
+func solidRuns(img *image.NRGBA, step, start image.Point, n int) [][2]int {
+	const solid, faint = 128, 16
+	alpha := func(i int) uint8 {
+		p := start.Add(step.Mul(i))
+		return img.NRGBAAt(p.X, p.Y).A
+	}
+	var runs [][2]int
+	for i := 0; i < n; i++ {
+		if alpha(i) < solid {
+			continue
+		}
+		lo := i
+		floor := 0
+		if len(runs) > 0 {
+			floor = runs[len(runs)-1][1]
+		}
+		for lo > floor && alpha(lo-1) >= faint {
+			lo--
+		}
+		hi := i
+		for hi < n && alpha(hi) >= solid {
+			hi++
+		}
+		for hi < n && alpha(hi) >= faint && alpha(hi) < solid {
+			hi++
+		}
+		runs = append(runs, [2]int{lo, hi})
+		i = hi - 1
+	}
+	return runs
 }

@@ -42,21 +42,21 @@ const (
 )
 
 type Tree2 struct {
-	Nodes         map[string]*Node2  `json:"nodes"`
-	NodeOverlay   map[string]Overlay `json:"nodeOverlay"`
-	ConnectionArt map[string]string  `json:"connectionArt"`
-	Tree          string             `json:"tree"`
-	Classes       []*Class2          `json:"classes"`
-	Groups        []*Group2          `json:"groups"`
-	JewelSlots    []uint32           `json:"jewelSlots"`
-	Constants     Constants2         `json:"constants"`
-	MinX          float64            `json:"min_x"`
-	MinY          float64            `json:"min_y"`
-	MaxX          float64            `json:"max_x"`
-	MaxY          float64            `json:"max_y"`
 	// Sprites and ImageZoomLevels are PoE1's sprite sheet format; PoB-PoE2 has assets and ddsCoords instead.
 	Sprites         Ordered[Ordered[*Sprite]] `json:"sprites,omitempty"`
 	ImageZoomLevels []float64                 `json:"imageZoomLevels,omitempty"`
+	Nodes           map[string]*Node2         `json:"nodes"`
+	NodeOverlay     map[string]Overlay        `json:"nodeOverlay"`
+	ConnectionArt   map[string]string         `json:"connectionArt"`
+	Tree            string                    `json:"tree"`
+	Classes         []*Class2                 `json:"classes"`
+	Groups          []*Group2                 `json:"groups"`
+	JewelSlots      []uint32                  `json:"jewelSlots"`
+	Constants       Constants2                `json:"constants"`
+	MinX            float64                   `json:"min_x"`
+	MinY            float64                   `json:"min_y"`
+	MaxX            float64                   `json:"max_x"`
+	MaxY            float64                   `json:"max_y"`
 }
 
 type Constants2 struct {

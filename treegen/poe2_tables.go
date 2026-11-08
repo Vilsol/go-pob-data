@@ -67,14 +67,14 @@ type ascendancy2 struct {
 }
 
 type treeUIArt2 struct {
-	GroupBackgroundSmall  string `json:"GroupBackgroundSmall"`
-	GroupBackgroundMedium string `json:"GroupBackgroundMedium"`
-	GroupBackgroundLarge  string `json:"GroupBackgroundLarge"`
 	Connection            *int   `json:"Connection"` // ConnectionsArt
 	PassiveFrame          *int   `json:"PassiveFrame"`
 	NotableFrame          *int   `json:"NotableFrame"`
 	KeystoneFrame         *int   `json:"KeystoneFrame"`
 	JewelFrame            *int   `json:"JewelFrame"`
+	GroupBackgroundSmall  string `json:"GroupBackgroundSmall"`
+	GroupBackgroundMedium string `json:"GroupBackgroundMedium"`
+	GroupBackgroundLarge  string `json:"GroupBackgroundLarge"`
 }
 
 type nodeFrameArt2 struct {
