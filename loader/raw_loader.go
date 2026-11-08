@@ -54,6 +54,31 @@ func LoadRaw[T msgp.Decodable](ctx context.Context, version string, name string,
 		return nil, err
 	}
 
+	return decodeRows[T](ctx, url, b, fromCache, onInit, assetCache, hooks...)
+}
+
+// LoadAssetRows loads the rows of the tuple asset at path under version's directory, such as
+// "pob/ItemMods.1a2b3c4d.msgpack.br": an int64 row count, then the rows. A missing asset is
+// ErrAssetNotFound.
+func LoadAssetRows[T msgp.Decodable](ctx context.Context, version string, path string, assetCache AssetCache) ([]T, error) {
+	url := cdnBase + version + "/" + path
+
+	slox.From(ctx).Debug(
+		"loading asset rows",
+		slog.String("version", version),
+		slog.String("path", path),
+	)
+
+	b, fromCache, err := loadAsset(ctx, url, assetCache)
+	if err != nil {
+		return nil, err
+	}
+
+	return decodeRows[T](ctx, url, b, fromCache, nil, assetCache)
+}
+
+// decodeRows decodes b, the brotli tuple asset at url: an int64 row count, then the rows.
+func decodeRows[T msgp.Decodable](ctx context.Context, url string, b []byte, fromCache bool, onInit func(count int64), assetCache AssetCache, hooks ...func(obj T)) ([]T, error) {
 	r := msgp.NewReader(brotli.NewReader(bytes.NewReader(b)))
 
 	elementCount, err := r.ReadInt64()
