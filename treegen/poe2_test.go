@@ -6,13 +6,17 @@ import (
 	"fmt"
 	"image"
 	"image/color"
+	"image/draw"
+	"image/png"
 	"io"
 	"math"
 	"os"
+	"path"
 	"path/filepath"
 	"reflect"
 	"slices"
 	"sort"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -261,4 +265,95 @@ func TestSolidRuns(t *testing.T) {
 	}
 	testza.AssertEqual(t, [][2]int{{3, 8}, {12, 13}}, solidRuns(img, image.Pt(1, 0), image.Pt(0, 0), len(alphas)))
 	testza.AssertLen(t, opaqueRuns(img, image.Pt(1, 0), image.Pt(0, 0), len(alphas)), 4, "the speckles split opaqueRuns")
+}
+
+func TestLineCutterKeepsItsMaskRegion(t *testing.T) {
+	// Two nested quarter arcs around the bottom right corner, each with a faint shadow, and a mask
+	// lighting a band around each.
+	const n = 24
+	tex := image.NewNRGBA(image.Rect(0, 0, n, n))
+	mask := image.NewNRGBA(image.Rect(0, 0, n, n))
+	radius := func(x, y int) float64 { return math.Hypot(float64(n-1-x), float64(n-1-y)) }
+	for y := 0; y < n; y++ {
+		for x := 0; x < n; x++ {
+			for _, r := range []float64{8, 18} {
+				d := math.Abs(radius(x, y) - r)
+				if d <= 1 {
+					tex.SetNRGBA(x, y, color.NRGBA{R: 200, A: 255})
+				} else if d <= 2.5 {
+					tex.SetNRGBA(x, y, color.NRGBA{A: 30})
+				}
+				if d <= 3 {
+					mask.SetNRGBA(x, y, color.NRGBA{G: 255, B: 255, A: 255})
+				}
+			}
+			if mask.NRGBAAt(x, y).A == 0 {
+				mask.SetNRGBA(x, y, color.NRGBA{A: 255})
+			}
+		}
+	}
+
+	owners := maskOwners(mask)
+	s := &sheet{}
+	cut := lineCutter{art: &art{img: tex}, owners: owners, used: make(map[int]string)}
+	arcs := solidRuns(tex, image.Pt(1, 0), image.Pt(0, n-1), n)
+	testza.AssertLen(t, arcs, 2)
+	for i, arc := range arcs {
+		testza.AssertNoError(t, cut.add(s, strconv.Itoa(i), image.Rect(arc[0], arc[0], n, n), image.Pt(1, 0), image.Pt(arc[0], n-1), arc[1]-arc[0]))
+	}
+
+	outer := s.entries[0].art.img
+	off := arcs[0][0]
+	region := owners[(n-1)*n+(arcs[0][0]+arcs[0][1])/2]
+	drawn := 0
+	for y := off; y < n; y++ {
+		for x := off; x < n; x++ {
+			a := outer.NRGBAAt(x-off, y-off).A
+			if owners[y*n+x] != region {
+				testza.AssertEqual(t, uint8(0), a, "pixel %d,%d of the outer arc's sprite is outside its mask region", x, y)
+			} else if a == tex.NRGBAAt(x, y).A && a > 0 {
+				drawn++
+			}
+		}
+	}
+	testza.AssertTrue(t, drawn > 0, "the outer arc's sprite keeps its own pixels")
+	testza.AssertNotNil(t, cut.add(s, "again", image.Rect(0, 0, n, n), image.Pt(1, 0), image.Pt(arcs[1][0], n-1), arcs[1][1]-arcs[1][0]), "two lines may not share a mask region")
+}
+
+// TestLineSpritesHoldOneArc reads the committed PoE2 line sheet: along each orbit sprite's bottom
+// row and right column, which every nested arc of the curves textures crosses, only its own arc
+// may be solid.
+func TestLineSpritesHoldOneArc(t *testing.T) {
+	var tree struct {
+		Sprites map[string]map[string]struct {
+			Coords   map[string]Coord `json:"coords"`
+			Filename string           `json:"filename"`
+		} `json:"sprites"`
+	}
+	b, err := json.Marshal(readGzipJSON(t, filepath.Join("data", "0.5", "tree", "data.json.gz")))
+	testza.AssertNoError(t, err)
+	testza.AssertNoError(t, json.Unmarshal(b, &tree))
+	testza.AssertLen(t, tree.Sprites["line"], 1)
+	for _, sp := range tree.Sprites["line"] {
+		f, err := os.Open(filepath.Join("data", "0.5", "tree", "assets", path.Base(sp.Filename)))
+		testza.AssertNoError(t, err)
+		decoded, err := png.Decode(f)
+		f.Close()
+		testza.AssertNoError(t, err)
+		img := image.NewNRGBA(decoded.Bounds())
+		draw.Draw(img, img.Rect, decoded, image.Point{}, draw.Src)
+
+		orbits := 0
+		for name, c := range sp.Coords {
+			if !strings.Contains(name, "Orbit") {
+				continue
+			}
+			orbits++
+			bottom := solidRuns(img, image.Pt(1, 0), image.Pt(c.X, c.Y+c.H-1), c.W)
+			right := solidRuns(img, image.Pt(0, 1), image.Pt(c.X+c.W-1, c.Y), c.H)
+			testza.AssertLen(t, bottom, 1, "%s crosses its bottom row %d times", name, len(bottom))
+			testza.AssertLen(t, right, 1, "%s crosses its right column %d times", name, len(right))
+		}
+		testza.AssertEqual(t, 81, orbits)
+	}
 }
