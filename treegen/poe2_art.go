@@ -81,6 +81,7 @@ type connectionArt2Row struct {
 	Normal       string `json:"Normal"`
 	Intermediate string `json:"Intermediate"`
 	Active       string `json:"Active"`
+	Mask         string `json:"Mask"`
 }
 
 type jewelArt2 struct {
@@ -563,8 +564,10 @@ func (b *artBuilder2) legion() error {
 }
 
 // lines cuts each connection art's curves texture like PoE1's lines: a quarter of every orbit's
-// circle centred on its bottom right corner, with the straight connector along its top. The names
-// are passivetree.lua:1256-1283's, prefixed by the connection art.
+// circle centred on its bottom right corner, with the straight connector along its top. The
+// textures nest the arcs, so each sprite keeps only the pixels of its arc's region of the
+// connection art's mask, as passivetree.lua:1252 (extract_lines.scm) does. The names are
+// passivetree.lua:1256-1283's, prefixed by the connection art.
 func (b *artBuilder2) lines() error {
 	s := b.newSheet("line-3.png")
 	b.sprite("line", s, "line")
@@ -586,10 +589,18 @@ func (b *artBuilder2) lines() error {
 			return fmt.Errorf("no connection art %s", id)
 		}
 		c := b.a.connections[ci]
+		mask, err := b.render2(source{file: c.Mask}, zoomOf2("line"))
+		if err != nil {
+			return err
+		}
+		owners := maskOwners(mask.img)
 		for _, state := range [][2]string{{"Normal", c.Normal}, {"Intermediate", c.Intermediate}, {"Active", c.Active}} {
 			a, err := b.render2(source{file: state[1]}, zoomOf2("line"))
 			if err != nil {
 				return err
+			}
+			if a.img.Rect != mask.img.Rect {
+				return fmt.Errorf("the %s %s connection art is %v, its mask %v", id, state[0], a.img.Rect, mask.img.Rect)
 			}
 			// The textures carry a padding row and column past the corner the arcs are centred on, and
 			// compression speckles their faint shadows, so arcs are found by their solid cores.
@@ -602,19 +613,105 @@ func (b *artBuilder2) lines() error {
 			if len(arcs) != len(byRadius) {
 				return fmt.Errorf("found %d orbit arcs in the %s %s connection art, want %d", len(arcs), id, state[0], len(byRadius))
 			}
+			cut := lineCutter{art: a, owners: owners, used: make(map[int]string)}
 			for i, arc := range arcs {
-				s.entries = append(s.entries, sheetEntry{group: "line", name: id + "Orbit" + strconv.Itoa(byRadius[i]) + state[0], art: a, sub: image.Rect(arc[0], arc[0], size, size)})
+				name := id + "Orbit" + strconv.Itoa(byRadius[i]) + state[0]
+				if err := cut.add(s, name, image.Rect(arc[0], arc[0], size, size), image.Pt(1, 0), image.Pt(arc[0], size-1), arc[1]-arc[0]); err != nil {
+					return err
+				}
 			}
 
 			// Left of the largest arc only the connector crosses a column.
-			connector := solidRuns(a.img, image.Pt(0, 1), image.Pt(arcs[0][0]/2, 0), size)
+			x := arcs[0][0] / 2
+			connector := solidRuns(a.img, image.Pt(0, 1), image.Pt(x, 0), size)
 			if len(connector) != 1 {
 				return fmt.Errorf("found %d connectors in the %s %s connection art, want 1", len(connector), id, state[0])
 			}
-			s.entries = append(s.entries, sheetEntry{group: "line", name: id + "LineConnector" + state[0], art: a, sub: image.Rect(0, connector[0][0], size, connector[0][1])})
+			name := id + "LineConnector" + state[0]
+			if err := cut.add(s, name, image.Rect(0, connector[0][0], size, connector[0][1]), image.Pt(0, 1), image.Pt(x, connector[0][0]), connector[0][1]-connector[0][0]); err != nil {
+				return err
+			}
 		}
 	}
 	return nil
+}
+
+// lineCutter cuts one connection art texture into a sprite per line, each the pixels of its own
+// region of the mask.
+type lineCutter struct {
+	art    *art
+	used   map[int]string
+	owners []int
+}
+
+// add puts the pixels of sub that share the mask region of the line's most opaque pixel among the
+// n from start along step on s as its own art.
+func (c *lineCutter) add(s *sheet, name string, sub image.Rectangle, step, start image.Point, n int) error {
+	img := c.art.img
+	w := img.Rect.Dx()
+	at, best := start, -1
+	for i := 0; i < n; i++ {
+		p := start.Add(step.Mul(i))
+		if a := int(img.NRGBAAt(p.X, p.Y).A); a > best {
+			at, best = p, a
+		}
+	}
+	region := c.owners[at.Y*w+at.X]
+	if region == 0 {
+		return fmt.Errorf("%s is in no region of its mask", name)
+	}
+	if other, ok := c.used[region]; ok {
+		return fmt.Errorf("%s and %s share a region of their mask", name, other)
+	}
+	c.used[region] = name
+
+	out := image.NewNRGBA(image.Rect(0, 0, sub.Dx(), sub.Dy()))
+	for y := sub.Min.Y; y < sub.Max.Y; y++ {
+		for x := sub.Min.X; x < sub.Max.X; x++ {
+			if c.owners[y*w+x] == region {
+				out.SetNRGBA(x-sub.Min.X, y-sub.Min.Y, img.NRGBAAt(x, y))
+			}
+		}
+	}
+	s.add("line", name, &art{img: out, src: c.art.src})
+	return nil
+}
+
+// maskOwners labels each separate lit area of a connection art mask. extract_lines.scm selects the
+// black between the areas with GIMP's default threshold of 15.
+func maskOwners(mask *image.NRGBA) []int {
+	const lit = 16
+	w, h := mask.Rect.Dx(), mask.Rect.Dy()
+	isLit := func(i int) bool {
+		p := mask.Pix[i*4 : i*4+4 : i*4+4]
+		return p[3] > 0 && max(p[0], p[1], p[2]) >= lit
+	}
+
+	owners := make([]int, w*h)
+	label := 0
+	for i := range owners {
+		if owners[i] != 0 || !isLit(i) {
+			continue
+		}
+		label++
+		owners[i] = label
+		stack := []int{i}
+		for len(stack) > 0 {
+			j := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			x, y := j%w, j/w
+			for _, k := range [4]int{j - 1, j + 1, j - w, j + w} {
+				if (k == j-1 && x == 0) || (k == j+1 && x == w-1) || (k == j-w && y == 0) || (k == j+w && y == h-1) {
+					continue
+				}
+				if owners[k] == 0 && isLit(k) {
+					owners[k] = label
+					stack = append(stack, k)
+				}
+			}
+		}
+	}
+	return owners
 }
 
 // solidRuns are the runs of opaqueRuns that hold a solid pixel, each widened over the faint
