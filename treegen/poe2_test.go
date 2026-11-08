@@ -4,6 +4,8 @@ import (
 	"compress/gzip"
 	"encoding/json"
 	"fmt"
+	"image"
+	"image/color"
 	"io"
 	"math"
 	"os"
@@ -248,4 +250,15 @@ func TestPoE2TreeAgainstPoB(t *testing.T) {
 	var generated map[string]any
 	testza.AssertNoError(t, json.Unmarshal(b, &generated))
 	testza.AssertTrue(t, reflect.DeepEqual(generated, committedTree), "%s is stale; regenerate it with -game poe2 -tree-only", committed)
+}
+
+func TestSolidRuns(t *testing.T) {
+	// One row: a speckled shadow, a solid arc with a faint edge, a lone speckle, and a second arc.
+	alphas := []uint8{0, 20, 0, 30, 60, 255, 255, 40, 0, 0, 20, 0, 200, 0}
+	img := image.NewNRGBA(image.Rect(0, 0, len(alphas), 1))
+	for x, a := range alphas {
+		img.SetNRGBA(x, 0, color.NRGBA{A: a})
+	}
+	testza.AssertEqual(t, [][2]int{{3, 8}, {12, 13}}, solidRuns(img, image.Pt(1, 0), image.Pt(0, 0), len(alphas)))
+	testza.AssertLen(t, opaqueRuns(img, image.Pt(1, 0), image.Pt(0, 0), len(alphas)), 4, "the speckles split opaqueRuns")
 }
