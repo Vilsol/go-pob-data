@@ -34,10 +34,11 @@ func Encode[T any, PT interface {
 	return buf.Bytes(), nil
 }
 
-// Compress is encoded as the published asset's bytes.
+// Compress is encoded as the published asset's bytes, at brotli's best compression: an asset is written once
+// and fetched by every PoE2 user.
 func Compress(encoded []byte) ([]byte, error) {
 	var buf bytes.Buffer
-	w := brotli.NewWriter(&buf)
+	w := brotli.NewWriterLevel(&buf, brotli.BestCompression)
 	if _, err := w.Write(encoded); err != nil {
 		return nil, errors.Wrap(err, "failed to compress")
 	}
