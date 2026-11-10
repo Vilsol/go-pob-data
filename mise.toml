@@ -45,3 +45,11 @@ out=monster_varieties.txt
 [ "${usage_game}" = poe2 ] && out=monster_varieties_poe2.txt
 grep -h '^#\(monster\|spectre\) ' "${usage_pob}/src/Export/Minions/Minions.txt" "${usage_pob}/src/Export/Minions/Spectres.txt" | awk '{print $2}' | LC_ALL=C sort -u > "$out"
 '''
+
+[tasks.trade-stats]
+description = "Fetch the trade site's stats list (the live league's) into data/<version>/files/api/trade[2]/data/stats.json and regenerate the manifests"
+usage = '''
+arg "<game>" help="poe1 or poe2"
+arg "<version>" help="The data version of the game's live patch, e.g. 3.29 or 0.5"
+'''
+run = '''nix-shell -p gcc pkg-config imagemagick --run "CGO_ENABLED=1 go run . -game ${usage_game} -trade-stats ${usage_version}"'''

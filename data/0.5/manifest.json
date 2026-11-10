@@ -1412,6 +1412,7 @@
 		"Metadata/Monsters/Zombies/Maraketh/MarakethZombie.ot",
 		"Metadata/Monsters/Zombies/PlayerSummoned/ZombiePlayerSummoned.ot",
 		"Metadata/Monsters/Zombies/UpperPrison/PrisonZombie.ot",
+		"api/trade2/data/stats.json",
 		"art/uiimages1.txt"
 	]
 }

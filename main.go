@@ -28,6 +28,7 @@ func main() {
 	treeOnly := flag.Bool("tree-only", false, "only regenerate the passive tree")
 	gameName := flag.String("game", string(extractor.PoE1), "game to extract: poe1 or poe2")
 	latest := flag.Bool("latest", false, "print the game's live patch and exit")
+	tradeStats := flag.Bool("trade-stats", false, "only fetch the trade site's stats list into data/<game_version>; the site serves only the live league's")
 	flag.Parse()
 
 	game, err := extractor.ParseGame(*gameName)
@@ -45,6 +46,24 @@ func main() {
 			return
 		}
 		fmt.Println(patch)
+		return
+	}
+
+	if *tradeStats {
+		if flag.NArg() < 1 {
+			slog.Error("please provide game version")
+			os.Exit(1)
+			return
+		}
+		if err := extractTradeStats(game, flag.Arg(0)); err != nil {
+			slog.Error(err.Error())
+			os.Exit(1)
+			return
+		}
+		if err := generateMeta(); err != nil {
+			slog.Error(err.Error())
+			os.Exit(1)
+		}
 		return
 	}
 

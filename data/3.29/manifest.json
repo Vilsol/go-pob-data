@@ -468,6 +468,7 @@
 		"Metadata/Monsters/WickerMan/WickerMan.ot",
 		"Metadata/Monsters/incaminion/IncaMinion.ot",
 		"Metadata/StatDescriptions/skillpopup_stat_filters.txt",
+		"api/trade/data/stats.json",
 		"art/uiimages1.txt"
 	]
 }
