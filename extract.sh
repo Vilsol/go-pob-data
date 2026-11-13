@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 if [ "$#" -lt 2 ] || [ "$#" -gt 3 ]; then
-    echo "usage: $0 </path/to/Path of Exile/|cdn:<patch>> <game_version> [poe1|poe2]"
+    echo "usage: $0 </path/to/Path of Exile/|/path/to/Content.ggpk|cdn:<patch>> <game_version> [poe1|poe2]"
     echo ""
     echo "example: $0 \"/home/vilsol/.local/share/Steam/steamapps/common/Path of Exile/\" 3.21"
+    echo "example: $0 /path/to/Content.ggpk 3.30"
     echo "example: $0 cdn:3.29.3.3 3.29"
     echo "example: $0 cdn:0.5.5.4.2 0.5 poe2"
     exit 1

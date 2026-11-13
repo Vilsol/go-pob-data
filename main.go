@@ -3,11 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io/fs"
 	"log/slog"
 	"os"
-	"path/filepath"
-	"strings"
 
 	"github.com/pkg/errors"
 	"gopkg.in/gographics/imagick.v3/imagick"
@@ -68,7 +65,7 @@ func main() {
 	}
 
 	if flag.NArg() < 1 {
-		slog.Error("please provide path to the game directory or cdn:<patch>")
+		slog.Error("please provide path to the game directory, a Content.ggpk or cdn:<patch>")
 		os.Exit(1)
 		return
 	}
@@ -90,14 +87,9 @@ func main() {
 }
 
 func run(game extractor.Game, gamePath string, gameVersion string, treeOnly bool) error {
-	var source fs.FS
-	if patch, ok := strings.CutPrefix(gamePath, cdnPrefix); ok {
-		source = extractor.NewWebFS(game, patch)
-	} else {
-		if _, err := os.Stat(filepath.Join(gamePath, "Bundles2", "_.index.bin")); err != nil {
-			return errors.Wrap(err, "could not find _.index.bin")
-		}
-		source = os.DirFS(gamePath)
+	source, err := openSource(game, gamePath)
+	if err != nil {
+		return err
 	}
 
 	extractor.LoadParser(game, gameVersion)
