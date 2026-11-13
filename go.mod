@@ -11,6 +11,7 @@ require (
 	github.com/oriath-net/pogo v0.0.0-20230425190806-78985d9ea758
 	github.com/pkg/errors v0.9.1
 	github.com/tinylib/msgp v1.1.8
+	golang.org/x/arch v0.33.0
 	golang.org/x/sync v0.1.0
 	golang.org/x/text v0.13.0
 	gopkg.in/djherbis/fscache.v0 v0.10.1
