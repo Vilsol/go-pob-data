@@ -142,6 +142,9 @@ func writeTranslationBundle(versionDir string, lang string, files map[string]*ra
 			}
 		}
 	}
+	if err := os.MkdirAll(filepath.Join(versionDir, filepath.Dir(path)), 0o755); err != nil {
+		return errors.Wrap(err, "failed to make translation directories")
+	}
 	return errors.Wrap(os.WriteFile(filepath.Join(versionDir, path), b, 0o644), "could not write "+path)
 }
 

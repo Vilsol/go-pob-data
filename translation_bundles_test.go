@@ -224,6 +224,20 @@ func TestWriteTranslations(t *testing.T) {
 	}
 }
 
+// A new version's directory holds nothing yet.
+func TestWriteTranslationsNewVersion(t *testing.T) {
+	versionDir := filepath.Join(t.TempDir(), "3.99")
+	translations := map[string]map[string]*raw.TranslationFile{
+		"de": {"stat_descriptions": {Descriptors: []*raw.StatTranslation{}}},
+	}
+	if err := writeTranslations(versionDir, translations); err != nil {
+		t.Fatal(err)
+	}
+	if bundles, err := translationBundles(versionDir); err != nil || len(bundles["de"]) != 1 {
+		t.Fatalf("bundles %v, %v", bundles, err)
+	}
+}
+
 // Rebuilding a version whose per-file assets are pruned keeps every name its bundles already hold, and a
 // per-file asset replaces its bundle entry.
 func TestBundleTranslationsKeepsPrunedNames(t *testing.T) {
