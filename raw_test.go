@@ -257,3 +257,59 @@ func TestStatsCannotGrantToMinion(t *testing.T) {
 		})
 	}
 }
+
+// 3.30 turned BaseItemTypes' single Equip_AchievementItemsKey into the list EquipAchievements; every version
+// reads it.
+func TestBaseItemTypesEquipAchievements(t *testing.T) {
+	jsons, err := filepath.Glob("data/*/raw/BaseItemTypes.json.gz")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, path := range jsons {
+		t.Run(path, func(t *testing.T) {
+			if extractor.GameOf(filepath.Base(filepath.Dir(filepath.Dir(path)))) == extractor.PoE2 {
+				t.Skip("poe2")
+			}
+			var items []raw.BaseItemType
+			if err := json.Unmarshal(readGzip(t, path), &items); err != nil {
+				t.Fatal(err)
+			}
+			for _, item := range items {
+				if item.ID == "Metadata/Items/Weapons/OneHandWeapons/Wands/WandM1" {
+					if !slices.Equal(item.EquipAchievements, []int{2519}) {
+						t.Errorf("WandM1 equip achievements %v", item.EquipAchievements)
+					}
+					return
+				}
+			}
+			t.Error("no WandM1")
+		})
+	}
+}
+
+// 3.30's AtlasNode moved Var32 to MapNodeHeader and Var36 to Var33; every version since 3.28 carries both.
+func TestAtlasNodeShiftedColumns(t *testing.T) {
+	for _, version := range []string{"3.28", "3.29", "3.30"} {
+		t.Run(version, func(t *testing.T) {
+			var nodes []raw.AtlasNode
+			if err := json.Unmarshal(readGzip(t, filepath.Join("data", version, "raw", "AtlasNode.json.gz")), &nodes); err != nil {
+				t.Fatal(err)
+			}
+			headers, flagged := 0, 0
+			for _, node := range nodes {
+				if node.Var32 != 0 {
+					headers++
+				}
+				if node.Var36 {
+					flagged++
+				}
+				if node.Var33 != 0 || node.Var34 != 0 || node.Var35 != 0 {
+					t.Errorf("%s reads %d %d %d into the always-zero columns", node.ID, node.Var33, node.Var34, node.Var35)
+				}
+			}
+			if headers < 40 || flagged == 0 {
+				t.Errorf("%d nodes with Var32, %d with Var36", headers, flagged)
+			}
+		})
+	}
+}

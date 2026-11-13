@@ -47,15 +47,19 @@ type AtlasNode struct {
 	Var36                bool    `json:"Var36"`
 }
 
-// UnmarshalJSON skips the unnamed columns 3.30 (the layout with MapNodeHeader) turned into booleans, Var33 and
-// Var35; the json.gz keeps them.
+// UnmarshalJSON reads 3.30's layout (the one with MapNodeHeader) under the earlier names: MapNodeHeader holds
+// Var32's values and Var33 Var36's, while Var34 (the earlier Var37) and the boolean Var35 have no field. The
+// earlier Var33 to Var35 were always zero and are gone.
 func (a *AtlasNode) UnmarshalJSON(b []byte) error {
 	var columns map[string]json.RawMessage
 	if err := json.Unmarshal(b, &columns); err != nil {
 		return errors.Wrap(err, "failed to decode atlas node")
 	}
-	if _, ok := columns["MapNodeHeader"]; ok {
+	if header, ok := columns["MapNodeHeader"]; ok {
+		columns["Var32"] = header
+		columns["Var36"] = columns["Var33"]
 		delete(columns, "Var33")
+		delete(columns, "Var34")
 		delete(columns, "Var35")
 		var err error
 		if b, err = json.Marshal(columns); err != nil {

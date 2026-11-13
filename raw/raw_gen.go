@@ -3733,23 +3733,6 @@ func (z *BaseItemType) DecodeMsg(dc *msgp.Reader) (err error) {
 	if dc.IsNil() {
 		err = dc.ReadNil()
 		if err != nil {
-			err = msgp.WrapError(err, "EquipAchievementItemsKey")
-			return
-		}
-		z.EquipAchievementItemsKey = nil
-	} else {
-		if z.EquipAchievementItemsKey == nil {
-			z.EquipAchievementItemsKey = new(int)
-		}
-		*z.EquipAchievementItemsKey, err = dc.ReadInt()
-		if err != nil {
-			err = msgp.WrapError(err, "EquipAchievementItemsKey")
-			return
-		}
-	}
-	if dc.IsNil() {
-		err = dc.ReadNil()
-		if err != nil {
 			err = msgp.WrapError(err, "FlavourTextKey")
 			return
 		}
@@ -3909,6 +3892,24 @@ func (z *BaseItemType) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 	}
+	var zb0008 uint32
+	zb0008, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "EquipAchievements")
+		return
+	}
+	if cap(z.EquipAchievements) >= int(zb0008) {
+		z.EquipAchievements = (z.EquipAchievements)[:zb0008]
+	} else {
+		z.EquipAchievements = make([]int, zb0008)
+	}
+	for za0007 := range z.EquipAchievements {
+		z.EquipAchievements[za0007], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "EquipAchievements", za0007)
+			return
+		}
+	}
 	z.SizeOnGround, err = dc.ReadInt()
 	if err != nil {
 		err = msgp.WrapError(err, "SizeOnGround")
@@ -3983,18 +3984,6 @@ func (z *BaseItemType) EncodeMsg(en *msgp.Writer) (err error) {
 		err = en.WriteInt(*z.SoundEffect)
 		if err != nil {
 			err = msgp.WrapError(err, "SoundEffect")
-			return
-		}
-	}
-	if z.EquipAchievementItemsKey == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteInt(*z.EquipAchievementItemsKey)
-		if err != nil {
-			err = msgp.WrapError(err, "EquipAchievementItemsKey")
 			return
 		}
 	}
@@ -4114,6 +4103,18 @@ func (z *BaseItemType) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
+	err = en.WriteArrayHeader(uint32(len(z.EquipAchievements)))
+	if err != nil {
+		err = msgp.WrapError(err, "EquipAchievements")
+		return
+	}
+	for za0007 := range z.EquipAchievements {
+		err = en.WriteInt(z.EquipAchievements[za0007])
+		if err != nil {
+			err = msgp.WrapError(err, "EquipAchievements", za0007)
+			return
+		}
+	}
 	err = en.WriteInt(z.SizeOnGround)
 	if err != nil {
 		err = msgp.WrapError(err, "SizeOnGround")
@@ -4182,11 +4183,6 @@ func (z *BaseItemType) MarshalMsg(b []byte) (o []byte, err error) {
 	} else {
 		o = msgp.AppendInt(o, *z.SoundEffect)
 	}
-	if z.EquipAchievementItemsKey == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendInt(o, *z.EquipAchievementItemsKey)
-	}
 	if z.FlavourTextKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
@@ -4233,6 +4229,10 @@ func (z *BaseItemType) MarshalMsg(b []byte) (o []byte, err error) {
 	for za0006 := range z.VendorRecipeAchievementItems {
 		o = msgp.AppendInt(o, z.VendorRecipeAchievementItems[za0006])
 	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.EquipAchievements)))
+	for za0007 := range z.EquipAchievements {
+		o = msgp.AppendInt(o, z.EquipAchievements[za0007])
+	}
 	o = msgp.AppendInt(o, z.SizeOnGround)
 	o = msgp.AppendInt(o, z.ItemVisualIdentity)
 	o = msgp.AppendInt(o, z.ModDomain)
@@ -4272,22 +4272,6 @@ func (z *BaseItemType) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		*z.SoundEffect, bts, err = msgp.ReadIntBytes(bts)
 		if err != nil {
 			err = msgp.WrapError(err, "SoundEffect")
-			return
-		}
-	}
-	if msgp.IsNil(bts) {
-		bts, err = msgp.ReadNilBytes(bts)
-		if err != nil {
-			return
-		}
-		z.EquipAchievementItemsKey = nil
-	} else {
-		if z.EquipAchievementItemsKey == nil {
-			z.EquipAchievementItemsKey = new(int)
-		}
-		*z.EquipAchievementItemsKey, bts, err = msgp.ReadIntBytes(bts)
-		if err != nil {
-			err = msgp.WrapError(err, "EquipAchievementItemsKey")
 			return
 		}
 	}
@@ -4451,6 +4435,24 @@ func (z *BaseItemType) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 	}
+	var zb0008 uint32
+	zb0008, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "EquipAchievements")
+		return
+	}
+	if cap(z.EquipAchievements) >= int(zb0008) {
+		z.EquipAchievements = (z.EquipAchievements)[:zb0008]
+	} else {
+		z.EquipAchievements = make([]int, zb0008)
+	}
+	for za0007 := range z.EquipAchievements {
+		z.EquipAchievements[za0007], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "EquipAchievements", za0007)
+			return
+		}
+	}
 	z.SizeOnGround, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "SizeOnGround")
@@ -4518,11 +4520,6 @@ func (z *BaseItemType) Msgsize() (s int) {
 	} else {
 		s += msgp.IntSize
 	}
-	if z.EquipAchievementItemsKey == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.IntSize
-	}
 	if z.FlavourTextKey == nil {
 		s += msgp.NilSize
 	} else {
@@ -4541,7 +4538,7 @@ func (z *BaseItemType) Msgsize() (s int) {
 	for za0004 := range z.IdentifyAchievementItems {
 		s += msgp.GuessSize(z.IdentifyAchievementItems[za0004])
 	}
-	s += msgp.ArrayHeaderSize + (len(z.ImplicitModsKeys) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.VendorRecipeAchievementItems) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize
+	s += msgp.ArrayHeaderSize + (len(z.ImplicitModsKeys) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.VendorRecipeAchievementItems) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.EquipAchievements) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize
 	return
 }
 
