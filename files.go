@@ -70,6 +70,10 @@ func extractTextFiles(bundles fs.FS, game extractor.Game, gameVersion string) er
 	files, varieties := textFiles(game)
 	for _, file := range files {
 		if _, err := extractTextFile(bundles, gameVersion, file); err != nil {
+			if skipMissing && errors.Is(err, fs.ErrNotExist) {
+				slog.Warn("skipping a missing file", slog.String("path", file))
+				continue
+			}
 			return err
 		}
 	}
@@ -103,7 +107,7 @@ func extractTextFiles(bundles fs.FS, game extractor.Game, gameVersion string) er
 	for _, id := range strings.Fields(varieties) {
 		objectType, ok := objectTypes[id]
 		// PoB-PoE2's templates follow its own patch, so PoE2 skips a variety the game no longer has.
-		if !ok && game == extractor.PoE2 {
+		if !ok && (game == extractor.PoE2 || skipMissing) {
 			slog.Warn("skipping a monster variety the game does not have", slog.String("id", id))
 			continue
 		}
@@ -215,7 +219,7 @@ func extractTemplates(bundles fs.FS, game extractor.Game, gameVersion string, ro
 
 		text, err := extractTextFile(bundles, gameVersion, template+ext)
 		// PoE2 names templates it does not ship (BloodClan); PoB-PoE2 skips them too (minions.lua:55-57).
-		if errors.Is(err, fs.ErrNotExist) && game == extractor.PoE2 {
+		if errors.Is(err, fs.ErrNotExist) && (game == extractor.PoE2 || skipMissing) {
 			slog.Warn("skipping a template the game does not have", slog.String("path", template+ext))
 			continue
 		}

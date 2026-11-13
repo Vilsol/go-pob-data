@@ -20,10 +20,14 @@ import (
 // cdnPrefix selects the patch CDN instead of a local install, e.g. cdn:3.29.3.3.
 const cdnPrefix = "cdn:"
 
+// skipMissing is -skip-missing.
+var skipMissing bool
+
 func main() {
 	treeOnly := flag.Bool("tree-only", false, "only regenerate the passive tree")
 	gameName := flag.String("game", string(extractor.PoE1), "game to extract: poe1 or poe2")
 	latest := flag.Bool("latest", false, "print the game's live patch and exit")
+	flag.BoolVar(&skipMissing, "skip-missing", false, "log and skip inputs the source lacks instead of failing: for a partial source such as a preload read through a sidecar index")
 	tradeStats := flag.Bool("trade-stats", false, "only fetch the trade site's stats list into data/<game_version>; the site serves only the live league's")
 	flag.Parse()
 
@@ -106,7 +110,10 @@ func run(game extractor.Game, gamePath string, gameVersion string, treeOnly bool
 
 	slog.Info("generating tree data")
 	if err := generateTreeData(loader, game, gameVersion); err != nil {
-		return err
+		if !skipMissing {
+			return err
+		}
+		slog.Error("tree not generated", slog.String("error", err.Error()))
 	}
 
 	if treeOnly {
@@ -115,7 +122,10 @@ func run(game extractor.Game, gamePath string, gameVersion string, treeOnly bool
 
 	slog.Info("extracting translations")
 	if err := extractTranslations(loader, game, gameVersion); err != nil {
-		return err
+		if !skipMissing {
+			return err
+		}
+		slog.Error("translations not extracted", slog.String("error", err.Error()))
 	}
 
 	slog.Info("extracting text files")

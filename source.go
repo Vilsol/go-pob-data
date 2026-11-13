@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 
 	"github.com/oriath-net/pogo/poefs/ggpk"
 	"github.com/pkg/errors"
@@ -85,6 +86,43 @@ const (
 )
 
 func bundleLoader(source fs.FS, game extractor.Game, gameVersion string) (fs.FS, error) {
+	loader, err := sidecarOrIndexLoader(source, game, gameVersion)
+	if err != nil {
+		return nil, err
+	}
+	if logPath := os.Getenv(openLogEnv); logPath != "" {
+		f, err := os.Create(logPath)
+		if err != nil {
+			return nil, errors.Wrap(err, "could not create the open log")
+		}
+		return &openLog{FS: loader, w: f}, nil
+	}
+	return loader, nil
+}
+
+// openLogEnv names a file to record every path the extractor opens, and whether it opened: the input list a
+// sidecar index has to cover.
+const openLogEnv = "GOPOB_OPENLOG"
+
+type openLog struct {
+	fs.FS
+	mu sync.Mutex
+	w  *os.File
+}
+
+func (l *openLog) Open(name string) (fs.File, error) {
+	f, err := l.FS.Open(name)
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	status := "ok"
+	if err != nil {
+		status = "missing"
+	}
+	fmt.Fprintf(l.w, "%s\t%s\n", status, name)
+	return f, err
+}
+
+func sidecarOrIndexLoader(source fs.FS, game extractor.Game, gameVersion string) (fs.FS, error) {
 	path := os.Getenv(sidecarEnv)
 	if path == "" {
 		loader, err := extractor.GetBundleLoader(source, IsNewHash(game, gameVersion))

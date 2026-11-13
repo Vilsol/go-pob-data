@@ -676,6 +676,10 @@ func extractRawData(bundles fs.FS, game extractor.Game, gameVersion string) erro
 		slog.Info("extracting", slog.String("path", img))
 
 		data, err := bundles.Open(strings.ToLower(img))
+		if err != nil && skipMissing && errors.Is(err, fs.ErrNotExist) {
+			slog.Warn("skipping a missing file", slog.String("path", img))
+			continue
+		}
 		if err != nil {
 			return errors.Wrap(err, "could not open file")
 		}
