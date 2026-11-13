@@ -65,7 +65,7 @@ func openGGPK(path string) (fs.FS, error) {
 	index, err := ggfs.Open(bundleIndex)
 	if err != nil {
 		_ = f.Close()
-		return nil, errors.Wrapf(err, "%s has no %s", path, bundleIndex)
+		return nil, errors.Wrapf(err, "%s has no %s (a preload ships its bundles without the index until launch)", path, bundleIndex)
 	}
 	_ = index.Close()
 
