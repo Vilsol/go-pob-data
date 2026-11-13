@@ -9,6 +9,7 @@ import (
 	"maps"
 	"os"
 	"path/filepath"
+	"regexp"
 	"slices"
 	"strings"
 
@@ -161,6 +162,8 @@ func manifestJSON(versionDir string) ([]byte, error) {
 	return append(b, '\n'), errors.Wrap(err, "failed marshaling manifest")
 }
 
+var lfsOID = regexp.MustCompile(`(?m)^oid sha256:([0-9a-f]{64})$`)
+
 // manifestAssets hashes every file under versionDir but the manifest and dotfiles such as unlistedMarker.
 func manifestAssets(versionDir string) (map[string]loader.ManifestAsset, error) {
 	assets := map[string]loader.ManifestAsset{}
@@ -172,15 +175,22 @@ func manifestAssets(versionDir string) (map[string]loader.ManifestAsset, error) 
 		if err != nil {
 			return errors.Wrap(err, "failed reading asset")
 		}
-		if bytes.HasPrefix(b, []byte("version https://git-lfs")) {
-			return errors.Errorf("%s is a git lfs pointer, run git lfs pull", path)
-		}
 		rel, err := filepath.Rel(versionDir, path)
 		if err != nil {
 			return errors.Wrap(err, "failed resolving asset path")
 		}
+		var asset loader.ManifestAsset
+		if bytes.HasPrefix(b, []byte("version https://git-lfs")) {
+			// An LFS pointer's oid is the content's sha256; a msgpack asset still needs its bytes for Records.
+			oid := lfsOID.FindSubmatch(b)
+			if oid == nil || strings.HasSuffix(path, ".msgpack.br") {
+				return errors.Errorf("%s is a git lfs pointer, run git lfs pull", path)
+			}
+			assets[filepath.ToSlash(rel)] = loader.ManifestAsset{SHA256: string(oid[1])}
+			return nil
+		}
 		sum := sha256.Sum256(b)
-		asset := loader.ManifestAsset{SHA256: hex.EncodeToString(sum[:])}
+		asset.SHA256 = hex.EncodeToString(sum[:])
 		if strings.HasSuffix(path, ".msgpack.br") {
 			asset.Records = leadingCount(b)
 		}
