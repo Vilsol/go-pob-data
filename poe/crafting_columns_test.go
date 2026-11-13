@@ -79,12 +79,11 @@ func TestItemTemplateFiles(t *testing.T) {
 	testdata.ServeCommittedData(t)
 	version := testdata.LatestDataVersion()
 
-	m, err := loader.LoadManifest(context.Background(), version)
+	it, err := loader.LoadFileBundle(context.Background(), version, ".it", FakeCache{})
 	testza.AssertNoError(t, err)
-	testza.AssertTrue(t, m.HasFile("Metadata/Items/Item.it"), "the root every base extends")
+	testza.AssertNotNil(t, it["Metadata/Items/Item.it"], "the root every base extends")
 
-	amulet, err := loader.LoadFile(context.Background(), version, "Metadata/Items/Amulets/AbstractAmulet.it", FakeCache{})
-	testza.AssertNoError(t, err)
+	amulet := it["Metadata/Items/Amulets/AbstractAmulet.it"]
 	testza.AssertContains(t, string(amulet), `extends "Metadata/Items/Equipment"`)
 	testza.AssertContains(t, string(amulet), `tag = "amulet"`)
 }

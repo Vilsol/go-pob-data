@@ -31,5 +31,6 @@ func TestHasTable(t *testing.T) {
 	m, err := LoadManifest(ctx, testdata.LatestDataVersion())
 	testza.AssertNoError(t, err)
 	testza.AssertTrue(t, m.HasStatTranslation("skill_stat_descriptions"))
-	testza.AssertTrue(t, m.HasFile("Metadata/Monsters/Monster.ot"))
+	testza.AssertTrue(t, m.HasFile("api/trade/data/stats.json"))
+	testza.AssertFalse(t, m.HasFile("Metadata/Monsters/Monster.ot"), "game text files are only bundled")
 }

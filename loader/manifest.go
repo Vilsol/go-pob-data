@@ -12,8 +12,8 @@ import (
 // Manifest lists what a version publishes, so a consumer can tell a table the version does not have
 // from a fetch that failed. The extractor writes it to <version>/manifest.json.
 type Manifest struct {
-	// FileBundles are the LoadFileBundle assets by file extension, such as ".ot", each holding every file of
-	// Files with that extension.
+	// FileBundles are the LoadFileBundle assets by file extension, such as ".ot", each holding every game
+	// text file with that extension.
 	FileBundles map[string]string `json:"fileBundles,omitempty"`
 	// TranslationBundles are the LoadTranslationBundle assets by layout variant, then by language.
 	TranslationBundles map[string]map[string]string `json:"translationBundles,omitempty"`
@@ -23,7 +23,7 @@ type Manifest struct {
 	StatTranslations []string `json:"statTranslations"`
 	// Languages are the stat translation language directories, such as "en".
 	Languages []string `json:"languages"`
-	// Files are the game text files LoadFile reads, by game path.
+	// Files are the files LoadFile reads one at a time, by path; the game text files are only in FileBundles.
 	Files []string `json:"files"`
 	// JSONOnly is set when the tables have no tuple assets, only json.gz, so LoadRaw cannot
 	// read them. Stat translations are unaffected.

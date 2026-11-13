@@ -34,9 +34,8 @@ func FileBundlePath(ext string, encoded []byte) string {
 	return AssetPath("files", strings.TrimPrefix(ext, ".")+"-"+hex.EncodeToString(sum[:4]))
 }
 
-// LoadFileBundle loads every file with extension ext (".ot") that version publishes, by game path, in one
-// asset: the texts LoadFile reads one at a time. A version whose manifest names no such bundle is
-// ErrAssetNotFound.
+// LoadFileBundle loads every game text file with extension ext (".ot", ".it", ".txt") that version
+// publishes, by game path, in one asset. A version whose manifest names no such bundle is ErrAssetNotFound.
 func LoadFileBundle(ctx context.Context, version string, ext string, assetCache AssetCache) (map[string][]byte, error) {
 	manifest, err := LoadManifest(ctx, version)
 	if err != nil {

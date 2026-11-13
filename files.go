@@ -65,17 +65,20 @@ func textFiles(game extractor.Game) ([]string, string) {
 // extractTextFiles publishes textFilesToExport and the templates rows inherit from, with their ancestors
 // through their extends lines: the item templates (.it) of every base's InheritsFrom, where bases read
 // their tags, and the monster templates (.ot) of monsterVarieties' BaseMonsterTypeIndex, where those
-// monsters read their base stats.
+// monsters read their base stats. They are published only in one bundle per extension.
 func extractTextFiles(bundles fs.FS, game extractor.Game, gameVersion string) error {
 	files, varieties := textFiles(game)
+	texts := map[string][]byte{}
 	for _, file := range files {
-		if _, err := extractTextFile(bundles, gameVersion, file); err != nil {
+		text, err := extractTextFile(bundles, file)
+		if err != nil {
 			if skipMissing && errors.Is(err, fs.ErrNotExist) {
 				slog.Warn("skipping a missing file", slog.String("path", file))
 				continue
 			}
 			return err
 		}
+		texts[file] = text
 	}
 
 	bases, err := readRows[struct {
@@ -88,7 +91,7 @@ func extractTextFiles(bundles fs.FS, game extractor.Game, gameVersion string) er
 	for _, base := range bases {
 		itemRoots = append(itemRoots, base.InheritsFrom)
 	}
-	if err := extractTemplates(bundles, game, gameVersion, itemRoots, ".it"); err != nil {
+	if err := extractTemplates(bundles, game, itemRoots, ".it", texts); err != nil {
 		return err
 	}
 
@@ -116,57 +119,25 @@ func extractTextFiles(bundles fs.FS, game extractor.Game, gameVersion string) er
 		}
 		monsterRoots = append(monsterRoots, objectType)
 	}
-	if err := extractTemplates(bundles, game, gameVersion, monsterRoots, ".ot"); err != nil {
+	if err := extractTemplates(bundles, game, monsterRoots, ".ot", texts); err != nil {
 		return err
 	}
 
-	return writeFileBundle(filepath.Join("data", gameVersion), ".ot")
+	return writeFileBundles(filepath.Join("data", gameVersion), texts)
 }
 
-// fileBundle is the LoadFileBundle asset of every file under versionDir's files/ with extension ext, at
-// its loader.FileBundlePath; false when there is none.
-func fileBundle(versionDir string, ext string) (string, []byte, bool, error) {
-	filesDir := filepath.Join(versionDir, "files")
-	files := map[string][]byte{}
-	err := filepath.WalkDir(filesDir, func(path string, d fs.DirEntry, err error) error {
-		if err != nil || d.IsDir() || !strings.HasSuffix(path, ext+".br") {
-			return err
-		}
-		rel, err := filepath.Rel(filesDir, path)
-		if err != nil {
-			return errors.Wrap(err, "failed resolving file path")
-		}
-		b, err := os.ReadFile(path)
-		if err != nil {
-			return errors.Wrap(err, "could not read "+path)
-		}
-		if bytes.HasPrefix(b, []byte("version https://git-lfs")) {
-			return errors.New(path + " is a git lfs pointer, run git lfs pull")
-		}
-		text, err := io.ReadAll(brotli.NewReader(bytes.NewReader(b)))
-		if err != nil {
-			return errors.Wrap(err, "could not decompress "+path)
-		}
-		files[strings.TrimSuffix(filepath.ToSlash(rel), ".br")] = text
-		return nil
-	})
-	if os.IsNotExist(err) || len(files) == 0 {
-		return "", nil, false, nil
-	}
-	if err != nil {
-		return "", nil, false, errors.Wrap(err, "failed listing "+ext+" files")
-	}
-
+// fileBundle is the LoadFileBundle asset of files, game path to UTF-8 text, at its loader.FileBundlePath.
+func fileBundle(files map[string][]byte, ext string) (string, []byte, error) {
 	encoded := loader.EncodeFileBundle(files)
 	var buf bytes.Buffer
 	w := brotli.NewWriter(&buf)
 	if _, err := w.Write(encoded); err != nil {
-		return "", nil, false, errors.Wrap(err, "could not compress the "+ext+" bundle")
+		return "", nil, errors.Wrap(err, "could not compress the "+ext+" bundle")
 	}
 	if err := w.Close(); err != nil {
-		return "", nil, false, errors.Wrap(err, "could not compress the "+ext+" bundle")
+		return "", nil, errors.Wrap(err, "could not compress the "+ext+" bundle")
 	}
-	return loader.FileBundlePath(ext, encoded), buf.Bytes(), true, nil
+	return loader.FileBundlePath(ext, encoded), buf.Bytes(), nil
 }
 
 // staleFileBundles are versionDir's ext bundles other than keep.
@@ -180,27 +151,46 @@ func staleFileBundles(versionDir string, ext string, keep string) ([]string, err
 	}), nil
 }
 
-// writeFileBundle writes versionDir's ext bundle and removes the bundles it replaces.
-func writeFileBundle(versionDir string, ext string) error {
-	path, b, ok, err := fileBundle(versionDir, ext)
-	if err != nil || !ok {
-		return err
+// writeFileBundles writes the bundle of files' every extension to versionDir and removes the bundles they
+// replace, and the copies of files an earlier extraction published one at a time.
+func writeFileBundles(versionDir string, files map[string][]byte) error {
+	byExt := map[string]map[string][]byte{}
+	for file, text := range files {
+		ext := path.Ext(file)
+		if byExt[ext] == nil {
+			byExt[ext] = map[string][]byte{}
+		}
+		byExt[ext][file] = text
 	}
-	stale, err := staleFileBundles(versionDir, ext, path)
-	if err != nil {
-		return err
-	}
-	for _, old := range stale {
-		if err := os.Remove(old); err != nil {
-			return errors.Wrap(err, "could not remove "+old)
+
+	for ext, group := range byExt {
+		bundlePath, b, err := fileBundle(group, ext)
+		if err != nil {
+			return err
+		}
+		stale, err := staleFileBundles(versionDir, ext, bundlePath)
+		if err != nil {
+			return err
+		}
+		for file := range group {
+			stale = append(stale, filepath.Join(versionDir, loader.FilePath(file)))
+		}
+		for _, old := range stale {
+			if err := os.Remove(old); err != nil && !os.IsNotExist(err) {
+				return errors.Wrap(err, "could not remove "+old)
+			}
+		}
+		if err := os.WriteFile(filepath.Join(versionDir, bundlePath), b, 0o644); err != nil {
+			return errors.Wrap(err, "could not write the "+ext+" bundle")
 		}
 	}
-	return errors.Wrap(os.WriteFile(filepath.Join(versionDir, path), b, 0o644), "could not write the "+ext+" bundle")
+
+	return nil
 }
 
 // extractTemplates publishes the templates of roots and of their ancestors, up to "nothing" or a template
-// textFiles already publishes (Metadata/Monsters/Monster).
-func extractTemplates(bundles fs.FS, game extractor.Game, gameVersion string, roots []string, ext string) error {
+// textFiles already publishes (Metadata/Monsters/Monster), into texts.
+func extractTemplates(bundles fs.FS, game extractor.Game, roots []string, ext string, texts map[string][]byte) error {
 	files, _ := textFiles(game)
 	seen := map[string]bool{"": true, "nothing": true}
 	for _, file := range files {
@@ -217,7 +207,7 @@ func extractTemplates(bundles fs.FS, game extractor.Game, gameVersion string, ro
 		}
 		seen[template] = true
 
-		text, err := extractTextFile(bundles, gameVersion, template+ext)
+		text, err := extractTextFile(bundles, template+ext)
 		// PoE2 names templates it does not ship (BloodClan); PoB-PoE2 skips them too (minions.lua:55-57).
 		if errors.Is(err, fs.ErrNotExist) && (game == extractor.PoE2 || skipMissing) {
 			slog.Warn("skipping a template the game does not have", slog.String("path", template+ext))
@@ -226,6 +216,7 @@ func extractTemplates(bundles fs.FS, game extractor.Game, gameVersion string, ro
 		if err != nil {
 			return err
 		}
+		texts[template+ext] = text
 		for _, m := range extendsRegex.FindAllSubmatch(text, -1) {
 			queue = append(queue, string(m[1]))
 		}
@@ -251,8 +242,8 @@ func readRows[T any](gameVersion string, table string) ([]T, error) {
 	return rows, errors.Wrap(json.NewDecoder(r).Decode(&rows), "could not decode "+table)
 }
 
-// extractTextFile publishes file as UTF-8 and returns its text.
-func extractTextFile(bundles fs.FS, gameVersion string, file string) ([]byte, error) {
+// extractTextFile reads file as UTF-8.
+func extractTextFile(bundles fs.FS, file string) ([]byte, error) {
 	slog.Info("extracting", slog.String("path", file))
 
 	f, err := openTextFile(bundles, file)
@@ -261,28 +252,7 @@ func extractTextFile(bundles fs.FS, gameVersion string, file string) ([]byte, er
 	}
 
 	text, err := io.ReadAll(unicode.UTF16(unicode.LittleEndian, unicode.UseBOM).NewDecoder().Reader(f))
-	if err != nil {
-		return nil, errors.Wrap(err, "could not decode "+file)
-	}
-
-	var buf bytes.Buffer
-	w := brotli.NewWriter(&buf)
-	if _, err := w.Write(text); err != nil {
-		return nil, errors.Wrap(err, "could not compress "+file)
-	}
-	if err := w.Close(); err != nil {
-		return nil, errors.Wrap(err, "could not compress "+file)
-	}
-
-	outPath := filepath.Join("data", gameVersion, loader.FilePath(file))
-	if err := os.MkdirAll(filepath.Dir(outPath), 0o755); err != nil {
-		return nil, errors.Wrap(err, "could not create directory tree")
-	}
-	if err := os.WriteFile(outPath, buf.Bytes(), 0o644); err != nil {
-		return nil, errors.Wrap(err, "could not write "+outPath)
-	}
-
-	return text, nil
+	return text, errors.Wrap(err, "could not decode "+file)
 }
 
 // openTextFile opens file, or under Metadata/StatDescriptions the same file with the other of .txt and .csd: 3.30

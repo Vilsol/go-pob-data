@@ -3,7 +3,7 @@ package loader
 import (
 	"bytes"
 	"context"
-	"slices"
+	"encoding/json"
 	"strings"
 	"testing"
 
@@ -13,36 +13,38 @@ import (
 	"github.com/Vilsol/go-pob-data/testdata"
 )
 
-// The .ot bundle holds exactly the .ot files the manifest lists, each as LoadFile reads it.
-func TestFileBundleMatchesFiles(t *testing.T) {
+// releasedFiles are the files released go-pob versions read one at a time with LoadFile: the trade site's
+// stats lists. Every other file is read from its bundle.
+var releasedFiles = map[string][]string{
+	"0.5":  {"api/trade2/data/stats.json"},
+	"3.29": {"api/trade/data/stats.json"},
+}
+
+// The game text files are published as one bundle per extension, read the way LoadFileBundle reads them
+// since v0.5.17; LoadFile reads only releasedFiles, which the manifest lists as Files.
+func TestFileBundlesAndFiles(t *testing.T) {
 	cdn := testdata.ServeCommittedData(t)
 	ctx := context.Background()
 
-	for _, version := range []string{"0.5", testdata.LatestDataVersion()} {
+	for version, files := range releasedFiles {
 		manifest, err := LoadManifest(ctx, version)
 		testza.AssertNoError(t, err)
+		testza.AssertEqual(t, files, manifest.Files, version)
 
-		bundle, err := LoadFileBundle(ctx, version, ".ot", FakeCache{})
-		testza.AssertNoError(t, err)
-
-		var want []string
-		for _, path := range manifest.Files {
-			if strings.HasSuffix(path, ".ot") {
-				want = append(want, path)
-			}
-		}
-		got := make([]string, 0, len(bundle))
-		for path := range bundle {
-			got = append(got, path)
-		}
-		slices.Sort(got)
-		testza.AssertGreater(t, len(want), 1)
-		testza.AssertEqual(t, want, got, version)
-
-		for _, path := range want {
+		for _, path := range files {
 			text, err := LoadFile(ctx, version, path, FakeCache{})
-			testza.AssertNoError(t, err)
-			testza.AssertTrue(t, bytes.Equal(text, bundle[path]), path)
+			testza.AssertNoError(t, err, path)
+			testza.AssertTrue(t, json.Valid(text), path)
+		}
+
+		for _, ext := range []string{".ot", ".it", ".txt"} {
+			bundle, err := LoadFileBundle(ctx, version, ext, FakeCache{})
+			testza.AssertNoError(t, err, version+" "+ext)
+			testza.AssertGreater(t, len(bundle), 0, version+" "+ext)
+			for path, text := range bundle {
+				testza.AssertTrue(t, strings.HasSuffix(path, ext), path)
+				testza.AssertGreater(t, len(text), 0, path)
+			}
 		}
 	}
 

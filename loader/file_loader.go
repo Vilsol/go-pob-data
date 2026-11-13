@@ -22,8 +22,8 @@ func FileURL(version string, path string) string {
 	return cdnBase + version + "/" + FilePath(path)
 }
 
-// LoadFile loads a game text file, such as "Metadata/Monsters/Monster.ot" or "art/uiimages1.txt", as
-// UTF-8 text. The game ships them as UTF-16.
+// LoadFile loads a file the manifest lists in Files, such as "api/trade/data/stats.json". Game text files
+// are published only in their bundle (LoadFileBundle).
 //
 // Returns data from cache if found
 func LoadFile(ctx context.Context, version string, path string, assetCache AssetCache) ([]byte, error) {

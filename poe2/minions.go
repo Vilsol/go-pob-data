@@ -272,7 +272,7 @@ var (
 )
 
 // Minion is the #emit directive of src/Export/Scripts/minions.lua:156-377 for the variety with id, less its
-// template half. readOT returns the UTF-8 text of a game .ot file (loader.LoadFile), and false when there is
+// template half. readOT returns the UTF-8 text of a game .ot file (from loader.LoadFileBundle), and false when there is
 // none.
 func (m *MinionTables) Minion(id string, readOT func(path string) (string, bool)) (*Minion, error) {
 	monsterVariety := m.VarietyByID(id)

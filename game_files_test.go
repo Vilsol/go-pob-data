@@ -11,7 +11,6 @@ import (
 	"unicode/utf16"
 
 	"github.com/Vilsol/go-pob-data/extractor"
-	"github.com/Vilsol/go-pob-data/loader"
 )
 
 // inTempDir runs the rest of the test in a scratch directory, since the extractors write data/ under the
@@ -85,12 +84,13 @@ func TestExtractTemplatesMissing(t *testing.T) {
 	}{{extractor.PoE1, true}, {extractor.PoE2, false}} {
 		t.Run(string(c.game), func(t *testing.T) {
 			inTempDir(t)
-			err := extractTemplates(bundles, c.game, "v", []string{"Metadata/Monsters/A"}, ".ot")
+			texts := map[string][]byte{}
+			err := extractTemplates(bundles, c.game, []string{"Metadata/Monsters/A"}, ".ot", texts)
 			if (err != nil) != c.wantErr {
 				t.Fatalf("err = %v, want an error: %v", err, c.wantErr)
 			}
-			if _, err := os.Stat(filepath.Join("data", "v", loader.FilePath("Metadata/Monsters/A.ot"))); err != nil {
-				t.Errorf("A.ot was not published: %v", err)
+			if _, ok := texts["Metadata/Monsters/A.ot"]; !ok {
+				t.Error("A.ot was not published")
 			}
 		})
 	}
@@ -145,7 +145,15 @@ func TestExtractTextFilesMissingVariety(t *testing.T) {
 	if err := extractTextFiles(bundles, extractor.PoE2, "0.5"); err != nil {
 		t.Fatal(err)
 	}
-	if _, err := os.Stat(filepath.Join("data", "0.5", loader.FilePath("Metadata/Monsters/Here.ot"))); err != nil {
-		t.Errorf("Here.ot was not published: %v", err)
+	if _, ok := readFileBundle(t, filepath.Join("data", "0.5"), ".ot")["Metadata/Monsters/Here.ot"]; !ok {
+		t.Error("Here.ot is not in the .ot bundle")
+	}
+	for _, ext := range []string{".it", ".txt"} {
+		if readFileBundle(t, filepath.Join("data", "0.5"), ext) == nil {
+			t.Errorf("no %s bundle", ext)
+		}
+	}
+	if _, err := os.Stat(filepath.Join("data", "0.5", "files")); !os.IsNotExist(err) {
+		t.Errorf("text files were published one at a time: %v", err)
 	}
 }

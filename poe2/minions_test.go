@@ -66,19 +66,13 @@ func loadPoBMinions(t *testing.T) map[string]pobMinion {
 
 func readOT(ctx context.Context, t *testing.T) func(string) (string, bool) {
 	t.Helper()
-	manifest, err := loader.LoadManifest(ctx, version)
+	files, err := loader.LoadFileBundle(ctx, version, ".ot", nopCache{})
 	if err != nil {
 		t.Fatal(err)
 	}
 	return func(path string) (string, bool) {
-		if !manifest.HasFile(path) {
-			return "", false
-		}
-		b, err := loader.LoadFile(ctx, version, path, nopCache{})
-		if err != nil {
-			t.Fatal(err)
-		}
-		return string(b), true
+		b, ok := files[path]
+		return string(b), ok
 	}
 }
 
