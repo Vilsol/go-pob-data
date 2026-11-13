@@ -54,7 +54,7 @@ func isInt(s string) bool {
 	return err == nil
 }
 
-// parseLimit parses `#`, `N`, `!N` and `min|max` where either side may be `#`.
+// parseLimit parses `#`, `N`, `!N` and `min|max` where either side may be `#`, and a stray `#` after max.
 func parseLimit(s string) limit {
 	l := limit{min: math.MinInt, max: math.MaxInt}
 	if rest, ok := strings.CutPrefix(s, "!"); ok {
@@ -68,7 +68,7 @@ func parseLimit(s string) limit {
 	if n, err := strconv.Atoi(lo); err == nil {
 		l.min = n
 	}
-	if n, err := strconv.Atoi(hi); err == nil {
+	if n, err := strconv.Atoi(strings.TrimSuffix(hi, "#")); err == nil {
 		l.max = n
 	}
 	return l

@@ -106,11 +106,48 @@ func TestParseFileCsd(t *testing.T) {
 	testza.AssertEqual(t, []string{"Data/StatDescriptions/stat_descriptions.csd"}, p.includes)
 	testza.AssertLen(t, p.ordered, 1)
 
-	for _, line := range []string{
-		`include "Data/StatDescriptions/stat_descriptions.txt"`,
-		`include "Metadata/StatDescriptions/stat_descriptions.csd"`,
-	} {
-		_, err := parse(t, line+"\n")
-		testza.AssertNotNil(t, err, line)
+	_, err := parse(t, "include \"Data/StatDescriptions/stat_descriptions.txt\"\n")
+	testza.AssertNotNil(t, err)
+}
+
+// 3.30's PoE1 files include each other as Metadata/StatDescriptions/*.csd.
+func TestParseFileIncludesCsd(t *testing.T) {
+	text := "include \"Metadata/StatDescriptions/stat_descriptions.csd\"\ndescription\n\t1 a\n\t1\n\t\t# \"x\"\n"
+	p, err := parse(t, text)
+	testza.AssertNoError(t, err)
+	testza.AssertEqual(t, []string{"Metadata/StatDescriptions/stat_descriptions.csd"}, p.includes)
+	testza.AssertLen(t, p.ordered, 1)
+}
+
+// An include or a listed file resolves to the same name with the other of .txt and .csd when only that
+// one exists, under Metadata/StatDescriptions only.
+func TestParseFileOtherExtension(t *testing.T) {
+	base := "description\n\t1 a\n\t1\n\t\t# \"base {0}\"\n"
+	child := "include \"Metadata/StatDescriptions/base.csd\"\ndescription\n\t1 b\n\t1\n\t\t# \"child {0}\"\n"
+	loader := fstest.MapFS{
+		"metadata/statdescriptions/base.txt":  {Data: utf16(t, base)},
+		"metadata/statdescriptions/child.csd": {Data: utf16(t, child)},
+		"data/statdescriptions/only.txt":      {Data: utf16(t, base)},
 	}
+	d, err := NewDescriber(loader, "metadata/statdescriptions/child.txt")
+	testza.AssertNoError(t, err)
+	got, err := d.Describe([]string{"a", "b"}, []int{1, 2})
+	testza.AssertNoError(t, err)
+	testza.AssertEqual(t, []string{"base 1", "child 2"}, got.Lines)
+
+	testza.AssertNotNil(t, NewTranslationParser(loader).ParseFile("metadata/statdescriptions/missing.txt"))
+	testza.AssertNotNil(t, NewTranslationParser(loader).ParseFile("data/statdescriptions/only.csd"))
+}
+
+// 3.30's stat_descriptions.txt writes `1|99#` for `1|99`.
+func TestParseFileStrayHashAfterMax(t *testing.T) {
+	p, err := parse(t, "description\n\t1 a\n\t2\n\t\t1|99# \"{0}% chance\"\n\t\t100|# \"always\"\n")
+	testza.AssertNoError(t, err)
+	c := p.ordered[0].Lang["English"][0].Conditions[0]
+	testza.AssertEqual(t, 1, *c.Min)
+	testza.AssertEqual(t, 99, *c.Max)
+	testza.AssertEqual(t, 99, p.ordered[0].variants[0].limits[0].max)
+
+	_, err = parse(t, "description\n\t1 a\n\t1\n\t\t1#|99 \"x\"\n")
+	testza.AssertNotNil(t, err)
 }

@@ -8,6 +8,7 @@ import (
 	"io/fs"
 	"log/slog"
 	"os"
+	"path"
 	"path/filepath"
 	"reflect"
 	"regexp"
@@ -24,15 +25,16 @@ import (
 )
 
 var (
-	includeRegex     = regexp.MustCompile(`^include "(Metadata/StatDescriptions/.+\.txt|Data/StatDescriptions/.+\.csd)"$`)
+	includeRegex     = regexp.MustCompile(`^include "(Metadata/StatDescriptions/.+\.(?:txt|csd)|Data/StatDescriptions/.+\.csd)"$`)
 	noDescRegex      = regexp.MustCompile(`^no_description (\S+)$`)
 	descriptionRegex = regexp.MustCompile(`^(handed_)?description(?: (\S+))?$`)
 	langRegex        = regexp.MustCompile(`^lang "(.+)"$`)
 	countRegex       = regexp.MustCompile(`^\d+$`)
 	statsRegex       = regexp.MustCompile(`^(\d+)\s+(.+)$`)
 	variantRegex     = regexp.MustCompile(`^([-\d#|!]+(?:\s+[-\d#|!]+)*)\s+(?:([a-z_]+)\s+)?"(.*)"\s*(.*)$`)
-	// A third part, as in a `1|1|#` typo of the game, is ignored like the game and PoB do.
-	limitRegex = regexp.MustCompile(`^(!)?(-?\d+|#)(?:\|(-?\d+|#))?(?:\|(?:-?\d+|#))*$`)
+	// A third part, as in a `1|1|#` typo of the game, is ignored like the game and PoB do; so is a `#` after the
+	// upper bound, as in 3.30's `1|99#`.
+	limitRegex = regexp.MustCompile(`^(!)?(-?\d+|#)(?:\|(-?\d+|#)#?)?(?:\|(?:-?\d+|#))*$`)
 )
 
 // defaultLang is the language of a description's lines before any lang block.
@@ -92,7 +94,7 @@ func (t *TranslationParser) ParseFile(name string) error {
 
 	slog.Info("parsing", slog.String("name", name))
 
-	data, err := t.loader.Open(name)
+	data, err := openDescriptions(t.loader, name)
 	if err != nil {
 		return errors.Wrap(err, "failed to open input file")
 	}
@@ -237,6 +239,25 @@ func (t *TranslationParser) ParseFile(name string) error {
 	}
 
 	return nil
+}
+
+// openDescriptions opens name, or under Metadata/StatDescriptions the same file with the other of .txt and
+// .csd: 3.30 files include each other as .csd, while every earlier PoE1 file is a .txt.
+func openDescriptions(loader fs.FS, name string) (fs.File, error) {
+	f, err := loader.Open(name)
+	if err == nil || !errors.Is(err, fs.ErrNotExist) || !strings.HasPrefix(strings.ToLower(name), "metadata/statdescriptions/") {
+		return f, err //nolint:wrapcheck
+	}
+	ext := path.Ext(name)
+	other := map[string]string{".txt": ".csd", ".csd": ".txt"}[ext]
+	if other == "" {
+		return nil, err //nolint:wrapcheck
+	}
+	f, otherErr := loader.Open(strings.TrimSuffix(name, ext) + other)
+	if otherErr != nil {
+		return nil, err //nolint:wrapcheck
+	}
+	return f, nil
 }
 
 // parseLine parses a line like `1|# # gem_quality "{0}% increased {1}" negate 1 reminderstring ReminderTextX`
