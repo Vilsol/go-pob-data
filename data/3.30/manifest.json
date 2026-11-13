@@ -151,7 +151,7 @@
 		},
 		"raw/AtlasNode.t-ac5bd8cd.msgpack.br": {
 			"records": 188,
-			"sha256": "c9d36f444a6fc74a35ac3c469f554f4f5ddab829c09d3928e55707f77199a485"
+			"sha256": "e63e645231ce939bbbb58f414942cd20d559a949cdc2beb1944632c757897f57"
 		},
 		"raw/AtlasNodeDefinition.json.gz": {
 			"sha256": "1b5310627d5504decdf3505c3cb83cf63760e3ac41d8fbbcb0ed36651ef8d457"
@@ -166,6 +166,10 @@
 		"raw/BaseItemTypes.t-6b58ed61.msgpack.br": {
 			"records": 5668,
 			"sha256": "e8cae9f0717c0e93716e6de8ccdfcbc246346a798604621f8dd9fa5fe4c65d84"
+		},
+		"raw/BaseItemTypes.t-7456cd34.msgpack.br": {
+			"records": 5668,
+			"sha256": "65330199e127650758f1e4c2b89b66bc0815a566a7aebc6f103ade5345358c40"
 		},
 		"raw/BuffTemplates.json.gz": {
 			"sha256": "1b16b42352a1fb27b5abf1be8271d8a7447b9456559af8700c5c0b77ab55502d"

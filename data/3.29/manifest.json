@@ -211,6 +211,10 @@
 		"raw/BaseItemTypes.json.gz": {
 			"sha256": "8c25d1427e97d29df8b5dfbe3fdfa2ce6db15437c8ce988fb098a128a7b35475"
 		},
+		"raw/BaseItemTypes.min-165625b6.msgpack.br": {
+			"records": 5461,
+			"sha256": "3ba04143b55fda2ff42815b08a295cd61a382c5e8cf17090b909db989178d657"
+		},
 		"raw/BaseItemTypes.min-60eac400.msgpack.br": {
 			"records": 5461,
 			"sha256": "4e797e0b9611d75fdfe66a531efe0ff337b6966ada118b09afc88d4c1707fdd2"
@@ -230,6 +234,10 @@
 		"raw/BaseItemTypes.t-6b58ed61.msgpack.br": {
 			"records": 5461,
 			"sha256": "b74c405dbb36e625e86828e34e7d774b47a04f2d4fb34c11bcb84830cc685d7c"
+		},
+		"raw/BaseItemTypes.t-7456cd34.msgpack.br": {
+			"records": 5461,
+			"sha256": "3ba04143b55fda2ff42815b08a295cd61a382c5e8cf17090b909db989178d657"
 		},
 		"raw/BaseItemTypes.t-99de2bba.msgpack.br": {
 			"records": 5461,

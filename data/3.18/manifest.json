@@ -119,6 +119,10 @@
 			"records": 9498,
 			"sha256": "45b7d1148906b637305a31ff64a629e1121e1260845cca7c0c41456f432d8f53"
 		},
+		"raw/BaseItemTypes.t-7456cd34.msgpack.br": {
+			"records": 9498,
+			"sha256": "bf9cba4b9e239456f084c5fa8d07b12ac0ffc5d0e2b8a0d2f751a9fe5152ac22"
+		},
 		"raw/BaseItemTypes.t-99de2bba.msgpack.br": {
 			"records": 9498,
 			"sha256": "fa4cec2aebccd004f33b972ac080c8b460018d06752bdc83e74eefd78394d5b8"
