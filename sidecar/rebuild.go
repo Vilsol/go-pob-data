@@ -86,7 +86,8 @@ type datTable struct {
 
 type target struct {
 	name    string
-	blob    []byte
+	size    int
+	blob    []byte // dropped between passes for a bundle with no tables, to bound memory
 	marks   []int
 	cands   [][]candidate
 	tables  []datTable
@@ -169,7 +170,7 @@ func Rebuild(tgt, ref BundleSource, refFiles []RefFile, targetBundles []string, 
 			}
 			continue
 		}
-		t := &target{name: name, blob: blob, marks: markers(blob)}
+		t := &target{name: name, size: len(blob), blob: blob, marks: markers(blob)}
 		t.cands = make([][]candidate, len(t.marks))
 		for k := range t.marks {
 			lo := 0
@@ -177,6 +178,9 @@ func Rebuild(tgt, ref BundleSource, refFiles []RefFile, targetBundles []string, 
 				lo = t.marks[k-1] + 8
 			}
 			t.cands[k] = startCandidates(blob, lo, t.marks[k])
+		}
+		if len(t.marks) == 0 {
+			t.blob = nil
 		}
 		targets = append(targets, t)
 	}
@@ -322,9 +326,25 @@ func Rebuild(tgt, ref BundleSource, refFiles []RefFile, targetBundles []string, 
 	}
 
 	// other files: unchanged bytes, or the only file between two placed neighbours
+	load := func(t *target) bool {
+		if t.blob == nil {
+			b, err := tgt(t.name)
+			if err != nil {
+				return false
+			}
+			t.blob = b
+		}
+		return true
+	}
+	release := func(t *target) {
+		if len(t.marks) == 0 {
+			t.blob = nil
+			delete(refBlobs, t.name)
+		}
+	}
 	for _, t := range targets {
 		rb := refBlob(t.name)
-		if rb == nil {
+		if rb == nil || !load(t) {
 			continue
 		}
 		known := map[int64][2]int{} // reference offset -> target [start, end)
@@ -422,7 +442,8 @@ func Rebuild(tgt, ref BundleSource, refFiles []RefFile, targetBundles []string, 
 				if ratio := float64(b-a) / float64(max(g.size, 1)); ratio < 0.5 || ratio > 2 {
 					conf, method = Low, method+", size far from reference"
 				}
-				if err := checkFile(g.paths[0], t.blob[a:b], opt.Check); err != nil {
+				refBOM := g.off+2 <= int64(len(rb)) && rb[g.off] == 0xff && rb[g.off+1] == 0xfe
+				if err := checkFile(g.paths[0], t.blob[a:b], refBOM, opt.Check); err != nil {
 					conf, method = Low, method+", check failed: "+err.Error()
 				} else if opt.Check != nil && strings.HasSuffix(g.paths[0], ".psg") {
 					method += ", parsed"
@@ -441,9 +462,10 @@ func Rebuild(tgt, ref BundleSource, refFiles []RefFile, targetBundles []string, 
 				entries = append(entries, e)
 			}
 		}
+		release(t)
 	}
 	if opt.MovedText != nil {
-		entries = append(entries, movedText(targets, entries, spans, refFiles, refBlob, opt.MovedText)...)
+		entries = append(entries, movedText(targets, entries, spans, refFiles, refBlob, opt.MovedText, load, release)...)
 	}
 	var gaps []Span
 	for _, t := range targets {
@@ -782,7 +804,7 @@ func refOrder(files []RefFile, bundle string) []refGroup {
 }
 
 // movedText names UTF-16 pieces of unidentified spans after the unplaced reference file they share most lines with.
-func movedText(targets []*target, entries []Entry, spans []Span, refFiles []RefFile, refBlob func(string) []byte, pick func(string) bool) []Entry {
+func movedText(targets []*target, entries []Entry, spans []Span, refFiles []RefFile, refBlob func(string) []byte, pick func(string) bool, load func(*target) bool, release func(*target)) []Entry {
 	placed := map[string]bool{}
 	for _, e := range entries {
 		placed[e.Path] = true
@@ -804,8 +826,15 @@ func movedText(targets []*target, entries []Entry, spans []Span, refFiles []RefF
 	}
 	used := map[int]bool{}
 	var out []Entry
+	if len(pool) == 0 {
+		return nil
+	}
 	for _, t := range targets {
-		for _, g := range uncovered(t, entries, spans) {
+		gaps := uncovered(t, entries, spans)
+		if len(gaps) == 0 || !load(t) {
+			continue
+		}
+		for _, g := range gaps {
 			a, end := int(g.Offset), int(g.Offset+g.Size)
 			var cuts []int
 			for p := a; p+2 <= end; p += 2 {
@@ -843,6 +872,7 @@ func movedText(targets []*target, entries []Entry, spans []Span, refFiles []RefF
 					Method: fmt.Sprintf("moved from %s, split at UTF-16 byte order marks, %.2f of lines shared with reference size %d", f.Bundle, bestSim, f.Size)})
 			}
 		}
+		release(t)
 	}
 	return out
 }
@@ -868,7 +898,7 @@ func matchTextRun(b []byte, start, end int, ref []byte, run []refGroup) []textMa
 	bom := []byte{0xff, 0xfe}
 	for _, g := range run {
 		if g.off+2 > int64(len(ref)) || !bytes.HasPrefix(ref[g.off:], bom) {
-			return nil
+			return splitAtFirstLines(b, start, end, ref, run)
 		}
 	}
 	var cuts []int
@@ -922,6 +952,32 @@ func matchTextRun(b []byte, start, end int, ref []byte, run []refGroup) []textMa
 	return out
 }
 
+// splitAtFirstLines cuts a run of UTF-16 text files without byte order marks where each one's first line, as in
+// the reference, appears once in order.
+func splitAtFirstLines(b []byte, start, end int, ref []byte, run []refGroup) []textMatch {
+	cuts := []int{start}
+	for _, g := range run[1:] {
+		head := ref[g.off : g.off+min(g.size, 400)]
+		nl := bytes.Index(head, []byte{'\n', 0})
+		if nl < 8 || nl%2 != 0 {
+			return nil
+		}
+		head = head[:nl+2]
+		from := cuts[len(cuts)-1] + 2
+		i := bytes.Index(b[from:end], head)
+		if i < 0 || bytes.Contains(b[from+i+1:end], head) || (from+i-start)%2 != 0 {
+			return nil
+		}
+		cuts = append(cuts, from+i)
+	}
+	cuts = append(cuts, end)
+	var out []textMatch
+	for i, g := range run {
+		out = append(out, textMatch{g, cuts[i], cuts[i+1], "split where the next reference file's first line begins"})
+	}
+	return out
+}
+
 // lineSet is the distinct non-blank lines of a UTF-16 text, at most 20000 of them.
 func lineSet(b []byte) map[string]bool {
 	u := make([]uint16, 0, len(b)/2)
@@ -940,8 +996,9 @@ func lineSet(b []byte) map[string]bool {
 	return out
 }
 
-func checkFile(p string, b []byte, check func(string, []byte) error) error {
-	if strings.HasSuffix(p, ".txt") && !bytes.HasPrefix(b, []byte{0xff, 0xfe}) {
+// checkFile refuses a text piece without the byte order mark its reference file starts with, then runs check.
+func checkFile(p string, b []byte, bom bool, check func(string, []byte) error) error {
+	if bom && !bytes.HasPrefix(b, []byte{0xff, 0xfe}) {
 		return fmt.Errorf("no UTF-16 byte order mark")
 	}
 	if check != nil {
@@ -972,7 +1029,7 @@ func uncovered(t *target, entries []Entry, spans []Span) []Span {
 		}
 		at = max(at, v.b)
 	}
-	if n := int64(len(t.blob)); n > at {
+	if n := int64(t.size); n > at {
 		out = append(out, Span{Bundle: t.name, Offset: at, Size: n - at, Note: "not identified"})
 	}
 	return out

@@ -274,3 +274,16 @@ func TestParseIndex(t *testing.T) {
 		t.Fatal("a truncated index parsed")
 	}
 }
+
+// Two changed UTF-16 files without byte order marks are cut where the second one's first line begins.
+func TestSplitAtFirstLines(t *testing.T) {
+	u16 := func(s string) []byte { return text(s)[2:] }
+	ref := append(u16("\"Art/A\" 1\n\"Art/B\" 2\n"), u16("\"Shop/X\" 1\n")...)
+	run := []refGroup{{off: 0, size: int64(len(u16("\"Art/A\" 1\n\"Art/B\" 2\n")))}, {off: int64(len(u16("\"Art/A\" 1\n\"Art/B\" 2\n"))), size: int64(len(u16("\"Shop/X\" 1\n")))}}
+	first := u16("\"Art/A\" 1\n\"Art/B\" 2\n\"Art/C\" 3\n")
+	b := append(append([]byte{}, first...), u16("\"Shop/X\" 1\n\"Shop/Y\" 2\n")...)
+	got := matchTextRun(b, 0, len(b), ref, run)
+	if len(got) != 2 || got[0].b != len(first) || got[1].a != len(first) || got[1].b != len(b) {
+		t.Fatalf("cuts: %+v", got)
+	}
+}

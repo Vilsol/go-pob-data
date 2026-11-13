@@ -28,10 +28,25 @@ func main() {
 	refPath := flag.String("ref", "", "the reference patch: a directory holding Bundles2/, or cdn:<patch>")
 	schema := flag.String("schema", "", "data/<version>/schema.min.json to read the reference tables' columns from")
 	out := flag.String("out", "", "directory to write sidecar.tsv and unnamed.tsv into")
+	inputs := flag.String("inputs", "", "paths the extractor opens, one per line (a GOPOB_OPENLOG file works): their bundles are indexed too")
+	dump := flag.String("dump", "", "write this target bundle, decompressed, to -out and exit")
 	flag.Parse()
+	if *dump != "" && *ggpkPath != "" && *out != "" {
+		if err := dumpBundle(*ggpkPath, *dump, *out); err != nil {
+			slog.Error(err.Error())
+			os.Exit(1)
+		}
+		return
+	}
 	if *ggpkPath == "" || *refPath == "" || *out == "" {
 		flag.Usage()
 		os.Exit(2)
+	}
+	if *inputs != "" {
+		if err := readInputs(*inputs); err != nil {
+			slog.Error(err.Error())
+			os.Exit(1)
+		}
 	}
 	if err := run(*ggpkPath, *refPath, *schema, *out); err != nil {
 		slog.Error(err.Error())
@@ -50,18 +65,22 @@ func run(ggpkPath, refPath, schema, out string) error {
 		return err
 	}
 
-	var ref fs.FS = os.DirFS(refPath)
+	readRef := func(name string) ([]byte, error) { return readAll(os.DirFS(refPath), name) }
 	if patch, ok := strings.CutPrefix(refPath, "cdn:"); ok {
-		ref = extractor.NewWebFS(extractor.PoE1, patch)
+		web := extractor.NewWebFS(extractor.PoE1, patch)
+		readRef = func(name string) ([]byte, error) {
+			// WebFile.Read never reports EOF: take the whole file it fetched
+			f, _ := web.Open(name)
+			wf := f.(*extractor.WebFile)
+			if _, err := wf.Read(nil); err != nil {
+				return nil, err
+			}
+			return wf.CachedFile, nil
+		}
 	}
-	ih, err := ref.Open("Bundles2/_.index.bin")
+	raw, err := readRef("Bundles2/_.index.bin")
 	if err != nil {
 		return fmt.Errorf("reference index: %w", err)
-	}
-	raw, err := io.ReadAll(ih)
-	_ = ih.Close()
-	if err != nil {
-		return err
 	}
 	refFiles, err := sidecar.ParseIndex(raw)
 	if err != nil {
@@ -95,11 +114,24 @@ func run(ggpkPath, refPath, schema, out string) error {
 		}
 	}
 
+	refBundles := map[string]bool{}
+	for _, f := range refFiles {
+		refBundles[f.Bundle] = true
+	}
 	bundles := targetBundles(refFiles, target)
 	slog.Info("target bundles", "count", len(bundles))
 	entries, spans, err := sidecar.Rebuild(
 		func(name string) ([]byte, error) { return sidecar.ReadBundle(target, name) },
-		func(name string) ([]byte, error) { return sidecar.ReadBundle(ref, name) },
+		func(name string) ([]byte, error) {
+			if !refBundles[name] {
+				return nil, fs.ErrNotExist
+			}
+			raw, err := readRef("Bundles2/" + name + ".bundle.bin")
+			if err != nil {
+				return nil, err
+			}
+			return sidecar.DecodeBundle(raw)
+		},
 		refFiles, bundles, opt)
 	if err != nil {
 		return err
@@ -158,7 +190,55 @@ func targetBundles(refFiles []sidecar.RefFile, target fs.FS) []string {
 
 var englishTable = regexp.MustCompile(`^data/[^/]+\.datc(l)?64$`)
 
+var inputSet = map[string]bool{}
+
+// readInputs loads -inputs: lines of a path, or of a status and a path separated by a tab.
+func readInputs(path string) error {
+	b, err := os.ReadFile(path)
+	if err != nil {
+		return err
+	}
+	for _, line := range strings.Split(string(b), "\n") {
+		if i := strings.LastIndexByte(line, '\t'); i >= 0 {
+			line = line[i+1:]
+		}
+		if line = strings.TrimSpace(line); line != "" {
+			inputSet[strings.ToLower(line)] = true
+		}
+	}
+	return nil
+}
+
+func readAll(fsys fs.FS, name string) ([]byte, error) {
+	f, err := fsys.Open(name)
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+	return io.ReadAll(f)
+}
+
+func dumpBundle(ggpkPath, name, out string) error {
+	f, err := os.Open(ggpkPath)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	target, err := ggpk.NewLoader(f)
+	if err != nil {
+		return err
+	}
+	b, err := sidecar.ReadBundle(target, name)
+	if err != nil {
+		return err
+	}
+	return os.WriteFile(out, b, 0o644)
+}
+
 func wanted(p string) bool {
+	if inputSet[p] {
+		return true
+	}
 	switch p {
 	case "metadata/passiveskillgraph.psg", "metadata/characters/character.ot", "metadata/monsters/monster.ot", "art/uiimages1.txt":
 		return true
