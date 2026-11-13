@@ -1,5 +1,11 @@
 package raw
 
+import (
+	"encoding/json"
+
+	"github.com/pkg/errors"
+)
+
 type AtlasNode struct {
 	ID                   string  `json:"Id"`
 	UniqueArt            string  `json:"UniqueArt"`
@@ -39,4 +45,23 @@ type AtlasNode struct {
 	Var29                bool    `json:"Var29"`
 	Var31                bool    `json:"Var31"`
 	Var36                bool    `json:"Var36"`
+}
+
+// UnmarshalJSON skips the unnamed columns 3.30 (the layout with MapNodeHeader) turned into booleans, Var33 and
+// Var35; the json.gz keeps them.
+func (a *AtlasNode) UnmarshalJSON(b []byte) error {
+	var columns map[string]json.RawMessage
+	if err := json.Unmarshal(b, &columns); err != nil {
+		return errors.Wrap(err, "failed to decode atlas node")
+	}
+	if _, ok := columns["MapNodeHeader"]; ok {
+		delete(columns, "Var33")
+		delete(columns, "Var35")
+		var err error
+		if b, err = json.Marshal(columns); err != nil {
+			return errors.Wrap(err, "failed to decode atlas node")
+		}
+	}
+	type plain AtlasNode
+	return errors.Wrap(json.Unmarshal(b, (*plain)(a)), "failed to decode atlas node")
 }
