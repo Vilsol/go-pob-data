@@ -8,6 +8,7 @@ import (
 	"io/fs"
 	"log/slog"
 	"os"
+	"path"
 	"path/filepath"
 	"regexp"
 	"slices"
@@ -250,7 +251,7 @@ func readRows[T any](gameVersion string, table string) ([]T, error) {
 func extractTextFile(bundles fs.FS, gameVersion string, file string) ([]byte, error) {
 	slog.Info("extracting", slog.String("path", file))
 
-	f, err := bundles.Open(strings.ToLower(file))
+	f, err := openTextFile(bundles, file)
 	if err != nil {
 		return nil, errors.Wrap(err, "could not open "+file)
 	}
@@ -278,4 +279,24 @@ func extractTextFile(bundles fs.FS, gameVersion string, file string) ([]byte, er
 	}
 
 	return text, nil
+}
+
+// openTextFile opens file, or under Metadata/StatDescriptions the same file with the other of .txt and .csd: 3.30
+// ships its stat files as .csd where earlier versions had .txt. The file is published under the name asked for.
+func openTextFile(bundles fs.FS, file string) (fs.File, error) {
+	name := strings.ToLower(file)
+	f, err := bundles.Open(name)
+	if err == nil || !errors.Is(err, fs.ErrNotExist) || !strings.HasPrefix(name, "metadata/statdescriptions/") {
+		return f, err //nolint:wrapcheck
+	}
+	ext := path.Ext(name)
+	other := map[string]string{".txt": ".csd", ".csd": ".txt"}[ext]
+	if other == "" {
+		return nil, err //nolint:wrapcheck
+	}
+	f, otherErr := bundles.Open(strings.TrimSuffix(name, ext) + other)
+	if otherErr != nil {
+		return nil, err //nolint:wrapcheck
+	}
+	return f, nil
 }
