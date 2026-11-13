@@ -85,7 +85,7 @@ func loadGameData(loader fs.FS, gameVersion string) (*gameData, error) {
 	loadTable(l, "Characters", &d.characters)
 	loadTable(l, "Ascendancy", &d.ascendancies)
 	loadTable(l, "Descendancy", &d.descendancies)
-	loadTable(l, "PassiveSkillMasteryGroups", &d.masteryGroups)
+	loadMasteryGroups(l, &d.masteryGroups)
 	loadTable(l, "PassiveSkillMasteryEffects", &d.masteryEffects)
 	loadTable(l, "PassiveJewelSlots", &d.jewelSlots)
 	loadTable(l, "ReminderText", &d.reminderTexts)

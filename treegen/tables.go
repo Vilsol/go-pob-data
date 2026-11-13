@@ -98,6 +98,19 @@ type masteryGroup struct {
 	MasteryEffects    []int  `json:"MasteryEffects"`
 }
 
+// masteryGroupWithArt is PassiveSkillMasteryGroups from 3.30, whose art is a PassiveSkillTreeMasteryArt row,
+// as in PoE2.
+type masteryGroupWithArt struct {
+	Art            *int  `json:"Art"`
+	MasteryEffects []int `json:"MasteryEffects"`
+}
+
+type masteryArt struct {
+	InactiveIcon      string `json:"InactiveIcon"`
+	ActiveIcon        string `json:"ActiveIcon"`
+	ActiveEffectImage string `json:"ActiveEffectImage"`
+}
+
 type masteryEffect struct {
 	Stats      []int  `json:"Stats"`
 	Hash16     uint16 `json:"HASH16"`
@@ -235,6 +248,43 @@ type tableLoader struct {
 	gameVersion string
 }
 
+var errNoColumn = errors.New("missing column")
+
+// loadMasteryGroups reads each mastery group's art from its own columns, or from 3.30 on from the
+// PassiveSkillTreeMasteryArt row its Art column names.
+func loadMasteryGroups(l *tableLoader, dst *[]masteryGroup) {
+	if l.err != nil {
+		return
+	}
+	groups, err := decodeTable[masteryGroupWithArt](l.loader, l.game, l.gameVersion, "PassiveSkillMasteryGroups")
+	if errors.Is(err, errNoColumn) {
+		loadTable(l, "PassiveSkillMasteryGroups", dst)
+		return
+	}
+	if err != nil {
+		l.err = err
+		return
+	}
+	var art []masteryArt
+	if loadTable(l, "PassiveSkillTreeMasteryArt", &art); l.err != nil {
+		return
+	}
+	*dst = make([]masteryGroup, len(groups))
+	for i, g := range groups {
+		if g.Art == nil || *g.Art >= len(art) {
+			l.err = fmt.Errorf("mastery group %d has no art row", i)
+			return
+		}
+		a := art[*g.Art]
+		(*dst)[i] = masteryGroup{
+			InactiveIcon:      a.InactiveIcon,
+			ActiveIcon:        a.ActiveIcon,
+			ActiveEffectImage: a.ActiveEffectImage,
+			MasteryEffects:    g.MasteryEffects,
+		}
+	}
+}
+
 // loadTable decodes table name into dst; after the first failure it does nothing and l.err holds the error.
 func loadTable[T any](l *tableLoader, name string, dst *[]T) {
 	if l.err == nil {
@@ -269,7 +319,7 @@ func decodeTable[T any](loader fs.FS, game extractor.Game, gameVersion string, n
 	for i := range rt.NumField() {
 		column := strings.Split(rt.Field(i).Tag.Get("json"), ",")[0]
 		if _, ok := columns[0][column]; !ok {
-			return nil, fmt.Errorf("table %s has no column %s", name, column)
+			return nil, fmt.Errorf("table %s has no column %s: %w", name, column, errNoColumn)
 		}
 	}
 
