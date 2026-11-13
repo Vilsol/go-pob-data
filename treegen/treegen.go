@@ -33,6 +33,32 @@ const (
 // orbitRadii is a game-client value absent from the game files, one radius per orbit.
 var orbitRadii = []int{0, 82, 162, 335, 493, 662, 846}
 
+// noRegion is the PassiveSkills region of a node outside every Blightcore region.
+const noRegion = 7
+
+// proxyKeys name the Blightcore regions by PassiveSkills region; the names are a game-client value absent from the
+// game files.
+var proxyKeys = map[int]string{
+	1: "BlightcoreLeft",
+	2: "BlightcoreTopLeft",
+	3: "BlightcoreBottomLeft",
+	4: "BlightcoreRight",
+	5: "BlightcoreTopRight",
+	6: "BlightcoreBottomRight",
+}
+
+// proxyKey is the Blightcore region a node of that PassiveSkills region is in, "" outside them.
+func proxyKey(region int) (string, error) {
+	if region == noRegion {
+		return "", nil
+	}
+	key, ok := proxyKeys[region]
+	if !ok {
+		return "", fmt.Errorf("unknown passive skill region %d", region)
+	}
+	return key, nil
+}
+
 // characterAttributes is a game-client value absent from the game files.
 var characterAttributes = Ordered[int]{
 	{Key: "Strength", Value: 0},
@@ -55,6 +81,7 @@ var grantedAttributeStats = map[string]string{
 type gameData struct {
 	descriptions           *descriptions
 	grants                 *grants
+	regions                []passiveRegion
 	reminderByID           map[string]string
 	passiveSkills          []passiveSkill
 	stats                  []stat
@@ -102,6 +129,7 @@ func loadGameData(loader fs.FS, gameVersion string) (*gameData, error) {
 	loadTable(l, "BuffDefinitions", &d.buffDefinitions)
 	loadTable(l, "ClientStrings", &d.clientStrings)
 	d.grants = loadGrants(l, d.clientStrings)
+	loadRegions(l, &d.regions)
 	if l.err != nil {
 		return nil, l.err
 	}
@@ -532,6 +560,15 @@ func buildNode(d *gameData, skillIdx int, l *lookups) (*Node, error) {
 		GrantedPassivePoints:   p.SkillPointsGranted,
 		IsProxy:                p.IsProxyPassive,
 		Stats:                  []string{},
+	}
+
+	if d.regions != nil {
+		key, err := proxyKey(d.regions[skillIdx].Region)
+		if err != nil {
+			return nil, err
+		}
+		node.ProxyKey = key
+		node.IsProxy = node.IsProxy || key != ""
 	}
 
 	if p.MasteryGroup != nil {

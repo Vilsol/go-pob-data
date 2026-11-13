@@ -49,6 +49,23 @@ func (p *passiveSkill) statValues() []int {
 	return []int{p.Stat1Value, p.Stat2Value, p.Stat3Value, p.Stat4Value, p.Stat5Value}
 }
 
+// passiveRegion is PassiveSkills' unnamed column, from 3.30, numbering the Blightcore region a node is in.
+type passiveRegion struct {
+	Region int `json:"Var51"`
+}
+
+// loadRegions leaves dst nil for a version whose PassiveSkills has no region column.
+func loadRegions(l *tableLoader, dst *[]passiveRegion) {
+	if l.err != nil {
+		return
+	}
+	regions, err := decodeTable[passiveRegion](l.loader, l.game, l.gameVersion, "PassiveSkills")
+	if errors.Is(err, errNoColumn) {
+		return
+	}
+	*dst, l.err = regions, err
+}
+
 // passiveGrant is a PassiveSkills row's granted skill.
 type passiveGrant struct {
 	GrantedEffectsPerLevel *int `json:"GrantedEffectsPerLevel"`

@@ -120,6 +120,7 @@ type Node struct {
 	IsMultipleChoiceOption bool             `json:"isMultipleChoiceOption,omitempty"`
 	GrantedPassivePoints   int              `json:"grantedPassivePoints,omitempty"`
 	IsProxy                bool             `json:"isProxy,omitempty"`
+	ProxyKey               string           `json:"proxyKey,omitempty"`
 	Stats                  []string         `json:"stats"`
 	ReminderText           []string         `json:"reminderText,omitempty"`
 	FlavourText            []string         `json:"flavourText,omitempty"`

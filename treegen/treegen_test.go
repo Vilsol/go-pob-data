@@ -387,3 +387,16 @@ func TestNodePositions(t *testing.T) {
 		}
 	}
 }
+
+func TestProxyKey(t *testing.T) {
+	key, err := proxyKey(7)
+	testza.AssertNoError(t, err)
+	testza.AssertEqual(t, "", key)
+
+	key, err = proxyKey(5)
+	testza.AssertNoError(t, err)
+	testza.AssertEqual(t, "BlightcoreTopRight", key)
+
+	_, err = proxyKey(8)
+	testza.AssertNotNil(t, err)
+}
