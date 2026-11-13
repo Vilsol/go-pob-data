@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/fs"
 	"reflect"
+	"slices"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -265,14 +266,8 @@ func loadMasteryGroups(l *tableLoader, dst *[]masteryGroup) {
 		l.err = err
 		return
 	}
-	artTable := "PassiveSkillTreeMasteryArt"
-	for _, c := range extractor.SchemaColumns("PassiveSkillMasteryGroups") {
-		if c.Name == "Art" && c.Ref != "" {
-			artTable = c.Ref
-		}
-	}
 	var art []masteryArt
-	if loadTable(l, artTable, &art); l.err != nil {
+	if loadTable(l, schemaRef("PassiveSkillMasteryGroups", "Art", "PassiveSkillTreeMasteryArt"), &art); l.err != nil {
 		return
 	}
 	*dst = make([]masteryGroup, len(groups))
@@ -288,6 +283,47 @@ func loadMasteryGroups(l *tableLoader, dst *[]masteryGroup) {
 			ActiveEffectImage: a.ActiveEffectImage,
 			MasteryEffects:    g.MasteryEffects,
 		}
+	}
+}
+
+// schemaRef is the table that table's column references in the loaded schema, or fallback.
+func schemaRef(table, column, fallback string) string {
+	for _, c := range extractor.SchemaColumns(table) {
+		if c.Name == column && c.Ref != "" {
+			return c.Ref
+		}
+	}
+	return fallback
+}
+
+// remapDescendancyArt points each descendancy's PassiveTreeUIArt at the treeArt row of the same Id when the
+// schema says the column references another table, as 3.30.0.1's PassiveSkillTreeUIArt.
+func remapDescendancyArt(l *tableLoader, descendancies []descendancy, treeArt []ascendancyTreeArt) {
+	ref := schemaRef("Descendancy", "PassiveTreeUIArt", "PassiveSkillTreeUIArtAscendancy")
+	if l.err != nil || ref == "PassiveSkillTreeUIArtAscendancy" {
+		return
+	}
+	var rows []struct {
+		ID string `json:"Id"`
+	}
+	if loadTable(l, ref, &rows); l.err != nil {
+		return
+	}
+	for i, desc := range descendancies {
+		if desc.PassiveTreeUIArt == nil {
+			continue
+		}
+		if *desc.PassiveTreeUIArt >= len(rows) {
+			l.err = fmt.Errorf("descendancy %s has no %s row", desc.ID, ref)
+			return
+		}
+		id := rows[*desc.PassiveTreeUIArt].ID
+		j := slices.IndexFunc(treeArt, func(a ascendancyTreeArt) bool { return a.ID == id })
+		if j < 0 {
+			l.err = fmt.Errorf("descendancy %s uses %s art %s, which PassiveSkillTreeUIArtAscendancy lacks", desc.ID, ref, id)
+			return
+		}
+		descendancies[i].PassiveTreeUIArt = &j
 	}
 }
 

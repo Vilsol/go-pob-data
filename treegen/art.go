@@ -1,6 +1,7 @@
 package treegen
 
 import (
+	"cmp"
 	"fmt"
 	"image"
 	"io/fs"
@@ -205,6 +206,7 @@ func loadArtData(loader fs.FS, gameVersion string, d *gameData) (*artData, error
 	loadTable(l, "PassiveSkillTreeUIArtAscendancy", &a.treeArt)
 	loadTable(l, "UIArtAscendancy", &a.uiArt)
 	loadTable(l, "PassiveSkillOverrideTypes", &a.overrideTypes)
+	remapDescendancyArt(l, d.descendancies, a.treeArt)
 	if l.err != nil {
 		return nil, l.err
 	}
@@ -520,7 +522,8 @@ func (b *artBuilder) bloodlines() error {
 
 		var u *int
 		for _, desc := range b.d.descendancies {
-			if desc.PassiveTreeUIArt == nil || *desc.PassiveTreeUIArt != i {
+			// 3.30's "None" placeholder names art too, but has no background.
+			if desc.ID == "None" || desc.PassiveTreeUIArt == nil || *desc.PassiveTreeUIArt != i {
 				continue
 			}
 			if u != nil && desc.UIArt != nil && *desc.UIArt != *u {
@@ -616,14 +619,18 @@ func (b *artBuilder) lines() error {
 			return err
 		}
 		size := a.img.Rect.Dx()
+		// 3.30's textures carry a padding row and column past the corner the arcs are centred on.
+		for size > 1 && len(opaqueRuns(a.img, image.Pt(1, 0), image.Pt(0, size-1), size)) == 0 {
+			size--
+		}
 
 		// Each orbit's arc crosses the bottom row; the outermost crossing is the largest orbit.
-		arcs := opaqueRuns(a.img, image.Pt(1, 0), image.Pt(0, size-1), size)
-		if len(arcs) != len(orbitRadii)-1 {
-			return fmt.Errorf("found %d orbit arcs in the %s connection art, want %d", len(arcs), state, len(orbitRadii)-1)
+		orbits, err := orbitArcs(opaqueRuns(a.img, image.Pt(1, 0), image.Pt(0, size-1), size))
+		if err != nil {
+			return fmt.Errorf("%s connection art: %w", state, err)
 		}
-		for i, arc := range arcs {
-			orbit := len(arcs) - i
+		for orbit := 1; orbit < len(orbitRadii); orbit++ {
+			arc := orbits[orbit]
 			s.entries = append(s.entries, sheetEntry{group: "line", name: "Orbit" + strconv.Itoa(orbit) + state, art: a, sub: image.Rect(arc[0], arc[0], size, size)})
 		}
 
@@ -639,6 +646,35 @@ func (b *artBuilder) lines() error {
 		}
 	}
 	return nil
+}
+
+// orbitArcs maps each orbit to its arc of arcs, outermost first. Up to 3.29 the curves texture holds
+// one arc per orbit; 3.30 ships PoE2's, one per orbitRadii2 radius, whose first orbits are PoE1's.
+func orbitArcs(arcs [][2]int) (map[int][2]int, error) {
+	radii := orbitRadii2
+	if len(arcs) == len(orbitRadii)-1 {
+		radii = make([]float64, len(orbitRadii))
+		for i, r := range orbitRadii {
+			radii[i] = float64(r)
+		}
+	} else if len(arcs) != len(orbitRadii2)-1 {
+		return nil, fmt.Errorf("found %d orbit arcs, want %d or %d", len(arcs), len(orbitRadii)-1, len(orbitRadii2)-1)
+	}
+	byRadius := make([]int, 0, len(radii)-1)
+	for i := 1; i < len(radii); i++ {
+		byRadius = append(byRadius, i)
+	}
+	slices.SortFunc(byRadius, func(x, y int) int { return cmp.Compare(radii[y], radii[x]) })
+	out := make(map[int][2]int, len(orbitRadii)-1)
+	for i, orbit := range byRadius {
+		if orbit < len(orbitRadii) {
+			if radii[orbit] != float64(orbitRadii[orbit]) {
+				return nil, fmt.Errorf("orbit %d has radius %v, want %d", orbit, radii[orbit], orbitRadii[orbit])
+			}
+			out[orbit] = arcs[i]
+		}
+	}
+	return out, nil
 }
 
 // opaqueRuns walks n pixels from start in step and returns the [first, last+1) offsets of each run of visible pixels.

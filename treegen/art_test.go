@@ -175,3 +175,21 @@ func TestWriteArt(t *testing.T) {
 		}
 	})
 }
+
+// Up to 3.29 the curves texture holds one arc per orbit; 3.30's holds PoE2's nine, and orbit 3 must skip the 251
+// arc nested between orbits 2 and 3, and orbit 6 the two outside it.
+func TestOrbitArcs(t *testing.T) {
+	six := [][2]int{{0, 1}, {10, 11}, {20, 21}, {30, 31}, {40, 41}, {50, 51}}
+	got, err := orbitArcs(six)
+	testza.AssertNoError(t, err)
+	testza.AssertEqual(t, map[int][2]int{6: {0, 1}, 5: {10, 11}, 4: {20, 21}, 3: {30, 31}, 2: {40, 41}, 1: {50, 51}}, got)
+
+	// radii 1322, 1080, 846, 662, 493, 335, 251, 162, 82
+	nine := [][2]int{{0, 1}, {10, 11}, {20, 21}, {30, 31}, {40, 41}, {50, 51}, {60, 61}, {70, 71}, {80, 81}}
+	got, err = orbitArcs(nine)
+	testza.AssertNoError(t, err)
+	testza.AssertEqual(t, map[int][2]int{6: {20, 21}, 5: {30, 31}, 4: {40, 41}, 3: {50, 51}, 2: {70, 71}, 1: {80, 81}}, got)
+
+	_, err = orbitArcs(nine[:7])
+	testza.AssertNotNil(t, err)
+}

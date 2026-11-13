@@ -194,3 +194,40 @@ func TestRecoveredMasteryArt(t *testing.T) {
 	}
 	t.Logf("%d mastery groups, first %+v", len(groups), groups[0])
 }
+
+// 3.30.0.1's Descendancy names a PassiveSkillTreeUIArt row; the art builder indexes PassiveSkillTreeUIArtAscendancy,
+// so each descendancy must land on the row of the same Id there.
+func TestRemapDescendancyArt(t *testing.T) {
+	treeArt := []ascendancyTreeArt{{ID: "Default"}, {ID: "DescendancyAzmeri"}, {ID: "DescendancyOshabi"}}
+	uiArt := newDatc64()
+	for _, id := range []string{"Character", "DescendancyOshabi", "DescendancyAzmeri"} {
+		uiArt.rows++
+		uiArt.str(id)
+	}
+	loader := fstest.MapFS{"data/passiveskilltreeuiart.datc64": {Data: uiArt.bytes()}}
+	schema := func(ref string) map[string]any {
+		return map[string]any{"version": 1, "tables": []any{
+			map[string]any{"name": "Descendancy", "validFor": 3, "columns": []any{column("PassiveTreeUIArt", "foreignrow", false, ref)}},
+			map[string]any{"name": "PassiveSkillTreeUIArt", "validFor": 1, "columns": []any{column("Id", "string", false, "")}},
+		}}
+	}
+	ptr := func(i int) *int { return &i }
+
+	withSchema(t, "3.30", schema("PassiveSkillTreeUIArt"), func() {
+		descs := []descendancy{{ID: "None", PassiveTreeUIArt: ptr(2)}, {ID: "Oshabi", PassiveTreeUIArt: ptr(1)}, {ID: "Unset"}}
+		l := &tableLoader{loader: loader, gameVersion: "3.30"}
+		remapDescendancyArt(l, descs, treeArt)
+		testza.AssertNoError(t, l.err)
+		testza.AssertEqual(t, 1, *descs[0].PassiveTreeUIArt)
+		testza.AssertEqual(t, 2, *descs[1].PassiveTreeUIArt)
+		testza.AssertNil(t, descs[2].PassiveTreeUIArt)
+	})
+
+	withSchema(t, "3.29", schema("PassiveSkillTreeUIArtAscendancy"), func() {
+		descs := []descendancy{{ID: "Oshabi", PassiveTreeUIArt: ptr(2)}}
+		l := &tableLoader{loader: fstest.MapFS{}, gameVersion: "3.29"}
+		remapDescendancyArt(l, descs, treeArt)
+		testza.AssertNoError(t, l.err)
+		testza.AssertEqual(t, 2, *descs[0].PassiveTreeUIArt)
+	})
+}
