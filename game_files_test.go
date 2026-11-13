@@ -50,8 +50,10 @@ func writeRows(t *testing.T, version string, table string, rows any) {
 }
 
 func utf16File(text string) *fstest.MapFile {
-	b := []byte{0xff, 0xfe}
-	for _, u := range utf16.Encode([]rune(text)) {
+	units := utf16.Encode([]rune(text))
+	b := make([]byte, 0, 2+2*len(units))
+	b = append(b, 0xff, 0xfe)
+	for _, u := range units {
 		b = append(b, byte(u), byte(u>>8))
 	}
 	return &fstest.MapFile{Data: b}

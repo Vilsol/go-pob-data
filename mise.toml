@@ -1,5 +1,6 @@
 [tools]
-go = "1.23.3"
+go = "1.26.11"
+"aqua:golangci/golangci-lint" = "2.15.0"
 "go:github.com/tinylib/msgp" = "1.6.4"
 imagemagick = "7.1.2_27"
 

@@ -1,49 +1,68 @@
+version: "2"
 linters:
-  disable-all: true
+  default: none
   enable:
-    - errcheck
-    - gosimple
-    - govet
-    - ineffassign
-    - staticcheck
-    - typecheck
-    - unused
     - bidichk
     - contextcheck
     - durationcheck
+    - errcheck
     - errorlint
-    - goconst
-    - goimports
-    - revive
+    - gocritic
+    - govet
+    - ineffassign
     - misspell
+    - nonamedreturns
     - prealloc
+    - revive
+    - staticcheck
+    - unused
     - whitespace
     - wrapcheck
+  settings:
+    staticcheck:
+      checks:
+        - all
+        - -ST*
+        - -QF*
+    gocritic:
+      disabled-checks:
+        - ifElseChain
+    govet:
+      disable:
+        - shadow
+      enable-all: true
+    wrapcheck:
+      ignore-package-globs:
+        - github.com/Vilsol/go-pob-data/*
+        - golang.org/x/sync/errgroup*
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
     - gci
-    - gocritic
     - gofumpt
-    - nonamedreturns
-
-linters-settings:
-  govet:
-    enable-all: true
-    disable:
-      - shadow
-
-  gocritic:
-    disabled-checks:
-      - ifElseChain
-
-  gci:
-    custom-order: true
-    sections:
-      - standard
-      - default
-      - prefix(github.com/Vilsol/go-pob-data)
-      - blank
-      - dot
-
-  wrapcheck:
-    ignorePackageGlobs:
-      - github.com/Vilsol/go-pob-data/*
-      - golang.org/x/sync/errgroup*
+    - goimports
+  settings:
+    gci:
+      sections:
+        - standard
+        - default
+        - prefix(github.com/Vilsol/go-pob-data)
+        - blank
+        - dot
+      custom-order: true
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$

@@ -122,8 +122,8 @@ func utf16z(s string) []byte {
 // table builds a .datc64: rows of an Id string then a u32 value, padded with extra zero bytes per row.
 func table(ids []string, values []uint32, extra int) []byte {
 	w := 12 + extra
-	var fixed, varData []byte
-	varData = append(varData, bytes.Repeat([]byte{0xbb}, 8)...)
+	fixed := make([]byte, 0, w*len(ids))
+	varData := bytes.Repeat([]byte{0xbb}, 8)
 	for i, id := range ids {
 		row := make([]byte, w)
 		binary.LittleEndian.PutUint64(row, uint64(len(varData)))

@@ -104,8 +104,9 @@ func run(ggpkPath, refPath, schema, out string) error {
 		extractor.LoadSchema(extractor.PoE1, schema)
 		names := extractor.SchemaTables()
 		opt.Columns = func(table string) []sidecar.Column {
-			var cols []sidecar.Column
-			for _, c := range extractor.SchemaColumns(names[table]) {
+			columns := extractor.SchemaColumns(names[table])
+			cols := make([]sidecar.Column, 0, len(columns))
+			for _, c := range columns {
 				cols = append(cols, sidecar.Column{Type: c.Type, Ref: c.Ref, Offset: c.Offset, Size: c.Size})
 			}
 			return cols

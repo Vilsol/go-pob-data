@@ -1,11 +1,13 @@
 module github.com/Vilsol/go-pob-data
 
-go 1.23.3
+go 1.26.11
 
 require (
 	github.com/MarvinJWendt/testza v0.5.2
 	github.com/Vilsol/slox v0.0.1
 	github.com/andybalholm/brotli v1.0.5
+	github.com/nfisher/gstream v0.0.0-20190503025049-55c78d87ebc2
+	github.com/oriath-net/gooz v1.0.1
 	github.com/oriath-net/pogo v0.0.0-20230425190806-78985d9ea758
 	github.com/pkg/errors v0.9.1
 	github.com/tinylib/msgp v1.1.8
@@ -27,8 +29,6 @@ require (
 	github.com/lithammer/fuzzysearch v1.1.8 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/mcuadros/go-version v0.0.0-20190830083331-035f6764e8d2 // indirect
-	github.com/nfisher/gstream v0.0.0-20190503025049-55c78d87ebc2 // indirect
-	github.com/oriath-net/gooz v1.0.1 // indirect
 	github.com/philhofer/fwd v1.1.2 // indirect
 	github.com/pterm/pterm v0.12.67 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect

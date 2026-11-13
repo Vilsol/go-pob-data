@@ -125,6 +125,7 @@ type Mod struct {
 }
 
 func (m *Mod) stats() [6]*int { return [6]*int{m.Stat1, m.Stat2, m.Stat3, m.Stat4, m.Stat5, m.Stat6} }
+
 func (m *Mod) values() [6]int {
 	return [6]int{m.Stat1Value, m.Stat2Value, m.Stat3Value, m.Stat4Value, m.Stat5Value, m.Stat6Value}
 }
