@@ -19,6 +19,701 @@
 			"tw": "stat_translations/tw.t-c976d1d7-15040eaa.msgpack.br"
 		}
 	},
+	"assets": {
+		"files.it-6b11d07f.msgpack.br": {
+			"records": 87,
+			"sha256": "f22877a2c562930c3eabf674bc83b6dce74e40226567fbaa453fc4bd2e43e42b"
+		},
+		"files.ot-c65fd62d.msgpack.br": {
+			"records": 247,
+			"sha256": "b7f2141ae6967e862b394be6863af5217cc92785e164989261ab439e16499978"
+		},
+		"files.txt-a1ed4088.msgpack.br": {
+			"records": 2,
+			"sha256": "829c3d1aefd449174f9cfb44aa4ec1f1eb802c85fbf748e7220992eedb45a7f2"
+		},
+		"files/api/trade/data/stats.json.br": {
+			"sha256": "2ccf4d341bfb0f16f2742ec29f1b53e7338fd94a3ab3a70bbb36638a85542af2"
+		},
+		"raw/ActiveSkillType.json.gz": {
+			"sha256": "790615503fc4be0944ed1ccca5082eb77f40d0a5c174cb8b69de087774ebd65a"
+		},
+		"raw/ActiveSkillType.t-5a112530.msgpack.br": {
+			"records": 135,
+			"sha256": "f6cc43c3b0ec13745de854130e2610b8a1f8a007e64ad70f6a5f6ae2c708cff9"
+		},
+		"raw/ActiveSkills.json.gz": {
+			"sha256": "789a249a708af844604aaa1cee3182f4941ddf55d0946123d9562e2ea07d7972"
+		},
+		"raw/ActiveSkills.t-4c893f9c.msgpack.br": {
+			"records": 1953,
+			"sha256": "94ba71cf9672fc71797d0f44a1427cb43c1c9777f0cbf20f9342d72c4382cef3"
+		},
+		"raw/AlternatePassiveAdditions.json.gz": {
+			"sha256": "dde78c9212023019232771e22899702bbe3cf478a72828620545d09442f1ad35"
+		},
+		"raw/AlternatePassiveAdditions.t-8ffb2eb5.msgpack.br": {
+			"records": 337,
+			"sha256": "308d4c116967c70422b1db1fca3f0de687170c5d2a93f612f330f3d6119156cb"
+		},
+		"raw/AlternatePassiveSkills.json.gz": {
+			"sha256": "59868751a58e7898f0dbcadb1ed5cfb92e05e77e3ba19fde997bbaf2e976ce7a"
+		},
+		"raw/AlternatePassiveSkills.t-2a333cfa.msgpack.br": {
+			"records": 381,
+			"sha256": "51f1f38156954a5b85c0aa2fbe980faa85aeb850badddde1cd70142780bef185"
+		},
+		"raw/AlternateTreeArt.json.gz": {
+			"sha256": "81c55890407925069a5c9eb406a634de0709a3ae6209e8cd153efdf76742ff48"
+		},
+		"raw/AlternateTreeArt.t-fc09c276.msgpack.br": {
+			"records": 13,
+			"sha256": "3497c090ea2bf3ef149ae292a274854f69e194de55dd744eaecd27bd9a71c3da"
+		},
+		"raw/AlternateTreeVersions.json.gz": {
+			"sha256": "72cbcc46ab1ecbff93bd8feb1f28dacf46c785cfe738dd62326f8ac253701c9f"
+		},
+		"raw/AlternateTreeVersions.t-bd500abd.msgpack.br": {
+			"records": 13,
+			"sha256": "2b855281aa61a0a4995647a7fda84090a63e58bc93912588f1285d91f51ad6e2"
+		},
+		"raw/ArmourTypes.json.gz": {
+			"sha256": "6ae3b712132a0d966ed34e78625b7fe612c844d3e4faec99a7103f8a8ed8b6ee"
+		},
+		"raw/ArmourTypes.t-a82f45c4.msgpack.br": {
+			"records": 481,
+			"sha256": "265526b0434d7563b52f8a53c52cd999ff07e56b22686c5959e77727b57bd0f5"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/Dex.png": {
+			"sha256": "9d77cd73040b9cb50b7332eb99c9de0342b5b98fa7534c151ab62e23d9a152d4"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/DexInt.png": {
+			"sha256": "bdb9d6298cfbd847473c7db9398e9222e54a95cc9177e0d554ad5cacadc292fc"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/Int.png": {
+			"sha256": "1d6e2702077187a0e189c0cd5144d6a429aae311790c11381e9e4f45f97cfa48"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/Str.png": {
+			"sha256": "0c9e0285fa667b99b558f3bff4433d30e37ef3a30c46519cbec5973390b97d39"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/StrDex.png": {
+			"sha256": "23b71cd2f1102a8016c85bafca734c3b9555dc69fabdf50c1eea2c94fc9fa790"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/StrInt.png": {
+			"sha256": "f80018cfa6f8a5f6493e7af76d7821d4a79efecd1543279b2a9857276f17afe0"
+		},
+		"raw/AtlasNode.json.gz": {
+			"sha256": "caa740b11c5c4e853cce870d689362565ebafca7b63b1a18c1a3e32af9935f62"
+		},
+		"raw/AtlasNode.t-ac5bd8cd.msgpack.br": {
+			"records": 188,
+			"sha256": "c9d36f444a6fc74a35ac3c469f554f4f5ddab829c09d3928e55707f77199a485"
+		},
+		"raw/AtlasNodeDefinition.json.gz": {
+			"sha256": "1b5310627d5504decdf3505c3cb83cf63760e3ac41d8fbbcb0ed36651ef8d457"
+		},
+		"raw/AtlasNodeDefinition.t-8199a01a.msgpack.br": {
+			"records": 235,
+			"sha256": "6f1c197ba6f6fe24f09f41724e683dff3ae00ef25e45a29cf7b064d4ea180956"
+		},
+		"raw/BaseItemTypes.json.gz": {
+			"sha256": "46f706e8c718f98b3788c97f1c724c00b5870eb43b8d0e38d8bf2bdf9c104f49"
+		},
+		"raw/BaseItemTypes.t-6b58ed61.msgpack.br": {
+			"records": 5668,
+			"sha256": "e8cae9f0717c0e93716e6de8ccdfcbc246346a798604621f8dd9fa5fe4c65d84"
+		},
+		"raw/BuffTemplates.json.gz": {
+			"sha256": "1b16b42352a1fb27b5abf1be8271d8a7447b9456559af8700c5c0b77ab55502d"
+		},
+		"raw/BuffTemplates.t-98dc22bc.msgpack.br": {
+			"records": 832,
+			"sha256": "b81e4857b822ce4b8c80cb73720d8fe9d8db34097e8ab9eaf1eb2a77d35ba05b"
+		},
+		"raw/ClientStrings.json.gz": {
+			"sha256": "dd010e9a1ee58257d6ec83b4d937ec385eab02ea951aa56129f0df87ced976d8"
+		},
+		"raw/ClientStrings.t-75378c7d.msgpack.br": {
+			"records": 8648,
+			"sha256": "4cf0f34cee557d02ebd971b1c68b87438b0661b1732bf1d04a3211f51b7a6a96"
+		},
+		"raw/ComponentAttributeRequirements.json.gz": {
+			"sha256": "436cc10630a50718563e134c884a8110e565273a199ffb268caa1def888e25b6"
+		},
+		"raw/ComponentAttributeRequirements.t-3b560602.msgpack.br": {
+			"records": 862,
+			"sha256": "88cf1cba7f3d19559a25950168aa3316379c02a5e1422d406b10fef1c15a5cb6"
+		},
+		"raw/ComponentCharges.json.gz": {
+			"sha256": "95cc957796ef0f40e65ce4057d752186b64b4dcbe9295a8c84078a89446822e9"
+		},
+		"raw/ComponentCharges.t-68f62d44.msgpack.br": {
+			"records": 51,
+			"sha256": "60df04c1647389525a58cf634665359ac4ca5eead172dae31774995fc117ffaf"
+		},
+		"raw/CostTypes.json.gz": {
+			"sha256": "8cfff311121a1e74f216330e7d635f429e37b0d1296defb54065144a7cf0f941"
+		},
+		"raw/CostTypes.t-5c6bb0d9.msgpack.br": {
+			"records": 13,
+			"sha256": "4a0e50c4ccd0e888b406b038e4fc8c7e63286710d6eaacdc0a4dffe4dbd6489b"
+		},
+		"raw/CraftingBenchOptions.json.gz": {
+			"sha256": "1fa14208661e69087e0a194b1c3e46dbb380b0d6e378063691d323e21a4c3468"
+		},
+		"raw/CraftingBenchOptions.t-a91cd533.msgpack.br": {
+			"records": 846,
+			"sha256": "a777ca2983ce74ea53701560ce49284b8a9d5fa6a239913659ace835a47f68c5"
+		},
+		"raw/CraftingItemClassCategories.json.gz": {
+			"sha256": "77eda59efef3e1c8621f1ece972b6ea0e90f3169a6a0a8d209f427b632c0b69f"
+		},
+		"raw/CraftingItemClassCategories.t-86d33af3.msgpack.br": {
+			"records": 22,
+			"sha256": "9d31b3faa6a633fab4d77f50126a2ded1e0f86d6a90aa5e8b6ce2a5615154a4b"
+		},
+		"raw/CurrencyExchange.json.gz": {
+			"sha256": "9a4fd56737bafc04c2de307bf02ffadd05c2f2ea3771a9a40519cdadf0f3e940"
+		},
+		"raw/CurrencyExchange.t-a9f6e70d.msgpack.br": {
+			"records": 1018,
+			"sha256": "a12c77dfcc89accee24ac5aab23d1e2a55e8aeff1c343bbf663057fe1ec7c06e"
+		},
+		"raw/DefaultMonsterStats.json.gz": {
+			"sha256": "a55e83585036e868c6f712f0d60bdd0153b9753f441791a548e4a22d173dd4a6"
+		},
+		"raw/DefaultMonsterStats.t-6ec44a96.msgpack.br": {
+			"records": 100,
+			"sha256": "7b265fffcf71adb24ae0b1096039b4ab68256d3ba0bc4f72349ee3b0f936249a"
+		},
+		"raw/EffectivenessCostConstants.json.gz": {
+			"sha256": "c78ac74ac807eb8902b8aaac234365dad16ce5aa86a80d957a90e6117d464e88"
+		},
+		"raw/EffectivenessCostConstants.t-08f80fb5.msgpack.br": {
+			"records": 3,
+			"sha256": "23029017efbfb0902c59c8c3d8298c330a07ce27b7eb6efb120354bc0e87b81e"
+		},
+		"raw/Essences.json.gz": {
+			"sha256": "b8a8c9786c24f04954e34892758aa25fcfe7dd705ca96988db3e19bd82ea2255"
+		},
+		"raw/Essences.t-803dc542.msgpack.br": {
+			"records": 107,
+			"sha256": "1f9d9a8f0f7e21f9496205ee5552fee42adf7eb96876a56f28a98422a8112032"
+		},
+		"raw/Flasks.json.gz": {
+			"sha256": "b03c8962d9d868a808fc37a75d70dd29c7a266cf85eab7fb23056a80daf69bf5"
+		},
+		"raw/Flasks.t-03df0fb5.msgpack.br": {
+			"records": 51,
+			"sha256": "eae1e30ed5736bd24629646a91afbdfc2d894a77331615ae0e442e5e8ada33b9"
+		},
+		"raw/FlavourText.json.gz": {
+			"sha256": "b26547caf9e9d47d51fb1079837a126731486af440981188756fc973ca5cebd5"
+		},
+		"raw/FlavourText.t-23a755da.msgpack.br": {
+			"records": 2983,
+			"sha256": "875d87b96dd333891d842f1eca2490ac1b494163c792cda290ed32fcc715f3d5"
+		},
+		"raw/GameConstants.json.gz": {
+			"sha256": "d8b319339c500e6e7e695bdf0ca604bb47a02bd1b79d6be56016e6728a89a278"
+		},
+		"raw/GameConstants.t-b3e5184d.msgpack.br": {
+			"records": 42,
+			"sha256": "242554bfdcbda82e19f95aae52df7651c38b0f36cf8eef368bdcd9a389c94400"
+		},
+		"raw/GemEffects.json.gz": {
+			"sha256": "c79c15a5f66e8d1147633871f4f693be87162fd0d0fa6461b3a9ee520ff66fd9"
+		},
+		"raw/GemEffects.t-dbdec350.msgpack.br": {
+			"records": 1305,
+			"sha256": "5923ba2247f6ae21508111bfd8ac6414f99ab31eee07094ba3bd91ec3da67484"
+		},
+		"raw/GemTags.json.gz": {
+			"sha256": "e6489f7ef9cdbe9640d656a986555791b33ded97c8eddb8ce3d3a3d351a87f0b"
+		},
+		"raw/GemTags.t-5b411d74.msgpack.br": {
+			"records": 54,
+			"sha256": "d9d40990bd963d188b1dacc1cdb91167b58cbd9fa54b2b230f8937b4cf81dc6e"
+		},
+		"raw/GrantedEffectQualityStats.json.gz": {
+			"sha256": "119d2463976145e6c08258a8066fb461f309e331b33222c94f1a09ef1a87bdf3"
+		},
+		"raw/GrantedEffectQualityStats.t-67c5564a.msgpack.br": {
+			"records": 1015,
+			"sha256": "1345bc024efe2ef738bf40d8d638671881b423dec4193a424e34929a2cb120de"
+		},
+		"raw/GrantedEffectStatSets.json.gz": {
+			"sha256": "5cfec45663aff7e546acc9e52b8a6061c6bf014217d6854a9fc16eab8d497f0d"
+		},
+		"raw/GrantedEffectStatSets.t-66f30bc1.msgpack.br": {
+			"records": 13180,
+			"sha256": "e55187ebab24e067b3124095bab7364e9de78f39fa994394af83f6f235059e49"
+		},
+		"raw/GrantedEffectStatSetsPerLevel.json.gz": {
+			"sha256": "bcf07e70420c35539099d77c4ee5e337363d087c0902470be1dfd89620e3f100"
+		},
+		"raw/GrantedEffectStatSetsPerLevel.t-7af234a2.msgpack.br": {
+			"records": 80485,
+			"sha256": "4e1edf908b56e491b2ecf5dd29e24af2112b782ceeb2a9e0aa601d0dde26b656"
+		},
+		"raw/GrantedEffects.json.gz": {
+			"sha256": "015ca40cd779d5d7fabc58a0d953f519dbfa818ca89e6ebb21728591a79bf151"
+		},
+		"raw/GrantedEffects.t-8bf77856.msgpack.br": {
+			"records": 13247,
+			"sha256": "317c304938f5d6fd30cdcf869fc3552ce0036cc5b9974e0729d1f3ba29402b96"
+		},
+		"raw/GrantedEffectsPerLevel.json.gz": {
+			"sha256": "b1864266692b1152069c83c9395c03f89f2cc6992a1b78081d914fa7b2a77d22"
+		},
+		"raw/GrantedEffectsPerLevel.t-e73dc1ac.msgpack.br": {
+			"records": 81190,
+			"sha256": "21a56b01fbac453a59ff527373e7912df1c54c0d18f7b6d849af27737033c580"
+		},
+		"raw/ItemClasses.json.gz": {
+			"sha256": "3514265d98f06ef402430756100a78c0791b8d4ea1fa6482a7cd8592db2b3586"
+		},
+		"raw/ItemClasses.t-15bff15a.msgpack.br": {
+			"records": 105,
+			"sha256": "574be1767a798e7d88be807dc47d50a1185c0af89259cd290c00b6f5fd9e7e3c"
+		},
+		"raw/ItemExperiencePerLevel.json.gz": {
+			"sha256": "df28e64713f6f317e5ebfc0c581af25303721770848ac18a437c4ec729d45e5d"
+		},
+		"raw/ItemExperiencePerLevel.t-e6fcd9d8.msgpack.br": {
+			"records": 361,
+			"sha256": "7447d1886a38ec2e1a7200ad80f2681b3e04e5f2c01b4c5b3b4e8c983752438c"
+		},
+		"raw/ItemVisualIdentity.json.gz": {
+			"sha256": "a5c73997d37f1b3ef7309b65d0b7ee15f989a2a556f8d082659dec6f105ab621"
+		},
+		"raw/ItemVisualIdentity.t-4975f02e.msgpack.br": {
+			"records": 15743,
+			"sha256": "f463bf3566c8c9912a788de9823b064654446879153982edce106398df8120b1"
+		},
+		"raw/ModFamily.json.gz": {
+			"sha256": "9e27b1a5cf45d9b5d2b35c985d7b557ed3580a04e213bfc6e86800c0c7bcd104"
+		},
+		"raw/ModFamily.t-5d22b60c.msgpack.br": {
+			"records": 8276,
+			"sha256": "20ee77eaa5436dc91d08cf940e398f3fbfc0123562065b4333c9ade25e1c0b2a"
+		},
+		"raw/ModType.json.gz": {
+			"sha256": "76e96b2a7d58bf7a8b304d1553646703064c5b8329de65222b02f03186c1f1f9"
+		},
+		"raw/ModType.t-0aa49d5b.msgpack.br": {
+			"records": 15047,
+			"sha256": "2b179bf31d5b262371dc0cfd8fd76833d213823a012e7851ed0eb7f7d2d4df7e"
+		},
+		"raw/Mods.json.gz": {
+			"sha256": "0456a15f208115f129e12adcf7ee713a3f9d1875b0d22f192956ee77ad446874"
+		},
+		"raw/Mods.t-095071f7.msgpack.br": {
+			"records": 41324,
+			"sha256": "671bfe9164900b805441213c7a94b4a6ca800bb25f96a2e5059804dda0a1e18c"
+		},
+		"raw/MonsterMapBossDifficulty.json.gz": {
+			"sha256": "e491b900a18f14911c8cd727b84f9bdeb0c391189e71102a76b4d5705ba16ae8"
+		},
+		"raw/MonsterMapBossDifficulty.t-4f79525b.msgpack.br": {
+			"records": 90,
+			"sha256": "d490ca639fd0558b23b159798c7ea19e4478e699f12786c26309574299461a12"
+		},
+		"raw/MonsterMapDifficulty.json.gz": {
+			"sha256": "b69cabcd413ecf8f78db83fcd98886db9ab82609f3c545d54e6bf288ff11a1e4"
+		},
+		"raw/MonsterMapDifficulty.t-f0ed38a7.msgpack.br": {
+			"records": 25,
+			"sha256": "89c5f56899cadc11eb730d8ca9750dc1bbf98b7db4699636eb29a86a2031f2af"
+		},
+		"raw/MonsterResistances.json.gz": {
+			"sha256": "b36538e54d3154010671b76ad81d42553898c6d953bdfc3531f5286b9097cf52"
+		},
+		"raw/MonsterResistances.t-3a800cd6.msgpack.br": {
+			"records": 50,
+			"sha256": "f63c0739e2547b0aa5626f24727405eb6b8d8c005a83625b3ca94550bb48adc7"
+		},
+		"raw/MonsterTypes.json.gz": {
+			"sha256": "a63150520603f3b6d93086362e46baadd961bf0367bec575da188ad266534da3"
+		},
+		"raw/MonsterTypes.t-b6228f47.msgpack.br": {
+			"records": 3690,
+			"sha256": "ff0d2bea058e5458e1a43ae93836f1ee61a93b4ab73511536cc0af4725725cb3"
+		},
+		"raw/MonsterVarieties.json.gz": {
+			"sha256": "e632e01d3a243ff389ce6839748c050c0d6f73df24ee408c3e78e8cc477100f0"
+		},
+		"raw/MonsterVarieties.t-33999016.msgpack.br": {
+			"records": 11007,
+			"sha256": "36eff530dda41a7f64667876e9203c2a3f2ea822b58422c40c835dfe1daec5dd"
+		},
+		"raw/PantheonPanelLayout.json.gz": {
+			"sha256": "537520cf49b4cccbded932cbfa404cad4c8640ae3691b16cb340065c42e710b8"
+		},
+		"raw/PantheonPanelLayout.t-5be37a93.msgpack.br": {
+			"records": 16,
+			"sha256": "44576f5d0d3f122543bc374e825b97b3e279bdd1918b6d724e61734947b57710"
+		},
+		"raw/PassiveJewelSlots.json.gz": {
+			"sha256": "b5eeb8db4374aa6f312b85e089b713dca29521b9ce46e0bb376901aa3ce1363f"
+		},
+		"raw/PassiveJewelSlots.t-3655f337.msgpack.br": {
+			"records": 60,
+			"sha256": "dcb1e5d96c03d5e52917bcdc958af94768eb94baeb3081f0cd7e8a3578830268"
+		},
+		"raw/PassiveOverrideLimits.json.gz": {
+			"sha256": "fa2e09c51912f799a980bce61731b43237ff192c95801c14541270218637590f"
+		},
+		"raw/PassiveOverrideLimits.t-a083e284.msgpack.br": {
+			"records": 41,
+			"sha256": "8b09b48838c177894b252f9783cd0abcc54c4b640d31c9abbb45b75830d9eadc"
+		},
+		"raw/PassiveSkillOverrideTypes.json.gz": {
+			"sha256": "266bccaac9d5dba00c65b9160e18b7c7c402f728cccbfdb4c2d986b417e408a0"
+		},
+		"raw/PassiveSkillOverrideTypes.t-7644c5dd.msgpack.br": {
+			"records": 24,
+			"sha256": "7a42c640b127be805937b4ebf638bc3f702fcd3b1f8fa98872fdbea702e01ab8"
+		},
+		"raw/PassiveSkillOverrides.json.gz": {
+			"sha256": "5b93c48e0193830a06272fbbe07d27ca86fdf7afb25ecc97f4a1c082c3f7c90e"
+		},
+		"raw/PassiveSkillOverrides.t-ae7e24d9.msgpack.br": {
+			"records": 343,
+			"sha256": "7eb8638eb4e09acf1c63069988855118dbdd429a4f10211f2d09c5e41d40e782"
+		},
+		"raw/PassiveSkillTattooTargetSets.json.gz": {
+			"sha256": "e652dbff98c21ff23844e8171f5237f0c864315c38547d4bb9ce0e6b1b5dfcb5"
+		},
+		"raw/PassiveSkillTattooTargetSets.t-e800c20a.msgpack.br": {
+			"records": 10,
+			"sha256": "17721d58b47a72c06cabbb831b1f7cd7b7d3d180dffedd5f5cf432ea9203b43c"
+		},
+		"raw/PassiveSkillTattoos.json.gz": {
+			"sha256": "630bcef335f8ad1dcb0e521ed7db9bed98a5af446e3a30844ee339399f64df8c"
+		},
+		"raw/PassiveSkillTattoos.t-f49f6420.msgpack.br": {
+			"records": 136,
+			"sha256": "508ba7cd093208305c7090e74da54e86c5ed062ffbe1d5457275f6226e748d57"
+		},
+		"raw/PassiveSkillTreeConnectionArt.json.gz": {
+			"sha256": "887f27198b68153a8c15f8bf81d827b815836bbb93636c2391e0fb8fbc7f01b2"
+		},
+		"raw/PassiveSkillTreeConnectionArt.t-a6516090.msgpack.br": {
+			"records": 6,
+			"sha256": "0b5d3288d8a9d1bd5439b50980676b0675bb8ec5aebba2830ff15f508dd155c7"
+		},
+		"raw/PassiveSkillTreeNodeFrameArt.json.gz": {
+			"sha256": "9164548b4187bafc5db23c8359c70beeacee4066af5d337993ad01a07876f8b6"
+		},
+		"raw/PassiveSkillTreeNodeFrameArt.t-bf8c5aab.msgpack.br": {
+			"records": 63,
+			"sha256": "4e3424c882add13b8b4bb0567af287c2d10729255d592acfeb328dca88277eb6"
+		},
+		"raw/PassiveSkills.json.gz": {
+			"sha256": "f6323478ef96ab5d493a9682d53a27ea949bdf850be5de319e929882b35d5548"
+		},
+		"raw/PassiveSkills.t-f91b6972.msgpack.br": {
+			"records": 6606,
+			"sha256": "79defea06e98b4b1cc337c0172c482384839bfb71f459d81d90e27c380637636"
+		},
+		"raw/PassiveTreeExpansionJewelSizes.json.gz": {
+			"sha256": "73f00c1ca4c86c9f65ce94b0f4abcf8ab96916f1035be9a16259f9bf12ebfe4e"
+		},
+		"raw/PassiveTreeExpansionJewelSizes.t-055415f8.msgpack.br": {
+			"records": 3,
+			"sha256": "af5313dcb1ee9fdfea7b592d9b6ad5302b768ff8fb55cde6ca48cbe18fdcf253"
+		},
+		"raw/PassiveTreeExpansionJewels.json.gz": {
+			"sha256": "41e632662377267c04478e160d709ad8a57f4c3f64cc9e7c8593d5977fed8f6b"
+		},
+		"raw/PassiveTreeExpansionJewels.t-7e658285.msgpack.br": {
+			"records": 3,
+			"sha256": "2b19e8770cb071a0b8fb0fcc7707c8a70934a63b4b7148b94b16116a4d023d8d"
+		},
+		"raw/PassiveTreeExpansionSkills.json.gz": {
+			"sha256": "d292d3d36ba0021bebf9f6aca732c49704e9bc90aed25ff782c4b55ee7d01549"
+		},
+		"raw/PassiveTreeExpansionSkills.t-5c83cda0.msgpack.br": {
+			"records": 55,
+			"sha256": "c800fc4113064802c3f7363c4713df4f2755c23200f24aa44ec99f3a0974d28d"
+		},
+		"raw/PassiveTreeExpansionSpecialSkills.json.gz": {
+			"sha256": "6478f56afa6a62e256dcc493fbda277ba89511bc28550cc88ce8eefbe7b33572"
+		},
+		"raw/PassiveTreeExpansionSpecialSkills.t-afa54769.msgpack.br": {
+			"records": 309,
+			"sha256": "60b1ed782aed36274134bc8820695c0f8ede8374eb3d711926f0d1e5a0441aab"
+		},
+		"raw/ShieldTypes.json.gz": {
+			"sha256": "7ee1c1d553a46b55d844e798432f2fa54cf38f3380e6fd65ce2c49f9d51a31e7"
+		},
+		"raw/ShieldTypes.t-265ecc13.msgpack.br": {
+			"records": 98,
+			"sha256": "66f9d8fa8ad03289bc955b2656cf260c3edaec4a2c1541baf3dcec6ec45946d3"
+		},
+		"raw/SkillGems.json.gz": {
+			"sha256": "d9fb48241ec6fbb4d79d701d9d5a631fdc207dedd8fa2f73de623cda12d3a2d3"
+		},
+		"raw/SkillGems.t-cc8ffc1f.msgpack.br": {
+			"records": 860,
+			"sha256": "916eb7bc627eaeb39d4210353ce4e0ae78163fa27f862686b0b6c4db1e795854"
+		},
+		"raw/SkillTotemVariations.json.gz": {
+			"sha256": "3a8277af5242fb0ab996251c456e73ac252cf21bf72cd6836b1210790d52d205"
+		},
+		"raw/SkillTotemVariations.t-300da1fd.msgpack.br": {
+			"records": 284,
+			"sha256": "516050837d273f29237c1a754a139fc19a7ddee5ef5a5f21736153604de37711"
+		},
+		"raw/Stats.json.gz": {
+			"sha256": "86ae3786060fd8341821a7875414aed89f2b1a86282c7c88a611e20022fa50ee"
+		},
+		"raw/Stats.t-9d22a0ae.msgpack.br": {
+			"records": 23630,
+			"sha256": "60413114c98fcda449990a3b9a9d819270a84eb0cbcd874e9499a27564cf555c"
+		},
+		"raw/Tags.json.gz": {
+			"sha256": "3c231db9f9c81029f636dafcbacbdfaa497cc72a1f6bee96c170d4c75e0d3eac"
+		},
+		"raw/Tags.t-c3bab4bb.msgpack.br": {
+			"records": 1441,
+			"sha256": "3054a10505220a2bf72e98ca4517b26f07b89ecaa42f79cb84342dc4f44a3091"
+		},
+		"raw/Tinctures.json.gz": {
+			"sha256": "9e70b896f527ddc606a68e5f360c389f895193ab206648c789ebc544db0ed415"
+		},
+		"raw/Tinctures.t-7b2f08b1.msgpack.br": {
+			"records": 10,
+			"sha256": "da1768e6cfa9a49bf0f7f602ce1441da222c372618dcf2025f48ea677d741b97"
+		},
+		"raw/UniqueStashLayout.json.gz": {
+			"sha256": "7cfac3542b28f53853803bfda95b726694231a01e0966ae1085778e651c21758"
+		},
+		"raw/UniqueStashLayout.t-ce4deb46.msgpack.br": {
+			"records": 1569,
+			"sha256": "2927193ea35f009c81bee8f91ab542410dd34d24718601407428a05fff2e55bd"
+		},
+		"raw/UniqueStashTypes.json.gz": {
+			"sha256": "a2117fc6b8519d506e3acf325abf3f3cdf8a26499abc84ccae869f918f58adbc"
+		},
+		"raw/UniqueStashTypes.t-4431ee55.msgpack.br": {
+			"records": 23,
+			"sha256": "ec85853a40f91af8088e9b81445b3ef9c3da46cc4abaf27c8319655ddda3b0dd"
+		},
+		"raw/VillageBalancePerLevelShared.json.gz": {
+			"sha256": "9a751eba28c7886a85fcb6b3a6ee40d79f406fa08056f32eab58051b95a80bb9"
+		},
+		"raw/VillageBalancePerLevelShared.t-ab8d1c0c.msgpack.br": {
+			"records": 100,
+			"sha256": "2f11fdf50b6fe94362af5861045dea717c50be81cc16a8a30997fdaf2047c550"
+		},
+		"raw/VirtualStatContextFlags.json.gz": {
+			"sha256": "501ab23c35a78c455126ddc89bd798407d48b6084e256da8369b8e160754ab02"
+		},
+		"raw/VirtualStatContextFlags.t-5d22b60c.msgpack.br": {
+			"records": 40,
+			"sha256": "6d3cc1e7af7509f925b2cacb462c2e79abcf004bede28c273cb37e22673e53d0"
+		},
+		"raw/WeaponPassiveSkillTypes.json.gz": {
+			"sha256": "39b5a84960bef75513339380dabdaa4d725e136705d7737db431b831867c3311"
+		},
+		"raw/WeaponPassiveSkillTypes.t-5d22b60c.msgpack.br": {
+			"records": 3,
+			"sha256": "b0df592903b8bfa6228fe2da686f60d2de5a138b9ee6061aecc73740a0b1657a"
+		},
+		"raw/WeaponPassiveSkills.json.gz": {
+			"sha256": "6549bf3b67a1ae7d4af15434fde3f33f25d1a6134147a2a5458287284b55d9be"
+		},
+		"raw/WeaponPassiveSkills.t-14e129d3.msgpack.br": {
+			"records": 2632,
+			"sha256": "da18aa6dcac935ff4d49410f642c015336442f70c24ac8a18e4ec170df3533f3"
+		},
+		"raw/WeaponTypes.json.gz": {
+			"sha256": "a60ff0bdea99d67f43794c08cef4fbf580538ec9a0ab8a72482d32376b7c6e63"
+		},
+		"raw/WeaponTypes.t-87b959ad.msgpack.br": {
+			"records": 366,
+			"sha256": "4c648589d5fb1c5df20d99ac4db7b2a3f67a234a245289d7257c5b4d977e34b8"
+		},
+		"raw/Words.json.gz": {
+			"sha256": "9913b18ecc6e9ace4d11fa09270e64296088974867e633ba2979f84503ec898c"
+		},
+		"raw/Words.t-35c4d14d.msgpack.br": {
+			"records": 4162,
+			"sha256": "005961a3f3f9a46e8fe33343ed6c5d242afc49981d71ae787b7e7d90f3038e34"
+		},
+		"schema.min.json": {
+			"sha256": "70632aefb45e0b3c628121aacfc0c70ef66e12f0b2a407a0973e4c8dbb71fc57"
+		},
+		"stat_translations/cn.t-c976d1d7-a9dccddd.msgpack.br": {
+			"records": 44,
+			"sha256": "09db103f0c20ae3aab8ce0274ea8b31a8cd12258b9f8754ee64511bd3f8179a4"
+		},
+		"stat_translations/de.t-c976d1d7-78ab97a7.msgpack.br": {
+			"records": 44,
+			"sha256": "0b85ff6097fcac18abf8067492f9f953abe24550fbc423663fc870031ad4d7e9"
+		},
+		"stat_translations/en.t-c976d1d7-e2964292.msgpack.br": {
+			"records": 44,
+			"sha256": "b73e683775281438d7974a9b0e57d6258fe036aa2c6d5ea30b186087c196ab10"
+		},
+		"stat_translations/en/active_skill_gem_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "9ba1df5c4a00318fb2c32dfb4a976e699129c6cb640fd54c11dce9ec7094d3f5"
+		},
+		"stat_translations/en/aura_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "3350eb24ed066c8068c4a918c1efacf995c0184a0552b9acdfe9e51cf8b82563"
+		},
+		"stat_translations/en/banner_aura_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "05b83337bea26ee39cc6e46db68c96fc978aa8b4196d7565558ffd7f29c16098"
+		},
+		"stat_translations/en/beam_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "4ac4d840af7fefe07b545586f49c10c698aac9dd83c87b877bfc77fd33437c1d"
+		},
+		"stat_translations/en/brand_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "555ac666aa031a67ce77e2ed81706dcf7b1ecec50677d2d9ce911f665120e350"
+		},
+		"stat_translations/en/buff_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "34d461fd4aa767a9e61caefa9095c96f7f673314c07fab9ac5292e75739c2b9a"
+		},
+		"stat_translations/en/curse_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "c8bca7d5dfe852bd0b0b589852f79ee34d5448c6852d269f241979405434b030"
+		},
+		"stat_translations/en/debuff_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "190d66f5101f60dab0dea69074d288bd90e752350fc5432cf4503b9a980d17aa"
+		},
+		"stat_translations/en/gem_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "f71f6344097304e857dc141d2565af466091ac7a0d0405788988dcbb858343fb"
+		},
+		"stat_translations/en/graft_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "f6e7d2f4472aa2e2a2fec15a3c3a2a5966110d6f067b38806412d3aaef6573ec"
+		},
+		"stat_translations/en/minion_attack_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "2d8a26ffc48b60604daae4003a707c73db4235f1c3422f2fd3ce46dad16b86f3"
+		},
+		"stat_translations/en/minion_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "e8f2c8dc94e3d6bfd5492379064779032463936b91106cd79d443529cb92e217"
+		},
+		"stat_translations/en/minion_spell_damage_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "006c02d481ff6f768bcdb62c8c89a7b07fedb693045a938d828fb055e129e03b"
+		},
+		"stat_translations/en/minion_spell_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "675fb412ac0bc4a8d9863e5aa7098ca38ee4089a11d4275c73b3552092fa2ece"
+		},
+		"stat_translations/en/monster_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "ea6bddbb1983db77c64ea57163954e0baa8e39602fb9cdac4a3a763d4cb7b897"
+		},
+		"stat_translations/en/offering_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "c6d54fcd766897864e2a523ae566a23c72a934f26de1a56c1380685cbd2b0c56"
+		},
+		"stat_translations/en/passive_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "5769256f0285ce8ed0bf8fbad92bf7fb0e059387070981562b1cde18660065e3"
+		},
+		"stat_translations/en/secondary_debuff_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "c565dd8a1067c5b4a8357880343b41ddb6e85930d0971e0a43f00981b8aef345"
+		},
+		"stat_translations/en/single_minion_spell_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "091a84fb3e16ee82b382c7f91bafba4159eb6a135f34c69ae7185de3b52578db"
+		},
+		"stat_translations/en/skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "b194d59092af232447f899abd173cea44e5accd6eb42d1157c9dae2f58e1650d"
+		},
+		"stat_translations/en/stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "96ef0cfb07d5949ba0a93ce0980443c51354d421c444f727550540d3ae0361fc"
+		},
+		"stat_translations/en/tincture_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "d3089c943978a271b7a1026a4e42c15f718de2817f1ed1fdf8f7df0081f98f47"
+		},
+		"stat_translations/en/variable_duration_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "4887f75e142ff7aaaafbc00c28134c3bdde734b7b77adf15e022977fe7b8551d"
+		},
+		"stat_translations/es.t-c976d1d7-6ce3a3ba.msgpack.br": {
+			"records": 44,
+			"sha256": "c0feaa2f6faa73497f82a3f958fd385e768add1d362baef06025d10d21ddf861"
+		},
+		"stat_translations/fr.t-c976d1d7-c928c990.msgpack.br": {
+			"records": 44,
+			"sha256": "13d8453c568cc9ce96d475a6e8537af8f7c32d3beefb51d12401e945fcde34a8"
+		},
+		"stat_translations/jp.t-c976d1d7-2cd08e0c.msgpack.br": {
+			"records": 44,
+			"sha256": "889e5286ea1ca40165143e46cafd1313634b5038b52bf8a6a94b1094e026fd47"
+		},
+		"stat_translations/kr.t-c976d1d7-ba102554.msgpack.br": {
+			"records": 44,
+			"sha256": "36dd03f9ce8f08a432cb9a914580cff591e42741259f55eba68fb881c38bb59d"
+		},
+		"stat_translations/po.t-c976d1d7-95a03a83.msgpack.br": {
+			"records": 44,
+			"sha256": "110411436cfcb28b64648ec3b007a4dbbe4b5948f348b954fea98856f7dc3f66"
+		},
+		"stat_translations/ru.t-c976d1d7-8b409392.msgpack.br": {
+			"records": 44,
+			"sha256": "2cc4d091bfc764cac2a1e5e26b5e4a8825877340855ec48abf37e0850b8b7742"
+		},
+		"stat_translations/th.t-c976d1d7-7292166e.msgpack.br": {
+			"records": 44,
+			"sha256": "484c6d9d8bac2aab8e28cbfdc2084027eb2bf7342852b4f09f2752c426219dd2"
+		},
+		"stat_translations/tw.t-c976d1d7-15040eaa.msgpack.br": {
+			"records": 44,
+			"sha256": "3c748542037050b02bcff3449f3406b0378a0d169ad82f5e252202a72cf50da8"
+		},
+		"tree/assets/ascendancy-3.webp": {
+			"sha256": "493246c67708f15e78167f37882db65994f8109fed86d5d12285e9810aaae470"
+		},
+		"tree/assets/background-3.png": {
+			"sha256": "790303d95e83e79f121a149d27160db7152d23562a67afc60561acab8a90a434"
+		},
+		"tree/assets/bloodline-3.webp": {
+			"sha256": "7149255b6a89e58848b0e7102d2774a7b0ff4455624b3d64933256c0cc75dd45"
+		},
+		"tree/assets/frame-3.png": {
+			"sha256": "4857becda4c6868e517be959172d0d368be689e67940856da02651c900e2217e"
+		},
+		"tree/assets/group-background-3.png": {
+			"sha256": "b130b34e4601735841238bb069d5e3ea813f4c179d53a3919813a60c07acd18b"
+		},
+		"tree/assets/jewel-3.png": {
+			"sha256": "98f666f253e36b36ac220d3c66a2c427c9f0a2d7ff665d45f16ebc5c75615188"
+		},
+		"tree/assets/jewel-radius.png": {
+			"sha256": "f5a74fed622424eb378760999edd88ccebc8b8de26a42b4f41e908cdd0628145"
+		},
+		"tree/assets/line-3.png": {
+			"sha256": "ec6bc1ad0e674c3a17f1b59671e354336f3acf0657344e280315b406292f2849"
+		},
+		"tree/assets/mastery-3.png": {
+			"sha256": "9a6a7721b31ef3274c56992780e3861e0dc35bdb3a8a3efba936093fb7f281a2"
+		},
+		"tree/assets/mastery-active-effect-3.png": {
+			"sha256": "0b6d698660348fe3a4d03beeddd3466e7301a402b302002065160b35d3643e76"
+		},
+		"tree/assets/mastery-active-selected-3.png": {
+			"sha256": "6d052eef7abc8f96ab1d7b6e535b22fdb4678a298798824c4d6e28a5ad86ac08"
+		},
+		"tree/assets/mastery-connected-3.png": {
+			"sha256": "14e0c33cb4f200c7260d5c3903933b78f576f8a6949513fd7f21efa14873ce29"
+		},
+		"tree/assets/mastery-disabled-3.png": {
+			"sha256": "7b45bd7112dec66b9ca5d4588460e35aeb9b82678d46392236e9fa37b4791f50"
+		},
+		"tree/assets/skills-3.jpg": {
+			"sha256": "4a3d43f7385bf0cbd0e54c812b88b8e0c1baf576018c2241c33332a406d5107d"
+		},
+		"tree/assets/skills-disabled-3.jpg": {
+			"sha256": "593035d2ac61ff50e44347853d4a7b580188f419e08a293af33942e3fef07e9c"
+		},
+		"tree/assets/tattoo-active-effect-3.png": {
+			"sha256": "f4c290189478a6b6be6c62396c269de7d5babc3520b13be211b12c5f8008a8cc"
+		},
+		"tree/data.json.br": {
+			"sha256": "da3fab81142783cda478e3d19f7c4aa872af992cba8fd436f95d3359ed65c5ea"
+		},
+		"tree/data.json.gz": {
+			"sha256": "949cdaf6aef60793209d3b0b5fc06c40255dddeea824c32abd84d49bc25064eb"
+		}
+	},
 	"tables": [
 		"ActiveSkillType",
 		"ActiveSkills",

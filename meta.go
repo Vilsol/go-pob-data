@@ -1,6 +1,9 @@
 package main
 
 import (
+	"bytes"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"io/fs"
 	"maps"
@@ -9,7 +12,9 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/andybalholm/brotli"
 	"github.com/pkg/errors"
+	"github.com/tinylib/msgp/msgp"
 
 	"github.com/Vilsol/go-pob-data/extractor"
 	"github.com/Vilsol/go-pob-data/loader"
@@ -128,8 +133,67 @@ func manifestJSON(versionDir string) ([]byte, error) {
 		manifest.FileBundles["."+ext] = name
 	}
 
+	manifest.Assets, err = manifestAssets(versionDir)
+	if err != nil {
+		return nil, err
+	}
+
 	b, err := json.MarshalIndent(manifest, "", "\t")
 	return append(b, '\n'), errors.Wrap(err, "failed marshaling manifest")
+}
+
+// manifestAssets hashes every file under versionDir but the manifest and dotfiles such as unlistedMarker.
+func manifestAssets(versionDir string) (map[string]loader.ManifestAsset, error) {
+	assets := map[string]loader.ManifestAsset{}
+	err := filepath.WalkDir(versionDir, func(path string, d fs.DirEntry, err error) error {
+		if err != nil || d.IsDir() || strings.HasPrefix(d.Name(), ".") || path == filepath.Join(versionDir, "manifest.json") {
+			return err
+		}
+		b, err := os.ReadFile(path)
+		if err != nil {
+			return errors.Wrap(err, "failed reading asset")
+		}
+		if bytes.HasPrefix(b, []byte("version https://git-lfs")) {
+			return errors.Errorf("%s is a git lfs pointer, run git lfs pull", path)
+		}
+		rel, err := filepath.Rel(versionDir, path)
+		if err != nil {
+			return errors.Wrap(err, "failed resolving asset path")
+		}
+		sum := sha256.Sum256(b)
+		asset := loader.ManifestAsset{SHA256: hex.EncodeToString(sum[:])}
+		if strings.HasSuffix(path, ".msgpack.br") {
+			asset.Records = leadingCount(b)
+		}
+		assets[filepath.ToSlash(rel)] = asset
+		return nil
+	})
+	return assets, errors.Wrap(err, "failed hashing assets")
+}
+
+// leadingCount is the int64 row count a tuple asset leads with, or the entry count of a bundle's map;
+// nil for an asset that leads with neither, such as a single translation file.
+func leadingCount(compressed []byte) *int64 {
+	r := msgp.NewReader(brotli.NewReader(bytes.NewReader(compressed)))
+	t, err := r.NextType()
+	if err != nil {
+		return nil
+	}
+	var n int64
+	switch t {
+	case msgp.IntType, msgp.UintType:
+		n, err = r.ReadInt64()
+	case msgp.MapType:
+		var size uint32
+		size, err = r.ReadMapHeader()
+		n = int64(size)
+	default:
+		return nil
+	}
+	if err != nil {
+		return nil
+	}
+	return &n
 }
 
 func IsNewHash(game extractor.Game, gameVersion string) bool {

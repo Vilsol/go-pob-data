@@ -14,6 +14,441 @@
 			"tw": "stat_translations/tw.t-c976d1d7-efa88f76.msgpack.br"
 		}
 	},
+	"assets": {
+		"raw/ActiveSkillType.json.gz": {
+			"sha256": "b9bd10e0455483aad380be0a075f06a1567394c988d7015aafeea55c8060a3d9"
+		},
+		"raw/ActiveSkillType.t-5a112530.msgpack.br": {
+			"records": 115,
+			"sha256": "b01e68890075e7193a422e68de75864e0479bb61b3ecab81b2917e25cb98549b"
+		},
+		"raw/ActiveSkills.json.gz": {
+			"sha256": "f8337630315553496e66c1ccbba55c262e43364eeb11ba9effad59c15a116880"
+		},
+		"raw/ActiveSkills.t-2c7bb75c.msgpack.br": {
+			"records": 1415,
+			"sha256": "57329cc0c983c516aba7a32c567dfb54aa418f98240204f12fe1fc226e66ca95"
+		},
+		"raw/ActiveSkills.t-4c893f9c.msgpack.br": {
+			"records": 1415,
+			"sha256": "c45feb90e5a8cd5aab94fe0b7f6a20442ec6be9611c23d4583e2c1cfc890acf2"
+		},
+		"raw/AlternatePassiveAdditions.json.gz": {
+			"sha256": "de189695acfc9b9643f81cabc353fda42743820b40c33f2c20396a7f99d064f7"
+		},
+		"raw/AlternatePassiveAdditions.t-8ffb2eb5.msgpack.br": {
+			"records": 94,
+			"sha256": "98984a2634c9723517cfd0913ac6d7ca7c668bdcd30613d29990242734ae11e6"
+		},
+		"raw/AlternatePassiveSkills.json.gz": {
+			"sha256": "565f68ed7132fef45da0b8e6944182ca812ac7347ae9ce16ade9bcc0ea30de81"
+		},
+		"raw/AlternatePassiveSkills.t-2a333cfa.msgpack.br": {
+			"records": 155,
+			"sha256": "d593afa913be2440a08983e7b4a7063e01658f3934fa11b9718bb7d59cb66556"
+		},
+		"raw/AlternateTreeVersions.json.gz": {
+			"sha256": "61124244fadfa7c778fb253ba1af9c38d4e7eb689f43e4412a50887ce63b14f1"
+		},
+		"raw/AlternateTreeVersions.t-bd500abd.msgpack.br": {
+			"records": 6,
+			"sha256": "237bff6b5d3db41bb0395a88885074ed801e27b361f7b3bc1da3c96560d3f924"
+		},
+		"raw/ArmourTypes.json.gz": {
+			"sha256": "34fee3282b3fc92006aa112b178000c36f3fa9a9d425ae7dc33428e3959b76e8"
+		},
+		"raw/ArmourTypes.t-a82f45c4.msgpack.br": {
+			"records": 421,
+			"sha256": "b67b271d25e67ba5e68cb3b95ce09fbe7267ee1c503f0aef919c600d8c6185b3"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/Dex.png": {
+			"sha256": "9fe55d16755ca8bd9e19b81c0581cac191bbda6e6fe11a302cbdf0f774c6a0fb"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/DexInt.png": {
+			"sha256": "85dbcfad03fcc29cde6495b2aaf135b49baa6dbe258deac80f3c69d52128bdf7"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/Int.png": {
+			"sha256": "4bdd87016bafb1ff92b9ab894abc6486ebac69deade21f9ef1a6bb2710374ba2"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/Str.png": {
+			"sha256": "baa382ec6880a22f14d1485c6625b38b78b09ec55a8644e804c47fab5816cf46"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/StrDex.png": {
+			"sha256": "f50ed6b4d97bec5e81e03477e6f452f0a763c214df2dec578851dc233c6fa50f"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/StrInt.png": {
+			"sha256": "a5684ccc0246368dbdb6ba55986bd820c11eeb4eceb3af71a4c5f9947577079b"
+		},
+		"raw/BaseItemTypes.json.gz": {
+			"sha256": "794c1b520a63caab296f92f496763df6e13ccd1de48f3bcb0b6c94547e45ce46"
+		},
+		"raw/BaseItemTypes.t-6b58ed61.msgpack.br": {
+			"records": 10221,
+			"sha256": "f360eb8713196222ee1eaa1d348869cad14e13f1fb535ac84dc25f62c9bb97bf"
+		},
+		"raw/BaseItemTypes.t-99de2bba.msgpack.br": {
+			"records": 10221,
+			"sha256": "fbc7c514c5f8e50fcc14e38a3250692e81cef3071b0eb43c5ef181950a97e3e2"
+		},
+		"raw/ComponentAttributeRequirements.json.gz": {
+			"sha256": "b60faad2387e6aa3a9b517554c7699e41c6e0e2e3f111459ef295e6ee759d252"
+		},
+		"raw/ComponentAttributeRequirements.t-3b560602.msgpack.br": {
+			"records": 797,
+			"sha256": "0d3c5461f34e095028460bffb6983657d1ef26f0411e33e88158ac6279f10238"
+		},
+		"raw/ComponentCharges.json.gz": {
+			"sha256": "95cc957796ef0f40e65ce4057d752186b64b4dcbe9295a8c84078a89446822e9"
+		},
+		"raw/ComponentCharges.t-68f62d44.msgpack.br": {
+			"records": 51,
+			"sha256": "60df04c1647389525a58cf634665359ac4ca5eead172dae31774995fc117ffaf"
+		},
+		"raw/CostTypes.json.gz": {
+			"sha256": "ea478b59cb59ec7f65ff433f78ede7edac8c5d88b1cbc7dd414c1742941d96f3"
+		},
+		"raw/CostTypes.t-5c6bb0d9.msgpack.br": {
+			"records": 13,
+			"sha256": "146b59bca35ac484ee98a2be8fba73cf722ca13873330734b54383e21516384e"
+		},
+		"raw/CraftingBenchOptions.json.gz": {
+			"sha256": "ad95ab1745608ca4db73b31e90aa38a60d289f0f3719ce52efd5490ed9d3008a"
+		},
+		"raw/CraftingBenchOptions.t-a91cd533.msgpack.br": {
+			"records": 836,
+			"sha256": "bd5ad58d9a10b268b2635ba9b63bca2e3ae3d0d227173f64271f897fe4dedab5"
+		},
+		"raw/DefaultMonsterStats.json.gz": {
+			"sha256": "07b08ba9ee930e9ddcd0b35b0934602211bcd2ab89809cb9e0985ab9333d0aca"
+		},
+		"raw/DefaultMonsterStats.t-6ec44a96.msgpack.br": {
+			"records": 100,
+			"sha256": "700d39be2b8164264d45f2666091d177158bc5be2cc28ca0bb941a3c7a6e5ab3"
+		},
+		"raw/DefaultMonsterStats.t-b7bc1eab.msgpack.br": {
+			"records": 100,
+			"sha256": "b59ad2f0afd99dd63eae0a17b511ef8f830f1350b409218408c2751a4b3e45a0"
+		},
+		"raw/Essences.json.gz": {
+			"sha256": "1cfe28631281719a9bf15998587b2bded7cc3a7addcfbc2f8cc5e22b7a30ab7d"
+		},
+		"raw/Essences.t-6ed4552a.msgpack.br": {
+			"records": 105,
+			"sha256": "4886061df268cf95b6e9b0d46f92fe078793d93556d86c212a83a63e6b0e35da"
+		},
+		"raw/Essences.t-803dc542.msgpack.br": {
+			"records": 105,
+			"sha256": "9687db0384b5a7e31de404bf3869983c84b37f533308a1773ca20f4db8a39a52"
+		},
+		"raw/Flasks.json.gz": {
+			"sha256": "7b101b84649d299f270c1c21b042421aceee4a074ea8a90fbc6a56de29f07098"
+		},
+		"raw/Flasks.t-03df0fb5.msgpack.br": {
+			"records": 51,
+			"sha256": "12532438ac115a5db366b06ec5a5c5f89969c805f84489abfbd18754cbcd4c61"
+		},
+		"raw/GrantedEffectQualityStats.json.gz": {
+			"sha256": "8b7e8115cb9107e4879209c2ca117ac7036b9ef2af5433350e6f28522598f3bc"
+		},
+		"raw/GrantedEffectQualityStats.t-67c5564a.msgpack.br": {
+			"records": 1522,
+			"sha256": "c1ff1cbbd04064fb5dc9ad58c132a55f98d65f8820885868ef9dff7bb7473477"
+		},
+		"raw/GrantedEffectStatSets.json.gz": {
+			"sha256": "ff4a62c5222443e81f9937a7edbd50076b4e33ee9fc39d45583900021762fcb4"
+		},
+		"raw/GrantedEffectStatSets.t-66f30bc1.msgpack.br": {
+			"records": 10434,
+			"sha256": "e306474508082710d622634d6c8d944fe0e2e07b53215b63d06946d032e95793"
+		},
+		"raw/GrantedEffectStatSetsPerLevel.json.gz": {
+			"sha256": "cb8ec1598ef8e227825ee75d1ffc52728502fdbdd20b8f5dace0d7643373bc42"
+		},
+		"raw/GrantedEffectStatSetsPerLevel.t-7af234a2.msgpack.br": {
+			"records": 48845,
+			"sha256": "6584b476569829f9b6ef6c44ca3415d42aef380b900bd01d8d08b026f69e665a"
+		},
+		"raw/GrantedEffects.json.gz": {
+			"sha256": "8a9460585a84e9d4d65e40550a64329dde3bac6c1550a3f87de639c29621106c"
+		},
+		"raw/GrantedEffects.t-8bf77856.msgpack.br": {
+			"records": 10472,
+			"sha256": "bf6c34871cb16a30c94d297378a1adcb8d5f92b2e1f8fcf687b8d07f457ce819"
+		},
+		"raw/GrantedEffects.t-d42ac338.msgpack.br": {
+			"records": 10472,
+			"sha256": "242a02646e99584483da7b466ee5a42d7aeebcc6d2e622e580159b39cd868637"
+		},
+		"raw/GrantedEffectsPerLevel.json.gz": {
+			"sha256": "bc93b36e380fff4cd1c9e80620f06f03e5865b074975a373c66845eb1ef71304"
+		},
+		"raw/GrantedEffectsPerLevel.t-8d199d04.msgpack.br": {
+			"records": 48793,
+			"sha256": "6b5c6a010a6c7f141f131be891020a6f3dd2c59e02fd98d57f01f44f49e0c3a6"
+		},
+		"raw/GrantedEffectsPerLevel.t-e73dc1ac.msgpack.br": {
+			"records": 48793,
+			"sha256": "211e052cb719253ea326ce6ced33947e5269449d0be09a4fa12ddf6c5c0d31f5"
+		},
+		"raw/ItemClasses.json.gz": {
+			"sha256": "01a10f2793d6ea18e462de39013ccba5f25e8d31f0d42c007cc1d3991a0920a8"
+		},
+		"raw/ItemClasses.t-15bff15a.msgpack.br": {
+			"records": 88,
+			"sha256": "4cdd78b699f8f2fea4f03f589a4d2623d41e8f9e7f9c92077669b69943f2897e"
+		},
+		"raw/ItemExperiencePerLevel.json.gz": {
+			"sha256": "9a2341a9089d5dae69680f38d18d613a06f6be07ab58a08e144c41b02a7a9d8c"
+		},
+		"raw/ItemExperiencePerLevel.t-077ef748.msgpack.br": {
+			"records": 315,
+			"sha256": "ac6c985fc5e82cd4af50b6e52493c0aca1f8ea66a8b2e4d2fa8151f6a45ae579"
+		},
+		"raw/ItemExperiencePerLevel.t-e6fcd9d8.msgpack.br": {
+			"records": 315,
+			"sha256": "f7db2add17882c78fad7a3e4906ba34d93609c8b2911565581ffbe6eef653984"
+		},
+		"raw/Mods.json.gz": {
+			"sha256": "b776386f499c7431b44ca536d7c0a01f47818f8cb8093273f0f18da040535cfd"
+		},
+		"raw/Mods.t-095071f7.msgpack.br": {
+			"records": 34625,
+			"sha256": "9529bf32f42e67c560342274d032ff1df1e0a8e43162267dd2c54f84d655e17d"
+		},
+		"raw/Mods.t-7f666e3b.msgpack.br": {
+			"records": 34625,
+			"sha256": "9a5c9a0cc2bf435f39421883177ad69061c04c5a65a2ca4814f6f4de054d23ec"
+		},
+		"raw/Mods.t-b96d6527.msgpack.br": {
+			"records": 34625,
+			"sha256": "dac34bf959895dab4bd8bc9d39918f2760c34c45bb3d1d2efde2aed6c012aab1"
+		},
+		"raw/MonsterMapBossDifficulty.json.gz": {
+			"sha256": "ebd29fc2596a87f218835aacd16f43083018da229c1dd35a62f164106ab2cf4c"
+		},
+		"raw/MonsterMapBossDifficulty.t-1cd7842f.msgpack.br": {
+			"records": 90,
+			"sha256": "dc5836e62c79eb6ba05fc03af788f9f93a1b5e58d01d5aa833d65c0d12340e94"
+		},
+		"raw/MonsterMapBossDifficulty.t-4f79525b.msgpack.br": {
+			"records": 90,
+			"sha256": "f21defc10be909fbf3d1e5b550e0c8f2122df067ad36c4962a042f3063532071"
+		},
+		"raw/MonsterMapDifficulty.json.gz": {
+			"sha256": "3a2e44b12b859140ea642171457d6c12d8231e3ee0ea1a6f953295dd620afdcf"
+		},
+		"raw/MonsterMapDifficulty.t-eb3ec86b.msgpack.br": {
+			"records": 25,
+			"sha256": "9fdd3017e84a6645e4a8737fe4e19e730bcfe84732d572b16c8b388d7bf08734"
+		},
+		"raw/MonsterMapDifficulty.t-f0ed38a7.msgpack.br": {
+			"records": 25,
+			"sha256": "55b9aec9eaa2f32b03afb461e6d291c46dd46cb25217c8cbe136cea51a3e81da"
+		},
+		"raw/MonsterVarieties.json.gz": {
+			"sha256": "44eed104c414f88967467ce116a4cc3e4ca998a2f5052dc8681fe05b9e87e04d"
+		},
+		"raw/MonsterVarieties.t-33999016.msgpack.br": {
+			"records": 9217,
+			"sha256": "abe05c8dd1b3bb2dce0c3aca6608dc10dd46c5b7caf1954352e0b45e1874f1fd"
+		},
+		"raw/PantheonPanelLayout.json.gz": {
+			"sha256": "77ccbec738fd20ec9aef599a32b4f4746c40c40a581ee3dea679ff191b33fb78"
+		},
+		"raw/PantheonPanelLayout.t-5be37a93.msgpack.br": {
+			"records": 16,
+			"sha256": "6a9225609c4c4beac10b2c046351f38d293606002d7a1927877b213457eb639f"
+		},
+		"raw/PassiveSkills.json.gz": {
+			"sha256": "e2437722a097ca3558abd2d3ce8d3cb61712a89c2fb521d1cd5a518005454b0e"
+		},
+		"raw/PassiveSkills.t-f91b6972.msgpack.br": {
+			"records": 4394,
+			"sha256": "b64ecf49bde32d0a63a82ce14e22ad3357584c8e9769015d555edcd35ad8f313"
+		},
+		"raw/PassiveTreeExpansionJewels.json.gz": {
+			"sha256": "15937c1fdc24bd1e079df7a31b7009862c1601cda6bf80034afdb91801f8c12e"
+		},
+		"raw/PassiveTreeExpansionJewels.t-7e658285.msgpack.br": {
+			"records": 3,
+			"sha256": "d6e4e2b242d498731baad83a0387ead37a47ec4f503182900362637cc6de0e90"
+		},
+		"raw/PassiveTreeExpansionSkills.json.gz": {
+			"sha256": "f342983543824ce4fe0ab7f42d7f76d62d7ea73bc6f032727455da390a7ceed4"
+		},
+		"raw/PassiveTreeExpansionSkills.t-5c83cda0.msgpack.br": {
+			"records": 55,
+			"sha256": "51663ce11f77c70900f5fd5bd91f5e03d44dfe83befd731a1b61d3dd08b0adfb"
+		},
+		"raw/PassiveTreeExpansionSpecialSkills.json.gz": {
+			"sha256": "54b63b8d6ea5b5fada23df2babb19cdd3b541fec511fc0ca96c205233c1d5649"
+		},
+		"raw/PassiveTreeExpansionSpecialSkills.t-afa54769.msgpack.br": {
+			"records": 307,
+			"sha256": "ec128341f19cdbd27437450ba83e722064f692f8e256741c34b78e2ed4b39dbd"
+		},
+		"raw/ShieldTypes.json.gz": {
+			"sha256": "fec8b87122b6ebf84d8544f81821806bff36e48d2aa4031377c31f72a05f16e3"
+		},
+		"raw/ShieldTypes.t-265ecc13.msgpack.br": {
+			"records": 98,
+			"sha256": "fce0daa06c292a1ba1e1e8dffb47e1f717573bd9d4e6d9b6696b3a80941400cb"
+		},
+		"raw/SkillGems.json.gz": {
+			"sha256": "dae576539942e88f8e6513149665496d9f2fb70640f54540c17d164849f407bc"
+		},
+		"raw/SkillGems.t-7d205e15.msgpack.br": {
+			"records": 733,
+			"sha256": "c54a71f4f255d875de349c29af425c2c54275da2297114a2b466b5f46d342d88"
+		},
+		"raw/SkillGems.t-cc8ffc1f.msgpack.br": {
+			"records": 733,
+			"sha256": "6e45319c267679334ab594961328811c0caa5bda0e8bd1c48c04812dcb7a9e04"
+		},
+		"raw/SkillTotemVariations.json.gz": {
+			"sha256": "4a6895461c54995711c5c826606b06f692a404b0e11dec642cb8094059572917"
+		},
+		"raw/SkillTotemVariations.t-300da1fd.msgpack.br": {
+			"records": 249,
+			"sha256": "49a68e8a1dcbef29a62c590a9196baad70ca20971e37515648110621355d6b59"
+		},
+		"raw/SkillTotems.json.gz": {
+			"sha256": "0a21e28c21d728ad3b0fab114c67f8a63ef1485a87db268bd8bfea09090bd5ef"
+		},
+		"raw/SkillTotems.t-8fbfd653.msgpack.br": {
+			"records": 21,
+			"sha256": "1f94cae8170c4fefd3b7facb09586bc440843823406cd9caf0c4957eb7405240"
+		},
+		"raw/Stats.json.gz": {
+			"sha256": "5558ae0e90c44d91ce88d6ab27f0338964763a1acdaf235887f35cdc39e408bd"
+		},
+		"raw/Stats.t-5fdad0a9.msgpack.br": {
+			"records": 18517,
+			"sha256": "b8a80504e9cf4b244828e85514bcf26cc0cf8b6212151bc84583a87c15509888"
+		},
+		"raw/Stats.t-9d22a0ae.msgpack.br": {
+			"records": 18517,
+			"sha256": "7af458961e6b921477c3b655d6379f3cd3fe5152d361a8033b083a6902250880"
+		},
+		"raw/Tags.json.gz": {
+			"sha256": "de11abbcf17bdfdaa57e0983c7a071126eeb9a7acdf9906cf96d10a261fb240a"
+		},
+		"raw/Tags.t-c3bab4bb.msgpack.br": {
+			"records": 1063,
+			"sha256": "39efcea24533458cf2d684ea370548aa43fe98dcdab21c60b7eef9fc996eef81"
+		},
+		"raw/WeaponTypes.json.gz": {
+			"sha256": "5dda0f6b96ff2b159080fe379c10e013801af44f6b4ad86985c3622e306d1c92"
+		},
+		"raw/WeaponTypes.t-87b959ad.msgpack.br": {
+			"records": 361,
+			"sha256": "d2d2af69cc035f9bdcf807153db9a58f635df494716cc9130044aff87ee72d6c"
+		},
+		"schema.min.json": {
+			"sha256": "f01ee16f56fdeafdb715431661a679e41c2013961a391cfad347e94f877f5224"
+		},
+		"stat_translations/cn.t-c976d1d7-eaf24651.msgpack.br": {
+			"records": 3,
+			"sha256": "6de56287add1f05b2fcdc0dbcd25bf708af4e69499a3441134bb8d31943be624"
+		},
+		"stat_translations/de.t-c976d1d7-adf18e7f.msgpack.br": {
+			"records": 3,
+			"sha256": "aea0f642c19172c9ba1018f86817f1809d4608fda04e9b72df2f72b4ad11fd61"
+		},
+		"stat_translations/en.t-c976d1d7-780b4d67.msgpack.br": {
+			"records": 3,
+			"sha256": "ddfe68024bac9f9b95805b3224a83340e79af2fa67bd37abac76d3d2ba22d31c"
+		},
+		"stat_translations/en/passive_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "c136a3a81b7ff123f83703a7d2184db89d69483f7f118cc98045e068842060e9"
+		},
+		"stat_translations/en/stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "2a4978f5b5460cc2f28328e13b07f34bb267ff0dba492e59b45ea1fdb5e168d7"
+		},
+		"stat_translations/es.t-c976d1d7-a7532d02.msgpack.br": {
+			"records": 3,
+			"sha256": "4c8e83a59811b573bdbb3da9e40eea15ddbb8cd2d2eb16e09f21215ce915980a"
+		},
+		"stat_translations/fr.t-c976d1d7-9b4802df.msgpack.br": {
+			"records": 3,
+			"sha256": "f4d22bc50460effe920508d63b9bf07168132a4f4265f306e33c52c64f211ebe"
+		},
+		"stat_translations/jp.t-c976d1d7-934f6a2e.msgpack.br": {
+			"records": 3,
+			"sha256": "46bc71971678663b15df55af24f827949c7764f473efecc80323e12587e36143"
+		},
+		"stat_translations/kr.t-c976d1d7-d6c55fbd.msgpack.br": {
+			"records": 3,
+			"sha256": "077c0970ccb51a525da93d51e18ac24315d6480e6a89d00e405523439f203cd5"
+		},
+		"stat_translations/po.t-c976d1d7-5c3460a6.msgpack.br": {
+			"records": 3,
+			"sha256": "824d3a2b842d8b1292423f66c6a58327fb7c6b56fe5d00fc7cd8d5267c2015c2"
+		},
+		"stat_translations/ru.t-c976d1d7-8a89c2ab.msgpack.br": {
+			"records": 3,
+			"sha256": "c307142a5f4f618d714584f3f4fa3204ec010c4346adcc2b442ee99f1d15cc71"
+		},
+		"stat_translations/th.t-c976d1d7-1ca84ce8.msgpack.br": {
+			"records": 3,
+			"sha256": "8fc750e0629d9279782707a77e8235770c92d7bf389b48ebac5f3ea9d4901190"
+		},
+		"stat_translations/tw.t-c976d1d7-efa88f76.msgpack.br": {
+			"records": 3,
+			"sha256": "41fdf1d7033766b24019cacc5cf9d69a64a65d4d770015c9400cce86976b56c1"
+		},
+		"tree/assets/ascendancy-3.png": {
+			"sha256": "0ee62e242de0781866dabdae9f38bdf16f9e0e90bf2b5ee855ed61afe84bb136"
+		},
+		"tree/assets/ascendancy-background-3.jpg": {
+			"sha256": "4d8461227eb872a4b7e449f179f2e445c95205b9bf073cc2204ca116679a3956"
+		},
+		"tree/assets/background-3.png": {
+			"sha256": "180ff1c42924d9989c3b4fa82bfa294c64fd1fa321516b0e3cb51f59bfb8e145"
+		},
+		"tree/assets/frame-3.png": {
+			"sha256": "506b34053cde6616e3a2202970a7c387bc5df6daec2c9813eb09ee82f575cc63"
+		},
+		"tree/assets/group-background-3.png": {
+			"sha256": "81346e855858cb6ea44b00bcb670f303a6547ff33de3027d81b1f301a3ad614b"
+		},
+		"tree/assets/jewel-3.png": {
+			"sha256": "c2a3134f8e0ece177c46cfc531937038e4448cd4185a80243acb04d72bac7525"
+		},
+		"tree/assets/jewel-radius.png": {
+			"sha256": "608884c8ee35a01fba418fd9710edaab90fd638f17a0f46cd074fc09660d14c2"
+		},
+		"tree/assets/line-3.png": {
+			"sha256": "2fb268a4b7316b822d73660bb47fcfdccd4b1ca5c47df211a8301a1a2785d0b8"
+		},
+		"tree/assets/mastery-3.png": {
+			"sha256": "2ad49caa1263bf4dadd2c3b377d5a90916e1e68e9fd6d27232522e39f7eb1f0d"
+		},
+		"tree/assets/mastery-active-effect-3.png": {
+			"sha256": "1659b14c56e7e244d9c5dbea9fa9e0d8d725b90b5e679ac41c6506e8f61ff8df"
+		},
+		"tree/assets/mastery-active-selected-3.png": {
+			"sha256": "df821e3b30362b041574dcf4e351e05ac395cc0e473984c17eb232a83ad82ca4"
+		},
+		"tree/assets/mastery-connected-3.png": {
+			"sha256": "d7c59284343ec8097407966e93f703ed908fcc698459c188cbc72e1cb8356b48"
+		},
+		"tree/assets/mastery-disabled-3.png": {
+			"sha256": "e62c655ee3d99bba112b46fd478a4e558d2c64c00a0bbafaac84de414da3bd90"
+		},
+		"tree/assets/skills-3.jpg": {
+			"sha256": "da56767440507db150256f48e4017bf8be56ada403afcc3a8b19dc01c331f5c4"
+		},
+		"tree/assets/skills-disabled-3.jpg": {
+			"sha256": "26928abf420e63bd3bea105c2fcb5438a703a9920864927906248ef03456716e"
+		},
+		"tree/data.json.br": {
+			"sha256": "7fec24c700b1f93837b6448f58285973c043c7687aaf3b179ee29a144240f8d8"
+		},
+		"tree/data.json.gz": {
+			"sha256": "e794ffa0b4ab7e421ac25bdd3010d5a019d397ca24c3eda214ce4c43893a791d"
+		}
+	},
 	"tables": [
 		"ActiveSkillType",
 		"ActiveSkills",

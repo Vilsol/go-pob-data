@@ -19,6 +19,1184 @@
 			"tw": "stat_translations/tw.t-c976d1d7-03ce685a.msgpack.br"
 		}
 	},
+	"assets": {
+		"files.it-400891e8.msgpack.br": {
+			"records": 86,
+			"sha256": "c0d479134952e55dd6f2ccd9fb4842493751e4608957fbc168bdbbf9c89579c6"
+		},
+		"files.ot-8967fd56.msgpack.br": {
+			"records": 247,
+			"sha256": "f75c1e510896ebdc6db834264db3685127430d6f306d1142b0381bb2760883a3"
+		},
+		"files.txt-1e411dae.msgpack.br": {
+			"records": 2,
+			"sha256": "5cd49de6fa20e5b25bc955264585d37fc9453f45f5df2aaf990eb9497b613e4c"
+		},
+		"files/api/trade/data/stats.json.br": {
+			"sha256": "ee58c1e0030fcf1ee4e50158da79052de4cc1f29b91705bf7b81a2d04cead54b"
+		},
+		"raw/ActiveSkillType.json.gz": {
+			"sha256": "a55a0086c349a76f740bb10e86606cd217faec51f83b66c0f4db1ffa64f78abf"
+		},
+		"raw/ActiveSkillType.min-09f0bb0e.msgpack.br": {
+			"records": 135,
+			"sha256": "d73ba26018ca87228ffc9e3cef9569327bdffb76ba3dd858bd3b022f40ac9bd1"
+		},
+		"raw/ActiveSkillType.min-cd09921a.msgpack.br": {
+			"records": 135,
+			"sha256": "d73ba26018ca87228ffc9e3cef9569327bdffb76ba3dd858bd3b022f40ac9bd1"
+		},
+		"raw/ActiveSkillType.t-5a112530.msgpack.br": {
+			"records": 135,
+			"sha256": "d73ba26018ca87228ffc9e3cef9569327bdffb76ba3dd858bd3b022f40ac9bd1"
+		},
+		"raw/ActiveSkills.json.gz": {
+			"sha256": "05b774561d6d8389dcdbaae53092a694129c068eab50e4ddc23b57f838fc3010"
+		},
+		"raw/ActiveSkills.min-1d60ba19.msgpack.br": {
+			"records": 1941,
+			"sha256": "fb268b2615046f80c3bb88b35b999cd57b219bc8b57b319e857cc63acc279f80"
+		},
+		"raw/ActiveSkills.min-3b547575.msgpack.br": {
+			"records": 1941,
+			"sha256": "5c3937283bb6d8be258541c0a1722ea13198140346869dd40079e20abc40d312"
+		},
+		"raw/ActiveSkills.min-f1df9d0d.msgpack.br": {
+			"records": 1941,
+			"sha256": "5c3937283bb6d8be258541c0a1722ea13198140346869dd40079e20abc40d312"
+		},
+		"raw/ActiveSkills.min-fc4db7cc.msgpack.br": {
+			"records": 1941,
+			"sha256": "2aabb3fa55257e378be7b2d03d65294f8cbe4cc4ba78c75e6308a2562cc133e8"
+		},
+		"raw/ActiveSkills.t-2c7bb75c.msgpack.br": {
+			"records": 1941,
+			"sha256": "fb268b2615046f80c3bb88b35b999cd57b219bc8b57b319e857cc63acc279f80"
+		},
+		"raw/ActiveSkills.t-4c893f9c.msgpack.br": {
+			"records": 1941,
+			"sha256": "5c3937283bb6d8be258541c0a1722ea13198140346869dd40079e20abc40d312"
+		},
+		"raw/AlternatePassiveAdditions.json.gz": {
+			"sha256": "c20db50751e44a3d09fe599bae6a12a4305cfef84d985b46e7c7d95064b87df8"
+		},
+		"raw/AlternatePassiveAdditions.min-58cb7700.msgpack.br": {
+			"records": 337,
+			"sha256": "36a0c0065bb46a3f403d3ef014cda7559cb393618bcd26556fceb2798952b7f7"
+		},
+		"raw/AlternatePassiveAdditions.t-8ffb2eb5.msgpack.br": {
+			"records": 337,
+			"sha256": "36a0c0065bb46a3f403d3ef014cda7559cb393618bcd26556fceb2798952b7f7"
+		},
+		"raw/AlternatePassiveSkills.json.gz": {
+			"sha256": "6183982ea4fdf1691a46e84a5344a0aa1095eeacb3762c13fff59ce5e7c2f11a"
+		},
+		"raw/AlternatePassiveSkills.min-7aa81ec6.msgpack.br": {
+			"records": 381,
+			"sha256": "dd8a4ec0bdfa29f25c0ef034b7ea9954b8c0d13ac3c11d00bd1b4685a71698d9"
+		},
+		"raw/AlternatePassiveSkills.t-2a333cfa.msgpack.br": {
+			"records": 381,
+			"sha256": "51b5b46167673465293605f150d37feb4bd9ff6cb32b2a651b17544e92611557"
+		},
+		"raw/AlternateTreeArt.json.gz": {
+			"sha256": "0baed8e156feb430f83bf2b7557a9b1a99cdfb5dfefea6f7ab92cc68d32a2f76"
+		},
+		"raw/AlternateTreeArt.min-3b73e60c.msgpack.br": {
+			"records": 12,
+			"sha256": "34bfaf36fadff88c2d602bf17ffc0e31b00426a44fab39c3f9976c060c596d81"
+		},
+		"raw/AlternateTreeArt.t-fc09c276.msgpack.br": {
+			"records": 12,
+			"sha256": "f37426da69e69eff993e979a46a86dc332c1a4ce7b43f2efb9fee16388b7c155"
+		},
+		"raw/AlternateTreeVersions.json.gz": {
+			"sha256": "bd3f70dfaa99e3bc9b1b508ce65b29b17382f9d7ca7819c8024d3ca47f349f8d"
+		},
+		"raw/AlternateTreeVersions.min-a3625c19.msgpack.br": {
+			"records": 12,
+			"sha256": "d2c0c5f43d9b040a3c71fb43240702f1c07ebc22637889bbe1dd2ae6b057c6b2"
+		},
+		"raw/AlternateTreeVersions.t-bd500abd.msgpack.br": {
+			"records": 12,
+			"sha256": "d2c0c5f43d9b040a3c71fb43240702f1c07ebc22637889bbe1dd2ae6b057c6b2"
+		},
+		"raw/ArmourTypes.json.gz": {
+			"sha256": "bd0262f177ae5e325cea3e8df745127a9e0cb2b324d8d7464e22bc280e766bb3"
+		},
+		"raw/ArmourTypes.min-544e2248.msgpack.br": {
+			"records": 481,
+			"sha256": "cc8aae11475a187e6f31fe420fc5b5b333955d3bae735bf02ebb58fa738e3c59"
+		},
+		"raw/ArmourTypes.t-a82f45c4.msgpack.br": {
+			"records": 481,
+			"sha256": "0e409072ce6a4aee0afac04227e3d2bace6d8b4b5c0a21e9fd8962e487ef2e58"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/Dex.png": {
+			"sha256": "9d77cd73040b9cb50b7332eb99c9de0342b5b98fa7534c151ab62e23d9a152d4"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/DexInt.png": {
+			"sha256": "bdb9d6298cfbd847473c7db9398e9222e54a95cc9177e0d554ad5cacadc292fc"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/Int.png": {
+			"sha256": "1d6e2702077187a0e189c0cd5144d6a429aae311790c11381e9e4f45f97cfa48"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/Str.png": {
+			"sha256": "0c9e0285fa667b99b558f3bff4433d30e37ef3a30c46519cbec5973390b97d39"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/StrDex.png": {
+			"sha256": "23b71cd2f1102a8016c85bafca734c3b9555dc69fabdf50c1eea2c94fc9fa790"
+		},
+		"raw/Art/2DArt/BaseClassIllustrations/StrInt.png": {
+			"sha256": "f80018cfa6f8a5f6493e7af76d7821d4a79efecd1543279b2a9857276f17afe0"
+		},
+		"raw/AtlasNode.json.gz": {
+			"sha256": "61bf243a5d4e7075a61d476d0de4803b15e818d5cd0c419ea8971d9323617f45"
+		},
+		"raw/AtlasNode.t-ac5bd8cd.msgpack.br": {
+			"records": 182,
+			"sha256": "9de4dd40f122be174fbc5e563309473b278f9469892b7984a5fa1604a1e8e4b9"
+		},
+		"raw/AtlasNodeDefinition.json.gz": {
+			"sha256": "f0c2c25641cf8f512c844f3d96ff8252db1188d2b50026f4d47af762357db899"
+		},
+		"raw/AtlasNodeDefinition.t-8199a01a.msgpack.br": {
+			"records": 228,
+			"sha256": "b5da29545ed4e960c25780ef3ca625a42225bd282d5a4f6cf7cecc2aa7e5540d"
+		},
+		"raw/BaseItemTypes.json.gz": {
+			"sha256": "8c25d1427e97d29df8b5dfbe3fdfa2ce6db15437c8ce988fb098a128a7b35475"
+		},
+		"raw/BaseItemTypes.min-60eac400.msgpack.br": {
+			"records": 5461,
+			"sha256": "4e797e0b9611d75fdfe66a531efe0ff337b6966ada118b09afc88d4c1707fdd2"
+		},
+		"raw/BaseItemTypes.min-63b499a3.msgpack.br": {
+			"records": 5461,
+			"sha256": "b74c405dbb36e625e86828e34e7d774b47a04f2d4fb34c11bcb84830cc685d7c"
+		},
+		"raw/BaseItemTypes.min-911da7f5.msgpack.br": {
+			"records": 5461,
+			"sha256": "7652bffed89c6cd5ac82bf131d9d18c56d1abd57d629a9251a799ab5b4b72cb9"
+		},
+		"raw/BaseItemTypes.min-f6c1e6f5.msgpack.br": {
+			"records": 5461,
+			"sha256": "b74c405dbb36e625e86828e34e7d774b47a04f2d4fb34c11bcb84830cc685d7c"
+		},
+		"raw/BaseItemTypes.t-6b58ed61.msgpack.br": {
+			"records": 5461,
+			"sha256": "b74c405dbb36e625e86828e34e7d774b47a04f2d4fb34c11bcb84830cc685d7c"
+		},
+		"raw/BaseItemTypes.t-99de2bba.msgpack.br": {
+			"records": 5461,
+			"sha256": "7652bffed89c6cd5ac82bf131d9d18c56d1abd57d629a9251a799ab5b4b72cb9"
+		},
+		"raw/BuffTemplates.json.gz": {
+			"sha256": "e92890b6893c2b5b8ad857418da31b8762a471e690dc9a12facb32c8d5c8d41c"
+		},
+		"raw/BuffTemplates.min-381074d4.msgpack.br": {
+			"records": 811,
+			"sha256": "7f2e08f69ba8da00de0a07d8c967f9aa25de4532e799b487ce251bb9c52c3ef5"
+		},
+		"raw/BuffTemplates.min-89054444.msgpack.br": {
+			"records": 811,
+			"sha256": "1069e382ea494ce0ba8ed2db1c459fa7cdc6d11e1f11ec938771276b85f29991"
+		},
+		"raw/BuffTemplates.t-98dc22bc.msgpack.br": {
+			"records": 811,
+			"sha256": "7f2e08f69ba8da00de0a07d8c967f9aa25de4532e799b487ce251bb9c52c3ef5"
+		},
+		"raw/ClientStrings.json.gz": {
+			"sha256": "0ad5137f00aca7a7dfc34e64553cd75ff3806a7c3046c12e5293b84344898e33"
+		},
+		"raw/ClientStrings.min-abed68f4.msgpack.br": {
+			"records": 8494,
+			"sha256": "4f53891f336e59d1b562230cd79d3efdd9ddd084e537684c02327b1d91a7753b"
+		},
+		"raw/ClientStrings.t-75378c7d.msgpack.br": {
+			"records": 8494,
+			"sha256": "f097feaadce2f611f94dab9d7786cdeb4da602bba43bf69352e9439103c8b7cf"
+		},
+		"raw/ComponentAttributeRequirements.json.gz": {
+			"sha256": "436cc10630a50718563e134c884a8110e565273a199ffb268caa1def888e25b6"
+		},
+		"raw/ComponentAttributeRequirements.min-c4ae9065.msgpack.br": {
+			"records": 862,
+			"sha256": "8e4a0ba107a8b009e3bcd1f5c81b3ec379f92a215f84ffeae417c7a7f5c5a159"
+		},
+		"raw/ComponentAttributeRequirements.t-3b560602.msgpack.br": {
+			"records": 862,
+			"sha256": "88cf1cba7f3d19559a25950168aa3316379c02a5e1422d406b10fef1c15a5cb6"
+		},
+		"raw/ComponentCharges.json.gz": {
+			"sha256": "95cc957796ef0f40e65ce4057d752186b64b4dcbe9295a8c84078a89446822e9"
+		},
+		"raw/ComponentCharges.min-13cd7ded.msgpack.br": {
+			"records": 51,
+			"sha256": "a4695272c96fb0a060eb13809b08cc59f26dc3f8209680b46fd08ab2e1964e84"
+		},
+		"raw/ComponentCharges.t-68f62d44.msgpack.br": {
+			"records": 51,
+			"sha256": "60df04c1647389525a58cf634665359ac4ca5eead172dae31774995fc117ffaf"
+		},
+		"raw/CostTypes.json.gz": {
+			"sha256": "e68c820bf6dce11612d6665a20e6e2cf88b89fe01faf2e5ef48a838fb3f126d5"
+		},
+		"raw/CostTypes.min-46ec2aac.msgpack.br": {
+			"records": 13,
+			"sha256": "aea1c61437aa8422656190f024ddf40932ce82e0fe1e561621888054579f890f"
+		},
+		"raw/CostTypes.min-7f7e305c.msgpack.br": {
+			"records": 13,
+			"sha256": "aea1c61437aa8422656190f024ddf40932ce82e0fe1e561621888054579f890f"
+		},
+		"raw/CostTypes.t-5c6bb0d9.msgpack.br": {
+			"records": 13,
+			"sha256": "aea1c61437aa8422656190f024ddf40932ce82e0fe1e561621888054579f890f"
+		},
+		"raw/CraftingBenchOptions.json.gz": {
+			"sha256": "cee6954d9c86b76d1bcab5fed76a83e56633eae172c57abfc4fb12756aa97a21"
+		},
+		"raw/CraftingBenchOptions.min-259257ba.msgpack.br": {
+			"records": 829,
+			"sha256": "78629bb49ff1f771e6191e4423d788c8637da83eb18a2893bf73ab2247e1948d"
+		},
+		"raw/CraftingBenchOptions.t-a91cd533.msgpack.br": {
+			"records": 829,
+			"sha256": "b2d4b2c3147e565adcc5edc1acd1ada22fe56439eb2eef914a5a2a4a4413cfcf"
+		},
+		"raw/CraftingItemClassCategories.json.gz": {
+			"sha256": "77eda59efef3e1c8621f1ece972b6ea0e90f3169a6a0a8d209f427b632c0b69f"
+		},
+		"raw/CraftingItemClassCategories.t-86d33af3.msgpack.br": {
+			"records": 22,
+			"sha256": "9d31b3faa6a633fab4d77f50126a2ded1e0f86d6a90aa5e8b6ce2a5615154a4b"
+		},
+		"raw/CurrencyExchange.json.gz": {
+			"sha256": "327e04eece52eddb76e5cf25cb159965f7d3509f8aacf0d65321c56821aff634"
+		},
+		"raw/CurrencyExchange.min-5baa3300.msgpack.br": {
+			"records": 1126,
+			"sha256": "4834948d9c94ccecaa6bcb6e2dd53b2b4810faf37bc81130c8f75914fbff0b1d"
+		},
+		"raw/CurrencyExchange.t-a9f6e70d.msgpack.br": {
+			"records": 1126,
+			"sha256": "a3d066aa55cbd1b9d4cb7baf4c412c071704d9a6b10ebccc78dd4bd399e11059"
+		},
+		"raw/DefaultMonsterStats.json.gz": {
+			"sha256": "a55e83585036e868c6f712f0d60bdd0153b9753f441791a548e4a22d173dd4a6"
+		},
+		"raw/DefaultMonsterStats.min-89c0b0b7.msgpack.br": {
+			"records": 100,
+			"sha256": "3c94df5ec46a059f8a88529d21ed723d49d0c244dccaa398c57e89005e4accca"
+		},
+		"raw/DefaultMonsterStats.min-9f65a022.msgpack.br": {
+			"records": 100,
+			"sha256": "e9d4e59acbd5afd88cdfed44e50359945e1dd7c138f2fa66d44c6b7954e94409"
+		},
+		"raw/DefaultMonsterStats.min-bf0a73de.msgpack.br": {
+			"records": 100,
+			"sha256": "4fbdfcc2059beb2bd169121a0c87a9c32d4de44da99ababfd93287233aab5d16"
+		},
+		"raw/DefaultMonsterStats.t-6ec44a96.msgpack.br": {
+			"records": 100,
+			"sha256": "7b265fffcf71adb24ae0b1096039b4ab68256d3ba0bc4f72349ee3b0f936249a"
+		},
+		"raw/DefaultMonsterStats.t-b7bc1eab.msgpack.br": {
+			"records": 100,
+			"sha256": "100aa26cc49987b0d3b57bec3dfe78cc701fa791f10c6b8f54d96cd62d2471e2"
+		},
+		"raw/EffectivenessCostConstants.json.gz": {
+			"sha256": "c78ac74ac807eb8902b8aaac234365dad16ce5aa86a80d957a90e6117d464e88"
+		},
+		"raw/EffectivenessCostConstants.t-08f80fb5.msgpack.br": {
+			"records": 3,
+			"sha256": "23029017efbfb0902c59c8c3d8298c330a07ce27b7eb6efb120354bc0e87b81e"
+		},
+		"raw/Essences.json.gz": {
+			"sha256": "ba4de63d29e0182d0e4c078c560039c6fa7169ae6324d804fcf735bd463190ca"
+		},
+		"raw/Essences.min-bd046916.msgpack.br": {
+			"records": 106,
+			"sha256": "670a53140a2f4ed7d2e108b2b892b15a92562b4df14c9f92871785e79fbebb14"
+		},
+		"raw/Essences.min-d2d5e3a7.msgpack.br": {
+			"records": 106,
+			"sha256": "3370d7317e68f2e37b110f58e71d8db2de109ecbd8e59b410299e6796a605f43"
+		},
+		"raw/Essences.t-6ed4552a.msgpack.br": {
+			"records": 106,
+			"sha256": "2099fe55e7ae7ea3b86d7180c54a0bde67d5afd06fb7069b21b12e037614714b"
+		},
+		"raw/Essences.t-803dc542.msgpack.br": {
+			"records": 106,
+			"sha256": "e3a047b95d6d660a502c3da50204f65668f7d877eefaec7824a0ea05971d5147"
+		},
+		"raw/Flasks.json.gz": {
+			"sha256": "cc8d2b9759c1e62bd44d6b4391113931f18ae1f99f19bccc2fa7df65c1c7eefe"
+		},
+		"raw/Flasks.min-fec41318.msgpack.br": {
+			"records": 51,
+			"sha256": "b30f7112c7dc273acf0f34443c69e2e99e076872ce62ae517030c3a035721189"
+		},
+		"raw/Flasks.t-03df0fb5.msgpack.br": {
+			"records": 51,
+			"sha256": "faedd2b064035eb6b70a79570771b547df33bc43d29630b813085dbfd1769bbd"
+		},
+		"raw/FlavourText.json.gz": {
+			"sha256": "62dda9f3098012f41e57a04387ff899bf4f27168e0c7dc17e671719048a07c3f"
+		},
+		"raw/FlavourText.min-6056ab58.msgpack.br": {
+			"records": 2962,
+			"sha256": "c37da8af0451ab8f9161f833355a6844ca8274a9b8791b564d8f8ee0da48cb11"
+		},
+		"raw/FlavourText.min-642fd8ea.msgpack.br": {
+			"records": 2962,
+			"sha256": "c772ec270e6e86383e905447b16a6232e4bed94eafd2f711db459258f9529771"
+		},
+		"raw/FlavourText.t-23a755da.msgpack.br": {
+			"records": 2962,
+			"sha256": "96a837fabd5fe367cb21154ef975df43c0ad0e4b914aaabef2222342c518de89"
+		},
+		"raw/GameConstants.json.gz": {
+			"sha256": "d8b319339c500e6e7e695bdf0ca604bb47a02bd1b79d6be56016e6728a89a278"
+		},
+		"raw/GameConstants.min-a4018b37.msgpack.br": {
+			"records": 42,
+			"sha256": "8b46e6b13eadae01a49a23adb0ff23b439c87327aac2ee104f3af6f6f6da2d9c"
+		},
+		"raw/GameConstants.t-b3e5184d.msgpack.br": {
+			"records": 42,
+			"sha256": "242554bfdcbda82e19f95aae52df7651c38b0f36cf8eef368bdcd9a389c94400"
+		},
+		"raw/GemEffects.json.gz": {
+			"sha256": "906149dbf6e696256f7ea7ce122adfe5cc871cd63ea5334ad61c772b8b0c8e08"
+		},
+		"raw/GemEffects.min-f8477243.msgpack.br": {
+			"records": 1292,
+			"sha256": "ab894a2a69404cbcdca883c2bd117d40d090e28b84280d834ad3e21cc1bacf33"
+		},
+		"raw/GemEffects.t-dbdec350.msgpack.br": {
+			"records": 1292,
+			"sha256": "ff723395912923611f15023aed1e684e04b3b1b0e73b7dd2413671e216d6f3d0"
+		},
+		"raw/GemTags.json.gz": {
+			"sha256": "64a459853de969b97b589d7994e58452ce477b81e0e35a922ce10664df60a016"
+		},
+		"raw/GemTags.min-be93ed40.msgpack.br": {
+			"records": 54,
+			"sha256": "2ac542e38597b33dac353610ad03bf689cd2bbbb00814bf390118f83b7b026ee"
+		},
+		"raw/GemTags.t-5b411d74.msgpack.br": {
+			"records": 54,
+			"sha256": "9f18d80724ba547ed70a77d803e44c817598079da121c6e837de71deb39f3092"
+		},
+		"raw/GrantedEffectQualityStats.json.gz": {
+			"sha256": "5aa879e4108a63291f026942054637c6566fe935698088250926e2f64f63d739"
+		},
+		"raw/GrantedEffectQualityStats.min-e0508273.msgpack.br": {
+			"records": 1014,
+			"sha256": "56be1bf0338062df2d51c708d2e01483d864841e1bc4e14951472aed4a25d72e"
+		},
+		"raw/GrantedEffectQualityStats.min-e84fbc5c.msgpack.br": {
+			"records": 1014,
+			"sha256": "56be1bf0338062df2d51c708d2e01483d864841e1bc4e14951472aed4a25d72e"
+		},
+		"raw/GrantedEffectQualityStats.t-67c5564a.msgpack.br": {
+			"records": 1014,
+			"sha256": "56be1bf0338062df2d51c708d2e01483d864841e1bc4e14951472aed4a25d72e"
+		},
+		"raw/GrantedEffectStatSets.json.gz": {
+			"sha256": "ba7dc6e58cf707dbb01e8afac1cf3512a80c0008e9cc337ab97fa0be644da896"
+		},
+		"raw/GrantedEffectStatSets.min-324b82b1.msgpack.br": {
+			"records": 12763,
+			"sha256": "8ef182632b64d6762d2aeebad2279f1384b9f3a84da45c949a4b2b3e4d495ea4"
+		},
+		"raw/GrantedEffectStatSets.min-41bfb5e6.msgpack.br": {
+			"records": 12763,
+			"sha256": "8ef182632b64d6762d2aeebad2279f1384b9f3a84da45c949a4b2b3e4d495ea4"
+		},
+		"raw/GrantedEffectStatSets.t-66f30bc1.msgpack.br": {
+			"records": 12763,
+			"sha256": "8ef182632b64d6762d2aeebad2279f1384b9f3a84da45c949a4b2b3e4d495ea4"
+		},
+		"raw/GrantedEffectStatSetsPerLevel.json.gz": {
+			"sha256": "5c255abb4cf5fb84043e348d8218763dc21ae9a60d75efaa614a79ddc0fbf442"
+		},
+		"raw/GrantedEffectStatSetsPerLevel.min-98782474.msgpack.br": {
+			"records": 79927,
+			"sha256": "24d8eb07cc17815ee346f82cfc7a670aa6dcdf43c10d8cfc6ffdf2636b289604"
+		},
+		"raw/GrantedEffectStatSetsPerLevel.min-d594152c.msgpack.br": {
+			"records": 79927,
+			"sha256": "24d8eb07cc17815ee346f82cfc7a670aa6dcdf43c10d8cfc6ffdf2636b289604"
+		},
+		"raw/GrantedEffectStatSetsPerLevel.t-7af234a2.msgpack.br": {
+			"records": 79927,
+			"sha256": "24d8eb07cc17815ee346f82cfc7a670aa6dcdf43c10d8cfc6ffdf2636b289604"
+		},
+		"raw/GrantedEffects.json.gz": {
+			"sha256": "0c26a21a94ef7852e7e755f8dc5325850be5a1e1d4ece50cf31702118084197d"
+		},
+		"raw/GrantedEffects.min-44295ff3.msgpack.br": {
+			"records": 12829,
+			"sha256": "13aaa470d5b12b4cdf0e9dbafbe976fa9741586b37a4312d2fadf2c972298b6b"
+		},
+		"raw/GrantedEffects.min-5d5bac3e.msgpack.br": {
+			"records": 12829,
+			"sha256": "375d1908039328cbfde5102a013469bac34fe20e05c72b244360a14839728ad7"
+		},
+		"raw/GrantedEffects.min-6fd8e290.msgpack.br": {
+			"records": 12829,
+			"sha256": "375d1908039328cbfde5102a013469bac34fe20e05c72b244360a14839728ad7"
+		},
+		"raw/GrantedEffects.t-8bf77856.msgpack.br": {
+			"records": 12829,
+			"sha256": "13aaa470d5b12b4cdf0e9dbafbe976fa9741586b37a4312d2fadf2c972298b6b"
+		},
+		"raw/GrantedEffects.t-d42ac338.msgpack.br": {
+			"records": 12829,
+			"sha256": "375d1908039328cbfde5102a013469bac34fe20e05c72b244360a14839728ad7"
+		},
+		"raw/GrantedEffectsPerLevel.json.gz": {
+			"sha256": "e13e642bf0293c4f6e62d3ee6879695963ead89c60518c8257bc24e2fb7b6dcb"
+		},
+		"raw/GrantedEffectsPerLevel.min-4e9894ea.msgpack.br": {
+			"records": 80600,
+			"sha256": "b19c6c2a74123cf25e5d531beca865d2fa2bd4654fbd93983f920f21c2392315"
+		},
+		"raw/GrantedEffectsPerLevel.min-f8ff75fd.msgpack.br": {
+			"records": 80600,
+			"sha256": "5019dea70d936c378085af30b8fd0e313eec10c915176f3768596fa0620218ea"
+		},
+		"raw/GrantedEffectsPerLevel.min-fb042071.msgpack.br": {
+			"records": 80600,
+			"sha256": "5019dea70d936c378085af30b8fd0e313eec10c915176f3768596fa0620218ea"
+		},
+		"raw/GrantedEffectsPerLevel.t-8d199d04.msgpack.br": {
+			"records": 80600,
+			"sha256": "5019dea70d936c378085af30b8fd0e313eec10c915176f3768596fa0620218ea"
+		},
+		"raw/GrantedEffectsPerLevel.t-e73dc1ac.msgpack.br": {
+			"records": 80600,
+			"sha256": "b19c6c2a74123cf25e5d531beca865d2fa2bd4654fbd93983f920f21c2392315"
+		},
+		"raw/ItemClasses.json.gz": {
+			"sha256": "06e7a9c7d8b283a385f22153eb06fb2b6bcee9afab5b1866fee5e88843ffc8a9"
+		},
+		"raw/ItemClasses.min-3038f9d4.msgpack.br": {
+			"records": 103,
+			"sha256": "10a649b2f28347947f1b3d1bca827681e7e4945454fd33973d6d3555014d1b60"
+		},
+		"raw/ItemClasses.min-97f741cd.msgpack.br": {
+			"records": 103,
+			"sha256": "10a649b2f28347947f1b3d1bca827681e7e4945454fd33973d6d3555014d1b60"
+		},
+		"raw/ItemClasses.t-15bff15a.msgpack.br": {
+			"records": 103,
+			"sha256": "10a649b2f28347947f1b3d1bca827681e7e4945454fd33973d6d3555014d1b60"
+		},
+		"raw/ItemExperiencePerLevel.json.gz": {
+			"sha256": "df28e64713f6f317e5ebfc0c581af25303721770848ac18a437c4ec729d45e5d"
+		},
+		"raw/ItemExperiencePerLevel.min-6f92ae7c.msgpack.br": {
+			"records": 361,
+			"sha256": "f6f766381ff4561b5a149c7852311e28e3ac916e3128cc8fa1f207f259378b2c"
+		},
+		"raw/ItemExperiencePerLevel.min-9de9ff63.msgpack.br": {
+			"records": 361,
+			"sha256": "71cbca8a563bf9f575b98a4e6c6920811e0fdeea280fc4b3e339b130fc6756f6"
+		},
+		"raw/ItemExperiencePerLevel.min-f6f45fe2.msgpack.br": {
+			"records": 361,
+			"sha256": "d7ed9a424856e2f7d87e0e0af54f1a8e3cdd366a5e719780d00813977c2626db"
+		},
+		"raw/ItemExperiencePerLevel.t-077ef748.msgpack.br": {
+			"records": 361,
+			"sha256": "8888e88f8070e82ddc3313fd8872fa0fd02dbf3cc42c193ca80c4a194fd0882d"
+		},
+		"raw/ItemExperiencePerLevel.t-e6fcd9d8.msgpack.br": {
+			"records": 361,
+			"sha256": "7447d1886a38ec2e1a7200ad80f2681b3e04e5f2c01b4c5b3b4e8c983752438c"
+		},
+		"raw/ItemVisualIdentity.json.gz": {
+			"sha256": "b999834335e62897b0a05e4dd39683a12026833d5b584c9b36d5fa2c59907c23"
+		},
+		"raw/ItemVisualIdentity.min-2f264128.msgpack.br": {
+			"records": 15484,
+			"sha256": "e309eec7b62dabc9a4c6a8ef895fd4de1e85333b94a4f6eb0935596069eb9905"
+		},
+		"raw/ItemVisualIdentity.min-f9bd9a7d.msgpack.br": {
+			"records": 15484,
+			"sha256": "96942729fddb6b8f6cfce73a06f5d79ffa0a0220b1b9f39917d02f9d45c34108"
+		},
+		"raw/ItemVisualIdentity.t-4975f02e.msgpack.br": {
+			"records": 15484,
+			"sha256": "860cd34a82ba4874aad6479351a758143a384e164a0ecdcbe4b3aad27cea9bec"
+		},
+		"raw/ModFamily.json.gz": {
+			"sha256": "db26e95d2ce62c57f2050c881dbe905b523d610c26041d531768d5dfb0c223dd"
+		},
+		"raw/ModFamily.min-1e308ab8.msgpack.br": {
+			"records": 7844,
+			"sha256": "955fea8dfb0187d547cb122251870e784904e20f7f4c305b12ec71246645d794"
+		},
+		"raw/ModFamily.t-5d22b60c.msgpack.br": {
+			"records": 7844,
+			"sha256": "d4c069245fc28ec119082ae9d0864d76646bb59ba6841c9f916c12059285d3a6"
+		},
+		"raw/ModType.json.gz": {
+			"sha256": "25f4064f91c459f91222aed2a6e03817e5922d45d9061bfe80b18cdd41f7f923"
+		},
+		"raw/ModType.min-9e7feb08.msgpack.br": {
+			"records": 14554,
+			"sha256": "2af32dd935e1c9e8db45eed5de13b7c4ace12414445d79a166c903eb1353d5c1"
+		},
+		"raw/ModType.min-ef45c2cd.msgpack.br": {
+			"records": 14554,
+			"sha256": "7fcd64010ea90bc50626362514447316957702966aaa9ed2e2a7776c964b519a"
+		},
+		"raw/ModType.t-0aa49d5b.msgpack.br": {
+			"records": 14554,
+			"sha256": "ad0ee3da509e91090e06dd5d7911234a94d8c1e57a9d6d608029076684fa195e"
+		},
+		"raw/Mods.json.gz": {
+			"sha256": "7a7b03bdea3fbd375a9036a64d1ef80702444d239fd9486c94c7558daf640bc1"
+		},
+		"raw/Mods.min-1bf0c5c2.msgpack.br": {
+			"records": 40355,
+			"sha256": "f119323c50f724c9e2f513beb5d506479eb3830b4cb7a898990ef67b25134294"
+		},
+		"raw/Mods.min-2aee6fb1.msgpack.br": {
+			"records": 40355,
+			"sha256": "f5c940910de9f2ccf6e53818a540f95148a8c0e33e383d2f47f5582d4afc975b"
+		},
+		"raw/Mods.min-8f4b924d.msgpack.br": {
+			"records": 40355,
+			"sha256": "8694ff6e94b98f8dfcba2040f8b8d307dd5eabcdb05e71bda6ead340eb263b01"
+		},
+		"raw/Mods.min-c206e366.msgpack.br": {
+			"records": 40355,
+			"sha256": "064720eb0cd4b4459a9454ef77ad7a16c23eb4554ee63a72f069b03ce24b051b"
+		},
+		"raw/Mods.min-d5f573f7.msgpack.br": {
+			"records": 40355,
+			"sha256": "bce6d6e121c12aa114b73530dc67a5d4be3c6c69516dc5296c0f516d84e61097"
+		},
+		"raw/Mods.min-d76c25e9.msgpack.br": {
+			"records": 40355,
+			"sha256": "bb2e03efd93c7270e2d2beb00ee4156d8a5b238bc75cee36f9d83c15311701cb"
+		},
+		"raw/Mods.t-095071f7.msgpack.br": {
+			"records": 40355,
+			"sha256": "f5c940910de9f2ccf6e53818a540f95148a8c0e33e383d2f47f5582d4afc975b"
+		},
+		"raw/Mods.t-7f666e3b.msgpack.br": {
+			"records": 40355,
+			"sha256": "974fdc3e4b22746b7fed0f04e95dbc9883ad3e5378aa5d2928358be1496c4049"
+		},
+		"raw/Mods.t-b96d6527.msgpack.br": {
+			"records": 40355,
+			"sha256": "608f8e769cbabc65572e75a18c2dc03d1c135280f4805699d5ef84e44722d9b1"
+		},
+		"raw/MonsterMapBossDifficulty.json.gz": {
+			"sha256": "9c206f5b4161b5247b25217c873f6309d6f9d57623d4a3e0f6a8b1469850d0e3"
+		},
+		"raw/MonsterMapBossDifficulty.min-49f98bf4.msgpack.br": {
+			"records": 90,
+			"sha256": "ee21afdf3efe0f6a5d7d8f410506304ed9d1f9811b6372ee99dcc3c89b1127e7"
+		},
+		"raw/MonsterMapBossDifficulty.min-818aaf16.msgpack.br": {
+			"records": 90,
+			"sha256": "c51c4c98dcec6992e9c363f6cb1b8fb540201b75969e550da0090fcfdc772b09"
+		},
+		"raw/MonsterMapBossDifficulty.min-ea73fd4e.msgpack.br": {
+			"records": 90,
+			"sha256": "97dd9f80d3d7269408dfe28d3ed606076e17a2546cc58ec89d65e8fb7032634b"
+		},
+		"raw/MonsterMapBossDifficulty.t-1cd7842f.msgpack.br": {
+			"records": 90,
+			"sha256": "2932e9dfa4b807e6015f56cb6790de8580995682ccdfcc67ac626d25170503d7"
+		},
+		"raw/MonsterMapBossDifficulty.t-4f79525b.msgpack.br": {
+			"records": 90,
+			"sha256": "7bb90b908cf4c791361eebcadfe4a2962ffab8649f58f69c826790fc60946229"
+		},
+		"raw/MonsterMapDifficulty.json.gz": {
+			"sha256": "6ee8751071aaf8440a5bf2eb69d11d55a861a05f76bf051cbdf02f4adbdf6dd0"
+		},
+		"raw/MonsterMapDifficulty.min-4739e0b9.msgpack.br": {
+			"records": 25,
+			"sha256": "76227bb4279c5e338beaa511e041b1b632b60bd0a9b86c3a5023b1ae0e76c934"
+		},
+		"raw/MonsterMapDifficulty.min-c255250e.msgpack.br": {
+			"records": 25,
+			"sha256": "b333c18fcd88c56d40a99231c2be1c83f61973c39cc9e00f8fa8a4ce742cc615"
+		},
+		"raw/MonsterMapDifficulty.min-c7b02781.msgpack.br": {
+			"records": 25,
+			"sha256": "498c6d9f7c13e2486e73f58faaf3e6eb38c7a43f1dcdc294d37b565a8257ecbd"
+		},
+		"raw/MonsterMapDifficulty.t-eb3ec86b.msgpack.br": {
+			"records": 25,
+			"sha256": "2861d0fbc90dfbcfad04bf4bad31118639181f09a2dcb8ca184845ede5694b9b"
+		},
+		"raw/MonsterMapDifficulty.t-f0ed38a7.msgpack.br": {
+			"records": 25,
+			"sha256": "72b05c9051b2691e1ad651766e3fac38fd92b97798cc1929a806d65bcc6d8b78"
+		},
+		"raw/MonsterResistances.json.gz": {
+			"sha256": "b36538e54d3154010671b76ad81d42553898c6d953bdfc3531f5286b9097cf52"
+		},
+		"raw/MonsterResistances.t-3a800cd6.msgpack.br": {
+			"records": 50,
+			"sha256": "f63c0739e2547b0aa5626f24727405eb6b8d8c005a83625b3ca94550bb48adc7"
+		},
+		"raw/MonsterTypes.json.gz": {
+			"sha256": "9243e5ea67dc0e6350ca4fddffba6e72cffb3ab64fb9b3f3ba81b7fbc4bf5488"
+		},
+		"raw/MonsterTypes.min-22529164.msgpack.br": {
+			"records": 3600,
+			"sha256": "a6da0636382959809a2c2dcb58d119e586437605fe28283c3ed1fd41504ac20f"
+		},
+		"raw/MonsterTypes.t-b6228f47.msgpack.br": {
+			"records": 3600,
+			"sha256": "8df5f5733713be6f04f50c9f2803ed3e14cd49858821e34c5a6f676919b9eb85"
+		},
+		"raw/MonsterVarieties.json.gz": {
+			"sha256": "ceb135e010b23881971ae0183a091c3e2fa806ae39abca9ddaf69dc69c57c4c2"
+		},
+		"raw/MonsterVarieties.min-9e29492f.msgpack.br": {
+			"records": 10691,
+			"sha256": "9da9e094e7d15567f148b1c4d12fecfc32763c431dd2cd61f88332264daa8aa0"
+		},
+		"raw/MonsterVarieties.t-33999016.msgpack.br": {
+			"records": 10691,
+			"sha256": "4bbb1f1c6fcb94fe9f3f7991313c7da8df41a6c0e0a01fd94a69a7529d1efadd"
+		},
+		"raw/PantheonPanelLayout.json.gz": {
+			"sha256": "746b3b211011dcd2aaa3f08953a41d48ef7ae310281d7589cc396e0efd0a2cad"
+		},
+		"raw/PantheonPanelLayout.min-8b58b52b.msgpack.br": {
+			"records": 16,
+			"sha256": "94aaf3ce455fb6539440262756721bc31862ce8cf8345a5961ac42c08a710aa6"
+		},
+		"raw/PantheonPanelLayout.t-5be37a93.msgpack.br": {
+			"records": 16,
+			"sha256": "e67ee30fe881f7c9ecdd0642566bb6266bef7c739ec4795328cf2214c4ca8ffc"
+		},
+		"raw/PassiveJewelSlots.json.gz": {
+			"sha256": "f4561c5994d1ef6affc50fa5e954407779de2cfbbdc47c945392c076c01ccb0f"
+		},
+		"raw/PassiveJewelSlots.min-98b13b1c.msgpack.br": {
+			"records": 60,
+			"sha256": "3f0e1bf40064259956b172a208e70de65ef61ca9357a4e68274827ae7baab5e6"
+		},
+		"raw/PassiveJewelSlots.t-3655f337.msgpack.br": {
+			"records": 60,
+			"sha256": "9b59e567f92c2679f23b5591156a53f44d41baa3423307edd6465e2709d8a7b5"
+		},
+		"raw/PassiveOverrideLimits.json.gz": {
+			"sha256": "fa2e09c51912f799a980bce61731b43237ff192c95801c14541270218637590f"
+		},
+		"raw/PassiveOverrideLimits.min-3762616f.msgpack.br": {
+			"records": 41,
+			"sha256": "1e0cf78079d8912c623a4e810ae7b71d251d886c8267a8a9b394df6142737b48"
+		},
+		"raw/PassiveOverrideLimits.t-a083e284.msgpack.br": {
+			"records": 41,
+			"sha256": "8b09b48838c177894b252f9783cd0abcc54c4b640d31c9abbb45b75830d9eadc"
+		},
+		"raw/PassiveSkillOverrideTypes.json.gz": {
+			"sha256": "35a60b2c8f1dd7a7ddb0b3132d834c19f5b85ab70afc585b197bfd86e68b9128"
+		},
+		"raw/PassiveSkillOverrideTypes.min-43825921.msgpack.br": {
+			"records": 24,
+			"sha256": "a2241f03df30195aa23739316bca6b12526eabb8c787597012c5c4142191014d"
+		},
+		"raw/PassiveSkillOverrideTypes.t-7644c5dd.msgpack.br": {
+			"records": 24,
+			"sha256": "f6e98549f6e09ae3ebede2dcf67fdcea24fa622ebfe6893b22b82458f4d93fe0"
+		},
+		"raw/PassiveSkillOverrides.json.gz": {
+			"sha256": "7175e8409185ada18e3471a0f2c3783b8f366f0cf681a16c4dfafdd3c8e567b6"
+		},
+		"raw/PassiveSkillOverrides.min-dd4b5181.msgpack.br": {
+			"records": 343,
+			"sha256": "35aa3036a64a726186c8669868a0b6da4735f1c4e7b66bf5dae20be97c280f66"
+		},
+		"raw/PassiveSkillOverrides.t-ae7e24d9.msgpack.br": {
+			"records": 343,
+			"sha256": "4f3761158b0962d2eaebb24b65f94b1384160549f53f03c0d9a1f3896a178f41"
+		},
+		"raw/PassiveSkillTattooTargetSets.json.gz": {
+			"sha256": "e652dbff98c21ff23844e8171f5237f0c864315c38547d4bb9ce0e6b1b5dfcb5"
+		},
+		"raw/PassiveSkillTattooTargetSets.min-c054bd07.msgpack.br": {
+			"records": 10,
+			"sha256": "fde1a12138b8731cc1f5a33a62edf6d24f618c7005d15cd0c18f24e06621cb44"
+		},
+		"raw/PassiveSkillTattooTargetSets.t-e800c20a.msgpack.br": {
+			"records": 10,
+			"sha256": "17721d58b47a72c06cabbb831b1f7cd7b7d3d180dffedd5f5cf432ea9203b43c"
+		},
+		"raw/PassiveSkillTattoos.json.gz": {
+			"sha256": "fb35e3f31788bc4265daa69e8aff7b4b6b0d2dd8d6a9c513121c4212f1b9c5a1"
+		},
+		"raw/PassiveSkillTattoos.min-5debd791.msgpack.br": {
+			"records": 136,
+			"sha256": "e593ea3d684c506dc756af78e6b92d9f545b4ff5ab95912faf4a0dca64b3c3b6"
+		},
+		"raw/PassiveSkillTattoos.t-f49f6420.msgpack.br": {
+			"records": 136,
+			"sha256": "4ec8b543e105d6f172e9d013cf9ba6e49fa617d92a5864a025528cb2e39cbf51"
+		},
+		"raw/PassiveSkillTreeConnectionArt.json.gz": {
+			"sha256": "729c8cbab36bcfdef4d396c2638e10199f4bf611ec88767d199aa1e486b4d1ee"
+		},
+		"raw/PassiveSkillTreeConnectionArt.min-fe71e4fc.msgpack.br": {
+			"records": 1,
+			"sha256": "a3115baf34499337a8b924f679e5c0f2a72519aed8cd5bda9ad54db5645111a9"
+		},
+		"raw/PassiveSkillTreeConnectionArt.t-a6516090.msgpack.br": {
+			"records": 1,
+			"sha256": "6c63b92b8afe06ad991b16d53126ca6263a50d899eb4f23b774c2d8ab8f8d5e1"
+		},
+		"raw/PassiveSkillTreeNodeFrameArt.json.gz": {
+			"sha256": "9518736b575268a38787baf8b60d6d7c2c6916c956a24ab8a6b9094a961a0d8b"
+		},
+		"raw/PassiveSkillTreeNodeFrameArt.min-5ba26b24.msgpack.br": {
+			"records": 12,
+			"sha256": "f6377dd04339657bde1898664108d2eebf5a8261cab1caa6a02da8ae69977af5"
+		},
+		"raw/PassiveSkillTreeNodeFrameArt.t-bf8c5aab.msgpack.br": {
+			"records": 12,
+			"sha256": "d4e040345dcd55591212ad816368826dcb9baee98270e9c38724f2930c7c32d1"
+		},
+		"raw/PassiveSkills.json.gz": {
+			"sha256": "dbfae67d540386237988672a38d05196e36fa8210e26d97004b5444abac02d94"
+		},
+		"raw/PassiveSkills.min-fb028b5b.msgpack.br": {
+			"records": 5706,
+			"sha256": "3e1d9fd2497ed77d0ccc706a0d1fd4a3e644a8d2ea126b750fd53e4819e8e11d"
+		},
+		"raw/PassiveSkills.t-f91b6972.msgpack.br": {
+			"records": 5706,
+			"sha256": "4a6c3ceaf52683d7a6c27af7f1af837726033d2a4d6b887fa4cc64f35b63607b"
+		},
+		"raw/PassiveTreeExpansionJewelSizes.json.gz": {
+			"sha256": "73f00c1ca4c86c9f65ce94b0f4abcf8ab96916f1035be9a16259f9bf12ebfe4e"
+		},
+		"raw/PassiveTreeExpansionJewelSizes.min-28868bd9.msgpack.br": {
+			"records": 3,
+			"sha256": "dc00684805b5954fdf81879e8bd1dab8b8adb11b71aaaea6e7f031f6e2a20b54"
+		},
+		"raw/PassiveTreeExpansionJewelSizes.t-055415f8.msgpack.br": {
+			"records": 3,
+			"sha256": "af5313dcb1ee9fdfea7b592d9b6ad5302b768ff8fb55cde6ca48cbe18fdcf253"
+		},
+		"raw/PassiveTreeExpansionJewels.json.gz": {
+			"sha256": "b82ecfa191b4e3343c8107a6d9d98516b9f0626b060e43d0a517704d552151e1"
+		},
+		"raw/PassiveTreeExpansionJewels.min-907aec89.msgpack.br": {
+			"records": 3,
+			"sha256": "5780af25499b9daee1a6d24a2eb59065b5107a7cdcf8380496e042511a5e7ec1"
+		},
+		"raw/PassiveTreeExpansionJewels.t-7e658285.msgpack.br": {
+			"records": 3,
+			"sha256": "7037ce1d05caa6248f776c65d06b27eb0b1c91e807ec448b8d76996595000a52"
+		},
+		"raw/PassiveTreeExpansionSkills.json.gz": {
+			"sha256": "cdefa4d47793e72e517bec9f98da220ca7ec4c803cc170d6d68569344e0215a9"
+		},
+		"raw/PassiveTreeExpansionSkills.min-85c14627.msgpack.br": {
+			"records": 55,
+			"sha256": "7032cb2dc7a3fd354106da7b117995778719c7fbb88ff6636eb323ed1adae330"
+		},
+		"raw/PassiveTreeExpansionSkills.t-5c83cda0.msgpack.br": {
+			"records": 55,
+			"sha256": "515d55f360e144824bd0f879f4c979146e4baaea6fcbd4b1f5198f1a7805ef83"
+		},
+		"raw/PassiveTreeExpansionSpecialSkills.json.gz": {
+			"sha256": "2985db3b3e2a7246454bf15e3582533c5e89c7db32609b796696003fcf7f587e"
+		},
+		"raw/PassiveTreeExpansionSpecialSkills.min-19058953.msgpack.br": {
+			"records": 309,
+			"sha256": "b9c9fa17959de197db1622183811e7babe6e24708b6718c59c9d66d2ae5b0d03"
+		},
+		"raw/PassiveTreeExpansionSpecialSkills.t-afa54769.msgpack.br": {
+			"records": 309,
+			"sha256": "6a5edc6d7f46e0063ff6a6410cab1ac99d968c43d05bab3816af61e10f4f6706"
+		},
+		"raw/ShieldTypes.json.gz": {
+			"sha256": "c6f63c38ab90b49e44b77e003cc7ce452eeedb4ea494f727f3f1bfc2d5d93da4"
+		},
+		"raw/ShieldTypes.min-1defe185.msgpack.br": {
+			"records": 98,
+			"sha256": "64e8f8d75f0430610186a433609658f9fd1cfe838f1c4692a7b022723accc345"
+		},
+		"raw/ShieldTypes.t-265ecc13.msgpack.br": {
+			"records": 98,
+			"sha256": "b3df12a0852ec29c9936de518e8a3ca930eaf8a5658423f3857d987e26d62cdf"
+		},
+		"raw/SkillGems.json.gz": {
+			"sha256": "a312ea7757810dc21cc6b82319a1841d523a9fa375b928f49f0e60a15312bac1"
+		},
+		"raw/SkillGems.min-059f2a94.msgpack.br": {
+			"records": 847,
+			"sha256": "8202e6af5f44420c3b3affc74693ed3e60dea5c9047229f279b3aa114c95f072"
+		},
+		"raw/SkillGems.min-412e03c3.msgpack.br": {
+			"records": 847,
+			"sha256": "8202e6af5f44420c3b3affc74693ed3e60dea5c9047229f279b3aa114c95f072"
+		},
+		"raw/SkillGems.min-6d240986.msgpack.br": {
+			"records": 847,
+			"sha256": "10e0a47e5e5bc97dd988f20bbc6f171083785d0c34ad47db1ae5cef3e2903065"
+		},
+		"raw/SkillGems.min-c7b72ecd.msgpack.br": {
+			"records": 847,
+			"sha256": "8ace09f8e3efff3d215c9a83a721ba4c944719471f7ca544415f81b834fac8d7"
+		},
+		"raw/SkillGems.t-7d205e15.msgpack.br": {
+			"records": 847,
+			"sha256": "8ace09f8e3efff3d215c9a83a721ba4c944719471f7ca544415f81b834fac8d7"
+		},
+		"raw/SkillGems.t-cc8ffc1f.msgpack.br": {
+			"records": 847,
+			"sha256": "8202e6af5f44420c3b3affc74693ed3e60dea5c9047229f279b3aa114c95f072"
+		},
+		"raw/SkillTotemVariations.json.gz": {
+			"sha256": "ec507e3b0bc7c90d4627a193b3d53125603a0edd1c32aa135cc1b6daf68a979b"
+		},
+		"raw/SkillTotemVariations.min-b462b1df.msgpack.br": {
+			"records": 285,
+			"sha256": "dfdc48307120568ba632825d262420ad935e9272cd3753054232b255c462c25b"
+		},
+		"raw/SkillTotemVariations.t-300da1fd.msgpack.br": {
+			"records": 285,
+			"sha256": "7bb3d0d543fc9eb3978f048d39ea9e8c973ba41b5a80355126e2c85eb47ca27c"
+		},
+		"raw/Stats.json.gz": {
+			"sha256": "458d2fb5561df532f57484ba27595e6f73d4689e0aaa773a192513730cdf6d0f"
+		},
+		"raw/Stats.min-3a1eb95f.msgpack.br": {
+			"records": 23346,
+			"sha256": "9ec2bde054e140e6fb22462f7cf61912724c6a743da6463f54ff92bc932dd859"
+		},
+		"raw/Stats.min-3e956a97.msgpack.br": {
+			"records": 23346,
+			"sha256": "909f01c8c340cbb44727202d1a6489ed95fc4c8f996f4769259b968b9b055524"
+		},
+		"raw/Stats.min-f86e4bbe.msgpack.br": {
+			"records": 23346,
+			"sha256": "909f01c8c340cbb44727202d1a6489ed95fc4c8f996f4769259b968b9b055524"
+		},
+		"raw/Stats.t-5fdad0a9.msgpack.br": {
+			"records": 23346,
+			"sha256": "909f01c8c340cbb44727202d1a6489ed95fc4c8f996f4769259b968b9b055524"
+		},
+		"raw/Stats.t-9d22a0ae.msgpack.br": {
+			"records": 23346,
+			"sha256": "9ec2bde054e140e6fb22462f7cf61912724c6a743da6463f54ff92bc932dd859"
+		},
+		"raw/Tags.json.gz": {
+			"sha256": "c940ab5e1b593b956d4b91eab6a66603c1f88e7e9a4d75d70810ad60fe792b1e"
+		},
+		"raw/Tags.min-0dc51ac8.msgpack.br": {
+			"records": 1389,
+			"sha256": "89f92271099456538133f8b62855ec3229e4e6171503a563cdaea0de64ac2d61"
+		},
+		"raw/Tags.min-5adaca24.msgpack.br": {
+			"records": 1389,
+			"sha256": "89f92271099456538133f8b62855ec3229e4e6171503a563cdaea0de64ac2d61"
+		},
+		"raw/Tags.t-c3bab4bb.msgpack.br": {
+			"records": 1389,
+			"sha256": "89f92271099456538133f8b62855ec3229e4e6171503a563cdaea0de64ac2d61"
+		},
+		"raw/Tinctures.json.gz": {
+			"sha256": "76c4a462f981c5889e6e88dd80c61e41560151f8976fde288bf74a1477689ae5"
+		},
+		"raw/Tinctures.min-7ec13646.msgpack.br": {
+			"records": 10,
+			"sha256": "7fa42d95fbbe67b4f947df57caae5f687de60dc6f33a24722dd785cabd3650b5"
+		},
+		"raw/Tinctures.t-7b2f08b1.msgpack.br": {
+			"records": 10,
+			"sha256": "4b99e0d6fee9591d6a1111f5ee2efefc1181d6031ea3a6437acda3a21bf5ed04"
+		},
+		"raw/UniqueStashLayout.json.gz": {
+			"sha256": "44727cae00a36e72b26086f7f3019b1cecc4e6004093793cd76b22def05ea1cb"
+		},
+		"raw/UniqueStashLayout.min-2d55fefc.msgpack.br": {
+			"records": 1556,
+			"sha256": "30afc71f196cd56e2a412e2dd96515e48d5ab68a0068801c7ab53a72ba9a4dd5"
+		},
+		"raw/UniqueStashLayout.min-a7c95a51.msgpack.br": {
+			"records": 1556,
+			"sha256": "516ac14669fe275c187c9fb05a1a5a452405ada423715842b9dd9f9246ae3a27"
+		},
+		"raw/UniqueStashLayout.t-ce4deb46.msgpack.br": {
+			"records": 1556,
+			"sha256": "d29d72f1338d0db80bd436c4c8086a31ed3e804c12bdc5c76ef31545cfa559de"
+		},
+		"raw/UniqueStashTypes.json.gz": {
+			"sha256": "bb99080f07d5d25b37dccb00bc43a41a7f79f5799e940771cab165dc57b4c0d6"
+		},
+		"raw/UniqueStashTypes.min-66e9b47a.msgpack.br": {
+			"records": 23,
+			"sha256": "11ddb09018c2222365ad77ac9cd7da8714514a707dba0db8bb2d31e4ecbaa6b8"
+		},
+		"raw/UniqueStashTypes.t-4431ee55.msgpack.br": {
+			"records": 23,
+			"sha256": "f47c5c7dc7ed3b185284314cee1f5100fdc32dd19a7d0c70565dece597b8cce2"
+		},
+		"raw/VillageBalancePerLevelShared.json.gz": {
+			"sha256": "9a751eba28c7886a85fcb6b3a6ee40d79f406fa08056f32eab58051b95a80bb9"
+		},
+		"raw/VillageBalancePerLevelShared.min-e51c6a0a.msgpack.br": {
+			"records": 100,
+			"sha256": "9c0f727dbffb151c392ef652cc1ddcb917198944f7946e119a72ea6b7e81eb92"
+		},
+		"raw/VillageBalancePerLevelShared.t-ab8d1c0c.msgpack.br": {
+			"records": 100,
+			"sha256": "2f11fdf50b6fe94362af5861045dea717c50be81cc16a8a30997fdaf2047c550"
+		},
+		"raw/VirtualStatContextFlags.json.gz": {
+			"sha256": "501ab23c35a78c455126ddc89bd798407d48b6084e256da8369b8e160754ab02"
+		},
+		"raw/VirtualStatContextFlags.min-1e308ab8.msgpack.br": {
+			"records": 40,
+			"sha256": "8ec95ae2697d4459d95eea14bd7d095045fa287a027d834af1f4f8325e0503b6"
+		},
+		"raw/VirtualStatContextFlags.t-5d22b60c.msgpack.br": {
+			"records": 40,
+			"sha256": "6d3cc1e7af7509f925b2cacb462c2e79abcf004bede28c273cb37e22673e53d0"
+		},
+		"raw/WeaponPassiveSkillTypes.json.gz": {
+			"sha256": "39b5a84960bef75513339380dabdaa4d725e136705d7737db431b831867c3311"
+		},
+		"raw/WeaponPassiveSkillTypes.min-1e308ab8.msgpack.br": {
+			"records": 3,
+			"sha256": "e0c2ec23017b79ff6dd250443868487c51eb6de906685008f53b5b734184ce4a"
+		},
+		"raw/WeaponPassiveSkillTypes.t-5d22b60c.msgpack.br": {
+			"records": 3,
+			"sha256": "b0df592903b8bfa6228fe2da686f60d2de5a138b9ee6061aecc73740a0b1657a"
+		},
+		"raw/WeaponPassiveSkills.json.gz": {
+			"sha256": "718afe14afcafa82ee1126d25affea277d3aa168a880e8cd3d3c0b20fc2dbba1"
+		},
+		"raw/WeaponPassiveSkills.min-3a68841b.msgpack.br": {
+			"records": 2632,
+			"sha256": "7986e38f5a261badaa2d037b3998a157bc5a1937d269eb164a0d7bcbca9d822a"
+		},
+		"raw/WeaponPassiveSkills.t-14e129d3.msgpack.br": {
+			"records": 2632,
+			"sha256": "69f92ad01b04dd6da5c8a33ccdea4a2f2b82c14da097e1fe0f4994ecea5c53c3"
+		},
+		"raw/WeaponTypes.json.gz": {
+			"sha256": "825b82e857e9153d98adf49da01402cf65b2f1a7d3d03a589448d33c7d7dd1f7"
+		},
+		"raw/WeaponTypes.min-828e9f45.msgpack.br": {
+			"records": 366,
+			"sha256": "5e7ddc71b38629ddd6ae57a2bb9aadecb1baf473686a88a028e51e13c1b4fb39"
+		},
+		"raw/WeaponTypes.t-87b959ad.msgpack.br": {
+			"records": 366,
+			"sha256": "5fb6d2e95d9894f9c27ac8cf3ba838d418dadd99eebe9e1a221b319a4fb97f1e"
+		},
+		"raw/Words.json.gz": {
+			"sha256": "72ab21616d5412797ef42fb4d4a8af3642d771b6e2bfb44ab08c52daed6adfda"
+		},
+		"raw/Words.min-a96bdb5a.msgpack.br": {
+			"records": 4117,
+			"sha256": "ca679298e58154c7cee3b976f8de87c4e602734fd9e60bf6cedf3b69f162f7c6"
+		},
+		"raw/Words.min-dbb25222.msgpack.br": {
+			"records": 4117,
+			"sha256": "1ee82f307e4c0b3f2f94d2b4a9f00dd354192aa33a3614a7ec8f6d3eb644d04c"
+		},
+		"raw/Words.t-35c4d14d.msgpack.br": {
+			"records": 4117,
+			"sha256": "ef7c8b290ed218bcd5762babe93819d8cf87f58cb55fe80446ed9310cd4812d2"
+		},
+		"schema.min.json": {
+			"sha256": "4b51063be32f2a66c1047bf455784d2e85411bed401ffdee380c8603399b9656"
+		},
+		"stat_translations/cn.t-c976d1d7-25a9592b.msgpack.br": {
+			"records": 44,
+			"sha256": "bbde9a2670c68eac8ae290046cf7caaad017d53ceb92215a75cd758b2b404b51"
+		},
+		"stat_translations/de.t-c976d1d7-262dc0b1.msgpack.br": {
+			"records": 44,
+			"sha256": "7330769bd3756604ff1ed2503eb401d57e1daf341b735d0681a193b2918547e2"
+		},
+		"stat_translations/en.t-c976d1d7-f349e363.msgpack.br": {
+			"records": 44,
+			"sha256": "5a74034bf8e88dc06ee81f05008c7a39271697c412a47f842c1c48ccba440bc0"
+		},
+		"stat_translations/en/active_skill_gem_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "fd0cb4120d88628a3c4a1aca9e9f12a32b38a5fc99065275ccff5c2c0bf3d980"
+		},
+		"stat_translations/en/aura_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "7ea9132b2f4ce791958758d34bb9086c60e82bc9d957473fed3a71b94646eeb2"
+		},
+		"stat_translations/en/banner_aura_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "5dd20d9c458c778dda74a721cdef028a923ac64802dd5d3136c3f2621d14be18"
+		},
+		"stat_translations/en/beam_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "8e4c71f9f3df444cf059433bf320905768c96f40d8936a143faf3beecdcd4616"
+		},
+		"stat_translations/en/brand_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "3058043b73b35e4bd82dcdfab797a67168f56b20ab040ba2765eba39ef9c84a0"
+		},
+		"stat_translations/en/buff_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "cdb5d3cbfac53e79bf7451c02a72324d981f1749bea29d974a9d53061de30c4a"
+		},
+		"stat_translations/en/curse_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "369df5eeba345b934a5713bdc29997e7ca66088f5feb61a7aa5821a1a0ca48b1"
+		},
+		"stat_translations/en/debuff_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "ab4adb2f63a93bdaa7b2ff111bbd322b7d9ab8efa38b7a33785e90ea8c9a83e5"
+		},
+		"stat_translations/en/gem_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "1c1eb524308c165f3d45c71fff182a1cd59751a1e6b2ca5ab1b2d4e4ccd383d4"
+		},
+		"stat_translations/en/graft_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "0fad4e0483b0b7ffc3895392aae331db2e509deaa9ec1003983c0e63df60ddbb"
+		},
+		"stat_translations/en/minion_attack_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "73a8bc6f04e7a5806d9d80cc7076a59660511cf64161b12d6579ab614dcfcd72"
+		},
+		"stat_translations/en/minion_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "3698714f56fdeefbee49be4ad1e1f9ab1f980293f74221ddb2c2452ae102eded"
+		},
+		"stat_translations/en/minion_spell_damage_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "259ef3d320feeef87953753af085cece1fb565fd52883d4182481cf052d73d44"
+		},
+		"stat_translations/en/minion_spell_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "c2827c95c66cf191f43928964a7c98a942c44d1433c9b41a498d20003a8bc430"
+		},
+		"stat_translations/en/monster_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "ea6bddbb1983db77c64ea57163954e0baa8e39602fb9cdac4a3a763d4cb7b897"
+		},
+		"stat_translations/en/offering_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "fd95cf9f842ac4b0bef32569aae00246cf0b2a34f8bce1a753bf9d14567cf7ef"
+		},
+		"stat_translations/en/passive_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "6f2cecfbea4d0da922edac914443c095caff392170b575993b24873dcd0e0eec"
+		},
+		"stat_translations/en/secondary_debuff_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "fdbc188264ec02b54fb90359312d39b9e01a703e53634a5bb613d7f1ced14c64"
+		},
+		"stat_translations/en/single_minion_spell_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "27549879743b564bcff9bb9f56dff85785a114b5de16995f5182264457092c95"
+		},
+		"stat_translations/en/skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "bd4bb7c22ca385fe42965ef11d90d713996413834657dbfae171b62d8ddbae28"
+		},
+		"stat_translations/en/stat_descriptions.min-ad0f83aa.msgpack.br": {
+			"sha256": "bc7a7ac3110cda5ace42956a82c398000aba0e9597667e0966e1a536b77fa3b7"
+		},
+		"stat_translations/en/stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "126fcb7e3153d86326efaa196e73668673c87d18377d539e8e7bcc2cdbb93de3"
+		},
+		"stat_translations/en/tincture_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "61910cab43c3550a5109ad61b86ebb215e783d4e1a7783513b8962cb7cc6d351"
+		},
+		"stat_translations/en/variable_duration_skill_stat_descriptions.t-c976d1d7.msgpack.br": {
+			"sha256": "c913aa5597ea20c1c9b966032c303ed3e82ba39fea808808d82adacdd9cb4d48"
+		},
+		"stat_translations/es.t-c976d1d7-b1e31ff1.msgpack.br": {
+			"records": 44,
+			"sha256": "a61245ea208e4374a8a40880d3ddaaca708ba157f975c11af3442293953d8899"
+		},
+		"stat_translations/fr.t-c976d1d7-bf788e4f.msgpack.br": {
+			"records": 44,
+			"sha256": "91db76b892d439ee167e544ca4fd7b75e1b0f9426d29225e20d2700b26d843c9"
+		},
+		"stat_translations/jp.t-c976d1d7-7748a148.msgpack.br": {
+			"records": 44,
+			"sha256": "a8018ab6caab78f6f0ce240d5dc17b1a81237944a665ce90384a6a9f9474cc4a"
+		},
+		"stat_translations/kr.t-c976d1d7-b757c908.msgpack.br": {
+			"records": 44,
+			"sha256": "6d57106627a8bad533c332914b39bf68ad08b629b9b713414ce658f075fb00de"
+		},
+		"stat_translations/po.t-c976d1d7-ab53e400.msgpack.br": {
+			"records": 44,
+			"sha256": "fd5cdc2bb134fcb60486e47489b497851c1633d5db2c68eb47f67194956c34ff"
+		},
+		"stat_translations/ru.t-c976d1d7-7e6a1930.msgpack.br": {
+			"records": 44,
+			"sha256": "026b4dd114ebc7eb93e90291c6d5c3a94594e535346a9d695d3f1d4e3ae3c799"
+		},
+		"stat_translations/th.t-c976d1d7-6a24c03a.msgpack.br": {
+			"records": 44,
+			"sha256": "f8204e875253fafffd3e926663a37576fdc8a71a9aeb8dff9b044586fac85f7c"
+		},
+		"stat_translations/tw.t-c976d1d7-03ce685a.msgpack.br": {
+			"records": 44,
+			"sha256": "92dbf0717cb370ab63085e6e0e9fad6c40a2055507e09ad6422a3b37a61600b3"
+		},
+		"tree/assets/ascendancy-3.webp": {
+			"sha256": "599bd0a5bacb3bbe33ea3f2194fccb6894ad4e0a0ce962dd7ee8e26aa11fb9ae"
+		},
+		"tree/assets/background-3.png": {
+			"sha256": "6ea47785f40f5ad98457e20b9110fc0831f14b7dedc0be88b5ecc0d6389322cb"
+		},
+		"tree/assets/bloodline-3.webp": {
+			"sha256": "7149255b6a89e58848b0e7102d2774a7b0ff4455624b3d64933256c0cc75dd45"
+		},
+		"tree/assets/frame-3.png": {
+			"sha256": "0ad8cd8990e078022bf779c998714930be9a8f9ae10097472324f14efbe76dab"
+		},
+		"tree/assets/group-background-3.png": {
+			"sha256": "6c60fcfa6837e5c32f2105b7f4be531db187b02ac1ae6cf6623cceab7bfeed1f"
+		},
+		"tree/assets/jewel-3.png": {
+			"sha256": "9841fc2b4fe888cfbcc8dd030e20cea7834df0fdacfa9c37d19bb7fbb4137c47"
+		},
+		"tree/assets/jewel-radius.png": {
+			"sha256": "455ad2c621406a66788733aeca965badcfcf7b8e181316561a9a73e14e5dfc47"
+		},
+		"tree/assets/line-3.png": {
+			"sha256": "752bac3872f54976b51041c0004f21a1241c37ea381b7be775770f1968048d06"
+		},
+		"tree/assets/mastery-3.png": {
+			"sha256": "9a6a7721b31ef3274c56992780e3861e0dc35bdb3a8a3efba936093fb7f281a2"
+		},
+		"tree/assets/mastery-active-effect-3.png": {
+			"sha256": "0b6d698660348fe3a4d03beeddd3466e7301a402b302002065160b35d3643e76"
+		},
+		"tree/assets/mastery-active-selected-3.png": {
+			"sha256": "6d052eef7abc8f96ab1d7b6e535b22fdb4678a298798824c4d6e28a5ad86ac08"
+		},
+		"tree/assets/mastery-connected-3.png": {
+			"sha256": "14e0c33cb4f200c7260d5c3903933b78f576f8a6949513fd7f21efa14873ce29"
+		},
+		"tree/assets/mastery-disabled-3.png": {
+			"sha256": "7b45bd7112dec66b9ca5d4588460e35aeb9b82678d46392236e9fa37b4791f50"
+		},
+		"tree/assets/skills-3.jpg": {
+			"sha256": "4f8984f53e9e71c5a23a0ed641331fcf135bce3b348d567ce3a43a4dd7078afe"
+		},
+		"tree/assets/skills-disabled-3.jpg": {
+			"sha256": "f336a04a17243268143fa76732dd1d1dea877a2dea842a4171130fbc37b7626a"
+		},
+		"tree/assets/tattoo-active-effect-3.png": {
+			"sha256": "59ce765687af0c1828c2fb5c01d3b0f630fffb38685ec022eeed122b5a8967f1"
+		},
+		"tree/data.json.br": {
+			"sha256": "015e623c82f4c07975161016e5d6478ca0192f8e4d8f5f9e9538b45372dc5dad"
+		},
+		"tree/data.json.gz": {
+			"sha256": "973d798bb04fb5586f025c2d742ff74355260cef1afd6ee1c19f957be68789f9"
+		}
+	},
 	"tables": [
 		"ActiveSkillType",
 		"ActiveSkills",

@@ -17,6 +17,9 @@ type Manifest struct {
 	FileBundles map[string]string `json:"fileBundles,omitempty"`
 	// TranslationBundles are the LoadTranslationBundle assets by layout variant, then by language.
 	TranslationBundles map[string]map[string]string `json:"translationBundles,omitempty"`
+	// Assets are every published file by path under the version directory ("raw/Mods.json.gz"), the
+	// manifest itself aside.
+	Assets map[string]ManifestAsset `json:"assets,omitempty"`
 	// Tables are the raw tables by name, such as "Mods".
 	Tables []string `json:"tables"`
 	// StatTranslations are the stat description files by name, such as "stat_descriptions".
@@ -28,6 +31,15 @@ type Manifest struct {
 	// JSONOnly is set when the tables have no tuple assets, only json.gz, so LoadRaw cannot
 	// read them. Stat translations are unaffected.
 	JSONOnly bool `json:"jsonOnly,omitempty"`
+}
+
+// ManifestAsset is what a published file holds.
+type ManifestAsset struct {
+	// Records is the row count a msgpack asset leads with, or the entry count of a bundle; nil for any
+	// other file.
+	Records *int64 `json:"records,omitempty"`
+	// SHA256 is the hex sha256 of the file's bytes as served.
+	SHA256 string `json:"sha256"`
 }
 
 func (m *Manifest) HasTable(name string) bool {
