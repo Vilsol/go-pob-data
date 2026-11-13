@@ -21,7 +21,7 @@ description = "Regenerate only data/<version>/tree from the patch CDN (defaults 
 usage = 'arg "[patch]" help="Full patch version, e.g. 3.29.3.3"'
 run = '''
 patch="${usage_patch:-$(nix-shell -p gcc pkg-config imagemagick --run "CGO_ENABLED=1 go run . -latest")}"
-nix-shell --run "CGO_ENABLED=1 go run . -tree-only cdn:$patch ${patch%.*.*}"
+nix-shell --run "CGO_ENABLED=1 go run . -tree-only cdn:$patch $(echo "$patch" | cut -d. -f1,2)"
 '''
 
 [tasks.extract]
