@@ -6,7 +6,6 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/pkg/errors"
 	"gopkg.in/gographics/imagick.v3/imagick"
 
 	"github.com/Vilsol/go-pob-data/extractor"
@@ -93,9 +92,9 @@ func run(game extractor.Game, gamePath string, gameVersion string, treeOnly bool
 	}
 
 	extractor.LoadParser(game, gameVersion)
-	loader, err := extractor.GetBundleLoader(source, IsNewHash(game, gameVersion))
+	loader, err := bundleLoader(source, game, gameVersion)
 	if err != nil {
-		return errors.Wrap(err, "could not initialize bundle loader")
+		return err
 	}
 
 	if !treeOnly {

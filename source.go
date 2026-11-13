@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/fs"
+	"log/slog"
 	"os"
 	"path/filepath"
 	"strings"
@@ -11,6 +12,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/Vilsol/go-pob-data/extractor"
+	"github.com/Vilsol/go-pob-data/sidecar"
 )
 
 const (
@@ -63,6 +65,9 @@ func openGGPK(path string) (fs.FS, error) {
 	}
 
 	index, err := ggfs.Open(bundleIndex)
+	if err != nil && os.Getenv(sidecarEnv) != "" {
+		return ggfs, nil
+	}
 	if err != nil {
 		_ = f.Close()
 		return nil, errors.Wrapf(err, "%s has no %s (a preload ships its bundles without the index until launch)", path, bundleIndex)
@@ -70,4 +75,38 @@ func openGGPK(path string) (fs.FS, error) {
 	_ = index.Close()
 
 	return ggfs, nil
+}
+
+// sidecarEnv names a sidecar index (cmd/sidecar) to serve the bundles by when the source has no bundle index;
+// sidecarMinEnv is the lowest confidence served, medium by default.
+const (
+	sidecarEnv    = "GOPOB_SIDECAR"
+	sidecarMinEnv = "GOPOB_SIDECAR_MIN"
+)
+
+func bundleLoader(source fs.FS, game extractor.Game, gameVersion string) (fs.FS, error) {
+	path := os.Getenv(sidecarEnv)
+	if path == "" {
+		loader, err := extractor.GetBundleLoader(source, IsNewHash(game, gameVersion))
+		return loader, errors.Wrap(err, "could not initialize bundle loader")
+	}
+	minConf := sidecar.Medium
+	if v := os.Getenv(sidecarMinEnv); v != "" {
+		c, err := sidecar.ParseConfidence(v)
+		if err != nil {
+			return nil, err
+		}
+		minConf = c
+	}
+	f, err := os.Open(path)
+	if err != nil {
+		return nil, errors.Wrap(err, "could not open sidecar index")
+	}
+	defer f.Close()
+	entries, err := sidecar.ReadEntries(f)
+	if err != nil {
+		return nil, errors.Wrapf(err, "could not read sidecar index %s", path)
+	}
+	slog.Warn("serving bundles by a sidecar index, not the game's", "sidecar", path, "min", minConf.String())
+	return sidecar.NewFS(source, entries, minConf), nil
 }
