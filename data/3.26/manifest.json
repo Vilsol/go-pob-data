@@ -15,14 +15,28 @@
 		}
 	},
 	"derived": {
+		"LegionPassives": {
+			"t-865dd455": "derived/LegionPassives.t-865dd455-6e830e72.msgpack.br"
+		},
 		"ModScalability": {
 			"t-5008eeb6": "derived/ModScalability.t-5008eeb6-c76e8bb1.msgpack.br"
+		},
+		"Pantheons": {
+			"t-43df158e": "derived/Pantheons.t-43df158e-30f8d5a9.msgpack.br"
 		}
 	},
 	"assets": {
+		"derived/LegionPassives.t-865dd455-6e830e72.msgpack.br": {
+			"records": 249,
+			"sha256": "228dd65745f849a123097e68eb2d0654e4f12df2ad8811143c72f1c8e63a9e25"
+		},
 		"derived/ModScalability.t-5008eeb6-c76e8bb1.msgpack.br": {
 			"records": 14193,
 			"sha256": "d0addcb9369cf95916cb5fa4bd5070c0b14b9df304b8b8d49365568088cca284"
+		},
+		"derived/Pantheons.t-43df158e-30f8d5a9.msgpack.br": {
+			"records": 12,
+			"sha256": "2a7ede0577c9dacdb806f0c42900fe5b825715c093f2e9af84d74384784d3e77"
 		},
 		"raw/ActiveSkillType.json.gz": {
 			"sha256": "48070b8ba7dee96acd5f15f71e7703a2c3a1f0f0c55f75174da94b355516a4f4"

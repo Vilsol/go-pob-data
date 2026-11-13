@@ -56,6 +56,36 @@ var tables = []table{
 		statFiles: []string{"stat_descriptions", "tincture_stat_descriptions", "graft_stat_descriptions"},
 		build:     encode(buildItemModStatOrder),
 	},
+	{
+		name:      PantheonsTable,
+		tables:    []string{"Stats", "PantheonPanelLayout"},
+		statFiles: []string{"stat_descriptions"},
+		build:     encode(buildPantheons),
+	},
+	{
+		name: ClusterJewelsTable,
+		tables: []string{
+			"Stats", "Tags", "BaseItemTypes", "PassiveSkills", "PassiveJewelSlots", "PassiveTreeExpansionJewelSizes",
+			"PassiveTreeExpansionJewels", "PassiveTreeExpansionSkills", "PassiveTreeExpansionSpecialSkills",
+		},
+		statFiles: []string{"passive_skill_stat_descriptions"},
+		build:     encode(buildClusterJewels),
+	},
+	{
+		name:      LegionPassivesTable,
+		tables:    []string{"Stats", "AlternatePassiveSkills", "AlternatePassiveAdditions"},
+		statFiles: []string{"passive_skill_stat_descriptions"},
+		build:     encode(buildLegionPassives),
+	},
+	{
+		name: TattooPassivesTable,
+		tables: []string{
+			"Stats", "ClientStrings", "BaseItemTypes", "CurrencyExchange", "PassiveSkills", "PassiveSkillOverrideTypes",
+			"PassiveOverrideLimits", "PassiveSkillOverrides", "PassiveSkillTattooTargetSets", "PassiveSkillTattoos",
+		},
+		statFiles: []string{"passive_skill_stat_descriptions"},
+		build:     encode(buildTattooPassives),
+	},
 }
 
 // Build derives every table whose inputs version publishes, read through http.DefaultClient and

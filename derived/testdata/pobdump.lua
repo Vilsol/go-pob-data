@@ -31,6 +31,18 @@ local function quote(s)
 	end) .. '"'
 end
 
+-- isArray is whether t's keys are exactly 1..#t, however its constructor spelled them.
+local function isArray(t)
+	local n = 0
+	for k in pairs(t) do
+		if type(k) ~= "number" or k < 1 or k ~= math.floor(k) then
+			return false
+		end
+		n = n + 1
+	end
+	return n == #t
+end
+
 local out = { }
 local function encode(v)
 	local t = type(v)
@@ -43,7 +55,7 @@ local function encode(v)
 	elseif next(v) == nil then
 		-- An empty table is either; JSON null decodes to an empty Go slice or map alike.
 		out[#out + 1] = "null"
-	elseif #v > 0 and next(v, #v) == nil and v[0] == nil then
+	elseif isArray(v) then
 		out[#out + 1] = "["
 		for i, e in ipairs(v) do
 			if i > 1 then out[#out + 1] = "," end

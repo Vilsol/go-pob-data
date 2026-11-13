@@ -71,4 +71,4 @@ run = '''nix-shell -p gcc pkg-config imagemagick --run "go run ./cmd/derive && C
 [tasks.difftest-pob]
 description = "Compare the derived tables with Path of Building's src/Data, exported from the same game version"
 usage = 'arg "[pob]" help="Path of Building checkout" default="../PathOfBuilding"'
-run = 'POB_DIR="$(realpath "${usage_pob}")" go test -count=1 -run MatchesPoB -v ./derived'
+run = '''POB_DIR="$(realpath "${usage_pob}")" go test -count=1 -run 'PoB$' -v ./derived'''

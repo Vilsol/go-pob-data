@@ -15,14 +15,28 @@
 		}
 	},
 	"derived": {
+		"LegionPassives": {
+			"t-865dd455": "derived/LegionPassives.t-865dd455-034ed515.msgpack.br"
+		},
 		"ModScalability": {
 			"t-5008eeb6": "derived/ModScalability.t-5008eeb6-e4693cc3.msgpack.br"
+		},
+		"Pantheons": {
+			"t-43df158e": "derived/Pantheons.t-43df158e-70933081.msgpack.br"
 		}
 	},
 	"assets": {
+		"derived/LegionPassives.t-865dd455-034ed515.msgpack.br": {
+			"records": 249,
+			"sha256": "0aff3e9cdbe31a0285eb4aada24077b1d4c7d81fa9981c06bd37390ba0e73f61"
+		},
 		"derived/ModScalability.t-5008eeb6-e4693cc3.msgpack.br": {
 			"records": 11819,
 			"sha256": "a37cb7f1fc668aac18cea3282bee097415ef12f7badefc0f6d9b7102bf497045"
+		},
+		"derived/Pantheons.t-43df158e-70933081.msgpack.br": {
+			"records": 12,
+			"sha256": "d09632988b3e26703e21430e8ad58156dcddbfe4a23f97a1b247516d4fcd8c14"
 		},
 		"raw/ActiveSkillType.json.gz": {
 			"sha256": "3f13cbc588c635926e7b9825337a375b990b5dab431c5a0361fbb19377840074"

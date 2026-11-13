@@ -20,21 +20,49 @@
 		}
 	},
 	"derived": {
+		"ClusterJewels": {
+			"t-e073eb86": "derived/ClusterJewels.t-e073eb86-70249ceb.msgpack.br"
+		},
 		"ItemModStatOrder": {
 			"t-4f6a8053": "derived/ItemModStatOrder.t-4f6a8053-67d9e6b4.msgpack.br"
 		},
+		"LegionPassives": {
+			"t-865dd455": "derived/LegionPassives.t-865dd455-02488ab3.msgpack.br"
+		},
 		"ModScalability": {
 			"t-5008eeb6": "derived/ModScalability.t-5008eeb6-ccdcc7da.msgpack.br"
+		},
+		"Pantheons": {
+			"t-43df158e": "derived/Pantheons.t-43df158e-44772cf1.msgpack.br"
+		},
+		"TattooPassives": {
+			"t-3c8fc938": "derived/TattooPassives.t-3c8fc938-c2e0b69c.msgpack.br"
 		}
 	},
 	"assets": {
+		"derived/ClusterJewels.t-e073eb86-70249ceb.msgpack.br": {
+			"records": 1,
+			"sha256": "f14bb613444ae6dfc5f2c46e6d80ad9e3577eea049e8b427e3adce569dbe2719"
+		},
 		"derived/ItemModStatOrder.t-4f6a8053-67d9e6b4.msgpack.br": {
 			"records": 9921,
 			"sha256": "41c239bd888e2291aa830b4f4ea2fe52ea6fb10625e241392872471b9eba0987"
 		},
+		"derived/LegionPassives.t-865dd455-02488ab3.msgpack.br": {
+			"records": 718,
+			"sha256": "88c911bb5a38d29c6a40258783e1063c69df7189507c87cd60f5f5db53119a83"
+		},
 		"derived/ModScalability.t-5008eeb6-ccdcc7da.msgpack.br": {
 			"records": 14864,
 			"sha256": "8243ebcd9506123dd921b5f3d849d64038da1af1b3e90b30f405d3635c16f2cb"
+		},
+		"derived/Pantheons.t-43df158e-44772cf1.msgpack.br": {
+			"records": 12,
+			"sha256": "d09e537ce47bac9e492774bc1b25cf45cb84f1c9a9decb47c61e5dfb60677076"
+		},
+		"derived/TattooPassives.t-3c8fc938-c2e0b69c.msgpack.br": {
+			"records": 173,
+			"sha256": "6f4d2b2da4a2c4032e26ddefeb5a901f8a4dfd84427f7901bb64a230fb99322a"
 		},
 		"files.it-6b11d07f.msgpack.br": {
 			"records": 87,

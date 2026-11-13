@@ -119,7 +119,7 @@ type LegionPassive struct {
 	Dn    string
 	Sd    []string
 	Rolls []LegionRoll
-	// Keystone is a node of the keystones table.
+	// Keystone is a keystone node, PoB's ks: one whose PassiveType holds 4.
 	Keystone bool
 	// Addition is a row of the additions table, otherwise of the nodes table.
 	Addition bool
