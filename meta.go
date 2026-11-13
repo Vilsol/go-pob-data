@@ -18,6 +18,10 @@ type Metadata struct {
 	Versions []string `json:"versions"`
 }
 
+// unlistedMarker in a version directory publishes that version's files and manifest but leaves it out of
+// meta.json, for data that must not be offered as a version yet, such as a partial pre-launch extraction.
+const unlistedMarker = ".unlisted"
+
 func generateMeta() error {
 	dir, err := os.ReadDir("data")
 	if err != nil {
@@ -27,7 +31,9 @@ func generateMeta() error {
 	metadata := &Metadata{}
 	for _, entry := range dir {
 		if entry.IsDir() {
-			metadata.Versions = append(metadata.Versions, entry.Name())
+			if _, err := os.Stat(filepath.Join("data", entry.Name(), unlistedMarker)); err != nil {
+				metadata.Versions = append(metadata.Versions, entry.Name())
+			}
 
 			manifest, err := manifestJSON(filepath.Join("data", entry.Name()))
 			if err != nil {
