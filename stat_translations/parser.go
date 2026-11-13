@@ -332,7 +332,8 @@ var languageMap = map[string]string{
 	"Turkish":             "tr",
 }
 
-func (t *TranslationParser) SaveTo(outDir string, translationName string) error {
+// Translations are the parsed file in every language, by language directory ("en").
+func (t *TranslationParser) Translations() (map[string]*raw.TranslationFile, error) {
 	// Every language gets the file, so a file without descriptions of its own still carries its
 	// includes and hidden stats.
 	fullOut := make(map[string]*raw.TranslationFile, len(languageMap))
@@ -347,7 +348,7 @@ func (t *TranslationParser) SaveTo(outDir string, translationName string) error 
 	for _, description := range t.ordered {
 		for lang, translations := range description.Lang {
 			if _, ok := fullOut[lang]; !ok {
-				return errors.Errorf("unknown language %q", lang)
+				return nil, errors.Errorf("unknown language %q", lang)
 			}
 
 			fullOut[lang].Descriptors = append(fullOut[lang].Descriptors, &raw.StatTranslation{
@@ -359,13 +360,27 @@ func (t *TranslationParser) SaveTo(outDir string, translationName string) error 
 		}
 	}
 
+	byDir := make(map[string]*raw.TranslationFile, len(fullOut))
+	for lang, translations := range fullOut {
+		byDir[languageMap[lang]] = translations
+	}
+	return byDir, nil
+}
+
+// SaveTo writes the parsed file in every language under outDir, as its tuple asset and its json.gz.
+func (t *TranslationParser) SaveTo(outDir string, translationName string) error {
+	fullOut, err := t.Translations()
+	if err != nil {
+		return err
+	}
+
 	for lang, translations := range fullOut {
 		b, err := json.Marshal(translations)
 		if err != nil {
 			return errors.Wrap(err, "failed to marshal translations file")
 		}
 
-		fullPath := loader.AssetPath(filepath.Join(outDir, languageMap[lang], translationName), loader.TupleVariant(translations))
+		fullPath := loader.AssetPath(filepath.Join(outDir, lang, translationName), loader.TupleVariant(translations))
 		slog.Info("writing to", slog.String("path", fullPath))
 
 		if err := os.MkdirAll(filepath.Dir(fullPath), 0o755); err != nil {
@@ -391,7 +406,7 @@ func (t *TranslationParser) SaveTo(outDir string, translationName string) error 
 		_ = writerMsgpBrotli.Close()
 		_ = f.Close()
 
-		outPathGzip := filepath.Join(outDir, languageMap[lang], translationName+".json.gz")
+		outPathGzip := filepath.Join(outDir, lang, translationName+".json.gz")
 		slog.Info("writing to", slog.String("path", outPathGzip))
 
 		fGzip, err := os.OpenFile(outPathGzip, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o755)

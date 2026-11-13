@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"io/fs"
+	"maps"
 	"os"
 	"path/filepath"
 	"slices"
@@ -12,6 +13,7 @@ import (
 
 	"github.com/Vilsol/go-pob-data/extractor"
 	"github.com/Vilsol/go-pob-data/loader"
+	st "github.com/Vilsol/go-pob-data/stat_translations"
 )
 
 type Metadata struct {
@@ -53,8 +55,8 @@ func generateMeta() error {
 	return errors.Wrap(os.WriteFile("data/meta.json", bs, 0o644), "failed writing metadata")
 }
 
-// manifestJSON lists what versionDir publishes. Every table and translation has a json.gz, whichever
-// tuple layouts it also has.
+// manifestJSON lists what versionDir publishes. Every table has a json.gz, whichever tuple layouts it also
+// has; the translations are what the translation bundles hold.
 func manifestJSON(versionDir string) ([]byte, error) {
 	manifest := loader.Manifest{
 		Tables:           []string{},
@@ -77,33 +79,22 @@ func manifestJSON(versionDir string) ([]byte, error) {
 	}
 	manifest.JSONOnly = len(tables) > 0 && len(tuples) == 0
 
-	languages, err := os.ReadDir(filepath.Join(versionDir, "stat_translations"))
-	if err != nil && !os.IsNotExist(err) {
-		return nil, errors.Wrap(err, "failed listing languages")
+	translationPaths, err := translationBundles(versionDir)
+	if err != nil {
+		return nil, err
 	}
-	for _, language := range languages {
-		if language.IsDir() {
-			manifest.Languages = append(manifest.Languages, language.Name())
-		}
+	translations, err := readTranslationBundles(versionDir)
+	if err != nil {
+		return nil, err
 	}
-
-	// PoE2 nests its per-skill descriptions under specific_skill_stat_descriptions/.
-	enDir := filepath.Join(versionDir, "stat_translations", "en")
-	err = filepath.WalkDir(enDir, func(path string, d fs.DirEntry, err error) error {
-		if err != nil || d.IsDir() || !strings.HasSuffix(path, ".json.gz") {
-			return err
+	for _, language := range slices.Sorted(maps.Keys(translationPaths)) {
+		if manifest.TranslationBundles == nil {
+			manifest.TranslationBundles = map[string]map[string]string{loader.TranslationBundleVariant(): {}}
 		}
-		rel, err := filepath.Rel(enDir, path)
-		if err != nil {
-			return errors.Wrap(err, "failed resolving translation path")
-		}
-		manifest.StatTranslations = append(manifest.StatTranslations, strings.TrimSuffix(filepath.ToSlash(rel), ".json.gz"))
-		return nil
-	})
-	if err != nil && !os.IsNotExist(err) {
-		return nil, errors.Wrap(err, "failed listing translations")
+		manifest.TranslationBundles[loader.TranslationBundleVariant()][language] = translationPaths[language][0]
+		manifest.Languages = append(manifest.Languages, language)
 	}
-	slices.Sort(manifest.StatTranslations)
+	manifest.StatTranslations = append(manifest.StatTranslations, slices.Sorted(maps.Keys(translations[st.PerFileLanguage]))...)
 
 	filesDir := filepath.Join(versionDir, "files")
 	err = filepath.WalkDir(filesDir, func(path string, d fs.DirEntry, err error) error {

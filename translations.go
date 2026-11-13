@@ -11,6 +11,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/Vilsol/go-pob-data/extractor"
+	"github.com/Vilsol/go-pob-data/raw"
 	st "github.com/Vilsol/go-pob-data/stat_translations"
 )
 
@@ -25,7 +26,7 @@ func extractTranslations(loader fs.FS, game extractor.Game, gameVersion string) 
 		names = append(names, specific...)
 	}
 
-	saved := 0
+	parsed := map[string]map[string]*raw.TranslationFile{}
 	for _, name := range names {
 		if !statDescriptionShipped(loader, dir+name+ext) {
 			// 3.30 dropped some of the listed files (tincture, village, variable_duration); a file the game ships
@@ -37,16 +38,22 @@ func extractTranslations(loader fs.FS, game extractor.Game, gameVersion string) 
 		if err := parser.ParseFile(dir + name + ext); err != nil {
 			return errors.Wrap(err, "failed to parse translation file")
 		}
-		if err := parser.SaveTo(filepath.Join("data", gameVersion, "stat_translations"), name); err != nil {
+		files, err := parser.Translations()
+		if err != nil {
 			return errors.Wrap(err, "failed to save translation files")
 		}
-		saved++
+		for lang, file := range files {
+			if parsed[lang] == nil {
+				parsed[lang] = map[string]*raw.TranslationFile{}
+			}
+			parsed[lang][name] = file
+		}
 	}
-	if saved == 0 {
+	if len(parsed) == 0 {
 		return errors.New("no stat description file the list names is in the game")
 	}
 
-	return nil
+	return writeTranslations(filepath.Join("data", gameVersion), parsed)
 }
 
 // statDescriptionShipped reports whether the game has file, under its own extension or, for a PoE1 .txt, as the

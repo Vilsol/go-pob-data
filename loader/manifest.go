@@ -15,6 +15,8 @@ type Manifest struct {
 	// FileBundles are the LoadFileBundle assets by file extension, such as ".ot", each holding every file of
 	// Files with that extension.
 	FileBundles map[string]string `json:"fileBundles,omitempty"`
+	// TranslationBundles are the LoadTranslationBundle assets by layout variant, then by language.
+	TranslationBundles map[string]map[string]string `json:"translationBundles,omitempty"`
 	// Tables are the raw tables by name, such as "Mods".
 	Tables []string `json:"tables"`
 	// StatTranslations are the stat description files by name, such as "stat_descriptions".

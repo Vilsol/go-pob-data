@@ -260,30 +260,6 @@ func isMapAsset(path string) bool {
 	return !strings.Contains(strings.TrimSuffix(filepath.Base(path), ".msgpack.br"), ".")
 }
 
-func encodeTranslation(t *testing.T, jsonData []byte) []byte {
-	t.Helper()
-
-	var file raw.TranslationFile
-	if err := json.Unmarshal(jsonData, &file); err != nil {
-		t.Fatal(err)
-	}
-
-	var buf bytes.Buffer
-	bw := brotli.NewWriter(&buf)
-	w := msgp.NewWriter(bw)
-	if err := file.EncodeMsg(w); err != nil {
-		t.Fatal(err)
-	}
-	if err := w.Flush(); err != nil {
-		t.Fatal(err)
-	}
-	if err := bw.Close(); err != nil {
-		t.Fatal(err)
-	}
-
-	return buf.Bytes()
-}
-
 // The map assets are frozen: nothing re-encodes them any more, so only this list vouches for them.
 func TestLegacyAssetsPinned(t *testing.T) {
 	f, err := os.Open("testdata/legacy-assets.sha256")
@@ -371,7 +347,6 @@ func TestTupleMatchesJSON(t *testing.T) {
 
 	for _, dir := range dirs {
 		version := filepath.Base(filepath.Dir(dir))
-		manifest := readManifest(t, version)
 		for _, file := range tablesToExport(extractor.GameOf(version)) {
 			if file.Encode == nil {
 				continue
@@ -422,70 +397,7 @@ func TestTupleMatchesJSON(t *testing.T) {
 				}
 			})
 		}
-
-		for _, lang := range langDirs(t, version) {
-			for _, name := range manifest.StatTranslations {
-				t.Run(version+"/"+lang+"/"+name, func(t *testing.T) {
-					base := filepath.Join("data", version, "stat_translations", lang, name)
-					tuplePath := loader.AssetPath(base, translationVariant)
-					if version == staleTranslations {
-						if readAsset(t, tuplePath) != nil {
-							t.Errorf("%s exists, but its source is not a TranslationFile", tuplePath)
-						}
-						t.Skip("known stale: no TranslationFile to encode")
-					}
-
-					if _, err := os.Stat(base + ".json.gz"); os.IsNotExist(err) {
-						t.Skip("not extracted for this version")
-					}
-
-					source := encodeTranslation(t, readGzip(t, base+".json.gz"))
-					committed := readAsset(t, tuplePath)
-
-					switch {
-					case bytes.Equal(source, committed):
-					case *update:
-						if err := os.WriteFile(tuplePath, source, 0o755); err != nil {
-							t.Fatal(err)
-						}
-					default:
-						t.Errorf("%s is missing or stale: run with -update", tuplePath)
-					}
-				})
-			}
-		}
 	}
-}
-
-func readManifest(t *testing.T, version string) loader.Manifest {
-	t.Helper()
-
-	b, err := os.ReadFile(filepath.Join("data", version, "manifest.json"))
-	if err != nil {
-		t.Fatal(err)
-	}
-	var m loader.Manifest
-	if err := json.Unmarshal(b, &m); err != nil {
-		t.Fatal(err)
-	}
-	return m
-}
-
-func langDirs(t *testing.T, version string) []string {
-	t.Helper()
-
-	entries, err := os.ReadDir(filepath.Join("data", version, "stat_translations"))
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	langs := make([]string, 0, len(entries))
-	for _, entry := range entries {
-		if entry.IsDir() {
-			langs = append(langs, entry.Name())
-		}
-	}
-	return langs
 }
 
 // Every tuple asset decodes to exactly the rows its frozen map asset decodes to with the map decoder
