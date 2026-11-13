@@ -35,6 +35,14 @@ patch="${usage_patch:-$(nix-shell -p gcc pkg-config imagemagick --run "CGO_ENABL
 nix-shell -p gcc pkg-config imagemagick --run "CGO_ENABLED=1 ./extract.sh cdn:$patch $(echo "$patch" | cut -d. -f1,2) ${usage_game}"
 '''
 
+[tasks.check-exe]
+description = "Opt-in: compare the table layouts PoE1's client executable (downloaded from the patch CDN) loads against data/<version>/schema.min.json; fails when an exported table disagrees (needs cgo)"
+usage = 'arg "[patch]" help="Full patch version, e.g. 3.30.0.1.2 (defaults to the live patch)"'
+run = '''
+patch="${usage_patch:-$(nix-shell -p gcc pkg-config imagemagick --run "CGO_ENABLED=1 go run . -latest")}"
+nix-shell -p gcc pkg-config imagemagick --run "CGO_ENABLED=1 go run . -check-exe cdn:$patch $(echo "$patch" | cut -d. -f1,2)"
+'''
+
 [tasks.monster-varieties]
 description = "Regenerate monster_varieties.txt, or monster_varieties_poe2.txt from PoB-PoE2 (the monsters whose .ot templates are published), from PoB's minion and spectre export templates"
 usage = '''

@@ -29,6 +29,7 @@ func main() {
 	latest := flag.Bool("latest", false, "print the game's live patch and exit")
 	flag.BoolVar(&skipMissing, "skip-missing", false, "log and skip inputs the source lacks instead of failing: for a partial source such as a preload read through a sidecar index")
 	tradeStats := flag.Bool("trade-stats", false, "only fetch the trade site's stats list into data/<game_version>; the site serves only the live league's")
+	checkExeLayout := flag.Bool("check-exe", false, "only compare the tables the client executable (from cdn:<patch>) loads against data/<game_version>/schema.min.json; fails when an exported table disagrees")
 	flag.Parse()
 
 	game, err := extractor.ParseGame(*gameName)
@@ -61,6 +62,19 @@ func main() {
 			return
 		}
 		if err := generateMeta(); err != nil {
+			slog.Error(err.Error())
+			os.Exit(1)
+		}
+		return
+	}
+
+	if *checkExeLayout {
+		if flag.NArg() < 2 {
+			slog.Error("please provide cdn:<patch> and game version")
+			os.Exit(1)
+			return
+		}
+		if err := checkExe(game, flag.Arg(0), flag.Arg(1)); err != nil {
 			slog.Error(err.Error())
 			os.Exit(1)
 		}
