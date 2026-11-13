@@ -39,18 +39,6 @@
 		"WeaponTypes"
 	],
 	"statTranslations": [],
-	"languages": [
-		"cn",
-		"de",
-		"en",
-		"es",
-		"fr",
-		"jp",
-		"kr",
-		"po",
-		"ru",
-		"th",
-		"tw"
-	],
+	"languages": [],
 	"files": []
 }

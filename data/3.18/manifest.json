@@ -1,4 +1,19 @@
 {
+	"translationBundles": {
+		"t-c976d1d7": {
+			"cn": "stat_translations/cn.t-c976d1d7-2667ac06.msgpack.br",
+			"de": "stat_translations/de.t-c976d1d7-116ac403.msgpack.br",
+			"en": "stat_translations/en.t-c976d1d7-1a0f17db.msgpack.br",
+			"es": "stat_translations/es.t-c976d1d7-fa4bb477.msgpack.br",
+			"fr": "stat_translations/fr.t-c976d1d7-bb223a9b.msgpack.br",
+			"jp": "stat_translations/jp.t-c976d1d7-690dec4e.msgpack.br",
+			"kr": "stat_translations/kr.t-c976d1d7-e22ddb19.msgpack.br",
+			"po": "stat_translations/po.t-c976d1d7-f561adcf.msgpack.br",
+			"ru": "stat_translations/ru.t-c976d1d7-28b825c3.msgpack.br",
+			"th": "stat_translations/th.t-c976d1d7-fd6402d4.msgpack.br",
+			"tw": "stat_translations/tw.t-c976d1d7-1489b070.msgpack.br"
+		}
+	},
 	"tables": [
 		"ActiveSkillType",
 		"ActiveSkills",

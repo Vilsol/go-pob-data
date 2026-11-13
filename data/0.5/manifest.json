@@ -2,6 +2,21 @@
 	"fileBundles": {
 		".ot": "files.ot-453cc8c7.msgpack.br"
 	},
+	"translationBundles": {
+		"t-c976d1d7": {
+			"cn": "stat_translations/cn.t-c976d1d7-9183df44.msgpack.br",
+			"de": "stat_translations/de.t-c976d1d7-4ba27e4a.msgpack.br",
+			"en": "stat_translations/en.t-c976d1d7-feadc875.msgpack.br",
+			"es": "stat_translations/es.t-c976d1d7-ff1473cc.msgpack.br",
+			"fr": "stat_translations/fr.t-c976d1d7-59a0d6d2.msgpack.br",
+			"jp": "stat_translations/jp.t-c976d1d7-ba7b1953.msgpack.br",
+			"kr": "stat_translations/kr.t-c976d1d7-c8e3dd88.msgpack.br",
+			"po": "stat_translations/po.t-c976d1d7-dc45b92d.msgpack.br",
+			"ru": "stat_translations/ru.t-c976d1d7-8c07fe6b.msgpack.br",
+			"th": "stat_translations/th.t-c976d1d7-076fbad5.msgpack.br",
+			"tw": "stat_translations/tw.t-c976d1d7-09faf475.msgpack.br"
+		}
+	},
 	"tables": [
 		"ActiveSkillType",
 		"ActiveSkillWeaponRequirement",
