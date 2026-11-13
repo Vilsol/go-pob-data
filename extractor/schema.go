@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/oriath-net/pogo/dat"
+	"github.com/pkg/errors"
 )
 
 var (
@@ -21,31 +22,49 @@ var dataPath = "data"
 
 func LoadSchema(game Game, gameVersion string) {
 	schemaPath := filepath.Join(dataPath, gameVersion, "schema.min.json")
-	schemaRaw, err := os.ReadFile(schemaPath)
+	var err error
+	schemaFile, err = readSchema(schemaPath)
 	if err != nil {
 		panic(err)
 	}
 
-	if err := json.Unmarshal(schemaRaw, &schemaFile); err != nil {
-		panic(err)
+	tableMap = schemaFile.gameTables(game)
+	tableSource = make(map[string]string, len(tableMap))
+	for name := range tableMap {
+		tableSource[name] = schemaPath
+	}
+}
+
+func readSchema(schemaPath string) (*SchemaFile, error) {
+	schemaRaw, err := os.ReadFile(schemaPath)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to read schema")
 	}
 
-	tableMap = make(map[string]Table, len(schemaFile.Tables))
-	tableSource = make(map[string]string, len(schemaFile.Tables))
-	for _, table := range schemaFile.Tables {
+	var s *SchemaFile
+	if err := json.Unmarshal(schemaRaw, &s); err != nil {
+		return nil, errors.Wrap(err, "failed to decode schema")
+	}
+	return s, nil
+}
+
+// gameTables is every table the schema describes for game.
+func (s *SchemaFile) gameTables(game Game) map[string]Table {
+	out := make(map[string]Table, len(s.Tables))
+	for _, table := range s.Tables {
 		if table.ValidFor&game.validFor() == 0 {
 			continue
 		}
-		if t, ok := tableMap[table.Name]; ok {
+		if t, ok := out[table.Name]; ok {
 			if t.ValidFor < table.ValidFor {
 				// Ignore newer versions of the table
 				continue
 			}
 		}
 
-		tableMap[table.Name] = table
-		tableSource[table.Name] = schemaPath
+		out[table.Name] = table
 	}
+	return out
 }
 
 type SchemaFile struct {
