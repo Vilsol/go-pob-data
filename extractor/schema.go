@@ -6,6 +6,7 @@ import (
 	"log/slog"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/oriath-net/pogo/dat"
 )
@@ -178,4 +179,42 @@ const (
 
 func GetSchema(name string) Table {
 	return tableMap[name]
+}
+
+// SchemaColumn is one decoded column of a table's datc64 row: its pogo type, byte offset and size.
+type SchemaColumn struct {
+	Name   string
+	Type   string
+	Ref    string
+	Offset int
+	Size   int
+}
+
+// SchemaColumns lays out table name's datc64 row as pogo would decode it; nil when the schema has no such table.
+func SchemaColumns(name string) []SchemaColumn {
+	t, ok := tableMap[name]
+	if !ok {
+		return nil
+	}
+	var out []SchemaColumn
+	off := 0
+	for _, f := range t.ToJSONFormat().Fields {
+		ft := dat.FieldType(f.Type)
+		if !ft.Valid() {
+			continue
+		}
+		size := ft.Size(dat.Datc64)
+		out = append(out, SchemaColumn{Name: f.Name, Type: f.Type, Ref: f.Ref, Offset: off, Size: size})
+		off += size
+	}
+	return out
+}
+
+// SchemaTables maps every loaded table's lower-case name to its schema name.
+func SchemaTables() map[string]string {
+	out := make(map[string]string, len(tableMap))
+	for n := range tableMap {
+		out[strings.ToLower(n)] = n
+	}
+	return out
 }
