@@ -75,6 +75,10 @@ func ParseDat(data io.Reader, filename string) ([]interface{}, error) {
 		return nil, err
 	}
 
+	if err := checkFit(b, filename); err != nil {
+		return nil, err
+	}
+
 	result, err := parser.Parse(bytes.NewReader(b), filename)
 	return result, errors.Wrap(err, "failed parsing dat file")
 }
@@ -115,7 +119,7 @@ func checkRowWidth(b []byte, filename string) error {
 // SchemaRowWidth is the row width pogo would decode table name with for filename's dat variant.
 func SchemaRowWidth(name string, filename string) int {
 	width := dat.Dat32
-	if ext := path.Ext(filename); ext == ".dat64" || ext == ".datc64" {
+	if is64Bit(filename) {
 		width = dat.Datc64
 	}
 
