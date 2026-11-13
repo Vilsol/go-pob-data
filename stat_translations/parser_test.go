@@ -151,3 +151,10 @@ func TestParseFileStrayHashAfterMax(t *testing.T) {
 	_, err = parse(t, "description\n\t1 a\n\t1\n\t\t1#|99 \"x\"\n")
 	testza.AssertNotNil(t, err)
 }
+
+// 0.5 ships Turkish blocks; an unmapped language stops SaveTo for every file
+func TestSaveToTurkish(t *testing.T) {
+	p, err := parse(t, "description some_stat\n\t1 some_stat\n\t1\n\t\t# \"{0} thing\"\n\tlang \"Turkish\"\n\t1\n\t\t# \"{0} şey\"\n")
+	testza.AssertNoError(t, err)
+	testza.AssertNoError(t, p.SaveTo(t.TempDir(), "skill"))
+}

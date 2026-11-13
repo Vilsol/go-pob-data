@@ -329,6 +329,7 @@ var languageMap = map[string]string{
 	"Simplified Chinese":  "cn",
 	"Thai":                "th",
 	"Japanese":            "jp",
+	"Turkish":             "tr",
 }
 
 func (t *TranslationParser) SaveTo(outDir string, translationName string) error {
