@@ -196,9 +196,10 @@ func SchemaColumns(name string) []SchemaColumn {
 	if !ok {
 		return nil
 	}
-	var out []SchemaColumn
+	fields := t.ToJSONFormat().Fields
+	out := make([]SchemaColumn, 0, len(fields))
 	off := 0
-	for _, f := range t.ToJSONFormat().Fields {
+	for _, f := range fields {
 		ft := dat.FieldType(f.Type)
 		if !ft.Valid() {
 			continue

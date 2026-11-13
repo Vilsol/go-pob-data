@@ -18,6 +18,7 @@ import (
 	"strings"
 
 	"github.com/oriath-net/pogo/poefs/ggpk"
+	"github.com/pkg/errors"
 
 	"github.com/Vilsol/go-pob-data/extractor"
 	"github.com/Vilsol/go-pob-data/sidecar"
@@ -57,12 +58,12 @@ func main() {
 func run(ggpkPath, refPath, schema, out string) error {
 	f, err := os.Open(ggpkPath)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "could not open the ggpk")
 	}
 	defer f.Close()
 	target, err := ggpk.NewLoader(f)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "could not read the ggpk")
 	}
 
 	readRef := func(name string) ([]byte, error) { return readAll(os.DirFS(refPath), name) }
@@ -92,11 +93,8 @@ func run(ggpkPath, refPath, schema, out string) error {
 		Logf:      func(format string, args ...any) { slog.Info(fmt.Sprintf(format, args...)) },
 		Check: func(p string, b []byte) error {
 			if strings.HasSuffix(p, ".psg") {
-				// 3.30's PoE1 graphs use the PoE2 layout (u64 roots, edges with an orbit); accept either
-				if _, err := extractor.ParsePassiveSkillGraph(bytes.NewReader(b), extractor.PoE1); err == nil {
-					return nil
-				}
-				_, err := extractor.ParsePassiveSkillGraph(bytes.NewReader(b), extractor.PoE2)
+				// the parser reads either graph layout from the file (3.30's PoE1 graphs use PoE2's)
+				_, err := extractor.ParsePassiveSkillGraph(bytes.NewReader(b))
 				return err
 			}
 			return nil
@@ -138,7 +136,7 @@ func run(ggpkPath, refPath, schema, out string) error {
 	}
 
 	if err := os.MkdirAll(out, 0o755); err != nil {
-		return err
+		return errors.Wrap(err, "could not create "+out)
 	}
 	if err := writeFile(filepath.Join(out, "sidecar.tsv"), func(w io.Writer) error { return sidecar.WriteEntries(w, entries) }); err != nil {
 		return err
@@ -196,7 +194,7 @@ var inputSet = map[string]bool{}
 func readInputs(path string) error {
 	b, err := os.ReadFile(path)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "could not read "+path)
 	}
 	for _, line := range strings.Split(string(b), "\n") {
 		if i := strings.LastIndexByte(line, '\t'); i >= 0 {
@@ -212,27 +210,28 @@ func readInputs(path string) error {
 func readAll(fsys fs.FS, name string) ([]byte, error) {
 	f, err := fsys.Open(name)
 	if err != nil {
-		return nil, err
+		return nil, errors.Wrap(err, "could not open "+name)
 	}
 	defer f.Close()
-	return io.ReadAll(f)
+	b, err := io.ReadAll(f)
+	return b, errors.Wrap(err, "could not read "+name)
 }
 
 func dumpBundle(ggpkPath, name, out string) error {
 	f, err := os.Open(ggpkPath)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "could not open the ggpk")
 	}
 	defer f.Close()
 	target, err := ggpk.NewLoader(f)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "could not read the ggpk")
 	}
 	b, err := sidecar.ReadBundle(target, name)
 	if err != nil {
 		return err
 	}
-	return os.WriteFile(out, b, 0o644)
+	return errors.Wrap(os.WriteFile(out, b, 0o644), "could not write "+out)
 }
 
 func wanted(p string) bool {
@@ -249,11 +248,11 @@ func wanted(p string) bool {
 func writeFile(p string, fn func(io.Writer) error) error {
 	f, err := os.Create(p)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "could not create "+p)
 	}
 	if err := fn(f); err != nil {
 		_ = f.Close()
 		return err
 	}
-	return f.Close()
+	return errors.Wrap(f.Close(), "could not close "+p)
 }

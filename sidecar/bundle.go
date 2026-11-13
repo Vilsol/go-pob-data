@@ -30,7 +30,7 @@ func DecodeBundle(raw []byte) ([]byte, error) {
 		return nil, fmt.Errorf("bundle of %d bytes has no head", len(raw))
 	}
 	if _, err := binary.Decode(raw[:hs], binary.LittleEndian, &bh); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("bundle head: %w", err)
 	}
 	p := hs + 4*int(bh.BlockCount)
 	if bh.UncompressedBlockGranularity == 0 || p > len(raw) || bh.UncompressedSize2 < 0 {

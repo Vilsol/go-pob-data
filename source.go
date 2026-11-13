@@ -106,8 +106,8 @@ const openLogEnv = "GOPOB_OPENLOG"
 
 type openLog struct {
 	fs.FS
-	mu sync.Mutex
 	w  *os.File
+	mu sync.Mutex
 }
 
 func (l *openLog) Open(name string) (fs.File, error) {
@@ -119,7 +119,7 @@ func (l *openLog) Open(name string) (fs.File, error) {
 		status = "missing"
 	}
 	fmt.Fprintf(l.w, "%s\t%s\n", status, name)
-	return f, err
+	return f, err //nolint:wrapcheck // a pass-through fs.FS returns the lower FS's error as is
 }
 
 func sidecarOrIndexLoader(source fs.FS, game extractor.Game, gameVersion string) (fs.FS, error) {

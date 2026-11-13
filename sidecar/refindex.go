@@ -72,9 +72,9 @@ func ParseIndex(raw []byte) ([]RefFile, error) {
 }
 
 type reader struct {
+	err error
 	d   []byte
 	p   int
-	err error
 }
 
 func (r *reader) take(n int) []byte {

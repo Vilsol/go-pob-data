@@ -41,18 +41,20 @@ var marker = bytes.Repeat([]byte{0xbb}, 8)
 
 const nullRow = 0xfefefefefefefefe
 
+const stringColumn = "string"
+
 // refTable is one table file of the reference patch; one record covers every path that shared its bytes.
 type refTable struct {
-	paths  []string
+	keys   map[string]struct{}
 	stem   string
 	bundle string
-	off    int64
+	paths  []string
 	data   []byte
+	cols   []Column
+	off    int64
 	rows   int
 	width  int
 	keyOff int
-	keys   map[string]struct{}
-	cols   []Column
 	// utf32 marks a .datcl64 table: its strings are UTF-32 where .datc64's are UTF-16
 	utf32 bool
 }
@@ -62,10 +64,10 @@ type candidate struct {
 }
 
 type pair struct {
+	ref    *refTable
+	cand   candidate
 	bundle int
 	k      int
-	cand   candidate
-	ref    *refTable
 	score  float64
 	agree  float64
 	keyed  bool
@@ -73,25 +75,24 @@ type pair struct {
 }
 
 type datTable struct {
+	ref    *refTable
 	start  int
 	end    int
 	rows   int
 	width  int
-	ref    *refTable
 	agree  float64
+	marker int
 	keyed  bool
 	slot   bool
-	marker int
 }
 
 type target struct {
-	name    string
-	size    int
-	blob    []byte // dropped between passes for a bundle with no tables, to bound memory
-	marks   []int
-	cands   [][]candidate
-	tables  []datTable
-	entries []Entry
+	name   string
+	blob   []byte // dropped between passes for a bundle with no tables, to bound memory
+	marks  []int
+	cands  [][]candidate
+	tables []datTable
+	size   int
 }
 
 // Rebuild names the files in the target bundles. Tables are found one per 0xBB*8 marker, their starts by the
@@ -146,7 +147,7 @@ func Rebuild(tgt, ref BundleSource, refFiles []RefFile, targetBundles []string, 
 			recs[k] = r
 		}
 	}
-	var pool []*refTable
+	pool := make([]*refTable, 0, len(recs))
 	for _, r := range recs {
 		slices.Sort(r.paths)
 		r.loadKeys(opt.Columns)
@@ -161,7 +162,7 @@ func Rebuild(tgt, ref BundleSource, refFiles []RefFile, targetBundles []string, 
 	}
 	logf("reference: %d tables", len(pool))
 
-	var targets []*target
+	targets := make([]*target, 0, len(targetBundles))
 	for _, name := range targetBundles {
 		blob, err := tgt(name)
 		if err != nil {
@@ -365,7 +366,7 @@ func Rebuild(tgt, ref BundleSource, refFiles []RefFile, targetBundles []string, 
 				continue
 			}
 			want := rb[g.off : g.off+g.size]
-			if i := bytes.Index(t.blob, want); i >= 0 && bytes.Index(t.blob[i+1:], want) < 0 {
+			if i := bytes.Index(t.blob, want); i >= 0 && !bytes.Contains(t.blob[i+1:], want) {
 				known[g.off] = [2]int{i, i + int(g.size)}
 				placed[g.off] = Entry{Bundle: t.name, Offset: int64(i), Size: g.size, Confidence: High, Method: "identical to reference"}
 			}
@@ -423,16 +424,16 @@ func Rebuild(tgt, ref BundleSource, refFiles []RefFile, targetBundles []string, 
 				continue
 			}
 			type piece struct {
+				how  string
 				g    refGroup
 				a, b int
-				how  string
 			}
 			var pieces []piece
 			if len(run) == 1 {
-				pieces = append(pieces, piece{run[0], start, end, "between placed neighbours"})
+				pieces = append(pieces, piece{g: run[0], a: start, b: end, how: "between placed neighbours"})
 			} else {
 				for _, m := range matchTextRun(t.blob, start, end, rb, run) {
-					pieces = append(pieces, piece{m.g, m.a, m.b, m.how})
+					pieces = append(pieces, piece(m))
 				}
 			}
 			for _, pc := range pieces {
@@ -526,7 +527,7 @@ func (r *refTable) loadKeys(columns func(string) []Column) {
 	r.cols = columns(r.stem)
 	off := -1
 	for _, c := range columns(r.stem) {
-		if c.Type == "string" {
+		if c.Type == stringColumn {
 			off = c.Offset
 			break
 		}
@@ -654,7 +655,7 @@ func stringsInRange(t *target, k int, c candidate, r *refTable) float64 {
 	for i := range n {
 		row := c.start + 4 + (i*c.rows/n)*c.width
 		for _, col := range r.cols {
-			if col.Type != "string" || col.Offset+8 > c.width {
+			if col.Type != stringColumn || col.Offset+8 > c.width {
 				continue
 			}
 			o := binary.LittleEndian.Uint64(t.blob[row+col.Offset:])
@@ -751,7 +752,7 @@ func gradeTable(b []byte, dt datTable, recovered map[string]int, columns func(st
 				continue
 			}
 			switch c.Type {
-			case "string":
+			case stringColumn:
 				o := binary.LittleEndian.Uint64(b[row+c.Offset:])
 				if o < 8 || o >= varLen {
 					badStr++
@@ -777,8 +778,8 @@ func gradeTable(b []byte, dt datTable, recovered map[string]int, columns func(st
 }
 
 type refGroup struct {
-	off, size int64
 	paths     []string
+	off, size int64
 }
 
 func refOrder(files []RefFile, bundle string) []refGroup {
@@ -794,7 +795,7 @@ func refOrder(files []RefFile, bundle string) []refGroup {
 		}
 		g.paths = append(g.paths, f.Path)
 	}
-	var out []refGroup
+	out := make([]refGroup, 0, len(by))
 	for _, g := range by {
 		slices.Sort(g.paths)
 		out = append(out, *g)
@@ -810,10 +811,10 @@ func movedText(targets []*target, entries []Entry, spans []Span, refFiles []RefF
 		placed[e.Path] = true
 	}
 	type item struct {
-		f     RefFile
 		lines map[string]bool
+		f     RefFile
 	}
-	var pool []item
+	var pool []item //nolint:prealloc // filtered from the whole reference index; sizing to it would allocate for every file
 	for _, f := range refFiles {
 		if !pick(f.Path) || placed[f.Path] || isLanguagePath(f.Path) {
 			continue
@@ -822,7 +823,7 @@ func movedText(targets []*target, entries []Entry, spans []Span, refFiles []RefF
 		if blob == nil || f.Offset+f.Size > int64(len(blob)) || !bytes.HasPrefix(blob[f.Offset:], []byte{0xff, 0xfe}) {
 			continue
 		}
-		pool = append(pool, item{f, lineSet(blob[f.Offset : f.Offset+f.Size])})
+		pool = append(pool, item{f: f, lines: lineSet(blob[f.Offset : f.Offset+f.Size])})
 	}
 	used := map[int]bool{}
 	var out []Entry
@@ -868,8 +869,10 @@ func movedText(targets []*target, entries []Entry, spans []Span, refFiles []RefF
 				}
 				used[best] = true
 				f := pool[best].f
-				out = append(out, Entry{Path: f.Path, Bundle: t.name, Offset: int64(cuts[i]), Size: int64(cuts[i+1] - cuts[i]), Confidence: Medium,
-					Method: fmt.Sprintf("moved from %s, split at UTF-16 byte order marks, %.2f of lines shared with reference size %d", f.Bundle, bestSim, f.Size)})
+				out = append(out, Entry{
+					Path: f.Path, Bundle: t.name, Offset: int64(cuts[i]), Size: int64(cuts[i+1] - cuts[i]), Confidence: Medium,
+					Method: fmt.Sprintf("moved from %s, split at UTF-16 byte order marks, %.2f of lines shared with reference size %d", f.Bundle, bestSim, f.Size),
+				})
 			}
 		}
 		release(t)
@@ -887,9 +890,9 @@ func nextKnown(order []refGroup, i int, known map[int64][2]int) (int, bool) {
 }
 
 type textMatch struct {
+	how  string
 	g    refGroup
 	a, b int
-	how  string
 }
 
 // matchTextRun cuts [start, end) at the byte order marks that begin UTF-16 files and names each piece after
@@ -937,7 +940,7 @@ func matchTextRun(b []byte, start, end int, ref []byte, run []refGroup) []textMa
 	}
 	sort.SliceStable(cs, func(i, j int) bool { return cs[i].sim > cs[j].sim })
 	usedP, usedR := map[int]bool{}, map[int]bool{}
-	var out []textMatch
+	out := make([]textMatch, 0, len(run))
 	for _, c := range cs {
 		if usedP[c.piece] || usedR[c.ref] {
 			continue
@@ -947,7 +950,7 @@ func matchTextRun(b []byte, start, end int, ref []byte, run []refGroup) []textMa
 		if len(cuts)-1 == len(run) {
 			how += ", piece count equals reference"
 		}
-		out = append(out, textMatch{run[c.ref], cuts[c.piece], cuts[c.piece+1], how})
+		out = append(out, textMatch{g: run[c.ref], a: cuts[c.piece], b: cuts[c.piece+1], how: how})
 	}
 	return out
 }
@@ -971,9 +974,9 @@ func splitAtFirstLines(b []byte, start, end int, ref []byte, run []refGroup) []t
 		cuts = append(cuts, from+i)
 	}
 	cuts = append(cuts, end)
-	var out []textMatch
+	out := make([]textMatch, 0, len(run))
 	for i, g := range run {
-		out = append(out, textMatch{g, cuts[i], cuts[i+1], "split where the next reference file's first line begins"})
+		out = append(out, textMatch{g: g, a: cuts[i], b: cuts[i+1], how: "split where the next reference file's first line begins"})
 	}
 	return out
 }

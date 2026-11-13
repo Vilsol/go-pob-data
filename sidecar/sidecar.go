@@ -43,18 +43,18 @@ func ParseConfidence(s string) (Confidence, error) {
 type Entry struct {
 	Path       string
 	Bundle     string
+	Method     string
 	Offset     int64
 	Size       int64
 	Confidence Confidence
-	Method     string
 }
 
 // Span is a stretch of a bundle that holds a file nothing identified.
 type Span struct {
 	Bundle string
+	Note   string
 	Offset int64
 	Size   int64
-	Note   string
 }
 
 const (
@@ -71,7 +71,10 @@ func WriteEntries(w io.Writer, es []Entry) error {
 	for _, e := range es {
 		fmt.Fprintf(bw, "%s\t%s\t%d\t%d\t%s\t%s\n", e.Path, e.Bundle, e.Offset, e.Size, e.Confidence, clean(e.Method))
 	}
-	return bw.Flush()
+	if err := bw.Flush(); err != nil {
+		return fmt.Errorf("write entries: %w", err)
+	}
+	return nil
 }
 
 // WriteSpans writes the unnamed spans sorted by bundle and offset.
@@ -88,7 +91,10 @@ func WriteSpans(w io.Writer, ss []Span) error {
 	for _, s := range ss {
 		fmt.Fprintf(bw, "%s\t%d\t%d\t%s\n", s.Bundle, s.Offset, s.Size, clean(s.Note))
 	}
-	return bw.Flush()
+	if err := bw.Flush(); err != nil {
+		return fmt.Errorf("write spans: %w", err)
+	}
+	return nil
 }
 
 func clean(s string) string { return strings.NewReplacer("\t", " ", "\n", " ").Replace(s) }
@@ -122,5 +128,8 @@ func ReadEntries(r io.Reader) ([]Entry, error) {
 	if line == 0 {
 		return nil, fmt.Errorf("empty sidecar index")
 	}
-	return out, sc.Err()
+	if err := sc.Err(); err != nil {
+		return out, fmt.Errorf("read sidecar index: %w", err)
+	}
+	return out, nil
 }

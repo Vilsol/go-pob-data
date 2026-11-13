@@ -14,18 +14,17 @@ import (
 // FS serves the files a sidecar index names out of the bundles under lower's Bundles2/, decompressing each bundle
 // once. Names are matched lower-case, as the bundle loader does for paths since 3.22.
 type FS struct {
-	lower fs.FS
-	files map[string]Entry
-
-	mu      sync.Mutex
+	lower   fs.FS
+	files   map[string]Entry
 	bundles map[string][]byte
+	mu      sync.Mutex
 }
 
-// NewFS keeps only entries at or above min.
-func NewFS(lower fs.FS, entries []Entry, min Confidence) *FS {
+// NewFS keeps only entries at or above minConf.
+func NewFS(lower fs.FS, entries []Entry, minConf Confidence) *FS {
 	files := make(map[string]Entry, len(entries))
 	for _, e := range entries {
-		if e.Confidence >= min {
+		if e.Confidence >= minConf {
 			files[strings.ToLower(e.Path)] = e
 		}
 	}
@@ -65,12 +64,12 @@ func (f *FS) bundle(name string) ([]byte, error) {
 func ReadBundle(lower fs.FS, name string) ([]byte, error) {
 	h, err := lower.Open("Bundles2/" + name + ".bundle.bin")
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("bundle %s: %w", name, err)
 	}
 	defer h.Close()
 	raw, err := io.ReadAll(h)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("bundle %s: %w", name, err)
 	}
 	b, err := DecodeBundle(raw)
 	if err != nil {
