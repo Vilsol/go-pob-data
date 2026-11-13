@@ -420,9 +420,12 @@ func generatePoE2(loader fs.FS, gameVersion string) (*Tree2, *gameData2, error) 
 	if err != nil {
 		return nil, nil, errors.Wrapf(err, "failed to open %s", graphPath)
 	}
-	graph, err := extractor.ParsePassiveSkillGraph(f, extractor.PoE2)
+	graph, err := extractor.ParsePassiveSkillGraph(f)
 	if err != nil {
 		return nil, nil, errors.Wrapf(err, "failed to parse %s", graphPath)
+	}
+	if !graph.Wide {
+		return nil, nil, fmt.Errorf("%s has no edge orbits", graphPath)
 	}
 
 	tree, err := buildTree2(d, graph)

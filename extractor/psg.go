@@ -2,6 +2,7 @@ package extractor
 
 import (
 	"bufio"
+	"bytes"
 	"encoding/binary"
 	"fmt"
 	"io"
@@ -19,6 +20,8 @@ type PassiveSkillGraph struct {
 	Groups         []PassiveSkillGraphGroup
 	Version        uint8
 	GraphType      uint8
+	// Wide is PoE2's layout: u64 roots and edges carrying an orbit.
+	Wide bool
 }
 
 type PassiveSkillGraphGroup struct {
@@ -33,7 +36,7 @@ type PassiveSkillGraphGroup struct {
 type PassiveSkillGraphNode struct {
 	// Out are the PassiveSkillGraphIds this node has an edge to.
 	Out []uint32
-	// OutOrbit is the curved-edge orbit of each Out edge; PoE2 only, nil for PoE1.
+	// OutOrbit is the curved-edge orbit of each Out edge in the wide layout, nil otherwise.
 	OutOrbit   []int32
 	ID         uint32
 	Orbit      uint32
@@ -137,14 +140,41 @@ func (p *psgReader) edges2() ([]uint32, []int32) {
 	return ids, orbits
 }
 
-// ParsePassiveSkillGraph decodes a .psg of the given game. PoE2's layout differs from PoE1's in
-// u64 roots and edges carrying an orbit (PathOfBuilding-PoE2 src/Export/Scripts/passivetree.lua:154-205).
-func ParsePassiveSkillGraph(r io.Reader, game Game) (*PassiveSkillGraph, error) {
-	p := &psgReader{r: bufio.NewReader(r)}
+// ParsePassiveSkillGraph decodes a .psg in either layout: PoE1's, or PoE2's with u64 roots and edges
+// carrying an orbit (PathOfBuilding-PoE2 src/Export/Scripts/passivetree.lua:154-205), which PoE1 uses
+// from 3.30. The header does not name the layout, so the file is read in both and must decode, to its
+// last byte, in exactly one.
+func ParsePassiveSkillGraph(r io.Reader) (*PassiveSkillGraph, error) {
+	data, err := io.ReadAll(r)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed reading passive skill graph")
+	}
 
-	g := &PassiveSkillGraph{Version: p.u8()}
+	narrow, narrowErr := parsePassiveSkillGraph(data, false)
+	wide, wideErr := parsePassiveSkillGraph(data, true)
+	switch {
+	case narrowErr == nil && wideErr == nil:
+		return nil, errors.New("passive skill graph decodes in both layouts")
+	case narrowErr == nil:
+		return narrow, nil
+	case wideErr == nil:
+		return wide, nil
+	case errors.Is(narrowErr, errUnsupportedVersion):
+		return nil, narrowErr
+	default:
+		return nil, fmt.Errorf("passive skill graph decodes in neither layout: %w; with u64 roots: %w", narrowErr, wideErr)
+	}
+}
+
+var errUnsupportedVersion = errors.New("unsupported passive skill graph version")
+
+// parsePassiveSkillGraph decodes data in PoE1's layout, or PoE2's when wide.
+func parsePassiveSkillGraph(data []byte, wide bool) (*PassiveSkillGraph, error) {
+	p := &psgReader{r: bufio.NewReader(bytes.NewReader(data))}
+
+	g := &PassiveSkillGraph{Version: p.u8(), Wide: wide}
 	if p.err == nil && g.Version != psgVersion {
-		return nil, fmt.Errorf("unsupported passive skill graph version %d (want %d)", g.Version, psgVersion)
+		return nil, fmt.Errorf("%w %d (want %d)", errUnsupportedVersion, g.Version, psgVersion)
 	}
 
 	g.GraphType = p.u8()
@@ -154,7 +184,7 @@ func ParsePassiveSkillGraph(r io.Reader, game Game) (*PassiveSkillGraph, error) 
 		g.SkillsPerOrbit[i] = p.u8()
 	}
 
-	if game == PoE2 {
+	if wide {
 		g.Roots = p.roots64()
 	} else {
 		g.Roots = p.u32s()
@@ -184,7 +214,7 @@ func ParsePassiveSkillGraph(r io.Reader, game Game) (*PassiveSkillGraph, error) 
 				Orbit:      p.u32(),
 				OrbitIndex: p.u32(),
 			}
-			if game == PoE2 {
+			if wide {
 				node.Out, node.OutOrbit = p.edges2()
 			} else {
 				node.Out = p.u32s()
