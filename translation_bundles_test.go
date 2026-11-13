@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"io/fs"
 	"maps"
 	"os"
@@ -60,6 +61,22 @@ func TestTranslationBundlesCurrent(t *testing.T) {
 				if err != nil || !bytes.Equal(got, want) {
 					t.Errorf("%s is missing or stale: run with -update", path)
 				}
+			}
+
+			if b, err := os.ReadFile(filepath.Join(versionDir, "manifest.json")); err == nil {
+				var manifest loader.Manifest
+				if err := json.Unmarshal(b, &manifest); err != nil {
+					t.Fatal(err)
+				}
+				for lang, files := range bundled {
+					for _, name := range manifest.StatTranslations {
+						if _, ok := files[name]; !ok {
+							t.Errorf("the %s bundle lacks %s, which manifest.json lists", lang, name)
+						}
+					}
+				}
+			} else if !os.IsNotExist(err) {
+				t.Fatal(err)
 			}
 
 			names := perFileTranslations(versionDir, bundled["en"])
@@ -204,5 +221,65 @@ func TestWriteTranslations(t *testing.T) {
 	}
 	if _, err := readTranslationBundles(versionDir); err != nil {
 		t.Fatal(err)
+	}
+}
+
+// Rebuilding a version whose per-file assets are pruned keeps every name its bundles already hold, and a
+// per-file asset replaces its bundle entry.
+func TestBundleTranslationsKeepsPrunedNames(t *testing.T) {
+	versionDir := filepath.Join(t.TempDir(), "3.99")
+	if err := os.MkdirAll(filepath.Join(versionDir, "stat_translations"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	file := func(includes ...string) *raw.TranslationFile {
+		return &raw.TranslationFile{Descriptors: []*raw.StatTranslation{}, Includes: includes}
+	}
+	full := map[string]map[string]*raw.TranslationFile{
+		"en": {
+			"stat_descriptions":       file(),
+			"atlas_stat_descriptions": file(),
+			"map_stat_descriptions":   file(),
+		},
+		"de": {"stat_descriptions": file(), "atlas_stat_descriptions": file()},
+	}
+	if err := writeTranslations(versionDir, full); err != nil {
+		t.Fatal(err)
+	}
+	perFile, err := readPerFileTranslations(versionDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := slices.Sorted(maps.Keys(perFile["en"])); !slices.Equal(got, []string{"stat_descriptions"}) {
+		t.Fatalf("per-file en %v, want only stat_descriptions", got)
+	}
+
+	changed := file("Metadata/StatDescriptions/atlas_stat_descriptions.txt")
+	path := filepath.Join(versionDir, "stat_translations", "en", "stat_descriptions")
+	if err := writeTranslationAsset(loader.AssetPath(path, loader.TranslationBundleVariant()), changed); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := bundleTranslations(versionDir); err != nil {
+		t.Fatal(err)
+	}
+	bundled, err := readTranslationBundles(versionDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for lang, files := range full {
+		if got, want := slices.Sorted(maps.Keys(bundled[lang])), slices.Sorted(maps.Keys(files)); !slices.Equal(got, want) {
+			t.Errorf("%s bundle holds %v, want %v", lang, got, want)
+		}
+	}
+	got, err := bundled["en"]["stat_descriptions"].MarshalMsg(nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	want, err := changed.MarshalMsg(nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Equal(got, want) {
+		t.Errorf("en/stat_descriptions is not its per-file asset")
 	}
 }

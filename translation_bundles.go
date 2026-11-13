@@ -295,17 +295,23 @@ func pruneTranslations(versionDir string, keep map[string]bool) error {
 	return nil
 }
 
-// bundleTranslations rebuilds versionDir's translation bundles from its per-file translations, or from the
-// bundles themselves once those are pruned, and prunes the per-file assets go-pob does not read.
+// bundleTranslations rebuilds versionDir's translation bundles from the bundles themselves with its per-file
+// translations laid over them, so a pruned per-file set never drops a bundled name, and prunes the per-file
+// assets go-pob does not read.
 func bundleTranslations(versionDir string) error {
-	translations, err := readPerFileTranslations(versionDir)
+	translations, err := readTranslationBundles(versionDir)
 	if err != nil {
 		return err
 	}
-	if len(translations) == 0 {
-		if translations, err = readTranslationBundles(versionDir); err != nil {
-			return err
+	perFile, err := readPerFileTranslations(versionDir)
+	if err != nil {
+		return err
+	}
+	for lang, files := range perFile {
+		if translations[lang] == nil {
+			translations[lang] = map[string]*raw.TranslationFile{}
 		}
+		maps.Copy(translations[lang], files)
 	}
 	if len(translations) == 0 {
 		// Nothing decodes as a TranslationFile (3.20's map assets predate it), so nothing is bundled.
