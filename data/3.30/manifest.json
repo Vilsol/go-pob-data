@@ -19,7 +19,23 @@
 			"tw": "stat_translations/tw.t-c976d1d7-15040eaa.msgpack.br"
 		}
 	},
+	"derived": {
+		"ItemModStatOrder": {
+			"t-4f6a8053": "derived/ItemModStatOrder.t-4f6a8053-67d9e6b4.msgpack.br"
+		},
+		"ModScalability": {
+			"t-5008eeb6": "derived/ModScalability.t-5008eeb6-ccdcc7da.msgpack.br"
+		}
+	},
 	"assets": {
+		"derived/ItemModStatOrder.t-4f6a8053-67d9e6b4.msgpack.br": {
+			"records": 9921,
+			"sha256": "41c239bd888e2291aa830b4f4ea2fe52ea6fb10625e241392872471b9eba0987"
+		},
+		"derived/ModScalability.t-5008eeb6-ccdcc7da.msgpack.br": {
+			"records": 14864,
+			"sha256": "8243ebcd9506123dd921b5f3d849d64038da1af1b3e90b30f405d3635c16f2cb"
+		},
 		"files.it-6b11d07f.msgpack.br": {
 			"records": 87,
 			"sha256": "f22877a2c562930c3eabf674bc83b6dce74e40226567fbaa453fc4bd2e43e42b"

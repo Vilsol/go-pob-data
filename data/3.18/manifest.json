@@ -14,7 +14,16 @@
 			"tw": "stat_translations/tw.t-c976d1d7-1489b070.msgpack.br"
 		}
 	},
+	"derived": {
+		"ModScalability": {
+			"t-5008eeb6": "derived/ModScalability.t-5008eeb6-e4693cc3.msgpack.br"
+		}
+	},
 	"assets": {
+		"derived/ModScalability.t-5008eeb6-e4693cc3.msgpack.br": {
+			"records": 11819,
+			"sha256": "a37cb7f1fc668aac18cea3282bee097415ef12f7badefc0f6d9b7102bf497045"
+		},
 		"raw/ActiveSkillType.json.gz": {
 			"sha256": "3f13cbc588c635926e7b9825337a375b990b5dab431c5a0361fbb19377840074"
 		},

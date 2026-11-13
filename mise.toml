@@ -3,6 +3,7 @@ go = "1.26.11"
 "aqua:golangci/golangci-lint" = "2.15.0"
 "go:github.com/tinylib/msgp" = "1.6.4"
 imagemagick = "7.1.2_27"
+luajit = "2.1.1744318430"
 
 [tasks.test-artifacts]
 description = "Check the tuple assets against their json.gz and the frozen map assets, the map assets against their pinned sha256, and the .min assets against their full assets and field lists (needs cgo)"
@@ -62,3 +63,12 @@ arg "<game>" help="poe1 or poe2"
 arg "<version>" help="The data version of the game's live patch, e.g. 3.29 or 0.5"
 '''
 run = '''nix-shell -p gcc pkg-config imagemagick --run "CGO_ENABLED=1 go run . -game ${usage_game} -trade-stats ${usage_version}"'''
+
+[tasks.derive]
+description = "Write the derived assets (derived/) of every PoE1 version from its committed tables and stat descriptions, then regenerate the manifests (needs cgo)"
+run = '''nix-shell -p gcc pkg-config imagemagick --run "go run ./cmd/derive && CGO_ENABLED=1 go test -count=1 -run TestManifestsCurrent . -update"'''
+
+[tasks.difftest-pob]
+description = "Compare the derived tables with Path of Building's src/Data, exported from the same game version"
+usage = 'arg "[pob]" help="Path of Building checkout" default="../PathOfBuilding"'
+run = 'POB_DIR="$(realpath "${usage_pob}")" go test -count=1 -run MatchesPoB -v ./derived'

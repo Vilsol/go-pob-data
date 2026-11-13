@@ -17,6 +17,8 @@ type Manifest struct {
 	FileBundles map[string]string `json:"fileBundles,omitempty"`
 	// TranslationBundles are the LoadTranslationBundle assets by layout variant, then by language.
 	TranslationBundles map[string]map[string]string `json:"translationBundles,omitempty"`
+	// Derived are the derived package's assets by table name, then by layout variant.
+	Derived map[string]map[string]string `json:"derived,omitempty"`
 	// Assets are every published file by path under the version directory ("raw/Mods.json.gz"), the
 	// manifest itself aside.
 	Assets map[string]ManifestAsset `json:"assets,omitempty"`

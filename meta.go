@@ -133,6 +133,25 @@ func manifestJSON(versionDir string) ([]byte, error) {
 		manifest.FileBundles["."+ext] = name
 	}
 
+	derived, err := filepath.Glob(filepath.Join(versionDir, "derived", "*.msgpack.br"))
+	if err != nil {
+		return nil, errors.Wrap(err, "failed listing derived assets")
+	}
+	for _, asset := range derived {
+		name, rest, _ := strings.Cut(filepath.Base(asset), ".")
+		variant := rest[:strings.LastIndex(strings.TrimSuffix(rest, ".msgpack.br"), "-")]
+		if manifest.Derived == nil {
+			manifest.Derived = map[string]map[string]string{}
+		}
+		if manifest.Derived[name] == nil {
+			manifest.Derived[name] = map[string]string{}
+		}
+		if previous, ok := manifest.Derived[name][variant]; ok {
+			return nil, errors.Errorf("%s has two %s %s assets: %s and %s", versionDir, name, variant, previous, asset)
+		}
+		manifest.Derived[name][variant] = "derived/" + filepath.Base(asset)
+	}
+
 	manifest.Assets, err = manifestAssets(versionDir)
 	if err != nil {
 		return nil, err
