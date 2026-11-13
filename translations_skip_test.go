@@ -6,6 +6,7 @@ import (
 	"testing/fstest"
 
 	"github.com/Vilsol/go-pob-data/extractor"
+	"github.com/Vilsol/go-pob-data/raw"
 	st "github.com/Vilsol/go-pob-data/stat_translations"
 )
 
@@ -34,5 +35,26 @@ func TestExtractTranslationsRefusesWhenNothingShips(t *testing.T) {
 	err := extractTranslations(fstest.MapFS{"metadata/other.txt": {}}, extractor.PoE1, "test")
 	if err == nil || !strings.Contains(err.Error(), "no stat description file") {
 		t.Fatalf("err = %v, want a refusal", err)
+	}
+}
+
+// a language without a description in any file is not published; English always is
+func TestDropUndescribedLanguages(t *testing.T) {
+	file := func(n int) *raw.TranslationFile {
+		return &raw.TranslationFile{Descriptors: make([]*raw.StatTranslation, n)}
+	}
+	parsed := map[string]map[string]*raw.TranslationFile{
+		"en": {"a": file(0)},
+		"de": {"a": file(0), "b": file(1)},
+		"tr": {"a": file(0), "b": file(0)},
+	}
+	dropUndescribedLanguages(parsed)
+	if _, ok := parsed["tr"]; ok {
+		t.Error("tr is kept")
+	}
+	for _, lang := range []string{"en", "de"} {
+		if _, ok := parsed[lang]; !ok {
+			t.Errorf("%s is dropped", lang)
+		}
 	}
 }

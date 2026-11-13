@@ -52,8 +52,30 @@ func extractTranslations(loader fs.FS, game extractor.Game, gameVersion string) 
 	if len(parsed) == 0 {
 		return errors.New("no stat description file the list names is in the game")
 	}
+	dropUndescribedLanguages(parsed)
 
 	return writeTranslations(filepath.Join("data", gameVersion), parsed)
+}
+
+// dropUndescribedLanguages removes the languages no file describes a stat in: the parser gives every language
+// it knows a file, and PoE1 3.30 ships no Turkish, which PoE2 does.
+func dropUndescribedLanguages(parsed map[string]map[string]*raw.TranslationFile) {
+	for lang, files := range parsed {
+		if lang == st.PerFileLanguage {
+			continue
+		}
+		described := false
+		for _, file := range files {
+			if len(file.Descriptors) > 0 {
+				described = true
+				break
+			}
+		}
+		if !described {
+			slog.Warn("skipping a language no stat description file describes", slog.String("language", lang))
+			delete(parsed, lang)
+		}
+	}
 }
 
 // statDescriptionShipped reports whether the game has file, under its own extension or, for a PoE1 .txt, as the
