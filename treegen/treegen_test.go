@@ -43,8 +43,9 @@ const (
 	swappedOrder = "export swaps two adjacent descriptions against the live file order"
 )
 
-// knownMismatches are export values the generator doesn't reproduce, keyed by "<field> <id>", with the reason.
-var knownMismatches = map[string]string{
+// knownMismatches are export values the generator doesn't reproduce, by version, keyed by "<field> <id>", with the
+// reason.
+var knownMismatches = map[string]map[string]string{"3.29": {
 	"nodes.stats 16287":        staleAbyssal,
 	"nodes.stats 19208":        staleAbyssal,
 	"nodes.reminderText 19208": staleAbyssal,
@@ -74,7 +75,14 @@ var knownMismatches = map[string]string{
 	"nodes.stats 30471": swappedOrder,
 	"nodes.stats 19897": swappedOrder,
 	"nodes.stats 40059": swappedOrder,
-}
+}, "3.30": {
+	"nodes.stats 6064":  swappedOrder,
+	"nodes.stats 9014":  swappedOrder,
+	"nodes.stats 28754": swappedOrder,
+	"nodes.stats 30471": swappedOrder,
+	"nodes.stats 19897": swappedOrder,
+	"nodes.stats 40059": swappedOrder,
+}}
 
 // exportPath is the frozen skilltree-export data.json of a version; data/<version>/tree now holds our own output.
 func exportPath(short string) string {
@@ -251,6 +259,8 @@ func TestDiffAgainstExport(t *testing.T) {
 		}
 	}
 
+	known := knownMismatches[short]
+
 	var report strings.Builder
 	fmt.Fprintf(&report, "generated out-of-graph nodes the export lacks: %d\n", len(generatedOnly))
 	for _, id := range generatedOnly {
@@ -274,9 +284,9 @@ func TestDiffAgainstExport(t *testing.T) {
 		fmt.Fprintf(&report, "\n%s: %d mismatches\n", field, len(ms))
 		for _, m := range ms {
 			key := field + " " + m.id
-			reason, known := knownMismatches[key]
+			reason, ok := known[key]
 			hit[key] = true
-			if !known {
+			if !ok {
 				reason = "UNEXPLAINED"
 				t.Fail()
 			}
@@ -286,7 +296,7 @@ func TestDiffAgainstExport(t *testing.T) {
 			fmt.Fprintf(&report, "  %s (%s): generated=%s export=%s\n", m.id, reason, compact(m.gen), compact(m.exp))
 		}
 	}
-	for _, key := range sortedKeys(knownMismatches) {
+	for _, key := range sortedKeys(known) {
 		if !hit[key] {
 			t.Errorf("known mismatch %q no longer happens", key)
 		}

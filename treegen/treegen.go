@@ -54,6 +54,7 @@ var grantedAttributeStats = map[string]string{
 
 type gameData struct {
 	descriptions           *descriptions
+	grants                 *grants
 	reminderByID           map[string]string
 	passiveSkills          []passiveSkill
 	stats                  []stat
@@ -100,6 +101,7 @@ func loadGameData(loader fs.FS, gameVersion string) (*gameData, error) {
 	loadTable(l, "BuffTemplates", &d.buffTemplates)
 	loadTable(l, "BuffDefinitions", &d.buffDefinitions)
 	loadTable(l, "ClientStrings", &d.clientStrings)
+	d.grants = loadGrants(l, d.clientStrings)
 	if l.err != nil {
 		return nil, l.err
 	}
@@ -539,7 +541,11 @@ func buildNode(d *gameData, skillIdx int, l *lookups) (*Node, error) {
 		node.ActiveIcon = iconPath(mg.ActiveIcon)
 		node.ActiveEffectImage = iconPath(mg.ActiveEffectImage)
 		for _, e := range mg.MasteryEffects {
-			effect, err := d.describeMasteryEffect(&d.masteryEffects[e])
+			var grant *int
+			if d.grants != nil {
+				grant = d.grants.masteryEffects[e].GrantedEffectsPerLevel
+			}
+			effect, err := d.describeMasteryEffect(&d.masteryEffects[e], grant)
 			if err != nil {
 				return nil, errors.Wrapf(err, "mastery effect %d", d.masteryEffects[e].Hash16)
 			}
@@ -590,7 +596,11 @@ func buildNode(d *gameData, skillIdx int, l *lookups) (*Node, error) {
 		node.IsBloodline = true
 	}
 
-	if err := d.describeNode(node, &p); err != nil {
+	var grant *int
+	if d.grants != nil {
+		grant = d.grants.passives[skillIdx].GrantedEffectsPerLevel
+	}
+	if err := d.describeNode(node, &p, grant); err != nil {
 		return nil, err
 	}
 

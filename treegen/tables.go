@@ -49,6 +49,31 @@ func (p *passiveSkill) statValues() []int {
 	return []int{p.Stat1Value, p.Stat2Value, p.Stat3Value, p.Stat4Value, p.Stat5Value}
 }
 
+// passiveGrant is a PassiveSkills row's granted skill.
+type passiveGrant struct {
+	GrantedEffectsPerLevel *int `json:"GrantedEffectsPerLevel"`
+}
+
+// masteryGrant is a PassiveSkillMasteryEffects row's granted skill.
+type masteryGrant struct {
+	GrantedEffectsPerLevel *int `json:"GrantedEffect"`
+}
+
+type grantedEffectLevel struct {
+	GrantedEffect int `json:"GrantedEffect"`
+	Level         int `json:"Level"`
+}
+
+type grantedEffect struct {
+	ActiveSkill       *int   `json:"ActiveSkill"`
+	ID                string `json:"Id"`
+	CannotBeSupported bool   `json:"CannotBeSupported"`
+}
+
+type activeSkill struct {
+	DisplayedName string `json:"DisplayedName"`
+}
+
 type stat struct {
 	ID string `json:"Id"`
 }
