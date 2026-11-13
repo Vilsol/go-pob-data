@@ -10,7 +10,7 @@ func TestGrantedEffectStatSets(t *testing.T) {
 	initGameData(t)
 
 	conflagration := GrantedEffectByID("Conflagration")
-	testza.AssertEqual(t, 11023, conflagration.GrantedEffectStatSets)
+	testza.AssertEqual(t, 11386, conflagration.GrantedEffectStatSets)
 	testza.AssertEqual(t, "Conflagration", conflagration.GetGrantedEffectStatSet().ID)
 
 	withStatSet2 := 0

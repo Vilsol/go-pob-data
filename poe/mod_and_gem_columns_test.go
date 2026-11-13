@@ -18,13 +18,13 @@ func TestModColumns(t *testing.T) {
 
 	ceaseless := byID["CeaselessFleshGrantedSkillUnique__1"]
 	testza.AssertEqual(t, "CeaselessFleshGrantedSkill", ceaseless.GetFamilies()[0].ID)
-	testza.AssertEqual(t, 283, *ceaseless.BuffTemplate, "read from BuffTemplate1")
+	testza.AssertEqual(t, 285, *ceaseless.BuffTemplate, "read from BuffTemplate1")
 
 	arcane := byID["MonsterArchnemesisArcaneEnchanted"]
 	templates := arcane.GetBuffTemplates()
 	testza.AssertLen(t, templates, 2)
 	testza.AssertEqual(t, BuffTemplates[70], templates[0])
-	testza.AssertEqual(t, BuffTemplates[372], templates[1])
+	testza.AssertEqual(t, BuffTemplates[374], templates[1])
 }
 
 func TestSkillGemColumns(t *testing.T) {
@@ -47,5 +47,5 @@ func TestSkillGemColumns(t *testing.T) {
 			supports++
 		}
 	}
-	testza.AssertEqual(t, 313, supports)
+	testza.AssertEqual(t, 325, supports)
 }

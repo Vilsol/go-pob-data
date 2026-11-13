@@ -72,17 +72,20 @@ func TestInitializeAllRequestsOnlyPresentTables(t *testing.T) {
 	testza.AssertEqual(t, []string(nil), cdn.Misses())
 }
 
-// go-pob reads the .min assets by loading under loader.WithVariants(ctx, fields.MinVariant).
+// go-pob reads the .min assets by loading under loader.WithVariants(ctx, fields.MinVariant), of the newest
+// version with a field list.
 func TestInitializeAllReadsMinAssets(t *testing.T) {
 	cdn := testdata.ServeCommittedData(t)
 	ctx := loader.WithVariants(context.Background(), fields.MinVariant)
+	versions := fields.Versions()
+	version := versions[len(versions)-1]
 
 	// Later tests read the full tables.
 	t.Cleanup(func() {
 		testza.AssertNoError(t, initializeFunctions(context.Background(), initFunctions, testdata.LatestDataVersion(), FakeCache{}, nil))
 	})
 
-	testza.AssertNoError(t, initializeFunctions(ctx, initFunctions, testdata.LatestDataVersion(), FakeCache{}, nil))
+	testza.AssertNoError(t, initializeFunctions(ctx, initFunctions, version, FakeCache{}, nil))
 	testza.AssertEqual(t, []string(nil), cdn.Misses())
 	testza.AssertEqual(t, "", Mods[0].ID, "Mods.ID is not listed, so the .min holds zero")
 }

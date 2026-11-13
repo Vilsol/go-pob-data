@@ -6,8 +6,9 @@ import (
 	"github.com/MarvinJWendt/testza"
 )
 
+// 3.30 moved the frame and connection art into a PassiveSkillTreeUIArt row, which AlternateTreeArt does not carry.
 func TestAlternateTreeArtTables(t *testing.T) {
-	initGameData(t, InitializeAlternateTreeArts, InitializePassiveSkillTreeNodeFrameArts, InitializePassiveSkillTreeConnectionArts)
+	initGameDataAt(t, "3.29", InitializeAlternateTreeArts, InitializePassiveSkillTreeNodeFrameArts, InitializePassiveSkillTreeConnectionArts)
 
 	testza.AssertGreater(t, len(AlternateTreeArts), 10)
 	art := AlternateTreeArts[7]
