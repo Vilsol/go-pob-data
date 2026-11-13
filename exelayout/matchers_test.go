@@ -222,7 +222,7 @@ func TestCompare(t *testing.T) {
 	}
 	want := []string{
 		"T: byte 8: client resolves Stat (foreignrow) against Mods, schema references Stats",
-		"T: byte 24: client reads list (element 16), schema has Values ([i32])",
+		"T: byte 24: client reads list of 16-byte elements, schema has Values ([i32])",
 		"T: byte 44: client reads row, schema has Text (string) from byte 40",
 		"T: byte 0: schema has Id (string), client fixes up nothing there",
 	}

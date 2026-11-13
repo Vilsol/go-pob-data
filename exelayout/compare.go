@@ -130,7 +130,11 @@ func Compare(t Table, st extractor.Table) []Disagreement {
 			case s.start != p.Offset:
 				add("byte %d: client reads %s, schema has %s from byte %d", p.Offset, p.Kind, columnName(s.c), s.start)
 			case schemaKind(s.c) != p.Kind || (p.Element == 16 && !isKey && s.c.Type != extractor.TypeArray):
-				add("byte %d: client reads %s (element %d), schema has %s", p.Offset, p.Kind, p.Element, columnName(s.c))
+				reads := string(p.Kind)
+				if p.Element != 0 {
+					reads = fmt.Sprintf("%s of %d-byte elements", p.Kind, p.Element)
+				}
+				add("byte %d: client reads %s, schema has %s", p.Offset, reads, columnName(s.c))
 			case p.Proven && isKey && s.c.References != nil && s.c.References.Table != "" &&
 				!strings.EqualFold(s.c.References.Table, p.Target):
 				add("byte %d: client resolves %s against %s, schema references %s", p.Offset, columnName(s.c), p.Target, s.c.References.Table)

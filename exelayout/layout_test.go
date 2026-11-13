@@ -73,7 +73,7 @@ func TestSchemaDisagreements(t *testing.T) {
 	// None of these tables is exported. The three row sizes match the .datc64 files' own widths, so the
 	// schema is behind; BetrayalUpgrades' byte 52 is a list of keys the schema reads as i32s.
 	want := []string{
-		"BetrayalUpgrades: byte 52: client reads list (element 16), schema has unnamed ([i32])",
+		"BetrayalUpgrades: byte 52: client reads list of 16-byte elements, schema has unnamed ([i32])",
 		"DropPool: row is 54 bytes, schema has 32",
 		"HideoutDoodads: row is 157 bytes, schema has 156",
 		"MapDevices: row is 126 bytes, schema has 110",
