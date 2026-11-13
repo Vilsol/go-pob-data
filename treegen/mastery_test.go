@@ -78,9 +78,10 @@ func column(name, typ string, array bool, ref string) map[string]any {
 	return c
 }
 
-// masterySchema is dat-schema's PassiveSkillMasteryGroups up to 3.29 or, with art, PoE2's layout that 3.30
-// uses: the three art strings moved to a PassiveSkillTreeMasteryArt row.
-func masterySchema(art bool) map[string]any {
+// masterySchema is dat-schema's PassiveSkillMasteryGroups up to 3.29 or, with an art table, PoE2's layout that
+// 3.30 uses: the three art strings moved to a row of artTable.
+func masterySchema(artTable string) map[string]any {
+	art := artTable != ""
 	groups := []any{column("Id", "string", false, ""), column("MasteryEffects", "foreignrow", true, "PassiveSkillMasteryEffects")}
 	if !art {
 		groups = append(groups, column("InactiveIcon", "string", false, ""), column("ActiveIcon", "string", false, ""), column("ActiveEffectImage", "string", false, ""))
@@ -88,9 +89,9 @@ func masterySchema(art bool) map[string]any {
 	groups = append(groups, column("", "bool", false, ""), column("SoundEffect", "foreignrow", false, "SoundEffects"), column("MasteryCountStat", "foreignrow", false, "Stats"))
 	tables := []any{map[string]any{"name": "PassiveSkillMasteryGroups", "validFor": 1, "columns": groups}}
 	if art {
-		groups = append(groups, column("Art", "foreignrow", false, "PassiveSkillTreeMasteryArt"))
+		groups = append(groups, column("Art", "foreignrow", false, artTable))
 		tables[0].(map[string]any)["columns"] = groups
-		tables = append(tables, map[string]any{"name": "PassiveSkillTreeMasteryArt", "validFor": 1, "columns": []any{
+		tables = append(tables, map[string]any{"name": artTable, "validFor": 1, "columns": []any{
 			column("Id", "string", false, ""), column("InactiveIcon", "string", false, ""),
 			column("ActiveIcon", "string", false, ""), column("ActiveEffectImage", "string", false, ""),
 		}})
@@ -114,10 +115,10 @@ func withSchema(t *testing.T, gameVersion string, schema map[string]any, f func(
 	f()
 }
 
-func masteryGroups(t *testing.T, loader fs.FS, gameVersion string, art bool) []masteryGroup {
+func masteryGroups(t *testing.T, loader fs.FS, gameVersion string, artTable string) []masteryGroup {
 	t.Helper()
 	var groups []masteryGroup
-	withSchema(t, gameVersion, masterySchema(art), func() {
+	withSchema(t, gameVersion, masterySchema(artTable), func() {
 		l := &tableLoader{loader: loader, game: extractor.PoE1, gameVersion: gameVersion}
 		loadMasteryGroups(l, &groups)
 		testza.AssertNoError(t, l.err)
@@ -143,7 +144,7 @@ func TestMasteryArt(t *testing.T) {
 		inline.nullRow()
 		inline.row(7)
 	}
-	got := masteryGroups(t, fstest.MapFS{"data/passiveskillmasterygroups.datc64": {Data: inline.bytes()}}, "3.29", false)
+	got := masteryGroups(t, fstest.MapFS{"data/passiveskillmasterygroups.datc64": {Data: inline.bytes()}}, "3.29", "")
 	testza.AssertEqual(t, want, got)
 
 	// 3.30: the groups name their art rows in reverse, so a group must take its own row, not its index.
@@ -168,7 +169,14 @@ func TestMasteryArt(t *testing.T) {
 	got = masteryGroups(t, fstest.MapFS{
 		"data/passiveskillmasterygroups.datc64":  {Data: groups.bytes()},
 		"data/passiveskilltreemasteryart.datc64": {Data: art.bytes()},
-	}, "3.30", true)
+	}, "3.30", "PassiveSkillTreeMasteryArt")
+	testza.AssertEqual(t, want, got)
+
+	// 3.30.0.1: the art rows are in PassiveSkillMasteryArt, the table the schema's Art column references.
+	got = masteryGroups(t, fstest.MapFS{
+		"data/passiveskillmasterygroups.datc64": {Data: groups.bytes()},
+		"data/passiveskillmasteryart.datc64":    {Data: art.bytes()},
+	}, "3.30", "PassiveSkillMasteryArt")
 	testza.AssertEqual(t, want, got)
 }
 
@@ -179,7 +187,7 @@ func TestRecoveredMasteryArt(t *testing.T) {
 	if dir == "" {
 		t.Skip("GOPOB_330_SCRATCH is not set")
 	}
-	groups := masteryGroups(t, os.DirFS(dir), "3.30", true)
+	groups := masteryGroups(t, os.DirFS(dir), "3.30", "PassiveSkillTreeMasteryArt")
 	testza.AssertGreater(t, len(groups), 0)
 	for _, g := range groups {
 		testza.AssertTrue(t, filepath.Ext(g.InactiveIcon) == ".dds" && filepath.Ext(g.ActiveIcon) == ".dds" && g.ActiveEffectImage != "", g)

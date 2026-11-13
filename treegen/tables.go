@@ -250,8 +250,8 @@ type tableLoader struct {
 
 var errNoColumn = errors.New("missing column")
 
-// loadMasteryGroups reads each mastery group's art from its own columns, or from 3.30 on from the
-// PassiveSkillTreeMasteryArt row its Art column names.
+// loadMasteryGroups reads each mastery group's art from its own columns, or from 3.30 on from the row its Art
+// column names, in the table the schema says it references.
 func loadMasteryGroups(l *tableLoader, dst *[]masteryGroup) {
 	if l.err != nil {
 		return
@@ -265,8 +265,14 @@ func loadMasteryGroups(l *tableLoader, dst *[]masteryGroup) {
 		l.err = err
 		return
 	}
+	artTable := "PassiveSkillTreeMasteryArt"
+	for _, c := range extractor.SchemaColumns("PassiveSkillMasteryGroups") {
+		if c.Name == "Art" && c.Ref != "" {
+			artTable = c.Ref
+		}
+	}
 	var art []masteryArt
-	if loadTable(l, "PassiveSkillTreeMasteryArt", &art); l.err != nil {
+	if loadTable(l, artTable, &art); l.err != nil {
 		return
 	}
 	*dst = make([]masteryGroup, len(groups))
