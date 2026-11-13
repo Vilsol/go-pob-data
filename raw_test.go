@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"bytes"
 	"compress/gzip"
 	"crypto/sha256"
@@ -16,16 +15,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/andybalholm/brotli"
-	"github.com/pkg/errors"
-	"github.com/tinylib/msgp/msgp"
-
 	"github.com/Vilsol/go-pob-data/extractor"
 	"github.com/Vilsol/go-pob-data/fields"
 	"github.com/Vilsol/go-pob-data/loader"
 	"github.com/Vilsol/go-pob-data/raw"
 	st "github.com/Vilsol/go-pob-data/stat_translations"
-	"github.com/Vilsol/go-pob-data/testdata/legacyraw"
 )
 
 const (
@@ -36,8 +30,8 @@ const (
 
 var update = flag.Bool("update", false, "write tuple assets that are missing or do not match their source")
 
-// Known mismatches between json.gz and the frozen map asset. Their tuple asset is built from the map
-// asset instead, which is what consumers have been reading.
+// Known mismatches between json.gz and the tuple asset. A staleSchema tuple asset was built from the
+// table's map asset, since deleted, so frozenTuples pins it instead.
 var knownStale = map[string]string{
 	"3.18/AtlasNodeDefinition": undecodable,
 	"3.24/AtlasNodeDefinition": undecodable,
@@ -49,170 +43,11 @@ var knownStale = map[string]string{
 	"3.27/AtlasNodeDefinition": undecodable,
 }
 
-// 3.20 translations predate TranslationFile: a bare list of descriptors whose conditions cannot tell 0
-// from absent, and no json. The current decoder already fails on them, so they have no tuple asset.
-const staleTranslations = "3.20"
-
-// 3.29 was re-extracted from patch 3.29.3.3, and its translations by the strict stat description parser,
-// after its map assets were frozen, so its assets no longer decode to the rows of their map assets.
-const reextracted = "3.29"
-
-// rowCodecs decodes a table's tuple asset and its frozen map asset to the json of their rows. The tuple
-// rows are projected onto the legacy row type, so columns added since the map assets froze are not compared.
-type rowCodecs struct {
-	tuple  func(asset []byte) ([]byte, error)
-	legacy func(asset []byte) ([]byte, error)
-}
-
-// Legacy columns that are not compared. The schema renamed them, so their map assets missed their value
-// (SkillGems' Str/Dex/Int from 3.24, Mods' BuffTemplate and GrantedEffects' StatSet from 3.28), or the row type now carries them
-// under the current schema names (DefaultMonsterStats, whose pre-3.28 Armour was AilmentThreshold, and
-// the map difficulty tables); TestTupleMatchesJSON still checks them against the json.gz.
-var correctedColumns = map[string][]string{
-	"SkillGems":                {"Str", "Dex", "Int"},
-	"Mods":                     {"BuffTemplate"},
-	"GrantedEffects":           {"StatSet"},
-	"DefaultMonsterStats":      {"Life", "AllyLife", "Damage2", "Armour"},
-	"MonsterMapDifficulty":     {"StatsKey1", "StatsKey2", "StatsKey3", "StatsKey4", "Stat1Value", "Stat2Value"},
-	"MonsterMapBossDifficulty": {"StatsKey1", "StatsKey2", "StatsKey3", "StatsKey4", "StatsKey5", "Stat1Value", "Stat2Value", "Stat3Value", "Stat4Value", "Stat5Value"},
-}
-
-func codecs[T, L any, PT interface {
-	*T
-	msgp.Decodable
-}, PL interface {
-	*L
-	msgp.Decodable
-}]() rowCodecs {
-	return rowCodecs{tuple: asLegacy[L](rowsJSON[T, PT]), legacy: rowsJSON[L, PL]}
-}
-
-func asLegacy[L any](decode func(asset []byte) ([]byte, error)) func(asset []byte) ([]byte, error) {
-	return func(asset []byte) ([]byte, error) {
-		b, err := decode(asset)
-		if err != nil {
-			return nil, err
-		}
-
-		var rows []L
-		if err := json.Unmarshal(b, &rows); err != nil {
-			return nil, errors.Wrap(err, "failed to project rows")
-		}
-
-		b, err = json.Marshal(rows)
-		return b, errors.Wrap(err, "failed to marshal rows")
-	}
-}
-
-func withoutColumns(t *testing.T, rowsJSON []byte, columns []string) []byte {
-	t.Helper()
-
-	var rows []map[string]any
-	if err := json.Unmarshal(rowsJSON, &rows); err != nil {
-		t.Fatal(err)
-	}
-	for _, row := range rows {
-		for _, column := range columns {
-			delete(row, column)
-		}
-	}
-
-	b, err := json.Marshal(rows)
-	if err != nil {
-		t.Fatal(err)
-	}
-	return b
-}
-
-var tables = map[string]rowCodecs{
-	"ActiveSkillType":                   codecs[raw.ActiveSkillType, legacyraw.ActiveSkillType](),
-	"ActiveSkills":                      codecs[raw.ActiveSkill, legacyraw.ActiveSkill](),
-	"AlternatePassiveAdditions":         codecs[raw.AlternatePassiveAddition, legacyraw.AlternatePassiveAddition](),
-	"AlternatePassiveSkills":            codecs[raw.AlternatePassiveSkill, legacyraw.AlternatePassiveSkill](),
-	"AlternateTreeVersions":             codecs[raw.AlternateTreeVersion, legacyraw.AlternateTreeVersion](),
-	"ArmourTypes":                       codecs[raw.ArmourType, legacyraw.ArmourType](),
-	"AtlasNode":                         codecs[raw.AtlasNode, legacyraw.AtlasNode](),
-	"AtlasNodeDefinition":               codecs[raw.AtlasNodeDefinition, legacyraw.AtlasNodeDefinition](),
-	"BaseItemTypes":                     codecs[raw.BaseItemType, legacyraw.BaseItemType](),
-	"ComponentAttributeRequirements":    codecs[raw.ComponentAttributeRequirement, legacyraw.ComponentAttributeRequirement](),
-	"ComponentCharges":                  codecs[raw.ComponentCharge, legacyraw.ComponentCharge](),
-	"CostTypes":                         codecs[raw.CostType, legacyraw.CostType](),
-	"CraftingBenchOptions":              codecs[raw.CraftingBenchOption, legacyraw.CraftingBenchOption](),
-	"DefaultMonsterStats":               codecs[raw.DefaultMonsterStat, legacyraw.DefaultMonsterStat](),
-	"Essences":                          codecs[raw.Essence, legacyraw.Essence](),
-	"Flasks":                            codecs[raw.Flask, legacyraw.Flask](),
-	"GrantedEffectQualityStats":         codecs[raw.GrantedEffectQualityStat, legacyraw.GrantedEffectQualityStat](),
-	"GrantedEffectStatSets":             codecs[raw.GrantedEffectStatSet, legacyraw.GrantedEffectStatSet](),
-	"GrantedEffectStatSetsPerLevel":     codecs[raw.GrantedEffectStatSetsPerLevel, legacyraw.GrantedEffectStatSetsPerLevel](),
-	"GrantedEffects":                    codecs[raw.GrantedEffect, legacyraw.GrantedEffect](),
-	"GrantedEffectsPerLevel":            codecs[raw.GrantedEffectsPerLevel, legacyraw.GrantedEffectsPerLevel](),
-	"ItemClasses":                       codecs[raw.ItemClass, legacyraw.ItemClass](),
-	"ItemExperiencePerLevel":            codecs[raw.ItemExperiencePerLevel, legacyraw.ItemExperiencePerLevel](),
-	"Mods":                              codecs[raw.Mod, legacyraw.Mod](),
-	"MonsterMapBossDifficulty":          codecs[raw.MonsterMapBossDifficulty, legacyraw.MonsterMapBossDifficulty](),
-	"MonsterMapDifficulty":              codecs[raw.MonsterMapDifficulty, legacyraw.MonsterMapDifficulty](),
-	"MonsterVarieties":                  codecs[raw.MonsterVariety, legacyraw.MonsterVariety](),
-	"PantheonPanelLayout":               codecs[raw.PantheonPanelLayout, legacyraw.PantheonPanelLayout](),
-	"PassiveSkills":                     codecs[raw.PassiveSkill, legacyraw.PassiveSkill](),
-	"PassiveTreeExpansionJewels":        codecs[raw.PassiveTreeExpansionJewel, legacyraw.PassiveTreeExpansionJewel](),
-	"PassiveTreeExpansionSkills":        codecs[raw.PassiveTreeExpansionSkill, legacyraw.PassiveTreeExpansionSkill](),
-	"PassiveTreeExpansionSpecialSkills": codecs[raw.PassiveTreeExpansionSpecialSkill, legacyraw.PassiveTreeExpansionSpecialSkill](),
-	"ShieldTypes":                       codecs[raw.ShieldType, legacyraw.ShieldType](),
-	"SkillGems":                         codecs[raw.SkillGem, legacyraw.SkillGem](),
-	"SkillTotemVariations":              codecs[raw.SkillTotemVariation, legacyraw.SkillTotemVariation](),
-	"SkillTotems":                       codecs[raw.SkillTotem, legacyraw.SkillTotem](),
-	"Stats":                             codecs[raw.Stat, legacyraw.Stat](),
-	"Tags":                              codecs[raw.Tag, legacyraw.Tag](),
-	"WeaponTypes":                       codecs[raw.WeaponType, legacyraw.WeaponType](),
-}
-
-var translationCodecs = rowCodecs{
-	tuple:  fileJSON[raw.TranslationFile],
-	legacy: fileJSON[legacyraw.TranslationFile],
-}
-
-// rowsJSON decodes an asset the way loader.LoadRaw does: a count, exactly that many rows, then EOF.
-func rowsJSON[T any, PT interface {
-	*T
-	msgp.Decodable
-}](asset []byte) ([]byte, error) {
-	r := msgp.NewReader(brotli.NewReader(bytes.NewReader(asset)))
-	n, err := r.ReadInt64()
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to read row count")
-	}
-
-	rows := make([]T, n)
-	for i := range rows {
-		if err := PT(&rows[i]).DecodeMsg(r); err != nil {
-			return nil, errors.Wrap(err, "failed to decode row")
-		}
-	}
-
-	if _, err := r.R.ReadByte(); !errors.Is(err, io.EOF) {
-		return nil, errors.New("trailing bytes after the last row")
-	}
-
-	b, err := json.Marshal(rows)
-	return b, errors.Wrap(err, "failed to marshal rows")
-}
-
-func fileJSON[T any, PT interface {
-	*T
-	msgp.Decodable
-}](asset []byte) ([]byte, error) {
-	var file T
-	r := msgp.NewReader(brotli.NewReader(bytes.NewReader(asset)))
-	if err := PT(&file).DecodeMsg(r); err != nil {
-		return nil, errors.Wrap(err, "failed to decode file")
-	}
-
-	if _, err := r.R.ReadByte(); !errors.Is(err, io.EOF) {
-		return nil, errors.New("trailing bytes after the file")
-	}
-
-	b, err := json.Marshal(file)
-	return b, errors.Wrap(err, "failed to marshal file")
+// frozenTuples are the sha256 of the staleSchema tuple assets.
+var frozenTuples = map[string]string{
+	"3.25/AtlasNode": "a045267de61d1d6a45b7f95f7ccf63f1791178a0d6bfdbfd7a34c38a21f0fd2b",
+	"3.26/AtlasNode": "0b58ce5060677f35701d8d2242f72acc6197d0bc863ef7362753bf597e3b1317",
+	"3.27/AtlasNode": "0b58ce5060677f35701d8d2242f72acc6197d0bc863ef7362753bf597e3b1317",
 }
 
 func readGzip(t *testing.T, path string) []byte {
@@ -260,46 +95,23 @@ func isMapAsset(path string) bool {
 	return !strings.Contains(strings.TrimSuffix(filepath.Base(path), ".msgpack.br"), ".")
 }
 
-// The map assets are frozen: nothing re-encodes them any more, so only this list vouches for them.
-func TestLegacyAssetsPinned(t *testing.T) {
-	f, err := os.Open("testdata/legacy-assets.sha256")
+// Raw tables publish as json.gz and tuple assets only: no consumer reads a map asset or a json.br.
+func TestRawAssetsTupleOnly(t *testing.T) {
+	assets, err := filepath.Glob("data/*/raw/*.msgpack.br")
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer f.Close()
-
-	var pinned []string
-	scanner := bufio.NewScanner(f)
-	for scanner.Scan() {
-		sum, path, _ := strings.Cut(scanner.Text(), "  ")
-		pinned = append(pinned, path)
-
-		b := readAsset(t, filepath.Join("data", path))
-		if b == nil {
-			t.Errorf("%s is gone, but consumers of older versions still read it", path)
-			continue
-		}
-		if got := sha256.Sum256(b); hex.EncodeToString(got[:]) != sum {
-			t.Errorf("%s changed", path)
-		}
-	}
-	if err := scanner.Err(); err != nil {
-		t.Fatal(err)
-	}
-
-	onDisk, err := filepath.Glob("data/*/raw/*.msgpack.br")
+	jsons, err := filepath.Glob("data/*/raw/*.json.br")
 	if err != nil {
 		t.Fatal(err)
 	}
-	translationAssets, err := filepath.Glob("data/*/stat_translations/*/*.msgpack.br")
-	if err != nil {
-		t.Fatal(err)
-	}
-	for _, path := range append(onDisk, translationAssets...) {
-		path = strings.TrimPrefix(filepath.ToSlash(path), "data/")
-		if isMapAsset(path) && !slices.Contains(pinned, path) {
-			t.Errorf("%s is a new map asset, the extractor should only write tuple assets", path)
+	for _, path := range assets {
+		if isMapAsset(path) {
+			t.Errorf("%s is a map asset, the extractor should only write tuple assets", path)
 		}
+	}
+	for _, path := range jsons {
+		t.Errorf("%s is a json.br, the extractor should only write json.gz", path)
 	}
 }
 
@@ -363,7 +175,6 @@ func TestTupleMatchesJSON(t *testing.T) {
 				committed := readAsset(t, tuplePath)
 				fromJSON, jsonErr := file.Encode(readGzip(t, jsonPath))
 
-				want := fromJSON
 				if reason, stale := knownStale[key]; stale {
 					if jsonErr == nil && bytes.Equal(fromJSON, committed) {
 						t.Errorf("%s is no longer stale, remove it from knownStale", key)
@@ -375,21 +186,18 @@ func TestTupleMatchesJSON(t *testing.T) {
 						t.Skip("known stale: " + reason)
 					}
 
-					rows, err := tables[name].legacy(readAsset(t, filepath.Join(dir, name+".msgpack.br")))
-					if err != nil {
-						t.Fatal(err)
+					if sum := sha256.Sum256(committed); hex.EncodeToString(sum[:]) != frozenTuples[key] {
+						t.Errorf("%s changed, and its map asset source is gone", tuplePath)
 					}
-					if want, err = file.Encode(rows); err != nil {
-						t.Fatal(err)
-					}
+					t.Skip("known stale: " + reason)
 				} else if jsonErr != nil {
 					t.Fatal(jsonErr)
 				}
 
 				switch {
-				case bytes.Equal(want, committed):
+				case bytes.Equal(fromJSON, committed):
 				case *update:
-					if err := os.WriteFile(tuplePath, want, 0o755); err != nil {
+					if err := os.WriteFile(tuplePath, fromJSON, 0o755); err != nil {
 						t.Fatal(err)
 					}
 				default:
@@ -397,76 +205,6 @@ func TestTupleMatchesJSON(t *testing.T) {
 				}
 			})
 		}
-	}
-}
-
-// Every tuple asset decodes to exactly the rows its frozen map asset decodes to with the map decoder
-// consumers used until now (testdata/legacyraw), compared as json of the decoded values.
-func TestTupleMatchesLegacy(t *testing.T) {
-	legacyAssets, err := filepath.Glob("data/*/raw/*.msgpack.br")
-	if err != nil {
-		t.Fatal(err)
-	}
-	translationAssets, err := filepath.Glob("data/*/stat_translations/*/*.msgpack.br")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	variants := map[string]string{}
-	for _, file := range filesToExport {
-		variants[filepath.Base(file.path)] = file.Variant
-	}
-
-	for _, legacyPath := range append(legacyAssets, translationAssets...) {
-		if !isMapAsset(legacyPath) {
-			continue
-		}
-
-		t.Run(strings.TrimPrefix(legacyPath, "data/"), func(t *testing.T) {
-			base := strings.TrimSuffix(legacyPath, ".msgpack.br")
-			name := filepath.Base(base)
-
-			version := strings.Split(filepath.ToSlash(legacyPath), "/")[1]
-
-			if version == reextracted {
-				t.Skip("re-extracted after its map asset was frozen")
-			}
-
-			codec, variant := tables[name], variants[name]
-			if strings.Contains(legacyPath, "stat_translations") {
-				if version == staleTranslations {
-					t.Skip("known stale: no TranslationFile to decode")
-				}
-				codec, variant = translationCodecs, loader.TupleVariant(raw.TranslationFile{})
-			} else if knownStale[version+"/"+name] == undecodable {
-				t.Skip("known stale: " + undecodable)
-			}
-			if codec.tuple == nil {
-				t.Fatalf("no codecs for %s", name)
-			}
-
-			tuple := readAsset(t, loader.AssetPath(base, variant))
-			if tuple == nil {
-				t.Fatalf("no tuple asset for %s", legacyPath)
-			}
-
-			want, err := codec.legacy(readAsset(t, legacyPath))
-			if err != nil {
-				t.Fatal(err)
-			}
-			got, err := codec.tuple(tuple)
-			if err != nil {
-				t.Fatal(err)
-			}
-
-			if columns, ok := correctedColumns[name]; ok {
-				got, want = withoutColumns(t, got, columns), withoutColumns(t, want, columns)
-			}
-
-			if !bytes.Equal(got, want) {
-				t.Errorf("tuple asset decodes to different rows than %s", legacyPath)
-			}
-		})
 	}
 }
 

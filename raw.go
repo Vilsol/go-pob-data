@@ -630,22 +630,6 @@ func extractRawData(bundles fs.FS, game extractor.Game, gameVersion string) erro
 		_ = writerGzip.Close()
 		_ = fGzip.Close()
 
-		outNameBrotli := strings.Split(filepath.Base(pathWithExt), ".")[0] + ".json.br"
-		outPathBrotli := filepath.Join("data", gameVersion, "raw", outNameBrotli)
-
-		fBrotli, err := os.OpenFile(outPathBrotli, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o755)
-		if err != nil {
-			return errors.Wrap(err, "could not open file for writing")
-		}
-
-		writerBrotli := brotli.NewWriter(fBrotli)
-		if _, err := writerBrotli.Write(b); err != nil {
-			return errors.Wrap(err, "could not compress to brotli")
-		}
-
-		_ = writerBrotli.Close()
-		_ = fBrotli.Close()
-
 		if file.Encode == nil {
 			continue
 		}
