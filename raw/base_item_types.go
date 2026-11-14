@@ -35,11 +35,12 @@ type BaseItemType struct {
 }
 
 // UnmarshalJSON reads EquipAchievements from Equip_AchievementItemsKey too, the single key tables extracted
-// before 3.30 hold.
+// before 3.30 hold, and Hash from HASH32, the name of 3.18's HASH since 3.20.
 func (b *BaseItemType) UnmarshalJSON(data []byte) error {
 	type plain BaseItemType
 	var named struct {
 		EquipAchievementItemsKey *int `json:"Equip_AchievementItemsKey"`
+		Hash32                   *int `json:"HASH32"`
 		plain
 	}
 	if err := json.Unmarshal(data, &named); err != nil {
@@ -48,6 +49,9 @@ func (b *BaseItemType) UnmarshalJSON(data []byte) error {
 	*b = BaseItemType(named.plain)
 	if named.EquipAchievementItemsKey != nil {
 		b.EquipAchievements = []int{*named.EquipAchievementItemsKey}
+	}
+	if named.Hash32 != nil {
+		b.Hash = *named.Hash32
 	}
 	return nil
 }

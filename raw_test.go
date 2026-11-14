@@ -313,3 +313,24 @@ func TestAtlasNodeShiftedColumns(t *testing.T) {
 		})
 	}
 }
+
+// 3.18 names BaseItemTypes' hash HASH, every later version HASH32.
+func TestBaseItemTypesHash(t *testing.T) {
+	for _, version := range []string{"3.18", "3.29", "3.30"} {
+		t.Run(version, func(t *testing.T) {
+			var items []raw.BaseItemType
+			if err := json.Unmarshal(readGzip(t, filepath.Join("data", version, "raw", "BaseItemTypes.json.gz")), &items); err != nil {
+				t.Fatal(err)
+			}
+			for _, item := range items {
+				if item.ID == "Metadata/Items/Currency/CurrencyWeaponQuality" {
+					if item.Hash != 1154719587 {
+						t.Errorf("CurrencyWeaponQuality hash %d", item.Hash)
+					}
+					return
+				}
+			}
+			t.Error("no CurrencyWeaponQuality")
+		})
+	}
+}

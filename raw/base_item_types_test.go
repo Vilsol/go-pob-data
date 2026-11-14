@@ -20,3 +20,18 @@ func TestBaseItemTypeEquipAchievementLayouts(t *testing.T) {
 		}
 	}
 }
+
+func TestBaseItemTypeHashLayouts(t *testing.T) {
+	for _, b := range []string{
+		`{"Id":"Ring1","HASH":1154719587}`,
+		`{"Id":"Ring1","HASH32":1154719587}`,
+	} {
+		var i BaseItemType
+		if err := json.Unmarshal([]byte(b), &i); err != nil {
+			t.Fatal(err)
+		}
+		if i.ID != "Ring1" || i.Hash != 1154719587 {
+			t.Errorf("%s decoded to %+v", b, i)
+		}
+	}
+}
