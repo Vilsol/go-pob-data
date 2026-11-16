@@ -116,7 +116,13 @@
     },
     "raw/CraftingBenchOptions": {
       "type": "CraftingBenchOption",
-      "keep": []
+      "keep": [
+        "AddMod",
+        "CostBaseItemTypes",
+        "CostValues",
+        "IsDisabled",
+        "Links"
+      ]
     },
     "raw/DefaultMonsterStats": {
       "type": "DefaultMonsterStat",
@@ -720,19 +726,14 @@
     "raw/CostTypes": [],
     "raw/CraftingBenchOptions": [
       "AddEnchantment",
-      "AddMod",
-      "CostBaseItemTypes",
-      "CostValues",
       "CraftingBenchCustomAction",
       "CraftingItemClassCategories",
       "Description",
       "HideoutNPCSKey",
       "IsAreaOption",
-      "IsDisabled",
       "ItemClasses",
       "ItemQuantity",
       "Key",
-      "Links",
       "Name",
       "Order",
       "RecipeIDS",

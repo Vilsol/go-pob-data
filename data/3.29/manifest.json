@@ -313,6 +313,10 @@
 			"records": 829,
 			"sha256": "78629bb49ff1f771e6191e4423d788c8637da83eb18a2893bf73ab2247e1948d"
 		},
+		"raw/CraftingBenchOptions.min-5a691e1a.msgpack.br": {
+			"records": 829,
+			"sha256": "34feecb460ccf8827da23a9b489e4c293960ef4e15e9d710946acaf6d58da9f5"
+		},
 		"raw/CraftingBenchOptions.t-a91cd533.msgpack.br": {
 			"records": 829,
 			"sha256": "b2d4b2c3147e565adcc5edc1acd1ada22fe56439eb2eef914a5a2a4a4413cfcf"
