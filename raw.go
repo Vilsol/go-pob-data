@@ -403,11 +403,39 @@ var filesToExport = []PackedFile{
 		path:  "Data/VirtualStatContextFlags",
 		Codec: ReEncode[*raw.VirtualStatContextFlag](),
 	},
+	{
+		path:  "Data/PassiveJewelRadii",
+		Codec: ReEncode[*raw.PassiveJewelRadius](),
+	},
+	{
+		path:  "Data/FishingLureTypes",
+		Codec: ReEncode[*raw.FishingLureType](),
+	},
+	{
+		path:  "Data/FishingHookTypes",
+		Codec: ReEncode[*raw.FishingHookType](),
+	},
+	{
+		path:  "Data/ShaperApparitionAbility",
+		Codec: ReEncode[*raw.ShaperApparitionAbility](),
+	},
+	{
+		path:  "Data/MinionDoublingStatTypes",
+		Codec: ReEncode[*raw.MinionDoublingStatType](),
+	},
+	{
+		path:  "Data/AtlasExiles",
+		Codec: ReEncode[*raw.AtlasExile](),
+	},
+	{
+		path:  "Data/ElderGuardians",
+		Codec: ReEncode[*raw.ElderGuardian](),
+	},
 }
 
 // poe2TablesToExport are published as json, and those poe2 declares rows for also as tuple assets of
 // those rows: the raw structs are PoE1 layouts. The first group is
-// filesToExport less the 8 tables PoE2 does not ship; the second is what PoB-PoE2's exporter reads besides,
+// filesToExport less the 8 tables PoE2 does not ship and the 7 PoE1 stat description formatter tables; the second is what PoB-PoE2's exporter reads besides,
 // and Characters, which names the class illustrations; the third holds the quest rewards and the unique
 // name lists.
 var poe2TablesToExport = slices.Concat([]string{

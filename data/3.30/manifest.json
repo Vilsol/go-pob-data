@@ -170,6 +170,13 @@
 		"raw/Art/2DArt/BaseClassIllustrations/StrInt.png": {
 			"sha256": "f80018cfa6f8a5f6493e7af76d7821d4a79efecd1543279b2a9857276f17afe0"
 		},
+		"raw/AtlasExiles.json.gz": {
+			"sha256": "fa2148bfa301b3075ede45ec3d63e89bfcd600d12ed07879930c70e9b3071b23"
+		},
+		"raw/AtlasExiles.t-c3d352b4.msgpack.br": {
+			"records": 4,
+			"sha256": "ab12244962108d72ac2142e3d215d3303b1dfc2d4fa30de04a005551bcf04758"
+		},
 		"raw/AtlasNode.json.gz": {
 			"sha256": "caa740b11c5c4e853cce870d689362565ebafca7b63b1a18c1a3e32af9935f62"
 		},
@@ -289,6 +296,13 @@
 			"records": 3,
 			"sha256": "23029017efbfb0902c59c8c3d8298c330a07ce27b7eb6efb120354bc0e87b81e"
 		},
+		"raw/ElderGuardians.json.gz": {
+			"sha256": "57247b19a6b91b8d565676def87c656b9b30275cd3212b5c84200b84b87bbb25"
+		},
+		"raw/ElderGuardians.t-c224d843.msgpack.br": {
+			"records": 4,
+			"sha256": "40a5e333098eb8cf12ce332a030fe895f8f39d16b9354d2062e631ab4a60ca82"
+		},
 		"raw/Essences.json.gz": {
 			"sha256": "b8a8c9786c24f04954e34892758aa25fcfe7dd705ca96988db3e19bd82ea2255"
 		},
@@ -299,6 +313,20 @@
 		"raw/Essences.t-803dc542.msgpack.br": {
 			"records": 107,
 			"sha256": "1f9d9a8f0f7e21f9496205ee5552fee42adf7eb96876a56f28a98422a8112032"
+		},
+		"raw/FishingHookTypes.json.gz": {
+			"sha256": "eca631eaa5141815d1b33a9c2b98aa33834a3650a80d444c50d85ac889d7d24f"
+		},
+		"raw/FishingHookTypes.t-055415f8.msgpack.br": {
+			"records": 4,
+			"sha256": "cb31e01087e0b7334efd4e89883d5532c6f758ca107ae7c502ea8c19c34fbfa8"
+		},
+		"raw/FishingLureTypes.json.gz": {
+			"sha256": "a064297cc2223990b5595d87e36af13db4ecc41f85151f8991f160088fc6c4e4"
+		},
+		"raw/FishingLureTypes.t-055415f8.msgpack.br": {
+			"records": 7,
+			"sha256": "5e4afbed95176c78f7c14c5b37d530e52e2088f2ed8faa8ea9472c28e4eab6c1"
 		},
 		"raw/Flasks.json.gz": {
 			"sha256": "b03c8962d9d868a808fc37a75d70dd29c7a266cf85eab7fb23056a80daf69bf5"
@@ -427,6 +455,13 @@
 			"records": 15743,
 			"sha256": "f463bf3566c8c9912a788de9823b064654446879153982edce106398df8120b1"
 		},
+		"raw/MinionDoublingStatTypes.json.gz": {
+			"sha256": "5837b29cc5b64e3c5a3959d44d8ae3eb09d7ec41461ba7716b9c9c522237e489"
+		},
+		"raw/MinionDoublingStatTypes.t-905e85d1.msgpack.br": {
+			"records": 16,
+			"sha256": "30a380a966fabd8cf29264d8713b7292b7abf6ee51ce5c451f6131e24e8e382f"
+		},
 		"raw/ModFamily.json.gz": {
 			"sha256": "9e27b1a5cf45d9b5d2b35c985d7b557ed3580a04e213bfc6e86800c0c7bcd104"
 		},
@@ -444,13 +479,17 @@
 		"raw/Mods.json.gz": {
 			"sha256": "0456a15f208115f129e12adcf7ee713a3f9d1875b0d22f192956ee77ad446874"
 		},
-		"raw/Mods.min-8f4b924d.msgpack.br": {
+		"raw/Mods.min-baa33d1a.msgpack.br": {
 			"records": 41324,
-			"sha256": "6e7eb7696d957f44044cdbda0cace8060ab57e5ef07eb6d553c09d6c869d5472"
+			"sha256": "2e1c0c8663dbe942a86dac7a1f919ada1af0424ace0a030a1f6b2c325bdf25bc"
 		},
 		"raw/Mods.t-095071f7.msgpack.br": {
 			"records": 41324,
 			"sha256": "671bfe9164900b805441213c7a94b4a6ca800bb25f96a2e5059804dda0a1e18c"
+		},
+		"raw/Mods.t-b69887b4.msgpack.br": {
+			"records": 41324,
+			"sha256": "5a69f22d05710b426df59fdc394903cdca10f2099580fbd575e5d29ba0bb446d"
 		},
 		"raw/MonsterMapBossDifficulty.json.gz": {
 			"sha256": "e491b900a18f14911c8cd727b84f9bdeb0c391189e71102a76b4d5705ba16ae8"
@@ -509,6 +548,13 @@
 		"raw/PantheonPanelLayout.t-5be37a93.msgpack.br": {
 			"records": 16,
 			"sha256": "44576f5d0d3f122543bc374e825b97b3e279bdd1918b6d724e61734947b57710"
+		},
+		"raw/PassiveJewelRadii.json.gz": {
+			"sha256": "ca4b7a1ec0a2e20224c4ce55d435f741d21d017ee5887aec31f49fe7debdeeb5"
+		},
+		"raw/PassiveJewelRadii.t-64afd130.msgpack.br": {
+			"records": 5,
+			"sha256": "952e658e1b13bae2fdda4bb80c44980be5e953cfe8c9715dc9b66234c88315d8"
 		},
 		"raw/PassiveJewelSlots.json.gz": {
 			"sha256": "b5eeb8db4374aa6f312b85e089b713dca29521b9ce46e0bb376901aa3ce1363f"
@@ -616,6 +662,13 @@
 		"raw/PassiveTreeExpansionSpecialSkills.t-afa54769.msgpack.br": {
 			"records": 309,
 			"sha256": "60b1ed782aed36274134bc8820695c0f8ede8374eb3d711926f0d1e5a0441aab"
+		},
+		"raw/ShaperApparitionAbility.json.gz": {
+			"sha256": "9d7d6b064bd87f7a5c07294e8d7f85dfcbff7b204cf2f1808dda3ab036096f2b"
+		},
+		"raw/ShaperApparitionAbility.t-2593af7b.msgpack.br": {
+			"records": 4,
+			"sha256": "e40187e13d45f40be6565a03d7b465f9e950e1a141f48828d5cbcdcf89fc6e57"
 		},
 		"raw/ShieldTypes.json.gz": {
 			"sha256": "7ee1c1d553a46b55d844e798432f2fa54cf38f3380e6fd65ce2c49f9d51a31e7"
@@ -933,6 +986,7 @@
 		"AlternateTreeArt",
 		"AlternateTreeVersions",
 		"ArmourTypes",
+		"AtlasExiles",
 		"AtlasNode",
 		"AtlasNodeDefinition",
 		"BaseItemTypes",
@@ -946,7 +1000,10 @@
 		"CurrencyExchange",
 		"DefaultMonsterStats",
 		"EffectivenessCostConstants",
+		"ElderGuardians",
 		"Essences",
+		"FishingHookTypes",
+		"FishingLureTypes",
 		"Flasks",
 		"FlavourText",
 		"GameConstants",
@@ -960,6 +1017,7 @@
 		"ItemClasses",
 		"ItemExperiencePerLevel",
 		"ItemVisualIdentity",
+		"MinionDoublingStatTypes",
 		"ModFamily",
 		"ModType",
 		"Mods",
@@ -969,6 +1027,7 @@
 		"MonsterTypes",
 		"MonsterVarieties",
 		"PantheonPanelLayout",
+		"PassiveJewelRadii",
 		"PassiveJewelSlots",
 		"PassiveOverrideLimits",
 		"PassiveSkillOverrideTypes",
@@ -982,6 +1041,7 @@
 		"PassiveTreeExpansionJewels",
 		"PassiveTreeExpansionSkills",
 		"PassiveTreeExpansionSpecialSkills",
+		"ShaperApparitionAbility",
 		"ShieldTypes",
 		"SkillGems",
 		"SkillTotemVariations",

@@ -18,6 +18,13 @@ var absentFromPoE2 = []string{
 	"Tinctures", "VillageBalancePerLevelShared", "WeaponPassiveSkills", "WeaponPassiveSkillTypes",
 }
 
+// poe1Only are exported for PoE1 only: the tables PoB's stat description formatter names come from, which
+// PoB-PoE2's exporter does not read.
+var poe1Only = []string{
+	"AtlasExiles", "ElderGuardians", "FishingHookTypes", "FishingLureTypes", "MinionDoublingStatTypes",
+	"PassiveJewelRadii", "ShaperApparitionAbility",
+}
+
 func TestTablesToExport(t *testing.T) {
 	if got := tablesToExport(extractor.PoE1); len(got) != len(filesToExport) || &got[0] != &filesToExport[0] {
 		t.Fatal("poe1 must export filesToExport unchanged")
@@ -50,6 +57,9 @@ func TestTablesToExport(t *testing.T) {
 		if slices.Contains(absentFromPoE2, name) {
 			t.Errorf("%s is absent from PoE2", name)
 		}
+		if slices.Contains(poe1Only, name) {
+			t.Errorf("%s is exported for PoE1 only", name)
+		}
 		if poe1[name] {
 			shared++
 		}
@@ -61,7 +71,7 @@ func TestTablesToExport(t *testing.T) {
 		}
 	}
 
-	if want := len(filesToExport) - len(absentFromPoE2); shared != want {
+	if want := len(filesToExport) - len(absentFromPoE2) - len(poe1Only); shared != want {
 		t.Errorf("poe2 exports %d of the poe1 tables, want every present one (%d)", shared, want)
 	}
 }

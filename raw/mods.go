@@ -65,13 +65,17 @@ type Mod struct {
 	GenerationType                   int           `json:"GenerationType"`
 	Domain                           int           `json:"Domain"`
 	IsEssenceOnlyModifier            bool          `json:"IsEssenceOnlyModifier"`
+	// ShowGrantedEffects is 3.30's unnamed Var80 (PoB's spec names it).
+	ShowGrantedEffects bool `json:"ShowGrantedEffects"`
 }
 
-// UnmarshalJSON reads BuffTemplate under its 3.28+ schema name BuffTemplate1 too.
+// UnmarshalJSON reads BuffTemplate under its 3.28+ schema name BuffTemplate1 too, and ShowGrantedEffects
+// from 3.30's Var80.
 func (m *Mod) UnmarshalJSON(b []byte) error {
 	type plain Mod
 	var named struct {
-		BuffTemplate1 *int `json:"BuffTemplate1"`
+		BuffTemplate1 *int  `json:"BuffTemplate1"`
+		Var80         *bool `json:"Var80"`
 		plain
 	}
 	if err := json.Unmarshal(b, &named); err != nil {
@@ -80,6 +84,9 @@ func (m *Mod) UnmarshalJSON(b []byte) error {
 	*m = Mod(named.plain)
 	if named.BuffTemplate1 != nil {
 		m.BuffTemplate = named.BuffTemplate1
+	}
+	if named.Var80 != nil {
+		m.ShowGrantedEffects = *named.Var80
 	}
 	return nil
 }

@@ -2436,6 +2436,213 @@ func (z *ArmourType) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *AtlasExile) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 7 {
+		err = msgp.ArrayError{Wanted: 7, Got: zb0001}
+		return
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "InfluencedItemIncrStat")
+			return
+		}
+		z.InfluencedItemIncrStat = nil
+	} else {
+		if z.InfluencedItemIncrStat == nil {
+			z.InfluencedItemIncrStat = new(int)
+		}
+		*z.InfluencedItemIncrStat, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "InfluencedItemIncrStat")
+			return
+		}
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.MapIcon, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "MapIcon")
+		return
+	}
+	z.MapIcon2, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "MapIcon2")
+		return
+	}
+	z.Title, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Title")
+		return
+	}
+	z.CitadelName, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "CitadelName")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *AtlasExile) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 7
+	err = en.Append(0x97)
+	if err != nil {
+		return
+	}
+	if z.InfluencedItemIncrStat == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.InfluencedItemIncrStat)
+		if err != nil {
+			err = msgp.WrapError(err, "InfluencedItemIncrStat")
+			return
+		}
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteString(z.MapIcon)
+	if err != nil {
+		err = msgp.WrapError(err, "MapIcon")
+		return
+	}
+	err = en.WriteString(z.MapIcon2)
+	if err != nil {
+		err = msgp.WrapError(err, "MapIcon2")
+		return
+	}
+	err = en.WriteString(z.Title)
+	if err != nil {
+		err = msgp.WrapError(err, "Title")
+		return
+	}
+	err = en.WriteString(z.CitadelName)
+	if err != nil {
+		err = msgp.WrapError(err, "CitadelName")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *AtlasExile) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 7
+	o = append(o, 0x97)
+	if z.InfluencedItemIncrStat == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.InfluencedItemIncrStat)
+	}
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendString(o, z.MapIcon)
+	o = msgp.AppendString(o, z.MapIcon2)
+	o = msgp.AppendString(o, z.Title)
+	o = msgp.AppendString(o, z.CitadelName)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *AtlasExile) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 7 {
+		err = msgp.ArrayError{Wanted: 7, Got: zb0001}
+		return
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.InfluencedItemIncrStat = nil
+	} else {
+		if z.InfluencedItemIncrStat == nil {
+			z.InfluencedItemIncrStat = new(int)
+		}
+		*z.InfluencedItemIncrStat, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "InfluencedItemIncrStat")
+			return
+		}
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.MapIcon, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "MapIcon")
+		return
+	}
+	z.MapIcon2, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "MapIcon2")
+		return
+	}
+	z.Title, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Title")
+		return
+	}
+	z.CitadelName, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "CitadelName")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *AtlasExile) Msgsize() (s int) {
+	s = 1
+	if z.InfluencedItemIncrStat == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.StringPrefixSize + len(z.ID) + msgp.StringPrefixSize + len(z.MapIcon) + msgp.StringPrefixSize + len(z.MapIcon2) + msgp.StringPrefixSize + len(z.Title) + msgp.StringPrefixSize + len(z.CitadelName) + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *AtlasNode) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()
@@ -7181,6 +7388,125 @@ func (z EffectivenessCostConstant) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *ElderGuardian) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 4 {
+		err = msgp.ArrayError{Wanted: 4, Got: zb0001}
+		return
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.MapIcon, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "MapIcon")
+		return
+	}
+	z.Name, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *ElderGuardian) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 4
+	err = en.Append(0x94)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteString(z.MapIcon)
+	if err != nil {
+		err = msgp.WrapError(err, "MapIcon")
+		return
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *ElderGuardian) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 4
+	o = append(o, 0x94)
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendString(o, z.MapIcon)
+	o = msgp.AppendString(o, z.Name)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *ElderGuardian) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 4 {
+		err = msgp.ArrayError{Wanted: 4, Got: zb0001}
+		return
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.MapIcon, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "MapIcon")
+		return
+	}
+	z.Name, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *ElderGuardian) Msgsize() (s int) {
+	s = 1 + msgp.StringPrefixSize + len(z.ID) + msgp.StringPrefixSize + len(z.MapIcon) + msgp.StringPrefixSize + len(z.Name) + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *Essence) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()
@@ -9840,6 +10166,180 @@ func (z *Essence) Msgsize() (s int) {
 		s += msgp.IntSize
 	}
 	s += msgp.ArrayHeaderSize + (len(z.MonsterModsKeys) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.DropLevel) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.Level2) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.MemoryLines) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *FishingHookType) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 2 {
+		err = msgp.ArrayError{Wanted: 2, Got: zb0001}
+		return
+	}
+	z.Name, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z FishingHookType) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 2
+	err = en.Append(0x92)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z FishingHookType) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 2
+	o = append(o, 0x92)
+	o = msgp.AppendString(o, z.Name)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *FishingHookType) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 2 {
+		err = msgp.ArrayError{Wanted: 2, Got: zb0001}
+		return
+	}
+	z.Name, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z FishingHookType) Msgsize() (s int) {
+	s = 1 + msgp.StringPrefixSize + len(z.Name) + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *FishingLureType) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 2 {
+		err = msgp.ArrayError{Wanted: 2, Got: zb0001}
+		return
+	}
+	z.Name, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z FishingLureType) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 2
+	err = en.Append(0x92)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z FishingLureType) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 2
+	o = append(o, 0x92)
+	o = msgp.AppendString(o, z.Name)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *FishingLureType) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 2 {
+		err = msgp.ArrayError{Wanted: 2, Got: zb0001}
+		return
+	}
+	z.Name, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z FishingLureType) Msgsize() (s int) {
+	s = 1 + msgp.StringPrefixSize + len(z.Name) + msgp.IntSize
 	return
 }
 
@@ -14598,6 +15098,220 @@ func (z *LangTranslation) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *MinionDoublingStatType) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 5 {
+		err = msgp.ArrayError{Wanted: 5, Got: zb0001}
+		return
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat")
+			return
+		}
+		z.Stat = nil
+	} else {
+		if z.Stat == nil {
+			z.Stat = new(int)
+		}
+		*z.Stat, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stat")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "MinionType")
+			return
+		}
+		z.MinionType = nil
+	} else {
+		if z.MinionType == nil {
+			z.MinionType = new(int)
+		}
+		*z.MinionType, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "MinionType")
+			return
+		}
+	}
+	z.Name, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.ID, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *MinionDoublingStatType) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 5
+	err = en.Append(0x95)
+	if err != nil {
+		return
+	}
+	if z.Stat == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.Stat)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat")
+			return
+		}
+	}
+	if z.MinionType == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.MinionType)
+		if err != nil {
+			err = msgp.WrapError(err, "MinionType")
+			return
+		}
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	err = en.WriteInt(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *MinionDoublingStatType) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 5
+	o = append(o, 0x95)
+	if z.Stat == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.Stat)
+	}
+	if z.MinionType == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.MinionType)
+	}
+	o = msgp.AppendString(o, z.Name)
+	o = msgp.AppendInt(o, z.ID)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *MinionDoublingStatType) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 5 {
+		err = msgp.ArrayError{Wanted: 5, Got: zb0001}
+		return
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.Stat = nil
+	} else {
+		if z.Stat == nil {
+			z.Stat = new(int)
+		}
+		*z.Stat, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stat")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.MinionType = nil
+	} else {
+		if z.MinionType == nil {
+			z.MinionType = new(int)
+		}
+		*z.MinionType, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "MinionType")
+			return
+		}
+	}
+	z.Name, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.ID, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *MinionDoublingStatType) Msgsize() (s int) {
+	s = 1
+	if z.Stat == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.MinionType == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.StringPrefixSize + len(z.Name) + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *Mod) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()
@@ -14605,8 +15319,8 @@ func (z *Mod) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 57 {
-		err = msgp.ArrayError{Wanted: 57, Got: zb0001}
+	if zb0001 != 58 {
+		err = msgp.ArrayError{Wanted: 58, Got: zb0001}
 		return
 	}
 	if dc.IsNil() {
@@ -15222,13 +15936,18 @@ func (z *Mod) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err, "IsEssenceOnlyModifier")
 		return
 	}
+	z.ShowGrantedEffects, err = dc.ReadBool()
+	if err != nil {
+		err = msgp.WrapError(err, "ShowGrantedEffects")
+		return
+	}
 	return
 }
 
 // EncodeMsg implements msgp.Encodable
 func (z *Mod) EncodeMsg(en *msgp.Writer) (err error) {
-	// array header, size 57
-	err = en.Append(0xdc, 0x0, 0x39)
+	// array header, size 58
+	err = en.Append(0xdc, 0x0, 0x3a)
 	if err != nil {
 		return
 	}
@@ -15699,14 +16418,19 @@ func (z *Mod) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "IsEssenceOnlyModifier")
 		return
 	}
+	err = en.WriteBool(z.ShowGrantedEffects)
+	if err != nil {
+		err = msgp.WrapError(err, "ShowGrantedEffects")
+		return
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
 func (z *Mod) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// array header, size 57
-	o = append(o, 0xdc, 0x0, 0x39)
+	// array header, size 58
+	o = append(o, 0xdc, 0x0, 0x3a)
 	if z.HeistStatsKey1 == nil {
 		o = msgp.AppendNil(o)
 	} else {
@@ -15860,6 +16584,7 @@ func (z *Mod) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.AppendInt(o, z.GenerationType)
 	o = msgp.AppendInt(o, z.Domain)
 	o = msgp.AppendBool(o, z.IsEssenceOnlyModifier)
+	o = msgp.AppendBool(o, z.ShowGrantedEffects)
 	return
 }
 
@@ -15871,8 +16596,8 @@ func (z *Mod) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 57 {
-		err = msgp.ArrayError{Wanted: 57, Got: zb0001}
+	if zb0001 != 58 {
+		err = msgp.ArrayError{Wanted: 58, Got: zb0001}
 		return
 	}
 	if msgp.IsNil(bts) {
@@ -16478,6 +17203,11 @@ func (z *Mod) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.WrapError(err, "IsEssenceOnlyModifier")
 		return
 	}
+	z.ShowGrantedEffects, bts, err = msgp.ReadBoolBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ShowGrantedEffects")
+		return
+	}
 	o = bts
 	return
 }
@@ -16543,7 +17273,7 @@ func (z *Mod) Msgsize() (s int) {
 	for za0011 := range z.AchievementItemsKey {
 		s += msgp.GuessSize(z.AchievementItemsKey[za0011])
 	}
-	s += msgp.ArrayHeaderSize + (len(z.ChestModType) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.ModifyMapsAchievements) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.Families) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.BuffTemplate2) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.AuraFlags) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize
+	s += msgp.ArrayHeaderSize + (len(z.ChestModType) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.ModifyMapsAchievements) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.Families) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.BuffTemplate2) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.AuraFlags) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize + msgp.BoolSize
 	return
 }
 
@@ -20621,6 +21351,197 @@ func (z *PantheonPanelLayout) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *PassiveJewelRadius) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 6 {
+		err = msgp.ArrayError{Wanted: 6, Got: zb0001}
+		return
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "ClientString")
+			return
+		}
+		z.ClientString = nil
+	} else {
+		if z.ClientString == nil {
+			z.ClientString = new(int)
+		}
+		*z.ClientString, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "ClientString")
+			return
+		}
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.RingOuterRadius, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "RingOuterRadius")
+		return
+	}
+	z.RingInnerRadius, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "RingInnerRadius")
+		return
+	}
+	z.Radius, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Radius")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *PassiveJewelRadius) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 6
+	err = en.Append(0x96)
+	if err != nil {
+		return
+	}
+	if z.ClientString == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.ClientString)
+		if err != nil {
+			err = msgp.WrapError(err, "ClientString")
+			return
+		}
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteInt(z.RingOuterRadius)
+	if err != nil {
+		err = msgp.WrapError(err, "RingOuterRadius")
+		return
+	}
+	err = en.WriteInt(z.RingInnerRadius)
+	if err != nil {
+		err = msgp.WrapError(err, "RingInnerRadius")
+		return
+	}
+	err = en.WriteInt(z.Radius)
+	if err != nil {
+		err = msgp.WrapError(err, "Radius")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *PassiveJewelRadius) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 6
+	o = append(o, 0x96)
+	if z.ClientString == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.ClientString)
+	}
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendInt(o, z.RingOuterRadius)
+	o = msgp.AppendInt(o, z.RingInnerRadius)
+	o = msgp.AppendInt(o, z.Radius)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *PassiveJewelRadius) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 6 {
+		err = msgp.ArrayError{Wanted: 6, Got: zb0001}
+		return
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.ClientString = nil
+	} else {
+		if z.ClientString == nil {
+			z.ClientString = new(int)
+		}
+		*z.ClientString, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "ClientString")
+			return
+		}
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.RingOuterRadius, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "RingOuterRadius")
+		return
+	}
+	z.RingInnerRadius, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "RingInnerRadius")
+		return
+	}
+	z.Radius, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Radius")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *PassiveJewelRadius) Msgsize() (s int) {
+	s = 1
+	if z.ClientString == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.StringPrefixSize + len(z.ID) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *PassiveJewelSlot) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()
@@ -24044,6 +24965,149 @@ func (z *PassiveTreeExpansionSpecialSkill) UnmarshalMsg(bts []byte) (o []byte, e
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z PassiveTreeExpansionSpecialSkill) Msgsize() (s int) {
 	s = 1 + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *ShaperApparitionAbility) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 3 {
+		err = msgp.ArrayError{Wanted: 3, Got: zb0001}
+		return
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffect")
+			return
+		}
+		z.GrantedEffect = nil
+	} else {
+		if z.GrantedEffect == nil {
+			z.GrantedEffect = new(int)
+		}
+		*z.GrantedEffect, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffect")
+			return
+		}
+	}
+	z.Name, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *ShaperApparitionAbility) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 3
+	err = en.Append(0x93)
+	if err != nil {
+		return
+	}
+	if z.GrantedEffect == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.GrantedEffect)
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffect")
+			return
+		}
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *ShaperApparitionAbility) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 3
+	o = append(o, 0x93)
+	if z.GrantedEffect == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.GrantedEffect)
+	}
+	o = msgp.AppendString(o, z.Name)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *ShaperApparitionAbility) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 3 {
+		err = msgp.ArrayError{Wanted: 3, Got: zb0001}
+		return
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.GrantedEffect = nil
+	} else {
+		if z.GrantedEffect == nil {
+			z.GrantedEffect = new(int)
+		}
+		*z.GrantedEffect, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedEffect")
+			return
+		}
+	}
+	z.Name, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *ShaperApparitionAbility) Msgsize() (s int) {
+	s = 1
+	if z.GrantedEffect == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.StringPrefixSize + len(z.Name) + msgp.IntSize
 	return
 }
 
