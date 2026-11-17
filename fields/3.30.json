@@ -1,0 +1,1096 @@
+{
+  "format": "go-pob-data-fields/2",
+  "dataModule": "github.com/Vilsol/go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5",
+  "version": "3.30",
+  "assets": {
+    "raw/ActiveSkillType": {
+      "type": "ActiveSkillType",
+      "keep": [
+        "*"
+      ]
+    },
+    "raw/ActiveSkills": {
+      "type": "ActiveSkill",
+      "keep": [
+        "*"
+      ]
+    },
+    "raw/AlternatePassiveAdditions": {
+      "type": "AlternatePassiveAddition",
+      "keep": [
+        "AlternateTreeVersionsKey",
+        "ID",
+        "Key",
+        "PassiveType",
+        "SpawnWeight",
+        "Stat1Max",
+        "Stat1Min",
+        "Stat2Max",
+        "Stat2Min",
+        "StatsKeys"
+      ]
+    },
+    "raw/AlternatePassiveSkills": {
+      "type": "AlternatePassiveSkill",
+      "keep": [
+        "AlternateTreeVersionsKey",
+        "ConquerorIndex",
+        "ConquerorVersion",
+        "ID",
+        "Key",
+        "Name",
+        "PassiveType",
+        "RandomMax",
+        "RandomMin",
+        "SpawnWeight",
+        "Stat1Max",
+        "Stat1Min",
+        "Stat2Max",
+        "Stat2Min",
+        "Stat3Max",
+        "Stat3Min",
+        "Stat4Max",
+        "Stat4Min",
+        "StatsKeys"
+      ]
+    },
+    "raw/AlternateTreeVersions": {
+      "type": "AlternateTreeVersion",
+      "keep": [
+        "AreSmallAttributePassiveSkillsReplaced",
+        "AreSmallNormalPassiveSkillsReplaced",
+        "ConquerorType",
+        "Key",
+        "MaximumAdditions",
+        "MaximumAdditionsNotable",
+        "MaximumAdditionsSmallAttribute",
+        "MinimumAdditions",
+        "MinimumAdditionsNotable",
+        "MinimumAdditionsSmallAttribute",
+        "NotableReplacementSpawnWeight"
+      ]
+    },
+    "raw/ArmourTypes": {
+      "type": "ArmourType",
+      "keep": [
+        "ArmourMax",
+        "ArmourMin",
+        "BaseItemTypesKey",
+        "EnergyShieldMax",
+        "EnergyShieldMin",
+        "EvasionMax",
+        "EvasionMin",
+        "IncreasedMovementSpeed",
+        "WardMax",
+        "WardMin"
+      ]
+    },
+    "raw/BaseItemTypes": {
+      "type": "BaseItemType",
+      "keep": [
+        "*"
+      ]
+    },
+    "raw/ComponentAttributeRequirements": {
+      "type": "ComponentAttributeRequirement",
+      "keep": [
+        "BaseItemTypesKey",
+        "ReqDex",
+        "ReqInt",
+        "ReqStr"
+      ]
+    },
+    "raw/ComponentCharges": {
+      "type": "ComponentCharge",
+      "keep": [
+        "BaseItemTypesKey",
+        "MaxCharges",
+        "PerCharge"
+      ]
+    },
+    "raw/CostTypes": {
+      "type": "CostType",
+      "keep": [
+        "*"
+      ]
+    },
+    "raw/CraftingBenchOptions": {
+      "type": "CraftingBenchOption",
+      "keep": [
+        "AddMod",
+        "CostBaseItemTypes",
+        "CostValues",
+        "IsDisabled",
+        "Links"
+      ]
+    },
+    "raw/DefaultMonsterStats": {
+      "type": "DefaultMonsterStat",
+      "keep": [
+        "AltDamage1",
+        "AltDamage2",
+        "AltLife1",
+        "AltLife2",
+        "Armour",
+        "EvasiveEvasion",
+        "MinionDamage",
+        "MinionLife",
+        "MonsterLife"
+      ]
+    },
+    "raw/Essences": {
+      "type": "Essence",
+      "keep": []
+    },
+    "raw/Flasks": {
+      "type": "Flask",
+      "keep": [
+        "BaseItemTypesKey",
+        "LifePerUse",
+        "ManaPerUse",
+        "RecoveryTime"
+      ]
+    },
+    "raw/GrantedEffectQualityStats": {
+      "type": "GrantedEffectQualityStat",
+      "keep": [
+        "*"
+      ]
+    },
+    "raw/GrantedEffectStatSets": {
+      "type": "GrantedEffectStatSet",
+      "keep": [
+        "*"
+      ]
+    },
+    "raw/GrantedEffectStatSetsPerLevel": {
+      "type": "GrantedEffectStatSetsPerLevel",
+      "keep": [
+        "*"
+      ]
+    },
+    "raw/GrantedEffects": {
+      "type": "GrantedEffect",
+      "keep": [
+        "*"
+      ]
+    },
+    "raw/GrantedEffectsPerLevel": {
+      "type": "GrantedEffectsPerLevel",
+      "keep": [
+        "*"
+      ]
+    },
+    "raw/ItemClasses": {
+      "type": "ItemClass",
+      "keep": [
+        "*"
+      ]
+    },
+    "raw/ItemExperiencePerLevel": {
+      "type": "ItemExperiencePerLevel",
+      "keep": [
+        "ItemExperienceType"
+      ]
+    },
+    "raw/ItemVisualIdentity": {
+      "type": "ItemVisualIdentity",
+      "keep": [
+        "DDSFile",
+        "ID"
+      ]
+    },
+    "raw/Mods": {
+      "type": "Mod",
+      "keep": [
+        "Key",
+        "Level"
+      ]
+    },
+    "raw/MonsterMapBossDifficulty": {
+      "type": "MonsterMapBossDifficulty",
+      "keep": [
+        "BossAilmentPercentDecrease",
+        "BossDamagePercentIncrease",
+        "BossIncItemQuantity",
+        "BossIncItemRarity",
+        "BossLifePercentIncrease",
+        "Stat1",
+        "Stat2",
+        "Stat3",
+        "Stat4",
+        "Stat5"
+      ]
+    },
+    "raw/MonsterMapDifficulty": {
+      "type": "MonsterMapDifficulty",
+      "keep": [
+        "DamagePercentIncrease",
+        "LifePercentIncrease",
+        "Stat1",
+        "Stat2",
+        "Stat3",
+        "Stat4"
+      ]
+    },
+    "raw/MonsterVarieties": {
+      "type": "MonsterVariety",
+      "keep": [
+        "LifeMultiplier"
+      ]
+    },
+    "raw/PantheonPanelLayout": {
+      "type": "PantheonPanelLayout",
+      "keep": []
+    },
+    "raw/PassiveSkills": {
+      "type": "PassiveSkill",
+      "keep": [
+        "Ascendancy",
+        "Descendancy",
+        "Hash",
+        "ID",
+        "JewelSocket",
+        "Key",
+        "Keystone",
+        "Name",
+        "Notable",
+        "Stats"
+      ]
+    },
+    "raw/PassiveTreeExpansionJewels": {
+      "type": "PassiveTreeExpansionJewel",
+      "keep": []
+    },
+    "raw/PassiveTreeExpansionSkills": {
+      "type": "PassiveTreeExpansionSkill",
+      "keep": []
+    },
+    "raw/PassiveTreeExpansionSpecialSkills": {
+      "type": "PassiveTreeExpansionSpecialSkill",
+      "keep": []
+    },
+    "raw/ShieldTypes": {
+      "type": "ShieldType",
+      "keep": [
+        "BaseItemTypesKey",
+        "Block"
+      ]
+    },
+    "raw/SkillGems": {
+      "type": "SkillGem",
+      "keep": [
+        "*"
+      ]
+    },
+    "raw/SkillTotemVariations": {
+      "type": "SkillTotemVariation",
+      "keep": [
+        "MonsterVarietiesKey",
+        "SkillTotemsKey"
+      ]
+    },
+    "raw/Stats": {
+      "type": "Stat",
+      "keep": [
+        "*"
+      ]
+    },
+    "raw/Tags": {
+      "type": "Tag",
+      "keep": [
+        "*"
+      ]
+    },
+    "raw/Tinctures": {
+      "type": "Tincture",
+      "keep": [
+        "BaseItem",
+        "Cooldown",
+        "DebuffInterval"
+      ]
+    },
+    "raw/UniqueStashLayout": {
+      "type": "UniqueStashLayout",
+      "keep": [
+        "IsAlternateArt",
+        "ItemVisualIdentityKey",
+        "WordsKey"
+      ]
+    },
+    "raw/WeaponTypes": {
+      "type": "WeaponType",
+      "keep": [
+        "BaseItemTypesKey",
+        "Critical",
+        "DamageMax",
+        "DamageMin",
+        "RangeMax",
+        "Speed"
+      ]
+    },
+    "raw/Words": {
+      "type": "Word",
+      "keep": [
+        "Key",
+        "Text"
+      ]
+    },
+    "stat_translations/en/stat_descriptions": {
+      "type": "TranslationFile",
+      "keep": [
+        "Descriptors",
+        "Descriptors.IDs",
+        "Descriptors.List",
+        "Descriptors.List.Conditions",
+        "Descriptors.List.Conditions.Max",
+        "Descriptors.List.Conditions.Min",
+        "Descriptors.List.Conditions.Negated",
+        "Descriptors.List.Handlers",
+        "Descriptors.List.Handlers.Arg",
+        "Descriptors.List.Handlers.Name",
+        "Descriptors.List.Qualifier",
+        "Descriptors.List.String",
+        "Descriptors.OffHandIDs"
+      ]
+    }
+  },
+  "wholeTypes": {
+    "ActiveSkill": [
+      "*github.com/Vilsol/go-pob-data/poe.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:41335",
+      "*github.com/Vilsol/go-pob-data/raw.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2ActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:43903",
+      "github.com/Vilsol/go-pob-data/poe.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:45",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41165",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43847",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41296",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43864",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:41308",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:43876"
+    ],
+    "ActiveSkillType": [
+      "*github.com/Vilsol/go-pob-data/poe.ActiveSkillType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeActiveSkillType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:41459",
+      "*github.com/Vilsol/go-pob-data/raw.ActiveSkillType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2ActiveSkillType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:44057",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41403",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44001",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41420",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44018",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:41432",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:44030"
+    ],
+    "BaseItemType": [
+      "*github.com/Vilsol/go-pob-data/poe.BaseItemType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeBaseItemType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:41601",
+      "*github.com/Vilsol/go-pob-data/raw.BaseItemType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2BaseItemType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:44560",
+      "github.com/Vilsol/go-pob-data/poe.BaseItemType converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:44",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41520",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44487",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41537",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44504",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:41549",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:44516"
+    ],
+    "CostType": [
+      "*github.com/Vilsol/go-pob-data/poe.CostType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeCostType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:41742",
+      "*github.com/Vilsol/go-pob-data/raw.CostType converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2CostType (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:44751",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41669",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44678",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41686",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44695",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:41698",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:44707"
+    ],
+    "EffectivenessCostConstant": [
+      "*github.com/Vilsol/go-pob-data/poe.EffectivenessCostConstant converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeEffectivenessCostConstant (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:41866",
+      "*github.com/Vilsol/go-pob-data/raw.EffectivenessCostConstant converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2EffectivenessCostConstant (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:44899",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41810",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44843",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41827",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:44860",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:41839",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:44872"
+    ],
+    "GrantedEffect": [
+      "*github.com/Vilsol/go-pob-data/poe.GrantedEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorGrantedEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:16685",
+      "*github.com/Vilsol/go-pob-data/poe.GrantedEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:42175",
+      "*github.com/Vilsol/go-pob-data/raw.GrantedEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:45362",
+      "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8918",
+      "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9455",
+      "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9667",
+      "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorGemEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:16386",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8912",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:10259",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9477",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9481",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9485",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActorMinion (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:10275",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorBreakdown (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:11655",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorEnvironment (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:15039",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorEnvironment (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:15043",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorPoolWalkStep (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:22687",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator.collectExtraJewelFuncs (reflection or an unfollowed dynamic call may read any field) @ calculator/calc_setup.go:188",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator.collectExtraJewelFuncs (reflection or an unfollowed dynamic call may read any field) @ calculator/calc_setup.go:197",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator.initEnvSpecKeep (reflection or an unfollowed dynamic call may read any field) @ calculator/env.go:357",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator.initEnvSpecKeep (reflection or an unfollowed dynamic call may read any field) @ calculator/env.go:358",
+      "*github.com/Vilsol/go-pob/calculator.ActorMinion converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8935",
+      "*github.com/Vilsol/go-pob/calculator.ActorMinion converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActorMinion (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:10663",
+      "*github.com/Vilsol/go-pob/calculator.ActorMinion converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorEnvironment (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:15047",
+      "*github.com/Vilsol/go-pob/calculator.ActorMinion converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator.performCalc (reflection or an unfollowed dynamic call may read any field) @ calculator/calc_perform.go:1400",
+      "*github.com/Vilsol/go-pob/calculator.Breakdown converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9671",
+      "*github.com/Vilsol/go-pob/calculator.Breakdown converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorBreakdown (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:11986",
+      "*github.com/Vilsol/go-pob/calculator.Calculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorCalculator (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:12484",
+      "*github.com/Vilsol/go-pob/calculator.ComparePowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorComparePowerBuilder (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:12781",
+      "*github.com/Vilsol/go-pob/calculator.Environment converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorEnvironment (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:16128",
+      "*github.com/Vilsol/go-pob/calculator.GemEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8882",
+      "*github.com/Vilsol/go-pob/calculator.GemEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8908",
+      "*github.com/Vilsol/go-pob/calculator.GemEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorGemEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:16643",
+      "*github.com/Vilsol/go-pob/calculator.GrantedEffect converted to any in github.com/Vilsol/go-pob/calculator.CalcBuildActiveSkillModList (reflection or an unfollowed dynamic call may read any field) @ calculator/calc_active_skill.go:641",
+      "*github.com/Vilsol/go-pob/calculator.GrantedEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorGemEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:16298",
+      "*github.com/Vilsol/go-pob/calculator.GrantedEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorGrantedEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:16882",
+      "*github.com/Vilsol/go-pob/calculator.PoolWalkStep converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorPoolWalkStep (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:22910",
+      "*github.com/Vilsol/go-pob/calculator.SidebarWarningsRun converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorSidebarWarningsRun (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:23821",
+      "*github.com/Vilsol/go-pob/wasm/exposition.MiscCalculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalExpositionMiscCalculator (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:32577",
+      "*github.com/Vilsol/go-pob/wasm/exposition.PowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalExpositionPowerBuilder (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:33068",
+      "*github.com/Vilsol/go-pob/wasm/exposition.SidebarPass converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalExpositionSidebarPass (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:33248",
+      "*github.com/Vilsol/go-pob/wasm/exposition.TimelessSearch converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalExpositionTimelessSearch (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:33915",
+      "[]*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to interface{} in github.com/Vilsol/go-pob/calculator.initEnvSpecKeep (reflection or an unfollowed dynamic call may read any field) @ calculator/env.go:1421",
+      "[]*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to interface{} in github.com/Vilsol/go-pob/calculator.initEnvSpecKeep (reflection or an unfollowed dynamic call may read any field) @ calculator/env.go:1423",
+      "[]*github.com/Vilsol/go-pob/mcp.handle converted to any in (*github.com/Vilsol/go-pob/mcp.Server).handlesByUse (reflection or an unfollowed dynamic call may read any field) @ mcp/state.go:120",
+      "github.com/Vilsol/go-pob/calculator.Breakdown converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:24",
+      "github.com/Vilsol/go-pob/calculator.Calculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:23",
+      "github.com/Vilsol/go-pob/calculator.ComparePowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:100",
+      "github.com/Vilsol/go-pob/calculator.skillInstanceStatsKey converted to any in github.com/Vilsol/go-pob/calculator.skillInstanceMods (reflection or an unfollowed dynamic call may read any field) @ calculator/calc_active_skill.go:186",
+      "github.com/Vilsol/go-pob/calculator.skillInstanceStatsKey converted to any in github.com/Vilsol/go-pob/calculator.skillInstanceMods (reflection or an unfollowed dynamic call may read any field) @ calculator/calc_active_skill.go:195",
+      "github.com/Vilsol/go-pob/calculator.skillInstanceStatsKey converted to any in github.com/Vilsol/go-pob/calculator.skillInstanceStats (reflection or an unfollowed dynamic call may read any field) @ calculator/calc_active_skill.go:201",
+      "github.com/Vilsol/go-pob/calculator.skillInstanceStatsKey converted to any in github.com/Vilsol/go-pob/calculator.skillInstanceStats (reflection or an unfollowed dynamic call may read any field) @ calculator/calc_active_skill.go:214",
+      "github.com/Vilsol/go-pob/wasm/exposition.MiscCalculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:33",
+      "github.com/Vilsol/go-pob/wasm/exposition.PowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.PowerReportExports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/power_report.go:16",
+      "github.com/Vilsol/go-pob/wasm/exposition.SidebarPass converted to any in github.com/Vilsol/go-pob/wasm/exposition.SidebarBreakdownExports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/sidebar_breakdown.go:12",
+      "github.com/Vilsol/go-pob/wasm/exposition.TimelessSearch converted to any in github.com/Vilsol/go-pob/wasm/exposition.TreeTimelessExports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/tree_timeless.go:22",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:41934",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:45289",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42119",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:45306",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:42131",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:45318"
+    ],
+    "GrantedEffectQualityStat": [
+      "*github.com/Vilsol/go-pob-data/poe.GrantedEffectQualityStat converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffectQualityStat (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:42319",
+      "*github.com/Vilsol/go-pob-data/raw.GrantedEffectQualityStat converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffectQualityStat (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:45573",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42243",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:45517",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42280",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:45534",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:42292",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:45546"
+    ],
+    "GrantedEffectStatSet": [
+      "*github.com/Vilsol/go-pob-data/poe.GrantedEffectStatSet converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffectStatSet (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:42483",
+      "*github.com/Vilsol/go-pob-data/raw.GrantedEffectStatSet converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffectStatSet (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:45809",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42387",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:45753",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42444",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:45770",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:42456",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:45782"
+    ],
+    "GrantedEffectStatSetsPerLevel": [
+      "*github.com/Vilsol/go-pob-data/poe.GrantedEffectStatSetsPerLevel converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffectStatSetsPerLevel (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:42687",
+      "*github.com/Vilsol/go-pob-data/raw.GrantedEffectStatSetsPerLevel converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffectStatSetsPerLevel (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:46247",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42551",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:46191",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42648",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:46208",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:42660",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:46220"
+    ],
+    "GrantedEffectsPerLevel": [
+      "*github.com/Vilsol/go-pob-data/poe.GrantedEffectsPerLevel converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeGrantedEffectsPerLevel (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:42848",
+      "*github.com/Vilsol/go-pob-data/raw.GrantedEffectsPerLevel converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2GrantedEffectsPerLevel (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:46670",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42755",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:46597",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42792",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:46614",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:42804",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:46626"
+    ],
+    "ItemClass": [
+      "*github.com/Vilsol/go-pob-data/poe.ItemClass converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeItemClass (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:42972",
+      "*github.com/Vilsol/go-pob-data/raw.ItemClass converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2ItemClass (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:47037",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42916",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:46981",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:42933",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:46998",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:42945",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:47010"
+    ],
+    "SkillGem": [
+      "*github.com/Vilsol/go-pob-data/poe.SkillGem converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorGemEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:16319",
+      "*github.com/Vilsol/go-pob-data/poe.SkillGem converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalModdbListCfg (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:34387",
+      "*github.com/Vilsol/go-pob-data/poe.SkillGem converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeSkillGem (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:43192",
+      "*github.com/Vilsol/go-pob-data/raw.SkillGem converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2SkillGem (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:47489",
+      "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8918",
+      "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9455",
+      "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9667",
+      "*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorGemEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:16386",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8912",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:10259",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9477",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9481",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9485",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActorMinion (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:10275",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorBreakdown (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:11655",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorEnvironment (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:15039",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorEnvironment (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:15043",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorPoolWalkStep (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:22687",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator.collectExtraJewelFuncs (reflection or an unfollowed dynamic call may read any field) @ calculator/calc_setup.go:188",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator.collectExtraJewelFuncs (reflection or an unfollowed dynamic call may read any field) @ calculator/calc_setup.go:197",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator.initEnvSpecKeep (reflection or an unfollowed dynamic call may read any field) @ calculator/env.go:357",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator.initEnvSpecKeep (reflection or an unfollowed dynamic call may read any field) @ calculator/env.go:358",
+      "*github.com/Vilsol/go-pob/calculator.ActorMinion converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8935",
+      "*github.com/Vilsol/go-pob/calculator.ActorMinion converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActorMinion (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:10663",
+      "*github.com/Vilsol/go-pob/calculator.ActorMinion converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorEnvironment (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:15047",
+      "*github.com/Vilsol/go-pob/calculator.ActorMinion converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator.performCalc (reflection or an unfollowed dynamic call may read any field) @ calculator/calc_perform.go:1400",
+      "*github.com/Vilsol/go-pob/calculator.Breakdown converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActor (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9671",
+      "*github.com/Vilsol/go-pob/calculator.Breakdown converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorBreakdown (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:11986",
+      "*github.com/Vilsol/go-pob/calculator.Calculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorCalculator (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:12484",
+      "*github.com/Vilsol/go-pob/calculator.ComparePowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorComparePowerBuilder (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:12781",
+      "*github.com/Vilsol/go-pob/calculator.Environment converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorEnvironment (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:16128",
+      "*github.com/Vilsol/go-pob/calculator.GemEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8882",
+      "*github.com/Vilsol/go-pob/calculator.GemEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8908",
+      "*github.com/Vilsol/go-pob/calculator.GemEffect converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorGemEffect (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:16643",
+      "*github.com/Vilsol/go-pob/calculator.PoolWalkStep converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorPoolWalkStep (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:22910",
+      "*github.com/Vilsol/go-pob/calculator.SidebarWarningsRun converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorSidebarWarningsRun (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:23821",
+      "*github.com/Vilsol/go-pob/calculator2.Actor converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator2.initEnvSpec (reflection or an unfollowed dynamic call may read any field) @ calculator2/calc_setup.go:707",
+      "*github.com/Vilsol/go-pob/calculator2.Actor converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator2.initEnvSpec (reflection or an unfollowed dynamic call may read any field) @ calculator2/calc_setup.go:709",
+      "*github.com/Vilsol/go-pob/calculator2.Actor converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator2.newMinionModDBs (reflection or an unfollowed dynamic call may read any field) @ calculator2/calc_minion.go:395",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8839",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8886",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:8890",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9032",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9036",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9040",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9044",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9048",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9052",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9056",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalCalculatorActiveSkill (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:9060",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalModdbListCfg (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:34773",
+      "*github.com/Vilsol/go-pob/wasm/exposition.MiscCalculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalExpositionMiscCalculator (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:32577",
+      "*github.com/Vilsol/go-pob/wasm/exposition.PowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalExpositionPowerBuilder (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:33068",
+      "*github.com/Vilsol/go-pob/wasm/exposition.SidebarPass converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalExpositionSidebarPass (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:33248",
+      "*github.com/Vilsol/go-pob/wasm/exposition.TimelessSearch converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalExpositionTimelessSearch (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:33915",
+      "[]*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to interface{} in github.com/Vilsol/go-pob/calculator.initEnvSpecKeep (reflection or an unfollowed dynamic call may read any field) @ calculator/env.go:1421",
+      "[]*github.com/Vilsol/go-pob/calculator.ActiveSkill converted to interface{} in github.com/Vilsol/go-pob/calculator.initEnvSpecKeep (reflection or an unfollowed dynamic call may read any field) @ calculator/env.go:1423",
+      "[]*github.com/Vilsol/go-pob/mcp.handle converted to any in (*github.com/Vilsol/go-pob/mcp.Server).handlesByUse (reflection or an unfollowed dynamic call may read any field) @ mcp/state.go:120",
+      "[]github.com/Vilsol/go-pob/calculator2.compareSlotEntry converted to any in (*github.com/Vilsol/go-pob/calculator2.ItemsTab).ItemCompares (reflection or an unfollowed dynamic call may read any field) @ calculator2/item_compare.go:202",
+      "github.com/Vilsol/go-pob-data/poe.SkillGem converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:43",
+      "github.com/Vilsol/go-pob/calculator.Breakdown converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:24",
+      "github.com/Vilsol/go-pob/calculator.Calculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:23",
+      "github.com/Vilsol/go-pob/calculator.ComparePowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:100",
+      "github.com/Vilsol/go-pob/calculator2.preDamageSkill converted to github.com/Vilsol/go-pob/data/poe2skills.PreDamageSkill in github.com/Vilsol/go-pob/calculator2.offencePreDamage (reflection or an unfollowed dynamic call may read any field) @ calculator2/calc_offence_setup.go:535",
+      "github.com/Vilsol/go-pob/wasm/exposition.MiscCalculator converted to any in github.com/Vilsol/go-pob/wasm/exposition.Exports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/main.go:33",
+      "github.com/Vilsol/go-pob/wasm/exposition.PowerBuilder converted to any in github.com/Vilsol/go-pob/wasm/exposition.PowerReportExports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/power_report.go:16",
+      "github.com/Vilsol/go-pob/wasm/exposition.SidebarPass converted to any in github.com/Vilsol/go-pob/wasm/exposition.SidebarBreakdownExports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/sidebar_breakdown.go:12",
+      "github.com/Vilsol/go-pob/wasm/exposition.TimelessSearch converted to any in github.com/Vilsol/go-pob/wasm/exposition.TreeTimelessExports (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/tree_timeless.go:22",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43048",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:47416",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43136",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:47433",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:43148",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:47445"
+    ],
+    "Stat": [
+      "*github.com/Vilsol/go-pob-data/poe.Stat converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeStat (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:43333",
+      "*github.com/Vilsol/go-pob-data/raw.Stat converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2Stat (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:47870",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43260",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:47797",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43277",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:47814",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:43289",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:47826"
+    ],
+    "Tag": [
+      "*github.com/Vilsol/go-pob-data/poe.Tag converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalPoeTag (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:43457",
+      "*github.com/Vilsol/go-pob-data/raw.Tag converted to any in github.com/Vilsol/go-pob/wasm/exposition.crystallineMarshalRaw2Tag (reflection or an unfollowed dynamic call may read any field) @ wasm/exposition/crystalline_gen.go:48031",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43401",
+      "msgp EncodeMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:47975",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:43418",
+      "msgp MarshalMsg (encodes every field) @ wasm/exposition/crystalline_gen.go:47992",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:43430",
+      "msgp Msgsize (encodes every field) @ wasm/exposition/crystalline_gen.go:48004"
+    ],
+    "plain": [
+      "*github.com/Vilsol/go-pob-data/raw.plain converted to any in (*github.com/Vilsol/go-pob-data/raw.AtlasNode).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/raw/atlas_node.go:70",
+      "*github.com/Vilsol/go-pob-data/raw.plain converted to any in (*github.com/Vilsol/go-pob-data/raw.Stat).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/raw/stats.go:31",
+      "*struct{BuffTemplate1 *int \"json:\\\"BuffTemplate1\\\"\"; github.com/Vilsol/go-pob-data/raw.plain} converted to any in (*github.com/Vilsol/go-pob-data/raw.Mod).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/raw/mods.go:77",
+      "*struct{Divisor *int \"json:\\\"Divisor\\\"\"; github.com/Vilsol/go-pob-data/raw.plain} converted to any in (*github.com/Vilsol/go-pob-data/raw.CostType).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/raw/cost_types.go:25",
+      "*struct{EquipAchievementItemsKey *int \"json:\\\"Equip_AchievementItemsKey\\\"\"; Hash32 *int \"json:\\\"HASH32\\\"\"; github.com/Vilsol/go-pob-data/raw.plain} converted to any in (*github.com/Vilsol/go-pob-data/raw.BaseItemType).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/raw/base_item_types.go:46",
+      "*struct{Life *int \"json:\\\"Life\\\"\"; AllyLife *int \"json:\\\"AllyLife\\\"\"; Damage2 *float64 \"json:\\\"Damage2\\\"\"; Var7 *int \"json:\\\"Var7\\\"\"; Var10 *int \"json:\\\"Var10\\\"\"; Var11 *float64 \"json:\\\"Var11\\\"\"; Var12 *float64 \"json:\\\"Var12\\\"\"; Var13 *int \"json:\\\"Var13\\\"\"; Var14 *int \"json:\\\"Var14\\\"\"; github.com/Vilsol/go-pob-data/raw.plain} converted to any in (*github.com/Vilsol/go-pob-data/raw.DefaultMonsterStat).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/raw/default_monster_stats.go:47",
+      "*struct{StatSet *int \"json:\\\"StatSet\\\"\"; Var27 []int \"json:\\\"Var27\\\"\"; github.com/Vilsol/go-pob-data/raw.plain} converted to any in (*github.com/Vilsol/go-pob-data/raw.GrantedEffect).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/raw/granted_effects.go:40",
+      "*struct{StatsKey1 *int \"json:\\\"StatsKey1\\\"\"; StatsKey2 *int \"json:\\\"StatsKey2\\\"\"; StatsKey3 *int \"json:\\\"StatsKey3\\\"\"; StatsKey4 *int \"json:\\\"StatsKey4\\\"\"; Stat1Value *int \"json:\\\"Stat1Value\\\"\"; Stat2Value *int \"json:\\\"Stat2Value\\\"\"; github.com/Vilsol/go-pob-data/raw.plain} converted to any in (*github.com/Vilsol/go-pob-data/raw.MonsterMapDifficulty).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/raw/monster_map_difficulty.go:36",
+      "*struct{StatsKey1 *int \"json:\\\"StatsKey1\\\"\"; StatsKey2 *int \"json:\\\"StatsKey2\\\"\"; StatsKey3 *int \"json:\\\"StatsKey3\\\"\"; StatsKey4 *int \"json:\\\"StatsKey4\\\"\"; StatsKey5 *int \"json:\\\"StatsKey5\\\"\"; Stat1Value *int \"json:\\\"Stat1Value\\\"\"; Stat2Value *int \"json:\\\"Stat2Value\\\"\"; Stat3Value *int \"json:\\\"Stat3Value\\\"\"; Stat4Value *int \"json:\\\"Stat4Value\\\"\"; Stat5Value *int \"json:\\\"Stat5Value\\\"\"; github.com/Vilsol/go-pob-data/raw.plain} converted to any in (*github.com/Vilsol/go-pob-data/raw.MonsterMapBossDifficulty).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/raw/monster_map_boss_difficulty.go:42",
+      "*struct{Str *int \"json:\\\"StrengthRequirementPercent\\\"\"; Dex *int \"json:\\\"DexterityRequirementPercent\\\"\"; Int *int \"json:\\\"IntelligenceRequirementPercent\\\"\"; github.com/Vilsol/go-pob-data/raw.plain} converted to any in (*github.com/Vilsol/go-pob-data/raw.SkillGem).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/raw/skill_gems.go:43",
+      "*struct{Var10 *int \"json:\\\"Var10\\\"\"; github.com/Vilsol/go-pob-data/raw.plain} converted to any in (*github.com/Vilsol/go-pob-data/raw.GrantedEffectsPerLevel).UnmarshalJSON (reflection or an unfollowed dynamic call may read any field) @ go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/raw/granted_effects_per_level.go:41"
+    ]
+  },
+  "testWholeSinks": {
+    "ActiveSkill": [
+      "[]*github.com/Vilsol/go-pob-data/poe.ActiveSkill converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:40"
+    ],
+    "ArmourType": [
+      "[]*github.com/Vilsol/go-pob-data/poe.ArmourType converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:48"
+    ],
+    "BaseItemType": [
+      "*github.com/Vilsol/go-pob-data/poe.BaseItemType converted to any in github.com/Vilsol/go-pob/calculator.TestGemIsTypeFoldsCase (reflection or an unfollowed dynamic call may read any field) @ calculator/map_order_test.go:75",
+      "[]*github.com/Vilsol/go-pob-data/poe.BaseItemType converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:41"
+    ],
+    "CostType": [
+      "[]*github.com/Vilsol/go-pob-data/poe.CostType converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:42"
+    ],
+    "DefaultMonsterStat": [
+      "[]*github.com/Vilsol/go-pob-data/poe.DefaultMonsterStat converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:46"
+    ],
+    "Flask": [
+      "[]*github.com/Vilsol/go-pob-data/poe.Flask converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:49"
+    ],
+    "GrantedEffect": [
+      "*github.com/Vilsol/go-pob-data/poe.GrantedEffect converted to any in github.com/Vilsol/go-pob/data/raw.TestStatRowsComeFromStatSet1 (reflection or an unfollowed dynamic call may read any field) @ data/raw/granted_effect_stat_set1_test.go:35",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/calculator.TestTagReadOrderingCensus (reflection or an unfollowed dynamic call may read any field) @ calculator/tag_read_ordering_test.go:112",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/calculator.TestTagReadOrderingCensus (reflection or an unfollowed dynamic call may read any field) @ calculator/tag_read_ordering_test.go:114",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/calculator.TestTagReadOrderingCensus (reflection or an unfollowed dynamic call may read any field) @ calculator/tag_read_ordering_test.go:117",
+      "*github.com/Vilsol/go-pob/calculator.ActorMinion converted to any in github.com/Vilsol/go-pob/calculator.TestCalcsSkillControlsAreTheTabsOwn (reflection or an unfollowed dynamic call may read any field) @ calculator/calcs_skill_controls_test.go:26",
+      "[]*github.com/Vilsol/go-pob-data/poe.GrantedEffect converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:35"
+    ],
+    "GrantedEffectQualityStat": [
+      "[]*github.com/Vilsol/go-pob-data/poe.GrantedEffectQualityStat converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:39"
+    ],
+    "GrantedEffectStatSet": [
+      "*github.com/Vilsol/go-pob-data/poe.GrantedEffectStatSet converted to any in github.com/Vilsol/go-pob/data/raw.TestStatRowsComeFromStatSet1 (reflection or an unfollowed dynamic call may read any field) @ data/raw/granted_effect_stat_set1_test.go:23",
+      "[]*github.com/Vilsol/go-pob-data/poe.GrantedEffectStatSet converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:36"
+    ],
+    "GrantedEffectStatSetsPerLevel": [
+      "[]*github.com/Vilsol/go-pob-data/poe.GrantedEffectStatSetsPerLevel converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:38"
+    ],
+    "GrantedEffectsPerLevel": [
+      "[]*github.com/Vilsol/go-pob-data/poe.GrantedEffectsPerLevel converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:37"
+    ],
+    "ItemClass": [
+      "[]*github.com/Vilsol/go-pob-data/poe.ItemClass converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:50"
+    ],
+    "Mod": [
+      "[]*github.com/Vilsol/go-pob-data/poe.Mod converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:44"
+    ],
+    "MonsterVariety": [
+      "[]*github.com/Vilsol/go-pob-data/poe.MonsterVariety converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:45"
+    ],
+    "SkillGem": [
+      "*github.com/Vilsol/go-pob-data/poe.SkillGem converted to any in github.com/Vilsol/go-pob/calculator.TestGemIsTypeFoldsCase (reflection or an unfollowed dynamic call may read any field) @ calculator/map_order_test.go:77",
+      "*github.com/Vilsol/go-pob-data/poe.SkillGem converted to any in github.com/Vilsol/go-pob/calculator.TestNameSpecOnlyGemResolves (reflection or an unfollowed dynamic call may read any field) @ calculator/find_skill_gem_test.go:19",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/calculator.TestTagReadOrderingCensus (reflection or an unfollowed dynamic call may read any field) @ calculator/tag_read_ordering_test.go:112",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/calculator.TestTagReadOrderingCensus (reflection or an unfollowed dynamic call may read any field) @ calculator/tag_read_ordering_test.go:114",
+      "*github.com/Vilsol/go-pob/calculator.Actor converted to any in github.com/Vilsol/go-pob/calculator.TestTagReadOrderingCensus (reflection or an unfollowed dynamic call may read any field) @ calculator/tag_read_ordering_test.go:117",
+      "*github.com/Vilsol/go-pob/calculator.ActorMinion converted to any in github.com/Vilsol/go-pob/calculator.TestCalcsSkillControlsAreTheTabsOwn (reflection or an unfollowed dynamic call may read any field) @ calculator/calcs_skill_controls_test.go:26",
+      "*github.com/Vilsol/go-pob/calculator2.Actor converted to github.com/Vilsol/go-pob/moddb.Actor in github.com/Vilsol/go-pob/calculator2.TestActorItemConditions (reflection or an unfollowed dynamic call may read any field) @ calculator2/env_test.go:19",
+      "*github.com/Vilsol/go-pob/calculator2.Minion converted to any in github.com/Vilsol/go-pob/calculator2.TestPerformMinionActorFixture (reflection or an unfollowed dynamic call may read any field) @ calculator2/calc_perform_test.go:371",
+      "*github.com/Vilsol/go-pob/calculator2.Minion converted to any in github.com/Vilsol/go-pob/calculator2.TestPerformMinionDamageMultiplierFixture (reflection or an unfollowed dynamic call may read any field) @ calculator2/calc_perform_test.go:394",
+      "*github.com/Vilsol/go-pob/calculator2.Minion converted to any in github.com/Vilsol/go-pob/calculator2.TestPerformMinionItemSetFixture (reflection or an unfollowed dynamic call may read any field) @ calculator2/calc_perform_test.go:453",
+      "*github.com/Vilsol/go-pob/calculator2.Minion converted to any in github.com/Vilsol/go-pob/calculator2.TestPerformNecromanticTalismanFixture (reflection or an unfollowed dynamic call may read any field) @ calculator2/calc_perform_test.go:471",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/calculator.TestMainSkillCfgCoversEveryStoredName (reflection or an unfollowed dynamic call may read any field) @ calculator/calc_tab_finalize_test.go:106",
+      "*github.com/Vilsol/go-pob/moddb.ListCfg converted to any in github.com/Vilsol/go-pob/calculator.TestMainSkillCfgCoversEveryStoredName (reflection or an unfollowed dynamic call may read any field) @ calculator/calc_tab_finalize_test.go:112",
+      "[]*github.com/Vilsol/go-pob-data/poe.SkillGem converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:34",
+      "map[int]*github.com/Vilsol/go-pob/calculator2.Environment converted to any in github.com/Vilsol/go-pob/calculator2.TestWeaponSetContext (reflection or an unfollowed dynamic call may read any field) @ calculator2/calc_setup_skills_test.go:115"
+    ],
+    "Stat": [
+      "[]*github.com/Vilsol/go-pob-data/poe.Stat converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:43"
+    ],
+    "WeaponType": [
+      "[]*github.com/Vilsol/go-pob-data/poe.WeaponType converted to any in github.com/Vilsol/go-pob/data/raw.TestDataFieldPopulationCensus (reflection or an unfollowed dynamic call may read any field) @ data/raw/data_field_population_test.go:47"
+    ]
+  },
+  "allowlistedConversions": {
+    "github.com/Vilsol/go-pob-data/loader.LoadRaw -> github.com/Vilsol/go-pob-data/loader.VariantURL": [
+      "go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/loader/raw_loader.go:18"
+    ],
+    "github.com/Vilsol/go-pob-data/loader.LoadTranslation -> github.com/Vilsol/go-pob-data/loader.VariantURL": [
+      "go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/loader/translation_loader.go:19"
+    ],
+    "github.com/Vilsol/go-pob-data/loader.RawURL -> github.com/Vilsol/go-pob-data/loader.TupleVariant": [
+      "go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/loader/naming.go:105"
+    ],
+    "github.com/Vilsol/go-pob-data/loader.TranslationURL -> github.com/Vilsol/go-pob-data/loader.TupleVariant": [
+      "go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/loader/naming.go:111"
+    ],
+    "github.com/Vilsol/go-pob-data/loader.decodeRows -> reflect.ValueOf": [
+      "go-pob-data@v0.5.18-0.20261116221402-5ea6c648b7d5/loader/raw_loader.go:81"
+    ]
+  },
+  "droppedKeys": {
+    "raw/ActiveSkillType": [],
+    "raw/ActiveSkills": [],
+    "raw/AlternatePassiveAdditions": [],
+    "raw/AlternatePassiveSkills": [
+      "AchievementItemsKeys",
+      "DDSIcon",
+      "FlavourText"
+    ],
+    "raw/AlternateTreeVersions": [],
+    "raw/ArmourTypes": [
+      "Key"
+    ],
+    "raw/BaseItemTypes": [],
+    "raw/ComponentAttributeRequirements": [
+      "Key"
+    ],
+    "raw/ComponentCharges": [
+      "Key",
+      "MaxCharges2",
+      "PerCharge2"
+    ],
+    "raw/CostTypes": [],
+    "raw/CraftingBenchOptions": [
+      "AddEnchantment",
+      "CraftingBenchCustomAction",
+      "CraftingItemClassCategories",
+      "Description",
+      "HideoutNPCSKey",
+      "IsAreaOption",
+      "ItemClasses",
+      "ItemQuantity",
+      "Key",
+      "Name",
+      "Order",
+      "RecipeIDS",
+      "RequiredLevel",
+      "SocketColours",
+      "Sockets",
+      "SortCategory",
+      "Tier",
+      "UnlockCategory",
+      "UnveilsRequired",
+      "UnveilsRequired2"
+    ],
+    "raw/DefaultMonsterStats": [
+      "Accuracy",
+      "AilmentThreshold",
+      "Damage",
+      "Difficulty",
+      "DisplayLevel",
+      "Evasion",
+      "Experience",
+      "Key",
+      "MonsterPhysConversionMulti"
+    ],
+    "raw/Essences": [
+      "AmuletModsKey",
+      "BaseItemTypesKey",
+      "BeltModsKey",
+      "BodyArmourModsKey",
+      "BootsModsKey",
+      "BowModsKey",
+      "ClawModsKey",
+      "DaggerModsKey",
+      "DisplayAmuletModsKey",
+      "DisplayArmourModsKey",
+      "DisplayBeltModsKey",
+      "DisplayBodyArmourModsKey",
+      "DisplayBootsModsKey",
+      "DisplayBowModsKey",
+      "DisplayGlovesModsKey",
+      "DisplayHelmetModsKey",
+      "DisplayItemsModsKey",
+      "DisplayJewelleryModsKey",
+      "DisplayMeleeWeaponModsKey",
+      "DisplayMonsterModsKey",
+      "DisplayOneHandWeaponModsKey",
+      "DisplayQuiverModsKey",
+      "DisplayRangedWeaponModsKey",
+      "DisplayRingModsKey",
+      "DisplayShieldModsKey",
+      "DisplayTwoHandMeleeWeaponModsKey",
+      "DisplayTwoHandWeaponModsKey",
+      "DisplayWandModsKey",
+      "DisplayWeaponModsKey",
+      "DropLevel",
+      "DropLevelMaximum",
+      "DropLevelMinimum",
+      "EssenceTypeKey",
+      "GlovesModsKey",
+      "HelmetModsKey",
+      "IsScreamingEssence",
+      "ItemLevelRestriction",
+      "Key",
+      "Level",
+      "Level2",
+      "MemoryLines",
+      "MonsterModsKeys",
+      "OneHandAxeModsKey",
+      "OneHandMaceModsKey",
+      "OneHandSwordModsKey",
+      "OneHandThrustingSwordModsKey",
+      "RingModsKey",
+      "SceptreModsKey",
+      "ShieldModsKey",
+      "StaffModsKey",
+      "TwoHandAxeModsKey",
+      "TwoHandMaceModsKey",
+      "TwoHandSwordModsKey",
+      "WandModsKey"
+    ],
+    "raw/Flasks": [
+      "BuffDefinitionsKey",
+      "BuffStatValues",
+      "BuffStatValues2",
+      "Group",
+      "Key",
+      "Name",
+      "RecoveryTime2"
+    ],
+    "raw/GrantedEffectQualityStats": [],
+    "raw/GrantedEffectStatSets": [],
+    "raw/GrantedEffectStatSetsPerLevel": [],
+    "raw/GrantedEffects": [],
+    "raw/GrantedEffectsPerLevel": [],
+    "raw/ItemClasses": [],
+    "raw/ItemExperiencePerLevel": [
+      "BaseItemTypesKey",
+      "Experience",
+      "ItemCurrentLevel",
+      "Key"
+    ],
+    "raw/ItemVisualIdentity": [
+      "Hash16",
+      "IsAlternateArt",
+      "Key"
+    ],
+    "raw/Mods": [
+      "AchievementItemsKey",
+      "ArchnemesisMinionMod",
+      "AuraFlags",
+      "BuffTemplate",
+      "BuffTemplate2",
+      "ChestModType",
+      "CorrectGroup",
+      "CraftingItemClassRestrictions",
+      "Domain",
+      "Families",
+      "FullAreaClearAchievementItemsKey",
+      "GenerationType",
+      "GenerationWeightTagsKeys",
+      "GenerationWeightValues",
+      "GrantedEffectsPerLevelKeys",
+      "Hash16",
+      "Hash32",
+      "HeistAddStatValue1",
+      "HeistAddStatValue2",
+      "HeistStatsKey0",
+      "HeistStatsKey1",
+      "HeistSubStatValue1",
+      "HeistSubStatValue2",
+      "ID",
+      "ImplicitTagsKeys",
+      "InfluenceTypes",
+      "IsEssenceOnlyModifier",
+      "MaxLevel",
+      "ModTypeKey",
+      "ModifyMapsAchievements",
+      "MonsterKillAchievements",
+      "MonsterMetadata",
+      "MonsterOnDeath",
+      "Name",
+      "SpawnWeightTagsKeys",
+      "SpawnWeightValues",
+      "Stat1Max",
+      "Stat1Min",
+      "Stat2Max",
+      "Stat2Min",
+      "Stat3Max",
+      "Stat3Min",
+      "Stat4Max",
+      "Stat4Min",
+      "Stat5Max",
+      "Stat5Min",
+      "Stat6Max",
+      "Stat6Min",
+      "StatsKey1",
+      "StatsKey2",
+      "StatsKey3",
+      "StatsKey4",
+      "StatsKey5",
+      "StatsKey6",
+      "TagsKeys"
+    ],
+    "raw/MonsterMapBossDifficulty": [
+      "Key",
+      "MapLevel"
+    ],
+    "raw/MonsterMapDifficulty": [
+      "Key",
+      "MapLevel",
+      "Stat3Value",
+      "Stat4Value"
+    ],
+    "raw/MonsterVarieties": [
+      "ACTFiles",
+      "AISFile",
+      "AOFiles",
+      "AttackSpeed",
+      "BackItemVisualIdentityKey",
+      "BaseMonsterTypeIndex",
+      "CriticalStrikeChance",
+      "DamageMultiplier",
+      "EPKFile",
+      "EndgameModsKeys",
+      "ExperienceMultiplier",
+      "GrantedEffectsKeys",
+      "HelmetItemVisualIdentityKey",
+      "ID",
+      "Key",
+      "KillRareAchievementItemsKeys",
+      "KillSpecificMonsterCountAchievementItemsKeys",
+      "KillWhileOnslaughtIsActiveAchievementItemsKey",
+      "KillWhileTalismanIsActiveAchievementItemsKey",
+      "MainHandItemClassesKey",
+      "MaximumAttackDistance",
+      "MinimumAttackDistance",
+      "ModelSizeMultiplier",
+      "ModsKeys",
+      "ModsKeys2",
+      "MonsterArmoursKey",
+      "MonsterConditionalEffectPacksKey",
+      "MonsterSegmentsKey",
+      "MonsterTypesKey",
+      "Name",
+      "ObjectSize",
+      "OffHandItemClassesKey",
+      "Part1ModsKeys",
+      "Part2ModsKeys",
+      "SinkAnimationAOFile",
+      "SpecialModsKeys",
+      "Stance",
+      "TagsKeys",
+      "Weapon1ItemVisualIdentityKeys",
+      "Weapon2ItemVisualIdentityKeys"
+    ],
+    "raw/PantheonPanelLayout": [
+      "AchievementItems",
+      "CoverImage",
+      "Effect1StatsKeys",
+      "Effect1Values",
+      "Effect2StatsKeys",
+      "Effect2Values",
+      "Effect3StatsKeys",
+      "Effect3Values",
+      "Effect4StatsKeys",
+      "Effect4Values",
+      "GodName1",
+      "GodName2",
+      "GodName3",
+      "GodName4",
+      "ID",
+      "IsDisabled",
+      "IsMajorGod",
+      "Key",
+      "QuestState1",
+      "QuestState2",
+      "QuestState3",
+      "QuestState4",
+      "SelectionImage",
+      "X",
+      "Y"
+    ],
+    "raw/PassiveSkills": [
+      "Achievement",
+      "AscendancyStart",
+      "Blighted",
+      "Buffs",
+      "ClassStart",
+      "ClusterNode",
+      "Flavour",
+      "GrantedEffect",
+      "Icon",
+      "Mastery",
+      "MasteryGroup",
+      "MultipleChoice",
+      "MultipleChoiceOption",
+      "PassivePointsGranted",
+      "Proxy",
+      "ReminderTexts",
+      "Stat1",
+      "Stat2",
+      "Stat3",
+      "Stat4",
+      "Stat5",
+      "Type"
+    ],
+    "raw/PassiveTreeExpansionJewels": [
+      "Art",
+      "BaseItemTypesKey",
+      "Key",
+      "MaxNodes",
+      "MinNodes",
+      "NotableIndices",
+      "PassiveTreeExpansionJewelSizesKey",
+      "SmallIndices",
+      "SocketIndices",
+      "SoundEffectsKey",
+      "TotalIndices"
+    ],
+    "raw/PassiveTreeExpansionSkills": [
+      "Key",
+      "MasteryPassiveSkillsKey",
+      "PassiveSkillsKey",
+      "PassiveTreeExpansionJewelSizesKey",
+      "TagsKey"
+    ],
+    "raw/PassiveTreeExpansionSpecialSkills": [
+      "Key",
+      "PassiveSkillsKey",
+      "StatsKey"
+    ],
+    "raw/ShieldTypes": [
+      "Key"
+    ],
+    "raw/SkillGems": [],
+    "raw/SkillTotemVariations": [
+      "Key",
+      "TotemSkinID"
+    ],
+    "raw/Stats": [],
+    "raw/Tags": [],
+    "raw/Tinctures": [
+      "Key"
+    ],
+    "raw/UniqueStashLayout": [
+      "BaseVersion",
+      "Key",
+      "OverrideHeight",
+      "OverrideWidth",
+      "RenamedVersion",
+      "ShowIfEmptyChallengeLeague",
+      "ShowIfEmptyStandard",
+      "UniqueStashTypesKey"
+    ],
+    "raw/WeaponTypes": [
+      "Key",
+      "Null6"
+    ],
+    "raw/Words": [
+      "Hash32",
+      "Inflection",
+      "SpawnWeightTags",
+      "SpawnWeightValues",
+      "Text2",
+      "Wordlist"
+    ],
+    "stat_translations/en/stat_descriptions": [
+      "Descriptors.Identifier",
+      "Descriptors.List.IndexHandlers",
+      "Includes",
+      "NoDescription"
+    ]
+  },
+  "notes": [
+    "generated by `mise run data-fields`; do not edit",
+    "a row is a msgpack map keyed by Go field name; `A.B` keeps key B inside the map(s) under A, through arrays and nil",
+    "a path with no listed children keeps its whole value"
+  ]
+}
