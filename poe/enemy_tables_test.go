@@ -97,3 +97,17 @@ func TestAdditionalLifeScaling(t *testing.T) {
 	testza.AssertEqual(t, "DeepwaterLifeScalingPerLevel", AdditionalLifeScalingsByIntID[26].ID)
 	testza.AssertNil(t, AdditionalLifeScalingsByIntID[26].PerLevel)
 }
+
+func TestBuffDefinitions(t *testing.T) {
+	initGameData(t, InitializeBuffDefinitions)
+
+	buffStats := BuffDefinitionsByID["uber_elder_immune_buff"].GetStats()
+	stats := make([]string, len(buffStats))
+	for i, stat := range buffStats {
+		stats[i] = stat.ID
+	}
+	testza.AssertEqual(t, []string{
+		"base_cannot_be_damaged", "base_cannot_be_stunned", "immune_to_auras_from_other_entities", "immune_to_curses",
+		"untargetable_by_monster_ai", "cannot_die",
+	}, stats)
+}

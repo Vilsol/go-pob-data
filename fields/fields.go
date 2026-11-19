@@ -71,6 +71,7 @@ var rawTables = map[string]reflect.Type{
 	"AtlasNode":                         reflect.TypeFor[raw.AtlasNode](),
 	"AtlasNodeDefinition":               reflect.TypeFor[raw.AtlasNodeDefinition](),
 	"BaseItemTypes":                     reflect.TypeFor[raw.BaseItemType](),
+	"BuffDefinitions":                   reflect.TypeFor[raw.BuffDefinition](),
 	"BuffTemplates":                     reflect.TypeFor[raw.BuffTemplate](),
 	"ClientStrings":                     reflect.TypeFor[raw.ClientString](),
 	"ComponentAttributeRequirements":    reflect.TypeFor[raw.ComponentAttributeRequirement](),

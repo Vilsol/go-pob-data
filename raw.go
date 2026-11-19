@@ -451,6 +451,10 @@ var filesToExport = slices.Concat([]PackedFile{
 		path:  "Data/AdditionalLifeScaling",
 		Codec: ReEncode[*raw.AdditionalLifeScaling](),
 	},
+	{
+		path:  "Data/BuffDefinitions",
+		Codec: ReEncode[*raw.BuffDefinition](),
+	},
 }, lifeScalingPerLevelFiles)
 
 // lifeScalingPerLevelFiles are the per-level tables AdditionalLifeScaling names whose columns are Level and

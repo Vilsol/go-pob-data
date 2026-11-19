@@ -4869,6 +4869,551 @@ func (z *BaseItemType) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *BuffDefinition) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 12 {
+		err = msgp.ArrayError{Wanted: 12, Got: zb0001}
+		return
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "MaximumStatsKey")
+			return
+		}
+		z.MaximumStatsKey = nil
+	} else {
+		if z.MaximumStatsKey == nil {
+			z.MaximumStatsKey = new(int)
+		}
+		*z.MaximumStatsKey, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "MaximumStatsKey")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "CurrentStatsKey")
+			return
+		}
+		z.CurrentStatsKey = nil
+	} else {
+		if z.CurrentStatsKey == nil {
+			z.CurrentStatsKey = new(int)
+		}
+		*z.CurrentStatsKey, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "CurrentStatsKey")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "MinStat")
+			return
+		}
+		z.MinStat = nil
+	} else {
+		if z.MinStat == nil {
+			z.MinStat = new(int)
+		}
+		*z.MinStat, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "MinStat")
+			return
+		}
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Description, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Description")
+		return
+	}
+	z.Name, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	var zb0002 uint32
+	zb0002, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "StatsKeys")
+		return
+	}
+	if cap(z.StatsKeys) >= int(zb0002) {
+		z.StatsKeys = (z.StatsKeys)[:zb0002]
+	} else {
+		z.StatsKeys = make([]int, zb0002)
+	}
+	for za0001 := range z.StatsKeys {
+		z.StatsKeys[za0001], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "StatsKeys", za0001)
+			return
+		}
+	}
+	var zb0003 uint32
+	zb0003, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "Stats2")
+		return
+	}
+	if cap(z.Stats2) >= int(zb0003) {
+		z.Stats2 = (z.Stats2)[:zb0003]
+	} else {
+		z.Stats2 = make([]int, zb0003)
+	}
+	for za0002 := range z.Stats2 {
+		z.Stats2[za0002], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Stats2", za0002)
+			return
+		}
+	}
+	var zb0004 uint32
+	zb0004, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "GrantedFlags")
+		return
+	}
+	if cap(z.GrantedFlags) >= int(zb0004) {
+		z.GrantedFlags = (z.GrantedFlags)[:zb0004]
+	} else {
+		z.GrantedFlags = make([]int, zb0004)
+	}
+	for za0003 := range z.GrantedFlags {
+		z.GrantedFlags[za0003], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedFlags", za0003)
+			return
+		}
+	}
+	var zb0005 uint32
+	zb0005, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "GrantedStats")
+		return
+	}
+	if cap(z.GrantedStats) >= int(zb0005) {
+		z.GrantedStats = (z.GrantedStats)[:zb0005]
+	} else {
+		z.GrantedStats = make([]int, zb0005)
+	}
+	for za0004 := range z.GrantedStats {
+		z.GrantedStats[za0004], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedStats", za0004)
+			return
+		}
+	}
+	var zb0006 uint32
+	zb0006, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "ConditionStats")
+		return
+	}
+	if cap(z.ConditionStats) >= int(zb0006) {
+		z.ConditionStats = (z.ConditionStats)[:zb0006]
+	} else {
+		z.ConditionStats = make([]int, zb0006)
+	}
+	for za0005 := range z.ConditionStats {
+		z.ConditionStats[za0005], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "ConditionStats", za0005)
+			return
+		}
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *BuffDefinition) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 12
+	err = en.Append(0x9c)
+	if err != nil {
+		return
+	}
+	if z.MaximumStatsKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.MaximumStatsKey)
+		if err != nil {
+			err = msgp.WrapError(err, "MaximumStatsKey")
+			return
+		}
+	}
+	if z.CurrentStatsKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.CurrentStatsKey)
+		if err != nil {
+			err = msgp.WrapError(err, "CurrentStatsKey")
+			return
+		}
+	}
+	if z.MinStat == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.MinStat)
+		if err != nil {
+			err = msgp.WrapError(err, "MinStat")
+			return
+		}
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteString(z.Description)
+	if err != nil {
+		err = msgp.WrapError(err, "Description")
+		return
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.StatsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "StatsKeys")
+		return
+	}
+	for za0001 := range z.StatsKeys {
+		err = en.WriteInt(z.StatsKeys[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "StatsKeys", za0001)
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Stats2)))
+	if err != nil {
+		err = msgp.WrapError(err, "Stats2")
+		return
+	}
+	for za0002 := range z.Stats2 {
+		err = en.WriteInt(z.Stats2[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "Stats2", za0002)
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.GrantedFlags)))
+	if err != nil {
+		err = msgp.WrapError(err, "GrantedFlags")
+		return
+	}
+	for za0003 := range z.GrantedFlags {
+		err = en.WriteInt(z.GrantedFlags[za0003])
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedFlags", za0003)
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.GrantedStats)))
+	if err != nil {
+		err = msgp.WrapError(err, "GrantedStats")
+		return
+	}
+	for za0004 := range z.GrantedStats {
+		err = en.WriteInt(z.GrantedStats[za0004])
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedStats", za0004)
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.ConditionStats)))
+	if err != nil {
+		err = msgp.WrapError(err, "ConditionStats")
+		return
+	}
+	for za0005 := range z.ConditionStats {
+		err = en.WriteInt(z.ConditionStats[za0005])
+		if err != nil {
+			err = msgp.WrapError(err, "ConditionStats", za0005)
+			return
+		}
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *BuffDefinition) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 12
+	o = append(o, 0x9c)
+	if z.MaximumStatsKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.MaximumStatsKey)
+	}
+	if z.CurrentStatsKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.CurrentStatsKey)
+	}
+	if z.MinStat == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.MinStat)
+	}
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendString(o, z.Description)
+	o = msgp.AppendString(o, z.Name)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.StatsKeys)))
+	for za0001 := range z.StatsKeys {
+		o = msgp.AppendInt(o, z.StatsKeys[za0001])
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Stats2)))
+	for za0002 := range z.Stats2 {
+		o = msgp.AppendInt(o, z.Stats2[za0002])
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.GrantedFlags)))
+	for za0003 := range z.GrantedFlags {
+		o = msgp.AppendInt(o, z.GrantedFlags[za0003])
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.GrantedStats)))
+	for za0004 := range z.GrantedStats {
+		o = msgp.AppendInt(o, z.GrantedStats[za0004])
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ConditionStats)))
+	for za0005 := range z.ConditionStats {
+		o = msgp.AppendInt(o, z.ConditionStats[za0005])
+	}
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *BuffDefinition) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 12 {
+		err = msgp.ArrayError{Wanted: 12, Got: zb0001}
+		return
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.MaximumStatsKey = nil
+	} else {
+		if z.MaximumStatsKey == nil {
+			z.MaximumStatsKey = new(int)
+		}
+		*z.MaximumStatsKey, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "MaximumStatsKey")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.CurrentStatsKey = nil
+	} else {
+		if z.CurrentStatsKey == nil {
+			z.CurrentStatsKey = new(int)
+		}
+		*z.CurrentStatsKey, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "CurrentStatsKey")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.MinStat = nil
+	} else {
+		if z.MinStat == nil {
+			z.MinStat = new(int)
+		}
+		*z.MinStat, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "MinStat")
+			return
+		}
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Description, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Description")
+		return
+	}
+	z.Name, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	var zb0002 uint32
+	zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "StatsKeys")
+		return
+	}
+	if cap(z.StatsKeys) >= int(zb0002) {
+		z.StatsKeys = (z.StatsKeys)[:zb0002]
+	} else {
+		z.StatsKeys = make([]int, zb0002)
+	}
+	for za0001 := range z.StatsKeys {
+		z.StatsKeys[za0001], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "StatsKeys", za0001)
+			return
+		}
+	}
+	var zb0003 uint32
+	zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Stats2")
+		return
+	}
+	if cap(z.Stats2) >= int(zb0003) {
+		z.Stats2 = (z.Stats2)[:zb0003]
+	} else {
+		z.Stats2 = make([]int, zb0003)
+	}
+	for za0002 := range z.Stats2 {
+		z.Stats2[za0002], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Stats2", za0002)
+			return
+		}
+	}
+	var zb0004 uint32
+	zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "GrantedFlags")
+		return
+	}
+	if cap(z.GrantedFlags) >= int(zb0004) {
+		z.GrantedFlags = (z.GrantedFlags)[:zb0004]
+	} else {
+		z.GrantedFlags = make([]int, zb0004)
+	}
+	for za0003 := range z.GrantedFlags {
+		z.GrantedFlags[za0003], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedFlags", za0003)
+			return
+		}
+	}
+	var zb0005 uint32
+	zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "GrantedStats")
+		return
+	}
+	if cap(z.GrantedStats) >= int(zb0005) {
+		z.GrantedStats = (z.GrantedStats)[:zb0005]
+	} else {
+		z.GrantedStats = make([]int, zb0005)
+	}
+	for za0004 := range z.GrantedStats {
+		z.GrantedStats[za0004], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "GrantedStats", za0004)
+			return
+		}
+	}
+	var zb0006 uint32
+	zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ConditionStats")
+		return
+	}
+	if cap(z.ConditionStats) >= int(zb0006) {
+		z.ConditionStats = (z.ConditionStats)[:zb0006]
+	} else {
+		z.ConditionStats = make([]int, zb0006)
+	}
+	for za0005 := range z.ConditionStats {
+		z.ConditionStats[za0005], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "ConditionStats", za0005)
+			return
+		}
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *BuffDefinition) Msgsize() (s int) {
+	s = 1
+	if z.MaximumStatsKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.CurrentStatsKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.MinStat == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.StringPrefixSize + len(z.ID) + msgp.StringPrefixSize + len(z.Description) + msgp.StringPrefixSize + len(z.Name) + msgp.ArrayHeaderSize + (len(z.StatsKeys) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.Stats2) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.GrantedFlags) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.GrantedStats) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.ConditionStats) * (msgp.IntSize)) + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *BuffTemplate) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()

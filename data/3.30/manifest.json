@@ -262,6 +262,13 @@
 			"records": 84,
 			"sha256": "b829306189b561f9e8dbb92bbd0d56d2b157902fcbbd77cfc4692f44cddff0c1"
 		},
+		"raw/BuffDefinitions.json.gz": {
+			"sha256": "758fe738e7708b4ff39bf0cb2c844917d8529c7b6e746ea720541f8442771651"
+		},
+		"raw/BuffDefinitions.t-f42afd85.msgpack.br": {
+			"records": 2871,
+			"sha256": "1d5c6b9fd526bb45479bde73d017ea1c28991d1c91adead9f88c873e7af16bee"
+		},
 		"raw/BuffTemplates.json.gz": {
 			"sha256": "1b16b42352a1fb27b5abf1be8271d8a7447b9456559af8700c5c0b77ab55502d"
 		},
@@ -1159,6 +1166,7 @@
 		"BetrayalTargetLifeScalingPerLevel",
 		"BetrayalWallLifeScalingPerLevel",
 		"BlightBossLifeScalingPerLevel",
+		"BuffDefinitions",
 		"BuffTemplates",
 		"ChieftainLifeScalingPerLevel",
 		"ClientStrings",
