@@ -19,10 +19,11 @@ var absentFromPoE2 = []string{
 }
 
 // poe1Only are exported for PoE1 only: the tables PoB's stat description formatter names come from, which
-// PoB-PoE2's exporter does not read.
+// PoB-PoE2's exporter does not read, and the map and monster scaling tables of PoE1's enemy model.
 var poe1Only = []string{
 	"AtlasExiles", "ElderGuardians", "FishingHookTypes", "FishingLureTypes", "MinionDoublingStatTypes",
 	"PassiveJewelRadii", "ShaperApparitionAbility",
+	"MapTiers", "Maps",
 }
 
 func TestTablesToExport(t *testing.T) {

@@ -455,6 +455,20 @@
 			"records": 15743,
 			"sha256": "f463bf3566c8c9912a788de9823b064654446879153982edce106398df8120b1"
 		},
+		"raw/MapTiers.json.gz": {
+			"sha256": "a703f4777d337922f6707c9850984f86749d0397fa52a19673ccf2fab62415f5"
+		},
+		"raw/MapTiers.t-fee8b80f.msgpack.br": {
+			"records": 17,
+			"sha256": "602901465d186df7c981e6821b76bf7c87dc4e620207daf9c0c41fe5abfd802b"
+		},
+		"raw/Maps.json.gz": {
+			"sha256": "76e327aea2a575589c9ee34f9f9a9ee3e12992d049e03d5082d2133b67809db8"
+		},
+		"raw/Maps.t-e9bbaf8b.msgpack.br": {
+			"records": 491,
+			"sha256": "c7ce56acdd34ea6a26b2657b70c85b430c448b0e4eb36b423508ea26c8b1e323"
+		},
 		"raw/MinionDoublingStatTypes.json.gz": {
 			"sha256": "5837b29cc5b64e3c5a3959d44d8ae3eb09d7ec41461ba7716b9c9c522237e489"
 		},
@@ -804,6 +818,13 @@
 			"records": 4162,
 			"sha256": "005961a3f3f9a46e8fe33343ed6c5d242afc49981d71ae787b7e7d90f3038e34"
 		},
+		"raw/WorldAreas.json.gz": {
+			"sha256": "ba127a8dc9811ee92c10c72ab40aff3528892c5371b7867566901b652f0dd74f"
+		},
+		"raw/WorldAreas.t-669d3552.msgpack.br": {
+			"records": 1935,
+			"sha256": "f1ca1e787c2c2bc76dfd421a4f88f343dc5241b6d34219010d0ee380bace8a2f"
+		},
 		"schema.min.json": {
 			"sha256": "70632aefb45e0b3c628121aacfc0c70ef66e12f0b2a407a0973e4c8dbb71fc57"
 		},
@@ -1017,6 +1038,8 @@
 		"ItemClasses",
 		"ItemExperiencePerLevel",
 		"ItemVisualIdentity",
+		"MapTiers",
+		"Maps",
 		"MinionDoublingStatTypes",
 		"ModFamily",
 		"ModType",
@@ -1055,7 +1078,8 @@
 		"WeaponPassiveSkillTypes",
 		"WeaponPassiveSkills",
 		"WeaponTypes",
-		"Words"
+		"Words",
+		"WorldAreas"
 	],
 	"statTranslations": [
 		"active_skill_gem_stat_descriptions",

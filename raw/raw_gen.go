@@ -15098,6 +15098,430 @@ func (z *LangTranslation) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *Map) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 6 {
+		err = msgp.ArrayError{Wanted: 6, Got: zb0001}
+		return
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "BaseItemTypesKey")
+			return
+		}
+		z.BaseItemTypesKey = nil
+	} else {
+		if z.BaseItemTypesKey == nil {
+			z.BaseItemTypesKey = new(int)
+		}
+		*z.BaseItemTypesKey, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "BaseItemTypesKey")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "RegularWorldAreasKey")
+			return
+		}
+		z.RegularWorldAreasKey = nil
+	} else {
+		if z.RegularWorldAreasKey == nil {
+			z.RegularWorldAreasKey = new(int)
+		}
+		*z.RegularWorldAreasKey, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "RegularWorldAreasKey")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "UniqueWorldAreasKey")
+			return
+		}
+		z.UniqueWorldAreasKey = nil
+	} else {
+		if z.UniqueWorldAreasKey == nil {
+			z.UniqueWorldAreasKey = new(int)
+		}
+		*z.UniqueWorldAreasKey, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "UniqueWorldAreasKey")
+			return
+		}
+	}
+	var zb0002 uint32
+	zb0002, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterPacksKeys")
+		return
+	}
+	if cap(z.MonsterPacksKeys) >= int(zb0002) {
+		z.MonsterPacksKeys = (z.MonsterPacksKeys)[:zb0002]
+	} else {
+		z.MonsterPacksKeys = make([]int, zb0002)
+	}
+	for za0001 := range z.MonsterPacksKeys {
+		z.MonsterPacksKeys[za0001], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "MonsterPacksKeys", za0001)
+			return
+		}
+	}
+	z.Tier, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Tier")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *Map) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 6
+	err = en.Append(0x96)
+	if err != nil {
+		return
+	}
+	if z.BaseItemTypesKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.BaseItemTypesKey)
+		if err != nil {
+			err = msgp.WrapError(err, "BaseItemTypesKey")
+			return
+		}
+	}
+	if z.RegularWorldAreasKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.RegularWorldAreasKey)
+		if err != nil {
+			err = msgp.WrapError(err, "RegularWorldAreasKey")
+			return
+		}
+	}
+	if z.UniqueWorldAreasKey == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.UniqueWorldAreasKey)
+		if err != nil {
+			err = msgp.WrapError(err, "UniqueWorldAreasKey")
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.MonsterPacksKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterPacksKeys")
+		return
+	}
+	for za0001 := range z.MonsterPacksKeys {
+		err = en.WriteInt(z.MonsterPacksKeys[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "MonsterPacksKeys", za0001)
+			return
+		}
+	}
+	err = en.WriteInt(z.Tier)
+	if err != nil {
+		err = msgp.WrapError(err, "Tier")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *Map) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 6
+	o = append(o, 0x96)
+	if z.BaseItemTypesKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.BaseItemTypesKey)
+	}
+	if z.RegularWorldAreasKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.RegularWorldAreasKey)
+	}
+	if z.UniqueWorldAreasKey == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.UniqueWorldAreasKey)
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.MonsterPacksKeys)))
+	for za0001 := range z.MonsterPacksKeys {
+		o = msgp.AppendInt(o, z.MonsterPacksKeys[za0001])
+	}
+	o = msgp.AppendInt(o, z.Tier)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *Map) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 6 {
+		err = msgp.ArrayError{Wanted: 6, Got: zb0001}
+		return
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.BaseItemTypesKey = nil
+	} else {
+		if z.BaseItemTypesKey == nil {
+			z.BaseItemTypesKey = new(int)
+		}
+		*z.BaseItemTypesKey, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "BaseItemTypesKey")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.RegularWorldAreasKey = nil
+	} else {
+		if z.RegularWorldAreasKey == nil {
+			z.RegularWorldAreasKey = new(int)
+		}
+		*z.RegularWorldAreasKey, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "RegularWorldAreasKey")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.UniqueWorldAreasKey = nil
+	} else {
+		if z.UniqueWorldAreasKey == nil {
+			z.UniqueWorldAreasKey = new(int)
+		}
+		*z.UniqueWorldAreasKey, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "UniqueWorldAreasKey")
+			return
+		}
+	}
+	var zb0002 uint32
+	zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "MonsterPacksKeys")
+		return
+	}
+	if cap(z.MonsterPacksKeys) >= int(zb0002) {
+		z.MonsterPacksKeys = (z.MonsterPacksKeys)[:zb0002]
+	} else {
+		z.MonsterPacksKeys = make([]int, zb0002)
+	}
+	for za0001 := range z.MonsterPacksKeys {
+		z.MonsterPacksKeys[za0001], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "MonsterPacksKeys", za0001)
+			return
+		}
+	}
+	z.Tier, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Tier")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *Map) Msgsize() (s int) {
+	s = 1
+	if z.BaseItemTypesKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.RegularWorldAreasKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.UniqueWorldAreasKey == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.ArrayHeaderSize + (len(z.MonsterPacksKeys) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *MapTier) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 4 {
+		err = msgp.ArrayError{Wanted: 4, Got: zb0001}
+		return
+	}
+	z.Tier, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Tier")
+		return
+	}
+	z.Level, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Level")
+		return
+	}
+	z.Level2, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Level2")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *MapTier) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 4
+	err = en.Append(0x94)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt(z.Tier)
+	if err != nil {
+		err = msgp.WrapError(err, "Tier")
+		return
+	}
+	err = en.WriteInt(z.Level)
+	if err != nil {
+		err = msgp.WrapError(err, "Level")
+		return
+	}
+	err = en.WriteInt(z.Level2)
+	if err != nil {
+		err = msgp.WrapError(err, "Level2")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *MapTier) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 4
+	o = append(o, 0x94)
+	o = msgp.AppendInt(o, z.Tier)
+	o = msgp.AppendInt(o, z.Level)
+	o = msgp.AppendInt(o, z.Level2)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *MapTier) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 4 {
+		err = msgp.ArrayError{Wanted: 4, Got: zb0001}
+		return
+	}
+	z.Tier, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Tier")
+		return
+	}
+	z.Level, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Level")
+		return
+	}
+	z.Level2, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Level2")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *MapTier) Msgsize() (s int) {
+	s = 1 + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *MinionDoublingStatType) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()
@@ -28978,5 +29402,512 @@ func (z *Word) UnmarshalMsg(bts []byte) (o []byte, err error) {
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *Word) Msgsize() (s int) {
 	s = 1 + msgp.StringPrefixSize + len(z.Text) + msgp.StringPrefixSize + len(z.Text2) + msgp.StringPrefixSize + len(z.Inflection) + msgp.ArrayHeaderSize + (len(z.SpawnWeightTags) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.SpawnWeightValues) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *WorldArea) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 17 {
+		err = msgp.ArrayError{Wanted: 17, Got: zb0001}
+		return
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Name, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	var zb0002 uint32
+	zb0002, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "BossesMonsterVarietiesKeys")
+		return
+	}
+	if cap(z.BossesMonsterVarietiesKeys) >= int(zb0002) {
+		z.BossesMonsterVarietiesKeys = (z.BossesMonsterVarietiesKeys)[:zb0002]
+	} else {
+		z.BossesMonsterVarietiesKeys = make([]int, zb0002)
+	}
+	for za0001 := range z.BossesMonsterVarietiesKeys {
+		z.BossesMonsterVarietiesKeys[za0001], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "BossesMonsterVarietiesKeys", za0001)
+			return
+		}
+	}
+	var zb0003 uint32
+	zb0003, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "MonstersMonsterVarietiesKeys")
+		return
+	}
+	if cap(z.MonstersMonsterVarietiesKeys) >= int(zb0003) {
+		z.MonstersMonsterVarietiesKeys = (z.MonstersMonsterVarietiesKeys)[:zb0003]
+	} else {
+		z.MonstersMonsterVarietiesKeys = make([]int, zb0003)
+	}
+	for za0002 := range z.MonstersMonsterVarietiesKeys {
+		z.MonstersMonsterVarietiesKeys[za0002], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "MonstersMonsterVarietiesKeys", za0002)
+			return
+		}
+	}
+	var zb0004 uint32
+	zb0004, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "ModsKeys")
+		return
+	}
+	if cap(z.ModsKeys) >= int(zb0004) {
+		z.ModsKeys = (z.ModsKeys)[:zb0004]
+	} else {
+		z.ModsKeys = make([]int, zb0004)
+	}
+	for za0003 := range z.ModsKeys {
+		z.ModsKeys[za0003], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "ModsKeys", za0003)
+			return
+		}
+	}
+	var zb0005 uint32
+	zb0005, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "AreaTypeTags")
+		return
+	}
+	if cap(z.AreaTypeTags) >= int(zb0005) {
+		z.AreaTypeTags = (z.AreaTypeTags)[:zb0005]
+	} else {
+		z.AreaTypeTags = make([]int, zb0005)
+	}
+	for za0004 := range z.AreaTypeTags {
+		z.AreaTypeTags[za0004], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "AreaTypeTags", za0004)
+			return
+		}
+	}
+	var zb0006 uint32
+	zb0006, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "Tags")
+		return
+	}
+	if cap(z.Tags) >= int(zb0006) {
+		z.Tags = (z.Tags)[:zb0006]
+	} else {
+		z.Tags = make([]int, zb0006)
+	}
+	for za0005 := range z.Tags {
+		z.Tags[za0005], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Tags", za0005)
+			return
+		}
+	}
+	z.Act, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Act")
+		return
+	}
+	z.AreaLevel, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "AreaLevel")
+		return
+	}
+	z.MaxLevel, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "MaxLevel")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	z.IsTown, err = dc.ReadBool()
+	if err != nil {
+		err = msgp.WrapError(err, "IsTown")
+		return
+	}
+	z.IsHideout, err = dc.ReadBool()
+	if err != nil {
+		err = msgp.WrapError(err, "IsHideout")
+		return
+	}
+	z.IsMapArea, err = dc.ReadBool()
+	if err != nil {
+		err = msgp.WrapError(err, "IsMapArea")
+		return
+	}
+	z.IsUniqueMapArea, err = dc.ReadBool()
+	if err != nil {
+		err = msgp.WrapError(err, "IsUniqueMapArea")
+		return
+	}
+	z.IsVaalArea, err = dc.ReadBool()
+	if err != nil {
+		err = msgp.WrapError(err, "IsVaalArea")
+		return
+	}
+	z.IsLabyrinthArea, err = dc.ReadBool()
+	if err != nil {
+		err = msgp.WrapError(err, "IsLabyrinthArea")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *WorldArea) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 17
+	err = en.Append(0xdc, 0x0, 0x11)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteString(z.Name)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.BossesMonsterVarietiesKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "BossesMonsterVarietiesKeys")
+		return
+	}
+	for za0001 := range z.BossesMonsterVarietiesKeys {
+		err = en.WriteInt(z.BossesMonsterVarietiesKeys[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "BossesMonsterVarietiesKeys", za0001)
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.MonstersMonsterVarietiesKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "MonstersMonsterVarietiesKeys")
+		return
+	}
+	for za0002 := range z.MonstersMonsterVarietiesKeys {
+		err = en.WriteInt(z.MonstersMonsterVarietiesKeys[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "MonstersMonsterVarietiesKeys", za0002)
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.ModsKeys)))
+	if err != nil {
+		err = msgp.WrapError(err, "ModsKeys")
+		return
+	}
+	for za0003 := range z.ModsKeys {
+		err = en.WriteInt(z.ModsKeys[za0003])
+		if err != nil {
+			err = msgp.WrapError(err, "ModsKeys", za0003)
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.AreaTypeTags)))
+	if err != nil {
+		err = msgp.WrapError(err, "AreaTypeTags")
+		return
+	}
+	for za0004 := range z.AreaTypeTags {
+		err = en.WriteInt(z.AreaTypeTags[za0004])
+		if err != nil {
+			err = msgp.WrapError(err, "AreaTypeTags", za0004)
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Tags)))
+	if err != nil {
+		err = msgp.WrapError(err, "Tags")
+		return
+	}
+	for za0005 := range z.Tags {
+		err = en.WriteInt(z.Tags[za0005])
+		if err != nil {
+			err = msgp.WrapError(err, "Tags", za0005)
+			return
+		}
+	}
+	err = en.WriteInt(z.Act)
+	if err != nil {
+		err = msgp.WrapError(err, "Act")
+		return
+	}
+	err = en.WriteInt(z.AreaLevel)
+	if err != nil {
+		err = msgp.WrapError(err, "AreaLevel")
+		return
+	}
+	err = en.WriteInt(z.MaxLevel)
+	if err != nil {
+		err = msgp.WrapError(err, "MaxLevel")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	err = en.WriteBool(z.IsTown)
+	if err != nil {
+		err = msgp.WrapError(err, "IsTown")
+		return
+	}
+	err = en.WriteBool(z.IsHideout)
+	if err != nil {
+		err = msgp.WrapError(err, "IsHideout")
+		return
+	}
+	err = en.WriteBool(z.IsMapArea)
+	if err != nil {
+		err = msgp.WrapError(err, "IsMapArea")
+		return
+	}
+	err = en.WriteBool(z.IsUniqueMapArea)
+	if err != nil {
+		err = msgp.WrapError(err, "IsUniqueMapArea")
+		return
+	}
+	err = en.WriteBool(z.IsVaalArea)
+	if err != nil {
+		err = msgp.WrapError(err, "IsVaalArea")
+		return
+	}
+	err = en.WriteBool(z.IsLabyrinthArea)
+	if err != nil {
+		err = msgp.WrapError(err, "IsLabyrinthArea")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *WorldArea) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 17
+	o = append(o, 0xdc, 0x0, 0x11)
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendString(o, z.Name)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.BossesMonsterVarietiesKeys)))
+	for za0001 := range z.BossesMonsterVarietiesKeys {
+		o = msgp.AppendInt(o, z.BossesMonsterVarietiesKeys[za0001])
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.MonstersMonsterVarietiesKeys)))
+	for za0002 := range z.MonstersMonsterVarietiesKeys {
+		o = msgp.AppendInt(o, z.MonstersMonsterVarietiesKeys[za0002])
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.ModsKeys)))
+	for za0003 := range z.ModsKeys {
+		o = msgp.AppendInt(o, z.ModsKeys[za0003])
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.AreaTypeTags)))
+	for za0004 := range z.AreaTypeTags {
+		o = msgp.AppendInt(o, z.AreaTypeTags[za0004])
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Tags)))
+	for za0005 := range z.Tags {
+		o = msgp.AppendInt(o, z.Tags[za0005])
+	}
+	o = msgp.AppendInt(o, z.Act)
+	o = msgp.AppendInt(o, z.AreaLevel)
+	o = msgp.AppendInt(o, z.MaxLevel)
+	o = msgp.AppendInt(o, z.Key)
+	o = msgp.AppendBool(o, z.IsTown)
+	o = msgp.AppendBool(o, z.IsHideout)
+	o = msgp.AppendBool(o, z.IsMapArea)
+	o = msgp.AppendBool(o, z.IsUniqueMapArea)
+	o = msgp.AppendBool(o, z.IsVaalArea)
+	o = msgp.AppendBool(o, z.IsLabyrinthArea)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *WorldArea) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 17 {
+		err = msgp.ArrayError{Wanted: 17, Got: zb0001}
+		return
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	z.Name, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Name")
+		return
+	}
+	var zb0002 uint32
+	zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "BossesMonsterVarietiesKeys")
+		return
+	}
+	if cap(z.BossesMonsterVarietiesKeys) >= int(zb0002) {
+		z.BossesMonsterVarietiesKeys = (z.BossesMonsterVarietiesKeys)[:zb0002]
+	} else {
+		z.BossesMonsterVarietiesKeys = make([]int, zb0002)
+	}
+	for za0001 := range z.BossesMonsterVarietiesKeys {
+		z.BossesMonsterVarietiesKeys[za0001], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "BossesMonsterVarietiesKeys", za0001)
+			return
+		}
+	}
+	var zb0003 uint32
+	zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "MonstersMonsterVarietiesKeys")
+		return
+	}
+	if cap(z.MonstersMonsterVarietiesKeys) >= int(zb0003) {
+		z.MonstersMonsterVarietiesKeys = (z.MonstersMonsterVarietiesKeys)[:zb0003]
+	} else {
+		z.MonstersMonsterVarietiesKeys = make([]int, zb0003)
+	}
+	for za0002 := range z.MonstersMonsterVarietiesKeys {
+		z.MonstersMonsterVarietiesKeys[za0002], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "MonstersMonsterVarietiesKeys", za0002)
+			return
+		}
+	}
+	var zb0004 uint32
+	zb0004, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ModsKeys")
+		return
+	}
+	if cap(z.ModsKeys) >= int(zb0004) {
+		z.ModsKeys = (z.ModsKeys)[:zb0004]
+	} else {
+		z.ModsKeys = make([]int, zb0004)
+	}
+	for za0003 := range z.ModsKeys {
+		z.ModsKeys[za0003], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "ModsKeys", za0003)
+			return
+		}
+	}
+	var zb0005 uint32
+	zb0005, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "AreaTypeTags")
+		return
+	}
+	if cap(z.AreaTypeTags) >= int(zb0005) {
+		z.AreaTypeTags = (z.AreaTypeTags)[:zb0005]
+	} else {
+		z.AreaTypeTags = make([]int, zb0005)
+	}
+	for za0004 := range z.AreaTypeTags {
+		z.AreaTypeTags[za0004], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "AreaTypeTags", za0004)
+			return
+		}
+	}
+	var zb0006 uint32
+	zb0006, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Tags")
+		return
+	}
+	if cap(z.Tags) >= int(zb0006) {
+		z.Tags = (z.Tags)[:zb0006]
+	} else {
+		z.Tags = make([]int, zb0006)
+	}
+	for za0005 := range z.Tags {
+		z.Tags[za0005], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Tags", za0005)
+			return
+		}
+	}
+	z.Act, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Act")
+		return
+	}
+	z.AreaLevel, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "AreaLevel")
+		return
+	}
+	z.MaxLevel, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "MaxLevel")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	z.IsTown, bts, err = msgp.ReadBoolBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "IsTown")
+		return
+	}
+	z.IsHideout, bts, err = msgp.ReadBoolBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "IsHideout")
+		return
+	}
+	z.IsMapArea, bts, err = msgp.ReadBoolBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "IsMapArea")
+		return
+	}
+	z.IsUniqueMapArea, bts, err = msgp.ReadBoolBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "IsUniqueMapArea")
+		return
+	}
+	z.IsVaalArea, bts, err = msgp.ReadBoolBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "IsVaalArea")
+		return
+	}
+	z.IsLabyrinthArea, bts, err = msgp.ReadBoolBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "IsLabyrinthArea")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *WorldArea) Msgsize() (s int) {
+	s = 3 + msgp.StringPrefixSize + len(z.ID) + msgp.StringPrefixSize + len(z.Name) + msgp.ArrayHeaderSize + (len(z.BossesMonsterVarietiesKeys) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.MonstersMonsterVarietiesKeys) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.ModsKeys) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.AreaTypeTags) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.Tags) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize + msgp.BoolSize
 	return
 }

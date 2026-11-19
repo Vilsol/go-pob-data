@@ -97,6 +97,8 @@ var rawTables = map[string]reflect.Type{
 	"ItemClasses":                       reflect.TypeFor[raw.ItemClass](),
 	"ItemExperiencePerLevel":            reflect.TypeFor[raw.ItemExperiencePerLevel](),
 	"ItemVisualIdentity":                reflect.TypeFor[raw.ItemVisualIdentity](),
+	"MapTiers":                          reflect.TypeFor[raw.MapTier](),
+	"Maps":                              reflect.TypeFor[raw.Map](),
 	"MinionDoublingStatTypes":           reflect.TypeFor[raw.MinionDoublingStatType](),
 	"ModType":                           reflect.TypeFor[raw.ModType](),
 	"ModFamily":                         reflect.TypeFor[raw.ModFamily](),
@@ -137,6 +139,7 @@ var rawTables = map[string]reflect.Type{
 	"WeaponPassiveSkills":               reflect.TypeFor[raw.WeaponPassiveSkill](),
 	"WeaponTypes":                       reflect.TypeFor[raw.WeaponType](),
 	"Words":                             reflect.TypeFor[raw.Word](),
+	"WorldAreas":                        reflect.TypeFor[raw.WorldArea](),
 }
 
 // RowType is the type the loader decodes asset into: a raw table's row ("raw/Mods") or a

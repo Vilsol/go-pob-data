@@ -431,6 +431,18 @@ var filesToExport = []PackedFile{
 		path:  "Data/ElderGuardians",
 		Codec: ReEncode[*raw.ElderGuardian](),
 	},
+	{
+		path:  "Data/MapTiers",
+		Codec: ReEncode[*raw.MapTier](),
+	},
+	{
+		path:  "Data/Maps",
+		Codec: ReEncode[*raw.Map](),
+	},
+	{
+		path:  "Data/WorldAreas",
+		Codec: ReEncode[*raw.WorldArea](),
+	},
 }
 
 // poe2TablesToExport are published as json, and those poe2 declares rows for also as tuple assets of
