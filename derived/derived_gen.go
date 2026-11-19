@@ -2043,6 +2043,93 @@ func (z *ModScalabilityEntry) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *MonsterLifeScaling) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 2 {
+		err = msgp.ArrayError{Wanted: 2, Got: zb0001}
+		return
+	}
+	z.Variety, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "Variety")
+		return
+	}
+	z.Index, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Index")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z MonsterLifeScaling) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 2
+	err = en.Append(0x92)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Variety)
+	if err != nil {
+		err = msgp.WrapError(err, "Variety")
+		return
+	}
+	err = en.WriteInt(z.Index)
+	if err != nil {
+		err = msgp.WrapError(err, "Index")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z MonsterLifeScaling) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 2
+	o = append(o, 0x92)
+	o = msgp.AppendString(o, z.Variety)
+	o = msgp.AppendInt(o, z.Index)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *MonsterLifeScaling) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 2 {
+		err = msgp.ArrayError{Wanted: 2, Got: zb0001}
+		return
+	}
+	z.Variety, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Variety")
+		return
+	}
+	z.Index, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Index")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z MonsterLifeScaling) Msgsize() (s int) {
+	s = 1 + msgp.StringPrefixSize + len(z.Variety) + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *Pantheon) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()

@@ -86,6 +86,12 @@ var tables = []table{
 		statFiles: []string{"passive_skill_stat_descriptions"},
 		build:     encode(buildTattooPassives),
 	},
+	{
+		name: MonsterLifeScalingTable,
+		// AdditionalLifeScaling is published only where the .ot bundle holds every variety's templates.
+		tables: []string{"MonsterVarieties", "AdditionalLifeScaling"},
+		build:  encode(buildMonsterLifeScaling),
+	},
 }
 
 // Build derives every table whose inputs version publishes, read through http.DefaultClient and

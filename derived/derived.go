@@ -6,7 +6,7 @@ package derived
 
 // Every row is encoded as a strict tuple, as raw's are.
 
-//msgp:tuple ModScalability ModScalabilityEntry ItemModStatOrder Pantheon PantheonSoul ClusterJewels ClusterJewel ClusterJewelSkill ClusterNotableOrder ClusterOrbitOffsets LegionPassive LegionRoll TattooPassive
+//msgp:tuple ModScalability ModScalabilityEntry ItemModStatOrder Pantheon PantheonSoul ClusterJewels ClusterJewel ClusterJewelSkill ClusterNotableOrder ClusterOrbitOffsets LegionPassive LegionRoll TattooPassive MonsterLifeScaling
 
 //msgp:ignore Asset
 
@@ -18,6 +18,8 @@ const (
 	ClusterJewelsTable    = "ClusterJewels"
 	LegionPassivesTable   = "LegionPassives"
 	TattooPassivesTable   = "TattooPassives"
+	// MonsterLifeScalingTable has no PoB counterpart.
+	MonsterLifeScalingTable = "MonsterLifeScaling"
 )
 
 // ModScalability is one data.modScalability entry (src/Data/ModScalability.lua), sorted by line: the mod

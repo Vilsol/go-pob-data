@@ -65,7 +65,8 @@ func textFiles(game extractor.Game) ([]string, string) {
 // extractTextFiles publishes textFilesToExport and the templates rows inherit from, with their ancestors
 // through their extends lines: the item templates (.it) of every base's InheritsFrom, where bases read
 // their tags, and the monster templates (.ot) of monsterVarieties' BaseMonsterTypeIndex, where those
-// monsters read their base stats. They are published only in one bundle per extension.
+// monsters read their base stats, and for PoE1 of every variety's BaseMonsterTypeIndex and
+// AddonMonsterTypeIndex. They are published only in one bundle per extension.
 func extractTextFiles(bundles fs.FS, game extractor.Game, gameVersion string) error {
 	files, varieties := textFiles(game)
 	texts := map[string][]byte{}
@@ -96,8 +97,9 @@ func extractTextFiles(bundles fs.FS, game extractor.Game, gameVersion string) er
 	}
 
 	rows, err := readRows[struct {
-		ID                   string `json:"Id"`
-		BaseMonsterTypeIndex string `json:"BaseMonsterTypeIndex"`
+		ID                    string   `json:"Id"`
+		BaseMonsterTypeIndex  string   `json:"BaseMonsterTypeIndex"`
+		AddonMonsterTypeIndex []string `json:"AddonMonsterTypeIndex"`
 	}](gameVersion, "MonsterVarieties")
 	if err != nil {
 		return err
@@ -118,6 +120,13 @@ func extractTextFiles(bundles fs.FS, game extractor.Game, gameVersion string) er
 			return errors.New("monster_varieties.txt names a variety the game does not have: " + id)
 		}
 		monsterRoots = append(monsterRoots, objectType)
+	}
+	// PoE1 publishes every variety's templates, which derived.MonsterLifeScaling reads.
+	if game == extractor.PoE1 {
+		for _, variety := range rows {
+			monsterRoots = append(monsterRoots, variety.BaseMonsterTypeIndex)
+			monsterRoots = append(monsterRoots, variety.AddonMonsterTypeIndex...)
+		}
 	}
 	if err := extractTemplates(bundles, game, monsterRoots, ".ot", texts); err != nil {
 		return err

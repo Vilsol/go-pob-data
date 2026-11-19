@@ -1,7 +1,7 @@
 {
 	"fileBundles": {
 		".it": "files.it-6b11d07f.msgpack.br",
-		".ot": "files.ot-c65fd62d.msgpack.br",
+		".ot": "files.ot-f0b473b2.msgpack.br",
 		".txt": "files.txt-a1ed4088.msgpack.br"
 	},
 	"translationBundles": {
@@ -32,6 +32,9 @@
 		"ModScalability": {
 			"t-5008eeb6": "derived/ModScalability.t-5008eeb6-ccdcc7da.msgpack.br"
 		},
+		"MonsterLifeScaling": {
+			"t-77d399d3": "derived/MonsterLifeScaling.t-77d399d3-4a2c16a0.msgpack.br"
+		},
 		"Pantheons": {
 			"t-43df158e": "derived/Pantheons.t-43df158e-44772cf1.msgpack.br"
 		},
@@ -56,6 +59,10 @@
 			"records": 14864,
 			"sha256": "8243ebcd9506123dd921b5f3d849d64038da1af1b3e90b30f405d3635c16f2cb"
 		},
+		"derived/MonsterLifeScaling.t-77d399d3-4a2c16a0.msgpack.br": {
+			"records": 1237,
+			"sha256": "65816ba57995e6c0295905c28b669839f0441b30940a50563d1914dc817bce5e"
+		},
 		"derived/Pantheons.t-43df158e-44772cf1.msgpack.br": {
 			"records": 12,
 			"sha256": "d09e537ce47bac9e492774bc1b25cf45cb84f1c9a9decb47c61e5dfb60677076"
@@ -68,9 +75,9 @@
 			"records": 87,
 			"sha256": "f22877a2c562930c3eabf674bc83b6dce74e40226567fbaa453fc4bd2e43e42b"
 		},
-		"files.ot-c65fd62d.msgpack.br": {
-			"records": 247,
-			"sha256": "b7f2141ae6967e862b394be6863af5217cc92785e164989261ab439e16499978"
+		"files.ot-f0b473b2.msgpack.br": {
+			"records": 5499,
+			"sha256": "66cd23df4ed5e19cecc3288a655a539bf084d9b797d081d4e9dd294486f4848a"
 		},
 		"files.txt-a1ed4088.msgpack.br": {
 			"records": 2,
