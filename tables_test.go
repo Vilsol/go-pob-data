@@ -10,6 +10,7 @@ import (
 	"github.com/Vilsol/go-pob-data/extractor"
 	"github.com/Vilsol/go-pob-data/loader"
 	"github.com/Vilsol/go-pob-data/poe2"
+	"github.com/Vilsol/go-pob-data/raw"
 )
 
 // absentFromPoE2 are exported for PoE1 but not shipped by PoE2.
@@ -20,11 +21,11 @@ var absentFromPoE2 = []string{
 
 // poe1Only are exported for PoE1 only: the tables PoB's stat description formatter names come from, which
 // PoB-PoE2's exporter does not read, and the map and monster scaling tables of PoE1's enemy model.
-var poe1Only = []string{
+var poe1Only = slices.Concat([]string{
 	"AtlasExiles", "ElderGuardians", "FishingHookTypes", "FishingLureTypes", "MinionDoublingStatTypes",
 	"PassiveJewelRadii", "ShaperApparitionAbility",
-	"MapDeviceRecipes", "MapTiers", "Maps",
-}
+	"MapDeviceRecipes", "MapTiers", "Maps", "AdditionalLifeScaling",
+}, raw.LifeScalingPerLevelTables)
 
 func TestTablesToExport(t *testing.T) {
 	if got := tablesToExport(extractor.PoE1); len(got) != len(filesToExport) || &got[0] != &filesToExport[0] {

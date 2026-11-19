@@ -118,7 +118,7 @@ func ReEncodeType(t reflect.Type) Codec {
 	}
 }
 
-var filesToExport = []PackedFile{
+var filesToExport = slices.Concat([]PackedFile{
 	{
 		path:  "Data/PassiveTreeExpansionJewels",
 		Codec: ReEncode[*raw.PassiveTreeExpansionJewel](),
@@ -447,7 +447,21 @@ var filesToExport = []PackedFile{
 		path:  "Data/MapDeviceRecipes",
 		Codec: ReEncode[*raw.MapDeviceRecipe](),
 	},
-}
+	{
+		path:  "Data/AdditionalLifeScaling",
+		Codec: ReEncode[*raw.AdditionalLifeScaling](),
+	},
+}, lifeScalingPerLevelFiles)
+
+// lifeScalingPerLevelFiles are the per-level tables AdditionalLifeScaling names whose columns are Level and
+// MoreLife.
+var lifeScalingPerLevelFiles = func() []PackedFile {
+	files := make([]PackedFile, len(raw.LifeScalingPerLevelTables))
+	for i, name := range raw.LifeScalingPerLevelTables {
+		files[i] = PackedFile{path: "Data/" + name, Codec: ReEncode[*raw.LifeScalingPerLevel]()}
+	}
+	return files
+}()
 
 // poe2TablesToExport are published as json, and those poe2 declares rows for also as tuple assets of
 // those rows: the raw structs are PoE1 layouts. The first group is

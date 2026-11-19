@@ -101,6 +101,13 @@
 			"records": 1953,
 			"sha256": "94ba71cf9672fc71797d0f44a1427cb43c1c9777f0cbf20f9342d72c4382cef3"
 		},
+		"raw/AdditionalLifeScaling.json.gz": {
+			"sha256": "a100affcf50ef2dc8f600b6a1628037c0c7c1a0e246a1fc0b50b73bf982a99f2"
+		},
+		"raw/AdditionalLifeScaling.t-c899fd52.msgpack.br": {
+			"records": 27,
+			"sha256": "97c5e841e74e1a81dfc4b2e4a8cfb6a6a531149fb10e92fe3643620a7cbf32e0"
+		},
 		"raw/AlternatePassiveAdditions.json.gz": {
 			"sha256": "dde78c9212023019232771e22899702bbe3cf478a72828620545d09442f1ad35"
 		},
@@ -140,6 +147,20 @@
 		"raw/AlternateTreeVersions.t-bd500abd.msgpack.br": {
 			"records": 13,
 			"sha256": "2b855281aa61a0a4995647a7fda84090a63e58bc93912588f1285d91f51ad6e2"
+		},
+		"raw/AncestralLifeScalingPerLevel.json.gz": {
+			"sha256": "a70b9f231cd20e1d1f8738c8bf0b9e317e62d621ca0db2d1102facb4582b24c0"
+		},
+		"raw/AncestralLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 100,
+			"sha256": "26a8845da12aebaeee2764c44a81dafc45d9834816813e363abd0d587fc64656"
+		},
+		"raw/ArchitectLifeScalingPerLevel.json.gz": {
+			"sha256": "359b50359f6b3c4cd6ab888d6ed6c3bc85ce6eef4cbde04151f03821d58bc303"
+		},
+		"raw/ArchitectLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 43,
+			"sha256": "2cb85255cadd8b0c7642c4cafa46bd88a66020113e566dc1f41e7c9b23120e99"
 		},
 		"raw/ArmourTypes.json.gz": {
 			"sha256": "6ae3b712132a0d966ed34e78625b7fe612c844d3e4faec99a7103f8a8ed8b6ee"
@@ -191,6 +212,20 @@
 			"records": 235,
 			"sha256": "6f1c197ba6f6fe24f09f41724e683dff3ae00ef25e45a29cf7b064d4ea180956"
 		},
+		"raw/AtlasUberMonsterLifeScalingPerLevel.json.gz": {
+			"sha256": "b85609e17f06db8640e0184011f0cc7fc3b711399fd6aa875512c76bc8da8449"
+		},
+		"raw/AtlasUberMonsterLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 100,
+			"sha256": "72bc5081812f0b2bda81af68f68d4de678fc1207bd6c255995c83e84b8b8cdbd"
+		},
+		"raw/AzmeriLifeScalingPerLevel.json.gz": {
+			"sha256": "51741b873d727ab35d914cd428593e0739aa7d41f79f570b375120e30280af6f"
+		},
+		"raw/AzmeriLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 100,
+			"sha256": "2db1b04148112f48c37c2ac57bb3de0c5ec8eb6e5bca82890c0888e173fdde16"
+		},
 		"raw/BaseItemTypes.json.gz": {
 			"sha256": "46f706e8c718f98b3788c97f1c724c00b5870eb43b8d0e38d8bf2bdf9c104f49"
 		},
@@ -206,12 +241,40 @@
 			"records": 5668,
 			"sha256": "1f22cbd6751a00972f490d742c83d5c5c05f192e977eab3589d295b66686426f"
 		},
+		"raw/BetrayalTargetLifeScalingPerLevel.json.gz": {
+			"sha256": "a456aaa51c941fccfa0c39bcd93d80ad39df7eb49e20ece198162f6d2715dc0a"
+		},
+		"raw/BetrayalTargetLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 55,
+			"sha256": "23196541e972f69801c0368eca5d3c66e6f58c6d76538b4f2607afd78532616a"
+		},
+		"raw/BetrayalWallLifeScalingPerLevel.json.gz": {
+			"sha256": "12a99cb2fbb60340e59c86683d3e9b755b06b036ab823dec9ad8f5cc941d94a5"
+		},
+		"raw/BetrayalWallLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 55,
+			"sha256": "c1c0437878ef922afa83cfede8323db10c403400478d3b61d311eaee7c5fe8d5"
+		},
+		"raw/BlightBossLifeScalingPerLevel.json.gz": {
+			"sha256": "94cf86901d1c5ebc2933ded3a6d79d5cb5774018c292d742e6b87e08a544a8ad"
+		},
+		"raw/BlightBossLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 84,
+			"sha256": "b829306189b561f9e8dbb92bbd0d56d2b157902fcbbd77cfc4692f44cddff0c1"
+		},
 		"raw/BuffTemplates.json.gz": {
 			"sha256": "1b16b42352a1fb27b5abf1be8271d8a7447b9456559af8700c5c0b77ab55502d"
 		},
 		"raw/BuffTemplates.t-98dc22bc.msgpack.br": {
 			"records": 832,
 			"sha256": "b81e4857b822ce4b8c80cb73720d8fe9d8db34097e8ab9eaf1eb2a77d35ba05b"
+		},
+		"raw/ChieftainLifeScalingPerLevel.json.gz": {
+			"sha256": "e003e929c208ade8aba8c946d2dc49edf2dbef85983df4a3adc7363eaa5eaf93"
+		},
+		"raw/ChieftainLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 100,
+			"sha256": "fa175578975076c68b488bbabc8ae129324b8f4ab43c1c8101e54ed47e79338e"
 		},
 		"raw/ClientStrings.json.gz": {
 			"sha256": "dd010e9a1ee58257d6ec83b4d937ec385eab02ea951aa56129f0df87ced976d8"
@@ -271,6 +334,13 @@
 			"records": 22,
 			"sha256": "9d31b3faa6a633fab4d77f50126a2ded1e0f86d6a90aa5e8b6ce2a5615154a4b"
 		},
+		"raw/CrucibleLifeScalingPerLevel.json.gz": {
+			"sha256": "6d5abafb20baa3f8c4d350104d824081565dbca6d0245fb128098f165fff0365"
+		},
+		"raw/CrucibleLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 100,
+			"sha256": "62f9b40ea8536261ed3488652788bac1d5f0b189705c54e72658462e67527b8a"
+		},
 		"raw/CurrencyExchange.json.gz": {
 			"sha256": "9a4fd56737bafc04c2de307bf02ffadd05c2f2ea3771a9a40519cdadf0f3e940"
 		},
@@ -313,6 +383,13 @@
 		"raw/Essences.t-803dc542.msgpack.br": {
 			"records": 107,
 			"sha256": "1f9d9a8f0f7e21f9496205ee5552fee42adf7eb96876a56f28a98422a8112032"
+		},
+		"raw/FaridunLifeScalingPerLevel.json.gz": {
+			"sha256": "1125776d91f0fcec03e4b8badc04ee99d814e3252e39d030ba88931a5eb665ea"
+		},
+		"raw/FaridunLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 100,
+			"sha256": "03741c4cbb31d986a2b34d29af5d98131cf18de91ff8cef7511de15e6f18baf4"
 		},
 		"raw/FishingHookTypes.json.gz": {
 			"sha256": "eca631eaa5141815d1b33a9c2b98aa33834a3650a80d444c50d85ac889d7d24f"
@@ -422,6 +499,20 @@
 			"records": 81190,
 			"sha256": "21a56b01fbac453a59ff527373e7912df1c54c0d18f7b6d849af27737033c580"
 		},
+		"raw/HarvestLifeScalingPerLevel.json.gz": {
+			"sha256": "a70b9f231cd20e1d1f8738c8bf0b9e317e62d621ca0db2d1102facb4582b24c0"
+		},
+		"raw/HarvestLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 100,
+			"sha256": "26a8845da12aebaeee2764c44a81dafc45d9834816813e363abd0d587fc64656"
+		},
+		"raw/HellscapeLifeScalingPerLevel.json.gz": {
+			"sha256": "7c5a4fdb3a42883f99b120f4f662644d7a6c2388cdbd79737e0181b19156a794"
+		},
+		"raw/HellscapeLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 100,
+			"sha256": "220566ddbd7eb05ade66d3d17443087ce336b2e6f6b65b106935b3ac801ab9e8"
+		},
 		"raw/ItemClasses.json.gz": {
 			"sha256": "3514265d98f06ef402430756100a78c0791b8d4ea1fa6482a7cd8592db2b3586"
 		},
@@ -454,6 +545,13 @@
 		"raw/ItemVisualIdentity.t-4975f02e.msgpack.br": {
 			"records": 15743,
 			"sha256": "f463bf3566c8c9912a788de9823b064654446879153982edce106398df8120b1"
+		},
+		"raw/LakeBossLifeScalingPerLevel.json.gz": {
+			"sha256": "137d71d8dc912948f8f7097764c35546db6837ca88759ce3f595255cfd056bc6"
+		},
+		"raw/LakeBossLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 100,
+			"sha256": "c17ffbea088b235f33bb878796680be06d729ef8041cb28f2f7b7ed3c3f1642a"
 		},
 		"raw/MapDeviceRecipes.json.gz": {
 			"sha256": "b089615b05f6053f864c9526b87d45a677434d04ed0662aca4afe70656fd26c2"
@@ -683,6 +781,41 @@
 		"raw/PassiveTreeExpansionSpecialSkills.t-afa54769.msgpack.br": {
 			"records": 309,
 			"sha256": "60b1ed782aed36274134bc8820695c0f8ede8374eb3d711926f0d1e5a0441aab"
+		},
+		"raw/PrimordialBossLifeScalingPerLevel.json.gz": {
+			"sha256": "a9915f6d57af4728d7962bcef43c482043c9fabe39dbda3a3269d960e2945683"
+		},
+		"raw/PrimordialBossLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 4,
+			"sha256": "0e10cd3ca512476ba158f5a4751fc50ab71a7ada9bc41707d914dc699260e86d"
+		},
+		"raw/RogueExileLifeScalingPerLevel.json.gz": {
+			"sha256": "12ce579476b35146ecc9250c0d9672416f22b2df237dc72bc83162eaffece5d6"
+		},
+		"raw/RogueExileLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 100,
+			"sha256": "4f809e50c604d69da8ffd12c325f9381e80d9096951b4d12fcd80f1affacf2b6"
+		},
+		"raw/SanctumFodderLifeScalingPerLevel.json.gz": {
+			"sha256": "1833c632e4f7f9c4949270bdde56d028dbdf7588e3e34e6ea10bc1462acd0710"
+		},
+		"raw/SanctumFodderLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 91,
+			"sha256": "11749396fed20947cf588424838bc5ff39414ec0655d9244075d3001ac198174"
+		},
+		"raw/SanctumLifeScalingPerLevel.json.gz": {
+			"sha256": "ae24cba16fbd141a93b5554d4c9282384d927825a1b45b65543d86b2095bea38"
+		},
+		"raw/SanctumLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 55,
+			"sha256": "585791f8341f451b6e34a2f689b36511e7d37a9dad4f741f15cb47e5883257db"
+		},
+		"raw/SettlersLifeScalingPerLevel.json.gz": {
+			"sha256": "1125776d91f0fcec03e4b8badc04ee99d814e3252e39d030ba88931a5eb665ea"
+		},
+		"raw/SettlersLifeScalingPerLevel.t-0d52474b.msgpack.br": {
+			"records": 100,
+			"sha256": "03741c4cbb31d986a2b34d29af5d98131cf18de91ff8cef7511de15e6f18baf4"
 		},
 		"raw/ShaperApparitionAbility.json.gz": {
 			"sha256": "9d7d6b064bd87f7a5c07294e8d7f85dfcbff7b204cf2f1808dda3ab036096f2b"
@@ -1009,27 +1142,38 @@
 	"tables": [
 		"ActiveSkillType",
 		"ActiveSkills",
+		"AdditionalLifeScaling",
 		"AlternatePassiveAdditions",
 		"AlternatePassiveSkills",
 		"AlternateTreeArt",
 		"AlternateTreeVersions",
+		"AncestralLifeScalingPerLevel",
+		"ArchitectLifeScalingPerLevel",
 		"ArmourTypes",
 		"AtlasExiles",
 		"AtlasNode",
 		"AtlasNodeDefinition",
+		"AtlasUberMonsterLifeScalingPerLevel",
+		"AzmeriLifeScalingPerLevel",
 		"BaseItemTypes",
+		"BetrayalTargetLifeScalingPerLevel",
+		"BetrayalWallLifeScalingPerLevel",
+		"BlightBossLifeScalingPerLevel",
 		"BuffTemplates",
+		"ChieftainLifeScalingPerLevel",
 		"ClientStrings",
 		"ComponentAttributeRequirements",
 		"ComponentCharges",
 		"CostTypes",
 		"CraftingBenchOptions",
 		"CraftingItemClassCategories",
+		"CrucibleLifeScalingPerLevel",
 		"CurrencyExchange",
 		"DefaultMonsterStats",
 		"EffectivenessCostConstants",
 		"ElderGuardians",
 		"Essences",
+		"FaridunLifeScalingPerLevel",
 		"FishingHookTypes",
 		"FishingLureTypes",
 		"Flasks",
@@ -1042,9 +1186,12 @@
 		"GrantedEffectStatSetsPerLevel",
 		"GrantedEffects",
 		"GrantedEffectsPerLevel",
+		"HarvestLifeScalingPerLevel",
+		"HellscapeLifeScalingPerLevel",
 		"ItemClasses",
 		"ItemExperiencePerLevel",
 		"ItemVisualIdentity",
+		"LakeBossLifeScalingPerLevel",
 		"MapDeviceRecipes",
 		"MapTiers",
 		"Maps",
@@ -1072,6 +1219,11 @@
 		"PassiveTreeExpansionJewels",
 		"PassiveTreeExpansionSkills",
 		"PassiveTreeExpansionSpecialSkills",
+		"PrimordialBossLifeScalingPerLevel",
+		"RogueExileLifeScalingPerLevel",
+		"SanctumFodderLifeScalingPerLevel",
+		"SanctumLifeScalingPerLevel",
+		"SettlersLifeScalingPerLevel",
 		"ShaperApparitionAbility",
 		"ShieldTypes",
 		"SkillGems",

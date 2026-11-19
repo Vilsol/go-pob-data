@@ -5,6 +5,8 @@ import (
 	"testing"
 
 	"github.com/MarvinJWendt/testza"
+
+	"github.com/Vilsol/go-pob-data/raw"
 )
 
 func TestMapTables(t *testing.T) {
@@ -62,4 +64,36 @@ func TestMapDeviceRecipes(t *testing.T) {
 		testza.AssertEqual(t, "UberBossKeyImplicit", mods[len(mods)-1].ID, recipe.ID)
 	}
 	testza.AssertEqual(t, len(areas), found)
+}
+
+func moreLifeAt(rows []*raw.LifeScalingPerLevel, level int) (int, bool) {
+	for _, row := range rows {
+		if row.Level == level {
+			return row.MoreLife, true
+		}
+	}
+	return 0, false
+}
+
+func TestAdditionalLifeScaling(t *testing.T) {
+	initGameData(t, InitializeAdditionalLifeScalings)
+
+	primordial := AdditionalLifeScalingsByIntID[8]
+	testza.AssertEqual(t, "PrimordialBossLifeScalingPerLevel", primordial.ID)
+	for level, want := range map[int]int{79: 0, 83: 1550, 84: 4500, 85: 4500} {
+		got, ok := moreLifeAt(primordial.PerLevel, level)
+		testza.AssertTrue(t, ok, level)
+		testza.AssertEqual(t, want, got, level)
+	}
+
+	uber := AdditionalLifeScalingsByIntID[21]
+	testza.AssertEqual(t, "AtlasUberMonsterLifeScalingPerLevel", uber.ID)
+	for level, want := range map[int]int{68: 140, 83: 275, 84: 275} {
+		got, _ := moreLifeAt(uber.PerLevel, level)
+		testza.AssertEqual(t, want, got, level)
+	}
+
+	// Its columns are Level and Life, not MoreLife: not published.
+	testza.AssertEqual(t, "DeepwaterLifeScalingPerLevel", AdditionalLifeScalingsByIntID[26].ID)
+	testza.AssertNil(t, AdditionalLifeScalingsByIntID[26].PerLevel)
 }

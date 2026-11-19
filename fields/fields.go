@@ -61,6 +61,7 @@ type Asset struct {
 var rawTables = map[string]reflect.Type{
 	"ActiveSkillType":                   reflect.TypeFor[raw.ActiveSkillType](),
 	"ActiveSkills":                      reflect.TypeFor[raw.ActiveSkill](),
+	"AdditionalLifeScaling":             reflect.TypeFor[raw.AdditionalLifeScaling](),
 	"AlternatePassiveAdditions":         reflect.TypeFor[raw.AlternatePassiveAddition](),
 	"AlternatePassiveSkills":            reflect.TypeFor[raw.AlternatePassiveSkill](),
 	"AlternateTreeArt":                  reflect.TypeFor[raw.AlternateTreeArt](),
@@ -141,6 +142,12 @@ var rawTables = map[string]reflect.Type{
 	"WeaponTypes":                       reflect.TypeFor[raw.WeaponType](),
 	"Words":                             reflect.TypeFor[raw.Word](),
 	"WorldAreas":                        reflect.TypeFor[raw.WorldArea](),
+}
+
+func init() {
+	for _, name := range raw.LifeScalingPerLevelTables {
+		rawTables[name] = reflect.TypeFor[raw.LifeScalingPerLevel]()
+	}
 }
 
 // RowType is the type the loader decodes asset into: a raw table's row ("raw/Mods") or a
