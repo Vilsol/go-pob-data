@@ -111,3 +111,29 @@ func TestBuffDefinitions(t *testing.T) {
 		"untargetable_by_monster_ai", "cannot_die",
 	}, stats)
 }
+
+func TestMonsterPacks(t *testing.T) {
+	initGameData(t, InitializeWorldAreas, InitializeMonsterPacks, InitializeMonsterPackEntries)
+
+	pack := MonsterPacksByID["AtlasUber-fire1"]
+	areas := make([]string, len(pack.WorldAreasKeys))
+	for i, key := range pack.WorldAreasKeys {
+		areas[i] = WorldAreas[key].ID
+	}
+	testza.AssertTrue(t, len(areas) > 0)
+	for _, area := range areas {
+		testza.AssertContains(t, []string{
+			"MapWorldsAbomination", "MapWorldsCitadel", "MapWorldsFortress", "MapWorldsSanctuary", "MapWorldsZiggurat",
+		}, area)
+	}
+
+	entries := MonsterPackEntriesByPack[pack.Key]
+	testza.AssertEqual(t, 2, len(entries))
+	testza.AssertEqual(t, 80, entries[0].Weight)
+	testza.AssertEqual(t, "Metadata/Monsters/Cannibal/CannibalMaleChampionAtlasUber", entries[0].GetMonsterVariety().ID)
+	testza.AssertEqual(t, "Metadata/Monsters/Cannibal/CannibalFemaleThrowFireAtlasUber", entries[1].GetMonsterVariety().ID)
+
+	zombies := MonsterPacksByID["chaos-zombies11"]
+	testza.AssertEqual(t, 4, zombies.MinCount)
+	testza.AssertEqual(t, 9, zombies.MaxCount)
+}

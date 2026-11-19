@@ -108,6 +108,8 @@ var rawTables = map[string]reflect.Type{
 	"Mods":                              reflect.TypeFor[raw.Mod](),
 	"MonsterMapBossDifficulty":          reflect.TypeFor[raw.MonsterMapBossDifficulty](),
 	"MonsterMapDifficulty":              reflect.TypeFor[raw.MonsterMapDifficulty](),
+	"MonsterPackEntries":                reflect.TypeFor[raw.MonsterPackEntry](),
+	"MonsterPacks":                      reflect.TypeFor[raw.MonsterPack](),
 	"MonsterResistances":                reflect.TypeFor[raw.MonsterResistance](),
 	"MonsterTypes":                      reflect.TypeFor[raw.MonsterType](),
 	"MonsterVarieties":                  reflect.TypeFor[raw.MonsterVariety](),

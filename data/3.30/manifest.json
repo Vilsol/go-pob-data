@@ -639,6 +639,20 @@
 			"records": 25,
 			"sha256": "89c5f56899cadc11eb730d8ca9750dc1bbf98b7db4699636eb29a86a2031f2af"
 		},
+		"raw/MonsterPackEntries.json.gz": {
+			"sha256": "aeb8c9de9410cf4e85bd1753daff71e2051fd11520ae6765d5f8f60a53975634"
+		},
+		"raw/MonsterPackEntries.t-0c93876e.msgpack.br": {
+			"records": 6222,
+			"sha256": "fe6ffb39bbe8012e4845f5e34266bd2469e88b458cb6c4da98160d6caa6f88c3"
+		},
+		"raw/MonsterPacks.json.gz": {
+			"sha256": "9dd9d00516d54c0e0715d33bbc60650a366aa404b44fa2d886ae752313a35a8c"
+		},
+		"raw/MonsterPacks.t-9b4e3c30.msgpack.br": {
+			"records": 3234,
+			"sha256": "e281d3947a1d92bb91836af2cc7ff0fc6cbe10294057cefb2130b2fda997c2e2"
+		},
 		"raw/MonsterResistances.json.gz": {
 			"sha256": "b36538e54d3154010671b76ad81d42553898c6d953bdfc3531f5286b9097cf52"
 		},
@@ -1209,6 +1223,8 @@
 		"Mods",
 		"MonsterMapBossDifficulty",
 		"MonsterMapDifficulty",
+		"MonsterPackEntries",
+		"MonsterPacks",
 		"MonsterResistances",
 		"MonsterTypes",
 		"MonsterVarieties",
