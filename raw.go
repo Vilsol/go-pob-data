@@ -443,6 +443,10 @@ var filesToExport = []PackedFile{
 		path:  "Data/WorldAreas",
 		Codec: ReEncode[*raw.WorldArea](),
 	},
+	{
+		path:  "Data/MapDeviceRecipes",
+		Codec: ReEncode[*raw.MapDeviceRecipe](),
+	},
 }
 
 // poe2TablesToExport are published as json, and those poe2 declares rows for also as tuple assets of

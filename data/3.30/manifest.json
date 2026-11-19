@@ -455,6 +455,13 @@
 			"records": 15743,
 			"sha256": "f463bf3566c8c9912a788de9823b064654446879153982edce106398df8120b1"
 		},
+		"raw/MapDeviceRecipes.json.gz": {
+			"sha256": "b089615b05f6053f864c9526b87d45a677434d04ed0662aca4afe70656fd26c2"
+		},
+		"raw/MapDeviceRecipes.t-90b434dc.msgpack.br": {
+			"records": 87,
+			"sha256": "d8e0080ea3186a765dd79e566b83525d0b3c445c1cb2dfb6da63705eec8f297a"
+		},
 		"raw/MapTiers.json.gz": {
 			"sha256": "a703f4777d337922f6707c9850984f86749d0397fa52a19673ccf2fab62415f5"
 		},
@@ -1038,6 +1045,7 @@
 		"ItemClasses",
 		"ItemExperiencePerLevel",
 		"ItemVisualIdentity",
+		"MapDeviceRecipes",
 		"MapTiers",
 		"Maps",
 		"MinionDoublingStatTypes",

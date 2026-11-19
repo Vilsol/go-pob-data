@@ -23,7 +23,7 @@ var absentFromPoE2 = []string{
 var poe1Only = []string{
 	"AtlasExiles", "ElderGuardians", "FishingHookTypes", "FishingLureTypes", "MinionDoublingStatTypes",
 	"PassiveJewelRadii", "ShaperApparitionAbility",
-	"MapTiers", "Maps",
+	"MapDeviceRecipes", "MapTiers", "Maps",
 }
 
 func TestTablesToExport(t *testing.T) {

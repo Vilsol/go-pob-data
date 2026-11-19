@@ -15403,6 +15403,324 @@ func (z *Map) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *MapDeviceRecipe) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0001 uint32
+	zb0001, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 7 {
+		err = msgp.ArrayError{Wanted: 7, Got: zb0001}
+		return
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "WorldArea")
+			return
+		}
+		z.WorldArea = nil
+	} else {
+		if z.WorldArea == nil {
+			z.WorldArea = new(int)
+		}
+		*z.WorldArea, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "WorldArea")
+			return
+		}
+	}
+	if dc.IsNil() {
+		err = dc.ReadNil()
+		if err != nil {
+			err = msgp.WrapError(err, "AtlasNode")
+			return
+		}
+		z.AtlasNode = nil
+	} else {
+		if z.AtlasNode == nil {
+			z.AtlasNode = new(int)
+		}
+		*z.AtlasNode, err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "AtlasNode")
+			return
+		}
+	}
+	z.ID, err = dc.ReadString()
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	var zb0002 uint32
+	zb0002, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "RecipeItems")
+		return
+	}
+	if cap(z.RecipeItems) >= int(zb0002) {
+		z.RecipeItems = (z.RecipeItems)[:zb0002]
+	} else {
+		z.RecipeItems = make([]int, zb0002)
+	}
+	for za0001 := range z.RecipeItems {
+		z.RecipeItems[za0001], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "RecipeItems", za0001)
+			return
+		}
+	}
+	var zb0003 uint32
+	zb0003, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "Mods")
+		return
+	}
+	if cap(z.Mods) >= int(zb0003) {
+		z.Mods = (z.Mods)[:zb0003]
+	} else {
+		z.Mods = make([]int, zb0003)
+	}
+	for za0002 := range z.Mods {
+		z.Mods[za0002], err = dc.ReadInt()
+		if err != nil {
+			err = msgp.WrapError(err, "Mods", za0002)
+			return
+		}
+	}
+	z.AreaLevel, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "AreaLevel")
+		return
+	}
+	z.Key, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z *MapDeviceRecipe) EncodeMsg(en *msgp.Writer) (err error) {
+	// array header, size 7
+	err = en.Append(0x97)
+	if err != nil {
+		return
+	}
+	if z.WorldArea == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.WorldArea)
+		if err != nil {
+			err = msgp.WrapError(err, "WorldArea")
+			return
+		}
+	}
+	if z.AtlasNode == nil {
+		err = en.WriteNil()
+		if err != nil {
+			return
+		}
+	} else {
+		err = en.WriteInt(*z.AtlasNode)
+		if err != nil {
+			err = msgp.WrapError(err, "AtlasNode")
+			return
+		}
+	}
+	err = en.WriteString(z.ID)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	err = en.WriteArrayHeader(uint32(len(z.RecipeItems)))
+	if err != nil {
+		err = msgp.WrapError(err, "RecipeItems")
+		return
+	}
+	for za0001 := range z.RecipeItems {
+		err = en.WriteInt(z.RecipeItems[za0001])
+		if err != nil {
+			err = msgp.WrapError(err, "RecipeItems", za0001)
+			return
+		}
+	}
+	err = en.WriteArrayHeader(uint32(len(z.Mods)))
+	if err != nil {
+		err = msgp.WrapError(err, "Mods")
+		return
+	}
+	for za0002 := range z.Mods {
+		err = en.WriteInt(z.Mods[za0002])
+		if err != nil {
+			err = msgp.WrapError(err, "Mods", za0002)
+			return
+		}
+	}
+	err = en.WriteInt(z.AreaLevel)
+	if err != nil {
+		err = msgp.WrapError(err, "AreaLevel")
+		return
+	}
+	err = en.WriteInt(z.Key)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z *MapDeviceRecipe) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// array header, size 7
+	o = append(o, 0x97)
+	if z.WorldArea == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.WorldArea)
+	}
+	if z.AtlasNode == nil {
+		o = msgp.AppendNil(o)
+	} else {
+		o = msgp.AppendInt(o, *z.AtlasNode)
+	}
+	o = msgp.AppendString(o, z.ID)
+	o = msgp.AppendArrayHeader(o, uint32(len(z.RecipeItems)))
+	for za0001 := range z.RecipeItems {
+		o = msgp.AppendInt(o, z.RecipeItems[za0001])
+	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.Mods)))
+	for za0002 := range z.Mods {
+		o = msgp.AppendInt(o, z.Mods[za0002])
+	}
+	o = msgp.AppendInt(o, z.AreaLevel)
+	o = msgp.AppendInt(o, z.Key)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *MapDeviceRecipe) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if zb0001 != 7 {
+		err = msgp.ArrayError{Wanted: 7, Got: zb0001}
+		return
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.WorldArea = nil
+	} else {
+		if z.WorldArea == nil {
+			z.WorldArea = new(int)
+		}
+		*z.WorldArea, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "WorldArea")
+			return
+		}
+	}
+	if msgp.IsNil(bts) {
+		bts, err = msgp.ReadNilBytes(bts)
+		if err != nil {
+			return
+		}
+		z.AtlasNode = nil
+	} else {
+		if z.AtlasNode == nil {
+			z.AtlasNode = new(int)
+		}
+		*z.AtlasNode, bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "AtlasNode")
+			return
+		}
+	}
+	z.ID, bts, err = msgp.ReadStringBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "ID")
+		return
+	}
+	var zb0002 uint32
+	zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "RecipeItems")
+		return
+	}
+	if cap(z.RecipeItems) >= int(zb0002) {
+		z.RecipeItems = (z.RecipeItems)[:zb0002]
+	} else {
+		z.RecipeItems = make([]int, zb0002)
+	}
+	for za0001 := range z.RecipeItems {
+		z.RecipeItems[za0001], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "RecipeItems", za0001)
+			return
+		}
+	}
+	var zb0003 uint32
+	zb0003, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Mods")
+		return
+	}
+	if cap(z.Mods) >= int(zb0003) {
+		z.Mods = (z.Mods)[:zb0003]
+	} else {
+		z.Mods = make([]int, zb0003)
+	}
+	for za0002 := range z.Mods {
+		z.Mods[za0002], bts, err = msgp.ReadIntBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "Mods", za0002)
+			return
+		}
+	}
+	z.AreaLevel, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "AreaLevel")
+		return
+	}
+	z.Key, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "Key")
+		return
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z *MapDeviceRecipe) Msgsize() (s int) {
+	s = 1
+	if z.WorldArea == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	if z.AtlasNode == nil {
+		s += msgp.NilSize
+	} else {
+		s += msgp.IntSize
+	}
+	s += msgp.StringPrefixSize + len(z.ID) + msgp.ArrayHeaderSize + (len(z.RecipeItems) * (msgp.IntSize)) + msgp.ArrayHeaderSize + (len(z.Mods) * (msgp.IntSize)) + msgp.IntSize + msgp.IntSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *MapTier) DecodeMsg(dc *msgp.Reader) (err error) {
 	var zb0001 uint32
 	zb0001, err = dc.ReadArrayHeader()

@@ -1,6 +1,7 @@
 package poe
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/MarvinJWendt/testza"
@@ -30,4 +31,35 @@ func TestMapTables(t *testing.T) {
 		}
 	}
 	testza.AssertTrue(t, tier16 > 0)
+}
+
+// Each uber fight is a map device recipe of four fragments at area level 85 with UberBossKeyImplicit.
+func TestMapDeviceRecipes(t *testing.T) {
+	initGameData(t, InitializeMapTiers, InitializeMaps, InitializeWorldAreas, InitializeMapDeviceRecipes)
+
+	areas := map[string]string{
+		"UberBossShaper":      "MapWorldsShapersRealm",
+		"UberBossUberElder":   "MapWorldsElderArenaUber",
+		"UberBossSirus":       "AtlasExilesBoss5",
+		"UberBossCortex":      "Synthesis_MapBoss",
+		"UberBossMaven":       "MavenBoss",
+		"UberBossEater":       "MapWorldsPrimordialBoss4",
+		"UberBossExarch":      "MapWorldsPrimordialBoss3",
+		"UberBossAnger":       "MapWorldsMemoryBoss1_Uber",
+		"UberBossBenevolence": "MapWorldsMemoryBoss3_Uber",
+		"UberBossIgnorance":   "MapWorldsMemoryBoss2_Uber",
+	}
+	found := 0
+	for _, recipe := range MapDeviceRecipes {
+		if !strings.HasPrefix(recipe.ID, "UberBoss") {
+			continue
+		}
+		found++
+		testza.AssertEqual(t, areas[recipe.ID], recipe.GetWorldArea().ID, recipe.ID)
+		testza.AssertEqual(t, 85, recipe.AreaLevel, recipe.ID)
+		testza.AssertEqual(t, 4, len(recipe.RecipeItems), recipe.ID)
+		mods := recipe.GetMods()
+		testza.AssertEqual(t, "UberBossKeyImplicit", mods[len(mods)-1].ID, recipe.ID)
+	}
+	testza.AssertEqual(t, len(areas), found)
 }

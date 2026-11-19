@@ -97,6 +97,7 @@ var rawTables = map[string]reflect.Type{
 	"ItemClasses":                       reflect.TypeFor[raw.ItemClass](),
 	"ItemExperiencePerLevel":            reflect.TypeFor[raw.ItemExperiencePerLevel](),
 	"ItemVisualIdentity":                reflect.TypeFor[raw.ItemVisualIdentity](),
+	"MapDeviceRecipes":                  reflect.TypeFor[raw.MapDeviceRecipe](),
 	"MapTiers":                          reflect.TypeFor[raw.MapTier](),
 	"Maps":                              reflect.TypeFor[raw.Map](),
 	"MinionDoublingStatTypes":           reflect.TypeFor[raw.MinionDoublingStatType](),
