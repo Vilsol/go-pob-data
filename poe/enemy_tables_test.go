@@ -137,3 +137,21 @@ func TestMonsterPacks(t *testing.T) {
 	testza.AssertEqual(t, 4, zombies.MinCount)
 	testza.AssertEqual(t, 9, zombies.MaxCount)
 }
+
+func TestMonsterVarietyAilmentThresholdAndAddons(t *testing.T) {
+	initGameData(t)
+
+	thresholds := map[string]int{}
+	addons := map[string][]string{}
+	for _, variety := range MonsterVarieties {
+		thresholds[variety.ID] = variety.AilmentThreshold
+		addons[variety.ID] = variety.AddonMonsterTypeIndex
+	}
+	testza.AssertEqual(t, 504, thresholds["Metadata/Monsters/AtlasBosses/TheShaperBoss"])
+	testza.AssertEqual(t, 301, thresholds["Metadata/Monsters/AtlasInvaders/CleansingMonsters/CleansingBoss"])
+	testza.AssertEqual(t, 294, thresholds["Metadata/Monsters/AtlasInvaders/ConsumeMonsters/ConsumeBoss"])
+
+	testza.AssertEqual(t, []string{"Metadata/Monsters/AtlasUbers/AtlasUberMonsterBase"},
+		addons["Metadata/Monsters/Cannibal/CannibalMaleChampionAtlasUber"])
+	testza.AssertEqual(t, 0, len(addons["Metadata/Monsters/AtlasBosses/TheShaperBoss"]))
+}

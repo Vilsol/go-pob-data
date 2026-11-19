@@ -731,9 +731,17 @@
 		"raw/MonsterVarieties.json.gz": {
 			"sha256": "ceb135e010b23881971ae0183a091c3e2fa806ae39abca9ddaf69dc69c57c4c2"
 		},
+		"raw/MonsterVarieties.min-998fa211.msgpack.br": {
+			"records": 10691,
+			"sha256": "8ff8cad4eb1153737ce7e4675f46d1e9681148bcf51a88d44961a2e9d82687b6"
+		},
 		"raw/MonsterVarieties.min-9e29492f.msgpack.br": {
 			"records": 10691,
 			"sha256": "9da9e094e7d15567f148b1c4d12fecfc32763c431dd2cd61f88332264daa8aa0"
+		},
+		"raw/MonsterVarieties.t-0ec17539.msgpack.br": {
+			"records": 10691,
+			"sha256": "83087bf57b3d3a1a9f57b8a0cfa98eda072bc3d55842206b606736111d4b52c4"
 		},
 		"raw/MonsterVarieties.t-33999016.msgpack.br": {
 			"records": 10691,

@@ -21022,8 +21022,8 @@ func (z *MonsterVariety) DecodeMsg(dc *msgp.Reader) (err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 41 {
-		err = msgp.ArrayError{Wanted: 41, Got: zb0001}
+	if zb0001 != 43 {
+		err = msgp.ArrayError{Wanted: 43, Got: zb0001}
 		return
 	}
 	if dc.IsNil() {
@@ -21470,6 +21470,24 @@ func (z *MonsterVariety) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 	}
+	var zb0017 uint32
+	zb0017, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err, "AddonMonsterTypeIndex")
+		return
+	}
+	if cap(z.AddonMonsterTypeIndex) >= int(zb0017) {
+		z.AddonMonsterTypeIndex = (z.AddonMonsterTypeIndex)[:zb0017]
+	} else {
+		z.AddonMonsterTypeIndex = make([]string, zb0017)
+	}
+	for za0015 := range z.AddonMonsterTypeIndex {
+		z.AddonMonsterTypeIndex[za0015], err = dc.ReadString()
+		if err != nil {
+			err = msgp.WrapError(err, "AddonMonsterTypeIndex", za0015)
+			return
+		}
+	}
 	z.MaximumAttackDistance, err = dc.ReadInt()
 	if err != nil {
 		err = msgp.WrapError(err, "MaximumAttackDistance")
@@ -21498,6 +21516,11 @@ func (z *MonsterVariety) DecodeMsg(dc *msgp.Reader) (err error) {
 	z.LifeMultiplier, err = dc.ReadInt()
 	if err != nil {
 		err = msgp.WrapError(err, "LifeMultiplier")
+		return
+	}
+	z.AilmentThreshold, err = dc.ReadInt()
+	if err != nil {
+		err = msgp.WrapError(err, "AilmentThreshold")
 		return
 	}
 	z.ExperienceMultiplier, err = dc.ReadInt()
@@ -21530,8 +21553,8 @@ func (z *MonsterVariety) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *MonsterVariety) EncodeMsg(en *msgp.Writer) (err error) {
-	// array header, size 41
-	err = en.Append(0xdc, 0x0, 0x29)
+	// array header, size 43
+	err = en.Append(0xdc, 0x0, 0x2b)
 	if err != nil {
 		return
 	}
@@ -21846,6 +21869,18 @@ func (z *MonsterVariety) EncodeMsg(en *msgp.Writer) (err error) {
 			return
 		}
 	}
+	err = en.WriteArrayHeader(uint32(len(z.AddonMonsterTypeIndex)))
+	if err != nil {
+		err = msgp.WrapError(err, "AddonMonsterTypeIndex")
+		return
+	}
+	for za0015 := range z.AddonMonsterTypeIndex {
+		err = en.WriteString(z.AddonMonsterTypeIndex[za0015])
+		if err != nil {
+			err = msgp.WrapError(err, "AddonMonsterTypeIndex", za0015)
+			return
+		}
+	}
 	err = en.WriteInt(z.MaximumAttackDistance)
 	if err != nil {
 		err = msgp.WrapError(err, "MaximumAttackDistance")
@@ -21874,6 +21909,11 @@ func (z *MonsterVariety) EncodeMsg(en *msgp.Writer) (err error) {
 	err = en.WriteInt(z.LifeMultiplier)
 	if err != nil {
 		err = msgp.WrapError(err, "LifeMultiplier")
+		return
+	}
+	err = en.WriteInt(z.AilmentThreshold)
+	if err != nil {
+		err = msgp.WrapError(err, "AilmentThreshold")
 		return
 	}
 	err = en.WriteInt(z.ExperienceMultiplier)
@@ -21907,8 +21947,8 @@ func (z *MonsterVariety) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *MonsterVariety) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// array header, size 41
-	o = append(o, 0xdc, 0x0, 0x29)
+	// array header, size 43
+	o = append(o, 0xdc, 0x0, 0x2b)
 	if z.HelmetItemVisualIdentityKey == nil {
 		o = msgp.AppendNil(o)
 	} else {
@@ -22017,12 +22057,17 @@ func (z *MonsterVariety) MarshalMsg(b []byte) (o []byte, err error) {
 	for za0014 := range z.AOFiles {
 		o = msgp.AppendString(o, z.AOFiles[za0014])
 	}
+	o = msgp.AppendArrayHeader(o, uint32(len(z.AddonMonsterTypeIndex)))
+	for za0015 := range z.AddonMonsterTypeIndex {
+		o = msgp.AppendString(o, z.AddonMonsterTypeIndex[za0015])
+	}
 	o = msgp.AppendInt(o, z.MaximumAttackDistance)
 	o = msgp.AppendInt(o, z.ObjectSize)
 	o = msgp.AppendInt(o, z.MonsterTypesKey)
 	o = msgp.AppendInt(o, z.ModelSizeMultiplier)
 	o = msgp.AppendInt(o, z.MinimumAttackDistance)
 	o = msgp.AppendInt(o, z.LifeMultiplier)
+	o = msgp.AppendInt(o, z.AilmentThreshold)
 	o = msgp.AppendInt(o, z.ExperienceMultiplier)
 	o = msgp.AppendInt(o, z.DamageMultiplier)
 	o = msgp.AppendInt(o, z.CriticalStrikeChance)
@@ -22039,8 +22084,8 @@ func (z *MonsterVariety) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		err = msgp.WrapError(err)
 		return
 	}
-	if zb0001 != 41 {
-		err = msgp.ArrayError{Wanted: 41, Got: zb0001}
+	if zb0001 != 43 {
+		err = msgp.ArrayError{Wanted: 43, Got: zb0001}
 		return
 	}
 	if msgp.IsNil(bts) {
@@ -22478,6 +22523,24 @@ func (z *MonsterVariety) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 	}
+	var zb0017 uint32
+	zb0017, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "AddonMonsterTypeIndex")
+		return
+	}
+	if cap(z.AddonMonsterTypeIndex) >= int(zb0017) {
+		z.AddonMonsterTypeIndex = (z.AddonMonsterTypeIndex)[:zb0017]
+	} else {
+		z.AddonMonsterTypeIndex = make([]string, zb0017)
+	}
+	for za0015 := range z.AddonMonsterTypeIndex {
+		z.AddonMonsterTypeIndex[za0015], bts, err = msgp.ReadStringBytes(bts)
+		if err != nil {
+			err = msgp.WrapError(err, "AddonMonsterTypeIndex", za0015)
+			return
+		}
+	}
 	z.MaximumAttackDistance, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "MaximumAttackDistance")
@@ -22506,6 +22569,11 @@ func (z *MonsterVariety) UnmarshalMsg(bts []byte) (o []byte, err error) {
 	z.LifeMultiplier, bts, err = msgp.ReadIntBytes(bts)
 	if err != nil {
 		err = msgp.WrapError(err, "LifeMultiplier")
+		return
+	}
+	z.AilmentThreshold, bts, err = msgp.ReadIntBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err, "AilmentThreshold")
 		return
 	}
 	z.ExperienceMultiplier, bts, err = msgp.ReadIntBytes(bts)
@@ -22593,7 +22661,11 @@ func (z *MonsterVariety) Msgsize() (s int) {
 	for za0014 := range z.AOFiles {
 		s += msgp.StringPrefixSize + len(z.AOFiles[za0014])
 	}
-	s += msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
+	s += msgp.ArrayHeaderSize
+	for za0015 := range z.AddonMonsterTypeIndex {
+		s += msgp.StringPrefixSize + len(z.AddonMonsterTypeIndex[za0015])
+	}
+	s += msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize + msgp.IntSize
 	return
 }
 

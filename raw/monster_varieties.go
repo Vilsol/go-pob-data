@@ -31,12 +31,14 @@ type MonsterVariety struct {
 	Weapon2ItemVisualIdentityKeys                 []int                `json:"Weapon2_ItemVisualIdentityKeys"`
 	Part1ModsKeys                                 []int                `json:"Part1_ModsKeys"`
 	AOFiles                                       []string             `json:"AOFiles"`
+	AddonMonsterTypeIndex                         []string             `json:"AddonMonsterTypeIndex"`
 	MaximumAttackDistance                         int                  `json:"MaximumAttackDistance"`
 	ObjectSize                                    int                  `json:"ObjectSize"`
 	MonsterTypesKey                               int                  `json:"MonsterTypesKey"`
 	ModelSizeMultiplier                           int                  `json:"ModelSizeMultiplier"`
 	MinimumAttackDistance                         int                  `json:"MinimumAttackDistance"`
 	LifeMultiplier                                int                  `json:"LifeMultiplier"`
+	AilmentThreshold                              int                  `json:"AilmentThreshold"`
 	ExperienceMultiplier                          int                  `json:"ExperienceMultiplier"`
 	DamageMultiplier                              int                  `json:"DamageMultiplier"`
 	CriticalStrikeChance                          int                  `json:"CriticalStrikeChance"`

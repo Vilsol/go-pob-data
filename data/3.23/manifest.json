@@ -254,6 +254,10 @@
 		"raw/MonsterVarieties.json.gz": {
 			"sha256": "af862e26f8efe42ba688ba8e4fb0710d24aa732fab2eca64330db7a819ca1bb8"
 		},
+		"raw/MonsterVarieties.t-0ec17539.msgpack.br": {
+			"records": 9627,
+			"sha256": "f2329fd796a7812ddf40f423bc46ab3c601738343012cd68eeaeb4e0f078f12d"
+		},
 		"raw/MonsterVarieties.t-33999016.msgpack.br": {
 			"records": 9627,
 			"sha256": "d8acca94845234f53479728561ef72248896439ec543883b3bc988be4c532faf"
