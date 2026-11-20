@@ -147,16 +147,14 @@ var rawTables = map[string]reflect.Type{
 	"WorldAreas":                        reflect.TypeFor[raw.WorldArea](),
 }
 
-func init() {
-	for _, name := range raw.LifeScalingPerLevelTables {
-		rawTables[name] = reflect.TypeFor[raw.LifeScalingPerLevel]()
-	}
-}
-
 // RowType is the type the loader decodes asset into: a raw table's row ("raw/Mods") or a
 // TranslationFile ("stat_translations/en/stat_descriptions").
 func RowType(asset string) (reflect.Type, bool) {
 	if name, ok := strings.CutPrefix(asset, "raw/"); ok {
+		if slices.Contains(raw.LifeScalingPerLevelTables, name) {
+			return reflect.TypeFor[raw.LifeScalingPerLevel](), true
+		}
+
 		t, ok := rawTables[name]
 		return t, ok
 	}
